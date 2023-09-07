@@ -2,14 +2,16 @@
 name: StatefulCallClient
 uid: '@azure/communication-react.StatefulCallClient'
 package: '@azure/communication-react'
-summary: >
+summary: >-
   Defines the methods that allow CallClient
   <xref:%40azure%2Fcommunication-calling%23CallClient> to be used statefully.
 
   The interface provides access to proxied state and also allows registering a
   handler for state change events. For
 
-  state definition see <xref:@azure/communication-react.CallClientState>.
+  state definition see
+  [CallClientState](xref:@azure/communication-react.CallClientState).
+
 
   State change events are driven by:
 
@@ -43,11 +45,10 @@ summary: >
     - RecordingCallFeature 'isRecordingActiveChanged'
 fullName: StatefulCallClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 inheritedMethods:
-  - name: 'createCallAgent(CommunicationTokenCredential, CallAgentOptions)'
+  - name: createCallAgent(CommunicationTokenCredential, CallAgentOptions)
     uid: '@azure/communication-react.StatefulCallClient.createCallAgent'
     package: '@azure/communication-react'
     summary: >-
@@ -64,7 +65,6 @@ inheritedMethods:
       CallClient's
         createCallAgent() method again to create a new CallAgent.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -82,6 +82,68 @@ inheritedMethods:
       return:
         description: ''
         type: Promise&lt;CallAgent&gt;
+    inheritanceDescription: <b>Inherited From</b> CallClient.createCallAgent
+  - name: createTeamsCallAgent(CommunicationTokenCredential, TeamsCallAgentOptions)
+    uid: '@azure/communication-react.StatefulCallClient.createTeamsCallAgent'
+    package: '@azure/communication-react'
+    summary: >-
+      The TeamsCallAgent is used to handle Teams calls.
+
+      To create the TeamsCallAgent, pass a CommunicationTokenCredential object
+      provided from SDK.
+
+      - The CallClient can only have one active TeamsCallAgent instance at a
+      time.
+
+      - You can create a new CallClient instance to create a new TeamsCallAgent.
+
+      - You can dispose of a CallClient's current active TeamsCallAgent, and
+      call the CallClient's
+        createTeamsCallAgent() method again to create a new TeamsCallAgent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createTeamsCallAgent(tokenCredential:
+        CommunicationTokenCredential, options?: TeamsCallAgentOptions):
+        Promise<TeamsCallAgent>
+      parameters:
+        - id: tokenCredential
+          type: CommunicationTokenCredential
+          description: >-
+            The token credential. Use AzureCommunicationTokenCredential from
+            @azure/communication-common to create a credential.
+        - id: options
+          type: TeamsCallAgentOptions
+          description: The CallAgentOptions for additional options like display name.
+      return:
+        description: ''
+        type: Promise&lt;TeamsCallAgent&gt;
+    inheritanceDescription: <b>Inherited From</b> CallClient.createTeamsCallAgent
+  - name: feature<TFeature>(CallClientFeatureFactory<TFeature>)
+    uid: '@azure/communication-react.StatefulCallClient.feature'
+    package: '@azure/communication-react'
+    summary: >-
+      Retrieves an initialized and memoized Feature object with extended API.
+
+      Check the object Features.* for all available extended call client
+      features in this package.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function feature<TFeature>(factory: CallClientFeatureFactory<TFeature>):
+        TFeature
+      parameters:
+        - id: factory
+          type: CallClientFeatureFactory&lt;TFeature&gt;
+          description: >-
+            The factory for the call client feature constructor that provides an
+            extended API.
+      return:
+        description: ''
+        type: TFeature
+    inheritanceDescription: <b>Inherited From</b> CallClient.feature
   - name: getDeviceManager()
     uid: '@azure/communication-react.StatefulCallClient.getDeviceManager'
     package: '@azure/communication-react'
@@ -89,41 +151,47 @@ inheritedMethods:
       The DeviceManager is used to handle media devices such as cameras,
       microphones, and speakers.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getDeviceManager(): Promise<DeviceManager>'
       return:
         description: ''
         type: Promise&lt;DeviceManager&gt;
+    inheritanceDescription: <b>Inherited From</b> CallClient.getDeviceManager
 methods:
   - name: >-
-      createView(string | undefined, CommunicationIdentifier | undefined,
+      createView(undefined | string, undefined | CommunicationIdentifier,
       LocalVideoStreamState | RemoteVideoStreamState, CreateViewOptions)
     uid: '@azure/communication-react.StatefulCallClient.createView'
     package: '@azure/communication-react'
-    summary: >
-      Renders a <xref:@azure/communication-react.RemoteVideoStreamState> or
-      <xref:@azure/communication-react.LocalVideoStreamState> and stores the
-      resulting
+    summary: >-
+      Renders a
+      [RemoteVideoStreamState](xref:@azure/communication-react.RemoteVideoStreamState)
+      or
+      [LocalVideoStreamState](xref:@azure/communication-react.LocalVideoStreamState)
+      and stores the resulting
 
-      <xref:@azure/communication-react.VideoStreamRendererViewState> under the
-      relevant <xref:@azure/communication-react.RemoteVideoStreamState> or
+      [VideoStreamRendererViewState](xref:@azure/communication-react.VideoStreamRendererViewState)
+      under the relevant
+      [RemoteVideoStreamState](xref:@azure/communication-react.RemoteVideoStreamState)
+      or
 
-      <xref:@azure/communication-react.LocalVideoStreamState> or as unparented
-      view in the state. Under the hood calls
+      [LocalVideoStreamState](xref:@azure/communication-react.LocalVideoStreamState)
+      or as unparented view in the state. Under the hood calls
 
       <xref:%40azure%2Fcommunication-calling%23VideoStreamRenderer.createView>.
+
 
       Scenario 1: Render RemoteVideoStreamState
 
       - CallId is required, participantId is required, and stream of type
       RemoteVideoStreamState is required
 
-      - Resulting <xref:@azure/communication-react.VideoStreamRendererViewState>
+      - Resulting
+      [VideoStreamRendererViewState](xref:@azure/communication-react.VideoStreamRendererViewState)
       is stored in the given callId and participantId in
 
-      <xref:@azure/communication-react.CallClientState>
+      [CallClientState](xref:@azure/communication-react.CallClientState)
 
 
       Scenario 2: Render LocalVideoStreamState for a call
@@ -134,10 +202,11 @@ methods:
       - The <xref:%40azure%2Fcommunication-calling%23Call.localVideoStreams>
       must already be started using
         <xref:%40azure%2Fcommunication-calling%23Call.startVideo>.
-      - Resulting <xref:@azure/communication-react.VideoStreamRendererViewState>
+      - Resulting
+      [VideoStreamRendererViewState](xref:@azure/communication-react.VideoStreamRendererViewState)
       is stored in the given callId
-      <xref:@azure/communication-react.CallState.localVideoStreams>
-        in <xref:@azure/communication-react.CallClientState>.
+      [localVideoStreams](xref:@azure/communication-react.CallState.localVideoStreams)
+        in [CallClientState](xref:@azure/communication-react.CallClientState).
 
       - Scenario 2: Render LocalVideoStreamState not part of a call (example
       rendering camera for local preview)
@@ -145,25 +214,26 @@ methods:
       - CallId must be undefined, participantId must be undefined, and stream of
       type LocalVideoStreamState is required.
 
-      - Resulting <xref:@azure/communication-react.VideoStreamRendererViewState>
+      - Resulting
+      [VideoStreamRendererViewState](xref:@azure/communication-react.VideoStreamRendererViewState)
       is stored in under the given LocalVideoStreamState in
         <xref:CallClientState.deviceManager.unparentedViews>
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function createView(callId: string | undefined, participantId:
-        CommunicationIdentifier | undefined, stream: LocalVideoStreamState |
-        RemoteVideoStreamState, options?: CreateViewOptions): Promise<void>
+        function createView(callId: undefined | string, participantId: undefined
+        | CommunicationIdentifier, stream: LocalVideoStreamState |
+        RemoteVideoStreamState, options?: CreateViewOptions): Promise<undefined
+        | CreateViewResult>
       parameters:
         - id: callId
-          type: string | undefined
+          type: undefined | string
           description: >-
             CallId for the given stream. Can be undefined if the stream is not
             part of any call.
         - id: participantId
-          type: CommunicationIdentifier | undefined
+          type: undefined | CommunicationIdentifier
           description: >-
             <xref:RemoteParticipant.identifier> associated with the given
             RemoteVideoStreamState. Could
@@ -177,31 +247,38 @@ methods:
             rendering.
         - id: options
           type: CreateViewOptions
-          description: >
+          description: >-
             Options that are passed to the
             <xref:%40azure%2Fcommunication-calling%23VideoStreamRenderer>.
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;undefined | <xref
+          uid="@azure/communication-react.CreateViewResult" />&gt;
   - name: >-
-      disposeView(string | undefined, CommunicationIdentifier | undefined,
+      disposeView(undefined | string, undefined | CommunicationIdentifier,
       LocalVideoStreamState | RemoteVideoStreamState)
     uid: '@azure/communication-react.StatefulCallClient.disposeView'
     package: '@azure/communication-react'
-    summary: >
-      Stops rendering a <xref:@azure/communication-react.RemoteVideoStreamState>
-      or <xref:@azure/communication-react.LocalVideoStreamState> and removes the
+    summary: >-
+      Stops rendering a
+      [RemoteVideoStreamState](xref:@azure/communication-react.RemoteVideoStreamState)
+      or
+      [LocalVideoStreamState](xref:@azure/communication-react.LocalVideoStreamState)
+      and removes the
 
       <xref:VideoStreamRendererView> from the relevant
-      <xref:@azure/communication-react.RemoteVideoStreamState> in
-      <xref:@azure/communication-react.CallClientState> or
+      [RemoteVideoStreamState](xref:@azure/communication-react.RemoteVideoStreamState)
+      in [CallClientState](xref:@azure/communication-react.CallClientState) or
 
       <xref:LocalVideoStream> in
-      <xref:@azure/communication-react.CallClientState> or appropriate
+      [CallClientState](xref:@azure/communication-react.CallClientState) or
+      appropriate
 
       <xref:CallClientState.deviceManager.unparentedViews> Under the hood calls
 
       <xref:%40azure%2Fcommunication-calling%23VideoStreamRenderer.dispose>.
+
 
       Its important to disposeView to clean up resources properly.
 
@@ -225,21 +302,20 @@ methods:
 
       - LocalVideoStreamState must be the original one passed to createView.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function disposeView(callId: string | undefined, participantId:
-        CommunicationIdentifier | undefined, stream: LocalVideoStreamState |
+        function disposeView(callId: undefined | string, participantId:
+        undefined | CommunicationIdentifier, stream: LocalVideoStreamState |
         RemoteVideoStreamState)
       parameters:
         - id: callId
-          type: string | undefined
+          type: undefined | string
           description: >-
             CallId for the given stream. Can be undefined if the stream is not
             part of any call.
         - id: participantId
-          type: CommunicationIdentifier | undefined
+          type: undefined | CommunicationIdentifier
           description: >-
             <xref:RemoteParticipant.identifier> associated with the given
             RemoteVideoStreamState. Could
@@ -248,8 +324,7 @@ methods:
           type: >-
             <xref uid="@azure/communication-react.LocalVideoStreamState" /> |
             <xref uid="@azure/communication-react.RemoteVideoStreamState" />
-          description: |
-            The LocalVideoStreamState or RemoteVideoStreamState to dispose.
+          description: The LocalVideoStreamState or RemoteVideoStreamState to dispose.
   - name: getState()
     uid: '@azure/communication-react.StatefulCallClient.getState'
     package: '@azure/communication-react'
@@ -257,9 +332,9 @@ methods:
       Holds all the state that we could proxy from CallClient
       <xref:%40azure%2Fcommunication-calling%23CallClient> as
 
-      CallClientState <xref:@azure/communication-react.CallClientState>.
+      CallClientState
+      [CallClientState](xref:@azure/communication-react.CallClientState).
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getState(): CallClientState'
@@ -271,27 +346,23 @@ methods:
     package: '@azure/communication-react'
     summary: Allows unregistering for 'stateChanged' events.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function offStateChange(handler: (state: CallClientState) => void)'
       parameters:
         - id: handler
           type: '(state: CallClientState) =&gt; void'
-          description: |
-            Original callback to be unsubscribed.
+          description: Original callback to be unsubscribed.
   - name: 'onStateChange((state: CallClientState) => void)'
     uid: '@azure/communication-react.StatefulCallClient.onStateChange'
     package: '@azure/communication-react'
     summary: Allows a handler to be registered for 'stateChanged' events.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function onStateChange(handler: (state: CallClientState) => void)'
       parameters:
         - id: handler
           type: '(state: CallClientState) =&gt; void'
-          description: |
-            Callback to receive the state.
+          description: Callback to receive the state.
 extends: CallClient

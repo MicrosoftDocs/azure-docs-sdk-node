@@ -5,7 +5,6 @@ package: '@azure/arm-eventgrid'
 summary: Properties of the Event Subscription update.
 fullName: EventSubscriptionUpdateParameters
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -13,10 +12,15 @@ properties:
     uid: >-
       @azure/arm-eventgrid.EventSubscriptionUpdateParameters.deadLetterDestination
     package: '@azure/arm-eventgrid'
-    summary: The DeadLetter destination of the event subscription.
+    summary: >-
+      The dead letter destination of the event subscription. Any event that
+      cannot be delivered to its' destination is sent to the dead letter
+      destination.
+
+      Uses Azure Event Grid's identity to acquire the authentication tokens
+      being used during delivery / dead-lettering.
     fullName: deadLetterDestination
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'deadLetterDestination?: DeadLetterDestinationUnion'
@@ -37,7 +41,6 @@ properties:
       dead-lettering.
     fullName: deadLetterWithResourceIdentity
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'deadLetterWithResourceIdentity?: DeadLetterWithResourceIdentity'
@@ -57,7 +60,6 @@ properties:
       dead-lettering.
     fullName: deliveryWithResourceIdentity
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'deliveryWithResourceIdentity?: DeliveryWithResourceIdentity'
@@ -70,9 +72,11 @@ properties:
     summary: >-
       Information about the destination where events have to be delivered for
       the event subscription.
+
+      Uses Azure Event Grid's identity to acquire the authentication tokens
+      being used during delivery / dead-lettering.
     fullName: destination
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'destination?: EventSubscriptionDestinationUnion'
@@ -85,20 +89,18 @@ properties:
     summary: The event delivery schema for the event subscription.
     fullName: eventDeliverySchema
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'eventDeliverySchema?: EventDeliverySchema'
+      content: 'eventDeliverySchema?: string'
       return:
         description: ''
-        type: <xref uid="@azure/arm-eventgrid.EventDeliverySchema" />
+        type: string
   - name: expirationTimeUtc
     uid: '@azure/arm-eventgrid.EventSubscriptionUpdateParameters.expirationTimeUtc'
     package: '@azure/arm-eventgrid'
     summary: Information about the expiration time for the event subscription.
     fullName: expirationTimeUtc
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'expirationTimeUtc?: Date'
@@ -111,7 +113,6 @@ properties:
     summary: Information about the filter for the event subscription.
     fullName: filter
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'filter?: EventSubscriptionFilter'
@@ -124,13 +125,12 @@ properties:
     summary: List of user defined labels.
     fullName: labels
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'labels?: string[]'
       return:
         description: ''
-        type: 'string[]'
+        type: string[]
   - name: retryPolicy
     uid: '@azure/arm-eventgrid.EventSubscriptionUpdateParameters.retryPolicy'
     package: '@azure/arm-eventgrid'
@@ -139,7 +139,6 @@ properties:
       of delivery attempts and time to live for events.
     fullName: retryPolicy
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'retryPolicy?: RetryPolicy'

@@ -1,17 +1,14 @@
 ---
-title: Azure Media Services modules for JavaScript
-description: Reference for Azure Media Services modules for JavaScript
-author: Juliako
-ms.author: juliako
-manager: cfowler
-ms.date: 07/18/2017
+title: Azure Media Services SDK for JavaScript
+description: Reference for Azure Media Services SDK for JavaScript
+author: xirzec
+ms.author: jeffish
+ms.data: 09/06/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Media Services
+ms.devlang: javascript
+ms.service: mediaservices
+ms.date: 06/15/2022
 ---
-
 # Azure Media Services modules for JavaScript
 
 Azure Media Services is an extensible cloud-based platform that enables developers to build scalable media management and delivery applications. Media Services is based on REST APIs that enable you to securely upload, store, encode, and package video or audio content for both on-demand and live streaming delivery to various clients (for example, TV, PC, and mobile devices).

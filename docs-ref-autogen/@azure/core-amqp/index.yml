@@ -34,12 +34,11 @@ interfaces:
 typeAliases:
   - '@azure/core-amqp.ParsedOutput'
 functions:
-  - name: 'delay<T>(number, AbortSignalLike, string, T)'
+  - name: delay<T>(number, AbortSignalLike, string, T)
     uid: '@azure/core-amqp.delay'
     package: '@azure/core-amqp'
     summary: A wrapper for setTimeout that resolves a promise after t milliseconds.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -66,40 +65,37 @@ functions:
     package: '@azure/core-amqp'
     summary: Determines if an error is a MessagingError.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isMessagingError(error: Error | MessagingError): boolean'
+      content: 'function isMessagingError(error: Error | MessagingError): error'
       parameters:
         - id: error
           type: Error | <xref uid="@azure/core-amqp.MessagingError" />
-          description: |
-            An error that can either be an Error or a MessagingError.
+          description: An error that can either be an Error or a MessagingError.
       return:
         description: ''
-        type: boolean
+        type: error
   - name: isSystemError(unknown)
     uid: '@azure/core-amqp.isSystemError'
     package: '@azure/core-amqp'
     summary: Checks whether the provided error is a node.js SystemError.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isSystemError(err: unknown): boolean'
+      content: 'function isSystemError(err: unknown): err'
       parameters:
         - id: err
           type: unknown
-          description: |
-            An object that may contain error information.
+          description: An object that may contain error information.
       return:
         description: ''
-        type: boolean
+        type: err
   - name: parseConnectionString<T>(string)
     uid: '@azure/core-amqp.parseConnectionString'
     package: '@azure/core-amqp'
-    summary: >
+    summary: >-
       Parses the connection string and returns an object of type T.
+
 
       Connection strings have the following syntax:
 
@@ -115,7 +111,6 @@ functions:
 
       WhiteSpace       ::= ? all whitespace characters including `\r` and `\n` ?
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -131,7 +126,7 @@ functions:
   - name: retry<T>(RetryConfig<T>)
     uid: '@azure/core-amqp.retry'
     package: '@azure/core-amqp'
-    summary: >
+    summary: >-
       Every operation is attempted at least once. Additional attempts are made
       if the previous attempt failed
 
@@ -139,6 +134,7 @@ functions:
       the `maxRetries` property provided
 
       on the `RetryConfig` argument.
+
 
       If `mode` option is set to `Fixed`, then the retries are made on the
 
@@ -151,19 +147,17 @@ functions:
 
       exponentially with each attempt using back-off factor of power 2.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function retry<T>(config: RetryConfig<T>): Promise<T>'
       parameters:
         - id: config
           type: <xref uid="@azure/core-amqp.RetryConfig" />&lt;T&gt;
-          description: |
-            Parameters to configure retry operation
+          description: Parameters to configure retry operation
       return:
         description: Promise<T>.
         type: Promise&lt;T&gt;
-  - name: translate(AmqpError | Error)
+  - name: translate(unknown)
     uid: '@azure/core-amqp.translate'
     package: '@azure/core-amqp'
     summary: >-
@@ -172,13 +166,12 @@ functions:
 
       All other errors are returned unaltered.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function translate(err: AmqpError | Error): MessagingError | Error'
+      content: 'function translate(err: unknown): MessagingError | Error'
       parameters:
         - id: err
-          type: AmqpError | Error
+          type: unknown
           description: The amqp error that was received.
       return:
         description: MessagingError object.

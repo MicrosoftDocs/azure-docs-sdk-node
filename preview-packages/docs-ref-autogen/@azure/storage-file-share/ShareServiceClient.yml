@@ -9,21 +9,21 @@ summary: >-
   to manipulate file shares.
 fullName: ShareServiceClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'ShareServiceClient(string, Credential_2, StoragePipelineOptions)'
+  - name: >-
+      ShareServiceClient(string, Credential_2 | TokenCredential,
+      ShareClientOptions)
     uid: '@azure/storage-file-share.ShareServiceClient.constructor'
     package: '@azure/storage-file-share'
     summary: Creates an instance of ShareServiceClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        new ShareServiceClient(url: string, credential?: Credential_2, options?:
-        StoragePipelineOptions)
+        new ShareServiceClient(url: string, credential?: Credential_2 |
+        TokenCredential, options?: ShareClientOptions)
       parameters:
         - id: url
           type: string
@@ -32,23 +32,26 @@ constructors:
                                 "https://myaccount.file.core.windows.net". You can Append a SAS
                                 if using AnonymousCredential, such as "https://myaccount.file.core.windows.net?sasString".
         - id: credential
-          type: <xref uid="@azure/storage-file-share.Credential_2" />
-          description: |-
-            Such as AnonymousCredential or StorageSharedKeyCredential.
+          type: >-
+            <xref uid="@azure/storage-file-share.Credential" /> |
+            TokenCredential
+          description: >-
+            Such as AnonymousCredential, StorageSharedKeyCredential or
+            TokenCredential.
                                              If not specified, AnonymousCredential is used.
         - id: options
-          type: <xref uid="@azure/storage-file-share.StoragePipelineOptions" />
-          description: |
-            Optional. Options to configure the HTTP pipeline.
-  - name: 'ShareServiceClient(string, Pipeline)'
+          type: <xref uid="@azure/storage-file-share.ShareClientOptions" />
+          description: Optional. Options to configure the HTTP pipeline.
+  - name: ShareServiceClient(string, Pipeline, ShareClientConfig)
     uid: '@azure/storage-file-share.ShareServiceClient.constructor_1'
     package: '@azure/storage-file-share'
     summary: Creates an instance of ShareServiceClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'new ShareServiceClient(url: string, pipeline: Pipeline)'
+      content: >-
+        new ShareServiceClient(url: string, pipeline: Pipeline, options?:
+        ShareClientConfig)
       parameters:
         - id: url
           type: string
@@ -58,43 +61,45 @@ constructors:
                                 if using AnonymousCredential, such as "https://myaccount.file.core.windows.net?sasString".
         - id: pipeline
           type: <xref uid="@azure/storage-file-share.Pipeline" />
-          description: |
+          description: |-
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
+        - id: options
+          type: <xref uid="@azure/storage-file-share.ShareClientConfig" />
+          description: Optional. Options to configure the HTTP pipeline.
+inheritedProperties:
   - name: accountName
     uid: '@azure/storage-file-share.ShareServiceClient.accountName'
     package: '@azure/storage-file-share'
     summary: ''
     fullName: accountName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'accountName: string'
       return:
         description: ''
         type: string
+    inheritanceDescription: <b>Inherited From</b> StorageClient.accountName
   - name: url
     uid: '@azure/storage-file-share.ShareServiceClient.url'
     package: '@azure/storage-file-share'
     summary: URL string value.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
       return:
         description: ''
         type: string
+    inheritanceDescription: <b>Inherited From</b> StorageClient.url
 methods:
-  - name: 'createShare(string, ShareCreateOptions)'
+  - name: createShare(string, ShareCreateOptions)
     uid: '@azure/storage-file-share.ShareServiceClient.createShare'
     package: '@azure/storage-file-share'
     summary: Creates a Share.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -104,21 +109,20 @@ methods:
       parameters:
         - id: shareName
           type: string
-          description: '-'
+          description: ''
         - id: options
           type: <xref uid="@azure/storage-file-share.ShareCreateOptions" />
-          description: '-'
+          description: ''
       return:
         description: Share creation response and the corresponding share client.
         type: >-
           Promise&lt;{ shareClient: ShareClient, shareCreateResponse:
           ShareCreateResponse }&gt;
-  - name: 'deleteShare(string, ShareDeleteMethodOptions)'
+  - name: deleteShare(string, ShareDeleteMethodOptions)
     uid: '@azure/storage-file-share.ShareServiceClient.deleteShare'
     package: '@azure/storage-file-share'
     summary: Deletes a Share.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -127,26 +131,25 @@ methods:
       parameters:
         - id: shareName
           type: string
-          description: '-'
+          description: ''
         - id: options
           type: <xref uid="@azure/storage-file-share.ShareDeleteMethodOptions" />
-          description: '-'
+          description: ''
       return:
         description: Share deletion response and the corresponding share client.
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.ShareDeleteResponse"
           />&gt;
-  - name: 'fromConnectionString(string, StoragePipelineOptions)'
+  - name: fromConnectionString(string, ShareClientOptions)
     uid: '@azure/storage-file-share.ShareServiceClient.fromConnectionString'
     package: '@azure/storage-file-share'
     summary: Creates an instance of ShareServiceClient from connection string.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromConnectionString(connectionString: string, options?:
-        StoragePipelineOptions): ShareServiceClient
+        ShareClientOptions): ShareServiceClient
       parameters:
         - id: connectionString
           type: string
@@ -159,7 +162,7 @@ methods:
                                              SAS connection string example -
                                              `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
         - id: options
-          type: <xref uid="@azure/storage-file-share.StoragePipelineOptions" />
+          type: <xref uid="@azure/storage-file-share.ShareClientOptions" />
           description: Options to configure the HTTP pipeline.
       return:
         description: A new ShareServiceClient from the given connection string.
@@ -173,6 +176,7 @@ methods:
       Only available for ShareServiceClient constructed with a shared key
       credential.
 
+
       Generates an account Shared Access Signature (SAS) URI based on the client
       properties
 
@@ -180,11 +184,9 @@ methods:
       of the client.
 
 
-
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -229,7 +231,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/get-file-service-properties
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -249,7 +250,6 @@ methods:
     package: '@azure/storage-file-share'
     summary: Creates a ShareClient object.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getShareClient(shareName: string): ShareClient'
@@ -272,10 +272,11 @@ methods:
   - name: listShares(ServiceListSharesOptions)
     uid: '@azure/storage-file-share.ShareServiceClient.listShares'
     package: '@azure/storage-file-share'
-    summary: >
+    summary: >-
       Returns an async iterable iterator to list all the shares
 
       under the specified account.
+
 
       .byPage() returns an async iterable iterator to list the shares in pages.
 
@@ -378,16 +379,16 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listShares(options?: ServiceListSharesOptions):
-        PagedAsyncIterableIterator<ShareItem, ServiceListSharesSegmentResponse>
+        PagedAsyncIterableIterator<ShareItem, ServiceListSharesSegmentResponse,
+        PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.ServiceListSharesOptions" />
-          description: |
+          description: |-
             Options to list shares operation.
 
             An asyncIterableIterator that supports paging.
@@ -396,9 +397,9 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/storage-file-share.ShareItem" />, <xref
-          uid="@azure/storage-file-share.ServiceListSharesSegmentResponse"
-          />&gt;
-  - name: 'setProperties(FileServiceProperties, ServiceSetPropertiesOptions)'
+          uid="@azure/storage-file-share.ServiceListSharesSegmentResponse" />,
+          PageSettings&gt;
+  - name: setProperties(FileServiceProperties, ServiceSetPropertiesOptions)
     uid: '@azure/storage-file-share.ShareServiceClient.setProperties'
     package: '@azure/storage-file-share'
     summary: >-
@@ -412,7 +413,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-service-properties
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -421,7 +421,7 @@ methods:
       parameters:
         - id: properties
           type: <xref uid="@azure/storage-file-share.FileServiceProperties" />
-          description: '-'
+          description: ''
         - id: options
           type: <xref uid="@azure/storage-file-share.ServiceSetPropertiesOptions" />
           description: Options to Set Properties operation.
@@ -430,7 +430,7 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.ServiceSetPropertiesResponse" />&gt;
-  - name: 'undeleteShare(string, string, ServiceUndeleteShareOptions)'
+  - name: undeleteShare(string, string, ServiceUndeleteShareOptions)
     uid: '@azure/storage-file-share.ShareServiceClient.undeleteShare'
     package: '@azure/storage-file-share'
     summary: |-
@@ -438,7 +438,6 @@ methods:
       This API is only functional if Share Soft Delete is enabled
       for the storage account associated with the share.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -457,4 +456,4 @@ methods:
       return:
         description: Restored share.
         type: Promise&lt;<xref uid="@azure/storage-file-share.ShareClient" />&gt;
-extends: <xref uid="@azure/storage-file-share.StorageClient" />
+extends: StorageClient

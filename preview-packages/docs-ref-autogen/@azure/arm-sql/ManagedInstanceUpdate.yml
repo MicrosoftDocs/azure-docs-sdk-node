@@ -5,7 +5,6 @@ package: '@azure/arm-sql'
 summary: An update request for an Azure SQL Database managed instance.
 fullName: ManagedInstanceUpdate
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -17,33 +16,34 @@ properties:
       when the managed instance is being created (and is required for creation).
     fullName: administratorLogin
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'administratorLogin?: undefined | string'
+      content: 'administratorLogin?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: administratorLoginPassword
     uid: '@azure/arm-sql.ManagedInstanceUpdate.administratorLoginPassword'
     package: '@azure/arm-sql'
     summary: The administrator login password (required for managed instance creation).
     fullName: administratorLoginPassword
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'administratorLoginPassword?: undefined | string'
+      content: 'administratorLoginPassword?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: administrators
     uid: '@azure/arm-sql.ManagedInstanceUpdate.administrators'
     package: '@azure/arm-sql'
-    summary: The Azure Active Directory administrator of the server.
+    summary: >-
+      The Azure Active Directory administrator of the instance. This can only be
+      used at instance create time. If used for instance update, it will be
+      ignored or it will result in an error. For updates individual APIs will
+      need to be used.
     fullName: administrators
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'administrators?: ManagedInstanceExternalAdministrator'
@@ -56,13 +56,30 @@ properties:
     summary: Collation of the managed instance.
     fullName: collation
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'collation?: undefined | string'
+      content: 'collation?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
+  - name: currentBackupStorageRedundancy
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.currentBackupStorageRedundancy'
+    package: '@azure/arm-sql'
+    summary: >-
+      The storage account type used to store backups for this instance. The
+      options are Local (LocallyRedundantStorage), Zone (ZoneRedundantStorage),
+      Geo (GeoRedundantStorage) and GeoZone(GeoZoneRedundantStorage)
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: currentBackupStorageRedundancy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'currentBackupStorageRedundancy?: string'
+      return:
+        description: ''
+        type: string
   - name: dnsZone
     uid: '@azure/arm-sql.ManagedInstanceUpdate.dnsZone'
     package: '@azure/arm-sql'
@@ -73,13 +90,12 @@ properties:
       the server.
     fullName: dnsZone
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'dnsZone?: undefined | string'
+      content: 'dnsZone?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: dnsZonePartner
     uid: '@azure/arm-sql.ManagedInstanceUpdate.dnsZonePartner'
     package: '@azure/arm-sql'
@@ -88,13 +104,12 @@ properties:
       instance will share after creation.
     fullName: dnsZonePartner
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'dnsZonePartner?: undefined | string'
+      content: 'dnsZonePartner?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: fullyQualifiedDomainName
     uid: '@azure/arm-sql.ManagedInstanceUpdate.fullyQualifiedDomainName'
     package: '@azure/arm-sql'
@@ -105,20 +120,18 @@ properties:
       the server.
     fullName: fullyQualifiedDomainName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'fullyQualifiedDomainName?: undefined | string'
+      content: 'fullyQualifiedDomainName?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: identity
     uid: '@azure/arm-sql.ManagedInstanceUpdate.identity'
     package: '@azure/arm-sql'
     summary: Managed instance identity
     fullName: identity
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'identity?: ResourceIdentity'
@@ -131,26 +144,24 @@ properties:
     summary: The Id of the instance pool this managed server belongs to.
     fullName: instancePoolId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'instancePoolId?: undefined | string'
+      content: 'instancePoolId?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: keyId
     uid: '@azure/arm-sql.ManagedInstanceUpdate.keyId'
     package: '@azure/arm-sql'
     summary: A CMK URI of the key to use for encryption.
     fullName: keyId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'keyId?: undefined | string'
+      content: 'keyId?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: licenseType
     uid: '@azure/arm-sql.ManagedInstanceUpdate.licenseType'
     package: '@azure/arm-sql'
@@ -160,31 +171,30 @@ properties:
       bringing your own SQL licenses).
     fullName: licenseType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'licenseType?: ManagedInstanceLicenseType'
+      content: 'licenseType?: string'
       return:
         description: ''
-        type: <xref uid="@azure/arm-sql.ManagedInstanceLicenseType" />
+        type: string
   - name: maintenanceConfigurationId
     uid: '@azure/arm-sql.ManagedInstanceUpdate.maintenanceConfigurationId'
     package: '@azure/arm-sql'
     summary: Specifies maintenance configuration id to apply to this managed instance.
     fullName: maintenanceConfigurationId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'maintenanceConfigurationId?: undefined | string'
+      content: 'maintenanceConfigurationId?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: managedInstanceCreateMode
     uid: '@azure/arm-sql.ManagedInstanceUpdate.managedInstanceCreateMode'
     package: '@azure/arm-sql'
-    summary: >
+    summary: >-
       Specifies the mode of database creation.
+
 
       Default: Regular instance creation.
 
@@ -194,39 +204,36 @@ properties:
       specified.
     fullName: managedInstanceCreateMode
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'managedInstanceCreateMode?: ManagedServerCreateMode'
+      content: 'managedInstanceCreateMode?: string'
       return:
         description: ''
-        type: <xref uid="@azure/arm-sql.ManagedServerCreateMode" />
+        type: string
   - name: minimalTlsVersion
     uid: '@azure/arm-sql.ManagedInstanceUpdate.minimalTlsVersion'
     package: '@azure/arm-sql'
     summary: 'Minimal TLS version. Allowed values: ''None'', ''1.0'', ''1.1'', ''1.2'''
     fullName: minimalTlsVersion
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'minimalTlsVersion?: undefined | string'
+      content: 'minimalTlsVersion?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: primaryUserAssignedIdentityId
     uid: '@azure/arm-sql.ManagedInstanceUpdate.primaryUserAssignedIdentityId'
     package: '@azure/arm-sql'
     summary: The resource id of a user assigned identity to be used by default.
     fullName: primaryUserAssignedIdentityId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'primaryUserAssignedIdentityId?: undefined | string'
+      content: 'primaryUserAssignedIdentityId?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: privateEndpointConnections
     uid: '@azure/arm-sql.ManagedInstanceUpdate.privateEndpointConnections'
     package: '@azure/arm-sql'
@@ -237,13 +244,12 @@ properties:
       the server.
     fullName: privateEndpointConnections
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'privateEndpointConnections?: ManagedInstancePecProperty[]'
       return:
         description: ''
-        type: '<xref uid="@azure/arm-sql.ManagedInstancePecProperty" />[]'
+        type: <xref uid="@azure/arm-sql.ManagedInstancePecProperty" />[]
   - name: provisioningState
     uid: '@azure/arm-sql.ManagedInstanceUpdate.provisioningState'
     package: '@azure/arm-sql'
@@ -252,41 +258,52 @@ properties:
       the server.
     fullName: provisioningState
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'provisioningState?: ManagedInstancePropertiesProvisioningState'
+      content: 'provisioningState?: string'
       return:
         description: ''
-        type: >-
-          <xref uid="@azure/arm-sql.ManagedInstancePropertiesProvisioningState"
-          />
+        type: string
   - name: proxyOverride
     uid: '@azure/arm-sql.ManagedInstanceUpdate.proxyOverride'
     package: '@azure/arm-sql'
     summary: Connection type used for connecting to the instance.
     fullName: proxyOverride
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'proxyOverride?: ManagedInstanceProxyOverride'
+      content: 'proxyOverride?: string'
       return:
         description: ''
-        type: <xref uid="@azure/arm-sql.ManagedInstanceProxyOverride" />
+        type: string
   - name: publicDataEndpointEnabled
     uid: '@azure/arm-sql.ManagedInstanceUpdate.publicDataEndpointEnabled'
     package: '@azure/arm-sql'
     summary: Whether or not the public data endpoint is enabled.
     fullName: publicDataEndpointEnabled
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'publicDataEndpointEnabled?: undefined | false | true'
+      content: 'publicDataEndpointEnabled?: boolean'
       return:
         description: ''
-        type: undefined | false | true
+        type: boolean
+  - name: requestedBackupStorageRedundancy
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.requestedBackupStorageRedundancy'
+    package: '@azure/arm-sql'
+    summary: >-
+      The storage account type to be used to store backups for this instance.
+      The options are Local (LocallyRedundantStorage), Zone
+      (ZoneRedundantStorage), Geo (GeoRedundantStorage) and
+      GeoZone(GeoZoneRedundantStorage)
+    fullName: requestedBackupStorageRedundancy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'requestedBackupStorageRedundancy?: string'
+      return:
+        description: ''
+        type: string
   - name: restorePointInTime
     uid: '@azure/arm-sql.ManagedInstanceUpdate.restorePointInTime'
     package: '@azure/arm-sql'
@@ -295,20 +312,30 @@ properties:
       will be restored to create the new database.
     fullName: restorePointInTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'restorePointInTime?: Date'
       return:
         description: ''
-        type: <xref uid="@azure/arm-sql.KnownColumnDataType.Date" />
+        type: Date
+  - name: servicePrincipal
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.servicePrincipal'
+    package: '@azure/arm-sql'
+    summary: The managed instance's service principal.
+    fullName: servicePrincipal
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'servicePrincipal?: ServicePrincipal'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-sql.ServicePrincipal" />
   - name: sku
     uid: '@azure/arm-sql.ManagedInstanceUpdate.sku'
     package: '@azure/arm-sql'
     summary: Managed instance sku
     fullName: sku
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'sku?: Sku'
@@ -323,13 +350,12 @@ properties:
       create operation of this instance.
     fullName: sourceManagedInstanceId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'sourceManagedInstanceId?: undefined | string'
+      content: 'sourceManagedInstanceId?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: state
     uid: '@azure/arm-sql.ManagedInstanceUpdate.state'
     package: '@azure/arm-sql'
@@ -340,70 +366,51 @@ properties:
       the server.
     fullName: state
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'state?: undefined | string'
+      content: 'state?: string'
       return:
         description: ''
-        type: undefined | string
-  - name: storageAccountType
-    uid: '@azure/arm-sql.ManagedInstanceUpdate.storageAccountType'
-    package: '@azure/arm-sql'
-    summary: >-
-      The storage account type used to store backups for this instance. The
-      options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and
-      GRS (GeoRedundantStorage)
-    fullName: storageAccountType
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'storageAccountType?: StorageAccountType'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-sql.StorageAccountType" />
+        type: string
   - name: storageSizeInGB
     uid: '@azure/arm-sql.ManagedInstanceUpdate.storageSizeInGB'
     package: '@azure/arm-sql'
     summary: >-
-      Storage size in GB. Minimum value: 32. Maximum value: 8192. Increments of
-      32 GB allowed only.
+      Storage size in GB. Minimum value: 32. Maximum value: 16384. Increments of
+      32 GB allowed only. Maximum value depends on the selected hardware family
+      and number of vCores.
     fullName: storageSizeInGB
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'storageSizeInGB?: undefined | number'
+      content: 'storageSizeInGB?: number'
       return:
         description: ''
-        type: undefined | number
+        type: number
   - name: subnetId
     uid: '@azure/arm-sql.ManagedInstanceUpdate.subnetId'
     package: '@azure/arm-sql'
     summary: Subnet resource ID for the managed instance.
     fullName: subnetId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'subnetId?: undefined | string'
+      content: 'subnetId?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: tags
     uid: '@azure/arm-sql.ManagedInstanceUpdate.tags'
     package: '@azure/arm-sql'
     summary: Resource tags.
     fullName: tags
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'tags?: undefined | [key: string]: string'
+      content: 'tags?: {[propertyName: string]: string}'
       return:
         description: ''
-        type: 'undefined | [key: string]: string'
+        type: '{[propertyName: string]: string}'
   - name: timezoneId
     uid: '@azure/arm-sql.ManagedInstanceUpdate.timezoneId'
     package: '@azure/arm-sql'
@@ -425,36 +432,33 @@ properties:
       Standard Time".
     fullName: timezoneId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'timezoneId?: undefined | string'
+      content: 'timezoneId?: string'
       return:
         description: ''
-        type: undefined | string
+        type: string
   - name: vCores
     uid: '@azure/arm-sql.ManagedInstanceUpdate.vCores'
     package: '@azure/arm-sql'
     summary: 'The number of vCores. Allowed values: 8, 16, 24, 32, 40, 64, 80.'
     fullName: vCores
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'vCores?: undefined | number'
+      content: 'vCores?: number'
       return:
         description: ''
-        type: undefined | number
+        type: number
   - name: zoneRedundant
     uid: '@azure/arm-sql.ManagedInstanceUpdate.zoneRedundant'
     package: '@azure/arm-sql'
     summary: Whether or not the multi-az is enabled.
     fullName: zoneRedundant
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'zoneRedundant?: undefined | false | true'
+      content: 'zoneRedundant?: boolean'
       return:
         description: ''
-        type: undefined | false | true
+        type: boolean

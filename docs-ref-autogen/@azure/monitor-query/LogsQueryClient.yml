@@ -5,18 +5,16 @@ package: '@azure/monitor-query'
 summary: Client for Azure Log Analytics
 fullName: LogsQueryClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'LogsQueryClient(TokenCredential, LogsQueryClientOptions)'
+  - name: LogsQueryClient(TokenCredential, LogsQueryClientOptions)
     uid: '@azure/monitor-query.LogsQueryClient.constructor'
     package: '@azure/monitor-query'
     summary: >-
       Construct a LogsClient that can be used to query logs using the Log
       Analytics Query language.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -28,15 +26,13 @@ constructors:
           description: A token credential.
         - id: options
           type: <xref uid="@azure/monitor-query.LogsQueryClientOptions" />
-          description: |
-            Options for the LogsClient.
+          description: Options for the LogsClient.
 methods:
-  - name: 'queryBatch(QueryBatch[], LogsQueryBatchOptions)'
+  - name: queryBatch(QueryBatch[], LogsQueryBatchOptions)
     uid: '@azure/monitor-query.LogsQueryClient.queryBatch'
     package: '@azure/monitor-query'
-    summary: 'Query Logs with multiple queries, in a batch.'
+    summary: Query Logs with multiple queries, in a batch.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -44,7 +40,7 @@ methods:
         LogsQueryBatchOptions): Promise<LogsQueryBatchResult>
       parameters:
         - id: batch
-          type: '<xref uid="@azure/monitor-query.QueryBatch" />[]'
+          type: <xref uid="@azure/monitor-query.QueryBatch" />[]
           description: >-
             A batch of Kusto queries to execute. Each query can be configured to
             run against separate workspaces.
@@ -56,12 +52,48 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/monitor-query.LogsQueryBatchResult"
           />&gt;
-  - name: 'queryWorkspace(string, string, QueryTimeInterval, LogsQueryOptions)'
+  - name: queryResource(string, string, QueryTimeInterval, LogsQueryOptions)
+    uid: '@azure/monitor-query.LogsQueryClient.queryResource'
+    package: '@azure/monitor-query'
+    summary: Executes a Kusto query on an Azure resource
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function queryResource(resourceId: string, query: string, timespan:
+        QueryTimeInterval, options?: LogsQueryOptions): Promise<LogsQueryResult>
+      parameters:
+        - id: resourceId
+          type: string
+          description: >-
+            The identifier of the resource. The expected format is
+
+            '/subscriptions/<sid>/resourceGroups/<rg>/providers/<providerName>/<resourceType>/<resourceName>'.
+        - id: query
+          type: string
+          description: >-
+            A Kusto query. Learn more about the `Kusto query syntax
+            <https://docs.microsoft.com/azure/data-explorer/kusto/query/>`.
+        - id: timespan
+          type: <xref uid="@azure/monitor-query.QueryTimeInterval" />
+          description: >-
+            The timespan over which to query data. This is an ISO8601 time
+            period value. This timespan is applied in addition to any that are
+            specified in the query expression.
+             Some common durations can be found in the [Durations](xref:2) object.
+        - id: options
+          type: <xref uid="@azure/monitor-query.LogsQueryOptions" />
+          description: Options to adjust various aspects of the request.
+      return:
+        description: >-
+          Returns all the Azure Monitor logs matching the given Kusto query for
+          an Azure resource.
+        type: Promise&lt;<xref uid="@azure/monitor-query.LogsQueryResult" />&gt;
+  - name: queryWorkspace(string, string, QueryTimeInterval, LogsQueryOptions)
     uid: '@azure/monitor-query.LogsQueryClient.queryWorkspace'
     package: '@azure/monitor-query'
     summary: Queries logs in a Log Analytics Workspace.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-

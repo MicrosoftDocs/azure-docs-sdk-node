@@ -1,16 +1,14 @@
 ---
-title: Azure SQL modules for JavaScript
-description: Reference for Azure SQL modules for JavaScript
-author: rothja
-ms.author: jroth
-manager: craigg
-ms.date: 07/18/2017
+title: Azure SQL SDK for JavaScript
+description: Reference for Azure SQL SDK for JavaScript
+author: xirzec
+ms.author: jeffish
+ms.data: 09/06/2023
 ms.topic: reference
-ms.devlang: nodejs
-ms.service: sql-database
-ms.subservice: development
+ms.devlang: javascript
+ms.service: sql
+ms.date: 06/15/2022
 ---
-
 # Azure SQL modules for JavaScript
 
 Work with data stored in [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from JavaScript.

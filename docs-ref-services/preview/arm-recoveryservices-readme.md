@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/26/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: recoveryservices
+ms.service: azure
 ---
 
-# Azure RecoveryServices client library for JavaScript - Version 5.0.0-beta.1 
+# Azure RecoveryServices client library for JavaScript - version 5.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure RecoveryServices client.

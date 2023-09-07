@@ -6,39 +6,58 @@ type: package
 classes:
   - '@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials'
   - '@azure/ms-rest-nodeauth.ApplicationTokenCredentials'
-  - '@azure/ms-rest-nodeauth.ApplicationTokenCredentialsBase'
   - '@azure/ms-rest-nodeauth.AzureCliCredentials'
   - '@azure/ms-rest-nodeauth.DeviceTokenCredentials'
   - '@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials'
   - '@azure/ms-rest-nodeauth.MSITokenCredentials'
   - '@azure/ms-rest-nodeauth.MSIVmTokenCredentials'
   - '@azure/ms-rest-nodeauth.TokenCredentialsBase'
-  - '@azure/ms-rest-nodeauth.TopicCredentials'
   - '@azure/ms-rest-nodeauth.UserTokenCredentials'
 interfaces:
-  - '@azure/ms-rest-nodeauth.AccessTokenOptions'
+  - '@azure/ms-rest-nodeauth.AuthResponse'
+  - '@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions'
   - '@azure/ms-rest-nodeauth.CliAccessToken'
+  - '@azure/ms-rest-nodeauth.InteractiveLoginOptions'
+  - '@azure/ms-rest-nodeauth.LinkedSubscription'
+  - '@azure/ms-rest-nodeauth.LinkedUser'
   - '@azure/ms-rest-nodeauth.ListAllSubscriptionOptions'
+  - '@azure/ms-rest-nodeauth.LoginWithAuthFileOptions'
+  - '@azure/ms-rest-nodeauth.LoginWithUsernamePasswordOptions'
   - '@azure/ms-rest-nodeauth.MSIAppServiceOptions'
   - '@azure/ms-rest-nodeauth.MSIOptions'
   - '@azure/ms-rest-nodeauth.MSITokenResponse'
   - '@azure/ms-rest-nodeauth.MSIVmOptions'
-  - '@azure/ms-rest-nodeauth.TokenClientCredentials'
-  - '@azure/ms-rest-nodeauth.TokenResponse'
-  - '@azure/ms-rest-nodeauth.AuthResponse'
-  - '@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions'
-  - '@azure/ms-rest-nodeauth.InteractiveLoginOptions'
-  - '@azure/ms-rest-nodeauth.LoginWithAuthFileOptions'
-  - '@azure/ms-rest-nodeauth.LoginWithUsernamePasswordOptions'
-  - '@azure/ms-rest-nodeauth.LinkedSubscription'
-  - '@azure/ms-rest-nodeauth.LinkedUser'
+typeAliases:
+  - '@azure/ms-rest-nodeauth.TokenAudience'
+  - '@azure/ms-rest-nodeauth.UserType'
 functions:
+  - name: buildTenantList(TokenCredentialsBase, string)
+    uid: '@azure/ms-rest-nodeauth.buildTenantList'
+    package: '@azure/ms-rest-nodeauth'
+    summary: Builds an array of tenantIds.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildTenantList(credentials: TokenCredentialsBase, apiVersion?:
+        string): Promise<string[]>
+      parameters:
+        - id: credentials
+          type: <xref uid="@azure/ms-rest-nodeauth.TokenCredentialsBase" />
+          description: The credentials.
+        - id: apiVersion
+          type: string
+          description: default value 2016-06-01
+      return:
+        description: >-
+          A promise that resolves to an array of tenantIds and rejects with an
+          error.
+        type: Promise&lt;string[]&gt;
   - name: createAuthenticator(MSITokenCredentials)
     uid: '@azure/ms-rest-nodeauth.createAuthenticator'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -51,46 +70,24 @@ functions:
       return:
         description: ''
         type: Authenticator
-  - name: 'execAz(string[])'
-    uid: '@azure/ms-rest-nodeauth.execAz'
+  - name: interactiveLogin()
+    uid: '@azure/ms-rest-nodeauth.interactiveLogin'
     package: '@azure/ms-rest-nodeauth'
     summary: >-
-      Executes the azure cli command and returns the result. It will be
-      `undefined` if the command did
-
-      not return anything or a `JSON object` if the command did return
-      something.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function execAz(cmdArguments: string[]): Promise<any>'
-      parameters:
-        - id: cmdArguments
-          type: 'string[]'
-          description: |
-            Arguments to the az cli command to execute.
-      return:
-        description: ''
-        type: Promise&lt;any&gt;
-  - name: interactive()
-    uid: '@azure/ms-rest-nodeauth.interactive'
-    package: '@azure/ms-rest-nodeauth'
-    summary: >
       Provides a url and code that needs to be copy and pasted in a browser and
       authenticated over there. If successful, the user will get a
       DeviceTokenCredentials object and the list of subscriptions associated
       with that userId across all the applicable tenants.
+
 
       When using personal accounts, the `domain` property in the `options`
       parameter is required to be set to the Id of a tenant for that account.
       Otherwise, the resulting credential will not be able to access the
       account's resources.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function interactive(): Promise<DeviceTokenCredentials>'
+      content: 'function interactiveLogin(): Promise<DeviceTokenCredentials>'
       return:
         description: >-
           If a callback was passed as the last parameter then it returns void
@@ -103,16 +100,15 @@ functions:
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
           />&gt;
-  - name: interactive(InteractiveLoginOptions)
-    uid: '@azure/ms-rest-nodeauth.interactive_1'
+  - name: interactiveLogin(InteractiveLoginOptions)
+    uid: '@azure/ms-rest-nodeauth.interactiveLogin_1'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function interactive(options: InteractiveLoginOptions):
+        function interactiveLogin(options: InteractiveLoginOptions):
         Promise<DeviceTokenCredentials>
       parameters:
         - id: options
@@ -124,19 +120,18 @@ functions:
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
           />&gt;
   - name: >-
-      interactive(InteractiveLoginOptions, (err: Error, credentials:
-      DeviceTokenCredentials, subscriptions: Array<LinkedSubscription>) => void)
-    uid: '@azure/ms-rest-nodeauth.interactive_2'
+      interactiveLogin(InteractiveLoginOptions, (err: Error, credentials:
+      DeviceTokenCredentials, subscriptions: LinkedSubscription[]) => void)
+    uid: '@azure/ms-rest-nodeauth.interactiveLogin_2'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function interactive(options: InteractiveLoginOptions, callback: (err:
-        Error, credentials: DeviceTokenCredentials, subscriptions:
-        Array<LinkedSubscription>) => void)
+        function interactiveLogin(options: InteractiveLoginOptions, callback:
+        (err: Error, credentials: DeviceTokenCredentials, subscriptions:
+        LinkedSubscription[]) => void)
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.InteractiveLoginOptions" />
@@ -144,27 +139,57 @@ functions:
         - id: callback
           type: >-
             (err: Error, credentials: DeviceTokenCredentials, subscriptions:
-            Array&lt;LinkedSubscription&gt;) =&gt; void
+            LinkedSubscription[]) =&gt; void
           description: ''
-  - name: interactive(any)
-    uid: '@azure/ms-rest-nodeauth.interactive_3'
+  - name: interactiveLogin(any)
+    uid: '@azure/ms-rest-nodeauth.interactiveLogin_3'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function interactive(callback: any)'
+      content: 'function interactiveLogin(callback: any)'
       parameters:
         - id: callback
           type: any
           description: ''
+  - name: interactiveLoginWithAuthResponse(InteractiveLoginOptions)
+    uid: '@azure/ms-rest-nodeauth.interactiveLoginWithAuthResponse'
+    package: '@azure/ms-rest-nodeauth'
+    summary: >-
+      Provides a url and code that needs to be copy and pasted in a browser and
+      authenticated over there. If successful, the user will get a
+      DeviceTokenCredentials object and the list of subscriptions associated
+      with that userId across all the applicable tenants.
+
+
+      When using personal accounts, the `domain` property in the `options`
+      parameter is required to be set to the Id of a tenant for that account.
+      Otherwise, the resulting credential will not be able to access the
+      account's resources.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function interactiveLoginWithAuthResponse(options?:
+        InteractiveLoginOptions): Promise<AuthResponse<DeviceTokenCredentials>>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ms-rest-nodeauth.InteractiveLoginOptions" />
+          description: Object representing optional parameters.
+      return:
+        description: >-
+          A Promise that resolves to AuthResponse, which contains "credentials"
+          and optional "subscriptions" array and rejects with an Error.
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
+          />&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
+          />&gt;&gt;
   - name: loginWithAppServiceMSI()
     uid: '@azure/ms-rest-nodeauth.loginWithAppServiceMSI'
     package: '@azure/ms-rest-nodeauth'
     summary: Authenticate using the App Service MSI.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -185,7 +210,6 @@ functions:
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -207,7 +231,6 @@ functions:
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -219,7 +242,7 @@ functions:
           description: ''
         - id: callback
           type: >-
-            <xref uid="@azure/ms-rest-nodeauth.Callback" />&lt;<xref
+            Callback&lt;<xref
             uid="@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials" />&gt;
           description: ''
   - name: loginWithAppServiceMSI(Callback<MSIAppServiceTokenCredentials>)
@@ -227,7 +250,6 @@ functions:
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -236,121 +258,13 @@ functions:
       parameters:
         - id: callback
           type: >-
-            <xref uid="@azure/ms-rest-nodeauth.Callback" />&lt;<xref
+            Callback&lt;<xref
             uid="@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials" />&gt;
           description: ''
-  - name: loginWithVmMSI()
-    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI'
+  - name: loginWithAuthFile()
+    uid: '@azure/ms-rest-nodeauth.loginWithAuthFile'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
-      Before using this method please install az cli from
-      https://github.com/Azure/azure-cli/releases.
-
-      If you have an Azure virtual machine provisioned with az cli and has MSI
-      enabled,
-
-      you can then use this method to get auth tokens from the VM.
-
-      To create a new VM, enable MSI, please execute this command:
-
-      az vm create -g <resource_group_name> -n <vm_name> --assign-identity
-      --image <os_image_name>
-
-      Note: the above command enables a service endpoint on the host, with a
-      default port 50342
-
-
-      To enable MSI on a already provisioned VM, execute the following command:
-
-      az vm --assign-identity -g <resource_group_name> -n <vm_name> --port
-      <custom_port_number>
-
-
-      To know more about this command, please execute:
-
-      az vm --assign-identity -h
-
-
-      Authenticates using the identity service running on an Azure virtual
-      machine.
-
-      This method makes a request to the authentication service hosted on the VM
-
-      and gets back an access token.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function loginWithVmMSI(): Promise<MSIVmTokenCredentials>'
-      return:
-        description: >-
-          If a callback was passed as the last parameter then it returns void
-          else returns a Promise.
-
-          The callback is called with the resulting MSIVmTokenCredentials
-          object.
-        type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
-          />&gt;
-  - name: loginWithVmMSI(MSIVmOptions)
-    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_1'
-    package: '@azure/ms-rest-nodeauth'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function loginWithVmMSI(options: MSIVmOptions):
-        Promise<MSIVmTokenCredentials>
-      parameters:
-        - id: options
-          type: <xref uid="@azure/ms-rest-nodeauth.MSIVmOptions" />
-          description: ''
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
-          />&gt;
-  - name: 'loginWithVmMSI(MSIVmOptions, Callback<MSIVmTokenCredentials>)'
-    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_2'
-    package: '@azure/ms-rest-nodeauth'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function loginWithVmMSI(options: MSIVmOptions, callback:
-        Callback<MSIVmTokenCredentials>)
-      parameters:
-        - id: options
-          type: <xref uid="@azure/ms-rest-nodeauth.MSIVmOptions" />
-          description: ''
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-nodeauth.Callback" />&lt;<xref
-            uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials" />&gt;
-          description: ''
-  - name: loginWithVmMSI(Callback<MSIVmTokenCredentials>)
-    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_3'
-    package: '@azure/ms-rest-nodeauth'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function loginWithVmMSI(callback: Callback<MSIVmTokenCredentials>)'
-      parameters:
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-nodeauth.Callback" />&lt;<xref
-            uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials" />&gt;
-          description: ''
-  - name: withAuthFile()
-    uid: '@azure/ms-rest-nodeauth.withAuthFile'
-    package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Before using this method please install az cli from
       https://github.com/Azure/azure-cli/releases. Then execute `az ad sp
       create-for-rbac --sdk-auth > ${yourFilename.json}`.
@@ -376,6 +290,7 @@ functions:
 
       5. az account show --sdk-auth > auth.json
 
+
       Authenticates using the service principal information provided in the auth
       file. This method will set
 
@@ -384,11 +299,10 @@ functions:
 
       parameter or the default "AZURE_SUBSCRIPTION_ID".
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withAuthFile(): Promise<ApplicationTokenCredentials |
+        function loginWithAuthFile(): Promise<ApplicationTokenCredentials |
         ApplicationTokenCertificateCredentials>
       return:
         description: >-
@@ -405,16 +319,15 @@ functions:
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" /> | <xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
-  - name: withAuthFile(LoginWithAuthFileOptions)
-    uid: '@azure/ms-rest-nodeauth.withAuthFile_1'
+  - name: loginWithAuthFile(LoginWithAuthFileOptions)
+    uid: '@azure/ms-rest-nodeauth.loginWithAuthFile_1'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withAuthFile(options: LoginWithAuthFileOptions):
+        function loginWithAuthFile(options: LoginWithAuthFileOptions):
         Promise<ApplicationTokenCredentials |
         ApplicationTokenCertificateCredentials>
       parameters:
@@ -429,21 +342,20 @@ functions:
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
   - name: >-
-      withAuthFile(LoginWithAuthFileOptions, (err: Error, credentials:
+      loginWithAuthFile(LoginWithAuthFileOptions, (err: Error, credentials:
       ApplicationTokenCredentials | ApplicationTokenCertificateCredentials,
-      subscriptions: Array<LinkedSubscription>) => void)
-    uid: '@azure/ms-rest-nodeauth.withAuthFile_2'
+      subscriptions: LinkedSubscription[]) => void)
+    uid: '@azure/ms-rest-nodeauth.loginWithAuthFile_2'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withAuthFile(options: LoginWithAuthFileOptions, callback: (err:
-        Error, credentials: ApplicationTokenCredentials |
+        function loginWithAuthFile(options: LoginWithAuthFileOptions, callback:
+        (err: Error, credentials: ApplicationTokenCredentials |
         ApplicationTokenCertificateCredentials, subscriptions:
-        Array<LinkedSubscription>) => void)
+        LinkedSubscription[]) => void)
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.LoginWithAuthFileOptions" />
@@ -452,25 +364,24 @@ functions:
           type: >-
             (err: Error, credentials: ApplicationTokenCredentials |
             ApplicationTokenCertificateCredentials, subscriptions:
-            Array&lt;LinkedSubscription&gt;) =&gt; void
+            LinkedSubscription[]) =&gt; void
           description: ''
-  - name: withAuthFile(any)
-    uid: '@azure/ms-rest-nodeauth.withAuthFile_3'
+  - name: loginWithAuthFile(any)
+    uid: '@azure/ms-rest-nodeauth.loginWithAuthFile_3'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withAuthFile(callback: any)'
+      content: 'function loginWithAuthFile(callback: any)'
       parameters:
         - id: callback
           type: any
           description: ''
-  - name: withAuthFileWithAuthResponse(LoginWithAuthFileOptions)
-    uid: '@azure/ms-rest-nodeauth.withAuthFileWithAuthResponse'
+  - name: loginWithAuthFileWithAuthResponse(LoginWithAuthFileOptions)
+    uid: '@azure/ms-rest-nodeauth.loginWithAuthFileWithAuthResponse'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Before using this method please install az cli from
       https://github.com/Azure/azure-cli/releases. Then execute `az ad sp
       create-for-rbac --sdk-auth > ${yourFilename.json}`.
@@ -496,6 +407,7 @@ functions:
 
       5. az account show --sdk-auth > auth.json
 
+
       Authenticates using the service principal information provided in the auth
       file. This method will set
 
@@ -504,11 +416,10 @@ functions:
 
       parameter or the default "AZURE_SUBSCRIPTION_ID".
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withAuthFileWithAuthResponse(options?:
+        function loginWithAuthFileWithAuthResponse(options?:
         LoginWithAuthFileOptions):
         Promise<AuthResponse<ApplicationTokenCredentials |
         ApplicationTokenCertificateCredentials>>
@@ -526,56 +437,23 @@ functions:
           /> | <xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;&gt;
-  - name: withInteractiveWithAuthResponse(InteractiveLoginOptions)
-    uid: '@azure/ms-rest-nodeauth.withInteractiveWithAuthResponse'
+  - name: loginWithServicePrincipalCertificate(string, string, string)
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalCertificate'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
-      Provides a url and code that needs to be copy and pasted in a browser and
-      authenticated over there. If successful, the user will get a
-      DeviceTokenCredentials object and the list of subscriptions associated
-      with that userId across all the applicable tenants.
-
-      When using personal accounts, the `domain` property in the `options`
-      parameter is required to be set to the Id of a tenant for that account.
-      Otherwise, the resulting credential will not be able to access the
-      account's resources.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withInteractiveWithAuthResponse(options?:
-        InteractiveLoginOptions): Promise<AuthResponse<DeviceTokenCredentials>>
-      parameters:
-        - id: options
-          type: <xref uid="@azure/ms-rest-nodeauth.InteractiveLoginOptions" />
-          description: |
-            Object representing optional parameters.
-      return:
-        description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
-          and optional "subscriptions" array and rejects with an Error.
-        type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
-          />&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
-          />&gt;&gt;
-  - name: 'withServicePrincipalCertificate(string, string, string)'
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate'
-    package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides an ApplicationTokenCertificateCredentials object and the list of
       subscriptions associated with that servicePrincipalId/clientId across all
       the applicable tenants.
+
 
       When using personal accounts, the `domain` parameter is required to be set
       to the Id of a tenant for that account. Otherwise, the resulting
       credential will not be able to access the account's resources.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalCertificate(clientId: string,
+        function loginWithServicePrincipalCertificate(clientId: string,
         certificateStringOrFilePath: string, domain: string):
         Promise<ApplicationTokenCertificateCredentials>
       parameters:
@@ -617,17 +495,16 @@ functions:
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
   - name: >-
-      withServicePrincipalCertificate(string, string, string,
+      loginWithServicePrincipalCertificate(string, string, string,
       AzureTokenCredentialsOptions)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate_1'
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalCertificate_1'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalCertificate(clientId: string,
+        function loginWithServicePrincipalCertificate(clientId: string,
         certificateStringOrFilePath: string, domain: string, options:
         AzureTokenCredentialsOptions):
         Promise<ApplicationTokenCertificateCredentials>
@@ -651,23 +528,22 @@ functions:
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
   - name: >-
-      withServicePrincipalCertificate(string, string, string,
+      loginWithServicePrincipalCertificate(string, string, string,
       AzureTokenCredentialsOptions, (err: Error, credentials:
       ApplicationTokenCertificateCredentials, subscriptions:
-      Array<LinkedSubscription>) => void)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate_2'
+      LinkedSubscription[]) => void)
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalCertificate_2'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalCertificate(clientId: string,
+        function loginWithServicePrincipalCertificate(clientId: string,
         certificateStringOrFilePath: string, domain: string, options:
         AzureTokenCredentialsOptions, callback: (err: Error, credentials:
         ApplicationTokenCertificateCredentials, subscriptions:
-        Array<LinkedSubscription>) => void)
+        LinkedSubscription[]) => void)
       parameters:
         - id: clientId
           type: string
@@ -684,18 +560,17 @@ functions:
         - id: callback
           type: >-
             (err: Error, credentials: ApplicationTokenCertificateCredentials,
-            subscriptions: Array&lt;LinkedSubscription&gt;) =&gt; void
+            subscriptions: LinkedSubscription[]) =&gt; void
           description: ''
-  - name: 'withServicePrincipalCertificate(string, string, string, any)'
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate_3'
+  - name: loginWithServicePrincipalCertificate(string, string, string, any)
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalCertificate_3'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalCertificate(clientId: string,
+        function loginWithServicePrincipalCertificate(clientId: string,
         certificateStringOrFilePath: string, domain: string, callback: any)
       parameters:
         - id: clientId
@@ -711,24 +586,25 @@ functions:
           type: any
           description: ''
   - name: >-
-      withServicePrincipalCertificateWithAuthResponse(string, string, string,
-      AzureTokenCredentialsOptions)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificateWithAuthResponse'
+      loginWithServicePrincipalCertificateWithAuthResponse(string, string,
+      string, AzureTokenCredentialsOptions)
+    uid: >-
+      @azure/ms-rest-nodeauth.loginWithServicePrincipalCertificateWithAuthResponse
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides an ApplicationTokenCertificateCredentials object and the list of
       subscriptions associated with that servicePrincipalId/clientId across all
       the applicable tenants.
+
 
       When using personal accounts, the `domain` parameter is required to be set
       to the Id of a tenant for that account. Otherwise, the resulting
       credential will not be able to access the account's resources.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalCertificateWithAuthResponse(clientId:
+        function loginWithServicePrincipalCertificateWithAuthResponse(clientId:
         string, certificateStringOrFilePath: string, domain: string, options?:
         AzureTokenCredentialsOptions):
         Promise<AuthResponse<ApplicationTokenCertificateCredentials>>
@@ -769,24 +645,24 @@ functions:
           />&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;&gt;
-  - name: 'withServicePrincipalSecret(string, string, string)'
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecret'
+  - name: loginWithServicePrincipalSecret(string, string, string)
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalSecret'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides an ApplicationTokenCredentials object and the list of
       subscriptions associated with that servicePrincipalId/clientId across all
       the applicable tenants.
+
 
       When using personal accounts, the `domain` parameter is required to be set
       to the Id of a tenant for that account. Otherwise, the resulting
       credential will not be able to access the account's resources.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalSecret(clientId: string, secret: string,
-        domain: string): Promise<ApplicationTokenCredentials>
+        function loginWithServicePrincipalSecret(clientId: string, secret:
+        string, domain: string): Promise<ApplicationTokenCredentials>
       parameters:
         - id: clientId
           type: string
@@ -817,18 +693,17 @@ functions:
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
   - name: >-
-      withServicePrincipalSecret(string, string, string,
+      loginWithServicePrincipalSecret(string, string, string,
       AzureTokenCredentialsOptions)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecret_1'
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalSecret_1'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalSecret(clientId: string, secret: string,
-        domain: string, options: AzureTokenCredentialsOptions):
+        function loginWithServicePrincipalSecret(clientId: string, secret:
+        string, domain: string, options: AzureTokenCredentialsOptions):
         Promise<ApplicationTokenCredentials>
       parameters:
         - id: clientId
@@ -849,22 +724,20 @@ functions:
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
   - name: >-
-      withServicePrincipalSecret(string, string, string,
+      loginWithServicePrincipalSecret(string, string, string,
       AzureTokenCredentialsOptions, (err: Error, credentials:
-      ApplicationTokenCredentials, subscriptions: Array<LinkedSubscription>) =>
-      void)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecret_2'
+      ApplicationTokenCredentials, subscriptions: LinkedSubscription[]) => void)
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalSecret_2'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalSecret(clientId: string, secret: string,
-        domain: string, options: AzureTokenCredentialsOptions, callback: (err:
-        Error, credentials: ApplicationTokenCredentials, subscriptions:
-        Array<LinkedSubscription>) => void)
+        function loginWithServicePrincipalSecret(clientId: string, secret:
+        string, domain: string, options: AzureTokenCredentialsOptions, callback:
+        (err: Error, credentials: ApplicationTokenCredentials, subscriptions:
+        LinkedSubscription[]) => void)
       parameters:
         - id: clientId
           type: string
@@ -881,19 +754,18 @@ functions:
         - id: callback
           type: >-
             (err: Error, credentials: ApplicationTokenCredentials,
-            subscriptions: Array&lt;LinkedSubscription&gt;) =&gt; void
+            subscriptions: LinkedSubscription[]) =&gt; void
           description: ''
-  - name: 'withServicePrincipalSecret(string, string, string, any)'
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecret_3'
+  - name: loginWithServicePrincipalSecret(string, string, string, any)
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalSecret_3'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalSecret(clientId: string, secret: string,
-        domain: string, callback: any)
+        function loginWithServicePrincipalSecret(clientId: string, secret:
+        string, domain: string, callback: any)
       parameters:
         - id: clientId
           type: string
@@ -908,25 +780,26 @@ functions:
           type: any
           description: ''
   - name: >-
-      withServicePrincipalSecretWithAuthResponse(string, string, string,
+      loginWithServicePrincipalSecretWithAuthResponse(string, string, string,
       AzureTokenCredentialsOptions)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecretWithAuthResponse'
+    uid: '@azure/ms-rest-nodeauth.loginWithServicePrincipalSecretWithAuthResponse'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides an ApplicationTokenCredentials object and the list of
       subscriptions associated with that servicePrincipalId/clientId across all
       the applicable tenants.
+
 
       When using personal accounts, the `domain` parameter is required to be set
       to the Id of a tenant for that account. Otherwise, the resulting
       credential will not be able to access the account's resources.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withServicePrincipalSecretWithAuthResponse(clientId: string,
-        secret: string, domain: string, options?: AzureTokenCredentialsOptions):
+        function loginWithServicePrincipalSecretWithAuthResponse(clientId:
+        string, secret: string, domain: string, options?:
+        AzureTokenCredentialsOptions):
         Promise<AuthResponse<ApplicationTokenCredentials>>
       parameters:
         - id: clientId
@@ -956,12 +829,13 @@ functions:
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
           />&lt;<xref uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials"
           />&gt;&gt;
-  - name: 'withUsernamePassword(string, string)'
-    uid: '@azure/ms-rest-nodeauth.withUsernamePassword'
+  - name: loginWithUsernamePassword(string, string)
+    uid: '@azure/ms-rest-nodeauth.loginWithUsernamePassword'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides a UserTokenCredentials object and the list of subscriptions
       associated with that userId across all the applicable tenants.
+
 
       This method is applicable only for organizational ids that are not 2FA
       enabled otherwise please use interactive login.
@@ -972,11 +846,10 @@ functions:
       Otherwise, the resulting credential will not be able to access the
       account's resources.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withUsernamePassword(username: string, password: string):
+        function loginWithUsernamePassword(username: string, password: string):
         Promise<UserTokenCredentials>
       parameters:
         - id: username
@@ -997,16 +870,17 @@ functions:
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
           />&gt;
-  - name: 'withUsernamePassword(string, string, LoginWithUsernamePasswordOptions)'
-    uid: '@azure/ms-rest-nodeauth.withUsernamePassword_1'
+  - name: >-
+      loginWithUsernamePassword(string, string,
+      LoginWithUsernamePasswordOptions)
+    uid: '@azure/ms-rest-nodeauth.loginWithUsernamePassword_1'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withUsernamePassword(username: string, password: string,
+        function loginWithUsernamePassword(username: string, password: string,
         options: LoginWithUsernamePasswordOptions):
         Promise<UserTokenCredentials>
       parameters:
@@ -1026,16 +900,15 @@ functions:
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
           />&gt;
-  - name: 'withUsernamePassword(string, string, any)'
-    uid: '@azure/ms-rest-nodeauth.withUsernamePassword_2'
+  - name: loginWithUsernamePassword(string, string, any)
+    uid: '@azure/ms-rest-nodeauth.loginWithUsernamePassword_2'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withUsernamePassword(username: string, password: string,
+        function loginWithUsernamePassword(username: string, password: string,
         callback: any)
       parameters:
         - id: username
@@ -1048,21 +921,20 @@ functions:
           type: any
           description: ''
   - name: >-
-      withUsernamePassword(string, string, LoginWithUsernamePasswordOptions,
-      (err: Error, credentials: UserTokenCredentials, subscriptions:
-      Array<LinkedSubscription>) => void)
-    uid: '@azure/ms-rest-nodeauth.withUsernamePassword_3'
+      loginWithUsernamePassword(string, string,
+      LoginWithUsernamePasswordOptions, (err: Error, credentials:
+      UserTokenCredentials, subscriptions: LinkedSubscription[]) => void)
+    uid: '@azure/ms-rest-nodeauth.loginWithUsernamePassword_3'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withUsernamePassword(username: string, password: string,
+        function loginWithUsernamePassword(username: string, password: string,
         options: LoginWithUsernamePasswordOptions, callback: (err: Error,
-        credentials: UserTokenCredentials, subscriptions:
-        Array<LinkedSubscription>) => void)
+        credentials: UserTokenCredentials, subscriptions: LinkedSubscription[])
+        => void)
       parameters:
         - id: username
           type: string
@@ -1078,30 +950,30 @@ functions:
         - id: callback
           type: >-
             (err: Error, credentials: UserTokenCredentials, subscriptions:
-            Array&lt;LinkedSubscription&gt;) =&gt; void
+            LinkedSubscription[]) =&gt; void
           description: ''
   - name: >-
-      withUsernamePasswordWithAuthResponse(string, string,
+      loginWithUsernamePasswordWithAuthResponse(string, string,
       LoginWithUsernamePasswordOptions)
-    uid: '@azure/ms-rest-nodeauth.withUsernamePasswordWithAuthResponse'
+    uid: '@azure/ms-rest-nodeauth.loginWithUsernamePasswordWithAuthResponse'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides a UserTokenCredentials object and the list of subscriptions
       associated with that userId across all the applicable tenants.
 
       This method is applicable only for organizational ids that are not 2FA
       enabled otherwise please use interactive login.
 
+
       When using personal accounts, the `domain` property in the `options`
       parameter is required to be set to the Id of a tenant for that account.
       Otherwise, the resulting credential will not be able to access the
       account's resources.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function withUsernamePasswordWithAuthResponse(username: string,
+        function loginWithUsernamePasswordWithAuthResponse(username: string,
         password: string, options?: LoginWithUsernamePasswordOptions):
         Promise<AuthResponse<UserTokenCredentials>>
       parameters:
@@ -1124,59 +996,108 @@ functions:
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
           />&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
           />&gt;&gt;
-  - name: 'buildTenantList(TokenCredentialsBase, undefined | string)'
-    uid: '@azure/ms-rest-nodeauth.buildTenantList'
+  - name: loginWithVmMSI()
+    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI'
     package: '@azure/ms-rest-nodeauth'
-    summary: Builds an array of tenantIds.
+    summary: >-
+      Before using this method please install az cli from
+      https://github.com/Azure/azure-cli/releases.
+
+      If you have an Azure virtual machine provisioned with az cli and has MSI
+      enabled,
+
+      you can then use this method to get auth tokens from the VM.
+
+
+      To create a new VM, enable MSI, please execute this command:
+
+      az vm create -g <resource_group_name> -n <vm_name> --assign-identity
+      --image <os_image_name>
+
+      Note: the above command enables a service endpoint on the host, with a
+      default port 50342
+
+
+      To enable MSI on a already provisioned VM, execute the following command:
+
+      az vm --assign-identity -g <resource_group_name> -n <vm_name> --port
+      <custom_port_number>
+
+
+      To know more about this command, please execute:
+
+      az vm --assign-identity -h
+
+
+      Authenticates using the identity service running on an Azure virtual
+      machine.
+
+      This method makes a request to the authentication service hosted on the VM
+
+      and gets back an access token.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function buildTenantList(credentials: TokenCredentialsBase, apiVersion?:
-        undefined | string): Promise<string[]>
-      parameters:
-        - id: credentials
-          type: <xref uid="@azure/ms-rest-nodeauth.TokenCredentialsBase" />
-          description: The credentials.
-        - id: apiVersion
-          type: undefined | string
-          description: default value 2016-06-01
+      content: 'function loginWithVmMSI(): Promise<MSIVmTokenCredentials>'
       return:
         description: >-
-          A promise that resolves to an array of tenantIds and rejects with an
-          error.
-        type: 'Promise&lt;string[]&gt;'
-  - name: >-
-      getSubscriptionsFromTenants(TokenCredentialsBase, string[], undefined |
-      string)
-    uid: '@azure/ms-rest-nodeauth.getSubscriptionsFromTenants'
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
+
+          The callback is called with the resulting MSIVmTokenCredentials
+          object.
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
+          />&gt;
+  - name: loginWithVmMSI(MSIVmOptions)
+    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_1'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getSubscriptionsFromTenants(credentials: TokenCredentialsBase,
-        tenantList: string[], apiVersion?: undefined | string):
-        Promise<LinkedSubscription[]>
+        function loginWithVmMSI(options: MSIVmOptions):
+        Promise<MSIVmTokenCredentials>
       parameters:
-        - id: credentials
-          type: <xref uid="@azure/ms-rest-nodeauth.TokenCredentialsBase" />
-          description: ''
-        - id: tenantList
-          type: 'string[]'
-          description: ''
-        - id: apiVersion
-          type: undefined | string
+        - id: options
+          type: <xref uid="@azure/ms-rest-nodeauth.MSIVmOptions" />
           description: ''
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.LinkedSubscription"
-          />[]&gt;
-typeAliases:
-  - '@azure/ms-rest-nodeauth.Callback'
-  - '@azure/ms-rest-nodeauth.UserType'
-  - '@azure/ms-rest-nodeauth.TokenAudience'
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
+          />&gt;
+  - name: loginWithVmMSI(MSIVmOptions, Callback<MSIVmTokenCredentials>)
+    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_2'
+    package: '@azure/ms-rest-nodeauth'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function loginWithVmMSI(options: MSIVmOptions, callback:
+        Callback<MSIVmTokenCredentials>)
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ms-rest-nodeauth.MSIVmOptions" />
+          description: ''
+        - id: callback
+          type: >-
+            Callback&lt;<xref
+            uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials" />&gt;
+          description: ''
+  - name: loginWithVmMSI(Callback<MSIVmTokenCredentials>)
+    uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_3'
+    package: '@azure/ms-rest-nodeauth'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function loginWithVmMSI(callback: Callback<MSIVmTokenCredentials>)'
+      parameters:
+        - id: callback
+          type: >-
+            Callback&lt;<xref
+            uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials" />&gt;
+          description: ''

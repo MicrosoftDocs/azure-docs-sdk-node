@@ -2,61 +2,18 @@
 name: ServiceBusSessionReceiver
 uid: '@azure/service-bus.ServiceBusSessionReceiver'
 package: '@azure/service-bus'
-summary: 'A receiver that handles sessions, including renewing the session lock.'
+summary: A receiver that handles sessions, including renewing the session lock.
 fullName: ServiceBusSessionReceiver
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
-  - name: entityPath
-    uid: '@azure/service-bus.ServiceBusSessionReceiver.entityPath'
-    package: '@azure/service-bus'
-    summary: Path of the entity for which the receiver has been created.
-    fullName: entityPath
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'entityPath: string'
-      return:
-        description: ''
-        type: string
-  - name: isClosed
-    uid: '@azure/service-bus.ServiceBusSessionReceiver.isClosed'
-    package: '@azure/service-bus'
-    summary: >-
-      Returns `true` if either the receiver or the client that created it has
-      been closed.
-    fullName: isClosed
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'isClosed: boolean'
-      return:
-        description: ''
-        type: boolean
-  - name: receiveMode
-    uid: '@azure/service-bus.ServiceBusSessionReceiver.receiveMode'
-    package: '@azure/service-bus'
-    summary: The receive mode used to create the receiver.
-    fullName: receiveMode
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'receiveMode: "peekLock" | "receiveAndDelete"'
-      return:
-        description: ''
-        type: '"peekLock" | "receiveAndDelete"'
   - name: sessionId
     uid: '@azure/service-bus.ServiceBusSessionReceiver.sessionId'
     package: '@azure/service-bus'
     summary: The session ID.
     fullName: sessionId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'sessionId: string'
@@ -66,7 +23,7 @@ properties:
   - name: sessionLockedUntilUtc
     uid: '@azure/service-bus.ServiceBusSessionReceiver.sessionLockedUntilUtc'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       The time in UTC until which the session is locked.
 
       Every time `renewSessionLock()` is called, this time gets updated to
@@ -74,19 +31,88 @@ properties:
 
       duration as specified during the Queue/Subscription creation.
 
+
       Will return undefined until a AMQP receiver link has been successfully set
       up for the session.
     fullName: sessionLockedUntilUtc
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'sessionLockedUntilUtc: Date'
       return:
         description: ''
         type: Date
+inheritedProperties:
+  - name: entityPath
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.entityPath'
+    package: '@azure/service-bus'
+    summary: Path of the entity for which the receiver has been created.
+    fullName: entityPath
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'entityPath: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.entityPath](xref:@azure/service-bus.ServiceBusReceiver.entityPath)
+  - name: identifier
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.identifier'
+    package: '@azure/service-bus'
+    summary: >-
+      A name used to identify the receiver. This can be used to correlate logs
+      and exceptions.
+
+      If not specified or empty, a random unique one will be generated.
+    fullName: identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'identifier: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.identifier](xref:@azure/service-bus.ServiceBusReceiver.identifier)
+  - name: isClosed
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.isClosed'
+    package: '@azure/service-bus'
+    summary: >-
+      Returns `true` if either the receiver or the client that created it has
+      been closed.
+    fullName: isClosed
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isClosed: boolean'
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.isClosed](xref:@azure/service-bus.ServiceBusReceiver.isClosed)
+  - name: receiveMode
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.receiveMode'
+    package: '@azure/service-bus'
+    summary: The receive mode used to create the receiver.
+    fullName: receiveMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'receiveMode: "peekLock" | "receiveAndDelete"'
+      return:
+        description: ''
+        type: '"peekLock" | "receiveAndDelete"'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.receiveMode](xref:@azure/service-bus.ServiceBusReceiver.receiveMode)
 inheritedMethods:
-  - name: 'abandonMessage(ServiceBusReceivedMessage, [key: string]: any)'
+  - name: >-
+      abandonMessage(ServiceBusReceivedMessage, {[key: string]: number | boolean
+      | string | Date | null})
     uid: '@azure/service-bus.ServiceBusSessionReceiver.abandonMessage'
     package: '@azure/service-bus'
     summary: >-
@@ -95,24 +121,27 @@ inheritedMethods:
 
       Service Bus for another receive operation.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function abandonMessage(message: ServiceBusReceivedMessage,
-        propertiesToModify?: [key: string]: any): Promise<void>
+        propertiesToModify?: {[key: string]: number | boolean | string | Date |
+        null}): Promise<void>
       parameters:
         - id: message
           type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
           description: ''
         - id: propertiesToModify
-          type: '[key: string]\: any'
-          description: >
+          type: '{[key: string]: number | boolean | string | Date | null}'
+          description: >-
             The properties of the message to modify while abandoning the
             message.
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.abandonMessage](xref:@azure/service-bus.ServiceBusReceiver.abandonMessage)
   - name: close()
     uid: '@azure/service-bus.ServiceBusSessionReceiver.close'
     package: '@azure/service-bus'
@@ -124,19 +153,20 @@ inheritedMethods:
       Use the `createReceiver()` method on the ServiceBusClient to create a new
       Receiver.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function close(): Promise<void>'
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.close](xref:@azure/service-bus.ServiceBusReceiver.close)
   - name: completeMessage(ServiceBusReceivedMessage)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.completeMessage'
     package: '@azure/service-bus'
     summary: Removes the message from Service Bus.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -149,9 +179,12 @@ inheritedMethods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.completeMessage](xref:@azure/service-bus.ServiceBusReceiver.completeMessage)
   - name: >-
-      deadLetterMessage(ServiceBusReceivedMessage, DeadLetterOptions & [key:
-      string]: any)
+      deadLetterMessage(ServiceBusReceivedMessage, DeadLetterOptions & {[key:
+      string]: number | boolean | string | Date | null})
     uid: '@azure/service-bus.ServiceBusSessionReceiver.deadLetterMessage'
     package: '@azure/service-bus'
     summary: >-
@@ -161,27 +194,32 @@ inheritedMethods:
       QueueClient/SubscriptionClient using the path for the deadletter
       sub-queue.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deadLetterMessage(message: ServiceBusReceivedMessage, options?:
-        DeadLetterOptions & [key: string]: any): Promise<void>
+        DeadLetterOptions & {[key: string]: number | boolean | string | Date |
+        null}): Promise<void>
       parameters:
         - id: message
           type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
           description: ''
         - id: options
           type: >-
-            <xref uid="@azure/service-bus.DeadLetterOptions" /> & [key: string]:
-            any
-          description: |
+            <xref uid="@azure/service-bus.DeadLetterOptions" /> & {[key:
+            string]: number | boolean | string | Date | null}
+          description: |-
             The DeadLetter options that can be provided while
             rejecting the message.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'deferMessage(ServiceBusReceivedMessage, [key: string]: any)'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.deadLetterMessage](xref:@azure/service-bus.ServiceBusReceiver.deadLetterMessage)
+  - name: >-
+      deferMessage(ServiceBusReceivedMessage, {[key: string]: number | boolean |
+      string | Date | null})
     uid: '@azure/service-bus.ServiceBusSessionReceiver.deferMessage'
     package: '@azure/service-bus'
     summary: >-
@@ -191,29 +229,30 @@ inheritedMethods:
       receive it message again in the future using the `receiveDeferredMessage`
       method.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deferMessage(message: ServiceBusReceivedMessage,
-        propertiesToModify?: [key: string]: any): Promise<void>
+        propertiesToModify?: {[key: string]: number | boolean | string | Date |
+        null}): Promise<void>
       parameters:
         - id: message
           type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
           description: ''
         - id: propertiesToModify
-          type: '[key: string]\: any'
-          description: |
-            The properties of the message to modify while deferring the message
+          type: '{[key: string]: number | boolean | string | Date | null}'
+          description: The properties of the message to modify while deferring the message
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.deferMessage](xref:@azure/service-bus.ServiceBusReceiver.deferMessage)
   - name: getMessageIterator(GetMessageIteratorOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.getMessageIterator'
     package: '@azure/service-bus'
     summary: Returns an iterator that can be used to receive messages from Service Bus.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -222,7 +261,7 @@ inheritedMethods:
       parameters:
         - id: options
           type: <xref uid="@azure/service-bus.GetMessageIteratorOptions" />
-          description: |
+          description: |-
             A set of options to control the receive operation.
             - `abortSignal`: The signal to use to abort the ongoing operation.
       return:
@@ -230,7 +269,10 @@ inheritedMethods:
         type: >-
           AsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.ServiceBusReceivedMessage" />&gt;
-  - name: 'peekMessages(number, PeekMessagesOptions)'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.getMessageIterator](xref:@azure/service-bus.ServiceBusReceiver.getMessageIterator)
+  - name: peekMessages(number, PeekMessagesOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.peekMessages'
     package: '@azure/service-bus'
     summary: >-
@@ -249,7 +291,6 @@ inheritedMethods:
 
       It cannot be `Completed/Abandoned/Deferred/Deadlettered`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -261,7 +302,7 @@ inheritedMethods:
           description: The maximum number of messages to peek.
         - id: options
           type: <xref uid="@azure/service-bus.PeekMessagesOptions" />
-          description: >
+          description: >-
             Options that allow to specify the maximum number of messages to
             peek,
 
@@ -272,22 +313,24 @@ inheritedMethods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
           />[]&gt;
-  - name: 'receiveDeferredMessages(Long_2 | Long_2[], OperationOptionsBase)'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.peekMessages](xref:@azure/service-bus.ServiceBusReceiver.peekMessages)
+  - name: receiveDeferredMessages(Long | Long[], OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.receiveDeferredMessages'
     package: '@azure/service-bus'
     summary: >-
       Returns a promise that resolves to an array of deferred messages
       identified by given `sequenceNumbers`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function receiveDeferredMessages(sequenceNumbers: Long_2 | Long_2[],
+        function receiveDeferredMessages(sequenceNumbers: Long | Long[],
         options?: OperationOptionsBase): Promise<ServiceBusReceivedMessage[]>
       parameters:
         - id: sequenceNumbers
-          type: 'Long_2 | Long_2[]'
+          type: Long | Long[]
           description: >-
             The sequence number or an array of sequence numbers for the messages
             that need to be received.
@@ -301,14 +344,16 @@ inheritedMethods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
           />[]&gt;
-  - name: 'receiveMessages(number, ReceiveMessagesOptions)'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.receiveDeferredMessages](xref:@azure/service-bus.ServiceBusReceiver.receiveDeferredMessages)
+  - name: receiveMessages(number, ReceiveMessagesOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.receiveMessages'
     package: '@azure/service-bus'
     summary: >-
       Returns a promise that resolves to an array of messages received from
       Service Bus.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -332,6 +377,9 @@ inheritedMethods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
           />[]&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.receiveMessages](xref:@azure/service-bus.ServiceBusReceiver.receiveMessages)
   - name: renewMessageLock(ServiceBusReceivedMessage)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.renewMessageLock'
     package: '@azure/service-bus'
@@ -352,7 +400,6 @@ inheritedMethods:
 
       receive operation.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -365,6 +412,9 @@ inheritedMethods:
       return:
         description: New lock token expiry date and time in UTC format.
         type: Promise&lt;Date&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ServiceBusReceiver.renewMessageLock](xref:@azure/service-bus.ServiceBusReceiver.renewMessageLock)
 methods:
   - name: getSessionState(OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.getSessionState'
@@ -372,10 +422,9 @@ methods:
     summary: >-
       Gets the state of the Session. For more on session states, see
 
-      [| Session
+      [Session
       State](https://docs.microsoft.com/azure/service-bus-messaging/message-sessions#message-session-state)
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getSessionState(options?: OperationOptionsBase): Promise<any>'
@@ -391,7 +440,6 @@ methods:
     package: '@azure/service-bus'
     summary: Renews the lock on the session.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function renewSessionLock(options?: OperationOptionsBase): Promise<Date>'
@@ -402,16 +450,15 @@ methods:
       return:
         description: ''
         type: Promise&lt;Date&gt;
-  - name: 'setSessionState(any, OperationOptionsBase)'
+  - name: setSessionState(any, OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.setSessionState'
     package: '@azure/service-bus'
     summary: >-
       Sets the state on the Session. For more on session states, see
 
-      [| Session
+      [Session
       State](https://docs.microsoft.com/azure/service-bus-messaging/message-sessions#message-session-state)
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -427,12 +474,11 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'subscribe(MessageHandlers, SubscribeOptions)'
+  - name: subscribe(MessageHandlers, SubscribeOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.subscribe'
     package: '@azure/service-bus'
     summary: Streams messages to message handlers.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-

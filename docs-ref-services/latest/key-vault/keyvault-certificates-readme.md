@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 07/29/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: keyvault
+ms.service: key-vault
 ---
 
-# Azure Key Vault Certificates client library for JavaScript - Version 4.3.0 
+# Azure Key Vault Certificates client library for JavaScript - version 4.3.0 
 
 
 Azure Key Vault is a cloud service that provides secure storage and automated management of certificates used throughout a cloud application. Multiple certificates, and multiple versions of the same certificate, can be kept in the Azure Key Vault. Each certificate in the vault has a policy associated with it which controls the issuance and lifetime of the certificate, along with actions to be taken as certificates near expiry.

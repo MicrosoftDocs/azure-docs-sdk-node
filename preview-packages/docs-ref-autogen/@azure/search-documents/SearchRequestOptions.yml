@@ -5,9 +5,8 @@ package: '@azure/search-documents'
 summary: >-
   Parameters for filtering, sorting, faceting, paging, and other search query
   behaviors.
-fullName: SearchRequestOptions<Fields>
+fullName: SearchRequestOptions<TModel, TFields>
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -18,23 +17,15 @@ properties:
       This parameter is only valid if the query type is 'semantic'. If set, the
       query returns answers
 
-      extracted from key passages in the highest ranked documents. The number of
-      answers returned can
-
-      be configured by appending the pipe character '|' followed by the
-      'count-\<number of answers\>' option
-
-      after the answers parameter value, such as 'extractive|count-3'. Default
-      count is 1.
+      extracted from key passages in the highest ranked documents.
     fullName: answers
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'answers?: Answers'
+      content: 'answers?: string | AnswersOptions'
       return:
         description: ''
-        type: <xref uid="@azure/search-documents.Answers" />
+        type: string | <xref uid="@azure/search-documents.AnswersOptions" />
   - name: captions
     uid: '@azure/search-documents.SearchRequestOptions.captions'
     package: '@azure/search-documents'
@@ -52,13 +43,26 @@ properties:
       'extractive|highlight-true'. Defaults to 'None'.
     fullName: captions
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'captions?: Captions'
+      content: 'captions?: string'
       return:
         description: ''
-        type: <xref uid="@azure/search-documents.Captions" />
+        type: string
+  - name: debugMode
+    uid: '@azure/search-documents.SearchRequestOptions.debugMode'
+    package: '@azure/search-documents'
+    summary: >-
+      Enables a debugging tool that can be used to further explore your search
+      results.
+    fullName: debugMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'debugMode?: QueryDebugMode'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.QueryDebugMode" />
   - name: facets
     uid: '@azure/search-documents.SearchRequestOptions.facets'
     package: '@azure/search-documents'
@@ -70,20 +74,18 @@ properties:
       pairs.
     fullName: facets
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'facets?: string[]'
       return:
         description: ''
-        type: 'string[]'
+        type: string[]
   - name: filter
     uid: '@azure/search-documents.SearchRequestOptions.filter'
     package: '@azure/search-documents'
     summary: The OData $filter expression to apply to the search query.
     fullName: filter
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'filter?: string'
@@ -100,7 +102,6 @@ properties:
       be used for hit highlighting.
     fullName: highlightFields
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'highlightFields?: string'
@@ -117,7 +118,6 @@ properties:
       &lt;/em&gt;.
     fullName: highlightPostTag
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'highlightPostTag?: string'
@@ -134,7 +134,6 @@ properties:
       is &lt;em&gt;.
     fullName: highlightPreTag
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'highlightPreTag?: string'
@@ -154,7 +153,6 @@ properties:
       approximation.
     fullName: includeTotalCount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'includeTotalCount?: boolean'
@@ -175,7 +173,6 @@ properties:
       The default is 100.
     fullName: minimumCoverage
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'minimumCoverage?: number'
@@ -203,26 +200,24 @@ properties:
       document match score. There can be at most 32 $orderby clauses.
     fullName: orderBy
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'orderBy?: string[]'
       return:
         description: ''
-        type: 'string[]'
+        type: string[]
   - name: queryLanguage
     uid: '@azure/search-documents.SearchRequestOptions.queryLanguage'
     package: '@azure/search-documents'
     summary: The language of the query.
     fullName: queryLanguage
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'queryLanguage?: QueryLanguage'
+      content: 'queryLanguage?: string'
       return:
         description: ''
-        type: <xref uid="@azure/search-documents.QueryLanguage" />
+        type: string
   - name: queryType
     uid: '@azure/search-documents.SearchRequestOptions.queryType'
     package: '@azure/search-documents'
@@ -231,10 +226,9 @@ properties:
       'simple'. Use 'full' if
 
       your query uses the Lucene query syntax. Possible values include:
-      'simple', 'full'
+      'simple', 'full', 'semantic'
     fullName: queryType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'queryType?: QueryType'
@@ -256,13 +250,12 @@ properties:
       "mylocation--122.2,44.8" (without the quotes).
     fullName: scoringParameters
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'scoringParameters?: string[]'
       return:
         description: ''
-        type: 'string[]'
+        type: string[]
   - name: scoringProfile
     uid: '@azure/search-documents.SearchRequestOptions.scoringProfile'
     package: '@azure/search-documents'
@@ -273,7 +266,6 @@ properties:
       the results.
     fullName: scoringProfile
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'scoringProfile?: string'
@@ -293,7 +285,6 @@ properties:
       values include: 'Local', 'Global'
     fullName: scoringStatistics
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'scoringStatistics?: ScoringStatistics'
@@ -314,13 +305,12 @@ properties:
       this parameter.
     fullName: searchFields
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'searchFields?: Fields[]'
+      content: 'searchFields?: SearchFieldArray<TModel>'
       return:
         description: ''
-        type: 'Fields[]'
+        type: <xref uid="@azure/search-documents.SearchFieldArray" />&lt;TModel&gt;
   - name: searchMode
     uid: '@azure/search-documents.SearchRequestOptions.searchMode'
     package: '@azure/search-documents'
@@ -331,7 +321,6 @@ properties:
       count the document as a match. Possible values include: 'any', 'all'
     fullName: searchMode
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'searchMode?: SearchMode'
@@ -346,26 +335,70 @@ properties:
       retrievable in the schema are included.
     fullName: select
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'select?: Fields[]'
+      content: 'select?: SelectArray<TFields>'
       return:
         description: ''
-        type: 'Fields[]'
+        type: <xref uid="@azure/search-documents.SelectArray" />&lt;TFields&gt;
+  - name: semanticConfiguration
+    uid: '@azure/search-documents.SearchRequestOptions.semanticConfiguration'
+    package: '@azure/search-documents'
+    summary: >-
+      The name of a semantic configuration that will be used when processing
+      documents for queries of
+
+      type semantic.
+    fullName: semanticConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'semanticConfiguration?: string'
+      return:
+        description: ''
+        type: string
+  - name: semanticErrorHandlingMode
+    uid: '@azure/search-documents.SearchRequestOptions.semanticErrorHandlingMode'
+    package: '@azure/search-documents'
+    summary: >-
+      Allows the user to choose whether a semantic call should fail completely,
+      or to return partial results.
+    fullName: semanticErrorHandlingMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'semanticErrorHandlingMode?: SemanticErrorHandlingMode'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.SemanticErrorHandlingMode" />
   - name: semanticFields
     uid: '@azure/search-documents.SearchRequestOptions.semanticFields'
     package: '@azure/search-documents'
     summary: The list of field names used for semantic search.
     fullName: semanticFields
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'semanticFields?: string[]'
       return:
         description: ''
-        type: 'string[]'
+        type: string[]
+  - name: semanticMaxWaitInMilliseconds
+    uid: '@azure/search-documents.SearchRequestOptions.semanticMaxWaitInMilliseconds'
+    package: '@azure/search-documents'
+    summary: >-
+      Allows the user to set an upper bound on the amount of time it takes for
+      semantic enrichment to finish
+
+      processing before the request fails.
+    fullName: semanticMaxWaitInMilliseconds
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'semanticMaxWaitInMilliseconds?: number'
+      return:
+        description: ''
+        type: number
   - name: sessionId
     uid: '@azure/search-documents.SearchRequestOptions.sessionId'
     package: '@azure/search-documents'
@@ -386,7 +419,6 @@ properties:
       character.
     fullName: sessionId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'sessionId?: string'
@@ -406,7 +438,6 @@ properties:
       orderby on a totally-ordered key and filter with a range query instead.
     fullName: skip
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'skip?: number'
@@ -419,13 +450,12 @@ properties:
     summary: Improve search recall by spell-correcting individual search query terms.
     fullName: speller
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'speller?: Speller'
+      content: 'speller?: string'
       return:
         description: ''
-        type: <xref uid="@azure/search-documents.Speller" />
+        type: string
   - name: top
     uid: '@azure/search-documents.SearchRequestOptions.top'
     package: '@azure/search-documents'
@@ -442,10 +472,21 @@ properties:
       Search request for the next page of results.
     fullName: top
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'top?: number'
       return:
         description: ''
         type: number
+  - name: vectors
+    uid: '@azure/search-documents.SearchRequestOptions.vectors'
+    package: '@azure/search-documents'
+    summary: The query parameters for vector, hybrid, and multi-vector search queries.
+    fullName: vectors
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vectors?: Vector<TModel>[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.Vector" />&lt;TModel&gt;[]

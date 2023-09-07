@@ -1,17 +1,14 @@
 ---
 title: Azure Web PubSub service client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/web-pubsub, webpubsub
-author: maggiepint
-ms.author: magpint
-ms.date: 11/11/2021
+keywords: Azure, javascript, SDK, API, @azure/web-pubsub, web-pubsub
+author: vicancy
+ms.author: lianwei
+ms.date: 01/03/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: webpubsub
+ms.service: web-pubsub
 ---
-
-# Azure Web PubSub service client library for JavaScript - Version 1.0.0 
+# Azure Web PubSub service client library for JavaScript - version 1.1.1 
 
 
 [Azure Web PubSub service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe pattern. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from server or submitting HTTP requests can also use Azure Web PubSub service.
@@ -28,7 +25,7 @@ You can use this library in your app server side to manage the WebSocket client 
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.0.0/sdk/web-pubsub/web-pubsub) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.1/sdk/web-pubsub/web-pubsub) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub) |
 [API reference documentation](https://aka.ms/awps/sdk/js) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -38,7 +35,7 @@ Details about the terms used here are described in [Key concepts](#key-concepts)
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -72,7 +69,7 @@ Or authenticate the `WebPubSubServiceClient` using [Azure Active Directory][aad_
 
 1. Install the `@azure/identity` dependency
 
-```batch
+```bash
 npm install @azure/identity
 ```
 
@@ -80,6 +77,7 @@ npm install @azure/identity
 
 ```js
 const { WebPubSubServiceClient, AzureKeyCredential } = require("@azure/web-pubsub");
+const { DefaultAzureCredential } = require("@azure/identity");
 
 const key = new DefaultAzureCredential();
 const serviceClient = new WebPubSubServiceClient("<Endpoint>", key, "<hubName>");
@@ -122,6 +120,9 @@ let token = await serviceClient.getClientAccessToken();
 // Or get the access token and assign the client a userId
 token = await serviceClient.getClientAccessToken({ userId: "user1" });
 
+// Or get the access token that the client will join group GroupA when it connects using the access token
+token = await serviceClient.getClientAccessToken({ userId: "user1", groups: [ "GroupA" ] });
+
 // return the token to the WebSocket client
 ```
 
@@ -141,6 +142,34 @@ await serviceClient.sendToAll("Hi there!", { contentType: "text/plain" });
 // Send a binary message
 const payload = new Uint8Array(10);
 await serviceClient.sendToAll(payload.buffer);
+```
+
+### Send messages to all connections in a hub with OData filter syntax
+
+Details about `filter` syntax please see [OData filter syntax for Azure Web PubSub](https://aka.ms/awps/filter-syntax).
+
+```js
+const { WebPubSubServiceClient, odata } = require("@azure/web-pubsub");
+
+const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+
+// Send a JSON message to anonymous connections
+await serviceClient.sendToAll(
+  { message: "Hello world!" },
+  { filter: "userId eq null" }
+  );
+
+// Send a text message to connections in groupA but not in groupB
+const groupA = 'groupA';
+const groupB = 'groupB';
+await serviceClient.sendToAll(
+  "Hello world!",
+  { 
+    contentType: "text/plain",
+    // use plain text "'groupA' in groups and not('groupB' in groups)"
+    // or use the odata helper method
+    filter: odata`${groupA} in groups and not(${groupB} in groups)` 
+  });
 ```
 
 ### Send messages to all connections in a group
@@ -206,7 +235,7 @@ const hasConnections = await serviceClient.groupExists("<groupName>");
 ```js
 const { WebPubSubServiceClient } = require("@azure/web-pubsub");
 
-function onResponse(rawResponse: FullOperationResponse): void {
+function onResponse(rawResponse) {
   console.log(rawResponse);
 }
 const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
@@ -225,7 +254,7 @@ You can set the following environment variable to get the debug logs when using 
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.1/sdk/core/logger).
 
 ### Live Trace
 
@@ -239,13 +268,13 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
 [azure_sub]: https://azure.microsoft.com/free/
-[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.0.0/sdk/web-pubsub/web-pubsub/samples
+[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.1/sdk/web-pubsub/web-pubsub/samples
 [aad_doc]: https://aka.ms/awps/aad
 

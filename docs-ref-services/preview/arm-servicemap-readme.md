@@ -5,12 +5,11 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/21/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: service-map
+ms.service: azure-maps
 ---
-# Azure Service client library for JavaScript - Version 3.0.0-beta.1 
+# Azure Service client library for JavaScript - version 3.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.

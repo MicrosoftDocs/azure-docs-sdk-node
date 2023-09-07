@@ -6,10 +6,9 @@ ms.author: ryanwi
 manager: timlt
 ms.date: 11/12/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Service Fabric
+ms.service: service-fabric
 ---
 
 # Azure Service Fabric modules for JavaScript

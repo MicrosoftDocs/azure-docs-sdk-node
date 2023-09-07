@@ -5,13 +5,12 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/24/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: resourcehealth
+ms.service: azure
 ---
 
-# Azure Service client library for JavaScript - Version 3.0.0-beta.1 
+# Azure Service client library for JavaScript - version 3.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.

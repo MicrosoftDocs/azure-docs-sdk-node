@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/10/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: purview
 ---
 
-# Azure PurviewManagement client library for JavaScript - Version 1.0.0-beta.1 
+# Azure PurviewManagement client library for JavaScript - version 1.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure PurviewManagement client.

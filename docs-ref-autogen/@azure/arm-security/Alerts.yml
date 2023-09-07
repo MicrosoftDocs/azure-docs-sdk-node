@@ -5,60 +5,11 @@ package: '@azure/arm-security'
 summary: Interface representing a Alerts.
 fullName: Alerts
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
-  - name: 'beginSimulate(AlertSimulatorRequestBody, AlertsSimulateOptionalParams)'
-    uid: '@azure/arm-security.Alerts.beginSimulate'
-    package: '@azure/arm-security'
-    summary: Simulate security alerts
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginSimulate(alertSimulatorRequestBody:
-        AlertSimulatorRequestBody, options?: AlertsSimulateOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
-      parameters:
-        - id: alertSimulatorRequestBody
-          type: <xref uid="@azure/arm-security.AlertSimulatorRequestBody" />
-          description: Alert Simulator Request Properties
-        - id: options
-          type: <xref uid="@azure/arm-security.AlertsSimulateOptionalParams" />
-          description: |
-            The options parameters.
-      return:
-        description: ''
-        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
   - name: >-
-      beginSimulateAndWait(AlertSimulatorRequestBody,
-      AlertsSimulateOptionalParams)
-    uid: '@azure/arm-security.Alerts.beginSimulateAndWait'
-    package: '@azure/arm-security'
-    summary: Simulate security alerts
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginSimulateAndWait(alertSimulatorRequestBody:
-        AlertSimulatorRequestBody, options?: AlertsSimulateOptionalParams):
-        Promise<void>
-      parameters:
-        - id: alertSimulatorRequestBody
-          type: <xref uid="@azure/arm-security.AlertSimulatorRequestBody" />
-          description: Alert Simulator Request Properties
-        - id: options
-          type: <xref uid="@azure/arm-security.AlertsSimulateOptionalParams" />
-          description: |
-            The options parameters.
-      return:
-        description: ''
-        type: Promise&lt;void&gt;
-  - name: >-
-      getResourceGroupLevel(string, string,
+      getResourceGroupLevel(string, string, string,
       AlertsGetResourceGroupLevelOptionalParams)
     uid: '@azure/arm-security.Alerts.getResourceGroupLevel'
     package: '@azure/arm-security'
@@ -66,14 +17,19 @@ methods:
       Get an alert that is associated a resource group or a resource in a
       resource group
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getResourceGroupLevel(alertName: string, resourceGroupName:
-        string, options?: AlertsGetResourceGroupLevelOptionalParams):
-        Promise<AlertsGetResourceGroupLevelResponse>
+        function getResourceGroupLevel(ascLocation: string, alertName: string,
+        resourceGroupName: string, options?:
+        AlertsGetResourceGroupLevelOptionalParams): Promise<Alert>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -88,26 +44,29 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsGetResourceGroupLevelOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-security.AlertsGetResourceGroupLevelResponse" />&gt;
-  - name: 'getSubscriptionLevel(string, AlertsGetSubscriptionLevelOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-security.Alert" />&gt;
+  - name: >-
+      getSubscriptionLevel(string, string,
+      AlertsGetSubscriptionLevelOptionalParams)
     uid: '@azure/arm-security.Alerts.getSubscriptionLevel'
     package: '@azure/arm-security'
     summary: Get an alert that is associated with a subscription
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getSubscriptionLevel(alertName: string, options?:
-        AlertsGetSubscriptionLevelOptionalParams):
-        Promise<AlertsGetSubscriptionLevelResponse>
+        function getSubscriptionLevel(ascLocation: string, alertName: string,
+        options?: AlertsGetSubscriptionLevelOptionalParams): Promise<Alert>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -116,46 +75,40 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsGetSubscriptionLevelOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-security.AlertsGetSubscriptionLevelResponse" />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-security.Alert" />&gt;
   - name: list(AlertsListOptionalParams)
     uid: '@azure/arm-security.Alerts.list'
     package: '@azure/arm-security'
     summary: List all the alerts that are associated with the subscription
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function list(options?: AlertsListOptionalParams):
-        PagedAsyncIterableIterator<Alert>
+        PagedAsyncIterableIterator<Alert, Alert[], PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/arm-security.AlertsListOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-security.Alert"
-          />&gt;
-  - name: 'listByResourceGroup(string, AlertsListByResourceGroupOptionalParams)'
+          />, <xref uid="@azure/arm-security.Alert" />[], PageSettings&gt;
+  - name: listByResourceGroup(string, AlertsListByResourceGroupOptionalParams)
     uid: '@azure/arm-security.Alerts.listByResourceGroup'
     package: '@azure/arm-security'
     summary: List all the alerts that are associated with the resource group
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listByResourceGroup(resourceGroupName: string, options?:
         AlertsListByResourceGroupOptionalParams):
-        PagedAsyncIterableIterator<Alert>
+        PagedAsyncIterableIterator<Alert, Alert[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -167,15 +120,14 @@ methods:
           type: >-
             <xref
             uid="@azure/arm-security.AlertsListByResourceGroupOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-security.Alert"
-          />&gt;
+          />, <xref uid="@azure/arm-security.Alert" />[], PageSettings&gt;
   - name: >-
-      listResourceGroupLevelByRegion(string,
+      listResourceGroupLevelByRegion(string, string,
       AlertsListResourceGroupLevelByRegionOptionalParams)
     uid: '@azure/arm-security.Alerts.listResourceGroupLevelByRegion'
     package: '@azure/arm-security'
@@ -185,14 +137,20 @@ methods:
 
       location
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listResourceGroupLevelByRegion(resourceGroupName: string,
-        options?: AlertsListResourceGroupLevelByRegionOptionalParams):
-        PagedAsyncIterableIterator<Alert>
+        function listResourceGroupLevelByRegion(ascLocation: string,
+        resourceGroupName: string, options?:
+        AlertsListResourceGroupLevelByRegionOptionalParams):
+        PagedAsyncIterableIterator<Alert, Alert[], PageSettings>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: resourceGroupName
           type: string
           description: >-
@@ -204,57 +162,93 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsListResourceGroupLevelByRegionOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-security.Alert"
-          />&gt;
+          />, <xref uid="@azure/arm-security.Alert" />[], PageSettings&gt;
   - name: >-
-      listSubscriptionLevelByRegion(AlertsListSubscriptionLevelByRegionOptionalParams)
+      listSubscriptionLevelByRegion(string,
+      AlertsListSubscriptionLevelByRegionOptionalParams)
     uid: '@azure/arm-security.Alerts.listSubscriptionLevelByRegion'
     package: '@azure/arm-security'
     summary: >-
       List all the alerts that are associated with the subscription that are
       stored in a specific location
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listSubscriptionLevelByRegion(options?:
+        function listSubscriptionLevelByRegion(ascLocation: string, options?:
         AlertsListSubscriptionLevelByRegionOptionalParams):
-        PagedAsyncIterableIterator<Alert>
+        PagedAsyncIterableIterator<Alert, Alert[], PageSettings>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: options
           type: >-
             <xref
             uid="@azure/arm-security.AlertsListSubscriptionLevelByRegionOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-security.Alert"
-          />&gt;
+          />, <xref uid="@azure/arm-security.Alert" />[], PageSettings&gt;
+  - name: simulate(string, AlertSimulatorRequestBody, AlertsSimulateOptionalParams)
+    uid: '@azure/arm-security.Alerts.simulate'
+    package: '@azure/arm-security'
+    summary: Simulate security alerts
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function simulate(ascLocation: string, alertSimulatorRequestBody:
+        AlertSimulatorRequestBody, options?: AlertsSimulateOptionalParams):
+        Promise<void>
+      parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
+        - id: alertSimulatorRequestBody
+          type: <xref uid="@azure/arm-security.AlertSimulatorRequestBody" />
+          description: Alert Simulator Request Properties
+        - id: options
+          type: <xref uid="@azure/arm-security.AlertsSimulateOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: >-
-      updateResourceGroupLevelStateToActivate(string, string,
+      updateResourceGroupLevelStateToActivate(string, string, string,
       AlertsUpdateResourceGroupLevelStateToActivateOptionalParams)
     uid: '@azure/arm-security.Alerts.updateResourceGroupLevelStateToActivate'
     package: '@azure/arm-security'
     summary: Update the alert's state
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function updateResourceGroupLevelStateToActivate(alertName: string,
-        resourceGroupName: string, options?:
+        function updateResourceGroupLevelStateToActivate(ascLocation: string,
+        alertName: string, resourceGroupName: string, options?:
         AlertsUpdateResourceGroupLevelStateToActivateOptionalParams):
         Promise<void>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -269,27 +263,31 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsUpdateResourceGroupLevelStateToActivateOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      updateResourceGroupLevelStateToDismiss(string, string,
+      updateResourceGroupLevelStateToDismiss(string, string, string,
       AlertsUpdateResourceGroupLevelStateToDismissOptionalParams)
     uid: '@azure/arm-security.Alerts.updateResourceGroupLevelStateToDismiss'
     package: '@azure/arm-security'
     summary: Update the alert's state
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function updateResourceGroupLevelStateToDismiss(alertName: string,
-        resourceGroupName: string, options?:
+        function updateResourceGroupLevelStateToDismiss(ascLocation: string,
+        alertName: string, resourceGroupName: string, options?:
         AlertsUpdateResourceGroupLevelStateToDismissOptionalParams):
         Promise<void>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -304,27 +302,31 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsUpdateResourceGroupLevelStateToDismissOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      updateResourceGroupLevelStateToResolve(string, string,
+      updateResourceGroupLevelStateToResolve(string, string, string,
       AlertsUpdateResourceGroupLevelStateToResolveOptionalParams)
     uid: '@azure/arm-security.Alerts.updateResourceGroupLevelStateToResolve'
     package: '@azure/arm-security'
     summary: Update the alert's state
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function updateResourceGroupLevelStateToResolve(alertName: string,
-        resourceGroupName: string, options?:
+        function updateResourceGroupLevelStateToResolve(ascLocation: string,
+        alertName: string, resourceGroupName: string, options?:
         AlertsUpdateResourceGroupLevelStateToResolveOptionalParams):
         Promise<void>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -339,26 +341,31 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsUpdateResourceGroupLevelStateToResolveOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      updateSubscriptionLevelStateToActivate(string,
+      updateSubscriptionLevelStateToActivate(string, string,
       AlertsUpdateSubscriptionLevelStateToActivateOptionalParams)
     uid: '@azure/arm-security.Alerts.updateSubscriptionLevelStateToActivate'
     package: '@azure/arm-security'
     summary: Update the alert's state
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function updateSubscriptionLevelStateToActivate(alertName: string,
-        options?: AlertsUpdateSubscriptionLevelStateToActivateOptionalParams):
+        function updateSubscriptionLevelStateToActivate(ascLocation: string,
+        alertName: string, options?:
+        AlertsUpdateSubscriptionLevelStateToActivateOptionalParams):
         Promise<void>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -367,26 +374,31 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsUpdateSubscriptionLevelStateToActivateOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      updateSubscriptionLevelStateToDismiss(string,
+      updateSubscriptionLevelStateToDismiss(string, string,
       AlertsUpdateSubscriptionLevelStateToDismissOptionalParams)
     uid: '@azure/arm-security.Alerts.updateSubscriptionLevelStateToDismiss'
     package: '@azure/arm-security'
     summary: Update the alert's state
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function updateSubscriptionLevelStateToDismiss(alertName: string,
-        options?: AlertsUpdateSubscriptionLevelStateToDismissOptionalParams):
+        function updateSubscriptionLevelStateToDismiss(ascLocation: string,
+        alertName: string, options?:
+        AlertsUpdateSubscriptionLevelStateToDismissOptionalParams):
         Promise<void>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -395,26 +407,31 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsUpdateSubscriptionLevelStateToDismissOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      updateSubscriptionLevelStateToResolve(string,
+      updateSubscriptionLevelStateToResolve(string, string,
       AlertsUpdateSubscriptionLevelStateToResolveOptionalParams)
     uid: '@azure/arm-security.Alerts.updateSubscriptionLevelStateToResolve'
     package: '@azure/arm-security'
     summary: Update the alert's state
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function updateSubscriptionLevelStateToResolve(alertName: string,
-        options?: AlertsUpdateSubscriptionLevelStateToResolveOptionalParams):
+        function updateSubscriptionLevelStateToResolve(ascLocation: string,
+        alertName: string, options?:
+        AlertsUpdateSubscriptionLevelStateToResolveOptionalParams):
         Promise<void>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: alertName
           type: string
           description: Name of the alert object
@@ -423,8 +440,7 @@ methods:
             <xref
             uid="@azure/arm-security.AlertsUpdateSubscriptionLevelStateToResolveOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;

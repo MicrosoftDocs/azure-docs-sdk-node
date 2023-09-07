@@ -5,13 +5,13 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/09/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: storage
+ms.subservice: blobs
 ---
 
-# Azure Storage Blob Change Feed client library for JavaScript - Version 12.0.0-preview.2
+# Azure Storage Blob Change Feed client library for JavaScript - version 12.0.0-preview.2
 
 
 > Server Version: 2019-12-12

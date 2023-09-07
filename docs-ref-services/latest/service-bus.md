@@ -1,15 +1,14 @@
 ---
-title: Azure Service Bus Modules for JavaScript
-description: Reference for Azure Service Bus Modules for JavaScript
-author: spelluru
-ms.author: spelluru
-manager: timlt
-ms.date: 03/04/2020
+title: Azure Service Bus SDK for JavaScript
+description: Reference for Azure Service Bus SDK for JavaScript
+author: xirzec
+ms.author: jeffish
+ms.data: 09/06/2023
 ms.topic: reference
-ms.service: azure
-ms.devlang: nodejs
+ms.devlang: javascript
+ms.service: servicebus
+ms.date: 06/15/2022
 ---
-
 # Azure Service Bus Modules for JavaScript
 
 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) is a highly-reliable cloud messaging service from Microsoft and a fully managed enterprise integration message broker.
@@ -49,5 +48,3 @@ There is a much older package `azure-sb` that allows you to send and receive mes
 | NPM Package                                                        | Reference                                                                                            | Samples                                                                                                                              |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | [azure-sb](https://npmjs.com/package/azure-sb) | [API Reference for azure-sb](https://docs.microsoft.com/javascript/api/azure-sb/?view=azure-node-legacy) | [Samples for sending & receiving messages](https://www.npmjs.com/package/azure-sb#how-to-use) |
-
-

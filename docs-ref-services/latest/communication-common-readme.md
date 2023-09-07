@@ -1,17 +1,14 @@
 ---
 title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, communication
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 07/23/2021
+author: xirzec
+ms.author: jeffish
+ms.date: 06/16/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: communication
 ---
-
-# Azure Communication Common client library for JavaScript - Version 1.1.0 
+# Azure Communication Common client library for JavaScript - version 2.2.1 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -39,15 +36,22 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ### CommunicationTokenCredential and AzureCommunicationTokenCredential
 
-A `CommunicationTokenCredential` authenticates a user with Communication Services, such as Chat or Calling. It optionally provides an auto-refresh mechanism to ensure a continuously stable authentication state during communications.
+The `CommunicationTokenCredential` is an interface used to authenticate a user with Communication Services, such as Chat or Calling.
 
-It is up to you the developer to first create valid user tokens with the Azure Communication Administration library. Then you use these tokens to create a `AzureCommunicationTokenCredential`.
+The `AzureCommunicationTokenCredential` offers a convenient way to create a credential implementing the said interface and allows you to take advantage of the built-in auto-refresh logic.
 
-`CommunicationTokenCredential` is only the interface, please always use the `AzureCommunicationTokenCredential` constructor to create a credential and take advantage of the built-in refresh logic.
+Depending on your scenario, you may want to initialize the `AzureCommunicationTokenCredential` with:
+
+- a static token (suitable for short-lived clients used to e.g. send one-off Chat messages) or
+- a callback function that ensures a continuous authentication state during communications (ideal e.g. for long Calling sessions).
+
+The tokens supplied to the `AzureCommunicationTokenCredential` either through the constructor or via the token refresher callback can be obtained using the Azure Communication Identity library.
 
 ## Examples
 
 ### Create a credential with a static token
+
+For a short-lived clients, refreshing the token upon expiry is not necessary and the `AzureCommunicationTokenCredential` may be instantiated with a static token.
 
 ```typescript
 const tokenCredential = new AzureCommunicationTokenCredential(
@@ -57,11 +61,11 @@ const tokenCredential = new AzureCommunicationTokenCredential(
 
 ### Create a credential with a callback
 
-Here we assume that we have a function `fetchTokenFromMyServerForUser` that makes a network request to retrieve a token string for a user. We pass it into the credential to fetch a token for Bob from our own server. Our server would use the Azure Communication Administration library to issue tokens.
+Here we assume that we have a function `fetchTokenFromMyServerForUser` that makes a network request to retrieve a JWT token string for a user. We pass it into the credential to fetch a token for Bob from our own server. Our server would use the Azure Communication Identity library to issue tokens. It's necessary that the `fetchTokenFromMyServerForUser` function returns a valid token (with an expiration date set in the future) at all times.
 
 ```typescript
 const tokenCredential = new AzureCommunicationTokenCredential({
-  tokenRefresher: async () => fetchTokenFromMyServerForUser("bob@contoso.com")
+  tokenRefresher: async () => fetchTokenFromMyServerForUser("bob@contoso.com"),
 });
 ```
 
@@ -72,7 +76,7 @@ Setting `refreshProactively` to true will call your `tokenRefresher` function wh
 ```typescript
 const tokenCredential = new AzureCommunicationTokenCredential({
   tokenRefresher: async () => fetchTokenFromMyServerForUser("bob@contoso.com"),
-  refreshProactively: true
+  refreshProactively: true,
 });
 ```
 
@@ -85,28 +89,32 @@ const tokenCredential = new AzureCommunicationTokenCredential({
   tokenRefresher: async () => fetchTokenFromMyServerForUser("bob@contoso.com"),
   refreshProactively: true,
   token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjM2MDB9.adM-ddBZZlQ1WlN3pdPBOF5G4Wh9iZpxNP_fSvpF4cWs"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjM2MDB9.adM-ddBZZlQ1WlN3pdPBOF5G4Wh9iZpxNP_fSvpF4cWs",
 });
 ```
 
 ## Troubleshooting
 
+- **Invalid token specified**: Make sure the token you are passing to the `AzureCommunicationTokenCredential` constructor or to the `tokenRefresher` callback is a bare JWT token string. E.g. if you're using the [Azure Communication Identity library][invalid_token_sdk] or [REST API][invalid_token_rest] to obtain the token, make sure you're passing just the `token` part of the response object.
+
 ## Next steps
 
-- [Read more about Communication user access tokens](https://docs.microsoft.com/azure/communication-services/concepts/authentication?tabs=javascript)
+- [Read more about Communication user access tokens](/azure/communication-services/concepts/authentication?tabs=javascript)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.2.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
+[invalid_token_sdk]: /javascript/api/@azure/communication-identity/communicationaccesstoken#@azure-communication-identity-communicationaccesstoken-token
+[invalid_token_rest]: /rest/api/communication/communication-identity/issue-access-token#communicationidentityaccesstoken
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-sms%2FREADME.png)
 

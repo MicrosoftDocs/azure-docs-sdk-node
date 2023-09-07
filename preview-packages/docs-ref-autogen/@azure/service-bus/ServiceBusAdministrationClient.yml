@@ -12,43 +12,43 @@ summary: >-
   access the direct response from the service.
 fullName: ServiceBusAdministrationClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'ServiceBusAdministrationClient(string, PipelineOptions)'
+  - name: >-
+      ServiceBusAdministrationClient(string,
+      ServiceBusAdministrationClientOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.constructor'
     package: '@azure/service-bus'
     summary: Initializes a new instance of the ServiceBusAdministrationClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         new ServiceBusAdministrationClient(connectionString: string, options?:
-        PipelineOptions)
+        ServiceBusAdministrationClientOptions)
       parameters:
         - id: connectionString
           type: string
           description: The connection string needed for the client to connect to Azure.
         - id: options
-          type: PipelineOptions
-          description: |
-            PipelineOptions
+          type: >-
+            <xref uid="@azure/service-bus.ServiceBusAdministrationClientOptions"
+            />
+          description: PipelineOptions
   - name: >-
       ServiceBusAdministrationClient(string, TokenCredential |
-      NamedKeyCredential, PipelineOptions)
+      NamedKeyCredential, ServiceBusAdministrationClientOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.constructor_1'
     package: '@azure/service-bus'
-    summary: Initializes a new instance of the ServiceBusAdministrationClient class.
+    summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         new ServiceBusAdministrationClient(fullyQualifiedNamespace: string,
         credential: TokenCredential | NamedKeyCredential, options?:
-        PipelineOptions)
+        ServiceBusAdministrationClientOptions)
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -56,7 +56,9 @@ constructors:
             The fully qualified namespace of your Service Bus instance which is
             likely to be similar to <yournamespace>.servicebus.windows.net.
         - id: credential
-          type: TokenCredential | NamedKeyCredential
+          type: >-
+            <xref uid="@azure/service-bus.TokenCredential" /> |
+            NamedKeyCredential
           description: >-
             A credential object used by the client to get the token to
             authenticate the connection
@@ -78,24 +80,35 @@ constructors:
 
             in `AzureNamedKeyCredential`.
         - id: options
-          type: PipelineOptions
-          description: |
-            PipelineOptions
+          type: >-
+            <xref uid="@azure/service-bus.ServiceBusAdministrationClientOptions"
+            />
+          description: PipelineOptions
+inheritedProperties:
+  - name: pipeline
+    uid: '@azure/service-bus.ServiceBusAdministrationClient.pipeline'
+    package: '@azure/service-bus'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        description: ''
+        type: Pipeline
+    inheritanceDescription: <b>Inherited From</b> ServiceClient.pipeline
 inheritedMethods:
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
+  - name: sendOperationRequest<T>(OperationArguments, OperationSpec)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendOperationRequest'
     package: '@azure/service-bus'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
-        Promise<RestResponse>
+        function sendOperationRequest<T>(operationArguments: OperationArguments,
+        operationSpec: OperationSpec): Promise<T>
       parameters:
         - id: operationArguments
           type: OperationArguments
@@ -105,38 +118,34 @@ inheritedMethods:
         - id: operationSpec
           type: OperationSpec
           description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: ServiceCallback&lt;any&gt;
-          description: |
-            The callback to call when the response is received.
       return:
         description: ''
-        type: Promise&lt;RestResponse&gt;
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+        type: Promise&lt;T&gt;
+    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendOperationRequest
+  - name: sendRequest(PipelineRequest)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendRequest'
     package: '@azure/service-bus'
     summary: Send the provided httpRequest.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
-        Promise<HttpOperationResponse>
+        function sendRequest(request: PipelineRequest):
+        Promise<PipelineResponse>
       parameters:
-        - id: options
-          type: RequestPrepareOptions | WebResourceLike
+        - id: request
+          type: PipelineRequest
           description: ''
       return:
         description: ''
-        type: Promise&lt;HttpOperationResponse&gt;
+        type: Promise&lt;PipelineResponse&gt;
+    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendRequest
 methods:
-  - name: 'createQueue(string, CreateQueueOptions)'
+  - name: createQueue(string, CreateQueueOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createQueue'
     package: '@azure/service-bus'
-    summary: 'Creates a queue with given name, configured using the given options'
+    summary: Creates a queue with given name, configured using the given options
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -160,18 +169,17 @@ methods:
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.QueueProperties" />&gt;&gt;
   - name: >-
-      createRule(string, string, string, SqlRuleFilter | CorrelationRuleFilter,
+      createRule(string, string, string, CorrelationRuleFilter | SqlRuleFilter,
       OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createRule'
     package: '@azure/service-bus'
-    summary: 'Creates a rule with given name, configured using the given options.'
+    summary: Creates a rule with given name, configured using the given options.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function createRule(topicName: string, subscriptionName: string,
-        ruleName: string, ruleFilter: SqlRuleFilter | CorrelationRuleFilter,
+        ruleName: string, ruleFilter: CorrelationRuleFilter | SqlRuleFilter,
         operationOptions?: OperationOptions):
         Promise<WithResponse<RuleProperties>>
       parameters:
@@ -186,11 +194,11 @@ methods:
           description: ''
         - id: ruleFilter
           type: >-
-            <xref uid="@azure/service-bus.SqlRuleFilter" /> | <xref
-            uid="@azure/service-bus.CorrelationRuleFilter" />
+            <xref uid="@azure/service-bus.CorrelationRuleFilter" /> | <xref
+            uid="@azure/service-bus.SqlRuleFilter" />
           description: Defines the filter expression that the rule evaluates.
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -203,18 +211,17 @@ methods:
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.RuleProperties" />&gt;&gt;
   - name: >-
-      createRule(string, string, string, SqlRuleFilter | CorrelationRuleFilter,
+      createRule(string, string, string, CorrelationRuleFilter | SqlRuleFilter,
       SqlRuleAction, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createRule_1'
     package: '@azure/service-bus'
-    summary: 'Creates a rule with given name, configured using the given options.'
+    summary: Creates a rule with given name, configured using the given options.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function createRule(topicName: string, subscriptionName: string,
-        ruleName: string, ruleFilter: SqlRuleFilter | CorrelationRuleFilter,
+        ruleName: string, ruleFilter: CorrelationRuleFilter | SqlRuleFilter,
         ruleAction: SqlRuleAction, operationOptions?: OperationOptions):
         Promise<WithResponse<RuleProperties>>
       parameters:
@@ -229,8 +236,8 @@ methods:
           description: ''
         - id: ruleFilter
           type: >-
-            <xref uid="@azure/service-bus.SqlRuleFilter" /> | <xref
-            uid="@azure/service-bus.CorrelationRuleFilter" />
+            <xref uid="@azure/service-bus.CorrelationRuleFilter" /> | <xref
+            uid="@azure/service-bus.SqlRuleFilter" />
           description: Defines the filter expression that the rule evaluates.
         - id: ruleAction
           type: <xref uid="@azure/service-bus.SqlRuleAction" />
@@ -238,7 +245,7 @@ methods:
             The SQL like expression that can be executed on the message should
             the associated filter apply.
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -250,12 +257,11 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.RuleProperties" />&gt;&gt;
-  - name: 'createSubscription(string, string, CreateSubscriptionOptions)'
+  - name: createSubscription(string, string, CreateSubscriptionOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createSubscription'
     package: '@azure/service-bus'
-    summary: 'Creates a subscription with given name, configured using the given options'
+    summary: Creates a subscription with given name, configured using the given options
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -285,12 +291,11 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.SubscriptionProperties" />&gt;&gt;
-  - name: 'createTopic(string, CreateTopicOptions)'
+  - name: createTopic(string, CreateTopicOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createTopic'
     package: '@azure/service-bus'
-    summary: 'Creates a topic with given name, configured using the given options'
+    summary: Creates a topic with given name, configured using the given options
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -316,23 +321,22 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.TopicProperties" />&gt;&gt;
-  - name: 'deleteQueue(string, OperationOptions)'
+  - name: deleteQueue(string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.deleteQueue'
     package: '@azure/service-bus'
     summary: Deletes a queue.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteQueue(queueName: string, operationOptions?:
-        OperationOptions): Promise<WithResponse<__type>>
+        OperationOptions): Promise<{ _response: HttpResponse }>
       parameters:
         - id: queueName
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -341,21 +345,18 @@ methods:
             Following are errors that can be expected from this operation
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/service-bus.WithResponse"
-          />&lt;__type&gt;&gt;
-  - name: 'deleteRule(string, string, string, OperationOptions)'
+        type: 'Promise&lt;{ _response: HttpResponse }&gt;'
+  - name: deleteRule(string, string, string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.deleteRule'
     package: '@azure/service-bus'
     summary: Deletes a rule.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteRule(topicName: string, subscriptionName: string,
-        ruleName: string, operationOptions?: OperationOptions):
-        Promise<WithResponse<__type>>
+        ruleName: string, operationOptions?: OperationOptions): Promise<{
+        _response: HttpResponse }>
       parameters:
         - id: topicName
           type: string
@@ -367,7 +368,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -376,20 +377,18 @@ methods:
             Following are errors that can be expected from this operation
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/service-bus.WithResponse"
-          />&lt;__type&gt;&gt;
-  - name: 'deleteSubscription(string, string, OperationOptions)'
+        type: 'Promise&lt;{ _response: HttpResponse }&gt;'
+  - name: deleteSubscription(string, string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.deleteSubscription'
     package: '@azure/service-bus'
     summary: Deletes a subscription.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteSubscription(topicName: string, subscriptionName: string,
-        operationOptions?: OperationOptions): Promise<WithResponse<__type>>
+        operationOptions?: OperationOptions): Promise<{ _response: HttpResponse
+        }>
       parameters:
         - id: topicName
           type: string
@@ -398,7 +397,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -407,26 +406,23 @@ methods:
             Following are errors that can be expected from this operation
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/service-bus.WithResponse"
-          />&lt;__type&gt;&gt;
-  - name: 'deleteTopic(string, OperationOptions)'
+        type: 'Promise&lt;{ _response: HttpResponse }&gt;'
+  - name: deleteTopic(string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.deleteTopic'
     package: '@azure/service-bus'
     summary: Deletes a topic.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteTopic(topicName: string, operationOptions?:
-        OperationOptions): Promise<WithResponse<__type>>
+        OperationOptions): Promise<{ _response: HttpResponse }>
       parameters:
         - id: topicName
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -435,9 +431,7 @@ methods:
             Following are errors that can be expected from this operation
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/service-bus.WithResponse"
-          />&lt;__type&gt;&gt;
+        type: 'Promise&lt;{ _response: HttpResponse }&gt;'
   - name: getNamespaceProperties(OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.getNamespaceProperties'
     package: '@azure/service-bus'
@@ -445,7 +439,6 @@ methods:
       Returns an object representing the metadata related to a service bus
       namespace.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -453,17 +446,16 @@ methods:
         Promise<WithResponse<NamespaceProperties>>
       parameters:
         - id: operationOptions
-          type: OperationOptions
-          description: >+
+          type: <xref uid="@azure/service-bus.OperationOptions" />
+          description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
-
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.NamespaceProperties" />&gt;&gt;
-  - name: 'getQueue(string, OperationOptions)'
+  - name: getQueue(string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.getQueue'
     package: '@azure/service-bus'
     summary: >-
@@ -472,7 +464,6 @@ methods:
       If you want to get the Queue runtime info like message count details, use
       `getQueueRuntimeProperties` API.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -483,7 +474,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -495,7 +486,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.QueueProperties" />&gt;&gt;
-  - name: 'getQueueRuntimeProperties(string, OperationOptions)'
+  - name: getQueueRuntimeProperties(string, OperationOptions)
     uid: >-
       @azure/service-bus.ServiceBusAdministrationClient.getQueueRuntimeProperties
     package: '@azure/service-bus'
@@ -503,7 +494,6 @@ methods:
       Returns an object representing the Queue runtime info like message count
       details.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -514,7 +504,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -526,14 +516,13 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.QueueRuntimeProperties" />&gt;&gt;
-  - name: 'getRule(string, string, string, OperationOptions)'
+  - name: getRule(string, string, string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.getRule'
     package: '@azure/service-bus'
     summary: >-
       Returns an object representing the Rule with the given name along with all
       its properties.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -551,7 +540,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -563,7 +552,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.RuleProperties" />&gt;&gt;
-  - name: 'getSubscription(string, string, OperationOptions)'
+  - name: getSubscription(string, string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.getSubscription'
     package: '@azure/service-bus'
     summary: >-
@@ -572,7 +561,6 @@ methods:
       If you want to get the Subscription runtime info like message count
       details, use `getSubscriptionRuntimeProperties` API.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -587,7 +575,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -599,7 +587,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.SubscriptionProperties" />&gt;&gt;
-  - name: 'getSubscriptionRuntimeProperties(string, string, OperationOptions)'
+  - name: getSubscriptionRuntimeProperties(string, string, OperationOptions)
     uid: >-
       @azure/service-bus.ServiceBusAdministrationClient.getSubscriptionRuntimeProperties
     package: '@azure/service-bus'
@@ -607,7 +595,6 @@ methods:
       Returns an object representing the Subscription runtime info like message
       count details.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -622,7 +609,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -634,7 +621,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.SubscriptionRuntimeProperties" />&gt;&gt;
-  - name: 'getTopic(string, OperationOptions)'
+  - name: getTopic(string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.getTopic'
     package: '@azure/service-bus'
     summary: >-
@@ -643,7 +630,6 @@ methods:
       If you want to get the Topic runtime info like subscription count details,
       use `getTopicRuntimeProperties` API.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -654,7 +640,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -666,7 +652,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.TopicProperties" />&gt;&gt;
-  - name: 'getTopicRuntimeProperties(string, OperationOptions)'
+  - name: getTopicRuntimeProperties(string, OperationOptions)
     uid: >-
       @azure/service-bus.ServiceBusAdministrationClient.getTopicRuntimeProperties
     package: '@azure/service-bus'
@@ -674,7 +660,6 @@ methods:
       Returns an object representing the Topic runtime info like subscription
       count.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -685,7 +670,7 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -700,20 +685,20 @@ methods:
   - name: listQueues(OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.listQueues'
     package: '@azure/service-bus'
-    summary: |
+    summary: |-
       Returns an async iterable iterator to list all the queues.
+
       .byPage() returns an async iterable iterator to list the queues in pages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listQueues(options?: OperationOptions):
         PagedAsyncIterableIterator<QueueProperties,
-        EntitiesResponse<QueueProperties>>
+        EntitiesResponse<QueueProperties>, PageSettings>
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
@@ -721,28 +706,27 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.QueueProperties" />, <xref
           uid="@azure/service-bus.EntitiesResponse" />&lt;<xref
-          uid="@azure/service-bus.QueueProperties" />&gt;&gt;
+          uid="@azure/service-bus.QueueProperties" />&gt;, PageSettings&gt;
   - name: listQueuesRuntimeProperties(OperationOptions)
     uid: >-
       @azure/service-bus.ServiceBusAdministrationClient.listQueuesRuntimeProperties
     package: '@azure/service-bus'
-    summary: >+
+    summary: >-
       Returns an async iterable iterator to list runtime info of the queues.
+
 
       .byPage() returns an async iterable iterator to list runtime info of the
       queues in pages.
-
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listQueuesRuntimeProperties(options?: OperationOptions):
         PagedAsyncIterableIterator<QueueRuntimeProperties,
-        EntitiesResponse<QueueRuntimeProperties>>
+        EntitiesResponse<QueueRuntimeProperties>, PageSettings>
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
@@ -750,22 +734,23 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.QueueRuntimeProperties" />, <xref
           uid="@azure/service-bus.EntitiesResponse" />&lt;<xref
-          uid="@azure/service-bus.QueueRuntimeProperties" />&gt;&gt;
-  - name: 'listRules(string, string, OperationOptions)'
+          uid="@azure/service-bus.QueueRuntimeProperties" />&gt;,
+          PageSettings&gt;
+  - name: listRules(string, string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.listRules'
     package: '@azure/service-bus'
-    summary: |
+    summary: |-
       Returns an async iterable iterator to list all the rules
       under the specified subscription.
+
       .byPage() returns an async iterable iterator to list the rules in pages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listRules(topicName: string, subscriptionName: string,
         options?: OperationOptions): PagedAsyncIterableIterator<RuleProperties,
-        EntitiesResponse<RuleProperties>>
+        EntitiesResponse<RuleProperties>, PageSettings>
       parameters:
         - id: topicName
           type: string
@@ -774,7 +759,7 @@ methods:
           type: string
           description: ''
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
@@ -782,31 +767,31 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.RuleProperties" />, <xref
           uid="@azure/service-bus.EntitiesResponse" />&lt;<xref
-          uid="@azure/service-bus.RuleProperties" />&gt;&gt;
-  - name: 'listSubscriptions(string, OperationOptions)'
+          uid="@azure/service-bus.RuleProperties" />&gt;, PageSettings&gt;
+  - name: listSubscriptions(string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.listSubscriptions'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Returns an async iterable iterator to list all the subscriptions
 
       under the specified topic.
 
+
       .byPage() returns an async iterable iterator to list the subscriptions in
       pages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listSubscriptions(topicName: string, options?:
         OperationOptions): PagedAsyncIterableIterator<SubscriptionProperties,
-        EntitiesResponse<SubscriptionProperties>>
+        EntitiesResponse<SubscriptionProperties>, PageSettings>
       parameters:
         - id: topicName
           type: string
           description: ''
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
@@ -814,34 +799,35 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.SubscriptionProperties" />, <xref
           uid="@azure/service-bus.EntitiesResponse" />&lt;<xref
-          uid="@azure/service-bus.SubscriptionProperties" />&gt;&gt;
-  - name: 'listSubscriptionsRuntimeProperties(string, OperationOptions)'
+          uid="@azure/service-bus.SubscriptionProperties" />&gt;,
+          PageSettings&gt;
+  - name: listSubscriptionsRuntimeProperties(string, OperationOptions)
     uid: >-
       @azure/service-bus.ServiceBusAdministrationClient.listSubscriptionsRuntimeProperties
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Returns an async iterable iterator to list runtime info of the
       subscriptions
 
       under the specified topic.
 
+
       .byPage() returns an async iterable iterator to list runtime info of
       subscriptions in pages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listSubscriptionsRuntimeProperties(topicName: string, options?:
         OperationOptions):
         PagedAsyncIterableIterator<SubscriptionRuntimeProperties,
-        EntitiesResponse<SubscriptionRuntimeProperties>>
+        EntitiesResponse<SubscriptionRuntimeProperties>, PageSettings>
       parameters:
         - id: topicName
           type: string
           description: ''
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
@@ -849,25 +835,25 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.SubscriptionRuntimeProperties" />, <xref
           uid="@azure/service-bus.EntitiesResponse" />&lt;<xref
-          uid="@azure/service-bus.SubscriptionRuntimeProperties" />&gt;&gt;
+          uid="@azure/service-bus.SubscriptionRuntimeProperties" />&gt;,
+          PageSettings&gt;
   - name: listTopics(OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.listTopics'
     package: '@azure/service-bus'
-    summary: |+
+    summary: |-
       Returns an async iterable iterator to list all the topics.
-      .byPage() returns an async iterable iterator to list the topics in pages.
 
+      .byPage() returns an async iterable iterator to list the topics in pages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listTopics(options?: OperationOptions):
         PagedAsyncIterableIterator<TopicProperties,
-        EntitiesResponse<TopicProperties>>
+        EntitiesResponse<TopicProperties>, PageSettings>
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
@@ -875,28 +861,27 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.TopicProperties" />, <xref
           uid="@azure/service-bus.EntitiesResponse" />&lt;<xref
-          uid="@azure/service-bus.TopicProperties" />&gt;&gt;
+          uid="@azure/service-bus.TopicProperties" />&gt;, PageSettings&gt;
   - name: listTopicsRuntimeProperties(OperationOptions)
     uid: >-
       @azure/service-bus.ServiceBusAdministrationClient.listTopicsRuntimeProperties
     package: '@azure/service-bus'
-    summary: >+
+    summary: >-
       Returns an async iterable iterator to list runtime info of the topics.
+
 
       .byPage() returns an async iterable iterator to list runtime info of the
       topics in pages.
-
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listTopicsRuntimeProperties(options?: OperationOptions):
         PagedAsyncIterableIterator<TopicRuntimeProperties,
-        EntitiesResponse<TopicRuntimeProperties>>
+        EntitiesResponse<TopicRuntimeProperties>, PageSettings>
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
@@ -904,13 +889,13 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/service-bus.TopicRuntimeProperties" />, <xref
           uid="@azure/service-bus.EntitiesResponse" />&lt;<xref
-          uid="@azure/service-bus.TopicRuntimeProperties" />&gt;&gt;
-  - name: 'queueExists(string, OperationOptions)'
+          uid="@azure/service-bus.TopicRuntimeProperties" />&gt;,
+          PageSettings&gt;
+  - name: queueExists(string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.queueExists'
     package: '@azure/service-bus'
     summary: Checks whether a given queue exists or not.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -921,19 +906,18 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
-          description: >
+          type: <xref uid="@azure/service-bus.OperationOptions" />
+          description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
       return:
         description: ''
         type: Promise&lt;boolean&gt;
-  - name: 'ruleExists(string, string, string, OperationOptions)'
+  - name: ruleExists(string, string, string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.ruleExists'
     package: '@azure/service-bus'
     summary: Checks whether a given rule exists or not.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -950,17 +934,16 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: ''
         type: Promise&lt;boolean&gt;
-  - name: 'subscriptionExists(string, string, OperationOptions)'
+  - name: subscriptionExists(string, string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.subscriptionExists'
     package: '@azure/service-bus'
     summary: Checks whether a given subscription exists in the topic or not.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -974,19 +957,18 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
-          description: >
+          type: <xref uid="@azure/service-bus.OperationOptions" />
+          description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
       return:
         description: ''
         type: Promise&lt;boolean&gt;
-  - name: 'topicExists(string, OperationOptions)'
+  - name: topicExists(string, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.topicExists'
     package: '@azure/service-bus'
     summary: Checks whether a given topic exists or not.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -997,17 +979,17 @@ methods:
           type: string
           description: ''
         - id: operationOptions
-          type: OperationOptions
-          description: >
+          type: <xref uid="@azure/service-bus.OperationOptions" />
+          description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
       return:
         description: ''
         type: Promise&lt;boolean&gt;
-  - name: 'updateQueue(WithResponse<QueueProperties>, OperationOptions)'
+  - name: updateQueue(WithResponse<QueueProperties>, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.updateQueue'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Updates the queue based on the queue properties provided.
 
       All queue properties must be set even though only a subset of them are
@@ -1017,10 +999,10 @@ methods:
       update the desired properties in it, and then pass the modified object to
       `updateQueue()`.
 
-      See https://docs.microsoft.com/rest/api/servicebus/update-queue for more
-      details.
+
+      The properties that cannot be updated are marked as readonly in the
+      `QueueProperties` interface.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1040,7 +1022,7 @@ methods:
             `enablePartitioning`, and `name` can't be updated after creating the
             queue.
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -1052,7 +1034,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.QueueProperties" />&gt;&gt;
-  - name: 'updateRule(string, string, WithResponse<RuleProperties>, OperationOptions)'
+  - name: updateRule(string, string, WithResponse<RuleProperties>, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.updateRule'
     package: '@azure/service-bus'
     summary: >-
@@ -1065,7 +1047,6 @@ methods:
       update the desired properties in it, and then pass the modified object to
       `updateRule()`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1089,7 +1070,7 @@ methods:
             For example, you can configure the filter to apply on associated
             Topic/Subscription.
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -1101,7 +1082,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.RuleProperties" />&gt;&gt;
-  - name: 'updateSubscription(WithResponse<SubscriptionProperties>, OperationOptions)'
+  - name: updateSubscription(WithResponse<SubscriptionProperties>, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.updateSubscription'
     package: '@azure/service-bus'
     summary: >-
@@ -1113,8 +1094,11 @@ methods:
       Therefore, the suggested flow is to use the output from
       `getSubscription()`, update the desired properties in it, and then pass
       the modified object to `updateSubscription()`.
+
+
+      The properties that cannot be updated are marked as readonly in the
+      `SubscriptionProperties` interface.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1133,7 +1117,7 @@ methods:
             `subscriptionName`, `topicName`, and `requiresSession` can't be
             updated after creating the subscription.
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.
@@ -1145,10 +1129,10 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.WithResponse" />&lt;<xref
           uid="@azure/service-bus.SubscriptionProperties" />&gt;&gt;
-  - name: 'updateTopic(WithResponse<TopicProperties>, OperationOptions)'
+  - name: updateTopic(WithResponse<TopicProperties>, OperationOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.updateTopic'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Updates the topic based on the topic properties provided.
 
       All topic properties must be set even though only a subset of them are
@@ -1158,10 +1142,10 @@ methods:
       update the desired properties in it, and then pass the modified object to
       `updateTopic()`.
 
-      See https://docs.microsoft.com/rest/api/servicebus/update-topic for more
-      details.
+
+      The properties that cannot be updated are marked as readonly in the
+      `TopicProperties` interface.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1180,7 +1164,7 @@ methods:
             `requiresDuplicateDetection`, `enablePartitioning`, and `name` can't
             be updated after creating the topic.
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: >-
             The options that can be used to abort, trace and control other
             configurations on the HTTP request.

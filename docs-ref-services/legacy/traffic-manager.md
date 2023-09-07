@@ -6,10 +6,9 @@ ms.author: kumud
 manager: jeconnoc
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Traffic Manager
+ms.service: traffic-manager
 ---
 
 # Azure Traffic Manager modules for JavaScript

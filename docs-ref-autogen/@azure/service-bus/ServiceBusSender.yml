@@ -14,7 +14,6 @@ summary: >-
   The Sender class is an abstraction over the underlying AMQP sender link.
 fullName: ServiceBusSender
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -24,10 +23,25 @@ properties:
     summary: Path of the entity for which the sender has been created.
     fullName: entityPath
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'entityPath: string'
+      return:
+        description: ''
+        type: string
+  - name: identifier
+    uid: '@azure/service-bus.ServiceBusSender.identifier'
+    package: '@azure/service-bus'
+    summary: >-
+      A name used to identify the sender. This can be used to correlate logs and
+      exceptions.
+
+      If not specified or empty, a random unique one will be generated.
+    fullName: identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'identifier: string'
       return:
         description: ''
         type: string
@@ -39,7 +53,6 @@ properties:
       closed.
     fullName: isClosed
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'isClosed: boolean'
@@ -47,22 +60,21 @@ properties:
         description: ''
         type: boolean
 methods:
-  - name: 'cancelScheduledMessages(Long_2 | Long_2[], OperationOptionsBase)'
+  - name: cancelScheduledMessages(Long | Long[], OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSender.cancelScheduledMessages'
     package: '@azure/service-bus'
     summary: >-
       Cancels multiple messages that were scheduled to appear on a ServiceBus
       Queue/Subscription.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function cancelScheduledMessages(sequenceNumbers: Long_2 | Long_2[],
+        function cancelScheduledMessages(sequenceNumbers: Long | Long[],
         options?: OperationOptionsBase): Promise<void>
       parameters:
         - id: sequenceNumbers
-          type: 'Long_2 | Long_2[]'
+          type: Long | Long[]
           description: >-
             Sequence number or an array of sequence numbers of the messages to
             be cancelled.
@@ -83,7 +95,6 @@ methods:
       Use the `createSender` function on the QueueClient or TopicClient to
       instantiate a new Sender
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function close(): Promise<void>'
@@ -100,7 +111,6 @@ methods:
       The batch can be passed to the <xref:send> method to send the messages to
       Azure Service Bus.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -109,7 +119,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/service-bus.CreateMessageBatchOptions" />
-          description: >
+          description: >-
             Configures the behavior of the batch.
 
             - `maxSizeInBytes`: The upper limit for the size of batch. The
@@ -120,28 +130,28 @@ methods:
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusMessageBatch"
           />&gt;
   - name: >-
-      scheduleMessages(ServiceBusMessage | ServiceBusMessage[] |
-      AmqpAnnotatedMessage | AmqpAnnotatedMessage[], Date, OperationOptionsBase)
+      scheduleMessages(ServiceBusMessage | AmqpAnnotatedMessage |
+      ServiceBusMessage[] | AmqpAnnotatedMessage[], Date, OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSender.scheduleMessages'
     package: '@azure/service-bus'
     summary: >-
       Schedules given messages to appear on Service Bus Queue/Subscription at a
       later time.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleMessages(messages: ServiceBusMessage |
-        ServiceBusMessage[] | AmqpAnnotatedMessage | AmqpAnnotatedMessage[],
+        AmqpAnnotatedMessage | ServiceBusMessage[] | AmqpAnnotatedMessage[],
         scheduledEnqueueTimeUtc: Date, options?: OperationOptionsBase):
-        Promise<Long_2[]>
+        Promise<Long[]>
       parameters:
         - id: messages
           type: >-
-            <xref uid="@azure/service-bus.ServiceBusMessage" /> | <xref
+            <xref uid="@azure/service-bus.ServiceBusMessage" /> |
+            AmqpAnnotatedMessage | <xref
             uid="@azure/service-bus.ServiceBusMessage" />[] |
-            AmqpAnnotatedMessage | AmqpAnnotatedMessage[]
+            AmqpAnnotatedMessage[]
           description: Message or an array of messages that need to be scheduled.
         - id: scheduledEnqueueTimeUtc
           type: Date
@@ -161,16 +171,17 @@ methods:
 
           only supports 53 bit numbers, converting the `Long` to number will
           cause loss in precision.
-        type: 'Promise&lt;Long_2[]&gt;'
+        type: Promise&lt;Long[]&gt;
   - name: >-
-      sendMessages(ServiceBusMessage | ServiceBusMessage[] |
-      ServiceBusMessageBatch | AmqpAnnotatedMessage | AmqpAnnotatedMessage[],
+      sendMessages(ServiceBusMessage | ServiceBusMessageBatch |
+      AmqpAnnotatedMessage | ServiceBusMessage[] | AmqpAnnotatedMessage[],
       OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSender.sendMessages'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Sends the given messages after creating an AMQP Sender link if it doesn't
       already exist.
+
 
       - To send messages to a `session` and/or `partition` enabled Queue/Topic,
       set the `sessionId`
@@ -180,21 +191,34 @@ methods:
       - All messages passed to the same sendMessages() call should have the same
       `sessionId` (if using
        sessions) and the same `partitionKey` (if using partitions).
+
+      **Note:**
+
+         __If you want to send messages of size greater than 1MB, please send individual messages instead of sending a batched message or an array of messages like below.__
+
+       `await sender.sendMessages(message);`
+
+      __This is because the batched messages are not capable of sending the
+      larger messages yet. You'll hit the `force detached` error in this case
+      otherwise. Read
+      [service-bus-premium-messaging#large-messages-support](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-premium-messaging#large-messages-support).
+      More info at
+      [#23014](https://github.com/Azure/azure-sdk-for-js/pull/23014).__
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function sendMessages(messages: ServiceBusMessage | ServiceBusMessage[]
-        | ServiceBusMessageBatch | AmqpAnnotatedMessage |
+        function sendMessages(messages: ServiceBusMessage |
+        ServiceBusMessageBatch | AmqpAnnotatedMessage | ServiceBusMessage[] |
         AmqpAnnotatedMessage[], options?: OperationOptionsBase): Promise<void>
       parameters:
         - id: messages
           type: >-
             <xref uid="@azure/service-bus.ServiceBusMessage" /> | <xref
-            uid="@azure/service-bus.ServiceBusMessage" />[] | <xref
             uid="@azure/service-bus.ServiceBusMessageBatch" /> |
-            AmqpAnnotatedMessage | AmqpAnnotatedMessage[]
+            AmqpAnnotatedMessage | <xref
+            uid="@azure/service-bus.ServiceBusMessage" />[] |
+            AmqpAnnotatedMessage[]
           description: >-
             A single message or an array of messages or a batch of messages
             created via the createBatch()

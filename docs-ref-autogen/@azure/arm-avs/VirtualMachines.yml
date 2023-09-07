@@ -5,7 +5,6 @@ package: '@azure/arm-avs'
 summary: Interface representing a VirtualMachines.
 fullName: VirtualMachines
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
@@ -17,7 +16,6 @@ methods:
     package: '@azure/arm-avs'
     summary: Enable or disable DRS-driven VM movement restriction
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -25,7 +23,7 @@ methods:
         privateCloudName: string, clusterName: string, virtualMachineId: string,
         restrictMovement: VirtualMachineRestrictMovement, options?:
         VirtualMachinesRestrictMovementOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -49,11 +47,12 @@ methods:
             <xref
             uid="@azure/arm-avs.VirtualMachinesRestrictMovementOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+        type: >-
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;void&gt;,
+          void&gt;&gt;
   - name: >-
       beginRestrictMovementAndWait(string, string, string, string,
       VirtualMachineRestrictMovement,
@@ -62,7 +61,6 @@ methods:
     package: '@azure/arm-avs'
     summary: Enable or disable DRS-driven VM movement restriction
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -93,23 +91,21 @@ methods:
             <xref
             uid="@azure/arm-avs.VirtualMachinesRestrictMovementOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'get(string, string, string, string, VirtualMachinesGetOptionalParams)'
+  - name: get(string, string, string, string, VirtualMachinesGetOptionalParams)
     uid: '@azure/arm-avs.VirtualMachines.get'
     package: '@azure/arm-avs'
     summary: Get a virtual machine by id in a private cloud cluster
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function get(resourceGroupName: string, privateCloudName: string,
         clusterName: string, virtualMachineId: string, options?:
-        VirtualMachinesGetOptionalParams): Promise<VirtualMachinesGetResponse>
+        VirtualMachinesGetOptionalParams): Promise<VirtualMachine>
       parameters:
         - id: resourceGroupName
           type: string
@@ -125,25 +121,22 @@ methods:
           description: Virtual Machine identifier
         - id: options
           type: <xref uid="@azure/arm-avs.VirtualMachinesGetOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-avs.VirtualMachinesGetResponse"
-          />&gt;
-  - name: 'list(string, string, string, VirtualMachinesListOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-avs.VirtualMachine" />&gt;
+  - name: list(string, string, string, VirtualMachinesListOptionalParams)
     uid: '@azure/arm-avs.VirtualMachines.list'
     package: '@azure/arm-avs'
     summary: List of virtual machines in a private cloud cluster
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function list(resourceGroupName: string, privateCloudName: string,
         clusterName: string, options?: VirtualMachinesListOptionalParams):
-        PagedAsyncIterableIterator<VirtualMachine>
+        PagedAsyncIterableIterator<VirtualMachine, VirtualMachine[],
+        PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -156,10 +149,10 @@ methods:
           description: Name of the cluster in the private cloud
         - id: options
           type: <xref uid="@azure/arm-avs.VirtualMachinesListOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-avs.VirtualMachine" />&gt;
+          uid="@azure/arm-avs.VirtualMachine" />, <xref
+          uid="@azure/arm-avs.VirtualMachine" />[], PageSettings&gt;

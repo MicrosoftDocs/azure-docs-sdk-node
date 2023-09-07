@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/18/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: compute
+ms.service: azure
 ---
 
-# Azure ComputeManagement client library for JavaScript - Version 17.0.0-beta.2 
+# Azure ComputeManagement client library for JavaScript - version 17.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ComputeManagement client.

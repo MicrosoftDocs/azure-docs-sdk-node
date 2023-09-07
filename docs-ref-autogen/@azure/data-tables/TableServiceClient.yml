@@ -9,16 +9,14 @@ summary: >-
   to perform operations on the tables and the entities.
 fullName: TableServiceClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'TableServiceClient(string, NamedKeyCredential, TableServiceClientOptions)'
+  - name: TableServiceClient(string, NamedKeyCredential, TableServiceClientOptions)
     uid: '@azure/data-tables.TableServiceClient.constructor'
     package: '@azure/data-tables'
     summary: Creates a new instance of the TableServiceClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -31,13 +29,13 @@ constructors:
             The URL of the service account that is the target of the desired
             operation., such as "https://myaccount.table.core.windows.net".
         - id: credential
-          type: NamedKeyCredential
+          type: <xref uid="@azure/data-tables.NamedKeyCredential" />
           description: >-
             NamedKeyCredential | SASCredential used to authenticate requests.
             Only Supported for Node
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
+          description: >-
             Options to configure the HTTP pipeline.
 
 
@@ -61,12 +59,11 @@ constructors:
             );
 
             ```
-  - name: 'TableServiceClient(string, SASCredential, TableServiceClientOptions)'
+  - name: TableServiceClient(string, SASCredential, TableServiceClientOptions)
     uid: '@azure/data-tables.TableServiceClient.constructor_1'
     package: '@azure/data-tables'
     summary: Creates a new instance of the TableServiceClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -80,41 +77,38 @@ constructors:
             operation., such as "https://myaccount.table.core.windows.net".
         - id: credential
           type: SASCredential
-          description: >-
-            NamedKeyCredential | SASCredential used to authenticate requests.
-            Only Supported for Node
+          description: SASCredential used to authenticate requests
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
+          description: >-
             Options to configure the HTTP pipeline.
 
 
-            ### Example using an account name/key:
+            ### Example using a SAS Token.
 
 
             ```js
 
-            const { AzureNamedKeyCredential, TableServiceClient } =
+            const { AzureSASCredential, TableServiceClient } =
             require("@azure/data-tables")
 
             const account = "<storage account name>"
 
-            const sharedKeyCredential = new AzureNamedKeyCredential(account,
-            "<account key>");
+            const sasCredential = new AzureSASCredential(account, "<account
+            key>");
 
 
             const tableServiceClient = new TableServiceClient(
               `https://${account}.table.core.windows.net`,
-              sharedKeyCredential
+              sasCredential
             );
 
             ```
-  - name: 'TableServiceClient(string, TableServiceClientOptions)'
+  - name: TableServiceClient(string, TableServiceClientOptions)
     uid: '@azure/data-tables.TableServiceClient.constructor_3'
     package: '@azure/data-tables'
     summary: Creates a new instance of the TableServiceClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new TableServiceClient(url: string, options?: TableServiceClientOptions)'
@@ -123,39 +117,28 @@ constructors:
           type: string
           description: >-
             The URL of the service account that is the target of the desired
-            operation., such as "https://myaccount.table.core.windows.net".
+            operation., such as
+                         "https://myaccount.table.core.windows.net". You can append a SAS,
+                         such as "https://myaccount.table.core.windows.net?sasString".
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
+          description: |-
             Options to configure the HTTP pipeline.
-
-
-            ### Example using an account name/key:
-
+            Example appending a SAS token:
 
             ```js
-
-            const { AzureNamedKeyCredential, TableServiceClient } =
-            require("@azure/data-tables")
-
-            const account = "<storage account name>"
-
-            const sharedKeyCredential = new AzureNamedKeyCredential(account,
-            "<account key>");
-
+            const account = "<storage account name>";
+            const sasToken = "<SAS token>";
 
             const tableServiceClient = new TableServiceClient(
-              `https://${account}.table.core.windows.net`,
-              sharedKeyCredential
+              `https://${account}.table.core.windows.net?${sasToken}`,
             );
-
             ```
-  - name: 'TableServiceClient(string, TokenCredential, TableServiceClientOptions)'
+  - name: TableServiceClient(string, TokenCredential, TableServiceClientOptions)
     uid: '@azure/data-tables.TableServiceClient.constructor_2'
     package: '@azure/data-tables'
     summary: Creates a new instance of the TableServiceClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -169,34 +152,24 @@ constructors:
             operation., such as "https://myaccount.table.core.windows.net".
         - id: credential
           type: TokenCredential
-          description: >-
-            NamedKeyCredential | SASCredential used to authenticate requests.
-            Only Supported for Node
+          description: Azure Active Directory credential used to authenticate requests
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
+          description: |-
             Options to configure the HTTP pipeline.
 
-
-            ### Example using an account name/key:
-
+            ### Example using an Azure Active Directory credential:
 
             ```js
-
-            const { AzureNamedKeyCredential, TableServiceClient } =
-            require("@azure/data-tables")
-
+            cons { DefaultAzureCredential } = require("@azure/identity");
+            const { TableServiceClient } = require("@azure/data-tables")
             const account = "<storage account name>"
-
-            const sharedKeyCredential = new AzureNamedKeyCredential(account,
-            "<account key>");
-
+            const credential = new DefaultAzureCredential();
 
             const tableServiceClient = new TableServiceClient(
               `https://${account}.table.core.windows.net`,
-              sharedKeyCredential
+              credential
             );
-
             ```
 properties:
   - name: pipeline
@@ -209,7 +182,6 @@ properties:
       before and after it is made to the server.
     fullName: pipeline
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'pipeline: Pipeline'
@@ -222,7 +194,6 @@ properties:
     summary: Table Account URL
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
@@ -230,12 +201,11 @@ properties:
         description: ''
         type: string
 methods:
-  - name: 'createTable(string, OperationOptions)'
+  - name: createTable(string, OperationOptions)
     uid: '@azure/data-tables.TableServiceClient.createTable'
     package: '@azure/data-tables'
     summary: Creates a new table under the given account.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -247,17 +217,15 @@ methods:
           description: The name of the table.
         - id: options
           type: OperationOptions
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'deleteTable(string, OperationOptions)'
+  - name: deleteTable(string, OperationOptions)
     uid: '@azure/data-tables.TableServiceClient.deleteTable'
     package: '@azure/data-tables'
     summary: Operation permanently deletes the specified table.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -269,17 +237,15 @@ methods:
           description: The name of the table.
         - id: options
           type: OperationOptions
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'fromConnectionString(string, TableServiceClientOptions)'
+  - name: fromConnectionString(string, TableServiceClientOptions)
     uid: '@azure/data-tables.TableServiceClient.fromConnectionString'
     package: '@azure/data-tables'
     summary: Creates an instance of TableServiceClient from connection string.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -311,7 +277,6 @@ methods:
 
       (Cross-Origin Resource Sharing) rules.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -320,8 +285,7 @@ methods:
       parameters:
         - id: options
           type: OperationOptions
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/data-tables.GetPropertiesResponse" />&gt;
@@ -335,7 +299,6 @@ methods:
       secondary location endpoint when read-access geo-redundant replication is
       enabled for the account.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -344,8 +307,7 @@ methods:
       parameters:
         - id: options
           type: OperationOptions
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/data-tables.GetStatisticsResponse" />&gt;
@@ -354,23 +316,22 @@ methods:
     package: '@azure/data-tables'
     summary: Queries tables under the given account.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listTables(options?: ListTableItemsOptions):
-        PagedAsyncIterableIterator<TableItem, TableItemResultPage>
+        PagedAsyncIterableIterator<TableItem, TableItemResultPage, PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/data-tables.ListTableItemsOptions" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref uid="@azure/data-tables.TableItem"
-          />, <xref uid="@azure/data-tables.TableItemResultPage" />&gt;
-  - name: 'setProperties(ServiceProperties, SetPropertiesOptions)'
+          />, <xref uid="@azure/data-tables.TableItemResultPage" />,
+          PageSettings&gt;
+  - name: setProperties(ServiceProperties, SetPropertiesOptions)
     uid: '@azure/data-tables.TableServiceClient.setProperties'
     package: '@azure/data-tables'
     summary: >-
@@ -379,20 +340,20 @@ methods:
 
       (Cross-Origin Resource Sharing) rules.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(properties: ServiceProperties, options?:
-        SetPropertiesOptions): Promise<SetPropertiesResponse>
+        SetPropertiesOptions): Promise<ServiceSetPropertiesHeaders>
       parameters:
         - id: properties
           type: <xref uid="@azure/data-tables.ServiceProperties" />
           description: The Table Service properties.
         - id: options
           type: <xref uid="@azure/data-tables.SetPropertiesOptions" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/data-tables.SetPropertiesResponse" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/data-tables.ServiceSetPropertiesHeaders"
+          />&gt;

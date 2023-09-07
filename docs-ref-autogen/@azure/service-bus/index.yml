@@ -3,7 +3,11 @@ uid: '@azure/service-bus'
 name: '@azure/service-bus'
 summary: ''
 type: package
+enums:
+  - '@azure/service-bus.RetryMode'
+  - '@azure/service-bus.TokenType'
 classes:
+  - '@azure/service-bus.MessagingError'
   - '@azure/service-bus.ServiceBusAdministrationClient'
   - '@azure/service-bus.ServiceBusClient'
   - '@azure/service-bus.ServiceBusError'
@@ -15,14 +19,20 @@ interfaces:
   - '@azure/service-bus.CreateSubscriptionOptions'
   - '@azure/service-bus.CreateTopicOptions'
   - '@azure/service-bus.DeadLetterOptions'
+  - '@azure/service-bus.Delivery'
   - '@azure/service-bus.GetMessageIteratorOptions'
+  - '@azure/service-bus.HttpHeader'
+  - '@azure/service-bus.HttpHeadersLike'
+  - '@azure/service-bus.HttpResponse'
   - '@azure/service-bus.MessageHandlers'
   - '@azure/service-bus.NamespaceProperties'
+  - '@azure/service-bus.OperationOptions'
   - '@azure/service-bus.PeekMessagesOptions'
   - '@azure/service-bus.ProcessErrorArgs'
   - '@azure/service-bus.QueueProperties'
   - '@azure/service-bus.QueueRuntimeProperties'
   - '@azure/service-bus.ReceiveMessagesOptions'
+  - '@azure/service-bus.RetryOptions'
   - '@azure/service-bus.RuleProperties'
   - '@azure/service-bus.ServiceBusAdministrationClientOptions'
   - '@azure/service-bus.ServiceBusClientOptions'
@@ -32,42 +42,74 @@ interfaces:
   - '@azure/service-bus.ServiceBusReceivedMessage'
   - '@azure/service-bus.ServiceBusReceiver'
   - '@azure/service-bus.ServiceBusReceiverOptions'
+  - '@azure/service-bus.ServiceBusRuleManager'
   - '@azure/service-bus.ServiceBusSender'
+  - '@azure/service-bus.ServiceBusSenderOptions'
   - '@azure/service-bus.ServiceBusSessionReceiver'
   - '@azure/service-bus.ServiceBusSessionReceiverOptions'
   - '@azure/service-bus.SqlRuleFilter'
   - '@azure/service-bus.SubscribeOptions'
   - '@azure/service-bus.SubscriptionProperties'
   - '@azure/service-bus.SubscriptionRuntimeProperties'
+  - '@azure/service-bus.TokenCredential'
   - '@azure/service-bus.TopicProperties'
   - '@azure/service-bus.TopicRuntimeProperties'
   - '@azure/service-bus.TryAddOptions'
+  - '@azure/service-bus.WebResourceLike'
+  - '@azure/service-bus.WebSocketImpl'
+  - '@azure/service-bus.WebSocketOptions'
 typeAliases:
   - '@azure/service-bus.EntitiesResponse'
   - '@azure/service-bus.EntityAvailabilityStatus'
   - '@azure/service-bus.EntityStatus'
   - '@azure/service-bus.OperationOptionsBase'
+  - '@azure/service-bus.RawHttpHeaders'
   - '@azure/service-bus.ServiceBusErrorCode'
   - '@azure/service-bus.SqlRuleAction'
+  - '@azure/service-bus.TransferProgressEvent'
   - '@azure/service-bus.WithResponse'
 functions:
+  - name: delay<T>(number, AbortSignalLike, string, T)
+    uid: '@azure/service-bus.delay'
+    package: '@azure/service-bus'
+    summary: A wrapper for setTimeout that resolves a promise after t milliseconds.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function delay<T>(delayInMs: number, abortSignal?: AbortSignalLike,
+        abortErrorMsg?: string, value?: T): Promise<T | void>
+      parameters:
+        - id: delayInMs
+          type: number
+          description: The number of milliseconds to be delayed.
+        - id: abortSignal
+          type: AbortSignalLike
+          description: The abortSignal associated with containing operation.
+        - id: abortErrorMsg
+          type: string
+          description: The abort error message associated with containing operation.
+        - id: value
+          type: T
+          description: The value to be resolved with after a timeout of t milliseconds.
+      return:
+        description: '- Resolved promise'
+        type: Promise&lt;T | void&gt;
   - name: isServiceBusError(unknown)
     uid: '@azure/service-bus.isServiceBusError'
     package: '@azure/service-bus'
     summary: Determines if an error is of type `ServiceBusError`
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isServiceBusError(err: unknown): boolean'
+      content: 'function isServiceBusError(err: unknown): err'
       parameters:
         - id: err
           type: unknown
-          description: |
-            An error to check to see if it's of type ServiceBusError
+          description: An error to check to see if it's of type ServiceBusError
       return:
         description: ''
-        type: boolean
+        type: err
   - name: parseServiceBusConnectionString(string)
     uid: '@azure/service-bus.parseServiceBusConnectionString'
     package: '@azure/service-bus'
@@ -77,7 +119,6 @@ functions:
 
       The properties are useful to then construct a ServiceBusClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -86,7 +127,7 @@ functions:
       parameters:
         - id: connectionString
           type: string
-          description: >
+          description: >-
             The connection string associated with the Shared Access Policy
             created
 

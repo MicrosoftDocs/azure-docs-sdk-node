@@ -2,11 +2,16 @@
 name: SearchResult
 uid: '@azure/search-documents.SearchResult'
 package: '@azure/search-documents'
-summary: 'Contains a document found by a search query, plus associated metadata.'
-fullName: SearchResult<T>
+summary: Contains a document found by a search query, plus associated metadata.
+fullName: SearchResult<TModel, TFields>
 remarks: ''
-isPreview: false
 isDeprecated: false
-syntax: >-
-  type SearchResult<T> = { captions?: CaptionResult[], document: T, highlights?:
-  Object, rerankerScore?: number, score: number }
+syntax: |
+  type SearchResult<TModel, TFields> = {
+    captions?: CaptionResult[]
+    document: NarrowedModel<TModel, TFields>
+    documentDebugInfo?: DocumentDebugInfo[]
+    highlights?: { [k in SelectFields<TModel>]?: string[] }
+    rerankerScore?: number
+    score: number
+  }

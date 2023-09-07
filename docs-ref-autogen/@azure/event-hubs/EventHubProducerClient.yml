@@ -2,8 +2,9 @@
 name: EventHubProducerClient
 uid: '@azure/event-hubs.EventHubProducerClient'
 package: '@azure/event-hubs'
-summary: >+
+summary: >-
   The `EventHubProducerClient` class is used to send events to an Event Hub.
+
 
   There are multiple ways to create an `EventHubProducerClient`
 
@@ -21,21 +22,18 @@ summary: >+
 
   Optionally, you can also pass an options bag to configure the retry policy or
   proxy settings.
-
 fullName: EventHubProducerClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'EventHubProducerClient(string, EventHubClientOptions)'
+  - name: EventHubProducerClient(string, EventHubClientOptions)
     uid: '@azure/event-hubs.EventHubProducerClient.constructor'
     package: '@azure/event-hubs'
     summary: |-
       The `EventHubProducerClient` class is used to send events to an Event Hub.
       Use the `options` parmeter to configure retry policy or proxy settings.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -55,7 +53,7 @@ constructors:
             'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key;EntityPath=my-event-hub-name'.
         - id: options
           type: <xref uid="@azure/event-hubs.EventHubClientOptions" />
-          description: >
+          description: >-
             A set of options to apply when configuring the client.
 
             - `retryOptions`   : Configures the retry policy for all the
@@ -69,14 +67,13 @@ constructors:
 
             - `userAgent`      : A string to append to the built in user agent
             string that is passed to the service.
-  - name: 'EventHubProducerClient(string, string, EventHubClientOptions)'
+  - name: EventHubProducerClient(string, string, EventHubClientOptions)
     uid: '@azure/event-hubs.EventHubProducerClient.constructor_1'
     package: '@azure/event-hubs'
     summary: |-
       The `EventHubProducerClient` class is used to send events to an Event Hub.
       Use the `options` parmeter to configure retry policy or proxy settings.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -86,20 +83,20 @@ constructors:
         - id: connectionString
           type: string
           description: >-
-            The connection string to use for connecting to the Event Hub
-            instance.
+            The connection string to use for connecting to the Event Hubs
+            namespace.
 
-            It is expected that the shared key properties and the Event Hub path
-            are contained in this connection string.
+            It is expected that the shared key properties are contained in this
+            connection string, but not the Event Hub path,
 
             e.g.
-            'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key;EntityPath=my-event-hub-name'.
+            'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key;'.
         - id: eventHubName
           type: string
           description: The name of the specific Event Hub to connect the client to.
         - id: options
           type: <xref uid="@azure/event-hubs.EventHubClientOptions" />
-          description: >
+          description: >-
             A set of options to apply when configuring the client.
 
             - `retryOptions`   : Configures the retry policy for all the
@@ -122,7 +119,6 @@ constructors:
       The `EventHubProducerClient` class is used to send events to an Event Hub.
       Use the `options` parmeter to configure retry policy or proxy settings.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -139,7 +135,9 @@ constructors:
           type: string
           description: The name of the specific Event Hub to connect the client to.
         - id: credential
-          type: TokenCredential | NamedKeyCredential | SASCredential
+          type: >-
+            <xref uid="@azure/event-hubs.TokenCredential" /> |
+            NamedKeyCredential | SASCredential
           description: >-
             An credential object used by the client to get the token to
             authenticate the connection
@@ -164,7 +162,7 @@ constructors:
             `AzureSASCredential`.
         - id: options
           type: <xref uid="@azure/event-hubs.EventHubClientOptions" />
-          description: >
+          description: >-
             A set of options to apply when configuring the client.
 
             - `retryOptions`   : Configures the retry policy for all the
@@ -182,10 +180,9 @@ properties:
   - name: eventHubName
     uid: '@azure/event-hubs.EventHubProducerClient.eventHubName'
     package: '@azure/event-hubs'
-    summary: ''
+    summary: The name of the Event Hub instance for which this client is created.
     fullName: eventHubName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: string eventHubName
@@ -195,13 +192,30 @@ properties:
   - name: fullyQualifiedNamespace
     uid: '@azure/event-hubs.EventHubProducerClient.fullyQualifiedNamespace'
     package: '@azure/event-hubs'
-    summary: ''
+    summary: >-
+      The fully qualified namespace of the Event Hub instance for which this
+      client is created.
+
+      This is likely to be similar to <yournamespace>.servicebus.windows.net.
     fullName: fullyQualifiedNamespace
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: string fullyQualifiedNamespace
+      return:
+        description: ''
+        type: string
+  - name: identifier
+    uid: '@azure/event-hubs.EventHubProducerClient.identifier'
+    package: '@azure/event-hubs'
+    summary: |-
+      The name used to identify this EventHubProducerClient.
+      If not specified or empty, a random unique one will be generated.
+    fullName: identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'identifier: string'
       return:
         description: ''
         type: string
@@ -213,7 +227,6 @@ methods:
       Closes the AMQP connection to the Event Hub instance,
       returning a promise that will be resolved when disconnection is completed.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function close(): Promise<void>'
@@ -223,13 +236,33 @@ methods:
   - name: createBatch(CreateBatchOptions)
     uid: '@azure/event-hubs.EventHubProducerClient.createBatch'
     package: '@azure/event-hubs'
-    summary: >
+    summary: >-
       Creates an instance of `EventDataBatch` to which one can add events until
       the maximum supported size is reached.
 
       The batch can be passed to the
-      <xref:@azure/event-hubs.EventHubProducerClient.sendBatch> method of the
-      `EventHubProducerClient` to be sent to Azure Event Hubs.
+      [sendBatch](xref:@azure/event-hubs.EventHubProducerClient.sendBatch_1)
+      method of the `EventHubProducerClient` to be sent to Azure Event Hubs.
+
+
+      Events with different values for partitionKey or partitionId will need to
+      be put into different batches.
+
+      To simplify such batch management across partitions or to have the client
+      automatically batch events
+
+      and send them in specific intervals, use `EventHubBufferedProducerClient`
+      instead.
+
+
+      The below example assumes you have an array of events at hand to be
+      batched safely.
+
+      If you have events coming in one by one, `EventHubBufferedProducerClient`
+      is recommended instead
+
+      for effecient management of batches.
+
 
       Example usage:
 
@@ -254,7 +287,6 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -286,7 +318,6 @@ methods:
     package: '@azure/event-hubs'
     summary: Provides the Event Hub runtime information.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -304,12 +335,11 @@ methods:
     package: '@azure/event-hubs'
     summary: Provides the id for each partition associated with the Event Hub.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getPartitionIds(options?: GetPartitionIdsOptions):
-        Promise<Array<string>>
+        Promise<string[]>
       parameters:
         - id: options
           type: <xref uid="@azure/event-hubs.GetPartitionIdsOptions" />
@@ -320,13 +350,12 @@ methods:
           for
 
           each partition associated with the Event Hub.
-        type: Promise&lt;Array&lt;string&gt;&gt;
-  - name: 'getPartitionProperties(string, GetPartitionPropertiesOptions)'
+        type: Promise&lt;string[]&gt;
+  - name: getPartitionProperties(string, GetPartitionPropertiesOptions)
     uid: '@azure/event-hubs.EventHubProducerClient.getPartitionProperties'
     package: '@azure/event-hubs'
     summary: Provides information about the state of the specified partition.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -344,15 +373,41 @@ methods:
           A promise that resolves with information about the state of the
           partition .
         type: Promise&lt;<xref uid="@azure/event-hubs.PartitionProperties" />&gt;
-  - name: 'sendBatch(EventDataBatch, OperationOptions)'
+  - name: sendBatch(EventDataBatch, OperationOptions)
     uid: '@azure/event-hubs.EventHubProducerClient.sendBatch_1'
     package: '@azure/event-hubs'
-    summary: |-
-      Sends a batch of events to the associated Event Hub.
+    summary: >-
+      Sends a batch of events created using
+      `EventHubProducerClient.createBatch()` to the associated Event Hub.
+
+
+      Events with different values for partitionKey or partitionId will need to
+      be put into different batches.
+
+      To simplify such batch management across partitions or to have the client
+      automatically batch events
+
+      and send them in specific intervals, use `EventHubBufferedProducerClient`
+      instead.
+
+
+      The below example assumes you have an array of events at hand to be
+      batched safely.
+
+      If you have events coming in one by one, `EventHubBufferedProducerClient`
+      is recommended instead
+
+      for effecient management of batches.
+
+
       Example usage:
+
       ```ts
+
       const client = new EventHubProducerClient(connectionString);
+
       let batch = await client.createBatch();
+
       for (let i = 0; i < messages.length; i++) {
        if (!batch.tryAdd(messages[i])) {
          await client.sendBatch(batch);
@@ -365,9 +420,9 @@ methods:
          }
         }
       }
+
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -378,10 +433,11 @@ methods:
           type: <xref uid="@azure/event-hubs.EventDataBatch" />
           description: >-
             A batch of events that you can create using the
-            <xref:@azure/event-hubs.EventHubProducerClient.createBatch> method.
+            [createBatch](xref:@azure/event-hubs.EventHubProducerClient.createBatch)
+            method.
         - id: options
           type: <xref uid="@azure/event-hubs.OperationOptions" />
-          description: >
+          description: >-
             A set of options that can be specified to influence the way in which
 
             events are sent to the associated Event Hub.
@@ -391,18 +447,34 @@ methods:
       return:
         description: Promise<void>
         type: Promise&lt;void&gt;
-  - name: 'sendBatch(EventData[] | AmqpAnnotatedMessage[], SendBatchOptions)'
+  - name: sendBatch(EventData[] | AmqpAnnotatedMessage[], SendBatchOptions)
     uid: '@azure/event-hubs.EventHubProducerClient.sendBatch'
     package: '@azure/event-hubs'
-    summary: |
-      Sends an array of events to the associated Event Hub.
+    summary: >-
+      Sends an array of events as a batch to the associated Event Hub.
+
+
+      Azure Event Hubs has a limit on the size of the batch that can be sent
+      which if exceeded
+
+      will result in an error with code `MessageTooLargeError`.
+
+      To safely send within batch size limits, use
+      `EventHubProducerClient.createBatch()` or
+
+      `EventHubBufferedProducerClient` instead.
+
+
       Example usage:
+
       ```ts
+
       const client = new EventHubProducerClient(connectionString);
+
       await client.sendBatch(messages);
+
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -414,11 +486,11 @@ methods:
             <xref uid="@azure/event-hubs.EventData" />[] |
             AmqpAnnotatedMessage[]
           description: >-
-            An array of <xref:@azure/event-hubs.EventData> or
+            An array of [EventData](xref:@azure/event-hubs.EventData) or
             `AmqpAnnotatedMessage`.
         - id: options
           type: <xref uid="@azure/event-hubs.SendBatchOptions" />
-          description: >
+          description: >-
             A set of options that can be specified to influence the way in which
 
             events are sent to the associated Event Hub.

@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 05/28/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
-# Azure IoT Models Repository client library for JavaScript - Version 1.0.0-beta.2 
+# Azure IoT Models Repository client library for JavaScript - version 1.0.0-beta.2 
 
 
 This package contains an isomorphic Client Library for Azure IoT Models Repository in JavaScript. Use the Azure IoT Models Repository library for JavaScript to pull DTDL files from remote endpoints.

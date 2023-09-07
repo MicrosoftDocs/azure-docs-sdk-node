@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/08/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: synapseanalytics
+ms.service: synapse-analytics
 ---
 
-## Azure Synapse Managed Private Endpoints client library for JavaScript - Version 1.0.0-beta.4 
+## Azure Synapse Managed Private Endpoints client library for JavaScript - version 1.0.0-beta.4 
 
 
 This package contains an isomorphic SDK for Managed Private Endpoints.

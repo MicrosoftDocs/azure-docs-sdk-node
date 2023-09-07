@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 05/07/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
-# Azure Core Util client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Core Util client library for JavaScript - version 1.0.0-beta.1 
  (Experimental)
 
 This library is intended to provide various shared utility functions for client SDK packages.

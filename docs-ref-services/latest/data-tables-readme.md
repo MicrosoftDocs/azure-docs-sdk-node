@@ -3,14 +3,12 @@ title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, tables
 author: joheredi
 ms.author: joheredi
-ms.date: 01/12/2022
+ms.date: 04/10/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: tables
 ---
-# Azure Tables client library for JavaScript - Version 13.0.1 
+# Azure Tables client library for JavaScript - version 13.2.2 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
@@ -31,11 +29,11 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.1/sdk/tables/data-tables/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.2.2/sdk/tables/data-tables/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables)
-- [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/data-tables)
-- [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.0.1/sdk/tables/data-tables/samples)
+- [API reference documentation](/javascript/api/@azure/data-tables)
+- [Product documentation](/azure/storage/tables/table-storage-overview/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.2.2/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -46,7 +44,7 @@ Currently supported environments:
 - LTS versions of Node.js
 - Latest versions of Safari, Chrome, Edge and Firefox
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/tables/table-storage-quickstart-portal) or an [Azure CosmosDB database](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
+You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](/azure/storage/tables/table-storage-quickstart-portal) or an [Azure CosmosDB database](/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
 
 ### Install the `@azure/data-tables` package
 
@@ -81,7 +79,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 #### CORS
 
-You need to set up [Cross-Origin Resource Sharing (CORS)](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
+You need to set up [Cross-Origin Resource Sharing (CORS)](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
 
 For example, you can create following CORS settings for debugging. But please customize the settings carefully according to your requirements in production environment.
 
@@ -163,7 +161,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.1/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.2.2/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableServiceClient } = require("@azure/data-tables");
@@ -318,7 +316,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.1/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.2.2/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableClient } = require("@azure/data-tables");
@@ -366,7 +364,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.1/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.2.2/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableClient } = require("@azure/data-tables");
@@ -480,7 +478,7 @@ const client = new TableClient(
 ### General
 
 When you interact with Tables service using the Javascript/Typescript SDK, errors returned by the service correspond to the same HTTP status codes returned for REST API requests:
-[Storage Table Service Error Codes](https://docs.microsoft.com/rest/api/storageservices/table-service-error-codes)
+[Storage Table Service Error Codes](/rest/api/storageservices/table-service-error-codes)
 
 ### Logging
 
@@ -510,7 +508,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.2.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/tables/README.png)
 

@@ -2,11 +2,12 @@
 name: DocumentModelAdministrationClient
 uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient'
 package: '@azure/ai-form-recognizer'
-summary: >
+summary: >-
   A client for interacting with the Form Recognizer service's model management
   features, such as creating, reading,
 
   listing, deleting, and copying models.
+
 
   ### Examples:
 
@@ -50,17 +51,252 @@ summary: >
   ```
 fullName: DocumentModelAdministrationClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
-methods:
-  - name: 'beginBuildModel(string, string, DocumentModelBuildMode, BuildModelOptions)'
-    uid: >-
-      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginBuildModel
+constructors:
+  - name: >-
+      DocumentModelAdministrationClient(string, KeyCredential,
+      DocumentModelAdministrationClientOptions)
+    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.constructor_1'
     package: '@azure/ai-form-recognizer'
-    summary: >
+    summary: >-
+      Create a DocumentModelAdministrationClient instance from a resource
+      endpoint and a static API key
+
+      (`KeyCredential`),
+
+
+      ### Example:
+
+
+      ```javascript
+
+      import { DocumentModelAdministrationClient, AzureKeyCredential } from
+      "@azure/ai-form-recognizer";
+
+
+      const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+
+      const credential = new AzureKeyCredential("<api key>");
+
+
+      const client = new DocumentModelAdministrationClient(endpoint,
+      credential);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new DocumentModelAdministrationClient(endpoint: string, credential:
+        KeyCredential, options?: DocumentModelAdministrationClientOptions)
+      parameters:
+        - id: endpoint
+          type: string
+          description: the endpoint URL of an Azure Cognitive Services instance
+        - id: credential
+          type: KeyCredential
+          description: >-
+            a KeyCredential containing the Cognitive Services instance
+            subscription key
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.DocumentModelAdministrationClientOptions"
+            />
+          description: optional settings for configuring all methods in the client
+  - name: >-
+      DocumentModelAdministrationClient(string, TokenCredential,
+      DocumentModelAdministrationClientOptions)
+    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.constructor'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Create a DocumentModelAdministrationClient instance from a resource
+      endpoint and a an Azure Identity `TokenCredential`.
+
+
+      See the [`@azure/identity`](https://npmjs.com/package/@azure/identity)
+      package for more information about
+
+      authenticating with Azure Active Directory.
+
+
+      ### Example:
+
+
+      ```javascript
+
+      import { DocumentModelAdministrationClient } from
+      "@azure/ai-form-recognizer";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+
+      const credential = new DefaultAzureCredential();
+
+
+      const client = new DocumentModelAdministrationClient(endpoint,
+      credential);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new DocumentModelAdministrationClient(endpoint: string, credential:
+        TokenCredential, options?: DocumentModelAdministrationClientOptions)
+      parameters:
+        - id: endpoint
+          type: string
+          description: the endpoint URL of an Azure Cognitive Services instance
+        - id: credential
+          type: TokenCredential
+          description: a TokenCredential instance from the `@azure/identity` package
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.DocumentModelAdministrationClientOptions"
+            />
+          description: optional settings for configuring all methods in the client
+methods:
+  - name: >-
+      beginBuildDocumentClassifier(string, {[docType: string]:
+      ClassifierDocumentTypeDetails}, BeginBuildDocumentClassifierOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginBuildDocumentClassifier
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Build a new document classifier with the given classifier ID and document
+      types.
+
+
+      The classifier ID must be unique among classifiers within the resource.
+
+
+      The document types are given as an object that maps the name of the
+      document type to the training data set for that
+
+      document type. Two training data input methods are supported:
+
+
+      - `azureBlobSource`, which trains a classifier using the data in the given
+      Azure Blob Storage container.
+
+      - `azureBlobFileListSource`, which is similar to `azureBlobSource` but
+      allows for more fine-grained control over
+        the files that are included in the training data set by using a JSONL-formatted file list.
+
+      The Form Recognizer service reads the training data set from an Azure
+      Storage container, given as a URL to the
+
+      container with a SAS token that allows the service backend to communicate
+      with the container. At a minimum, the
+
+      "read" and "list" permissions are required. In addition, the data in the
+      given container must be organized
+
+      according to a particular convention, which is documented in [the
+      service's documentation for building custom
+
+      document
+      classifiers](https://aka.ms/azsdk/formrecognizer/buildclassifiermodel).
+
+
+      ### Example
+
+
+      ```javascript
+
+      const classifierId = "aNewClassifier";
+
+      const containerUrl1 = "<training data container SAS URL 1>";
+
+      const containerUrl2 = "<training data container SAS URL 2>";
+
+
+      const poller = await client.beginBuildDocumentClassifier(
+        classifierId,
+        {
+          // The document types. Each entry in this object should map a document type name to a
+          // `ClassifierDocumentTypeDetails` object
+          "formX": {
+            azureBlobSource: {
+              containerUrl: containerUrl1,
+            }
+          },
+          "formY": {
+            azureBlobFileListSource: {
+              containerUrl: containerUrl2,
+              fileList: "path/to/fileList.jsonl"
+            }
+          },
+        },
+        {
+          // Optionally, a text description may be attached to the classifier
+          description: "This is an example classifier!"
+        }
+      );
+
+
+      // Classifier building, like model creation operations, returns a poller
+      that eventually produces a
+
+      // DocumentClassifierDetails object
+
+      const classifierDetails = await poller.pollUntilDone();
+
+
+      const {
+        classifierId, // identical to the classifierId given when creating the classifier
+        description, // identical to the description given when creating the classifier (if any)
+        createdOn, // the Date (timestamp) that the classifier was created
+        docTypes // information about the document types in the classifier and their details
+      } = classifierDetails;
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginBuildDocumentClassifier(classifierId: string, docTypes:
+        {[docType: string]: ClassifierDocumentTypeDetails}, options?:
+        BeginBuildDocumentClassifierOptions): Promise<DocumentClassifierPoller>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the unique ID of the classifier to create
+        - id: docTypes
+          type: >-
+            {[docType: string]: <xref
+            uid="@azure/ai-form-recognizer.ClassifierDocumentTypeDetails" />}
+          description: >-
+            the document types to include in the classifier (a map of document
+            type names to `ClassifierDocumentTypeDetails`)
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginBuildDocumentClassifierOptions"
+            />
+          description: optional settings for the classifier build operation
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce the
+          created classifier details or an error
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierPoller" />&gt;
+  - name: >-
+      beginBuildDocumentModel(string, string, DocumentModelBuildMode,
+      BeginBuildDocumentModelOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginBuildDocumentModel
+    package: '@azure/ai-form-recognizer'
+    summary: >-
       Build a new model with a given ID from a set of input documents and
       labeled fields.
+
 
       The Model ID can consist of any text, so long as it does not begin with
       "prebuilt-" (as these models refer to
@@ -96,36 +332,36 @@ methods:
       const containerUrl = "<training data container SAS URL>";
 
 
-      const poller = await client.beginBuildModel(modelId, containerUrl, {
+      const poller = await client.beginBuildDocumentModel(modelId, containerUrl,
+      {
         // Optionally, a text description may be attached to the model
         description: "This is an example model!"
       });
 
 
       // Model building, like all other model creation operations, returns a
-      poller that eventually produces a ModelInfo
+      poller that eventually produces a ModelDetails
 
       // object
 
-      const modelInfo = await poller.pollUntilDone();
+      const modelDetails = await poller.pollUntilDone();
 
 
       const {
         modelId, // identical to the modelId given when creating the model
         description, // identical to the description given when creating the model
-        createdDateTime, // the Date (timestamp) that the model was created
+        createdOn, // the Date (timestamp) that the model was created
         docTypes // information about the document types in the model and their field schemas
-      } = modelInfo;
+      } = modelDetails;
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginBuildModel(modelId: string, containerUrl: string,
-        buildMode: DocumentModelBuildMode, options?: BuildModelOptions):
-        Promise<TrainingPoller>
+        function beginBuildDocumentModel(modelId: string, containerUrl: string,
+        buildMode: DocumentModelBuildMode, options?:
+        BeginBuildDocumentModelOptions): Promise<DocumentModelPoller>
       parameters:
         - id: modelId
           type: string
@@ -136,24 +372,31 @@ methods:
             SAS-encoded URL to an Azure Storage container holding the training
             data set
         - id: buildMode
-          type: <xref uid="@azure/ai-form-recognizer.DocumentModelBuildMode" />
+          type: DocumentModelBuildMode
           description: >-
             the mode to use when building the model (see
             `DocumentModelBuildMode`)
         - id: options
-          type: <xref uid="@azure/ai-form-recognizer.BuildModelOptions" />
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.BeginBuildDocumentModelOptions"
+            />
           description: optional settings for the model build operation
       return:
         description: >-
           a long-running operation (poller) that will eventually produce the
           created model information or an error
-        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.TrainingPoller" />&gt;
-  - name: 'beginComposeModel(string, Iterable<string>, BuildModelOptions)'
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.DocumentModelPoller"
+          />&gt;
+  - name: >-
+      beginComposeDocumentModel(string, Iterable<string>,
+      BeginComposeDocumentModelOptions)
     uid: >-
-      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginComposeModel
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginComposeDocumentModel
     package: '@azure/ai-form-recognizer'
-    summary: >
+    summary: >-
       Creates a single composed model from several pre-existing submodels.
+
 
       The resulting composed model combines the document types of its component
       models, and inserts a classification step
@@ -181,7 +424,8 @@ methods:
 
       // conforming to any of the above document types
 
-      const poller = await client.beginComposeModel(modelId, subModelIds, {
+      const poller = await client.beginComposeDocumentModel(modelId,
+      subModelIds, {
         description: "This is a composed model that can handle several document types."
       });
 
@@ -189,54 +433,59 @@ methods:
       // Model composition, like all other model creation operations, returns a
       poller that eventually produces a
 
-      // ModelInfo object
+      // ModelDetails object
 
-      const modelInfo = await poller.pollUntilDone();
+      const modelDetails = await poller.pollUntilDone();
 
 
       const {
         modelId, // identical to the modelId given when creating the model
         description, // identical to the description given when creating the model
-        createdDateTime, // the Date (timestamp) that the model was created
+        createdOn, // the Date (timestamp) that the model was created
         docTypes // information about the document types of the composed submodels
-      } = modelInfo;
+      } = modelDetails;
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginComposeModel(modelId: string, componentModels:
-        Iterable<string>, options?: BuildModelOptions): Promise<TrainingPoller>
+        function beginComposeDocumentModel(modelId: string, componentModelIds:
+        Iterable<string>, options?: BeginComposeDocumentModelOptions):
+        Promise<DocumentModelPoller>
       parameters:
         - id: modelId
           type: string
           description: the unique ID of the model to create
-        - id: componentModels
+        - id: componentModelIds
           type: Iterable&lt;string&gt;
           description: >-
             an Iterable of strings representing the unique model IDs of the
             models to compose
         - id: options
-          type: <xref uid="@azure/ai-form-recognizer.BuildModelOptions" />
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginComposeDocumentModelOptions" />
           description: optional settings for model creation
       return:
         description: >-
           a long-running operation (poller) that will eventually produce the
           created model information or an error
-        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.TrainingPoller" />&gt;
-  - name: 'beginCopyModel(string, CopyAuthorization, CopyModelOptions)'
-    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.beginCopyModel'
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.DocumentModelPoller"
+          />&gt;
+  - name: beginCopyModelTo(string, CopyAuthorization, BeginCopyModelOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginCopyModelTo
     package: '@azure/ai-form-recognizer'
-    summary: >
+    summary: >-
       Copies a model with the given ID into the resource and model ID encoded by
       a given copy authorization.
 
-      See
-      <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getCopyAuthorization>
+
+      See [CopyAuthorization](xref:@azure/ai-form-recognizer.CopyAuthorization)
       and
-      <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getCopyAuthorization>.
+      [getCopyAuthorization](xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getCopyAuthorization).
 
 
       ### Example
@@ -268,32 +517,32 @@ methods:
       // Finally, use the _source_ client to copy the model and await the copy
       operation
 
-      const poller = await sourceClient.beginCopyModel("<source model ID>");
+      const poller = await sourceClient.beginCopyModelTo("<source model ID>");
 
 
       // Model copying, like all other model creation operations, returns a
-      poller that eventually produces a ModelInfo
+      poller that eventually produces a ModelDetails
 
       // object
 
-      const modelInfo = await poller.pollUntilDone();
+      const modelDetails = await poller.pollUntilDone();
 
 
       const {
         modelId, // identical to the modelId given when creating the copy authorization
         description, // identical to the description given when creating the copy authorization
-        createdDateTime, // the Date (timestamp) that the model was created
+        createdOn, // the Date (timestamp) that the model was created
         docTypes // information about the document types of the model (identical to the original, source model)
-      } = modelInfo;
+      } = modelDetails;
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginCopyModel(sourceModelId: string, authorization:
-        CopyAuthorization, options?: CopyModelOptions): Promise<TrainingPoller>
+        function beginCopyModelTo(sourceModelId: string, authorization:
+        CopyAuthorization, options?: BeginCopyModelOptions):
+        Promise<DocumentModelPoller>
       parameters:
         - id: sourceModelId
           type: string
@@ -302,55 +551,91 @@ methods:
           type: <xref uid="@azure/ai-form-recognizer.CopyAuthorization" />
           description: >-
             an authorization to copy the model, created using the
-            <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getCopyAuthorization>
+            [getCopyAuthorization](xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getCopyAuthorization)
         - id: options
-          type: <xref uid="@azure/ai-form-recognizer.CopyModelOptions" />
+          type: <xref uid="@azure/ai-form-recognizer.BeginCopyModelOptions" />
           description: optional settings for
       return:
         description: >-
           a long-running operation (poller) that will eventually produce the
           copied model information or an error
-        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.TrainingPoller" />&gt;
-  - name: 'deleteModel(string, DeleteModelOptions)'
-    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.deleteModel'
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.DocumentModelPoller"
+          />&gt;
+  - name: deleteDocumentClassifier(string, OperationOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.deleteDocumentClassifier
     package: '@azure/ai-form-recognizer'
-    summary: >
-      Deletes a model with the given ID from the client's resource, if it
+    summary: >-
+      Deletes a classifier with the given ID from the client's resource, if it
       exists. This operation CANNOT be reverted.
+
 
       ### Example
 
 
       ```javascript
 
-      await client.deleteModel("<model ID to delete>"));
+      await client.deleteDocumentClassifier("<classifier ID to delete>"));
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function deleteModel(modelId: string, options?: DeleteModelOptions):
-        Promise<void>
+        function deleteDocumentClassifier(classifierId: string, options?:
+        OperationOptions): Promise<void>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the unique ID of the classifier to delete from the resource
+        - id: options
+          type: OperationOptions
+          description: optional settings for the request
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteDocumentModel(string, DeleteDocumentModelOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.deleteDocumentModel
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Deletes a model with the given ID from the client's resource, if it
+      exists. This operation CANNOT be reverted.
+
+
+      ### Example
+
+
+      ```javascript
+
+      await client.deleteDocumentModel("<model ID to delete>"));
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteDocumentModel(modelId: string, options?:
+        DeleteDocumentModelOptions): Promise<void>
       parameters:
         - id: modelId
           type: string
           description: the unique ID of the model to delete from the resource
         - id: options
-          type: <xref uid="@azure/ai-form-recognizer.DeleteModelOptions" />
-          description: |
-            optional settings for the request
+          type: <xref uid="@azure/ai-form-recognizer.DeleteDocumentModelOptions" />
+          description: optional settings for the request
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'getCopyAuthorization(string, GetCopyAuthorizationOptions)'
+  - name: getCopyAuthorization(string, GetCopyAuthorizationOptions)
     uid: >-
       @azure/ai-form-recognizer.DocumentModelAdministrationClient.getCopyAuthorization
     package: '@azure/ai-form-recognizer'
-    summary: >
+    summary: >-
       Creates an authorization to copy a model into the resource, used with the
-      `beginCopyModel` method.
+      `beginCopyModelTo` method.
+
 
       The `CopyAuthorization` grants another cognitive service resource the
       right to create a model in this client's
@@ -374,7 +659,6 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -396,44 +680,71 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.CopyAuthorization"
           />&gt;
-  - name: getInfo(GetInfoOptions)
-    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.getInfo'
+  - name: getDocumentClassifier(string, OperationOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.getDocumentClassifier
     package: '@azure/ai-form-recognizer'
-    summary: |
-      Retrieve basic information about this client's resource.
+    summary: >-
+      Retrieves information about a classifier
+      ([DocumentClassifierDetails](xref:@azure/ai-form-recognizer.DocumentClassifierDetails))
+      by ID.
+
+
       ### Example
 
+
       ```javascript
+
+      const classifierId = "<classifier ID";
+
+
       const {
-        // Information about the custom models in the current resource
-        customDocumentModelInfo: {
-          // The number of custom models in the current resource
-          count,
-          // The maximum number of models that the current resource can support
-          limit
-        }
-      } = await client.getInfo();
+        classifierId, // identical to the ID given when calling `getDocumentClassifier`
+        description, // a textual description of the classifier, if provided during classifier creation
+        createdOn, // the Date (timestamp) that the classifier was created
+        // information about the document types in the classifier and their corresponding traning data
+        docTypes
+      } = await client.getDocumentClassifier(classifierId);
+
+
+      // The `docTypes` property is a map of document type names to information
+      about the training data
+
+      // for that document type.
+
+      for (const [docTypeName, classifierDocTypeDetails] of
+      Object.entries(docTypes)) {
+       console.log(`- '${docTypeName}': `, classifierDocTypeDetails);
+      }
+
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getInfo(options?: GetInfoOptions): Promise<GetInfoResponse>'
+      content: >-
+        function getDocumentClassifier(classifierId: string, options?:
+        OperationOptions): Promise<DocumentClassifierDetails>
       parameters:
+        - id: classifierId
+          type: string
+          description: the unique ID of the classifier to query
         - id: options
-          type: <xref uid="@azure/ai-form-recognizer.GetInfoOptions" />
+          type: OperationOptions
           description: optional settings for the request
       return:
-        description: basic information about this client's resource
+        description: information about the classifier with the given ID
         type: >-
-          Promise&lt;<xref uid="@azure/ai-form-recognizer.GetInfoResponse"
-          />&gt;
-  - name: 'getModel(string, GetModelOptions)'
-    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.getModel'
+          Promise&lt;<xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierDetails" />&gt;
+  - name: getDocumentModel(string, GetModelOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.getDocumentModel
     package: '@azure/ai-form-recognizer'
-    summary: >
+    summary: >-
       Retrieves information about a model
-      (<xref:@azure/ai-form-recognizer.ModelInfo>) by ID.
+      ([DocumentModelDetails](xref:@azure/ai-form-recognizer.DocumentModelDetails))
+      by ID.
+
 
       This method can retrieve information about custom as well as prebuilt
       models.
@@ -446,15 +757,15 @@ methods:
       `getModel` method could return any model, even
 
       one that failed to create due to errors. In the new service versions,
-      `getModel` and `listModels` _only produce
+      `getDocumentModel` and `listDocumentModels`
 
-      successfully created models_ (i.e. models that are "ready" for use).
-      Failed models are now retrieved through the
+      _only produce successfully created models_ (i.e. models that are "ready"
+      for use). Failed models are now retrieved
 
-      "operations" APIs, see
-      <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getOperation>
+      through the "operations" APIs, see
+      [getOperation](xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getOperation)
       and
-      <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.listOperations>.
+      [listOperations](xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.listOperations).
 
 
       ### Example
@@ -468,9 +779,9 @@ methods:
 
 
       const {
-        modelId, // identical to the modelId given when calling `getModel`
+        modelId, // identical to the modelId given when calling `getDocumentModel`
         description, // a textual description of the model, if provided during model creation
-        createdDateTime, // the Date (timestamp) that the model was created
+        createdOn, // the Date (timestamp) that the model was created
         // information about the document types in the model and their field schemas
         docTypes: {
           // the document type of the prebuilt business card model
@@ -484,16 +795,15 @@ methods:
             fieldConfidence
           }
         }
-      } = await client.getModel(modelId);
+      } = await client.getDocumentModel(modelId);
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getModel(modelId: string, options?: GetModelOptions):
-        Promise<ModelInfo>
+        function getDocumentModel(modelId: string, options?: GetModelOptions):
+        Promise<DocumentModelDetails>
       parameters:
         - id: modelId
           type: string
@@ -503,22 +813,24 @@ methods:
           description: optional settings for the request
       return:
         description: information about the model with the given ID
-        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.ModelInfo" />&gt;
-  - name: 'getOperation(string, GetOperationOptions)'
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.DocumentModelDetails"
+          />&gt;
+  - name: getOperation(string, GetOperationOptions)
     uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.getOperation'
     package: '@azure/ai-form-recognizer'
-    summary: >
-      Retrieves information about an operation (`OperationInfo`) by its ID.
+    summary: >-
+      Retrieves information about an operation (`OperationDetails`) by its ID.
+
 
       Operations represent non-analysis tasks, such as building, composing, or
       copying a model.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getOperation(operationId: string, options?:
-        GetOperationOptions): Promise<OperationInfo>
+        GetOperationOptions): Promise<OperationDetails>
       parameters:
         - id: operationId
           type: string
@@ -541,47 +853,55 @@ methods:
             kind, // the operation kind, one of "documentModelBuild", "documentModelCompose", or "documentModelCopyTo"
             status, // the status of the operation, one of "notStarted", "running", "failed", "succeeded", or "canceled"
             percentCompleted, // a number between 0 and 100 representing the progress of the operation
-            createdDateTime, // a Date object that reflects the time when the operation was started
-            lastUpdatedDateTime, // a Date object that reflects the time when the operation state was last modified
+            createdOn, // a Date object that reflects the time when the operation was started
+            lastUpdatedOn, // a Date object that reflects the time when the operation state was last modified
           } = await client.getOperation(operationId);
           ```
-        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.OperationInfo" />&gt;
-  - name: listModels(ListModelsOptions)
-    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.listModels'
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.OperationDetails"
+          />&gt;
+  - name: getResourceDetails(GetResourceDetailsOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.getResourceDetails
     package: '@azure/ai-form-recognizer'
-    summary: >
-      List summaries of models in the resource. Custom as well as prebuilt
-      models will be included. This operation
+    summary: |-
+      Retrieve basic information about this client's resource.
 
-      supports paging.
+      ### Example
 
-      The model summary (<xref:@azure/ai-form-recognizer.ModelSummary>) includes
-      only the basic information about the model, and does not include
-
-      information about the document types in the model (such as the field
-      schemas and confidence values).
-
-
-      To access the full information about the model, use
-      <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getModel>.
-
-
-      ### **Breaking Change**
-
-
-      In previous versions of the Form Recognizer REST API and SDK, the
-      `listModels` method would return all models, even
-
-      those that failed to create due to errors. In the new service versions,
-      `listModels` and `getModels` _only produce
-
-      successfully created models_ (i.e. models that are "ready" for use).
-      Failed models are now retrieved through the
-
-      "operations" APIs, see
-      <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getOperation>
-      and
-      <xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.listOperations>.
+      ```javascript
+      const {
+        // Information about the custom models in the current resource
+        customDocumentModelDetails: {
+          // The number of custom models in the current resource
+          count,
+          // The maximum number of models that the current resource can support
+          limit
+        }
+      } = await client.getResourceDetails();
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getResourceDetails(options?: GetResourceDetailsOptions):
+        Promise<ResourceDetails>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-form-recognizer.GetResourceDetailsOptions" />
+          description: optional settings for the request
+      return:
+        description: basic information about this client's resource
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.ResourceDetails"
+          />&gt;
+  - name: listDocumentClassifiers(ListModelsOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.listDocumentClassifiers
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      List details about classifiers in the resource. This operation supports
+      paging.
 
 
       ### Examples
@@ -592,14 +912,12 @@ methods:
 
       ```javascript
 
-      for await (const summary of client.listModels()) {
+      for await (const details of client.listDocumentClassifiers()) {
         const {
-          modelId, // The model's unique ID
-          description, // a textual description of the model, if provided during model creation
-        } = summary;
-
-        // You can get the full model info using `getModel`
-        const model = await client.getModel(modelId);
+          classifierId, // The classifier's unique ID
+          description, // a textual description of the classifier, if provided during creation
+          docTypes, // information about the document types in the classifier and their corresponding traning data
+        } = details;
       }
 
       ```
@@ -610,10 +928,113 @@ methods:
 
       ```javascript
 
-      // The listModels method is paged, and you can iterate by page using the
-      `byPage` method.
+      // The listDocumentClassifiers method is paged, and you can iterate by
+      page using the `byPage` method.
 
-      const pages = client.listModels().byPage();
+      const pages = client.listDocumentClassifiers().byPage();
+
+
+      for await (const page of pages) {
+        // Each page is an array of classifiers and can be iterated synchronously
+        for (const details of page) {
+          const {
+            classifierId, // The classifier's unique ID
+            description, // a textual description of the classifier, if provided during creation
+            docTypes, // information about the document types in the classifier and their corresponding traning data
+          } = details;
+        }
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listDocumentClassifiers(options?: ListModelsOptions):
+        PagedAsyncIterableIterator<DocumentClassifierDetails,
+        DocumentClassifierDetails[], PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-form-recognizer.ListModelsOptions" />
+          description: optional settings for the classifier requests
+      return:
+        description: an async iterable of classifier details that supports paging
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierDetails" />, <xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierDetails" />[],
+          PageSettings&gt;
+  - name: listDocumentModels(ListModelsOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.listDocumentModels
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      List summaries of models in the resource. Custom as well as prebuilt
+      models will be included. This operation
+
+      supports paging.
+
+
+      The model summary
+      ([DocumentModelSummary](xref:@azure/ai-form-recognizer.DocumentModelSummary))
+      includes only the basic information about the model, and does not include
+
+      information about the document types in the model (such as the field
+      schemas and confidence values).
+
+
+      To access the full information about the model, use
+      [getDocumentModel](xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getDocumentModel).
+
+
+      ### **Breaking Change**
+
+
+      In previous versions of the Form Recognizer REST API and SDK, the
+      `listModels` method would return all models, even
+
+      those that failed to create due to errors. In the new service versions,
+      `listDocumentModels` and `getDocumentModel`
+
+      _only produce successfully created models_ (i.e. models that are "ready"
+      for use). Failed models are now retrieved
+
+      through the "operations" APIs, see
+      [getOperation](xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.getOperation)
+      and
+      [listOperations](xref:@azure/ai-form-recognizer.DocumentModelAdministrationClient.listOperations).
+
+
+      ### Examples
+
+
+      #### Async Iteration
+
+
+      ```javascript
+
+      for await (const summary of client.listDocumentModels()) {
+        const {
+          modelId, // The model's unique ID
+          description, // a textual description of the model, if provided during model creation
+        } = summary;
+
+        // You can get the full model info using `getDocumentModel`
+        const model = await client.getDocumentModel(modelId);
+      }
+
+      ```
+
+
+      #### By Page
+
+
+      ```javascript
+
+      // The listDocumentModels method is paged, and you can iterate by page
+      using the `byPage` method.
+
+      const pages = client.listDocumentModels().byPage();
 
 
       for await (const page of pages) {
@@ -624,19 +1045,19 @@ methods:
             description, // a textual description of the model, if provided during model creation
           } = summary;
 
-          // You can get the full model info using `getModel`
-          const model = await client.getModel(modelId);
+          // You can get the full model info using `getDocumentModel`
+          const model = await client.getDocumentModel(modelId);
         }
       }
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listModels(options?: ListModelsOptions):
-        PagedAsyncIterableIterator<ModelSummary>
+        function listDocumentModels(options?: ListModelsOptions):
+        PagedAsyncIterableIterator<DocumentModelSummary, DocumentModelSummary[],
+        PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/ai-form-recognizer.ListModelsOptions" />
@@ -645,15 +1066,18 @@ methods:
         description: an async iterable of model summaries that supports paging
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/ai-form-recognizer.ModelSummary" />&gt;
+          uid="@azure/ai-form-recognizer.DocumentModelSummary" />, <xref
+          uid="@azure/ai-form-recognizer.DocumentModelSummary" />[],
+          PageSettings&gt;
   - name: listOperations(ListOperationsOptions)
     uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.listOperations'
     package: '@azure/ai-form-recognizer'
-    summary: >
+    summary: >-
       List model creation operations in the resource. This will produce all
       operations, including operations that failed
 
       to create models successfully. This operation supports paging.
+
 
       ### Examples
 
@@ -698,12 +1122,12 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listOperations(options?: ListOperationsOptions):
-        PagedAsyncIterableIterator<OperationInfo>
+        PagedAsyncIterableIterator<OperationSummary, OperationSummary[],
+        PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/ai-form-recognizer.ListOperationsOptions" />
@@ -714,4 +1138,6 @@ methods:
           paging
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/ai-form-recognizer.OperationInfo" />&gt;
+          uid="@azure/ai-form-recognizer.OperationSummary" />, <xref
+          uid="@azure/ai-form-recognizer.OperationSummary" />[],
+          PageSettings&gt;

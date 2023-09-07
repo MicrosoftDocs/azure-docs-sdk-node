@@ -6,13 +6,12 @@ ms.author: ramyar
 manager: twolley
 ms.date: 02/27/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: JavaScript
 ms.service: storage
 ---
 
-## Azure Storage SDK for JavaScript - latest
+# Azure Storage SDK for JavaScript - latest
 
 ## Client packages (12.x.x) - latest
 

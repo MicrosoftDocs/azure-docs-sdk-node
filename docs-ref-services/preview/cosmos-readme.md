@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/09/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: cosmos-db
 ---
 
-# Azure Cosmos DB client library for JavaScript - Version 3.9.3 
+# Azure Cosmos DB client library for JavaScript - version 3.9.3 
 /TypeScript
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]

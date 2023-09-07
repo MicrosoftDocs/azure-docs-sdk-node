@@ -5,13 +5,12 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/16/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: consumption
+ms.service: azure
 ---
 
-# Azure ConsumptionManagement client library for JavaScript - Version 9.0.0-beta.1 
+# Azure ConsumptionManagement client library for JavaScript - version 9.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ConsumptionManagement client.

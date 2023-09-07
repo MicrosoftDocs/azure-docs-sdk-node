@@ -6,19 +6,19 @@ summary: |-
   Class used to perform operations against a search index,
   including querying documents in the index as well as
   adding, updating, and removing them.
-fullName: SearchClient<T>
+fullName: SearchClient<TModel>
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
   - name: >-
-      SearchClient(string, string, KeyCredential | TokenCredential,
+      SearchClient<TModel>(string, string, KeyCredential | TokenCredential,
       SearchClientOptions)
     uid: '@azure/search-documents.SearchClient.constructor'
     package: '@azure/search-documents'
     summary: >-
       Creates an instance of SearchClient.
+
 
       Example usage:
 
@@ -31,12 +31,30 @@ constructors:
       const client = new SearchClient(
         "<endpoint>",
         "<indexName>",
-        new AzureKeyCredential("<Admin Key>");
+        new AzureKeyCredential("<Admin Key>")
+      );
+
+      ```
+
+
+      Optionally, the type of the model can be used to enable strong typing and
+      type hints:
+
+      ```ts
+
+      type TModel = {
+        keyName: string;
+        field1?: string | null;
+        field2?: { anotherField?: string | null } | null;
+      };
+
+
+      const client = new SearchClient<TModel>(
+        ...
       );
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -54,8 +72,7 @@ constructors:
           description: Used to authenticate requests to the service.
         - id: options
           type: <xref uid="@azure/search-documents.SearchClientOptions" />
-          description: |
-            Used to configure the Search client.
+          description: Used to configure the Search client.
 properties:
   - name: apiVersion
     uid: '@azure/search-documents.SearchClient.apiVersion'
@@ -63,9 +80,8 @@ properties:
     summary: The API version to use when communicating with the service.
     fullName: apiVersion
     remarks: ''
-    isPreview: false
     isDeprecated: true
-    customDeprecatedMessage: 'use {@Link serviceVersion} instead'
+    customDeprecatedMessage: use {@Link serviceVersion} instead
     syntax:
       content: 'apiVersion: string'
       return:
@@ -77,7 +93,6 @@ properties:
     summary: The endpoint of the search service
     fullName: endpoint
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'endpoint: string'
@@ -90,7 +105,6 @@ properties:
     summary: The name of the index
     fullName: indexName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'indexName: string'
@@ -103,7 +117,6 @@ properties:
     summary: The service version to use when communicating with the service.
     fullName: serviceVersion
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'serviceVersion: string'
@@ -111,19 +124,48 @@ properties:
         description: ''
         type: string
 methods:
-  - name: 'autocomplete<Fields>(string, string, AutocompleteOptions<Fields>)'
+  - name: autocomplete(string, string, AutocompleteOptions<TModel>)
     uid: '@azure/search-documents.SearchClient.autocomplete'
     package: '@azure/search-documents'
-    summary: |-
+    summary: |+
       Based on a partial searchText from the user, return a list
       of potential completion strings based on a specified suggester.
+
+      **Example**
+
+      ```ts
+      import {
+        AzureKeyCredential,
+        SearchClient,
+        SearchFieldArray,
+      } from "@azure/search-documents";
+
+      type TModel = {
+        key: string;
+        azure?: { sdk: string | null } | null;
+      };
+
+      const client = new SearchClient<TModel>(
+        "endpoint.azure",
+        "indexName",
+        new AzureKeyCredential("key")
+      );
+
+      const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
+
+      const autocompleteResult = await client.autocomplete(
+        "searchText",
+        "suggesterName",
+        { searchFields }
+      );
+      ```
+
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function autocomplete<Fields>(searchText: string, suggesterName: string,
-        options?: AutocompleteOptions<Fields>): Promise<AutocompleteResult>
+        function autocomplete(searchText: string, suggesterName: string,
+        options?: AutocompleteOptions<TModel>): Promise<AutocompleteResult>
       parameters:
         - id: searchText
           type: string
@@ -136,109 +178,101 @@ methods:
         - id: options
           type: >-
             <xref uid="@azure/search-documents.AutocompleteOptions"
-            />&lt;Fields&gt;
-          description: |
-            Options to the autocomplete operation.
+            />&lt;TModel&gt;
+          description: Options to the autocomplete operation.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.AutocompleteResult"
           />&gt;
-  - name: 'deleteDocuments(Object, string[], DeleteDocumentsOptions)'
+  - name: deleteDocuments(keyof TModel, string[], IndexDocumentsOptions)
     uid: '@azure/search-documents.SearchClient.deleteDocuments_1'
     package: '@azure/search-documents'
     summary: Delete a set of documents.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function deleteDocuments(keyName: Object, keyValues: string[], options?:
-        DeleteDocumentsOptions): Promise<IndexDocumentsResult>
+        function deleteDocuments(keyName: keyof TModel, keyValues: string[],
+        options?: IndexDocumentsOptions): Promise<IndexDocumentsResult>
       parameters:
         - id: keyName
-          type: Object
+          type: keyof TModel
           description: The name of their primary key in the index.
         - id: keyValues
-          type: 'string[]'
+          type: string[]
           description: The primary key values of documents to delete.
         - id: options
-          type: <xref uid="@azure/search-documents.DeleteDocumentsOptions" />
-          description: |
-            Additional options.
+          type: <xref uid="@azure/search-documents.IndexDocumentsOptions" />
+          description: Additional options.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.IndexDocumentsResult"
           />&gt;
-  - name: 'deleteDocuments(T[], DeleteDocumentsOptions)'
+  - name: deleteDocuments(TModel[], IndexDocumentsOptions)
     uid: '@azure/search-documents.SearchClient.deleteDocuments'
     package: '@azure/search-documents'
     summary: Delete a set of documents.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function deleteDocuments(documents: T[], options?:
-        DeleteDocumentsOptions): Promise<IndexDocumentsResult>
+        function deleteDocuments(documents: TModel[], options?:
+        IndexDocumentsOptions): Promise<IndexDocumentsResult>
       parameters:
         - id: documents
-          type: 'T[]'
+          type: TModel[]
           description: Documents to be deleted.
         - id: options
-          type: <xref uid="@azure/search-documents.DeleteDocumentsOptions" />
-          description: |
-            Additional options.
+          type: <xref uid="@azure/search-documents.IndexDocumentsOptions" />
+          description: Additional options.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.IndexDocumentsResult"
           />&gt;
-  - name: 'getDocument<Fields>(string, GetDocumentOptions<Fields>)'
+  - name: getDocument<TFields>(string, GetDocumentOptions<TModel, TFields>)
     uid: '@azure/search-documents.SearchClient.getDocument'
     package: '@azure/search-documents'
     summary: Retrieve a particular document from the index by key.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getDocument<Fields>(key: string, options?:
-        GetDocumentOptions<Fields>): Promise<T>
+        function getDocument<TFields>(key: string, options?:
+        GetDocumentOptions<TModel, TFields>): Promise<NarrowedModel<TModel,
+        TFields>>
       parameters:
         - id: key
           type: string
           description: The primary key value of the document
         - id: options
           type: >-
-            <xref uid="@azure/search-documents.GetDocumentOptions"
-            />&lt;Fields&gt;
-          description: |
-            Additional options
+            <xref uid="@azure/search-documents.GetDocumentOptions" />&lt;TModel,
+            TFields&gt;
+          description: Additional options
       return:
         description: ''
-        type: Promise&lt;T&gt;
-  - name: getDocumentsCount(CountDocumentsOptions)
+        type: >-
+          Promise&lt;<xref uid="@azure/search-documents.NarrowedModel"
+          />&lt;TModel, TFields&gt;&gt;
+  - name: getDocumentsCount(OperationOptions)
     uid: '@azure/search-documents.SearchClient.getDocumentsCount'
     package: '@azure/search-documents'
     summary: Retrieves the number of documents in the index.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function getDocumentsCount(options?: CountDocumentsOptions):
-        Promise<number>
+      content: 'function getDocumentsCount(options?: OperationOptions): Promise<number>'
       parameters:
         - id: options
-          type: <xref uid="@azure/search-documents.CountDocumentsOptions" />
-          description: |
-            Options to the count operation.
+          type: OperationOptions
+          description: Options to the count operation.
       return:
         description: ''
         type: Promise&lt;number&gt;
-  - name: 'indexDocuments(IndexDocumentsBatch<T>, IndexDocumentsOptions)'
+  - name: indexDocuments(IndexDocumentsBatch<TModel>, IndexDocumentsOptions)
     uid: '@azure/search-documents.SearchClient.indexDocuments'
     package: '@azure/search-documents'
     summary: >-
@@ -257,26 +291,26 @@ methods:
       For more details about how merging works, see:
       https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function indexDocuments(batch: IndexDocumentsBatch<T>, options?:
+        function indexDocuments(batch: IndexDocumentsBatch<TModel>, options?:
         IndexDocumentsOptions): Promise<IndexDocumentsResult>
       parameters:
         - id: batch
-          type: <xref uid="@azure/search-documents.IndexDocumentsBatch" />&lt;T&gt;
+          type: >-
+            <xref uid="@azure/search-documents.IndexDocumentsBatch"
+            />&lt;TModel&gt;
           description: An array of actions to perform on the index.
         - id: options
           type: <xref uid="@azure/search-documents.IndexDocumentsOptions" />
-          description: |
-            Additional options.
+          description: Additional options.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.IndexDocumentsResult"
           />&gt;
-  - name: 'mergeDocuments(T[], MergeDocumentsOptions)'
+  - name: mergeDocuments(TModel[], IndexDocumentsOptions)
     uid: '@azure/search-documents.SearchClient.mergeDocuments'
     package: '@azure/search-documents'
     summary: >-
@@ -285,26 +319,24 @@ methods:
       For more details about how merging works, see
       https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function mergeDocuments(documents: T[], options?:
-        MergeDocumentsOptions): Promise<IndexDocumentsResult>
+        function mergeDocuments(documents: TModel[], options?:
+        IndexDocumentsOptions): Promise<IndexDocumentsResult>
       parameters:
         - id: documents
-          type: 'T[]'
+          type: TModel[]
           description: The updated documents.
         - id: options
-          type: <xref uid="@azure/search-documents.MergeDocumentsOptions" />
-          description: |
-            Additional options.
+          type: <xref uid="@azure/search-documents.IndexDocumentsOptions" />
+          description: Additional options.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.IndexDocumentsResult"
           />&gt;
-  - name: 'mergeOrUploadDocuments(T[], MergeOrUploadDocumentsOptions)'
+  - name: mergeOrUploadDocuments(TModel[], IndexDocumentsOptions)
     uid: '@azure/search-documents.SearchClient.mergeOrUploadDocuments'
     package: '@azure/search-documents'
     summary: >-
@@ -313,65 +345,134 @@ methods:
       For more details about how merging works, see
       https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function mergeOrUploadDocuments(documents: T[], options?:
-        MergeOrUploadDocumentsOptions): Promise<IndexDocumentsResult>
+        function mergeOrUploadDocuments(documents: TModel[], options?:
+        IndexDocumentsOptions): Promise<IndexDocumentsResult>
       parameters:
         - id: documents
-          type: 'T[]'
+          type: TModel[]
           description: The updated documents.
         - id: options
-          type: <xref uid="@azure/search-documents.MergeOrUploadDocumentsOptions" />
-          description: |
-            Additional options.
+          type: <xref uid="@azure/search-documents.IndexDocumentsOptions" />
+          description: Additional options.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.IndexDocumentsResult"
           />&gt;
-  - name: 'search<Fields>(string, SearchOptions<Fields>)'
+  - name: search<TFields>(string, SearchOptions<TModel, TFields>)
     uid: '@azure/search-documents.SearchClient.search'
     package: '@azure/search-documents'
-    summary: |-
+    summary: |+
       Performs a search on the current index given
       the specified arguments.
+
+      **Example**
+
+      ```ts
+      import {
+        AzureKeyCredential,
+        SearchClient,
+        SearchFieldArray,
+      } from "@azure/search-documents";
+
+      type TModel = {
+        key: string;
+        azure?: { sdk: string | null } | null;
+      };
+
+      const client = new SearchClient<TModel>(
+        "endpoint.azure",
+        "indexName",
+        new AzureKeyCredential("key")
+      );
+
+      const select = ["azure/sdk"] as const;
+      const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
+
+      const searchResult = await client.search("searchText", {
+        select,
+        searchFields,
+      });
+      ```
+
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function search<Fields>(searchText?: string, options?:
-        SearchOptions<Fields>): Promise<SearchDocumentsResult<Pick<T, Fields>>>
+        function search<TFields>(searchText?: string, options?:
+        SearchOptions<TModel, TFields>): Promise<SearchDocumentsResult<TModel,
+        TFields>>
       parameters:
         - id: searchText
           type: string
           description: Text to search
         - id: options
-          type: <xref uid="@azure/search-documents.SearchOptions" />&lt;Fields&gt;
-          description: |
-            Options for the search operation.
+          type: >-
+            <xref uid="@azure/search-documents.SearchOptions" />&lt;TModel,
+            TFields&gt;
+          description: Options for the search operation.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.SearchDocumentsResult"
-          />&lt;Pick&lt;T, Fields&gt;&gt;&gt;
-  - name: 'suggest<Fields>(string, string, SuggestOptions<Fields>)'
+          />&lt;TModel, TFields&gt;&gt;
+  - name: suggest<TFields>(string, string, SuggestOptions<TModel, TFields>)
     uid: '@azure/search-documents.SearchClient.suggest'
     package: '@azure/search-documents'
-    summary: |-
+    summary: >+
       Returns a short list of suggestions based on the searchText
+
       and specified suggester.
+
+
+      **Example**
+
+
+      ```ts
+
+      import {
+        AzureKeyCredential,
+        SearchClient,
+        SearchFieldArray,
+      } from "@azure/search-documents";
+
+
+      type TModel = {
+        key: string;
+        azure?: { sdk: string | null } | null;
+      };
+
+
+      const client = new SearchClient<TModel>(
+        "endpoint.azure",
+        "indexName",
+        new AzureKeyCredential("key")
+      );
+
+
+      const select = ["azure/sdk"] as const;
+
+      const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
+
+
+      const suggestResult = await client.suggest("searchText", "suggesterName",
+      {
+        select,
+        searchFields,
+      });
+
+      ```
+
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function suggest<Fields>(searchText: string, suggesterName: string,
-        options?: SuggestOptions<Fields>):
-        Promise<SuggestDocumentsResult<Pick<T, Fields>>>
+        function suggest<TFields>(searchText: string, suggesterName: string,
+        options?: SuggestOptions<TModel, TFields>):
+        Promise<SuggestDocumentsResult<TModel, TFields>>
       parameters:
         - id: searchText
           type: string
@@ -384,33 +485,32 @@ methods:
             The name of the suggester as specified in the suggesters collection
             that's part of the index definition.
         - id: options
-          type: <xref uid="@azure/search-documents.SuggestOptions" />&lt;Fields&gt;
-          description: |
-            Options for the suggest operation
+          type: >-
+            <xref uid="@azure/search-documents.SuggestOptions" />&lt;TModel,
+            TFields&gt;
+          description: Options for the suggest operation
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.SuggestDocumentsResult"
-          />&lt;Pick&lt;T, Fields&gt;&gt;&gt;
-  - name: 'uploadDocuments(T[], UploadDocumentsOptions)'
+          />&lt;TModel, TFields&gt;&gt;
+  - name: uploadDocuments(TModel[], IndexDocumentsOptions)
     uid: '@azure/search-documents.SearchClient.uploadDocuments'
     package: '@azure/search-documents'
     summary: Upload an array of documents to the index.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function uploadDocuments(documents: T[], options?:
-        UploadDocumentsOptions): Promise<IndexDocumentsResult>
+        function uploadDocuments(documents: TModel[], options?:
+        IndexDocumentsOptions): Promise<IndexDocumentsResult>
       parameters:
         - id: documents
-          type: 'T[]'
+          type: TModel[]
           description: The documents to upload.
         - id: options
-          type: <xref uid="@azure/search-documents.UploadDocumentsOptions" />
-          description: |
-            Additional options.
+          type: <xref uid="@azure/search-documents.IndexDocumentsOptions" />
+          description: Additional options.
       return:
         description: ''
         type: >-

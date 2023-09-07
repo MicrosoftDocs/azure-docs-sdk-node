@@ -7,21 +7,19 @@ summary: >-
   manipulate its directories and files.
 fullName: ShareClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'ShareClient(string, Credential, StoragePipelineOptions)'
+  - name: ShareClient(string, Credential_2 | TokenCredential, ShareClientOptions)
     uid: '@azure/storage-file-share.ShareClient.constructor_1'
     package: '@azure/storage-file-share'
     summary: Creates an instance of ShareClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        new ShareClient(url: string, credential?: Credential, options?:
-        StoragePipelineOptions)
+        new ShareClient(url: string, credential?: Credential_2 |
+        TokenCredential, options?: ShareClientOptions)
       parameters:
         - id: url
           type: string
@@ -31,23 +29,25 @@ constructors:
                                 append a SAS if using AnonymousCredential, such as
                                 "https://myaccount.file.core.windows.net/share?sasString".
         - id: credential
-          type: <xref uid="@azure/storage-file-share.Credential" />
+          type: >-
+            <xref uid="@azure/storage-file-share.Credential" /> |
+            TokenCredential
           description: |-
             Such as AnonymousCredential or StorageSharedKeyCredential.
                                              If not specified, AnonymousCredential is used.
         - id: options
-          type: <xref uid="@azure/storage-file-share.StoragePipelineOptions" />
-          description: |
-            Optional. Options to configure the HTTP pipeline.
-  - name: 'ShareClient(string, Pipeline)'
+          type: <xref uid="@azure/storage-file-share.ShareClientOptions" />
+          description: Optional. Options to configure the HTTP pipeline.
+  - name: ShareClient(string, Pipeline, ShareClientConfig)
     uid: '@azure/storage-file-share.ShareClient.constructor_2'
     package: '@azure/storage-file-share'
     summary: Creates an instance of ShareClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'new ShareClient(url: string, pipeline: Pipeline)'
+      content: >-
+        new ShareClient(url: string, pipeline: Pipeline, options?:
+        ShareClientConfig)
       parameters:
         - id: url
           type: string
@@ -58,22 +58,22 @@ constructors:
                                 "https://myaccount.file.core.windows.net/share?sasString".
         - id: pipeline
           type: <xref uid="@azure/storage-file-share.Pipeline" />
-          description: |
+          description: |-
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-  - name: 'ShareClient(string, string, StoragePipelineOptions)'
+        - id: options
+          type: <xref uid="@azure/storage-file-share.ShareClientConfig" />
+          description: ''
+  - name: ShareClient(string, string, ShareClientOptions)
     uid: '@azure/storage-file-share.ShareClient.constructor'
     package: '@azure/storage-file-share'
-    summary: |-
-      Creates an instance of ShareClient.
-      Creates an instance of ShareClient.
+    summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         new ShareClient(connectionString: string, name: string, options?:
-        StoragePipelineOptions)
+        ShareClientOptions)
       parameters:
         - id: connectionString
           type: string
@@ -89,30 +89,15 @@ constructors:
           type: string
           description: Share name.
         - id: options
-          type: <xref uid="@azure/storage-file-share.StoragePipelineOptions" />
-          description: |
-            Optional. Options to configure the HTTP pipeline.
+          type: <xref uid="@azure/storage-file-share.ShareClientOptions" />
+          description: Optional. Options to configure the HTTP pipeline.
 properties:
-  - name: accountName
-    uid: '@azure/storage-file-share.ShareClient.accountName'
-    package: '@azure/storage-file-share'
-    summary: ''
-    fullName: accountName
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'accountName: string'
-      return:
-        description: ''
-        type: string
   - name: name
     uid: '@azure/storage-file-share.ShareClient.name'
     package: '@azure/storage-file-share'
     summary: The name of the share
     fullName: name
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: string name
@@ -125,28 +110,43 @@ properties:
     summary: |-
       Gets the directory client for the root directory of this share.
       Note that the root directory always exists and cannot be deleted.
+
+       A new ShareDirectoryClient object for the root directory.
     fullName: rootDirectoryClient
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: ShareDirectoryClient rootDirectoryClient
       return:
         description: ''
         type: <xref uid="@azure/storage-file-share.ShareDirectoryClient" />
+inheritedProperties:
+  - name: accountName
+    uid: '@azure/storage-file-share.ShareClient.accountName'
+    package: '@azure/storage-file-share'
+    summary: ''
+    fullName: accountName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'accountName: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> StorageClient.accountName
   - name: url
     uid: '@azure/storage-file-share.ShareClient.url'
     package: '@azure/storage-file-share'
     summary: URL string value.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
       return:
         description: ''
         type: string
+    inheritanceDescription: <b>Inherited From</b> StorageClient.url
 methods:
   - name: create(ShareCreateOptions)
     uid: '@azure/storage-file-share.ShareClient.create'
@@ -157,7 +157,6 @@ methods:
 
       See https://docs.microsoft.com/en-us/rest/api/storageservices/create-share
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -172,7 +171,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.ShareCreateResponse"
           />&gt;
-  - name: 'createDirectory(string, DirectoryCreateOptions)'
+  - name: createDirectory(string, DirectoryCreateOptions)
     uid: '@azure/storage-file-share.ShareClient.createDirectory'
     package: '@azure/storage-file-share'
     summary: >-
@@ -182,7 +181,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/create-directory
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -193,7 +191,7 @@ methods:
       parameters:
         - id: directoryName
           type: string
-          description: '-'
+          description: ''
         - id: options
           type: <xref uid="@azure/storage-file-share.DirectoryCreateOptions" />
           description: Options to Directory Create operation.
@@ -204,7 +202,7 @@ methods:
         type: >-
           Promise&lt;{ directoryClient: ShareDirectoryClient,
           directoryCreateResponse: DirectoryCreateResponse }&gt;
-  - name: 'createFile(string, number, FileCreateOptions)'
+  - name: createFile(string, number, FileCreateOptions)
     uid: '@azure/storage-file-share.ShareClient.createFile'
     package: '@azure/storage-file-share'
     summary: >-
@@ -216,7 +214,6 @@ methods:
 
       See https://docs.microsoft.com/en-us/rest/api/storageservices/create-file
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -226,10 +223,10 @@ methods:
       parameters:
         - id: fileName
           type: string
-          description: '-'
+          description: ''
         - id: size
           type: number
-          description: 'Specifies the maximum size in bytes for the file, up to 4 TB.'
+          description: Specifies the maximum size in bytes for the file, up to 4 TB.
         - id: options
           type: <xref uid="@azure/storage-file-share.FileCreateOptions" />
           description: Options to File Create operation.
@@ -247,7 +244,6 @@ methods:
 
       See https://docs.microsoft.com/en-us/rest/api/storageservices/create-share
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -256,14 +252,13 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.ShareCreateOptions" />
-          description: |
-            -
+          description: ''
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.ShareCreateIfNotExistsResponse" />&gt;
-  - name: 'createPermission(string, ShareCreatePermissionOptions)'
+  - name: createPermission(string, ShareCreatePermissionOptions)
     uid: '@azure/storage-file-share.ShareClient.createPermission'
     package: '@azure/storage-file-share'
     summary: >-
@@ -276,7 +271,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/create-permission
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -285,8 +279,7 @@ methods:
       parameters:
         - id: filePermission
           type: string
-          description: |
-            File permission described in the SDDL
+          description: File permission described in the SDDL
         - id: options
           type: >-
             <xref uid="@azure/storage-file-share.ShareCreatePermissionOptions"
@@ -302,7 +295,6 @@ methods:
     package: '@azure/storage-file-share'
     summary: Creates a read-only snapshot of a share.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -329,7 +321,6 @@ methods:
 
       See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-share
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -344,7 +335,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.ShareDeleteResponse"
           />&gt;
-  - name: 'deleteDirectory(string, DirectoryDeleteOptions)'
+  - name: deleteDirectory(string, DirectoryDeleteOptions)
     uid: '@azure/storage-file-share.ShareClient.deleteDirectory'
     package: '@azure/storage-file-share'
     summary: >-
@@ -356,7 +347,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/delete-directory
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -365,7 +355,7 @@ methods:
       parameters:
         - id: directoryName
           type: string
-          description: '-'
+          description: ''
         - id: options
           type: <xref uid="@azure/storage-file-share.DirectoryDeleteOptions" />
           description: Options to Directory Delete operation.
@@ -374,7 +364,7 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.DirectoryDeleteResponse" />&gt;
-  - name: 'deleteFile(string, FileDeleteOptions)'
+  - name: deleteFile(string, FileDeleteOptions)
     uid: '@azure/storage-file-share.ShareClient.deleteFile'
     package: '@azure/storage-file-share'
     summary: >-
@@ -388,6 +378,7 @@ methods:
       later
 
       removed from the service during garbage collection.
+
 
       Delete File will fail with status code 409 (Conflict) and error code
       `SharingViolation`
@@ -404,10 +395,8 @@ methods:
       (`InvalidQueryParameterValue`)
 
 
-
       See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-file2
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -416,7 +405,7 @@ methods:
       parameters:
         - id: fileName
           type: string
-          description: '-'
+          description: ''
         - id: options
           type: <xref uid="@azure/storage-file-share.FileDeleteOptions" />
           description: Options to File Delete operation.
@@ -437,7 +426,6 @@ methods:
 
       See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-share
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -446,8 +434,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.ShareDeleteMethodOptions" />
-          description: |
-            -
+          description: ''
       return:
         description: ''
         type: >-
@@ -456,9 +443,10 @@ methods:
   - name: exists(ShareExistsOptions)
     uid: '@azure/storage-file-share.ShareClient.exists'
     package: '@azure/storage-file-share'
-    summary: >
+    summary: >-
       Returns true if the Azrue share resource represented by this client
       exists; false otherwise.
+
 
       NOTE: use this function with care since an existing share might be deleted
       by other clients or
@@ -468,15 +456,13 @@ methods:
 
       function completes.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function exists(options?: ShareExistsOptions): Promise<boolean>'
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.ShareExistsOptions" />
-          description: |
-            options to Exists operation.
+          description: options to Exists operation.
       return:
         description: ''
         type: Promise&lt;boolean&gt;
@@ -486,6 +472,7 @@ methods:
     summary: >-
       Only available for ShareClient constructed with a shared key credential.
 
+
       Generates a Service Shared Access Signature (SAS) URI based on the client
       properties
 
@@ -493,11 +480,9 @@ methods:
       of the client.
 
 
-
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function generateSasUrl(options: ShareGenerateSasUrlOptions): string'
@@ -518,6 +503,7 @@ methods:
 
       whether share data may be accessed publicly.
 
+
       WARNING: JavaScript Date will potential lost precision when parsing start
       and expiry string.
 
@@ -525,11 +511,9 @@ methods:
       get "2018-12-31T03:44:23.882Z".
 
 
-
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/get-share-acl
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -547,9 +531,11 @@ methods:
   - name: getDirectoryClient(string)
     uid: '@azure/storage-file-share.ShareClient.getDirectoryClient'
     package: '@azure/storage-file-share'
-    summary: 'Creates a <xref:@azure/storage-file-share.ShareDirectoryClient> object.'
+    summary: >-
+      Creates a
+      [ShareDirectoryClient](xref:@azure/storage-file-share.ShareDirectoryClient)
+      object.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getDirectoryClient(directoryName: string): ShareDirectoryClient'
@@ -560,7 +546,7 @@ methods:
       return:
         description: The ShareDirectoryClient object for the given directory name.
         type: <xref uid="@azure/storage-file-share.ShareDirectoryClient" />
-  - name: 'getPermission(string, ShareGetPermissionOptions)'
+  - name: getPermission(string, ShareGetPermissionOptions)
     uid: '@azure/storage-file-share.ShareClient.getPermission'
     package: '@azure/storage-file-share'
     summary: >-
@@ -573,7 +559,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/get-permission
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -582,7 +567,7 @@ methods:
       parameters:
         - id: filePermissionKey
           type: string
-          description: >
+          description: >-
             File permission key which indicates the security descriptor of the
             permission.
         - id: options
@@ -613,12 +598,11 @@ methods:
       metadata keys returned by
 
       the `listShares` method of
-      <xref:@azure/storage-file-share.ShareServiceClient> using the
-      `includeMetadata` option, which
+      [ShareServiceClient](xref:@azure/storage-file-share.ShareServiceClient)
+      using the `includeMetadata` option, which
 
       will retain their original casing.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -638,7 +622,6 @@ methods:
     package: '@azure/storage-file-share'
     summary: Retrieves statistics related to the share.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -653,13 +636,14 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.ShareGetStatisticsResponse" />&gt;
-  - name: 'setAccessPolicy(SignedIdentifier[], ShareSetAccessPolicyOptions)'
+  - name: setAccessPolicy(SignedIdentifier[], ShareSetAccessPolicyOptions)
     uid: '@azure/storage-file-share.ShareClient.setAccessPolicy'
     package: '@azure/storage-file-share'
     summary: >-
       Sets the permissions for the specified share. The permissions indicate
 
       whether directories or files in a share may be accessed publicly.
+
 
       When you set permissions for a share, the existing permissions are
       replaced.
@@ -682,7 +666,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/set-share-acl
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -690,7 +673,7 @@ methods:
         ShareSetAccessPolicyOptions): Promise<ShareSetAccessPolicyResponse>
       parameters:
         - id: shareAcl
-          type: '<xref uid="@azure/storage-file-share.SignedIdentifier" />[]'
+          type: <xref uid="@azure/storage-file-share.SignedIdentifier" />[]
           description: >-
             Array of signed identifiers, each having a unique Id and details of
             access policy.
@@ -702,11 +685,12 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.ShareSetAccessPolicyResponse" />&gt;
-  - name: 'setMetadata(Metadata, ShareSetMetadataOptions)'
+  - name: setMetadata(Metadata, ShareSetMetadataOptions)
     uid: '@azure/storage-file-share.ShareClient.setMetadata'
     package: '@azure/storage-file-share'
     summary: >-
       Sets one or more user-defined name-value pairs for the specified share.
+
 
       If no option provided, or no metadata defined in the option parameter, the
       share
@@ -717,7 +701,6 @@ methods:
       See
       https://docs.microsoft.com/en-us/rest/api/storageservices/set-share-metadata
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -742,7 +725,6 @@ methods:
     package: '@azure/storage-file-share'
     summary: Sets properties of the share.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -757,18 +739,20 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.ShareSetPropertiesResponse" />&gt;
-  - name: 'setQuota(number, ShareSetQuotaOptions)'
+  - name: setQuota(number, ShareSetQuotaOptions)
     uid: '@azure/storage-file-share.ShareClient.setQuota'
     package: '@azure/storage-file-share'
     summary: Sets quota for the specified share.
     remarks: ''
-    isPreview: false
     isDeprecated: true
-    customDeprecatedMessage: 'Use <xref:@azure/storage-file-share.ShareClient.setProperties> instead.'
+    customDeprecatedMessage: >-
+      Use
+      [setProperties](xref:@azure/storage-file-share.ShareClient.setProperties)
+      instead.
     syntax:
       content: >-
         function setQuota(quotaInGB: number, options?: ShareSetQuotaOptions):
-        Promise<ShareSetQuotaResponse>
+        Promise<ShareSetPropertiesResponse>
       parameters:
         - id: quotaInGB
           type: number
@@ -779,8 +763,8 @@ methods:
       return:
         description: Response data for the Share Get Quota operation.
         type: >-
-          Promise&lt;<xref uid="@azure/storage-file-share.ShareSetQuotaResponse"
-          />&gt;
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.ShareSetPropertiesResponse" />&gt;
   - name: withSnapshot(string)
     uid: '@azure/storage-file-share.ShareClient.withSnapshot'
     package: '@azure/storage-file-share'
@@ -790,7 +774,6 @@ methods:
 
       Provide "" will remove the snapshot and return a URL to the base share.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function withSnapshot(snapshot: string): ShareClient'
@@ -803,4 +786,4 @@ methods:
           A new ShareClient object identical to the source but with the
           specified snapshot timestamp
         type: <xref uid="@azure/storage-file-share.ShareClient" />
-extends: <xref uid="@azure/storage-file-share.StorageClient" />
+extends: StorageClient

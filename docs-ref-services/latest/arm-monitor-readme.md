@@ -5,12 +5,11 @@ author: hectorhdzg
 ms.author: hectorhdzg
 ms.date: 12/21/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: monitor
+ms.service: azure-monitor
 ---
-# Azure Monitor client library for JavaScript - Version 7.0.0 
+# Azure Monitor client library for JavaScript - version 7.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Monitor client.

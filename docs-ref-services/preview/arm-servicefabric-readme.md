@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/05/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: servicefabric
+ms.service: service-fabric
 ---
 
-# Azure ServiceFabricManagement client library for JavaScript - Version 2.0.0-beta.1 
+# Azure ServiceFabricManagement client library for JavaScript - version 2.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ServiceFabricManagement client.

@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/15/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: features
+ms.service: azure
 ---
 
-# Azure Feature client library for JavaScript - Version 3.0.0-beta.1 
+# Azure Feature client library for JavaScript - version 3.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Feature client.

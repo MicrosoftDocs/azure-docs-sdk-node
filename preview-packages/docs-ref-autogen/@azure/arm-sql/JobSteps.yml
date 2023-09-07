@@ -5,7 +5,6 @@ package: '@azure/arm-sql'
 summary: Interface representing a JobSteps.
 fullName: JobSteps
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
@@ -18,14 +17,13 @@ methods:
       Creates or updates a job step. This will implicitly create a new job
       version.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function createOrUpdate(resourceGroupName: string, serverName: string,
         jobAgentName: string, jobName: string, stepName: string, parameters:
         JobStep, options?: JobStepsCreateOrUpdateOptionalParams):
-        Promise<JobStepsCreateOrUpdateResponse>
+        Promise<JobStep>
       parameters:
         - id: resourceGroupName
           type: string
@@ -50,13 +48,10 @@ methods:
           description: The requested state of the job step.
         - id: options
           type: <xref uid="@azure/arm-sql.JobStepsCreateOrUpdateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-sql.JobStepsCreateOrUpdateResponse"
-          />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-sql.JobStep" />&gt;
   - name: >-
       delete(string, string, string, string, string,
       JobStepsDeleteOptionalParams)
@@ -64,7 +59,6 @@ methods:
     package: '@azure/arm-sql'
     summary: Deletes a job step. This will implicitly create a new job version.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -92,23 +86,21 @@ methods:
           description: The name of the job step to delete.
         - id: options
           type: <xref uid="@azure/arm-sql.JobStepsDeleteOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'get(string, string, string, string, string, JobStepsGetOptionalParams)'
+  - name: get(string, string, string, string, string, JobStepsGetOptionalParams)
     uid: '@azure/arm-sql.JobSteps.get'
     package: '@azure/arm-sql'
     summary: Gets a job step in a job's current version.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function get(resourceGroupName: string, serverName: string,
         jobAgentName: string, jobName: string, stepName: string, options?:
-        JobStepsGetOptionalParams): Promise<JobStepsGetResponse>
+        JobStepsGetOptionalParams): Promise<JobStep>
       parameters:
         - id: resourceGroupName
           type: string
@@ -130,11 +122,10 @@ methods:
           description: The name of the job step.
         - id: options
           type: <xref uid="@azure/arm-sql.JobStepsGetOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/arm-sql.JobStepsGetResponse" />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-sql.JobStep" />&gt;
   - name: >-
       getByVersion(string, string, string, string, number, string,
       JobStepsGetByVersionOptionalParams)
@@ -142,14 +133,12 @@ methods:
     package: '@azure/arm-sql'
     summary: Gets the specified version of a job step.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getByVersion(resourceGroupName: string, serverName: string,
         jobAgentName: string, jobName: string, jobVersion: number, stepName:
-        string, options?: JobStepsGetByVersionOptionalParams):
-        Promise<JobStepsGetByVersionResponse>
+        string, options?: JobStepsGetByVersionOptionalParams): Promise<JobStep>
       parameters:
         - id: resourceGroupName
           type: string
@@ -174,25 +163,22 @@ methods:
           description: The name of the job step.
         - id: options
           type: <xref uid="@azure/arm-sql.JobStepsGetByVersionOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-sql.JobStepsGetByVersionResponse"
-          />&gt;
-  - name: 'listByJob(string, string, string, string, JobStepsListByJobOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-sql.JobStep" />&gt;
+  - name: listByJob(string, string, string, string, JobStepsListByJobOptionalParams)
     uid: '@azure/arm-sql.JobSteps.listByJob'
     package: '@azure/arm-sql'
     summary: Gets all job steps for a job's current version.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listByJob(resourceGroupName: string, serverName: string,
         jobAgentName: string, jobName: string, options?:
-        JobStepsListByJobOptionalParams): PagedAsyncIterableIterator<JobStep>
+        JobStepsListByJobOptionalParams): PagedAsyncIterableIterator<JobStep,
+        JobStep[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -211,13 +197,12 @@ methods:
           description: The name of the job to get.
         - id: options
           type: <xref uid="@azure/arm-sql.JobStepsListByJobOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
-          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-sql.JobStep"
-          />&gt;
+          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-sql.JobStep" />,
+          <xref uid="@azure/arm-sql.JobStep" />[], PageSettings&gt;
   - name: >-
       listByVersion(string, string, string, string, number,
       JobStepsListByVersionOptionalParams)
@@ -225,14 +210,13 @@ methods:
     package: '@azure/arm-sql'
     summary: Gets all job steps in the specified job version.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listByVersion(resourceGroupName: string, serverName: string,
         jobAgentName: string, jobName: string, jobVersion: number, options?:
         JobStepsListByVersionOptionalParams):
-        PagedAsyncIterableIterator<JobStep>
+        PagedAsyncIterableIterator<JobStep, JobStep[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -254,10 +238,9 @@ methods:
           description: The version of the job to get.
         - id: options
           type: <xref uid="@azure/arm-sql.JobStepsListByVersionOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
-          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-sql.JobStep"
-          />&gt;
+          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-sql.JobStep" />,
+          <xref uid="@azure/arm-sql.JobStep" />[], PageSettings&gt;

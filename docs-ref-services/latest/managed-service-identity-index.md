@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|[Resource Management - Managed Service Identity](arm-msi-readme.md)|[@azure/arm-msi](https://www.npmjs.com/package/@azure/arm-msi)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/msi/arm-msi)|

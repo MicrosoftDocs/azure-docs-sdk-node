@@ -1,0 +1,105 @@
+### YamlMime:TSType
+name: RouteGetRouteMatrix202Response
+uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response'
+package: '@azure-rest/maps-route'
+summary: >-
+  **Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).
+
+
+  If the Matrix Route request was accepted successfully, the Location header in
+  the response contains the URL to download the results of the request. This
+  status URI looks like the following:
+
+    ```
+      GET https://atlas.microsoft.com/route/matrix/{matrixId}?api-version=1.0?subscription-key={subscription-key}
+    ```
+
+
+  4. Client issues a GET request on the download URL obtained in Step 3 to
+  download the results
+
+
+  ### Download Sync Results
+
+  When you make a POST request for Route Matrix Sync API, the service returns
+  200 response code for successful request and a response array. The response
+  body will contain the data and there will be no possibility to retrieve the
+  results later.
+
+
+  ### Download Async Results
+
+  When a request issues a `202 Accepted` response, the request is being
+  processed using our async pipeline. You will be given a URL to check the
+  progress of your  async request in the location header of the response. This
+  status URI looks like the following:
+
+  ```
+    GET https://atlas.microsoft.com/route/matrix/{matrixId}?api-version=1.0?subscription-key={subscription-key}
+  ```
+
+
+  The URL provided by the location header will return the following responses
+  when a `GET` request is issued.
+
+    > HTTP `202 Accepted` - Matrix request was accepted but is still being processed. Please try again in some time.
+
+    > HTTP `200 OK` - Matrix request successfully processed. The response body contains all of the results.
+fullName: RouteGetRouteMatrix202Response
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: body
+    uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.body'
+    package: '@azure-rest/maps-route'
+    summary: ''
+    fullName: body
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'body: Record<string, unknown>'
+      return:
+        description: ''
+        type: Record&lt;string, unknown&gt;
+  - name: headers
+    uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.headers'
+    package: '@azure-rest/maps-route'
+    summary: ''
+    fullName: headers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'headers: RawHttpHeaders & RouteGetRouteMatrix202Headers'
+      return:
+        description: ''
+        type: >-
+          RawHttpHeaders & <xref
+          uid="@azure-rest/maps-route.RouteGetRouteMatrix202Headers" />
+  - name: status
+    uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.status'
+    package: '@azure-rest/maps-route'
+    summary: ''
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'status: "202"'
+      return:
+        description: ''
+        type: '"202"'
+inheritedProperties:
+  - name: request
+    uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.request'
+    package: '@azure-rest/maps-route'
+    summary: The request that generated this response.
+    fullName: request
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'request: PipelineRequest'
+      return:
+        description: ''
+        type: PipelineRequest
+    inheritanceDescription: <b>Inherited From</b> HttpResponse.request
+extends: HttpResponse

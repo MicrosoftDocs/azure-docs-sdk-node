@@ -5,12 +5,11 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/20/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: iotcentral
+ms.service: iot-central
 ---
-# Azure IotCentral client library for JavaScript - Version 6.0.0 
+# Azure IotCentral client library for JavaScript - version 6.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure IotCentral client.

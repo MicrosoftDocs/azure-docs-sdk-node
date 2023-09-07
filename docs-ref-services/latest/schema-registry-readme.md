@@ -1,17 +1,14 @@
 ---
 title: Azure Schema Registry client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry, schemaregistry
-author: maggiepint
-ms.author: magpint
-ms.date: 11/17/2021
+author: deyaaeldeen
+ms.author: dealmaha
+ms.date: 10/11/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: schemaregistry
 ---
-
-# Azure Schema Registry client library for JavaScript - Version 1.0.1 
+# Azure Schema Registry client library for JavaScript - version 1.2.0 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
@@ -21,14 +18,14 @@ schema identifiers rather than full schemas.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.1/sdk/schemaregistry/schema-registry)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.2.0/sdk/schemaregistry/schema-registry)
 - [Package (npm)](https://www.npmjs.com/package/@azure/schema-registry)
-- [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/schema-registry)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.1/sdk/schemaregistry/schema-registry/samples)
+- [API Reference Documentation](/javascript/api/@azure/schema-registry)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.2.0/sdk/schemaregistry/schema-registry/samples)
 
 ## Getting started
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -132,6 +129,19 @@ if (foundSchema) {
 }
 ```
 
+### Get definition of existing schema by version
+
+```javascript
+const { DefaultAzureCredential } = require("@azure/identity");
+const { SchemaRegistryClient } = require("@azure/schema-registry");
+
+const client = new SchemaRegistryClient("<fullyQualifiedNamespace>", new DefaultAzureCredential());
+const foundSchema = await client.getSchema("<schema name>", "<group name>", version);
+if (foundSchema) {
+  console.log(`Got schema definition=${foundSchema.definition}`);
+}
+```
+
 ## Troubleshooting
 
 ### Logging
@@ -150,7 +160,7 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.1/sdk/schemaregistry/schema-registry/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.2.0/sdk/schemaregistry/schema-registry/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -173,7 +183,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 If you'd like to contribute to this library, please read the [contributing
-guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry_1.0.1/CONTRIBUTING.md) to
+guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry_1.2.0/CONTRIBUTING.md) to
 learn more about how to build and test the code.
 
 ## Related projects
@@ -182,9 +192,9 @@ learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fschemaregistry%2Fschema-registry%2FREADME.png)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.2.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.2.0/sdk/identity/identity#defaultazurecredential
 

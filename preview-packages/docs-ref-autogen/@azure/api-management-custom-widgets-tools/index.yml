@@ -1,0 +1,185 @@
+### YamlMime:TSPackage
+uid: '@azure/api-management-custom-widgets-tools'
+name: '@azure/api-management-custom-widgets-tools'
+summary: ''
+type: package
+interfaces:
+  - '@azure/api-management-custom-widgets-tools.EditorData'
+  - '@azure/api-management-custom-widgets-tools.PortalData'
+typeAliases:
+  - '@azure/api-management-custom-widgets-tools.Environment'
+  - '@azure/api-management-custom-widgets-tools.OnChange'
+  - '@azure/api-management-custom-widgets-tools.Secrets'
+  - '@azure/api-management-custom-widgets-tools.ServiceInformation'
+  - '@azure/api-management-custom-widgets-tools.TargetModule'
+  - '@azure/api-management-custom-widgets-tools.ValuesCommon'
+functions:
+  - name: askForSecrets(TargetModule)
+    uid: '@azure/api-management-custom-widgets-tools.askForSecrets'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: Request secrets - token & userId, from the Dev portal parent window.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function askForSecrets(targetModule: TargetModule): Promise<Secrets>'
+      parameters:
+        - id: targetModule
+          type: >-
+            <xref uid="@azure/api-management-custom-widgets-tools.TargetModule"
+            />
+          description: >-
+            is the function invoke from the main "app" window or the admin
+            "editor"?
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/api-management-custom-widgets-tools.Secrets" />&gt;
+  - name: buildBlobConfigPath(string)
+    uid: '@azure/api-management-custom-widgets-tools.buildBlobConfigPath'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: Generate relative path for widgets' config on the blob storage
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function buildBlobConfigPath(name: string): string'
+      parameters:
+        - id: name
+          type: string
+          description: name of the widget
+      return:
+        description: ''
+        type: string
+  - name: buildBlobDataPath(string)
+    uid: '@azure/api-management-custom-widgets-tools.buildBlobDataPath'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: Generate relative path for widgets' data on the blob storage
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function buildBlobDataPath(name: string): string'
+      parameters:
+        - id: name
+          type: string
+          description: name of the widget
+      return:
+        description: ''
+        type: string
+  - name: buildOnChange<Values>()
+    uid: '@azure/api-management-custom-widgets-tools.buildOnChange'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: >-
+      Build onChange function, which you can use, to send changed data from the
+      editor.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function buildOnChange<Values>(): OnChange<Values>'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/api-management-custom-widgets-tools.OnChange"
+          />&lt;Values&gt;
+  - name: deployNodeJS(ServiceInformation, string, string, string)
+    uid: '@azure/api-management-custom-widgets-tools.deployNodeJS'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: >-
+      Deploys everything from /dist folder to the API Management DevPortals'
+      blob storage.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deployNodeJS(serviceInformation: ServiceInformation, name:
+        string, fallbackConfigPath?: string, rootLocal?: string): Promise<void>
+      parameters:
+        - id: serviceInformation
+          type: >-
+            <xref
+            uid="@azure/api-management-custom-widgets-tools.ServiceInformation"
+            />
+          description: service information for deployment
+        - id: name
+          type: string
+          description: name of the widget to be deployed
+        - id: fallbackConfigPath
+          type: string
+          description: >-
+            local path to the config file (by default
+            "./static/config.msapim.json")
+        - id: rootLocal
+          type: string
+          description: >-
+            optional, root of the local folder with compiled project to be
+            exported (by default "./dist")
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: getEditorValues<Values>()
+    uid: '@azure/api-management-custom-widgets-tools.getEditorValues'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: Function to get values you've set in the admin editor window.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getEditorValues<Values>(): Partial<Values>'
+      return:
+        description: ''
+        type: Partial&lt;Values&gt;
+  - name: getValues<Values>(Values)
+    uid: '@azure/api-management-custom-widgets-tools.getValues'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: >-
+      Function to get values you've set in the admin editor window.
+      Undefined/empty values are replaced with default values.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getValues<Values>(valuesDefault: Values): Values'
+      parameters:
+        - id: valuesDefault
+          type: Values
+          description: >-
+            object with your default values to use, just import valuesDefault
+            object from values.ts folder
+      return:
+        description: ''
+        type: Values
+  - name: getWidgetData<Values>()
+    uid: '@azure/api-management-custom-widgets-tools.getWidgetData'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: >-
+      Function to get all data related to the widget including technical values
+      not expected to be needed in most cases.
+
+      Intended mostly for internal use, API might change. Consider using
+      getValues or getEditorValues instead.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getWidgetData<Values>(): EditorData<Values>'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/api-management-custom-widgets-tools.EditorData"
+          />&lt;Values&gt;
+  - name: onChangeWithOrigin<Values>(string, string, Values)
+    uid: '@azure/api-management-custom-widgets-tools.onChangeWithOrigin'
+    package: '@azure/api-management-custom-widgets-tools'
+    summary: The onChange function itself with 'origin' provided as a param.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function onChangeWithOrigin<Values>(origin: string, instanceId: string,
+        values: Values)
+      parameters:
+        - id: origin
+          type: string
+          description: web content's origin (URL) of your Dev Portal to send changes to
+        - id: instanceId
+          type: string
+          description: ID of this particular instance of the widget
+        - id: values
+          type: Values
+          description: values that changed

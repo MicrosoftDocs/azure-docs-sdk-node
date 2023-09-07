@@ -5,7 +5,6 @@ package: '@azure/arm-logic'
 summary: Interface representing a IntegrationAccountMaps.
 fullName: IntegrationAccountMaps
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
@@ -14,9 +13,15 @@ methods:
       IntegrationAccountMapsCreateOrUpdateOptionalParams)
     uid: '@azure/arm-logic.IntegrationAccountMaps.createOrUpdate'
     package: '@azure/arm-logic'
-    summary: Creates or updates an integration account map.
+    summary: >-
+      Creates or updates an integration account map. If the map is larger than 4
+      MB, you need to store the
+
+      map in an Azure blob and use the blob's Shared Access Signature (SAS) URL
+      as the 'contentLink'
+
+      property value.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -24,7 +29,7 @@ methods:
         integrationAccountName: string, mapName: string, map:
         IntegrationAccountMap, options?:
         IntegrationAccountMapsCreateOrUpdateOptionalParams):
-        Promise<IntegrationAccountMapsCreateOrUpdateResponse>
+        Promise<IntegrationAccountMap>
       parameters:
         - id: resourceGroupName
           type: string
@@ -43,20 +48,15 @@ methods:
             <xref
             uid="@azure/arm-logic.IntegrationAccountMapsCreateOrUpdateOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-logic.IntegrationAccountMapsCreateOrUpdateResponse"
-          />&gt;
-  - name: 'delete(string, string, string, IntegrationAccountMapsDeleteOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-logic.IntegrationAccountMap" />&gt;
+  - name: delete(string, string, string, IntegrationAccountMapsDeleteOptionalParams)
     uid: '@azure/arm-logic.IntegrationAccountMaps.delete'
     package: '@azure/arm-logic'
     summary: Deletes an integration account map.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -77,23 +77,21 @@ methods:
           type: >-
             <xref
             uid="@azure/arm-logic.IntegrationAccountMapsDeleteOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'get(string, string, string, IntegrationAccountMapsGetOptionalParams)'
+  - name: get(string, string, string, IntegrationAccountMapsGetOptionalParams)
     uid: '@azure/arm-logic.IntegrationAccountMaps.get'
     package: '@azure/arm-logic'
     summary: Gets an integration account map.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function get(resourceGroupName: string, integrationAccountName: string,
         mapName: string, options?: IntegrationAccountMapsGetOptionalParams):
-        Promise<IntegrationAccountMapsGetResponse>
+        Promise<IntegrationAccountMap>
       parameters:
         - id: resourceGroupName
           type: string
@@ -108,25 +106,22 @@ methods:
           type: >-
             <xref uid="@azure/arm-logic.IntegrationAccountMapsGetOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-logic.IntegrationAccountMapsGetResponse" />&gt;
-  - name: 'list(string, string, IntegrationAccountMapsListOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-logic.IntegrationAccountMap" />&gt;
+  - name: list(string, string, IntegrationAccountMapsListOptionalParams)
     uid: '@azure/arm-logic.IntegrationAccountMaps.list'
     package: '@azure/arm-logic'
     summary: Gets a list of integration account maps.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function list(resourceGroupName: string, integrationAccountName: string,
         options?: IntegrationAccountMapsListOptionalParams):
-        PagedAsyncIterableIterator<IntegrationAccountMap>
+        PagedAsyncIterableIterator<IntegrationAccountMap,
+        IntegrationAccountMap[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -138,13 +133,13 @@ methods:
           type: >-
             <xref
             uid="@azure/arm-logic.IntegrationAccountMapsListOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-logic.IntegrationAccountMap" />&gt;
+          uid="@azure/arm-logic.IntegrationAccountMap" />, <xref
+          uid="@azure/arm-logic.IntegrationAccountMap" />[], PageSettings&gt;
   - name: >-
       listContentCallbackUrl(string, string, string, GetCallbackUrlParameters,
       IntegrationAccountMapsListContentCallbackUrlOptionalParams)
@@ -152,7 +147,6 @@ methods:
     package: '@azure/arm-logic'
     summary: Get the content callback url.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -160,7 +154,7 @@ methods:
         integrationAccountName: string, mapName: string, listContentCallbackUrl:
         GetCallbackUrlParameters, options?:
         IntegrationAccountMapsListContentCallbackUrlOptionalParams):
-        Promise<IntegrationAccountMapsListContentCallbackUrlResponse>
+        Promise<WorkflowTriggerCallbackUrl>
       parameters:
         - id: resourceGroupName
           type: string
@@ -179,11 +173,9 @@ methods:
             <xref
             uid="@azure/arm-logic.IntegrationAccountMapsListContentCallbackUrlOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-logic.IntegrationAccountMapsListContentCallbackUrlResponse"
+          Promise&lt;<xref uid="@azure/arm-logic.WorkflowTriggerCallbackUrl"
           />&gt;

@@ -5,12 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 02/02/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
+ms.service: event-hubs
 ---
 
-# Azure Event Hubs client library for Javascript - Version 2.1.4 
+# Azure Event Hubs client library for JavaScript - version 2.1.4 
 
 Azure Event Hubs is a scalable event processing service that ingests and processes large volumes of events and data, with low latency and high reliability.
 

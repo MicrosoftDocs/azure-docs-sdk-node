@@ -2,20 +2,21 @@
 name: Configuration
 uid: azure-iothub.Configuration
 package: azure-iothub
-summary: The configuration for Iot Hub device and module twins.
+summary: >-
+  The Configuration object represents the configuration of a single device or it
+  can represent a deployment which can be applied as a configuration to devices
+  based on the targetCondition.
 fullName: Configuration
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
   - name: content
     uid: azure-iothub.Configuration.content
     package: azure-iothub
-    summary: The content of the configuration.
+    summary: Content of the configuration
     fullName: content
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'content?: ConfigurationContent'
@@ -25,23 +26,23 @@ properties:
   - name: createdTimeUtc
     uid: azure-iothub.Configuration.createdTimeUtc
     package: azure-iothub
-    summary: The creation date and time of the configuration.
+    summary: Date time in ISO6801 of the creation of this configuration
     fullName: createdTimeUtc
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'createdTimeUtc?: Date'
+      content: 'createdTimeUtc?: string'
       return:
         description: ''
-        type: Date
+        type: string
   - name: etag
     uid: azure-iothub.Configuration.etag
     package: azure-iothub
-    summary: The ETag of the configuration.
+    summary: >-
+      A string used for protecting opportunistic concurrency updates by the
+      caller. This gets updated when deployment is update
     fullName: etag
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'etag?: string'
@@ -51,51 +52,55 @@ properties:
   - name: id
     uid: azure-iothub.Configuration.id
     package: azure-iothub
-    summary: The unique identifier of the configuration.
+    summary: Id of this configuration.
     fullName: id
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'id?: string'
+      content: 'id: string'
       return:
         description: ''
         type: string
   - name: labels
     uid: azure-iothub.Configuration.labels
     package: azure-iothub
-    summary: The key-value pairs used to describe the configuration.
+    summary: >-
+      This is a dictionary<string, string> of labels.
+
+      Labels are a set of case-sensitive string key value pairs that you can use
+      to describe a deployment.
+
+      Both keys and values are case-sensitive strings (up to 128 char long) of
+      ASCII 7-bit alphanumeric chars + {'-', ':', '.', '+', '%', '_', '#', '*',
+      '?', '!', '(', ')', ',', '=', '@', ';', '''}
+
+      (Note that $ is reserved)
     fullName: labels
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'labels?: [key: string]: string'
+      content: 'labels?: {[key: string]: string}'
       return:
         description: ''
-        type: '[key: string]\: string'
+        type: '{[key: string]: string}'
   - name: lastUpdatedTimeUtc
     uid: azure-iothub.Configuration.lastUpdatedTimeUtc
     package: azure-iothub
-    summary: The update date and time of the configuration.
+    summary: Date time in ISO6801 of the last update of this configuration
     fullName: lastUpdatedTimeUtc
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'lastUpdatedTimeUtc?: Date'
+      content: 'lastUpdatedTimeUtc?: string'
       return:
         description: ''
-        type: Date
+        type: string
   - name: metrics
     uid: azure-iothub.Configuration.metrics
     package: azure-iothub
-    summary: >-
-      The custom metrics specified by the developer as queries against twin
-      reported properties.
+    summary: Custom Configuration Metrics
     fullName: metrics
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'metrics?: ConfigurationMetrics'
@@ -105,10 +110,12 @@ properties:
   - name: priority
     uid: azure-iothub.Configuration.priority
     package: azure-iothub
-    summary: The priority number assigned to the configuration.
+    summary: >-
+      When two deployments target the same device, the deployment with higher
+      priority gets applied. If two deployments have the same priority, the
+      deployment with the later creation date gets applied.
     fullName: priority
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'priority?: number'
@@ -118,23 +125,21 @@ properties:
   - name: schemaVersion
     uid: azure-iothub.Configuration.schemaVersion
     package: azure-iothub
-    summary: The schema version of the configuration.
+    summary: Version of the schema.
     fullName: schemaVersion
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'schemaVersion?: string'
+      content: 'schemaVersion: string'
       return:
         description: ''
         type: string
   - name: systemMetrics
     uid: azure-iothub.Configuration.systemMetrics
     package: azure-iothub
-    summary: The system metrics computed by the IoT Hub that cannot be customized.
+    summary: System Configuration Metrics
     fullName: systemMetrics
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'systemMetrics?: ConfigurationMetrics'
@@ -145,13 +150,15 @@ properties:
     uid: azure-iothub.Configuration.targetCondition
     package: azure-iothub
     summary: >-
-      The query used to define the targeted devices or modules. The query is
-      based on twin tags
+      The target condition is continuously evaluated to include any new devices
+      that meet the requirements or remove devices that no longer do through the
+      life time of the deployment.
 
-      and/or reported properties.
+      Use any Boolean condition on device twins tags or deviceId to select the
+      target devices, e.g. tags.environment='prod' or deviceId='linuxprod' or
+      tags.environment = 'prod' AND tags.location = 'westus'.
     fullName: targetCondition
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'targetCondition?: string'

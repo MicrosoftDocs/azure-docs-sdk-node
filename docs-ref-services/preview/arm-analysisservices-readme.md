@@ -5,13 +5,12 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 11/30/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: analysisservices
+ms.service: azure-analysis-services
 ---
 
-# Azure Service client library for JavaScript - Version 4.0.0-beta.1 
+# Azure Service client library for JavaScript - version 4.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.

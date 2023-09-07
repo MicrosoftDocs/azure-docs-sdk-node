@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/18/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: policy
+ms.service: azure-policy
 ---
 
-# Azure Policy client library for JavaScript - Version 5.0.0-beta.2 
+# Azure Policy client library for JavaScript - version 5.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Policy client.

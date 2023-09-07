@@ -3,27 +3,34 @@ uid: durable-functions
 name: durable-functions
 summary: ''
 type: package
+enums:
+  - durable-functions.OrchestrationRuntimeStatus
 classes:
-  - durable-functions.AggregatedError
-  - durable-functions.DurableError
+  - durable-functions.DummyOrchestrationContext
   - durable-functions.DurableHttpRequest
   - durable-functions.DurableHttpResponse
-  - durable-functions.DurableOrchestrationClient
-  - durable-functions.DurableOrchestrationContext
-  - durable-functions.DurableOrchestrationStatus
   - durable-functions.EntityId
   - durable-functions.EntityStateResponse
-  - durable-functions.HttpManagementPayload
-  - durable-functions.PurgeHistoryResult
-  - durable-functions.RetryOptions
-  - durable-functions.Task
-  - durable-functions.TimerTask
-  - durable-functions.DummyOrchestrationContext
   - durable-functions.ManagedIdentityTokenSource
-typeAliases:
-  - durable-functions.DurableEntityContext
-  - durable-functions.TokenSource
+  - durable-functions.RetryOptions
 functions:
+  - name: 'entity<T>((context: IEntityFunctionContext<T>) => void)'
+    uid: durable-functions.entity
+    package: durable-functions
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function entity<T>(fn: (context: IEntityFunctionContext<T>) => void):
+        (context: IEntityFunctionContext<T>) => void
+      parameters:
+        - id: fn
+          type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
   - name: getClient(unknown)
     uid: durable-functions.getClient
     package: durable-functions
@@ -45,7 +52,6 @@ functions:
       ```
 
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getClient(context: unknown): DurableOrchestrationClient'
@@ -57,25 +63,7 @@ functions:
              calls this method.
       return:
         description: ''
-        type: <xref uid="durable-functions.DurableOrchestrationClient" />
-  - name: 'entity<T>((context: IEntityFunctionContext<T>) => void)'
-    uid: durable-functions.entity
-    package: durable-functions
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function entity<T>(fn: (context: IEntityFunctionContext<T>) => void):
-        (context: IEntityFunctionContext<T>) => void
-      parameters:
-        - id: fn
-          type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
+        type: DurableOrchestrationClient
   - name: >-
       orchestrator((context: IOrchestrationFunctionContext) =>
       Generator<unknown, unknown, any>)
@@ -83,6 +71,7 @@ functions:
     package: durable-functions
     summary: |+
       Enables a generator function to act as an orchestrator function.
+
       Orchestration context methods can be access
 
       **Example**
@@ -97,7 +86,6 @@ functions:
       ```
 
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -113,11 +101,3 @@ functions:
       return:
         description: ''
         type: '(context: IOrchestrationFunctionContext) =&gt; void'
-interfaces:
-  - durable-functions.IEntityFunctionContext
-  - durable-functions.IHttpRequest
-  - durable-functions.IHttpResponse
-  - durable-functions.IOrchestrationFunctionContext
-  - durable-functions.ITaskMethods
-enums:
-  - durable-functions.OrchestrationRuntimeStatus

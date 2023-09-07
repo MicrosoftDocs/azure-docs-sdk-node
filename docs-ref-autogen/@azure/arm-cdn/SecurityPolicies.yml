@@ -5,7 +5,6 @@ package: '@azure/arm-cdn'
 summary: Interface representing a SecurityPolicies.
 fullName: SecurityPolicies
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
@@ -16,22 +15,23 @@ methods:
     package: '@azure/arm-cdn'
     summary: Creates a new security policy within the specified profile.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginCreate(resourceGroupName: string, profileName: string,
         securityPolicyName: string, securityPolicy: SecurityPolicy, options?:
         SecurityPoliciesCreateOptionalParams):
-        Promise<PollerLike<PollOperationState<SecurityPoliciesCreateResponse>,
-        SecurityPoliciesCreateResponse>>
+        Promise<PollerLike<PollOperationState<SecurityPolicy>, SecurityPolicy>>
       parameters:
         - id: resourceGroupName
           type: string
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: securityPolicyName
           type: string
           description: Name of the security policy under the profile.
@@ -40,14 +40,13 @@ methods:
           description: The security policy properties.
         - id: options
           type: <xref uid="@azure/arm-cdn.SecurityPoliciesCreateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
-          uid="@azure/arm-cdn.SecurityPoliciesCreateResponse" />&gt;, <xref
-          uid="@azure/arm-cdn.SecurityPoliciesCreateResponse" />&gt;&gt;
+          uid="@azure/arm-cdn.SecurityPolicy" />&gt;, <xref
+          uid="@azure/arm-cdn.SecurityPolicy" />&gt;&gt;
   - name: >-
       beginCreateAndWait(string, string, string, SecurityPolicy,
       SecurityPoliciesCreateOptionalParams)
@@ -55,21 +54,22 @@ methods:
     package: '@azure/arm-cdn'
     summary: Creates a new security policy within the specified profile.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginCreateAndWait(resourceGroupName: string, profileName:
         string, securityPolicyName: string, securityPolicy: SecurityPolicy,
-        options?: SecurityPoliciesCreateOptionalParams):
-        Promise<SecurityPoliciesCreateResponse>
+        options?: SecurityPoliciesCreateOptionalParams): Promise<SecurityPolicy>
       parameters:
         - id: resourceGroupName
           type: string
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: securityPolicyName
           type: string
           description: Name of the security policy under the profile.
@@ -78,19 +78,15 @@ methods:
           description: The security policy properties.
         - id: options
           type: <xref uid="@azure/arm-cdn.SecurityPoliciesCreateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-cdn.SecurityPoliciesCreateResponse"
-          />&gt;
-  - name: 'beginDelete(string, string, string, SecurityPoliciesDeleteOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-cdn.SecurityPolicy" />&gt;
+  - name: beginDelete(string, string, string, SecurityPoliciesDeleteOptionalParams)
     uid: '@azure/arm-cdn.SecurityPolicies.beginDelete'
     package: '@azure/arm-cdn'
     summary: Deletes an existing security policy within profile.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -104,17 +100,19 @@ methods:
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: securityPolicyName
           type: string
-          description: Name of the Secret under the profile.
+          description: Name of the security policy under the profile.
         - id: options
           type: <xref uid="@azure/arm-cdn.SecurityPoliciesDeleteOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+        type: Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;
   - name: >-
       beginDeleteAndWait(string, string, string,
       SecurityPoliciesDeleteOptionalParams)
@@ -122,7 +120,6 @@ methods:
     package: '@azure/arm-cdn'
     summary: Deletes an existing security policy within profile.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -135,153 +132,155 @@ methods:
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: securityPolicyName
           type: string
-          description: Name of the Secret under the profile.
+          description: Name of the security policy under the profile.
         - id: options
           type: <xref uid="@azure/arm-cdn.SecurityPoliciesDeleteOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      beginPatch(string, string, string, SecurityPolicyProperties,
+      beginPatch(string, string, string, SecurityPolicyUpdateParameters,
       SecurityPoliciesPatchOptionalParams)
     uid: '@azure/arm-cdn.SecurityPolicies.beginPatch'
     package: '@azure/arm-cdn'
-    summary: Updates an existing Secret within a profile.
+    summary: Updates an existing security policy within a profile.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginPatch(resourceGroupName: string, profileName: string,
-        securityPolicyName: string, securityPolicyProperties:
-        SecurityPolicyProperties, options?:
+        securityPolicyName: string, securityPolicyUpdateProperties:
+        SecurityPolicyUpdateParameters, options?:
         SecurityPoliciesPatchOptionalParams):
-        Promise<PollerLike<PollOperationState<SecurityPoliciesPatchResponse>,
-        SecurityPoliciesPatchResponse>>
+        Promise<PollerLike<PollOperationState<SecurityPolicy>, SecurityPolicy>>
       parameters:
         - id: resourceGroupName
           type: string
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: securityPolicyName
           type: string
           description: Name of the security policy under the profile.
-        - id: securityPolicyProperties
-          type: <xref uid="@azure/arm-cdn.SecurityPolicyProperties" />
+        - id: securityPolicyUpdateProperties
+          type: <xref uid="@azure/arm-cdn.SecurityPolicyUpdateParameters" />
           description: Security policy update properties
         - id: options
           type: <xref uid="@azure/arm-cdn.SecurityPoliciesPatchOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
-          uid="@azure/arm-cdn.SecurityPoliciesPatchResponse" />&gt;, <xref
-          uid="@azure/arm-cdn.SecurityPoliciesPatchResponse" />&gt;&gt;
+          uid="@azure/arm-cdn.SecurityPolicy" />&gt;, <xref
+          uid="@azure/arm-cdn.SecurityPolicy" />&gt;&gt;
   - name: >-
-      beginPatchAndWait(string, string, string, SecurityPolicyProperties,
+      beginPatchAndWait(string, string, string, SecurityPolicyUpdateParameters,
       SecurityPoliciesPatchOptionalParams)
     uid: '@azure/arm-cdn.SecurityPolicies.beginPatchAndWait'
     package: '@azure/arm-cdn'
-    summary: Updates an existing Secret within a profile.
+    summary: Updates an existing security policy within a profile.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginPatchAndWait(resourceGroupName: string, profileName:
-        string, securityPolicyName: string, securityPolicyProperties:
-        SecurityPolicyProperties, options?:
-        SecurityPoliciesPatchOptionalParams):
-        Promise<SecurityPoliciesPatchResponse>
+        string, securityPolicyName: string, securityPolicyUpdateProperties:
+        SecurityPolicyUpdateParameters, options?:
+        SecurityPoliciesPatchOptionalParams): Promise<SecurityPolicy>
       parameters:
         - id: resourceGroupName
           type: string
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: securityPolicyName
           type: string
           description: Name of the security policy under the profile.
-        - id: securityPolicyProperties
-          type: <xref uid="@azure/arm-cdn.SecurityPolicyProperties" />
+        - id: securityPolicyUpdateProperties
+          type: <xref uid="@azure/arm-cdn.SecurityPolicyUpdateParameters" />
           description: Security policy update properties
         - id: options
           type: <xref uid="@azure/arm-cdn.SecurityPoliciesPatchOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-cdn.SecurityPoliciesPatchResponse"
-          />&gt;
-  - name: 'get(string, string, string, SecurityPoliciesGetOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-cdn.SecurityPolicy" />&gt;
+  - name: get(string, string, string, SecurityPoliciesGetOptionalParams)
     uid: '@azure/arm-cdn.SecurityPolicies.get'
     package: '@azure/arm-cdn'
     summary: Gets an existing security policy within a profile.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function get(resourceGroupName: string, profileName: string,
         securityPolicyName: string, options?:
-        SecurityPoliciesGetOptionalParams): Promise<SecurityPoliciesGetResponse>
+        SecurityPoliciesGetOptionalParams): Promise<SecurityPolicy>
       parameters:
         - id: resourceGroupName
           type: string
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: securityPolicyName
           type: string
           description: Name of the security policy under the profile.
         - id: options
           type: <xref uid="@azure/arm-cdn.SecurityPoliciesGetOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-cdn.SecurityPoliciesGetResponse"
-          />&gt;
-  - name: 'listByProfile(string, string, SecurityPoliciesListByProfileOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-cdn.SecurityPolicy" />&gt;
+  - name: listByProfile(string, string, SecurityPoliciesListByProfileOptionalParams)
     uid: '@azure/arm-cdn.SecurityPolicies.listByProfile'
     package: '@azure/arm-cdn'
     summary: Lists security policies associated with the profile
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listByProfile(resourceGroupName: string, profileName: string,
         options?: SecurityPoliciesListByProfileOptionalParams):
-        PagedAsyncIterableIterator<SecurityPolicy>
+        PagedAsyncIterableIterator<SecurityPolicy, SecurityPolicy[],
+        PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
           description: Name of the Resource group within the Azure subscription.
         - id: profileName
           type: string
-          description: Name of the CDN profile which is unique within the resource group.
+          description: >-
+            Name of the Azure Front Door Standard or Azure Front Door Premium
+            profile which
+                               is unique within the resource group.
         - id: options
           type: >-
             <xref
             uid="@azure/arm-cdn.SecurityPoliciesListByProfileOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-cdn.SecurityPolicy" />&gt;
+          uid="@azure/arm-cdn.SecurityPolicy" />, <xref
+          uid="@azure/arm-cdn.SecurityPolicy" />[], PageSettings&gt;

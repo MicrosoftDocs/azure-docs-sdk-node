@@ -10,6 +10,7 @@ interfaces:
   - '@azure/core-rest-pipeline.Agent'
   - '@azure/core-rest-pipeline.AuthorizeRequestOnChallengeOptions'
   - '@azure/core-rest-pipeline.AuthorizeRequestOptions'
+  - '@azure/core-rest-pipeline.AuxiliaryAuthenticationHeaderPolicyOptions'
   - '@azure/core-rest-pipeline.BearerTokenAuthenticationPolicyOptions'
   - '@azure/core-rest-pipeline.ChallengeCallbacks'
   - '@azure/core-rest-pipeline.DefaultRetryPolicyOptions'
@@ -17,6 +18,7 @@ interfaces:
   - '@azure/core-rest-pipeline.HttpClient'
   - '@azure/core-rest-pipeline.HttpHeaders'
   - '@azure/core-rest-pipeline.InternalPipelineOptions'
+  - '@azure/core-rest-pipeline.KeyObject'
   - '@azure/core-rest-pipeline.LogPolicyOptions'
   - '@azure/core-rest-pipeline.Pipeline'
   - '@azure/core-rest-pipeline.PipelineOptions'
@@ -26,6 +28,7 @@ interfaces:
   - '@azure/core-rest-pipeline.PipelineResponse'
   - '@azure/core-rest-pipeline.PipelineRetryOptions'
   - '@azure/core-rest-pipeline.ProxySettings'
+  - '@azure/core-rest-pipeline.PxfObject'
   - '@azure/core-rest-pipeline.RedirectPolicyOptions'
   - '@azure/core-rest-pipeline.RestErrorOptions'
   - '@azure/core-rest-pipeline.RetryInformation'
@@ -33,7 +36,9 @@ interfaces:
   - '@azure/core-rest-pipeline.RetryPolicyOptions'
   - '@azure/core-rest-pipeline.RetryStrategy'
   - '@azure/core-rest-pipeline.SystemErrorRetryPolicyOptions'
+  - '@azure/core-rest-pipeline.TelemetryOptions'
   - '@azure/core-rest-pipeline.ThrottlingRetryPolicyOptions'
+  - '@azure/core-rest-pipeline.TlsSettings'
   - '@azure/core-rest-pipeline.TracingPolicyOptions'
   - '@azure/core-rest-pipeline.UserAgentPolicyOptions'
 typeAliases:
@@ -47,6 +52,37 @@ typeAliases:
   - '@azure/core-rest-pipeline.SendRequest'
   - '@azure/core-rest-pipeline.TransferProgressEvent'
 functions:
+  - name: >-
+      auxiliaryAuthenticationHeaderPolicy(AuxiliaryAuthenticationHeaderPolicyOptions)
+    uid: '@azure/core-rest-pipeline.auxiliaryAuthenticationHeaderPolicy'
+    package: '@azure/core-rest-pipeline'
+    summary: >-
+      A policy for external tokens to `x-ms-authorization-auxiliary` header.
+
+      This header will be used when creating a cross-tenant application we may
+      need to handle authentication requests
+
+      for resources that are in different tenants.
+
+      You could see [ARM
+      docs](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/authenticate-multi-tenant)
+      for a rundown of how this feature works
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function auxiliaryAuthenticationHeaderPolicy(options:
+        AuxiliaryAuthenticationHeaderPolicyOptions): PipelinePolicy
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/core-rest-pipeline.AuxiliaryAuthenticationHeaderPolicyOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
   - name: bearerTokenAuthenticationPolicy(BearerTokenAuthenticationPolicyOptions)
     uid: '@azure/core-rest-pipeline.bearerTokenAuthenticationPolicy'
     package: '@azure/core-rest-pipeline'
@@ -56,7 +92,6 @@ functions:
 
       then apply it to the Authorization header of a request as a Bearer token.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -77,7 +112,6 @@ functions:
     package: '@azure/core-rest-pipeline'
     summary: Create the correct HttpClient for the current environment.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function createDefaultHttpClient(): HttpClient'
@@ -91,7 +125,6 @@ functions:
       Creates a totally empty pipeline.
       Useful for testing or creating a custom one.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function createEmptyPipeline(): Pipeline'
@@ -103,7 +136,6 @@ functions:
     package: '@azure/core-rest-pipeline'
     summary: Creates an object that satisfies the `HttpHeaders` interface.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -112,8 +144,7 @@ functions:
       parameters:
         - id: rawHeaders
           type: <xref uid="@azure/core-rest-pipeline.RawHttpHeadersInput" />
-          description: |
-            A simple object representing initial headers
+          description: A simple object representing initial headers
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.HttpHeaders" />
@@ -122,7 +153,6 @@ functions:
     package: '@azure/core-rest-pipeline'
     summary: Create a new pipeline with a default set of customizable policies.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -131,8 +161,7 @@ functions:
       parameters:
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.InternalPipelineOptions" />
-          description: |
-            Options to configure a custom pipeline.
+          description: Options to configure a custom pipeline.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.Pipeline" />
@@ -145,7 +174,6 @@ functions:
       This method is to allow for the easy setting of default values and not
       required.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -154,8 +182,7 @@ functions:
       parameters:
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.PipelineRequestOptions" />
-          description: |
-            The options to create the request with.
+          description: The options to create the request with.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelineRequest" />
@@ -168,7 +195,6 @@ functions:
 
       https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function decompressResponsePolicy(): PipelinePolicy'
@@ -189,7 +215,6 @@ functions:
       - Or otherwise if the outgoing request fails, it will retry with an
       exponentially increasing delay.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -209,7 +234,6 @@ functions:
       A policy that attempts to retry requests while introducing an
       exponentially increasing delay.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -220,8 +244,7 @@ functions:
           type: >-
             <xref uid="@azure/core-rest-pipeline.ExponentialRetryPolicyOptions"
             />
-          description: |
-            Options that configure retry logic.
+          description: Options that configure retry logic.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
@@ -230,7 +253,6 @@ functions:
     package: '@azure/core-rest-pipeline'
     summary: A policy that encodes FormData on the request into the body.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function formDataPolicy(): PipelinePolicy'
@@ -249,7 +271,6 @@ functions:
 
       variables `HTTPS_PROXY` or `HTTP_PROXY`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -258,25 +279,37 @@ functions:
       parameters:
         - id: proxyUrl
           type: string
-          description: |
-            The url of the proxy to use. May contain authentication information.
+          description: The url of the proxy to use. May contain authentication information.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.ProxySettings" /> | undefined
+  - name: isRestError(unknown)
+    uid: '@azure/core-rest-pipeline.isRestError'
+    package: '@azure/core-rest-pipeline'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: logPolicy(LogPolicyOptions)
     uid: '@azure/core-rest-pipeline.logPolicy'
     package: '@azure/core-rest-pipeline'
     summary: A policy that logs all requests and responses.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function logPolicy(options?: LogPolicyOptions): PipelinePolicy'
       parameters:
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.LogPolicyOptions" />
-          description: |
-            Options to configure logPolicy.
+          description: Options to configure logPolicy.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
@@ -287,14 +320,13 @@ functions:
       ndJsonPolicy is a policy used to control keep alive settings for every
       request.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function ndJsonPolicy(): PipelinePolicy'
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
-  - name: 'proxyPolicy(ProxySettings | undefined, { customNoProxyList?: string[] })'
+  - name: 'proxyPolicy(ProxySettings, { customNoProxyList?: string[] })'
     uid: '@azure/core-rest-pipeline.proxyPolicy'
     package: '@azure/core-rest-pipeline'
     summary: |-
@@ -302,20 +334,18 @@ functions:
       If not passed static settings, they will be retrieved from the HTTPS_PROXY
       or HTTP_PROXY environment variables.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function proxyPolicy(proxySettings?: ProxySettings | undefined,
-        options?: { customNoProxyList?: string[] }): PipelinePolicy
+        function proxyPolicy(proxySettings?: ProxySettings, options?: {
+        customNoProxyList?: string[] }): PipelinePolicy
       parameters:
         - id: proxySettings
-          type: <xref uid="@azure/core-rest-pipeline.ProxySettings" /> | undefined
+          type: <xref uid="@azure/core-rest-pipeline.ProxySettings" />
           description: ProxySettings to use on each request.
         - id: options
           type: '{ customNoProxyList?: string[] }'
-          description: |
-            additional settings, for example, custom NO_PROXY patterns
+          description: additional settings, for example, custom NO_PROXY patterns
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
@@ -325,27 +355,25 @@ functions:
     summary: |-
       A policy to follow Location headers from the server in order
       to support server-side redirection.
+      In the browser, this policy is not used.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function redirectPolicy(options?: RedirectPolicyOptions): PipelinePolicy'
       parameters:
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.RedirectPolicyOptions" />
-          description: |
-            Options to control policy behavior.
+          description: Options to control policy behavior.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
-  - name: 'retryPolicy(RetryStrategy[], RetryPolicyOptions)'
+  - name: retryPolicy(RetryStrategy[], RetryPolicyOptions)
     uid: '@azure/core-rest-pipeline.retryPolicy'
     package: '@azure/core-rest-pipeline'
     summary: >-
       retryPolicy is a generic policy to enable retrying requests when certain
       conditions are met
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -353,7 +381,7 @@ functions:
         RetryPolicyOptions): PipelinePolicy
       parameters:
         - id: strategies
-          type: '<xref uid="@azure/core-rest-pipeline.RetryStrategy" />[]'
+          type: <xref uid="@azure/core-rest-pipeline.RetryStrategy" />[]
           description: ''
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.RetryPolicyOptions" />
@@ -372,7 +400,6 @@ functions:
 
       telemetry and tracing.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -381,8 +408,7 @@ functions:
       parameters:
         - id: requestIdHeaderName
           type: string
-          description: |
-            The name of the header to pass the request ID to.
+          description: The name of the header to pass the request ID to.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
@@ -394,7 +420,6 @@ functions:
       underlying transport layer (e.g. DNS lookup failures) rather than
       retryable error codes from the server itself.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -405,17 +430,17 @@ functions:
           type: >-
             <xref uid="@azure/core-rest-pipeline.SystemErrorRetryPolicyOptions"
             />
-          description: |
-            Options that customize the policy.
+          description: Options that customize the policy.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
   - name: throttlingRetryPolicy(ThrottlingRetryPolicyOptions)
     uid: '@azure/core-rest-pipeline.throttlingRetryPolicy'
     package: '@azure/core-rest-pipeline'
-    summary: >
+    summary: >-
       A policy that retries when the server sends a 429 response with a
       Retry-After header.
+
 
       To learn more, please refer to
 
@@ -426,7 +451,6 @@ functions:
 
       https://docs.microsoft.com/en-us/azure/virtual-machines/troubleshooting/troubleshooting-throttling-errors
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -437,8 +461,24 @@ functions:
           type: >-
             <xref uid="@azure/core-rest-pipeline.ThrottlingRetryPolicyOptions"
             />
-          description: |
-            Options that configure retry logic.
+          description: Options that configure retry logic.
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: tlsPolicy(TlsSettings)
+    uid: '@azure/core-rest-pipeline.tlsPolicy'
+    package: '@azure/core-rest-pipeline'
+    summary: >-
+      Gets a pipeline policy that adds the client certificate to the HttpClient
+      agent for authentication.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function tlsPolicy(tlsSettings?: TlsSettings): PipelinePolicy'
+      parameters:
+        - id: tlsSettings
+          type: <xref uid="@azure/core-rest-pipeline.TlsSettings" />
+          description: ''
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
@@ -453,15 +493,13 @@ functions:
 
       Requests made without a parent Span will not be recorded.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function tracingPolicy(options?: TracingPolicyOptions): PipelinePolicy'
       parameters:
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.TracingPolicyOptions" />
-          description: |
-            Options to configure the telemetry logged by the tracing policy.
+          description: Options to configure the telemetry logged by the tracing policy.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
@@ -472,7 +510,6 @@ functions:
       A policy that sets the User-Agent header (or equivalent) to reflect
       the library version.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -481,8 +518,7 @@ functions:
       parameters:
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.UserAgentPolicyOptions" />
-          description: |
-            Options to customize the user agent value.
+          description: Options to customize the user agent value.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />

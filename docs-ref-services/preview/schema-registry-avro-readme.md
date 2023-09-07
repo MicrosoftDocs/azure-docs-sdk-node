@@ -1,29 +1,28 @@
 ---
-title: Azure Schema Registry Avro Encoder client library for JavaScript
+title: Azure Schema Registry Avro Serializer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry-avro, schemaregistry
 author: deyaaeldeen
 ms.author: dealmaha
-ms.date: 02/11/2022
+ms.date: 04/05/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: schemaregistry
+ms.service: azure
 ---
-# Azure Schema Registry Avro Encoder client library for JavaScript - Version 1.0.0-beta.6 
+# Azure Schema Registry Avro Serializer client library for JavaScript - version 1.0.0-beta.8 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
 providing schema storage, versioning, and management. This package provides an
-Avro encoder capable of encoding and decoding payloads containing
-Avro-encoded data.
+Avro serializer capable of serializing and deserializing payloads containing
+Avro-serialized data.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.6/sdk/schemaregistry/schema-registry-avro)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.8/sdk/schemaregistry/schema-registry-avro)
 - [Package (npm)](https://www.npmjs.com/package/@azure/schema-registry-avro)
 - [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/schema-registry-avro)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.6/sdk/schemaregistry/schema-registry-avro/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.8/sdk/schemaregistry/schema-registry-avro/samples)
 
 ## Getting started
 
@@ -44,58 +43,58 @@ npm install @azure/schema-registry-avro
 
 ## Key concepts
 
-### AvroEncoder
+### AvroSerializer
 
-Provides API to encode to and decode from Avro Binary Encoding wrapped in a message
+Provides API to serialize to and deserialize from Avro Binary Encoding wrapped in a message
 with a content type field containing the schema ID. Uses
 `SchemaRegistryClient` from the [@azure/schema-registry](https://www.npmjs.com/package/@azure/schema-registry) package
 to get schema IDs from schema definition or vice versa. The provided API has internal cache to avoid calling the schema registry service when possible.
 
 ### Messages
 
-By default, the encoder will create messages structured as follows:
+By default, the serializer will create messages structured as follows:
 
-- `body`: a byte array containing data in the Avro Binary Encoding. Note that it
+- `data`: a byte array containing data in the Avro Binary Encoding. Note that it
   is NOT Avro Object Container File. The latter includes the schema and creating
-  it defeats the purpose of using this encoder to move the schema out of the
+  it defeats the purpose of using this serializer to move the schema out of the
   message payload and into the schema registry.
 
 - `contentType`: a string of the following format `avro/binary+<Schema ID>` where
-  the `avro/binary` part signals that this message has an Avro-encoded payload
+  the `avro/binary` part signals that this message has an Avro-serialized payload
   and the `<Schema Id>` part is the Schema ID the Schema Registry service assigned
-  to the schema used to encode this payload.
+  to the schema used to serialize this payload.
 
 Not all messaging services are supporting the same message structure. To enable
-integration with such services, the encoder can act on custom message structures
+integration with such services, the serializer can act on custom message structures
 by setting the `messageAdapter` option in the constructor with a corresponding
 message producer and consumer. Azure messaging client libraries export default
 adapters for their message types.
 
 ### Backward Compatibility
 
-The encoder v1.0.0-beta.5 and under encodes data into binary arrays. Starting from
-v1.0.0-beta.6, the encoder returns messages instead that contain the encoded payload.
-For a smooth transition to using the newer versions, the encoder also supports
-decoding messages with payloads that follow the old format where the schema ID
+The serializer v1.0.0-beta.5 and under serializes data into binary arrays. Starting from
+v1.0.0-beta.6, the serializer returns messages instead that contain the serialized payload.
+For a smooth transition to using the newer versions, the serializer also supports
+deserializing messages with payloads that follow the old format where the schema ID
 is part of the payload.
 
 This backward compatibility is temporary and will be removed in v1.0.0.
 
 ## Examples
 
-### Encode and decode an `@azure/event-hubs`'s `EventData`
+### Serialize and deserialize an `@azure/event-hubs`'s `EventData`
 
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
 import { createEventDataAdapter } from "@azure/event-hubs";
 const { SchemaRegistryClient } = require("@azure/schema-registry");
-const { AvroEncoder } = require("@azure/schema-registry-avro");
+const { AvroSerializer } = require("@azure/schema-registry-avro");
 
 const client = new SchemaRegistryClient(
   "<fully qualified namespace>",
   new DefaultAzureCredential()
 );
-const encoder = new AvroEncoder(client, {
+const serializer = new AvroSerializer(client, {
   groupName: "<group>",
   messageAdapter: createEventDataAdapter(),
 });
@@ -111,14 +110,16 @@ const schema = JSON.stringify({
 // Example value that matches the Avro schema above
 const value = { score: 42 };
 
-// Encode value to a message
-const message = await encoder.encodeMessageData(value, schema);
+// Serialize value to a message
+const message = await serializer.serialize(value, schema);
 
-// Decode a message to value
-const decodedValue = await encoder.decodeMessageData(message);
+// Deserialize a message to value
+const deserializedValue = await serializer.deserialize(message);
 ```
 
 ## Troubleshooting
+
+The Avro serializer communicates with the [Schema Registry][schema_registry] service as needed to register or query schemas and those service calls could throw a [RestError][resterror]. Furthermore, errors of type `AvroError` will be thrown when serialization or deserialization fails. The `innerError` property will contain the underlying error that was thrown from the Avro implementation library.
 
 ### Logging
 
@@ -136,7 +137,7 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.6/sdk/schemaregistry/schema-registry-avro/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.8/sdk/schemaregistry/schema-registry-avro/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -159,7 +160,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 If you'd like to contribute to this library, please read the [contributing
-guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry-avro_1.0.0-beta.6/CONTRIBUTING.md) to
+guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry-avro_1.0.0-beta.8/CONTRIBUTING.md) to
 learn more about how to build and test the code.
 
 ## Related projects
@@ -171,6 +172,7 @@ learn more about how to build and test the code.
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.6/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.6/sdk/identity/identity#defaultazurecredential
-
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.8/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.8/sdk/identity/identity#defaultazurecredential
+[resterror]: https://docs.microsoft.com/javascript/api/@azure/core-rest-pipeline/resterror?view=azure-node-latest
+[schema_registry]: https://docs.microsoft.com/javascript/api/overview/azure/schema-registry-readme?view=azure-node-latest

@@ -6,10 +6,9 @@ ms.author: ramyar
 manager: angrobew
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Commerce
+ms.service: azure
 ---
 
 # Azure Commerce modules for JavaScript

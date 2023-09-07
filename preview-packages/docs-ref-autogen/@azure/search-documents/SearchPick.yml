@@ -1,0 +1,52 @@
+### YamlMime:TSTypeAlias
+name: SearchPick
+uid: '@azure/search-documents.SearchPick'
+package: '@azure/search-documents'
+summary: |-
+  Deeply pick fields of T using valid Cognitive Search OData $select
+  paths.
+fullName: SearchPick<TModel, TFields>
+remarks: ''
+isDeprecated: false
+syntax: |
+  type SearchPick<TModel, TFields> = () => (
+    T extends TModel ? true : false
+  ) extends () => T extends object ? true : false
+    ? TModel
+    : () => (T extends TFields ? true : false) extends () => T extends any
+        ? true
+        : false
+        ? TModel
+        : () => (T extends TFields ? true : false) extends () => T extends never
+            ? true
+            : false
+            ? TModel
+            : UnionToIntersection<
+                TFields extends Object
+                  ? FieldName extends keyof TModel & string
+                    ? NonNullable<TModel[FieldName]> extends Elem[]
+                      ? Elem extends object
+                        ? RestPaths extends SelectFields<Elem>
+                          ? {
+                              [Key in keyof TModel as Key &
+                                FieldName]: SearchPick<Elem, RestPaths>[]
+                            }
+                          : never
+                        : never
+                      : NonNullable<TModel[FieldName]> extends object
+                      ? {
+                          [Key in keyof TModel as Key &
+                            FieldName]: RestPaths extends SelectFields<
+                            TModel[Key] & {}
+                          >
+                            ?
+                                | SearchPick<TModel[Key] & {}, RestPaths>
+                                | Extract<TModel[Key], null>
+                            : never
+                        }
+                      : never
+                    : never
+                  : TFields extends keyof TModel
+                  ? Pick<TModel, TFields> | Extract<TModel, null>
+                  : never
+              > & {}

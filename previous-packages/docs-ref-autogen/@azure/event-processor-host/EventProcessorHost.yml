@@ -5,16 +5,14 @@ package: '@azure/event-processor-host'
 summary: Describes the Event Processor Host to process events from an EventHub.
 fullName: EventProcessorHost
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'EventProcessorHost(string, EventProcessorHostOptions)'
+  - name: EventProcessorHost(string, EventProcessorHostOptions)
     uid: '@azure/event-processor-host.EventProcessorHost.constructor'
     package: '@azure/event-processor-host'
     summary: Creates a new host to process events from an Event Hub.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -33,7 +31,9 @@ constructors:
             `js-host-${uuid()}`.
         - id: options
           type: <xref uid="@azure/event-processor-host.EventProcessorHostOptions" />
-          description: ''
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
 properties:
   - name: consumerGroup
     uid: '@azure/event-processor-host.EventProcessorHost.consumerGroup'
@@ -41,7 +41,6 @@ properties:
     summary: Provides the consumer group name for the Event processor host.
     fullName: consumerGroup
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'consumerGroup: string'
@@ -54,7 +53,6 @@ properties:
     summary: Provides the host name for the Event processor host.
     fullName: hostName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'hostName: string'
@@ -64,9 +62,10 @@ properties:
   - name: receivingFromPartitions
     uid: '@azure/event-processor-host.EventProcessorHost.receivingFromPartitions'
     package: '@azure/event-processor-host'
-    summary: >
+    summary: >-
       Provides a list of partitions the EPH is currently receiving messages
       from.
+
 
       The EPH will try to grab leases for more partitions during each scan that
       happens once every
@@ -83,13 +82,14 @@ properties:
       from.
     fullName: receivingFromPartitions
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'receivingFromPartitions: string[]'
       return:
-        description: ''
-        type: 'string[]'
+        description: |-
+          Array<string> List of partitions that this EPH instance is currently
+          receiving messages from.
+        type: string[]
 methods:
   - name: >-
       createFromAadTokenCredentials(string, string, string, string, string,
@@ -100,7 +100,6 @@ methods:
     package: '@azure/event-processor-host'
     summary: Creates an EventProcessorHost instance from AAD token credentials.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -156,7 +155,9 @@ methods:
             | MSITokenCredentials.
         - id: options
           type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
-          description: ''
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
@@ -174,7 +175,6 @@ methods:
 
       and lease manager.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -223,7 +223,9 @@ methods:
           description: A manager to manage leases.
         - id: options
           type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
-          description: ''
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
@@ -236,7 +238,6 @@ methods:
       Creates an EventProcessorHost instance from the EventHub connection
       string.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -282,7 +283,9 @@ methods:
           type: >-
             <xref uid="@azure/event-processor-host.FromConnectionStringOptions"
             />
-          description: ''
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
@@ -298,7 +301,6 @@ methods:
 
       checkpoint manager and lease manager.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -337,26 +339,27 @@ methods:
           type: >-
             <xref uid="@azure/event-processor-host.FromConnectionStringOptions"
             />
-          description: ''
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
   - name: >-
       createFromIotHubConnectionString(string, string, string, string,
-      FromIotHubConnectionStringOptions)
+      FromTokenProviderOptions)
     uid: >-
       @azure/event-processor-host.EventProcessorHost.createFromIotHubConnectionString
     package: '@azure/event-processor-host'
     summary: Creates an EventProcessorHost instance from the IotHub connection string.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function createFromIotHubConnectionString(hostName: string,
         storageConnectionString: string, storageContainerName: string,
-        iotHubConnectionString: string, options?:
-        FromIotHubConnectionStringOptions): Promise<EventProcessorHost>
+        iotHubConnectionString: string, options?: FromTokenProviderOptions):
+        Promise<EventProcessorHost>
       parameters:
         - id: hostName
           type: string
@@ -390,11 +393,10 @@ methods:
             Example:
             'Endpoint=iot-host-name;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
         - id: options
-          type: >-
-            <xref
-            uid="@azure/event-processor-host.FromIotHubConnectionStringOptions"
-            />
-          description: ''
+          type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: >-
@@ -402,8 +404,7 @@ methods:
           />&gt;
   - name: >-
       createFromIotHubConnectionStringWithCustomCheckpointAndLeaseManager(string,
-      string, CheckpointManager, LeaseManager,
-      FromIotHubConnectionStringOptions)
+      string, CheckpointManager, LeaseManager, FromTokenProviderOptions)
     uid: >-
       @azure/event-processor-host.EventProcessorHost.createFromIotHubConnectionStringWithCustomCheckpointAndLeaseManager
     package: '@azure/event-processor-host'
@@ -413,7 +414,6 @@ methods:
 
       checkpoint manager and lease manager.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -421,7 +421,7 @@ methods:
         createFromIotHubConnectionStringWithCustomCheckpointAndLeaseManager(hostName:
         string, iotHubConnectionString: string, checkpointManager:
         CheckpointManager, leaseManager: LeaseManager, options?:
-        FromIotHubConnectionStringOptions): Promise<EventProcessorHost>
+        FromTokenProviderOptions): Promise<EventProcessorHost>
       parameters:
         - id: hostName
           type: string
@@ -447,11 +447,10 @@ methods:
           type: <xref uid="@azure/event-processor-host.LeaseManager" />
           description: A manager to manage leases.
         - id: options
-          type: >-
-            <xref
-            uid="@azure/event-processor-host.FromIotHubConnectionStringOptions"
-            />
-          description: ''
+          type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: >-
@@ -464,7 +463,6 @@ methods:
     package: '@azure/event-processor-host'
     summary: Creates an EventProcessorHost instance from a TokenProvider.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -510,7 +508,9 @@ methods:
           description: Your token provider that implements the TokenProvider interface.
         - id: options
           type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
-          description: ''
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
@@ -527,7 +527,6 @@ methods:
 
       and lease manager.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -566,23 +565,26 @@ methods:
           description: A manager to manage leases.
         - id: options
           type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
-          description: ''
+          description: |-
+            Optional parameters for creating an
+            EventProcessorHost.
       return:
         description: EventProcessorHost
         type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
-  - name: createHostName(undefined | string)
+  - name: createHostName(string)
     uid: '@azure/event-processor-host.EventProcessorHost.createHostName'
     package: '@azure/event-processor-host'
     summary: Convenience method for generating unique host name.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function createHostName(prefix?: undefined | string): string'
+      content: 'static function createHostName(prefix?: string): string'
       parameters:
         - id: prefix
-          type: undefined | string
-          description: ''
+          type: string
+          description: >-
+            String to use as the beginning of the name. Default value:
+            "js-host".
       return:
         description: A unique host name
         type: string
@@ -591,31 +593,30 @@ methods:
     package: '@azure/event-processor-host'
     summary: Provides the eventhub runtime information.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getHubRuntimeInformation(): Promise<EventHubRuntimeInformation>'
       return:
         description: ''
-        type: Promise&lt;EventHubRuntimeInformation&gt;
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/event-processor-host.EventHubRuntimeInformation" />&gt;
   - name: getPartitionIds()
     uid: '@azure/event-processor-host.EventProcessorHost.getPartitionIds'
     package: '@azure/event-processor-host'
     summary: Provides an array of partitionIds.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getPartitionIds(): Promise<string[]>'
       return:
         description: ''
-        type: 'Promise&lt;string[]&gt;'
+        type: Promise&lt;string[]&gt;
   - name: getPartitionInformation(string | number)
     uid: '@azure/event-processor-host.EventProcessorHost.getPartitionInformation'
     package: '@azure/event-processor-host'
     summary: Provides information about the specified partition.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -624,12 +625,14 @@ methods:
       parameters:
         - id: partitionId
           type: string | number
-          description: |
-            Partition ID for which partition information is required.
+          description: Partition ID for which partition information is required.
       return:
         description: EventHubPartitionRuntimeInformation
-        type: Promise&lt;EventHubPartitionRuntimeInformation&gt;
-  - name: 'start(OnReceivedMessage, OnReceivedError)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/event-processor-host.EventHubPartitionRuntimeInformation"
+          />&gt;
+  - name: start(OnReceivedMessage, OnReceivedError)
     uid: '@azure/event-processor-host.EventProcessorHost.start'
     package: '@azure/event-processor-host'
     summary: >-
@@ -641,7 +644,6 @@ methods:
 
       point where it left off previously.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -662,7 +664,6 @@ methods:
     package: '@azure/event-processor-host'
     summary: Stops the EventProcessorHost from processing messages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function stop(): Promise<void>'

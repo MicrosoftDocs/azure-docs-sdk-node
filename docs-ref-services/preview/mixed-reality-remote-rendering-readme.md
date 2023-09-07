@@ -5,13 +5,12 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/21/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: remoterendering
+ms.service: azure-remote-rendering
 ---
 
-# Azure Remote Rendering client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Remote Rendering client library for JavaScript - version 1.0.0-beta.1 
 
 
 Azure Remote Rendering (ARR) is a service that enables you to render high-quality, interactive 3D content in the cloud and stream it in real time to devices, such as the HoloLens 2.

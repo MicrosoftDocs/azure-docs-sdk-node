@@ -5,33 +5,34 @@ package: '@azure/core-lro'
 summary: Description of a long running operation.
 fullName: LongRunningOperation<T>
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
   - name: requestMethod
     uid: '@azure/core-lro.LongRunningOperation.requestMethod'
     package: '@azure/core-lro'
-    summary: The HTTP request method.
+    summary: |-
+      The HTTP request method. This should be set if the operation is a PUT or a
+      DELETE.
     fullName: requestMethod
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'requestMethod: string'
+      content: 'requestMethod?: string'
       return:
         description: ''
         type: string
   - name: requestPath
     uid: '@azure/core-lro.LongRunningOperation.requestPath'
     package: '@azure/core-lro'
-    summary: The request path.
+    summary: |-
+      The request path. This should be set if the operation is a PUT and needs
+      to poll from the same request path.
     fullName: requestPath
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'requestPath: string'
+      content: 'requestPath?: string'
       return:
         description: ''
         type: string
@@ -41,13 +42,12 @@ properties:
     summary: A function that can be used to send initial request to the service.
     fullName: sendInitialRequest
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'sendInitialRequest: () => Promise<LroResponse<T>>'
+      content: 'sendInitialRequest: () => Promise<LroResponse<unknown>>'
       return:
         description: ''
-        type: () =&gt; Promise&lt;LroResponse&lt;T&gt;&gt;
+        type: () =&gt; Promise&lt;LroResponse&lt;unknown&gt;&gt;
   - name: sendPollRequest
     uid: '@azure/core-lro.LongRunningOperation.sendPollRequest'
     package: '@azure/core-lro'
@@ -56,10 +56,13 @@ properties:
       running operation.
     fullName: sendPollRequest
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'sendPollRequest: (path: string) => Promise<LroResponse<T>>'
+      content: >-
+        sendPollRequest: (path: string, options?: { abortSignal?:
+        AbortSignalLike }) => Promise<LroResponse<T>>
       return:
         description: ''
-        type: '(path: string) =&gt; Promise&lt;LroResponse&lt;T&gt;&gt;'
+        type: >-
+          (path: string, options?: { abortSignal?: AbortSignalLike }) =&gt;
+          Promise&lt;LroResponse&lt;T&gt;&gt;

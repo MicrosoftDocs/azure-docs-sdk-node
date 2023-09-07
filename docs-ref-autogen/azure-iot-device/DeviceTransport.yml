@@ -5,88 +5,19 @@ package: azure-iot-device
 summary: ''
 fullName: DeviceTransport
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
-properties:
-  - name: captureRejections
-    uid: azure-iot-device.DeviceTransport.captureRejections
-    package: azure-iot-device
-    summary: Sets or gets the default captureRejection value for all emitters.
-    fullName: captureRejections
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'static captureRejections: boolean'
-      return:
-        description: ''
-        type: boolean
-  - name: captureRejectionSymbol
-    uid: azure-iot-device.DeviceTransport.captureRejectionSymbol
-    package: azure-iot-device
-    summary: ''
-    fullName: captureRejectionSymbol
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'static captureRejectionSymbol: Object'
-      return:
-        description: ''
-        type: Object
-  - name: defaultMaxListeners
-    uid: azure-iot-device.DeviceTransport.defaultMaxListeners
-    package: azure-iot-device
-    summary: ''
-    fullName: defaultMaxListeners
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'static defaultMaxListeners: number'
-      return:
-        description: ''
-        type: number
-  - name: errorMonitor
-    uid: azure-iot-device.DeviceTransport.errorMonitor
-    package: azure-iot-device
-    summary: >
-      This symbol shall be used to install a listener for only monitoring
-      `'error'`
-
-      events. Listeners installed using this symbol are called before the
-      regular
-
-      `'error'` listeners are called.
-
-      Installing a listener using this symbol does not change the behavior once
-      an
-
-      `'error'` event is emitted, therefore the process will still crash if no
-
-      regular `'error'` listener is installed.
-    fullName: errorMonitor
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'static errorMonitor: Object'
-      return:
-        description: ''
-        type: Object
 inheritedMethods:
   - name: 'addListener(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.DeviceTransport.addListener
     package: azure-iot-device
-    summary: 'Alias for `emitter.on(eventName, listener)`.'
+    summary: Alias for `emitter.on(eventName, listener)`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function addListener(eventName: string | symbol, listener: (args: any[])
-        => void): this
+        => void): DeviceTransport
       parameters:
         - id: eventName
           type: string | symbol
@@ -96,8 +27,9 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
-  - name: 'emit(string | symbol, any[])'
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.addListener
+  - name: emit(string | symbol, any[])
     uid: azure-iot-device.DeviceTransport.emit
     package: azure-iot-device
     summary: >-
@@ -107,12 +39,13 @@ inheritedMethods:
 
       to each.
 
+
       Returns `true` if the event had listeners, `false` otherwise.
 
 
       ```js
 
-      const EventEmitter = require('events');
+      import { EventEmitter } from 'node:events';
 
       const myEmitter = new EventEmitter();
 
@@ -163,7 +96,6 @@ inheritedMethods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function emit(eventName: string | symbol, args: any[]): boolean'
@@ -172,19 +104,22 @@ inheritedMethods:
           type: string | symbol
           description: ''
         - id: args
-          type: 'any[]'
+          type: any[]
           description: ''
       return:
         description: ''
         type: boolean
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.emit
   - name: eventNames()
     uid: azure-iot-device.DeviceTransport.eventNames
     package: azure-iot-device
     summary: |-
       Returns an array listing the events for which the emitter has registered
       listeners. The values in the array are strings or `Symbol`s.
+
       ```js
-      const EventEmitter = require('events');
+      import { EventEmitter } from 'node:events';
+
       const myEE = new EventEmitter();
       myEE.on('foo', () => {});
       myEE.on('bar', () => {});
@@ -196,67 +131,13 @@ inheritedMethods:
       // Prints: [ 'foo', 'bar', Symbol(symbol) ]
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function eventNames(): Array<string | symbol>'
+      content: 'function eventNames(): (string | symbol)[]'
       return:
         description: ''
-        type: Array&lt;string | symbol&gt;
-  - name: 'getEventListeners(DOMEventTarget | EventEmitter, string | symbol)'
-    uid: azure-iot-device.DeviceTransport.getEventListeners
-    package: azure-iot-device
-    summary: >-
-      Returns a copy of the array of listeners for the event named `eventName`.
-
-      For `EventEmitter`s this behaves exactly the same as calling `.listeners`
-      on
-
-      the emitter.
-
-
-      For `EventTarget`s this is the only way to get the event listeners for the
-
-      event target. This is useful for debugging and diagnostic purposes.
-
-
-      ```js
-
-      const { getEventListeners, EventEmitter } = require('events');
-
-
-      {
-        const ee = new EventEmitter();
-        const listener = () => console.log('Events are fun');
-        ee.on('foo', listener);
-        getEventListeners(ee, 'foo'); // [listener]
-      }
-
-      {
-        const et = new EventTarget();
-        const listener = () => console.log('Events are fun');
-        et.addEventListener('foo', listener);
-        getEventListeners(et, 'foo'); // [listener]
-      }
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function getEventListeners(emitter: DOMEventTarget |
-        EventEmitter, name: string | symbol): Function[]
-      parameters:
-        - id: emitter
-          type: DOMEventTarget | EventEmitter
-          description: ''
-        - id: name
-          type: string | symbol
-          description: ''
-      return:
-        description: ''
-        type: 'Function[]'
+        type: (string | symbol)[]
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.eventNames
   - name: getMaxListeners()
     uid: azure-iot-device.DeviceTransport.getMaxListeners
     package: azure-iot-device
@@ -265,78 +146,48 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:azure-iot-device.DeviceTransport.defaultMaxListeners>.
+      <xref:azure-iot-device.Twin.defaultMaxListeners>.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getMaxListeners(): number'
       return:
         description: ''
         type: number
-  - name: 'listenerCount(EventEmitter, string | symbol)'
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.getMaxListeners
+  - name: listenerCount(string | symbol, Function)
     uid: azure-iot-device.DeviceTransport.listenerCount
     package: azure-iot-device
     summary: >-
-      A class method that returns the number of listeners for the given
-      `eventName`registered on the given `emitter`.
+      Returns the number of listeners listening for the event named `eventName`.
 
-      ```js
+      If `listener` is provided, it will return how many times the listener is
+      found
 
-      const { EventEmitter, listenerCount } = require('events');
-
-      const myEmitter = new EventEmitter();
-
-      myEmitter.on('event', () => {});
-
-      myEmitter.on('event', () => {});
-
-      console.log(listenerCount(myEmitter, 'event'));
-
-      // Prints: 2
-
-      ```
+      in the list of the listeners of the event.
     remarks: ''
-    isPreview: false
-    isDeprecated: true
-    customDeprecatedMessage: Since v3.2.0 - Use `listenerCount` instead.
-    syntax:
-      content: >-
-        static function listenerCount(emitter: EventEmitter, eventName: string |
-        symbol): number
-      parameters:
-        - id: emitter
-          type: EventEmitter
-          description: The emitter to query
-        - id: eventName
-          type: string | symbol
-          description: |
-            The event name
-      return:
-        description: ''
-        type: number
-  - name: listenerCount(string | symbol)
-    uid: azure-iot-device.DeviceTransport.listenerCount
-    package: azure-iot-device
-    summary: Returns the number of listeners listening to the event named `eventName`.
-    remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listenerCount(eventName: string | symbol): number'
+      content: >-
+        function listenerCount(eventName: string | symbol, listener?: Function):
+        number
       parameters:
         - id: eventName
           type: string | symbol
-          description: |
-            The name of the event being listened for
+          description: The name of the event being listened for
+        - id: listener
+          type: Function
+          description: The event handler function
       return:
         description: ''
         type: number
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.listenerCount
   - name: listeners(string | symbol)
     uid: azure-iot-device.DeviceTransport.listeners
     package: azure-iot-device
     summary: |-
       Returns a copy of the array of listeners for the event named `eventName`.
+
       ```js
       server.on('connection', (stream) => {
         console.log('someone connected!');
@@ -345,7 +196,6 @@ inheritedMethods:
       // Prints: [ [Function] ]
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function listeners(eventName: string | symbol): Function[]'
@@ -355,18 +205,18 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: 'Function[]'
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.listeners
   - name: 'off(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.DeviceTransport.off
     package: azure-iot-device
     summary: Alias for `emitter.removeListener()`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function off(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
+        void): DeviceTransport
       parameters:
         - id: eventName
           type: string | symbol
@@ -376,222 +226,8 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
-  - name: 'on(EventEmitter, string, StaticEventEmitterOptions)'
-    uid: azure-iot-device.DeviceTransport.on
-    package: azure-iot-device
-    summary: |-
-      ```js
-      const { on, EventEmitter } = require('events');
-      (async () => {
-        const ee = new EventEmitter();
-
-        // Emit later on
-        process.nextTick(() => {
-          ee.emit('foo', 'bar');
-          ee.emit('foo', 42);
-        });
-
-        for await (const event of on(ee, 'foo')) {
-          // The execution of this inner block is synchronous and it
-          // processes one event at a time (even with await). Do not use
-          // if concurrent execution is required.
-          console.log(event); // prints ['bar'] [42]
-        }
-        // Unreachable here
-      })();
-      ```
-
-      Returns an `AsyncIterator` that iterates `eventName` events. It will throw
-      if the `EventEmitter` emits `'error'`. It removes all listeners when
-      exiting the loop. The `value` returned by each iteration is an array
-      composed of the emitted event arguments.
-
-      An `AbortSignal` can be used to cancel waiting on events:
-
-      ```js
-      const { on, EventEmitter } = require('events');
-      const ac = new AbortController();
-
-      (async () => {
-        const ee = new EventEmitter();
-
-        // Emit later on
-        process.nextTick(() => {
-          ee.emit('foo', 'bar');
-          ee.emit('foo', 42);
-        });
-
-        for await (const event of on(ee, 'foo', { signal: ac.signal })) {
-          // The execution of this inner block is synchronous and it
-          // processes one event at a time (even with await). Do not use
-          // if concurrent execution is required.
-          console.log(event); // prints ['bar'] [42]
-        }
-        // Unreachable here
-      })();
-
-      process.nextTick(() => ac.abort());
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function on(emitter: EventEmitter, eventName: string, options?:
-        StaticEventEmitterOptions): AsyncIterableIterator<any>
-      parameters:
-        - id: emitter
-          type: EventEmitter
-          description: ''
-        - id: eventName
-          type: string
-          description: The name of the event being listened for
-        - id: options
-          type: StaticEventEmitterOptions
-          description: ''
-      return:
-        description: that iterates `eventName` events emitted by the `emitter`
-        type: AsyncIterableIterator&lt;any&gt;
-  - name: 'once(NodeEventTarget, string | symbol, StaticEventEmitterOptions)'
-    uid: azure-iot-device.DeviceTransport.once
-    package: azure-iot-device
-    summary: >-
-      Creates a `Promise` that is fulfilled when the `EventEmitter` emits the
-      given
-
-      event or that is rejected if the `EventEmitter` emits `'error'` while
-      waiting.
-
-      The `Promise` will resolve with an array of all the arguments emitted to
-      the
-
-      given event.
-
-      This method is intentionally generic and works with the web platform
-      [EventTarget](https://dom.spec.whatwg.org/#interface-eventtarget)
-      interface, which has no special`'error'` event
-
-      semantics and does not listen to the `'error'` event.
-
-
-      ```js
-
-      const { once, EventEmitter } = require('events');
-
-
-      async function run() {
-        const ee = new EventEmitter();
-
-        process.nextTick(() => {
-          ee.emit('myevent', 42);
-        });
-
-        const [value] = await once(ee, 'myevent');
-        console.log(value);
-
-        const err = new Error('kaboom');
-        process.nextTick(() => {
-          ee.emit('error', err);
-        });
-
-        try {
-          await once(ee, 'myevent');
-        } catch (err) {
-          console.log('error happened', err);
-        }
-      }
-
-
-      run();
-
-      ```
-
-
-      The special handling of the `'error'` event is only used when
-      `events.once()`is used to wait for another event. If `events.once()` is
-      used to wait for the
-
-      '`error'` event itself, then it is treated as any other kind of event
-      without
-
-      special handling:
-
-
-      ```js
-
-      const { EventEmitter, once } = require('events');
-
-
-      const ee = new EventEmitter();
-
-
-      once(ee, 'error')
-        .then(([err]) => console.log('ok', err.message))
-        .catch((err) => console.log('error', err.message));
-
-      ee.emit('error', new Error('boom'));
-
-
-      // Prints: ok boom
-
-      ```
-
-
-      An `AbortSignal` can be used to cancel waiting for the event:
-
-
-      ```js
-
-      const { EventEmitter, once } = require('events');
-
-
-      const ee = new EventEmitter();
-
-      const ac = new AbortController();
-
-
-      async function foo(emitter, event, signal) {
-        try {
-          await once(emitter, event, { signal });
-          console.log('event emitted!');
-        } catch (error) {
-          if (error.name === 'AbortError') {
-            console.error('Waiting for the event was canceled!');
-          } else {
-            console.error('There was an error', error.message);
-          }
-        }
-      }
-
-
-      foo(ee, 'foo', ac.signal);
-
-      ac.abort(); // Abort waiting for the event
-
-      ee.emit('foo'); // Prints: Waiting for the event was canceled!
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function once(emitter: NodeEventTarget, eventName: string |
-        symbol, options?: StaticEventEmitterOptions): Promise<any[]>
-      parameters:
-        - id: emitter
-          type: NodeEventTarget
-          description: ''
-        - id: eventName
-          type: string | symbol
-          description: ''
-        - id: options
-          type: StaticEventEmitterOptions
-          description: ''
-      return:
-        description: ''
-        type: 'Promise&lt;any[]&gt;'
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.off
   - name: 'once(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.DeviceTransport.once
     package: azure-iot-device
@@ -601,6 +237,7 @@ inheritedMethods:
 
       next time `eventName` is triggered, this listener is removed and then
       invoked.
+
 
       ```js
 
@@ -623,6 +260,8 @@ inheritedMethods:
 
       ```js
 
+      import { EventEmitter } from 'node:events';
+
       const myEE = new EventEmitter();
 
       myEE.once('foo', () => console.log('a'));
@@ -639,23 +278,22 @@ inheritedMethods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function once(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
+        void): DeviceTransport
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.once
   - name: 'prependListener(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.DeviceTransport.prependListener
     package: azure-iot-device
@@ -671,6 +309,7 @@ inheritedMethods:
 
       times.
 
+
       ```js
 
       server.prependListener('connection', (stream) => {
@@ -682,32 +321,32 @@ inheritedMethods:
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function prependListener(eventName: string | symbol, listener: (args:
-        any[]) => void): this
+        any[]) => void): DeviceTransport
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.prependListener
   - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.DeviceTransport.prependOnceListener
     package: azure-iot-device
     summary: >-
       Adds a **one-time**`listener` function for the event named `eventName` to
-      the_beginning_ of the listeners array. The next time `eventName` is
+      the _beginning_ of the listeners array. The next time `eventName` is
       triggered, this
 
       listener is removed, and then invoked.
+
 
       ```js
 
@@ -720,30 +359,31 @@ inheritedMethods:
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function prependOnceListener(eventName: string | symbol, listener:
-        (args: any[]) => void): this
+        (args: any[]) => void): DeviceTransport
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.prependOnceListener
   - name: rawListeners(string | symbol)
     uid: azure-iot-device.DeviceTransport.rawListeners
     package: azure-iot-device
     summary: |-
       Returns a copy of the array of listeners for the event named `eventName`,
       including any wrappers (such as those created by `.once()`).
+
       ```js
+      import { EventEmitter } from 'node:events';
       const emitter = new EventEmitter();
       emitter.once('log', () => console.log('log once'));
 
@@ -767,7 +407,6 @@ inheritedMethods:
       emitter.emit('log');
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function rawListeners(eventName: string | symbol): Function[]'
@@ -777,35 +416,38 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: 'Function[]'
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.rawListeners
   - name: removeAllListeners(string | symbol)
     uid: azure-iot-device.DeviceTransport.removeAllListeners
     package: azure-iot-device
     summary: |-
       Removes all listeners, or those of the specified `eventName`.
+
       It is bad practice to remove listeners added elsewhere in the code,
       particularly when the `EventEmitter` instance was created by some other
       component or module (e.g. sockets or file streams).
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function removeAllListeners(event?: string | symbol): this'
+      content: 'function removeAllListeners(event?: string | symbol): DeviceTransport'
       parameters:
         - id: event
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.removeAllListeners
   - name: 'removeListener(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.DeviceTransport.removeListener
     package: azure-iot-device
     summary: >-
       Removes the specified `listener` from the listener array for the event
       named`eventName`.
+
 
       ```js
 
@@ -837,14 +479,18 @@ inheritedMethods:
       Once an event is emitted, all listeners attached to it at the
 
       time of emitting are called in order. This implies that
-      any`removeListener()` or `removeAllListeners()` calls _after_ emitting
-      and_before_ the last listener finishes execution will
+      any`removeListener()` or `removeAllListeners()` calls _after_ emitting and
+      _before_ the last listener finishes execution
 
-      not remove them from`emit()` in progress. Subsequent events behave as
+      will not remove them from`emit()` in progress. Subsequent events behave as
       expected.
 
 
       ```js
+
+      import { EventEmitter } from 'node:events';
+
+      class MyEmitter extends EventEmitter {}
 
       const myEmitter = new MyEmitter();
 
@@ -916,6 +562,8 @@ inheritedMethods:
 
       ```js
 
+      import { EventEmitter } from 'node:events';
+
       const ee = new EventEmitter();
 
 
@@ -940,12 +588,11 @@ inheritedMethods:
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function removeListener(eventName: string | symbol, listener: (args:
-        any[]) => void): this
+        any[]) => void): DeviceTransport
       parameters:
         - id: eventName
           type: string | symbol
@@ -955,7 +602,8 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.removeListener
   - name: setMaxListeners(number)
     uid: azure-iot-device.DeviceTransport.setMaxListeners
     package: azure-iot-device
@@ -971,76 +619,26 @@ inheritedMethods:
       modified for this specific `EventEmitter` instance. The value can be set
       to`Infinity` (or `0`) to indicate an unlimited number of listeners.
 
+
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number): this'
+      content: 'function setMaxListeners(n: number): DeviceTransport'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
         description: ''
-        type: this
-  - name: 'setMaxListeners(number, Array<DOMEventTarget | EventEmitter>)'
-    uid: azure-iot-device.DeviceTransport.setMaxListeners
-    package: azure-iot-device
-    summary: >-
-      By default `EventEmitter`s will print a warning if more than `10`
-      listeners are
-
-      added for a particular event. This is a useful default that helps finding
-
-      memory leaks. The `EventEmitter.setMaxListeners()` method allows the
-      default limit to be
-
-      modified (if eventTargets is empty) or modify the limit specified in every
-      `EventTarget` | `EventEmitter` passed as arguments.
-
-      The value can be set to`Infinity` (or `0`) to indicate an unlimited number
-      of listeners.
-
-      ```js
-
-      EventEmitter.setMaxListeners(20);
-
-      // Equivalent to
-
-      EventEmitter.defaultMaxListeners = 20;
-
-
-      const eventTarget = new EventTarget();
-
-      // Only way to increase limit for `EventTarget` instances
-
-      // as these doesn't expose its own `setMaxListeners` method
-
-      EventEmitter.setMaxListeners(20, eventTarget);
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function setMaxListeners(n?: number, eventTargets:
-        Array<DOMEventTarget | EventEmitter>)
-      parameters:
-        - id: 'n'
-          type: number
-          description: ''
-        - id: eventTargets
-          type: Array&lt;DOMEventTarget | EventEmitter&gt;
-          description: ''
+        type: <xref uid="azure-iot-device.DeviceTransport" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.setMaxListeners
 methods:
   - name: 'abandon(Message, (err?: Error, results?: MessageAbandoned) => void)'
     uid: azure-iot-device.DeviceTransport.abandon
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1048,7 +646,7 @@ methods:
         MessageAbandoned) => void)
       parameters:
         - id: message
-          type: Message
+          type: <xref uid="azure-iot-device.Message" />
           description: ''
         - id: done
           type: '(err?: Error, results?: MessageAbandoned) =&gt; void'
@@ -1058,7 +656,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1066,7 +663,7 @@ methods:
         MessageCompleted) => void)
       parameters:
         - id: message
-          type: Message
+          type: <xref uid="azure-iot-device.Message" />
           description: ''
         - id: done
           type: '(err?: Error, result?: MessageCompleted) =&gt; void'
@@ -1076,7 +673,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function connect(done: (err?: Error, result?: Connected) => void)'
@@ -1089,7 +685,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function disableC2D(callback: (err?: Error) => void)'
@@ -1102,7 +697,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function disableInputMessages(callback: (err?: Error) => void)'
@@ -1115,7 +709,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function disableMethods(callback: (err?: Error) => void)'
@@ -1128,7 +721,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1143,7 +735,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function disconnect(done: (err?: Error, result?: Disconnected) => void)'
@@ -1156,7 +747,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function enableC2D(callback: (err?: Error) => void)'
@@ -1169,7 +759,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function enableInputMessages(callback: (err?: Error) => void)'
@@ -1182,7 +771,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function enableMethods(callback: (err?: Error) => void)'
@@ -1195,7 +783,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1210,7 +797,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getTwin(callback: (err?: Error, twin?: TwinProperties) => void)'
@@ -1218,15 +804,14 @@ methods:
         - id: callback
           type: '(err?: Error, twin?: TwinProperties) =&gt; void'
           description: ''
-  - name: 'on("connected", () => void)'
+  - name: on("connected", () => void)
     uid: azure-iot-device.DeviceTransport.on_2
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(type: "connected", func: () => void): this'
+      content: 'function on(type: "connected", func: () => void): DeviceTransport'
       parameters:
         - id: type
           type: '"connected"'
@@ -1236,16 +821,17 @@ methods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
   - name: 'on("disconnect", (err?: Error) => void)'
     uid: azure-iot-device.DeviceTransport.on_1
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(type: "disconnect", func: (err?: Error) => void): this'
+      content: >-
+        function on(type: "disconnect", func: (err?: Error) => void):
+        DeviceTransport
       parameters:
         - id: type
           type: '"disconnect"'
@@ -1255,16 +841,15 @@ methods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
   - name: 'on("error", (err: Error) => void)'
     uid: azure-iot-device.DeviceTransport.on
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(type: "error", func: (err: Error) => void): this'
+      content: 'function on(type: "error", func: (err: Error) => void): DeviceTransport'
       parameters:
         - id: type
           type: '"error"'
@@ -1274,18 +859,17 @@ methods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
   - name: 'on("inputMessage", (inputName: string, msg: Message) => void)'
     uid: azure-iot-device.DeviceTransport.on_5
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function on(type: "inputMessage", func: (inputName: string, msg:
-        Message) => void): this
+        Message) => void): DeviceTransport
       parameters:
         - id: type
           type: '"inputMessage"'
@@ -1295,16 +879,17 @@ methods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
   - name: 'on("message", (msg: Message) => void)'
     uid: azure-iot-device.DeviceTransport.on_3
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(type: "message", func: (msg: Message) => void): this'
+      content: >-
+        function on(type: "message", func: (msg: Message) => void):
+        DeviceTransport
       parameters:
         - id: type
           type: '"message"'
@@ -1314,18 +899,17 @@ methods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
   - name: 'on("twinDesiredPropertiesUpdate", (desiredProps: any) => void)'
     uid: azure-iot-device.DeviceTransport.on_4
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function on(type: "twinDesiredPropertiesUpdate", func: (desiredProps:
-        any) => void): this
+        any) => void): DeviceTransport
       parameters:
         - id: type
           type: '"twinDesiredPropertiesUpdate"'
@@ -1335,7 +919,7 @@ methods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iot-device.DeviceTransport" />
   - name: >-
       onDeviceMethod(string, (request: MethodMessage, response:
       DeviceMethodResponse) => void)
@@ -1343,7 +927,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1361,7 +944,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1369,7 +951,7 @@ methods:
         MessageRejected) => void)
       parameters:
         - id: message
-          type: Message
+          type: <xref uid="azure-iot-device.Message" />
           description: ''
         - id: done
           type: '(err?: Error, results?: MessageRejected) =&gt; void'
@@ -1379,7 +961,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1387,7 +968,7 @@ methods:
         MessageEnqueued) => void)
       parameters:
         - id: message
-          type: Message
+          type: <xref uid="azure-iot-device.Message" />
           description: ''
         - id: done
           type: '(err?: Error, result?: MessageEnqueued) =&gt; void'
@@ -1397,7 +978,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1405,7 +985,7 @@ methods:
         result?: MessageEnqueued) => void)
       parameters:
         - id: messages
-          type: 'Message[]'
+          type: <xref uid="azure-iot-device.Message" />[]
           description: ''
         - id: done
           type: '(err?: Error, result?: MessageEnqueued) =&gt; void'
@@ -1417,7 +997,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1437,7 +1016,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1448,7 +1026,7 @@ methods:
           type: string
           description: ''
         - id: message
-          type: Message
+          type: <xref uid="azure-iot-device.Message" />
           description: ''
         - id: done
           type: '(err?: Error, result?: MessageEnqueued) =&gt; void'
@@ -1460,7 +1038,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1471,7 +1048,7 @@ methods:
           type: string
           description: ''
         - id: messages
-          type: 'Message[]'
+          type: <xref uid="azure-iot-device.Message" />[]
           description: ''
         - id: done
           type: '(err?: Error, result?: MessageEnqueued) =&gt; void'
@@ -1483,7 +1060,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1503,7 +1079,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1521,7 +1096,6 @@ methods:
     package: azure-iot-device
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-

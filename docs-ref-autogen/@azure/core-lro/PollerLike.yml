@@ -5,9 +5,8 @@ package: '@azure/core-lro'
 summary: >-
   Abstract representation of a poller, intended to expose just the minimal API
   that the user needs to work with.
-fullName: 'PollerLike<TState, TResult>'
+fullName: PollerLike<TState, TResult>
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
@@ -16,8 +15,8 @@ methods:
     package: '@azure/core-lro'
     summary: Attempts to cancel the underlying operation.
     remarks: ''
-    isPreview: false
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: '`cancelOperation` has been deprecated because it was not implemented.'
     syntax:
       content: >-
         function cancelOperation(options?: { abortSignal?: AbortSignalLike }):
@@ -37,7 +36,6 @@ methods:
       The TState defined in PollerLike can be a subset of the TState defined in
       the Poller implementation.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getOperationState(): TState'
@@ -53,19 +51,17 @@ methods:
       It can return undefined or an incomplete form of the final TResult value
       depending on the implementation.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getResult(): TResult | undefined'
+      content: 'function getResult(): undefined | TResult'
       return:
         description: ''
-        type: TResult | undefined
+        type: undefined | TResult
   - name: isDone()
     uid: '@azure/core-lro.PollerLike.isDone'
     package: '@azure/core-lro'
     summary: Returns true if the poller has finished polling.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function isDone(): boolean'
@@ -77,7 +73,6 @@ methods:
     package: '@azure/core-lro'
     summary: Returns true if the poller is stopped.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function isStopped(): boolean'
@@ -87,15 +82,15 @@ methods:
   - name: 'onProgress((state: TState) => void)'
     uid: '@azure/core-lro.PollerLike.onProgress'
     package: '@azure/core-lro'
-    summary: >
+    summary: >-
       Invokes the provided callback after each polling is completed,
 
       sending the current state of the poller's operation.
 
+
       It returns a method that can be used to stop receiving updates on the
       given callback function.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function onProgress(callback: (state: TState) => void): CancelOnProgress'
@@ -115,7 +110,6 @@ methods:
 
       It does this by calling the update method of the Poller's operation.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -128,26 +122,30 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: pollUntilDone()
+  - name: 'pollUntilDone({ abortSignal?: AbortSignalLike })'
     uid: '@azure/core-lro.PollerLike.pollUntilDone'
     package: '@azure/core-lro'
     summary: >-
       Returns a promise that will resolve once the underlying operation is
       completed.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function pollUntilDone(): Promise<TResult>'
+      content: >-
+        function pollUntilDone(pollOptions?: { abortSignal?: AbortSignalLike }):
+        Promise<TResult>
+      parameters:
+        - id: pollOptions
+          type: '{ abortSignal?: AbortSignalLike }'
+          description: ''
       return:
         description: ''
         type: Promise&lt;TResult&gt;
   - name: stopPolling()
     uid: '@azure/core-lro.PollerLike.stopPolling'
     package: '@azure/core-lro'
-    summary: 'Stops the poller. After this, no manual or automated requests can be sent.'
+    summary: Stops the poller. After this, no manual or automated requests can be sent.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: function stopPolling()
@@ -158,7 +156,6 @@ methods:
       Returns a serialized version of the poller's operation
       by invoking the operation's toString method.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function toString(): string'

@@ -9,11 +9,10 @@ summary: >-
   subscriptions.
 fullName: ServiceBusClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'ServiceBusClient(string, ServiceBusClientOptions)'
+  - name: ServiceBusClient(string, ServiceBusClientOptions)
     uid: '@azure/service-bus.ServiceBusClient.constructor'
     package: '@azure/service-bus'
     summary: >-
@@ -26,7 +25,6 @@ constructors:
       until the senders/receivers created with the client are used to
       send/receive messages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -42,8 +40,7 @@ constructors:
             ignored.
         - id: options
           type: <xref uid="@azure/service-bus.ServiceBusClientOptions" />
-          description: |
-            Options for the service bus client.
+          description: Options for the service bus client.
   - name: >-
       ServiceBusClient(string, TokenCredential | NamedKeyCredential |
       SASCredential, ServiceBusClientOptions)
@@ -59,7 +56,6 @@ constructors:
       the senders/receivers created with the client are used to send/receive
       messages.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -73,7 +69,9 @@ constructors:
             The full namespace of your Service Bus instance which is
             likely to be similar to <yournamespace>.servicebus.windows.net.
         - id: credential
-          type: TokenCredential | NamedKeyCredential | SASCredential
+          type: >-
+            <xref uid="@azure/service-bus.TokenCredential" /> |
+            NamedKeyCredential | SASCredential
           description: >-
             A credential object used by the client to get the token to
             authenticate the connection
@@ -102,8 +100,17 @@ constructors:
             `AzureSASCredential`.
         - id: options
           type: <xref uid="@azure/service-bus.ServiceBusClientOptions" />
-          description: |
-            Options for the service bus client.
+          description: >-
+            A set of options to apply when configuring the client.
+
+            - `retryOptions`   : Configures the retry policy for all the
+            operations on the client.
+
+            For example, `{ "maxRetries": 4 }` or `{ "maxRetries": 4,
+            "retryDelayInMs": 30000 }`.
+
+            - `webSocketOptions`: Configures the channelling of the AMQP
+            connection over Web Sockets.
 properties:
   - name: fullyQualifiedNamespace
     uid: '@azure/service-bus.ServiceBusClient.fullyQualifiedNamespace'
@@ -115,20 +122,34 @@ properties:
       This is likely to be similar to <yournamespace>.servicebus.windows.net.
     fullName: fullyQualifiedNamespace
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'fullyQualifiedNamespace: string'
       return:
         description: ''
         type: string
+  - name: identifier
+    uid: '@azure/service-bus.ServiceBusClient.identifier'
+    package: '@azure/service-bus'
+    summary: |-
+      The name used to identify this ServiceBusClient.
+      If not specified or empty, a random unique one will be generated.
+    fullName: identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'identifier: string'
+      return:
+        description: ''
+        type: string
 methods:
-  - name: 'acceptNextSession(string, ServiceBusSessionReceiverOptions)'
+  - name: acceptNextSession(string, ServiceBusSessionReceiverOptions)
     uid: '@azure/service-bus.ServiceBusClient.acceptNextSession'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Creates a receiver for the next available session in a session-enabled
       Azure Service Bus queue.
+
 
       You can choose between two receive modes:  "peekLock" (default) and
       "receiveAndDelete".
@@ -152,7 +173,6 @@ methods:
 
       https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -168,16 +188,17 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
-        description: 'A receiver that can be used to receive, peek and settle messages.'
+        description: A receiver that can be used to receive, peek and settle messages.
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
-  - name: 'acceptNextSession(string, string, ServiceBusSessionReceiverOptions)'
+  - name: acceptNextSession(string, string, ServiceBusSessionReceiverOptions)
     uid: '@azure/service-bus.ServiceBusClient.acceptNextSession_1'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Creates a receiver for the next available session in a session-enabled
       Azure Service Bus subscription.
+
 
       You can choose between two receive modes:  "peekLock" (default) and
       "receiveAndDelete".
@@ -201,7 +222,6 @@ methods:
 
       https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -223,15 +243,16 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
-        description: 'A receiver that can be used to receive, peek and settle messages.'
+        description: A receiver that can be used to receive, peek and settle messages.
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
-  - name: 'acceptSession(string, string, ServiceBusSessionReceiverOptions)'
+  - name: acceptSession(string, string, ServiceBusSessionReceiverOptions)
     uid: '@azure/service-bus.ServiceBusClient.acceptSession'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Creates a receiver for a session enabled Azure Service Bus queue.
+
 
       You can choose between two receive modes:  "peekLock" (default) and
       "receiveAndDelete".
@@ -255,7 +276,6 @@ methods:
 
       https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -274,15 +294,16 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
-        description: 'A receiver that can be used to receive, peek and settle messages.'
+        description: A receiver that can be used to receive, peek and settle messages.
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
-  - name: 'acceptSession(string, string, string, ServiceBusSessionReceiverOptions)'
+  - name: acceptSession(string, string, string, ServiceBusSessionReceiverOptions)
     uid: '@azure/service-bus.ServiceBusClient.acceptSession_1'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Creates a receiver for a session enabled Azure Service Bus subscription.
+
 
       You can choose between two receive modes:  "peekLock" (default) and
       "receiveAndDelete".
@@ -306,7 +327,6 @@ methods:
 
       https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -331,7 +351,7 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
-        description: 'A receiver that can be used to receive, peek and settle messages.'
+        description: A receiver that can be used to receive, peek and settle messages.
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
@@ -346,20 +366,20 @@ methods:
 
       instance.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function close(): Promise<void>'
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'createReceiver(string, ServiceBusReceiverOptions)'
+  - name: createReceiver(string, ServiceBusReceiverOptions)
     uid: '@azure/service-bus.ServiceBusClient.createReceiver'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Creates a receiver for an Azure Service Bus queue. No connection is made
 
       to the service until one of the methods on the receiver is called.
+
 
       To target sub queues like the dead letter queue or the transfer dead
       letter queue, provide the
@@ -400,7 +420,6 @@ methods:
 
       https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -412,18 +431,19 @@ methods:
           description: The name of the queue to receive from.
         - id: options
           type: <xref uid="@azure/service-bus.ServiceBusReceiverOptions" />
-          description: 'Options to pass the receiveMode, defaulted to peekLock.'
+          description: Options to pass the receiveMode, defaulted to peekLock.
       return:
-        description: 'A receiver that can be used to receive, peek and settle messages.'
+        description: A receiver that can be used to receive, peek and settle messages.
         type: <xref uid="@azure/service-bus.ServiceBusReceiver" />
-  - name: 'createReceiver(string, string, ServiceBusReceiverOptions)'
+  - name: createReceiver(string, string, ServiceBusReceiverOptions)
     uid: '@azure/service-bus.ServiceBusClient.createReceiver_1'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Creates a receiver for an Azure Service Bus subscription. No connection is
       made
 
       to the service until one of the methods on the receiver is called.
+
 
       To target sub queues like the dead letter queue or the transfer dead
       letter queue, provide the
@@ -464,7 +484,6 @@ methods:
 
       https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -481,11 +500,44 @@ methods:
             from.
         - id: options
           type: <xref uid="@azure/service-bus.ServiceBusReceiverOptions" />
-          description: 'Options to pass the receiveMode, defaulted to peekLock.'
+          description: Options to pass the receiveMode, defaulted to peekLock.
       return:
-        description: 'A receiver that can be used to receive, peek and settle messages.'
+        description: A receiver that can be used to receive, peek and settle messages.
         type: <xref uid="@azure/service-bus.ServiceBusReceiver" />
-  - name: createSender(string)
+  - name: createRuleManager(string, string)
+    uid: '@azure/service-bus.ServiceBusClient.createRuleManager'
+    package: '@azure/service-bus'
+    summary: >-
+      Creates an instance of
+      [ServiceBusRuleManager](xref:@azure/service-bus.ServiceBusRuleManager)
+      that is used to manage
+
+      the rules for a subscription.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createRuleManager(topicName: string, subscriptionName: string):
+        ServiceBusRuleManager
+      parameters:
+        - id: topicName
+          type: string
+          description: >-
+            the topic to create
+            [ServiceBusRuleManager](xref:@azure/service-bus.ServiceBusRuleManager)
+        - id: subscriptionName
+          type: string
+          description: >-
+            the subscription specific to the specified topic to create a
+            [ServiceBusRuleManager](xref:@azure/service-bus.ServiceBusRuleManager)
+            for.
+      return:
+        description: >-
+          a
+          [ServiceBusRuleManager](xref:@azure/service-bus.ServiceBusRuleManager)
+          scoped to the specified subscription and topic.
+        type: <xref uid="@azure/service-bus.ServiceBusRuleManager" />
+  - name: createSender(string, ServiceBusSenderOptions)
     uid: '@azure/service-bus.ServiceBusClient.createSender'
     package: '@azure/service-bus'
     summary: >-
@@ -497,15 +549,18 @@ methods:
 
       to the service until one of the methods on the sender is called.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createSender(queueOrTopicName: string): ServiceBusSender'
+      content: >-
+        function createSender(queueOrTopicName: string, options?:
+        ServiceBusSenderOptions): ServiceBusSender
       parameters:
         - id: queueOrTopicName
           type: string
-          description: |
-            The name of a queue or topic to send messages to.
+          description: The name of a queue or topic to send messages to.
+        - id: options
+          type: <xref uid="@azure/service-bus.ServiceBusSenderOptions" />
+          description: ''
       return:
         description: ''
         type: <xref uid="@azure/service-bus.ServiceBusSender" />

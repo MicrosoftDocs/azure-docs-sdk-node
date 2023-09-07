@@ -7,16 +7,14 @@ summary: |-
   to perform operations on a single table.
 fullName: TableClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'TableClient(string, string, NamedKeyCredential, TableServiceClientOptions)'
+  - name: TableClient(string, string, NamedKeyCredential, TableServiceClientOptions)
     uid: '@azure/data-tables.TableClient.constructor'
     package: '@azure/data-tables'
     summary: Creates a new instance of the TableClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -32,13 +30,13 @@ constructors:
           type: string
           description: the name of the table
         - id: credential
-          type: NamedKeyCredential
+          type: <xref uid="@azure/data-tables.NamedKeyCredential" />
           description: >-
             NamedKeyCredential used to authenticate requests. Only Supported for
             Node
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
+          description: >-
             Optional. Options to configure the HTTP pipeline.
 
 
@@ -68,12 +66,11 @@ constructors:
             );
 
             ```
-  - name: 'TableClient(string, string, SASCredential, TableServiceClientOptions)'
+  - name: TableClient(string, string, SASCredential, TableServiceClientOptions)
     uid: '@azure/data-tables.TableClient.constructor_1'
     package: '@azure/data-tables'
     summary: Creates a new instance of the TableClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -90,47 +87,43 @@ constructors:
           description: the name of the table
         - id: credential
           type: SASCredential
-          description: >-
-            NamedKeyCredential used to authenticate requests. Only Supported for
-            Node
+          description: SASCredential used to authenticate requests
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
+          description: >-
             Optional. Options to configure the HTTP pipeline.
 
 
 
-            ### Example using an account name/key:
+            ### Example using a SAS Token:
 
 
             ```js
 
-            const { AzureNamedKeyCredential, TableClient } =
+            const { AzureSASCredential, TableClient } =
             require("@azure/data-tables");
 
             const account = "<storage account name>";
 
-            const accountKey = "<account key>"
+            const sasToken = "<sas-token>";
 
             const tableName = "<table name>";
 
-            const sharedKeyCredential = new AzureNamedKeyCredential(account,
-            accountKey);
+            const sasCredential = new AzureSASCredential(sasToken);
 
 
             const client = new TableClient(
               `https://${account}.table.core.windows.net`,
               tableName,
-              sharedKeyCredential
+              sasCredential
             );
 
             ```
-  - name: 'TableClient(string, string, TableServiceClientOptions)'
+  - name: TableClient(string, string, TableServiceClientOptions)
     uid: '@azure/data-tables.TableClient.constructor_3'
     package: '@azure/data-tables'
     summary: Creates an instance of TableClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -139,50 +132,36 @@ constructors:
       parameters:
         - id: url
           type: string
-          description: >-
-            The URL of the service account that is the target of the desired
-            operation, such as "https://myaccount.table.core.windows.net".
+          description: |-
+            A Client string pointing to Azure Storage table service, such as
+                         "https://myaccount.table.core.windows.net". You can append a SAS,
+                         such as "https://myaccount.table.core.windows.net?sasString".
         - id: tableName
           type: string
           description: the name of the table
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
-            Optional. Options to configure the HTTP pipeline.
+          description: |-
+            Options to configure the HTTP pipeline.
 
-
-
-            ### Example using an account name/key:
-
+            ### Example appending a SAS token:
 
             ```js
-
-            const { AzureNamedKeyCredential, TableClient } =
-            require("@azure/data-tables");
-
+            const { TableClient } = require("@azure/data-tables");
             const account = "<storage account name>";
-
-            const accountKey = "<account key>"
-
+            const sasToken = "<SAS token>";
             const tableName = "<table name>";
 
-            const sharedKeyCredential = new AzureNamedKeyCredential(account,
-            accountKey);
-
-
             const client = new TableClient(
-              `https://${account}.table.core.windows.net`,
-              tableName,
-              sharedKeyCredential
+              `https://${account}.table.core.windows.net?${sasToken}`,
+              `${tableName}`
             );
-
             ```
-  - name: 'TableClient(string, string, TokenCredential, TableServiceClientOptions)'
+  - name: TableClient(string, string, TokenCredential, TableServiceClientOptions)
     uid: '@azure/data-tables.TableClient.constructor_2'
     package: '@azure/data-tables'
     summary: Creates a new instance of the TableClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -199,38 +178,37 @@ constructors:
           description: the name of the table
         - id: credential
           type: TokenCredential
-          description: >-
-            NamedKeyCredential used to authenticate requests. Only Supported for
-            Node
+          description: Azure Active Directory credential used to authenticate requests
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
-          description: >
+          description: >-
             Optional. Options to configure the HTTP pipeline.
 
 
 
-            ### Example using an account name/key:
+            ### Example using an Azure Active Directory credential:
 
 
             ```js
 
-            const { AzureNamedKeyCredential, TableClient } =
+            cons { DefaultAzureCredential } = require("@azure/identity");
+
+            const { AzureSASCredential, TableClient } =
             require("@azure/data-tables");
 
             const account = "<storage account name>";
 
-            const accountKey = "<account key>"
+            const sasToken = "<sas-token>";
 
             const tableName = "<table name>";
 
-            const sharedKeyCredential = new AzureNamedKeyCredential(account,
-            accountKey);
+            const credential = new DefaultAzureCredential();
 
 
             const client = new TableClient(
               `https://${account}.table.core.windows.net`,
               tableName,
-              sharedKeyCredential
+              credential
             );
 
             ```
@@ -245,7 +223,6 @@ properties:
       before and after it is made to the server.
     fullName: pipeline
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'pipeline: Pipeline'
@@ -258,7 +235,6 @@ properties:
     summary: Name of the table to perform operations on.
     fullName: tableName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'tableName: string'
@@ -271,7 +247,6 @@ properties:
     summary: Table Account URL
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
@@ -279,24 +254,23 @@ properties:
         description: ''
         type: string
 methods:
-  - name: 'createEntity<T>(TableEntity<T>, OperationOptions)'
+  - name: createEntity<T>(TableEntity<T>, OperationOptions)
     uid: '@azure/data-tables.TableClient.createEntity'
     package: '@azure/data-tables'
     summary: Insert entity in the table.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function createEntity<T>(entity: TableEntity<T>, options?:
-        OperationOptions): Promise<CreateTableEntityResponse>
+        OperationOptions): Promise<TableInsertEntityHeaders>
       parameters:
         - id: entity
           type: <xref uid="@azure/data-tables.TableEntity" />&lt;T&gt;
           description: The properties for the table entity.
         - id: options
           type: OperationOptions
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -336,21 +310,20 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/data-tables.CreateTableEntityResponse"
+          Promise&lt;<xref uid="@azure/data-tables.TableInsertEntityHeaders"
           />&gt;
   - name: createTable(OperationOptions)
     uid: '@azure/data-tables.TableClient.createTable'
     package: '@azure/data-tables'
     summary: Creates a table with the tableName passed to the client constructor
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function createTable(options?: OperationOptions): Promise<void>'
       parameters:
         - id: options
           type: OperationOptions
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -392,17 +365,16 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'deleteEntity(string, string, DeleteTableEntityOptions)'
+  - name: deleteEntity(string, string, DeleteTableEntityOptions)
     uid: '@azure/data-tables.TableClient.deleteEntity'
     package: '@azure/data-tables'
     summary: Deletes the specified entity in the table.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteEntity(partitionKey: string, rowKey: string, options?:
-        DeleteTableEntityOptions): Promise<DeleteTableEntityResponse>
+        DeleteTableEntityOptions): Promise<TableDeleteEntityHeaders>
       parameters:
         - id: partitionKey
           type: string
@@ -412,7 +384,7 @@ methods:
           description: The row key of the entity.
         - id: options
           type: <xref uid="@azure/data-tables.DeleteTableEntityOptions" />
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -450,21 +422,20 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/data-tables.DeleteTableEntityResponse"
+          Promise&lt;<xref uid="@azure/data-tables.TableDeleteEntityHeaders"
           />&gt;
   - name: deleteTable(OperationOptions)
     uid: '@azure/data-tables.TableClient.deleteTable'
     package: '@azure/data-tables'
     summary: Permanently deletes the current table with all of its entities.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function deleteTable(options?: OperationOptions): Promise<void>'
       parameters:
         - id: options
           type: OperationOptions
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -504,12 +475,11 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'fromConnectionString(string, string, TableServiceClientOptions)'
+  - name: fromConnectionString(string, string, TableServiceClientOptions)
     uid: '@azure/data-tables.TableClient.fromConnectionString'
     package: '@azure/data-tables'
     summary: Creates an instance of TableClient from connection string.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -544,7 +514,6 @@ methods:
 
       Shared Access Signatures.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -553,19 +522,17 @@ methods:
       parameters:
         - id: options
           type: OperationOptions
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/data-tables.GetAccessPolicyResponse"
           />&gt;
-  - name: 'getEntity<T>(string, string, GetTableEntityOptions)'
+  - name: getEntity<T>(string, string, GetTableEntityOptions)
     uid: '@azure/data-tables.TableClient.getEntity'
     package: '@azure/data-tables'
     summary: Returns a single entity in the table.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -581,7 +548,7 @@ methods:
           description: The row key of the entity.
         - id: options
           type: <xref uid="@azure/data-tables.GetTableEntityOptions" />
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -631,17 +598,16 @@ methods:
     package: '@azure/data-tables'
     summary: Queries entities in a table.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listEntities<T>(options?: ListTableEntitiesOptions):
         PagedAsyncIterableIterator<TableEntityResult<T>,
-        TableEntityResultPage<T>>
+        TableEntityResultPage<T>, PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/data-tables.ListTableEntitiesOptions" />
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -692,42 +658,43 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/data-tables.TableEntityResult" />&lt;T&gt;, <xref
-          uid="@azure/data-tables.TableEntityResultPage" />&lt;T&gt;&gt;
-  - name: 'setAccessPolicy(SignedIdentifier[], OperationOptions)'
+          uid="@azure/data-tables.TableEntityResultPage" />&lt;T&gt;,
+          PageSettings&gt;
+  - name: setAccessPolicy(SignedIdentifier[], OperationOptions)
     uid: '@azure/data-tables.TableClient.setAccessPolicy'
     package: '@azure/data-tables'
     summary: >-
       Sets stored access policies for the table that may be used with Shared
       Access Signatures.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setAccessPolicy(tableAcl: SignedIdentifier[], options?:
-        OperationOptions): Promise<SetAccessPolicyResponse>
+        OperationOptions): Promise<TableSetAccessPolicyHeaders>
       parameters:
         - id: tableAcl
-          type: '<xref uid="@azure/data-tables.SignedIdentifier" />[]'
+          type: <xref uid="@azure/data-tables.SignedIdentifier" />[]
           description: The Access Control List for the table.
         - id: options
           type: OperationOptions
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/data-tables.SetAccessPolicyResponse"
+          Promise&lt;<xref uid="@azure/data-tables.TableSetAccessPolicyHeaders"
           />&gt;
-  - name: 'submitTransaction(TransactionAction[])'
+  - name: submitTransaction(TransactionAction[])
     uid: '@azure/data-tables.TableClient.submitTransaction'
     package: '@azure/data-tables'
-    summary: >
+    summary: >-
       Submits a Transaction which is composed of a set of actions. You can
       provide the actions as a list
 
-      or you can use <xref:@azure/data-tables.TableTransaction> to help building
-      the transaction.
+      or you can use
+      [TableTransaction](xref:@azure/data-tables.TableTransaction) to help
+      building the transaction.
+
 
       Example usage:
 
@@ -783,7 +750,6 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -791,8 +757,8 @@ methods:
         Promise<TableTransactionResponse>
       parameters:
         - id: actions
-          type: '<xref uid="@azure/data-tables.TransactionAction" />[]'
-          description: >
+          type: <xref uid="@azure/data-tables.TransactionAction" />[]
+          description: >-
             tuple that contains the action to perform, and the entity to perform
             the action with
       return:
@@ -800,17 +766,16 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/data-tables.TableTransactionResponse"
           />&gt;
-  - name: 'updateEntity<T>(TableEntity<T>, UpdateMode, UpdateTableEntityOptions)'
+  - name: updateEntity<T>(TableEntity<T>, UpdateMode, UpdateTableEntityOptions)
     uid: '@azure/data-tables.TableClient.updateEntity'
     package: '@azure/data-tables'
     summary: Update an entity in the table.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function updateEntity<T>(entity: TableEntity<T>, mode?: UpdateMode,
-        options?: UpdateTableEntityOptions): Promise<UpdateEntityResponse>
+        options?: UpdateTableEntityOptions): Promise<TableUpdateEntityHeaders>
       parameters:
         - id: entity
           type: <xref uid="@azure/data-tables.TableEntity" />&lt;T&gt;
@@ -823,7 +788,7 @@ methods:
                           - Replace: Updates an existing entity by replacing the entire entity.
         - id: options
           type: <xref uid="@azure/data-tables.UpdateTableEntityOptions" />
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -888,18 +853,19 @@ methods:
             ```
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/data-tables.UpdateEntityResponse" />&gt;
-  - name: 'upsertEntity<T>(TableEntity<T>, UpdateMode, OperationOptions)'
+        type: >-
+          Promise&lt;<xref uid="@azure/data-tables.TableUpdateEntityHeaders"
+          />&gt;
+  - name: upsertEntity<T>(TableEntity<T>, UpdateMode, OperationOptions)
     uid: '@azure/data-tables.TableClient.upsertEntity'
     package: '@azure/data-tables'
     summary: Upsert an entity in the table.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function upsertEntity<T>(entity: TableEntity<T>, mode?: UpdateMode,
-        options?: OperationOptions): Promise<UpsertEntityResponse>
+        options?: OperationOptions): Promise<TableMergeEntityHeaders>
       parameters:
         - id: entity
           type: <xref uid="@azure/data-tables.TableEntity" />&lt;T&gt;
@@ -912,7 +878,7 @@ methods:
                           - Replace: Updates an existing entity by replacing the entire entity.
         - id: options
           type: OperationOptions
-          description: >
+          description: >-
             The options parameters.
 
 
@@ -964,4 +930,6 @@ methods:
             ```
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/data-tables.UpsertEntityResponse" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/data-tables.TableMergeEntityHeaders"
+          />&gt;

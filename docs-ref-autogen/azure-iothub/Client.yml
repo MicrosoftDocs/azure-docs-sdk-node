@@ -2,7 +2,7 @@
 name: Client
 uid: azure-iothub.Client
 package: azure-iothub
-summary: >
+summary: >-
   The IoT Hub service client is used to communicate with devices through an
   Azure IoT hub.
 
@@ -11,6 +11,7 @@ summary: >
     - invoke direct methods on devices (which will work only if the device is currently connected: it's a synchronous way of communicating with the device)
     - listen for feedback messages sent by devices for previous commands.
     - listen for file upload notifications from devices.
+
   Users should create new <xref:azure-iothub.Client> instances by calling one of
   the factory methods,
 
@@ -21,88 +22,221 @@ summary: >
   to create an IoT Hub service Client.
 fullName: Client
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
-properties:
+inheritedProperties:
   - name: captureRejections
     uid: azure-iothub.Client.captureRejections
     package: azure-iothub
-    summary: Sets or gets the default captureRejection value for all emitters.
+    summary: >-
+      Value:
+      [boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type)
+
+
+      Change the default `captureRejections` option on all new `EventEmitter`
+      objects.
     fullName: captureRejections
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'static captureRejections: boolean'
       return:
         description: ''
         type: boolean
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.captureRejections
   - name: captureRejectionSymbol
     uid: azure-iothub.Client.captureRejectionSymbol
     package: azure-iothub
-    summary: ''
+    summary: |-
+      Value: `Symbol.for('nodejs.rejection')`
+
+      See how to write a custom `rejection handler`.
     fullName: captureRejectionSymbol
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static captureRejectionSymbol: Object'
+      content: 'static captureRejectionSymbol: typeof captureRejectionSymbol'
       return:
         description: ''
-        type: Object
+        type: typeof captureRejectionSymbol
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.captureRejectionSymbol
   - name: defaultMaxListeners
     uid: azure-iothub.Client.defaultMaxListeners
     package: azure-iothub
-    summary: ''
+    summary: >-
+      By default, a maximum of `10` listeners can be registered for any single
+
+      event. This limit can be changed for individual `EventEmitter` instances
+
+      using the `emitter.setMaxListeners(n)` method. To change the default
+
+      for _all_`EventEmitter` instances, the
+      `events.defaultMaxListeners`property can be used. If this value is not a
+      positive number, a `RangeError`is thrown.
+
+
+      Take caution when setting the `events.defaultMaxListeners` because the
+
+      change affects _all_`EventEmitter` instances, including those created
+      before
+
+      the change is made. However, calling `emitter.setMaxListeners(n)` still
+      has
+
+      precedence over `events.defaultMaxListeners`.
+
+
+      This is not a hard limit. The `EventEmitter` instance will allow
+
+      more listeners to be added but will output a trace warning to stderr
+      indicating
+
+      that a "possible EventEmitter memory leak" has been detected. For any
+      single`EventEmitter`, the `emitter.getMaxListeners()` and
+      `emitter.setMaxListeners()`methods can be used to
+
+      temporarily avoid this warning:
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      const emitter = new EventEmitter();
+
+      emitter.setMaxListeners(emitter.getMaxListeners() + 1);
+
+      emitter.once('event', () => {
+        // do stuff
+        emitter.setMaxListeners(Math.max(emitter.getMaxListeners() - 1, 0));
+      });
+
+      ```
+
+
+      The `--trace-warnings` command-line flag can be used to display the
+
+      stack trace for such warnings.
+
+
+      The emitted warning can be inspected with `process.on('warning')` and will
+
+      have the additional `emitter`, `type`, and `count` properties, referring
+      to
+
+      the event emitter instance, the event's name and the number of attached
+
+      listeners, respectively.
+
+      Its `name` property is set to `'MaxListenersExceededWarning'`.
     fullName: defaultMaxListeners
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'static defaultMaxListeners: number'
       return:
         description: ''
         type: number
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.defaultMaxListeners
   - name: errorMonitor
     uid: azure-iothub.Client.errorMonitor
     package: azure-iothub
-    summary: >
+    summary: >-
       This symbol shall be used to install a listener for only monitoring
-      `'error'`
+      `'error'`events. Listeners installed using this symbol are called before
+      the regular`'error'` listeners are called.
 
-      events. Listeners installed using this symbol are called before the
-      regular
-
-      `'error'` listeners are called.
 
       Installing a listener using this symbol does not change the behavior once
-      an
-
-      `'error'` event is emitted, therefore the process will still crash if no
+      an`'error'` event is emitted. Therefore, the process will still crash if
+      no
 
       regular `'error'` listener is installed.
     fullName: errorMonitor
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static errorMonitor: Object'
+      content: 'static errorMonitor: typeof errorMonitor'
       return:
         description: ''
-        type: Object
+        type: typeof errorMonitor
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.errorMonitor
 inheritedMethods:
+  - name: 'addAbortListener(AbortSignal, (event: Event) => void)'
+    uid: azure-iothub.Client.addAbortListener
+    package: azure-iothub
+    summary: >-
+      Listens once to the `abort` event on the provided `signal`.
+
+
+      Listening to the `abort` event on abort signals is unsafe and may
+
+      lead to resource leaks since another third party with the signal can
+
+      call `e.stopImmediatePropagation()`. Unfortunately Node.js cannot change
+
+      this since it would violate the web standard. Additionally, the original
+
+      API makes it easy to forget to remove listeners.
+
+
+      This API allows safely using `AbortSignal`s in Node.js APIs by solving
+      these
+
+      two issues by listening to the event such that `stopImmediatePropagation`
+      does
+
+      not prevent the listener from running.
+
+
+      Returns a disposable so that it may be unsubscribed from more easily.
+
+
+      ```js
+
+      import { addAbortListener } from 'node:events';
+
+
+      function example(signal) {
+        let disposable;
+        try {
+          signal.addEventListener('abort', (e) => e.stopImmediatePropagation());
+          disposable = addAbortListener(signal, (e) => {
+            // Do something when signal is aborted.
+          });
+        } finally {
+          disposable?.[Symbol.dispose]();
+        }
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function addAbortListener(signal: AbortSignal, resource: (event:
+        Event) => void): Disposable
+      parameters:
+        - id: signal
+          type: AbortSignal
+          description: ''
+        - id: resource
+          type: '(event: Event) =&gt; void'
+          description: ''
+      return:
+        description: that removes the `abort` listener.
+        type: Disposable
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.addAbortListener
   - name: 'addListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.addListener
     package: azure-iothub
-    summary: 'Alias for `emitter.on(eventName, listener)`.'
+    summary: Alias for `emitter.on(eventName, listener)`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function addListener(eventName: string | symbol, listener: (args: any[])
-        => void): this
+        => void): Client
       parameters:
         - id: eventName
           type: string | symbol
@@ -112,8 +246,9 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
-  - name: 'emit(string | symbol, any[])'
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.addListener
+  - name: emit(string | symbol, any[])
     uid: azure-iothub.Client.emit
     package: azure-iothub
     summary: >-
@@ -123,12 +258,13 @@ inheritedMethods:
 
       to each.
 
+
       Returns `true` if the event had listeners, `false` otherwise.
 
 
       ```js
 
-      const EventEmitter = require('events');
+      import { EventEmitter } from 'node:events';
 
       const myEmitter = new EventEmitter();
 
@@ -179,7 +315,6 @@ inheritedMethods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function emit(eventName: string | symbol, args: any[]): boolean'
@@ -188,19 +323,22 @@ inheritedMethods:
           type: string | symbol
           description: ''
         - id: args
-          type: 'any[]'
+          type: any[]
           description: ''
       return:
         description: ''
         type: boolean
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.emit
   - name: eventNames()
     uid: azure-iothub.Client.eventNames
     package: azure-iothub
     summary: |-
       Returns an array listing the events for which the emitter has registered
       listeners. The values in the array are strings or `Symbol`s.
+
       ```js
-      const EventEmitter = require('events');
+      import { EventEmitter } from 'node:events';
+
       const myEE = new EventEmitter();
       myEE.on('foo', () => {});
       myEE.on('bar', () => {});
@@ -212,18 +350,19 @@ inheritedMethods:
       // Prints: [ 'foo', 'bar', Symbol(symbol) ]
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function eventNames(): Array<string | symbol>'
+      content: 'function eventNames(): (string | symbol)[]'
       return:
         description: ''
-        type: Array&lt;string | symbol&gt;
-  - name: 'getEventListeners(DOMEventTarget | EventEmitter, string | symbol)'
+        type: (string | symbol)[]
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.eventNames
+  - name: getEventListeners(_DOMEventTarget | EventEmitter, string | symbol)
     uid: azure-iothub.Client.getEventListeners
     package: azure-iothub
     summary: >-
       Returns a copy of the array of listeners for the event named `eventName`.
+
 
       For `EventEmitter`s this behaves exactly the same as calling `.listeners`
       on
@@ -238,41 +377,41 @@ inheritedMethods:
 
       ```js
 
-      const { getEventListeners, EventEmitter } = require('events');
+      import { getEventListeners, EventEmitter } from 'node:events';
 
 
       {
         const ee = new EventEmitter();
         const listener = () => console.log('Events are fun');
         ee.on('foo', listener);
-        getEventListeners(ee, 'foo'); // [listener]
+        console.log(getEventListeners(ee, 'foo')); // [ [Function: listener] ]
       }
 
       {
         const et = new EventTarget();
         const listener = () => console.log('Events are fun');
         et.addEventListener('foo', listener);
-        getEventListeners(et, 'foo'); // [listener]
+        console.log(getEventListeners(et, 'foo')); // [ [Function: listener] ]
       }
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        static function getEventListeners(emitter: DOMEventTarget |
+        static function getEventListeners(emitter: _DOMEventTarget |
         EventEmitter, name: string | symbol): Function[]
       parameters:
         - id: emitter
-          type: DOMEventTarget | EventEmitter
+          type: _DOMEventTarget | EventEmitter
           description: ''
         - id: name
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: 'Function[]'
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.getEventListeners
   - name: getMaxListeners()
     uid: azure-iothub.Client.getMaxListeners
     package: azure-iothub
@@ -281,25 +420,84 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:azure-iothub.Amqp.defaultMaxListeners>.
+      [defaultMaxListeners](xref:azure-iothub.Client.defaultMaxListeners).
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function getMaxListeners(): number'
       return:
         description: ''
         type: number
-  - name: 'listenerCount(EventEmitter, string | symbol)'
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.getMaxListeners
+  - name: getMaxListeners(_DOMEventTarget | EventEmitter)
+    uid: azure-iothub.Client.getMaxListeners
+    package: azure-iothub
+    summary: >-
+      Returns the currently set max amount of listeners.
+
+
+      For `EventEmitter`s this behaves exactly the same as calling
+      `.getMaxListeners` on
+
+      the emitter.
+
+
+      For `EventTarget`s this is the only way to get the max event listeners for
+      the
+
+      event target. If the number of event handlers on a single EventTarget
+      exceeds
+
+      the max set, the EventTarget will print a warning.
+
+
+      ```js
+
+      import { getMaxListeners, setMaxListeners, EventEmitter } from
+      'node:events';
+
+
+      {
+        const ee = new EventEmitter();
+        console.log(getMaxListeners(ee)); // 10
+        setMaxListeners(11, ee);
+        console.log(getMaxListeners(ee)); // 11
+      }
+
+      {
+        const et = new EventTarget();
+        console.log(getMaxListeners(et)); // 10
+        setMaxListeners(11, et);
+        console.log(getMaxListeners(et)); // 11
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function getMaxListeners(emitter: _DOMEventTarget |
+        EventEmitter): number
+      parameters:
+        - id: emitter
+          type: _DOMEventTarget | EventEmitter
+          description: ''
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.getMaxListeners
+  - name: listenerCount(EventEmitter, string | symbol)
     uid: azure-iothub.Client.listenerCount
     package: azure-iothub
     summary: >-
       A class method that returns the number of listeners for the given
       `eventName`registered on the given `emitter`.
 
+
       ```js
 
-      const { EventEmitter, listenerCount } = require('events');
+      import { EventEmitter, listenerCount } from 'node:events';
+
 
       const myEmitter = new EventEmitter();
 
@@ -313,7 +511,6 @@ inheritedMethods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: true
     customDeprecatedMessage: Since v3.2.0 - Use `listenerCount` instead.
     syntax:
@@ -326,33 +523,44 @@ inheritedMethods:
           description: The emitter to query
         - id: eventName
           type: string | symbol
-          description: |
-            The event name
+          description: The event name
       return:
         description: ''
         type: number
-  - name: listenerCount(string | symbol)
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.listenerCount
+  - name: listenerCount(string | symbol, Function)
     uid: azure-iothub.Client.listenerCount
     package: azure-iothub
-    summary: Returns the number of listeners listening to the event named `eventName`.
+    summary: >-
+      Returns the number of listeners listening for the event named `eventName`.
+
+      If `listener` is provided, it will return how many times the listener is
+      found
+
+      in the list of the listeners of the event.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listenerCount(eventName: string | symbol): number'
+      content: >-
+        function listenerCount(eventName: string | symbol, listener?: Function):
+        number
       parameters:
         - id: eventName
           type: string | symbol
-          description: |
-            The name of the event being listened for
+          description: The name of the event being listened for
+        - id: listener
+          type: Function
+          description: The event handler function
       return:
         description: ''
         type: number
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.listenerCount
   - name: listeners(string | symbol)
     uid: azure-iothub.Client.listeners
     package: azure-iothub
     summary: |-
       Returns a copy of the array of listeners for the event named `eventName`.
+
       ```js
       server.on('connection', (stream) => {
         console.log('someone connected!');
@@ -361,7 +569,6 @@ inheritedMethods:
       // Prints: [ [Function] ]
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function listeners(eventName: string | symbol): Function[]'
@@ -371,18 +578,18 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: 'Function[]'
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.listeners
   - name: 'off(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.off
     package: azure-iothub
     summary: Alias for `emitter.removeListener()`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function off(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
+        void): Client
       parameters:
         - id: eventName
           type: string | symbol
@@ -392,30 +599,31 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
-  - name: 'on(EventEmitter, string, StaticEventEmitterOptions)'
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.off
+  - name: on(EventEmitter, string, StaticEventEmitterOptions)
     uid: azure-iothub.Client.on
     package: azure-iothub
     summary: |-
       ```js
-      const { on, EventEmitter } = require('events');
-      (async () => {
-        const ee = new EventEmitter();
+      import { on, EventEmitter } from 'node:events';
+      import process from 'node:process';
 
-        // Emit later on
-        process.nextTick(() => {
-          ee.emit('foo', 'bar');
-          ee.emit('foo', 42);
-        });
+      const ee = new EventEmitter();
 
-        for await (const event of on(ee, 'foo')) {
-          // The execution of this inner block is synchronous and it
-          // processes one event at a time (even with await). Do not use
-          // if concurrent execution is required.
-          console.log(event); // prints ['bar'] [42]
-        }
-        // Unreachable here
-      })();
+      // Emit later on
+      process.nextTick(() => {
+        ee.emit('foo', 'bar');
+        ee.emit('foo', 42);
+      });
+
+      for await (const event of on(ee, 'foo')) {
+        // The execution of this inner block is synchronous and it
+        // processes one event at a time (even with await). Do not use
+        // if concurrent execution is required.
+        console.log(event); // prints ['bar'] [42]
+      }
+      // Unreachable here
       ```
 
       Returns an `AsyncIterator` that iterates `eventName` events. It will throw
@@ -426,7 +634,9 @@ inheritedMethods:
       An `AbortSignal` can be used to cancel waiting on events:
 
       ```js
-      const { on, EventEmitter } = require('events');
+      import { on, EventEmitter } from 'node:events';
+      import process from 'node:process';
+
       const ac = new AbortController();
 
       (async () => {
@@ -450,7 +660,6 @@ inheritedMethods:
       process.nextTick(() => ac.abort());
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -469,6 +678,7 @@ inheritedMethods:
       return:
         description: that iterates `eventName` events emitted by the `emitter`
         type: AsyncIterableIterator&lt;any&gt;
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.on
   - name: 'on(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.on
     package: azure-iothub
@@ -482,6 +692,7 @@ inheritedMethods:
       called, multiple
 
       times.
+
 
       ```js
 
@@ -504,6 +715,8 @@ inheritedMethods:
 
       ```js
 
+      import { EventEmitter } from 'node:events';
+
       const myEE = new EventEmitter();
 
       myEE.on('foo', () => console.log('a'));
@@ -520,24 +733,113 @@ inheritedMethods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function on(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
+        void): Client
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
-  - name: 'once(NodeEventTarget, string | symbol, StaticEventEmitterOptions)'
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.on
+  - name: 'once(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.once
+    package: azure-iothub
+    summary: >-
+      Adds a **one-time**`listener` function for the event named `eventName`.
+      The
+
+      next time `eventName` is triggered, this listener is removed and then
+      invoked.
+
+
+      ```js
+
+      server.once('connection', (stream) => {
+        console.log('Ah, we have our first user!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+
+
+      By default, event listeners are invoked in the order they are added.
+      The`emitter.prependOnceListener()` method can be used as an alternative to
+      add the
+
+      event listener to the beginning of the listeners array.
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      const myEE = new EventEmitter();
+
+      myEE.once('foo', () => console.log('a'));
+
+      myEE.prependOnceListener('foo', () => console.log('b'));
+
+      myEE.emit('foo');
+
+      // Prints:
+
+      //   b
+
+      //   a
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function once(eventName: string | symbol, listener: (args: any[]) =>
+        void): Client
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: The callback function
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.once
+  - name: once(_DOMEventTarget, string, StaticEventEmitterOptions)
+    uid: azure-iothub.Client.once_1
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function once(emitter: _DOMEventTarget, eventName: string,
+        options?: StaticEventEmitterOptions): Promise<any[]>
+      parameters:
+        - id: emitter
+          type: _DOMEventTarget
+          description: ''
+        - id: eventName
+          type: string
+          description: ''
+        - id: options
+          type: StaticEventEmitterOptions
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any[]&gt;
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.once
+  - name: once(_NodeEventTarget, string | symbol, StaticEventEmitterOptions)
     uid: azure-iothub.Client.once
     package: azure-iothub
     summary: >-
@@ -552,6 +854,7 @@ inheritedMethods:
 
       given event.
 
+
       This method is intentionally generic and works with the web platform
       [EventTarget](https://dom.spec.whatwg.org/#interface-eventtarget)
       interface, which has no special`'error'` event
@@ -561,33 +864,36 @@ inheritedMethods:
 
       ```js
 
-      const { once, EventEmitter } = require('events');
+      import { once, EventEmitter } from 'node:events';
+
+      import process from 'node:process';
 
 
-      async function run() {
-        const ee = new EventEmitter();
+      const ee = new EventEmitter();
 
-        process.nextTick(() => {
-          ee.emit('myevent', 42);
-        });
 
-        const [value] = await once(ee, 'myevent');
-        console.log(value);
+      process.nextTick(() => {
+        ee.emit('myevent', 42);
+      });
 
-        const err = new Error('kaboom');
-        process.nextTick(() => {
-          ee.emit('error', err);
-        });
 
-        try {
-          await once(ee, 'myevent');
-        } catch (err) {
-          console.log('error happened', err);
-        }
+      const [value] = await once(ee, 'myevent');
+
+      console.log(value);
+
+
+      const err = new Error('kaboom');
+
+      process.nextTick(() => {
+        ee.emit('error', err);
+      });
+
+
+      try {
+        await once(ee, 'myevent');
+      } catch (err) {
+        console.error('error happened', err);
       }
-
-
-      run();
 
       ```
 
@@ -604,7 +910,7 @@ inheritedMethods:
 
       ```js
 
-      const { EventEmitter, once } = require('events');
+      import { EventEmitter, once } from 'node:events';
 
 
       const ee = new EventEmitter();
@@ -612,7 +918,7 @@ inheritedMethods:
 
       once(ee, 'error')
         .then(([err]) => console.log('ok', err.message))
-        .catch((err) => console.log('error', err.message));
+        .catch((err) => console.error('error', err.message));
 
       ee.emit('error', new Error('boom'));
 
@@ -627,7 +933,7 @@ inheritedMethods:
 
       ```js
 
-      const { EventEmitter, once } = require('events');
+      import { EventEmitter, once } from 'node:events';
 
 
       const ee = new EventEmitter();
@@ -657,15 +963,14 @@ inheritedMethods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        static function once(emitter: NodeEventTarget, eventName: string |
+        static function once(emitter: _NodeEventTarget, eventName: string |
         symbol, options?: StaticEventEmitterOptions): Promise<any[]>
       parameters:
         - id: emitter
-          type: NodeEventTarget
+          type: _NodeEventTarget
           description: ''
         - id: eventName
           type: string | symbol
@@ -675,71 +980,8 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: 'Promise&lt;any[]&gt;'
-  - name: 'once(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.once
-    package: azure-iothub
-    summary: >-
-      Adds a **one-time**`listener` function for the event named `eventName`.
-      The
-
-      next time `eventName` is triggered, this listener is removed and then
-      invoked.
-
-      ```js
-
-      server.once('connection', (stream) => {
-        console.log('Ah, we have our first user!');
-      });
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-
-
-      By default, event listeners are invoked in the order they are added.
-      The`emitter.prependOnceListener()` method can be used as an alternative to
-      add the
-
-      event listener to the beginning of the listeners array.
-
-
-      ```js
-
-      const myEE = new EventEmitter();
-
-      myEE.once('foo', () => console.log('a'));
-
-      myEE.prependOnceListener('foo', () => console.log('b'));
-
-      myEE.emit('foo');
-
-      // Prints:
-
-      //   b
-
-      //   a
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function once(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event.
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
-      return:
-        description: ''
-        type: this
+        type: Promise&lt;any[]&gt;
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.once
   - name: 'prependListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.prependListener
     package: azure-iothub
@@ -755,6 +997,7 @@ inheritedMethods:
 
       times.
 
+
       ```js
 
       server.prependListener('connection', (stream) => {
@@ -766,32 +1009,32 @@ inheritedMethods:
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function prependListener(eventName: string | symbol, listener: (args:
-        any[]) => void): this
+        any[]) => void): Client
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.prependListener
   - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.prependOnceListener
     package: azure-iothub
     summary: >-
       Adds a **one-time**`listener` function for the event named `eventName` to
-      the_beginning_ of the listeners array. The next time `eventName` is
+      the _beginning_ of the listeners array. The next time `eventName` is
       triggered, this
 
       listener is removed, and then invoked.
+
 
       ```js
 
@@ -804,30 +1047,31 @@ inheritedMethods:
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function prependOnceListener(eventName: string | symbol, listener:
-        (args: any[]) => void): this
+        (args: any[]) => void): Client
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.prependOnceListener
   - name: rawListeners(string | symbol)
     uid: azure-iothub.Client.rawListeners
     package: azure-iothub
     summary: |-
       Returns a copy of the array of listeners for the event named `eventName`,
       including any wrappers (such as those created by `.once()`).
+
       ```js
+      import { EventEmitter } from 'node:events';
       const emitter = new EventEmitter();
       emitter.once('log', () => console.log('log once'));
 
@@ -851,7 +1095,6 @@ inheritedMethods:
       emitter.emit('log');
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function rawListeners(eventName: string | symbol): Function[]'
@@ -861,35 +1104,38 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: 'Function[]'
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.rawListeners
   - name: removeAllListeners(string | symbol)
     uid: azure-iothub.Client.removeAllListeners
     package: azure-iothub
     summary: |-
       Removes all listeners, or those of the specified `eventName`.
+
       It is bad practice to remove listeners added elsewhere in the code,
       particularly when the `EventEmitter` instance was created by some other
       component or module (e.g. sockets or file streams).
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function removeAllListeners(event?: string | symbol): this'
+      content: 'function removeAllListeners(event?: string | symbol): Client'
       parameters:
         - id: event
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.removeAllListeners
   - name: 'removeListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.removeListener
     package: azure-iothub
     summary: >-
       Removes the specified `listener` from the listener array for the event
       named`eventName`.
+
 
       ```js
 
@@ -921,14 +1167,18 @@ inheritedMethods:
       Once an event is emitted, all listeners attached to it at the
 
       time of emitting are called in order. This implies that
-      any`removeListener()` or `removeAllListeners()` calls _after_ emitting
-      and_before_ the last listener finishes execution will
+      any`removeListener()` or `removeAllListeners()` calls _after_ emitting and
+      _before_ the last listener finishes execution
 
-      not remove them from`emit()` in progress. Subsequent events behave as
+      will not remove them from`emit()` in progress. Subsequent events behave as
       expected.
 
 
       ```js
+
+      import { EventEmitter } from 'node:events';
+
+      class MyEmitter extends EventEmitter {}
 
       const myEmitter = new MyEmitter();
 
@@ -1000,6 +1250,8 @@ inheritedMethods:
 
       ```js
 
+      import { EventEmitter } from 'node:events';
+
       const ee = new EventEmitter();
 
 
@@ -1024,12 +1276,11 @@ inheritedMethods:
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function removeListener(eventName: string | symbol, listener: (args:
-        any[]) => void): this
+        any[]) => void): Client
       parameters:
         - id: eventName
           type: string | symbol
@@ -1039,7 +1290,8 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.removeListener
   - name: setMaxListeners(number)
     uid: azure-iothub.Client.setMaxListeners
     package: azure-iothub
@@ -1055,100 +1307,77 @@ inheritedMethods:
       modified for this specific `EventEmitter` instance. The value can be set
       to`Infinity` (or `0`) to indicate an unlimited number of listeners.
 
+
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number): this'
+      content: 'function setMaxListeners(n: number): Client'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
         description: ''
-        type: this
-  - name: 'setMaxListeners(number, Array<DOMEventTarget | EventEmitter>)'
+        type: <xref uid="azure-iothub.Client" />
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.setMaxListeners
+  - name: setMaxListeners(number, (_DOMEventTarget | EventEmitter)[])
     uid: azure-iothub.Client.setMaxListeners
     package: azure-iothub
-    summary: >-
-      By default `EventEmitter`s will print a warning if more than `10`
-      listeners are
-
-      added for a particular event. This is a useful default that helps finding
-
-      memory leaks. The `EventEmitter.setMaxListeners()` method allows the
-      default limit to be
-
-      modified (if eventTargets is empty) or modify the limit specified in every
-      `EventTarget` | `EventEmitter` passed as arguments.
-
-      The value can be set to`Infinity` (or `0`) to indicate an unlimited number
-      of listeners.
-
+    summary: |-
       ```js
+      import { setMaxListeners, EventEmitter } from 'node:events';
 
-      EventEmitter.setMaxListeners(20);
+      const target = new EventTarget();
+      const emitter = new EventEmitter();
 
-      // Equivalent to
-
-      EventEmitter.defaultMaxListeners = 20;
-
-
-      const eventTarget = new EventTarget();
-
-      // Only way to increase limit for `EventTarget` instances
-
-      // as these doesn't expose its own `setMaxListeners` method
-
-      EventEmitter.setMaxListeners(20, eventTarget);
-
+      setMaxListeners(5, target, emitter);
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function setMaxListeners(n?: number, eventTargets:
-        Array<DOMEventTarget | EventEmitter>)
+        (_DOMEventTarget | EventEmitter)[])
       parameters:
         - id: 'n'
           type: number
-          description: ''
+          description: >-
+            A non-negative number. The maximum number of listeners per
+            `EventTarget` event.
         - id: eventTargets
-          type: Array&lt;DOMEventTarget | EventEmitter&gt;
+          type: (_DOMEventTarget | EventEmitter)[]
           description: ''
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.setMaxListeners
 methods:
   - name: close()
     uid: azure-iothub.Client.close_1
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function close(): Promise<ResultWithIncomingMessage<Disconnected>>'
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;Disconnected&gt;&gt;
+        type: Promise&lt;ResultWithIncomingMessage&lt;Disconnected&gt;&gt;
   - name: close(IncomingMessageCallback<Disconnected>)
     uid: azure-iothub.Client.close
     package: azure-iothub
     summary: Closes the connection to an IoT hub.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function close(done: IncomingMessageCallback<Disconnected>)'
+      content: 'function close(done?: IncomingMessageCallback<Disconnected>)'
       parameters:
         - id: done
-          type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback"
-            />&lt;Disconnected&gt;
-          description: ''
-  - name: 'fromConnectionString(string, Client.TransportCtor)'
+          type: IncomingMessageCallback&lt;Disconnected&gt;
+          description: |-
+            The optional function to call when the operation is
+                                       complete. `done` will be passed an Error object
+                                       argument, which will be null if the operation
+                                       completed successfully.
+  - name: fromConnectionString(string, TransportCtor)
     uid: azure-iothub.Client.fromConnectionString
     package: azure-iothub
     summary: |-
@@ -1156,12 +1385,11 @@ methods:
                          connection string using the default transport
                          (Amqp) or the one specified in the second argument.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromConnectionString(connStr: string, transportCtor?:
-        Client.TransportCtor): Client
+        TransportCtor): Client
       parameters:
         - id: connStr
           type: string
@@ -1174,7 +1402,7 @@ methods:
       return:
         description: ''
         type: <xref uid="azure-iothub.Client" />
-  - name: 'fromSharedAccessSignature(string, Client.TransportCtor)'
+  - name: fromSharedAccessSignature(string, TransportCtor)
     uid: azure-iothub.Client.fromSharedAccessSignature
     package: azure-iothub
     summary: |-
@@ -1182,12 +1410,11 @@ methods:
                          shared access signature using the default transport
                          (Amqp) or the one specified in the second argument.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromSharedAccessSignature(sharedAccessSignature: string,
-        transportCtor?: Client.TransportCtor): Client
+        transportCtor?: TransportCtor): Client
       parameters:
         - id: sharedAccessSignature
           type: string
@@ -1200,7 +1427,7 @@ methods:
       return:
         description: ''
         type: <xref uid="azure-iothub.Client" />
-  - name: 'fromTokenCredential(string, TokenCredential, Client.TransportCtor)'
+  - name: fromTokenCredential(string, TokenCredential, TransportCtor)
     uid: azure-iothub.Client.fromTokenCredential
     package: azure-iothub
     summary: |-
@@ -1208,12 +1435,11 @@ methods:
                          Azure tokenCredential using the default transport
                          (Amqp) or the one specified in the second argument.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromTokenCredential(hostName: string, tokenCredential:
-        TokenCredential, transportCtor?: Client.TransportCtor): Client
+        TokenCredential, transportCtor?: TransportCtor): Client
       parameters:
         - id: hostName
           type: string
@@ -1234,7 +1460,6 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1243,8 +1468,8 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;<xref uid="azure-iothub.Client.ServiceReceiver" />&gt;&gt;
+          Promise&lt;ResultWithIncomingMessage&lt;<xref
+          uid="azure-iothub.Client.ServiceReceiver" />&gt;&gt;
   - name: getFeedbackReceiver(IncomingMessageCallback<ServiceReceiver>)
     uid: azure-iothub.Client.getFeedbackReceiver
     package: azure-iothub
@@ -1252,24 +1477,26 @@ methods:
       Returns a AmqpReceiver object which emits events when new feedback
       messages are received by the client.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getFeedbackReceiver(done:
+        function getFeedbackReceiver(done?:
         IncomingMessageCallback<ServiceReceiver>)
       parameters:
         - id: done
           type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
+            IncomingMessageCallback&lt;<xref
             uid="azure-iothub.Client.ServiceReceiver" />&gt;
-          description: ''
+          description: |-
+            The optional function to call when the operation is
+                                         complete. `done` will be called with two
+                                         arguments: an Error object (can be null) and a
+                                         AmqpReceiver object.
   - name: getFileNotificationReceiver()
     uid: azure-iothub.Client.getFileNotificationReceiver_1
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1278,8 +1505,8 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;<xref uid="azure-iothub.Client.ServiceReceiver" />&gt;&gt;
+          Promise&lt;ResultWithIncomingMessage&lt;<xref
+          uid="azure-iothub.Client.ServiceReceiver" />&gt;&gt;
   - name: getFileNotificationReceiver(IncomingMessageCallback<ServiceReceiver>)
     uid: azure-iothub.Client.getFileNotificationReceiver
     package: azure-iothub
@@ -1287,24 +1514,26 @@ methods:
       Returns a AmqpReceiver object which emits events when new file upload
       notifications are received by the client.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getFileNotificationReceiver(done:
+        function getFileNotificationReceiver(done?:
         IncomingMessageCallback<ServiceReceiver>)
       parameters:
         - id: done
           type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
+            IncomingMessageCallback&lt;<xref
             uid="azure-iothub.Client.ServiceReceiver" />&gt;
-          description: ''
-  - name: 'invokeDeviceMethod(string, DeviceMethodParams)'
+          description: |-
+            The optional function to call when the operation is
+                                         complete. `done` will be called with two
+                                         arguments: an Error object (can be null) and a
+                                         AmqpReceiver object.
+  - name: invokeDeviceMethod(string, DeviceMethodParams)
     uid: azure-iothub.Client.invokeDeviceMethod_2
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1319,9 +1548,7 @@ methods:
           description: ''
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;any&gt;&gt;
+        type: Promise&lt;ResultWithIncomingMessage&lt;any&gt;&gt;
   - name: >-
       invokeDeviceMethod(string, DeviceMethodParams,
       IncomingMessageCallback<any>)
@@ -1329,12 +1556,11 @@ methods:
     package: azure-iothub
     summary: Invokes a method on a particular device or module.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function invokeDeviceMethod(deviceId: string, methodParams:
-        DeviceMethodParams, done: IncomingMessageCallback<any>)
+        DeviceMethodParams, done?: IncomingMessageCallback<any>)
       parameters:
         - id: deviceId
           type: string
@@ -1343,14 +1569,15 @@ methods:
           type: <xref uid="azure-iothub.DeviceMethodParams" />
           description: ''
         - id: done
-          type: <xref uid="azure-iothub.IncomingMessageCallback" />&lt;any&gt;
-          description: ''
-  - name: 'invokeDeviceMethod(string, string, DeviceMethodParams)'
+          type: IncomingMessageCallback&lt;any&gt;
+          description: >-
+            The optional callback to call with the result of the method
+            execution.
+  - name: invokeDeviceMethod(string, string, DeviceMethodParams)
     uid: azure-iothub.Client.invokeDeviceMethod_3
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1369,9 +1596,7 @@ methods:
           description: ''
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;any&gt;&gt;
+        type: Promise&lt;ResultWithIncomingMessage&lt;any&gt;&gt;
   - name: >-
       invokeDeviceMethod(string, string, DeviceMethodParams,
       IncomingMessageCallback<any>)
@@ -1379,7 +1604,6 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -1396,102 +1620,98 @@ methods:
           type: <xref uid="azure-iothub.DeviceMethodParams" />
           description: ''
         - id: done
-          type: <xref uid="azure-iothub.IncomingMessageCallback" />&lt;any&gt;
+          type: IncomingMessageCallback&lt;any&gt;
           description: ''
   - name: open()
     uid: azure-iothub.Client.open_1
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function open(): Promise<ResultWithIncomingMessage<Connected>>'
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;Connected&gt;&gt;
+        type: Promise&lt;ResultWithIncomingMessage&lt;Connected&gt;&gt;
   - name: open(IncomingMessageCallback<Connected>)
     uid: azure-iothub.Client.open
     package: azure-iothub
     summary: Opens the connection to an IoT hub.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function open(done: IncomingMessageCallback<Connected>)'
+      content: 'function open(done?: IncomingMessageCallback<Connected>)'
       parameters:
         - id: done
-          type: <xref uid="azure-iothub.IncomingMessageCallback" />&lt;Connected&gt;
-          description: ''
-  - name: 'send(string, Message | Message.BufferConvertible)'
+          type: IncomingMessageCallback&lt;Connected&gt;
+          description: |-
+            The optional function to call when the operation is
+                                       complete. `done` will be passed an Error object
+                                       argument, which will be null if the operation
+                                       completed successfully.
+  - name: send(string, Message | BufferConvertible)
     uid: azure-iothub.Client.send_1
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function send(deviceId: string, message: Message |
-        Message.BufferConvertible):
+        function send(deviceId: string, message: Message | BufferConvertible):
         Promise<ResultWithIncomingMessage<MessageEnqueued>>
       parameters:
         - id: deviceId
           type: string
           description: ''
         - id: message
-          type: Message | <xref uid="Message.BufferConvertible" />
+          type: Message | BufferConvertible
           description: ''
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;MessageEnqueued&gt;&gt;
+        type: Promise&lt;ResultWithIncomingMessage&lt;MessageEnqueued&gt;&gt;
   - name: >-
-      send(string, Message | Message.BufferConvertible,
+      send(string, Message | BufferConvertible,
       IncomingMessageCallback<MessageEnqueued>)
     uid: azure-iothub.Client.send
     package: azure-iothub
     summary: Sends a message to a device.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function send(deviceId: string, message: Message |
-        Message.BufferConvertible, done:
-        IncomingMessageCallback<MessageEnqueued>)
+        function send(deviceId: string, message: Message | BufferConvertible,
+        done?: IncomingMessageCallback<MessageEnqueued>)
       parameters:
         - id: deviceId
           type: string
           description: The identifier of an existing device identity.
         - id: message
-          type: Message | <xref uid="Message.BufferConvertible" />
+          type: Message | BufferConvertible
           description: |-
             The body of the message to send to the device.
                                          If `message` is not of type
                                          [Message](xref:azure-iot-common.Message),
                                          it will be converted.
         - id: done
-          type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback"
-            />&lt;MessageEnqueued&gt;
-          description: ''
+          type: IncomingMessageCallback&lt;MessageEnqueued&gt;
+          description: |-
+            The optional function to call when the operation is
+                                         complete. `done` will be called with two
+                                         arguments: an Error object (can be null) and a
+                                         transport-specific response object useful for
+                                         logging or debugging.
   - name: setRetryPolicy(RetryPolicy)
     uid: azure-iothub.Client.setRetryPolicy
     package: azure-iothub
     summary: Set the policy used by the client to retry network operations.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function setRetryPolicy(policy: RetryPolicy)'
       parameters:
         - id: policy
           type: RetryPolicy
-          description: |
+          description: |-
             policy used to retry operations (eg. open, send, etc.).
                           The SDK comes with 2 "built-in" policies: ExponentialBackoffWithJitter (default)
                           and NoRetry (to cancel any form of retry). The user can also pass its own object as

@@ -5,7 +5,6 @@ package: '@azure/arm-netapp'
 summary: Interface representing a Backups.
 fullName: Backups
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
@@ -16,19 +15,17 @@ methods:
     package: '@azure/arm-netapp'
     summary: Create a backup for the volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginCreate(resourceGroupName: string, accountName: string,
         poolName: string, volumeName: string, backupName: string, body: Backup,
         options?: BackupsCreateOptionalParams):
-        Promise<PollerLike<PollOperationState<BackupsCreateResponse>,
-        BackupsCreateResponse>>
+        Promise<SimplePollerLike<OperationState<Backup>, Backup>>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -46,14 +43,13 @@ methods:
           description: Backup object supplied in the body of the operation.
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsCreateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
-          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
-          uid="@azure/arm-netapp.BackupsCreateResponse" />&gt;, <xref
-          uid="@azure/arm-netapp.BackupsCreateResponse" />&gt;&gt;
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;<xref
+          uid="@azure/arm-netapp.Backup" />&gt;, <xref
+          uid="@azure/arm-netapp.Backup" />&gt;&gt;
   - name: >-
       beginCreateAndWait(string, string, string, string, string, Backup,
       BackupsCreateOptionalParams)
@@ -61,18 +57,16 @@ methods:
     package: '@azure/arm-netapp'
     summary: Create a backup for the volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginCreateAndWait(resourceGroupName: string, accountName:
         string, poolName: string, volumeName: string, backupName: string, body:
-        Backup, options?: BackupsCreateOptionalParams):
-        Promise<BackupsCreateResponse>
+        Backup, options?: BackupsCreateOptionalParams): Promise<Backup>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -90,11 +84,10 @@ methods:
           description: Backup object supplied in the body of the operation.
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsCreateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/arm-netapp.BackupsCreateResponse" />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-netapp.Backup" />&gt;
   - name: >-
       beginDelete(string, string, string, string, string,
       BackupsDeleteOptionalParams)
@@ -102,18 +95,17 @@ methods:
     package: '@azure/arm-netapp'
     summary: Delete a backup of the volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginDelete(resourceGroupName: string, accountName: string,
         poolName: string, volumeName: string, backupName: string, options?:
         BackupsDeleteOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -128,11 +120,12 @@ methods:
           description: The name of the backup
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsDeleteOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+        type: >-
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;void&gt;,
+          void&gt;&gt;
   - name: >-
       beginDeleteAndWait(string, string, string, string, string,
       BackupsDeleteOptionalParams)
@@ -140,7 +133,6 @@ methods:
     package: '@azure/arm-netapp'
     summary: Delete a backup of the volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -150,7 +142,7 @@ methods:
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -165,8 +157,91 @@ methods:
           description: The name of the backup
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsDeleteOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: >-
+      beginRestoreFiles(string, string, string, string, string,
+      BackupRestoreFiles, BackupsRestoreFilesOptionalParams)
+    uid: '@azure/arm-netapp.Backups.beginRestoreFiles'
+    package: '@azure/arm-netapp'
+    summary: >-
+      Restore the specified files from the specified backup to the active
+      filesystem
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRestoreFiles(resourceGroupName: string, accountName:
+        string, poolName: string, volumeName: string, backupName: string, body:
+        BackupRestoreFiles, options?: BackupsRestoreFilesOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: accountName
+          type: string
+          description: The name of the NetApp account
+        - id: poolName
+          type: string
+          description: The name of the capacity pool
+        - id: volumeName
+          type: string
+          description: The name of the volume
+        - id: backupName
+          type: string
+          description: The name of the backup
+        - id: body
+          type: <xref uid="@azure/arm-netapp.BackupRestoreFiles" />
+          description: Restore payload supplied in the body of the operation.
+        - id: options
+          type: <xref uid="@azure/arm-netapp.BackupsRestoreFilesOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;void&gt;,
+          void&gt;&gt;
+  - name: >-
+      beginRestoreFilesAndWait(string, string, string, string, string,
+      BackupRestoreFiles, BackupsRestoreFilesOptionalParams)
+    uid: '@azure/arm-netapp.Backups.beginRestoreFilesAndWait'
+    package: '@azure/arm-netapp'
+    summary: >-
+      Restore the specified files from the specified backup to the active
+      filesystem
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRestoreFilesAndWait(resourceGroupName: string,
+        accountName: string, poolName: string, volumeName: string, backupName:
+        string, body: BackupRestoreFiles, options?:
+        BackupsRestoreFilesOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: accountName
+          type: string
+          description: The name of the NetApp account
+        - id: poolName
+          type: string
+          description: The name of the capacity pool
+        - id: volumeName
+          type: string
+          description: The name of the volume
+        - id: backupName
+          type: string
+          description: The name of the backup
+        - id: body
+          type: <xref uid="@azure/arm-netapp.BackupRestoreFiles" />
+          description: Restore payload supplied in the body of the operation.
+        - id: options
+          type: <xref uid="@azure/arm-netapp.BackupsRestoreFilesOptionalParams" />
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -177,19 +252,17 @@ methods:
     package: '@azure/arm-netapp'
     summary: Patch a backup for the volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginUpdate(resourceGroupName: string, accountName: string,
         poolName: string, volumeName: string, backupName: string, options?:
         BackupsUpdateOptionalParams):
-        Promise<PollerLike<PollOperationState<BackupsUpdateResponse>,
-        BackupsUpdateResponse>>
+        Promise<SimplePollerLike<OperationState<Backup>, Backup>>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -204,14 +277,13 @@ methods:
           description: The name of the backup
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsUpdateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
-          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
-          uid="@azure/arm-netapp.BackupsUpdateResponse" />&gt;, <xref
-          uid="@azure/arm-netapp.BackupsUpdateResponse" />&gt;&gt;
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;<xref
+          uid="@azure/arm-netapp.Backup" />&gt;, <xref
+          uid="@azure/arm-netapp.Backup" />&gt;&gt;
   - name: >-
       beginUpdateAndWait(string, string, string, string, string,
       BackupsUpdateOptionalParams)
@@ -219,17 +291,16 @@ methods:
     package: '@azure/arm-netapp'
     summary: Patch a backup for the volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginUpdateAndWait(resourceGroupName: string, accountName:
         string, poolName: string, volumeName: string, backupName: string,
-        options?: BackupsUpdateOptionalParams): Promise<BackupsUpdateResponse>
+        options?: BackupsUpdateOptionalParams): Promise<Backup>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -244,27 +315,25 @@ methods:
           description: The name of the backup
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsUpdateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/arm-netapp.BackupsUpdateResponse" />&gt;
-  - name: 'get(string, string, string, string, string, BackupsGetOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-netapp.Backup" />&gt;
+  - name: get(string, string, string, string, string, BackupsGetOptionalParams)
     uid: '@azure/arm-netapp.Backups.get'
     package: '@azure/arm-netapp'
     summary: Gets the specified backup of the volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string, poolName:
         string, volumeName: string, backupName: string, options?:
-        BackupsGetOptionalParams): Promise<BackupsGetResponse>
+        BackupsGetOptionalParams): Promise<Backup>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -279,27 +348,25 @@ methods:
           description: The name of the backup
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsGetOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/arm-netapp.BackupsGetResponse" />&gt;
-  - name: 'getStatus(string, string, string, string, BackupsGetStatusOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-netapp.Backup" />&gt;
+  - name: getStatus(string, string, string, string, BackupsGetStatusOptionalParams)
     uid: '@azure/arm-netapp.Backups.getStatus'
     package: '@azure/arm-netapp'
     summary: Get the status of the backup for a volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getStatus(resourceGroupName: string, accountName: string,
         poolName: string, volumeName: string, options?:
-        BackupsGetStatusOptionalParams): Promise<BackupsGetStatusResponse>
+        BackupsGetStatusOptionalParams): Promise<BackupStatus>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -311,13 +378,10 @@ methods:
           description: The name of the volume
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsGetStatusOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-netapp.BackupsGetStatusResponse"
-          />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-netapp.BackupStatus" />&gt;
   - name: >-
       getVolumeRestoreStatus(string, string, string, string,
       BackupsGetVolumeRestoreStatusOptionalParams)
@@ -325,18 +389,16 @@ methods:
     package: '@azure/arm-netapp'
     summary: Get the status of the restore for a volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getVolumeRestoreStatus(resourceGroupName: string, accountName:
         string, poolName: string, volumeName: string, options?:
-        BackupsGetVolumeRestoreStatusOptionalParams):
-        Promise<BackupsGetVolumeRestoreStatusResponse>
+        BackupsGetVolumeRestoreStatusOptionalParams): Promise<RestoreStatus>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -351,29 +413,25 @@ methods:
             <xref
             uid="@azure/arm-netapp.BackupsGetVolumeRestoreStatusOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-netapp.BackupsGetVolumeRestoreStatusResponse" />&gt;
-  - name: 'list(string, string, string, string, BackupsListOptionalParams)'
+        type: Promise&lt;<xref uid="@azure/arm-netapp.RestoreStatus" />&gt;
+  - name: list(string, string, string, string, BackupsListOptionalParams)
     uid: '@azure/arm-netapp.Backups.list'
     package: '@azure/arm-netapp'
     summary: List all backups for a volume
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function list(resourceGroupName: string, accountName: string, poolName:
         string, volumeName: string, options?: BackupsListOptionalParams):
-        PagedAsyncIterableIterator<Backup>
+        PagedAsyncIterableIterator<Backup, Backup[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: accountName
           type: string
           description: The name of the NetApp account
@@ -385,10 +443,9 @@ methods:
           description: The name of the volume
         - id: options
           type: <xref uid="@azure/arm-netapp.BackupsListOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
-          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-netapp.Backup"
-          />&gt;
+          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-netapp.Backup" />,
+          <xref uid="@azure/arm-netapp.Backup" />[], PageSettings&gt;

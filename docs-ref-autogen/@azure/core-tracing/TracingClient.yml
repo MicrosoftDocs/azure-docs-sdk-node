@@ -1,0 +1,187 @@
+### YamlMime:TSType
+name: TracingClient
+uid: '@azure/core-tracing.TracingClient'
+package: '@azure/core-tracing'
+summary: >-
+  Represents a client that can integrate with the currently configured
+  [Instrumenter](xref:@azure/core-tracing.Instrumenter).
+
+
+  Create an instance using
+  [createTracingClient](xref:@azure/core-tracing.createTracingClient).
+fullName: TracingClient
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: createRequestHeaders(TracingContext)
+    uid: '@azure/core-tracing.TracingClient.createRequestHeaders'
+    package: '@azure/core-tracing'
+    summary: >-
+      Creates a set of request headers to propagate tracing information to a
+      backend.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createRequestHeaders(tracingContext?: TracingContext):
+        Record<string, string>
+      parameters:
+        - id: tracingContext
+          type: <xref uid="@azure/core-tracing.TracingContext" />
+          description: The context containing the span to propagate.
+      return:
+        description: The set of headers to add to a request.
+        type: Record&lt;string, string&gt;
+  - name: parseTraceparentHeader(string)
+    uid: '@azure/core-tracing.TracingClient.parseTraceparentHeader'
+    package: '@azure/core-tracing'
+    summary: Parses a traceparent header value into a <xref:TracingSpanContext>.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function parseTraceparentHeader(traceparentHeader: string): undefined |
+        TracingContext
+      parameters:
+        - id: traceparentHeader
+          type: string
+          description: The traceparent header to parse.
+      return:
+        description: An implementation-specific identifier for the span.
+        type: undefined | <xref uid="@azure/core-tracing.TracingContext" />
+  - name: startSpan<Options>(string, Options, TracingSpanOptions)
+    uid: '@azure/core-tracing.TracingClient.startSpan'
+    package: '@azure/core-tracing'
+    summary: >-
+      Starts a given span but does not set it as the active span.
+
+
+      You must end the span using
+      [end](xref:@azure/core-tracing.TracingSpan.end).
+
+
+      Most of the time you will want to use
+      [withSpan](xref:@azure/core-tracing.TracingClient.withSpan) instead.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startSpan<Options>(name: string, operationOptions?: Options,
+        spanOptions?: TracingSpanOptions): { span: TracingSpan, updatedOptions:
+        OptionsWithTracingContext<Options> }
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the span. By convention this should be
+            `${className}.${methodName}`.
+        - id: operationOptions
+          type: Options
+          description: The original operation options.
+        - id: spanOptions
+          type: <xref uid="@azure/core-tracing.TracingSpanOptions" />
+          description: The options to use when creating the span.
+      return:
+        description: >-
+          A [TracingSpan](xref:@azure/core-tracing.TracingSpan) and the updated
+          operation options.
+        type: >-
+          { span: TracingSpan, updatedOptions:
+          OptionsWithTracingContext&lt;Options&gt; }
+  - name: >-
+      withContext<CallbackArgs, Callback>(TracingContext, Callback,
+      CallbackArgs)
+    uid: '@azure/core-tracing.TracingClient.withContext'
+    package: '@azure/core-tracing'
+    summary: >-
+      Wraps a callback with an active context and calls the callback.
+
+      Depending on the implementation, this may set the globally available
+      active context.
+
+
+      Useful when you want to leave the boundaries of the SDK (make a request or
+      callback to user code) and are unable to use the
+      [withSpan](xref:@azure/core-tracing.TracingClient.withSpan) API.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withContext<CallbackArgs, Callback>(context: TracingContext,
+        callback: Callback, callbackArgs: CallbackArgs): ReturnType<Callback>
+      parameters:
+        - id: context
+          type: <xref uid="@azure/core-tracing.TracingContext" />
+          description: >-
+            The [TracingContext](xref:@azure/core-tracing.TracingContext) to use
+            as the active context in the scope of the callback.
+        - id: callback
+          type: Callback
+          description: >-
+            The callback to be invoked with the given context set as the
+            globally active context.
+        - id: callbackArgs
+          type: CallbackArgs
+          description: The callback arguments.
+      return:
+        description: ''
+        type: ReturnType&lt;Callback&gt;
+  - name: withSpan<Options, Callback>(string, Options, Callback, TracingSpanOptions)
+    uid: '@azure/core-tracing.TracingClient.withSpan'
+    package: '@azure/core-tracing'
+    summary: >-
+      Wraps a callback in a tracing span, calls the callback, and closes the
+      span.
+
+
+      This is the primary interface for using Tracing and will handle error
+      recording as well as setting the status on the span.
+
+
+      Both synchronous and asynchronous functions will be awaited in order to
+      reflect the result of the callback on the span.
+
+
+      Example:
+
+
+      ```ts
+
+      const myOperationResult = await
+      tracingClient.withSpan("myClassName.myOperationName", options,
+      (updatedOptions) => myOperation(updatedOptions));
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withSpan<Options, Callback>(name: string, operationOptions:
+        Options, callback: Callback, spanOptions?: TracingSpanOptions):
+        Promise<Resolved<ReturnType<Callback>>>
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the span. By convention this should be
+            `${className}.${methodName}`.
+        - id: operationOptions
+          type: Options
+          description: >-
+            The original options passed to the method. The callback will receive
+            these options with the newly created
+            [TracingContext](xref:@azure/core-tracing.TracingContext).
+        - id: callback
+          type: Callback
+          description: >-
+            The callback to be invoked with the updated options and newly
+            created [TracingSpan](xref:@azure/core-tracing.TracingSpan).
+        - id: spanOptions
+          type: <xref uid="@azure/core-tracing.TracingSpanOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-tracing.Resolved"
+          />&lt;ReturnType&lt;Callback&gt;&gt;&gt;

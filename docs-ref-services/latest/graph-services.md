@@ -3,7 +3,7 @@ title: Azure Graph Services SDK for JavaScript
 description: Reference for Azure Graph Services SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/08/2023
+ms.data: 09/11/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: graphservices

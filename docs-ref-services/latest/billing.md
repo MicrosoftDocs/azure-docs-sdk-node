@@ -3,14 +3,14 @@ title: Azure Billing SDK for JavaScript
 description: Reference for Azure Billing SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/11/2023
+ms.data: 09/12/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: billing
 ms.technology: 
-manager: timlt
-ms.product: 
 ms.date: 07/18/2017
+ms.product: 
+manager: timlt
 ---
 # Azure Billing modules for JavaScript
 

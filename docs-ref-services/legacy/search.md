@@ -1,17 +1,15 @@
 ---
-title: Azure Search resource management modules for JavaScript
-description: Introduction to the JavaScript resource management modules for Azure Search.
-author: HeidiSteen
-manager: nitinme
-ms.author: heidist
-
-ms.date: 08/18/2019
+title: Azure Search SDK for JavaScript
+description: Reference for Azure Search SDK for JavaScript
+author: dgetu
+ms.author: danielgetu
+ms.data: 09/13/2023
 ms.topic: reference
-ms.devlang: nodejs
+ms.devlang: javascript
 ms.service: cognitive-search
-
+ms.date: 08/18/2019
+manager: nitinme
 ---
-
 # JavaScript resource management modules for Azure Search
 
 Azure Search is a search-as-a-service cloud solution that gives developers APIs and tools for adding a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications. This JavaScript module provides resource management APIs for creating and updating a search service, managing access keys, and allocating replicas and partitionss. You cannot change tiers (SKU) or location with these APIs.

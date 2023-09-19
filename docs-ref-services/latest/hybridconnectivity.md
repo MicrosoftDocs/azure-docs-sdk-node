@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: hybridconnectivity
 ---
-# Azure Hybridconnectivity SDK for JavaScript - preview
-## Packages - preview
+# Azure Hybridconnectivity SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](hybridconnectivity-index.md)]

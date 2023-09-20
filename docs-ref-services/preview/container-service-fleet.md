@@ -3,7 +3,7 @@ title: Azure Container Service Fleet SDK for JavaScript
 description: Reference for Azure Container Service Fleet SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/19/2023
+ms.data: 09/20/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: containerservicefleet

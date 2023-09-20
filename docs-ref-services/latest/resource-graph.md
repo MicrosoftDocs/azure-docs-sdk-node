@@ -3,7 +3,7 @@ title: Azure Resource Graph SDK for JavaScript
 description: Reference for Azure Resource Graph SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/19/2023
+ms.data: 09/20/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: resourcegraph

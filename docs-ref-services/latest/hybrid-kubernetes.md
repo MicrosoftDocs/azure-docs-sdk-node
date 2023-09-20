@@ -3,7 +3,7 @@ title: Azure Hybrid Kubernetes SDK for JavaScript
 description: Reference for Azure Hybrid Kubernetes SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/19/2023
+ms.data: 09/20/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hybridkubernetes

@@ -53,6 +53,8 @@ interfaces:
   - '@azure/arm-signalr.PrivateLinkServiceConnectionState'
   - '@azure/arm-signalr.ProxyResource'
   - '@azure/arm-signalr.RegenerateKeyParameters'
+  - '@azure/arm-signalr.Replica'
+  - '@azure/arm-signalr.ReplicaList'
   - '@azure/arm-signalr.Resource'
   - '@azure/arm-signalr.ResourceLogCategory'
   - '@azure/arm-signalr.ResourceLogConfiguration'
@@ -90,6 +92,7 @@ interfaces:
   - '@azure/arm-signalr.SignalRListBySubscriptionNextOptionalParams'
   - '@azure/arm-signalr.SignalRListBySubscriptionOptionalParams'
   - '@azure/arm-signalr.SignalRListKeysOptionalParams'
+  - '@azure/arm-signalr.SignalRListReplicaSkusOptionalParams'
   - '@azure/arm-signalr.SignalRListSkusOptionalParams'
   - '@azure/arm-signalr.SignalRManagementClientOptionalParams'
   - '@azure/arm-signalr.SignalRNetworkACLs'
@@ -102,9 +105,21 @@ interfaces:
   - '@azure/arm-signalr.SignalRPrivateLinkResources'
   - '@azure/arm-signalr.SignalRPrivateLinkResourcesListNextOptionalParams'
   - '@azure/arm-signalr.SignalRPrivateLinkResourcesListOptionalParams'
+  - '@azure/arm-signalr.SignalRRegenerateKeyHeaders'
   - '@azure/arm-signalr.SignalRRegenerateKeyOptionalParams'
+  - '@azure/arm-signalr.SignalRReplicas'
+  - '@azure/arm-signalr.SignalRReplicasCreateOrUpdateOptionalParams'
+  - '@azure/arm-signalr.SignalRReplicasDeleteOptionalParams'
+  - '@azure/arm-signalr.SignalRReplicasGetOptionalParams'
+  - '@azure/arm-signalr.SignalRReplicasListNextOptionalParams'
+  - '@azure/arm-signalr.SignalRReplicasListOptionalParams'
+  - '@azure/arm-signalr.SignalRReplicasRestartHeaders'
+  - '@azure/arm-signalr.SignalRReplicasRestartOptionalParams'
+  - '@azure/arm-signalr.SignalRReplicasUpdateHeaders'
+  - '@azure/arm-signalr.SignalRReplicasUpdateOptionalParams'
   - '@azure/arm-signalr.SignalRResource'
   - '@azure/arm-signalr.SignalRResourceList'
+  - '@azure/arm-signalr.SignalRRestartHeaders'
   - '@azure/arm-signalr.SignalRRestartOptionalParams'
   - '@azure/arm-signalr.SignalRSharedPrivateLinkResources'
   - >-
@@ -114,6 +129,7 @@ interfaces:
   - '@azure/arm-signalr.SignalRSharedPrivateLinkResourcesListNextOptionalParams'
   - '@azure/arm-signalr.SignalRSharedPrivateLinkResourcesListOptionalParams'
   - '@azure/arm-signalr.SignalRTlsSettings'
+  - '@azure/arm-signalr.SignalRUpdateHeaders'
   - '@azure/arm-signalr.SignalRUpdateOptionalParams'
   - '@azure/arm-signalr.SignalRUsage'
   - '@azure/arm-signalr.SignalRUsageList'
@@ -158,6 +174,7 @@ typeAliases:
   - '@azure/arm-signalr.SignalRListBySubscriptionNextResponse'
   - '@azure/arm-signalr.SignalRListBySubscriptionResponse'
   - '@azure/arm-signalr.SignalRListKeysResponse'
+  - '@azure/arm-signalr.SignalRListReplicaSkusResponse'
   - '@azure/arm-signalr.SignalRListSkusResponse'
   - '@azure/arm-signalr.SignalRPrivateEndpointConnectionsGetResponse'
   - '@azure/arm-signalr.SignalRPrivateEndpointConnectionsListNextResponse'
@@ -166,7 +183,14 @@ typeAliases:
   - '@azure/arm-signalr.SignalRPrivateLinkResourcesListNextResponse'
   - '@azure/arm-signalr.SignalRPrivateLinkResourcesListResponse'
   - '@azure/arm-signalr.SignalRRegenerateKeyResponse'
+  - '@azure/arm-signalr.SignalRReplicasCreateOrUpdateResponse'
+  - '@azure/arm-signalr.SignalRReplicasGetResponse'
+  - '@azure/arm-signalr.SignalRReplicasListNextResponse'
+  - '@azure/arm-signalr.SignalRReplicasListResponse'
+  - '@azure/arm-signalr.SignalRReplicasRestartResponse'
+  - '@azure/arm-signalr.SignalRReplicasUpdateResponse'
   - '@azure/arm-signalr.SignalRRequestType'
+  - '@azure/arm-signalr.SignalRRestartResponse'
   - '@azure/arm-signalr.SignalRSharedPrivateLinkResourcesCreateOrUpdateResponse'
   - '@azure/arm-signalr.SignalRSharedPrivateLinkResourcesGetResponse'
   - '@azure/arm-signalr.SignalRSharedPrivateLinkResourcesListNextResponse'
@@ -181,8 +205,8 @@ functions:
     uid: '@azure/arm-signalr.getContinuationToken'
     package: '@azure/arm-signalr'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -191,7 +215,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

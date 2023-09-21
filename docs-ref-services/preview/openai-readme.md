@@ -3,12 +3,12 @@ title: Azure OpenAI client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/openai, openai
 author: deyaaeldeen
 ms.author: dealmaha
-ms.date: 08/25/2023
+ms.date: 09/21/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: openai
 ---
-# Azure OpenAI client library for JavaScript - version 1.0.0-beta.5 
+# Azure OpenAI client library for JavaScript - version 1.0.0-beta.6 
 
 
 The Azure OpenAI client library for JavaScript is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -17,10 +17,12 @@ non-Azure OpenAI inference endpoint, making it a great choice for even non-Azure
 
 Use the client library for Azure OpenAI to:
 
-* [Create a completion for text][msdocs_openai_completion]
-* [Create a chat completion with ChatGPT][msdocs_openai_chat_completion]
+* [Create a completion for text][get_completions_sample]
+* [Create a chat completion with ChatGPT][list_chat_completion_sample]
 * [Create a text embedding for comparisons][msdocs_openai_embedding]
-* [Use your own data with Azure OpenAI][msdocs_openai_custom_data]
+* [Use your own data with Azure OpenAI][byod_sample]
+* [Generate images][get_images_sample]
+* [Transcribe and Translate audio files][transcribe_audio_sample]
 
 Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
 
@@ -31,14 +33,15 @@ Checkout the following examples:
 - [Summarize Text](#summarize-text-with-completion)
 - [Generate Images](#generate-images-with-dall-e-image-generation-models)
 - [Analyze Business Data](#analyze-business-data)
+- [Transcribe and Translate audio files](#transcribe-and-translate-audio-files)
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.5/sdk/openai/openai)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.6/sdk/openai/openai)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/openai)
 - [API reference documentation](https://aka.ms/openai-js-api)
 - [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.5/sdk/openai/openai/samples/v1-beta)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.6/sdk/openai/openai/samples/v1-beta)
 
 ## Getting started
 
@@ -136,7 +139,7 @@ const client = new OpenAIClient(new OpenAIKeyCredential("<API key>"));
 The main concept to understand is [Completions][azure_openai_completions_docs]. Briefly explained, completions provides its functionality in the form of a text prompt, which by using a specific [model](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models), will then attempt to match the context and patterns, providing an output text. The following code snippet provides a rough overview:
 
 ```javascript
-const { OpenAIClient } = require("@azure/openai");
+const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
 
 async function main(){
   const client = new OpenAIClient(
@@ -151,11 +154,15 @@ async function main(){
     console.log(choice.text);
   }
 }
+
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
 ```
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.5/sdk/openai/openai/samples/v1-beta).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.6/sdk/openai/openai/samples/v1-beta).
 
 ### Generate Chatbot Response
 
@@ -163,6 +170,7 @@ This example authenticates using a DefaultAzureCredential, then generates chat r
 
 ```javascript
 const { OpenAIClient } = require("@azure/openai");
+const { DefaultAzureCredential } = require("@azure/identity");
 
 async function main(){
   const endpoint = "https://myaccount.openai.azure.com/";
@@ -189,6 +197,10 @@ async function main(){
     }
   }
 }
+
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
 ```
 
 ### Generate Multiple Completions With Subscription Key
@@ -196,7 +208,7 @@ async function main(){
 This example generates text responses to input prompts using an Azure subscription key
 
 ```javascript
-const { OpenAIClient } = require("@azure/openai");
+const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
 
 async function main(){
   // Replace with your Azure OpenAI key
@@ -222,6 +234,10 @@ async function main(){
     console.log(`Chatbot: ${completion}`);
   }
 }
+
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
 ```
 
 ### Summarize Text with Completion
@@ -230,6 +246,7 @@ This example generates a summarization of the given input prompt.
 
 ```javascript
 const { OpenAIClient } = require("@azure/openai");
+const { DefaultAzureCredential } = require("@azure/identity")
 
 async function main(){
   const endpoint = "https://myaccount.openai.azure.com/";
@@ -263,6 +280,9 @@ async function main(){
   console.log(`Summarization: ${completion}`);
 }
 
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
 ```
 ### Generate images with DALL-E image generation models
 
@@ -285,6 +305,10 @@ async function main() {
     console.log(`Image generation result URL: ${image.url}`);
   }
 }
+
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
 ```
 
 ### Analyze Business Data
@@ -294,6 +318,7 @@ This example generates chat responses to input chat questions about your busines
 
 ```javascript
 const { OpenAIClient } = require("@azure/openai");
+const { DefaultAzureCredential } = require("@azure/identity");
 
 async function main(){
   const endpoint = "https://myaccount.openai.azure.com/";
@@ -331,6 +356,36 @@ async function main(){
     }
   }
 }
+
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
+```
+
+### Transcribe and translate audio files
+
+The speech to text and translation capabilities of Azure OpenAI can be used to transcribe and translate a wide variety of audio file formats. The following example shows how to use the `getAudioTranscription` method to transcribe audio into the language the audio is in. You can also translate and transcribe the audio into English using the `getAudioTranslation` method.
+
+The audio file can be loaded into memory using the NodeJS file system APIs. In the browser, the file can be loaded using the `FileReader` API and the output of `arrayBuffer` instance method can be passed to the `getAudioTranscription` method.
+
+```js
+const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
+const fs = require("fs/promises");
+
+async function main() {
+  console.log("== Transcribe Audio Sample ==");
+
+  const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
+  const deploymentName = "whisper-deployment";
+  const audio = await fs.readFile("< path to an audio file >");
+  const result = await client.getAudioTranscription(deploymentName, audio);
+
+  console.log(`Transcription: ${result.text}`);
+}
+
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
 ```
 
 ## Troubleshooting
@@ -345,17 +400,20 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.5/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.6/sdk/core/logger).
 
 <!-- LINKS -->
-[msdocs_openai_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.5/sdk/openai/openai/samples/v1-beta/javascript/completions.js
-[msdocs_openai_chat_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.5/sdk/openai/openai/samples/v1-beta/javascript/listChatCompletions.js
-[msdocs_openai_custom_data]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.5/sdk/openai/openai/samples-dev/bringYourOwnData.ts
+[get_completions_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.6/sdk/openai/openai/samples/v1-beta/javascript/completions.js
+[list_chat_completion_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.6/sdk/openai/openai/samples/v1-beta/javascript/listChatCompletions.js
+[byod_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.6/sdk/openai/openai/samples/v1-beta/javascript/bringYourOwnData.js
+[get_images_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.6/sdk/openai/openai/samples/v1-beta/javascript/getImages.js
+[transcribe_audio_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.6/sdk/openai/openai/samples-dev/audioTranscription.ts
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.5/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.5/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.6/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.6/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com
 [msdocs_quickstart_byod]: https://learn.microsoft.com/azure/ai-services/openai/use-your-data-quickstart
+

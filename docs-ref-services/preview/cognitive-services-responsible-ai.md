@@ -3,7 +3,7 @@ title: Azure Cognitive Services Responsible AI SDK for JavaScript
 description: Reference for Azure Cognitive Services Responsible AI SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/25/2023
+ms.data: 09/26/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitiveservicesresponsibleai

@@ -3,13 +3,13 @@ title: Azure Active Directory SDK for JavaScript
 description: Reference for Azure Active Directory SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/25/2023
+ms.data: 09/26/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: activedirectory
-manager: mtillman
 ms.date: 07/18/2017
 ms.technology: azure
+manager: mtillman
 ---
 # Azure Active Directory modules for Node.js
 

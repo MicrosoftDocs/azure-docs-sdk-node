@@ -8,6 +8,7 @@ ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
 ms.service: azure-quantum
+---
 
 ## Azure Quantum Jobs client library for JavaScript - version 1.0.0-beta.1 
 

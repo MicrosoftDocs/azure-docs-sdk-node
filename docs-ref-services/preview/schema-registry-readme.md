@@ -1,8 +1,6 @@
 ---
 title: Azure Schema Registry client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry, schemaregistry
-author: deyaaeldeen
-ms.author: dealmaha
 ms.date: 01/12/2023
 ms.topic: reference
 ms.devlang: javascript

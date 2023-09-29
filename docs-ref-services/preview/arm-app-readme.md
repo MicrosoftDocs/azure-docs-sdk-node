@@ -1,8 +1,6 @@
 ---
 title: Azure ContainerApps API client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-app, app
-author: xirzec
-ms.author: jeffish
 ms.date: 10/08/2022
 ms.topic: reference
 ms.devlang: javascript

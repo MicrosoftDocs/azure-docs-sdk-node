@@ -1,8 +1,6 @@
 ---
 title: Azure Purview Catalog REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-catalog, purview
-author: qiaozha
-ms.author: qiaozha
 ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript

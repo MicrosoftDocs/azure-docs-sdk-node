@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/app-configuration, appconfiguration
-author: HarshaNalluru
-ms.author: sanallur
 ms.date: 07/14/2023
 ms.topic: reference
 ms.devlang: javascript

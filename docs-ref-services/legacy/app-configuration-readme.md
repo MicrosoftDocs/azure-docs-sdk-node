@@ -1,14 +1,11 @@
 ---
 title: Use App Configuration client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/app-configuration, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, javascript, SDK, API, @azure/app-configuration,
 ms.date: 07/07/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
 ---
-
 # App Configuration client library for JavaScript
 
 [Azure App Configuration](https://docs.microsoft.com/azure/azure-app-configuration/overview) is a managed service that helps developers centralize their application and feature settings simply and securely.

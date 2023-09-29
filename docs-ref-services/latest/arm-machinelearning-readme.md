@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-machinelearning, machinelearning
-author: xirzec
-ms.author: jeffish
 ms.date: 12/02/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure EventHubManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-eventhub, eventhub
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/24/2022
 ms.topic: reference
 ms.devlang: javascript

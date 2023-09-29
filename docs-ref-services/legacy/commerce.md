@@ -1,16 +1,13 @@
 ---
 title: Azure Commerce modules for JavaScript
 description: Reference for Azure Commerce modules for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
-manager: angrobew
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: azure
+manager: angrobew
+ms.technology: azure
 ---
-
 # Azure Commerce modules for JavaScript
 
 ## Overview
@@ -32,3 +29,4 @@ npm install @azure/arm-commerce
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-commerce)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

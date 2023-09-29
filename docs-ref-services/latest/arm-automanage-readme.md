@@ -1,8 +1,6 @@
 ---
 title: Azure Automanage client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-automanage, automanage
-author: xirzec
-ms.author: jeffish
 ms.date: 10/08/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure MySQLManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-mysql, mysql
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/06/2022
 ms.topic: reference
 ms.devlang: javascript

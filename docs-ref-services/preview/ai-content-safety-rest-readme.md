@@ -1,8 +1,6 @@
 ---
 title: Azure AI Content Safety REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-content-safety, contentsafety
-author: bowgong
-ms.author: bowgong
 ms.date: 09/25/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,15 +1,12 @@
 ---
 title: Azure Key Vault Certificates client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/keyvault-certificates, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, javascript, SDK, API, @azure/keyvault-certificates,
 ms.date: 08/12/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: key-vault
+ms.technology: azure
 ---
-
 # Azure Key Vault Certificates client library for JavaScript - version 4.1.0 
 
 
@@ -698,3 +695,4 @@ You can find more code samples through the following links:
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-certificates%2FREADME.png)
+

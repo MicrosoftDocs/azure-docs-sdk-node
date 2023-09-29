@@ -1,8 +1,6 @@
 ---
 title: Azure ConfidentialLedger client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-confidentialledger, confidentialledger
-author: joheredi
-ms.author: joheredi
 ms.date: 04/24/2023
 ms.topic: reference
 ms.devlang: javascript

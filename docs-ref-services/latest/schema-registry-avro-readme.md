@@ -1,8 +1,6 @@
 ---
 title: Azure Schema Registry Avro Serializer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry-avro, schemaregistry
-author: deyaaeldeen
-ms.author: dealmaha
 ms.date: 05/10/2022
 ms.topic: reference
 ms.devlang: javascript
@@ -165,3 +163,4 @@ learn more about how to build and test the code.
 [defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0/sdk/identity/identity#defaultazurecredential
 [resterror]: /javascript/api/@azure/core-rest-pipeline/resterror?view=azure-node-latest
 [schema_registry]: /javascript/api/overview/azure/schema-registry-readme?view=azure-node-latest
+

@@ -1,8 +1,6 @@
 ---
 title: Azure OpenAI client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/openai, openai
-author: deyaaeldeen
-ms.author: dealmaha
 ms.date: 09/21/2023
 ms.topic: reference
 ms.devlang: javascript

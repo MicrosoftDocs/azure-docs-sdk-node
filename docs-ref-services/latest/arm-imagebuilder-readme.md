@@ -1,8 +1,6 @@
 ---
 title: Azure ImageBuilder client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-imagebuilder, imagebuilder
-author: xirzec
-ms.author: jeffish
 ms.date: 04/26/2023
 ms.topic: reference
 ms.devlang: javascript

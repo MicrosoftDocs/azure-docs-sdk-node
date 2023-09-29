@@ -1,14 +1,11 @@
 ---
 title: Azure Azure Digital Twins client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/digital-twins, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, javascript, SDK, API, @azure/digital-twins,
 ms.date: 09/08/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
 ---
-
 # Azure Azure Digital Twins client library for JavaScript - version 1.0.0-preview.1 
 
 

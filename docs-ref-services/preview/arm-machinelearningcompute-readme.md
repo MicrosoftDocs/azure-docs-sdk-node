@@ -1,8 +1,6 @@
 ---
 title: Azure Machine Learning Compute Management client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-machinelearningcompute, machinelearningcompute
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/05/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,16 +1,13 @@
 ---
 title: Azure SQL modules for JavaScript
 description: Reference for Azure SQL modules for JavaScript
-author: rothja
-ms.author: jroth
-manager: craigg
 ms.date: 07/18/2017
 ms.topic: reference
 ms.devlang: nodejs
 ms.service: sql-database
 ms.subservice: development
+manager: craigg
 ---
-
 # Azure SQL modules for JavaScript
 
 Work with data stored in [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from JavaScript.
@@ -80,3 +77,4 @@ npm install @azure/arm-sql
 - [Azure SQL Database: Use JavaScript to connect and query data](https://docs.microsoft.com/azure/sql-database/sql-database-connect-query-nodejs)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

@@ -1,16 +1,13 @@
 ---
 title: Azure Key Vault modules for JavaScript
 description: Reference for Azure Key Vault modules for JavaScript
-author: barclayn
-ms.author: barclayn
-manager: mbaldwin
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: key-vault
+manager: mbaldwin
+ms.technology: azure
 ---
-
 ## Azure Key Vault SDK for JavaScript - latest
 
 ## Client packages (4.x.x) - latest
@@ -27,3 +24,4 @@ ms.service: key-vault
 |------------------------------------------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
 | [ARM Key Vault](/javascript/api/preview-docs/@azure/arm-keyvault?view=az-js-keyvault-v4) | [@azure/arm-keyvault@1.2.1](https://www.npmjs.com/package/@azure/arm-keyvault) | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/arm-keyvault) |
 |                                                                              |                                                                                |                                                                                           |
+

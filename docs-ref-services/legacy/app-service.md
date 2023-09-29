@@ -1,16 +1,13 @@
 ---
 title: Azure App Service modules for JavaScript
 description: Reference for Azure App Service modules for JavaScript
-author: SyntaxC4
-ms.author: cfowler
-manager: jhubbard
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: app-service
+manager: jhubbard
+ms.technology: azure
 ---
-
 # Azure App Service modules for JavaScript
 
 ## Overview
@@ -39,3 +36,4 @@ npm install @azure/arm-appservice
 - [FoodTrucks - Node API App for Azure App Service](https://azure.microsoft.com/resources/samples/app-service-api-node-food-trucks/)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure-rest/agrifood-farming, agrifood
-author: joheredi
-ms.author: joheredi
 ms.date: 02/23/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure Domain client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-domainservices, domainservices
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/24/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,16 +1,13 @@
 ---
 title: Cognitive Services Speech SDK for JavaScript
 description: Reference for Cognitive Services Speech SDK for JavaScript
-author: mahilleb-msft
-ms.author: mahilleb
-manager: wolfma
 ms.date: 12/18/2018
 ms.topic: reference
 ms.devlang: nodejs
 ms.service: cognitive-services
 ms.subservice: speech-service
+manager: wolfma
 ---
-
 # Cognitive Services Speech SDK for JavaScript
 
 ## Overview
@@ -89,3 +86,4 @@ The previous example uses single-shot recognition, which recognizes a single utt
 * [Step-by-step quickstart for JavaScript](/azure/cognitive-services/speech-service/quickstart-js-node).
 * [Step-by-step quickstart for the browser](/azure/cognitive-services/speech-service/quickstart-js-browser).
 * More samples can be found in our [Speech SDK sample repository](https://aka.ms/csspeech/samples).
+

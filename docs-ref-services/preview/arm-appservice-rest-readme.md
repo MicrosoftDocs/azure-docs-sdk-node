@@ -1,8 +1,6 @@
 ---
 title: Azure WebSitemManagement REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/arm-appservice, appservice
-author: qiaozha
-ms.author: qiaozha
 ms.date: 06/13/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure AI Document Intelligence client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-form-recognizer, formrecognizer
-author: witemple-msft
-ms.author: witemple
 ms.date: 08/10/2023
 ms.topic: reference
 ms.devlang: javascript

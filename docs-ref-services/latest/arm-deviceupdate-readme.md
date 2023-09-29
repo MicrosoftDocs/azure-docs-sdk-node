@@ -1,8 +1,6 @@
 ---
 title: Azure DeviceUpdate client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-deviceupdate, deviceupdate
-author: xirzec
-ms.author: jeffish
 ms.date: 02/02/2023
 ms.topic: reference
 ms.devlang: javascript

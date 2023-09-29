@@ -1,8 +1,6 @@
 ---
 title: Azure HybridConnectivityManagementApi client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-hybridconnectivity, hybridconnectivity
-author: xirzec
-ms.author: jeffish
 ms.date: 09/19/2023
 ms.topic: reference
 ms.devlang: javascript

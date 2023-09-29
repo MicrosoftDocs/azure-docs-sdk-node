@@ -1,8 +1,6 @@
 ---
 title: Azure Logger client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/logger, core
-author: xirzec
-ms.author: jeffish
 ms.date: 03/02/2023
 ms.topic: reference
 ms.devlang: javascript

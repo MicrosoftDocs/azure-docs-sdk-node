@@ -1,16 +1,13 @@
 ---
 title: Azure IoT Hub modules for JavaScript
 description: Reference for Azure IoT Hub modules for JavaScript
-author: dominicbetts
-ms.author: dobett
-manager: timlt
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: iot-hub
+manager: timlt
+ms.technology: azure
 ---
-
 # Azure IoT Hub modules for JavaScript
 
 Azure IoT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices and a solution back end. Azure IoT Hub:
@@ -40,3 +37,4 @@ npm install @azure/arm-iothub
 - [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

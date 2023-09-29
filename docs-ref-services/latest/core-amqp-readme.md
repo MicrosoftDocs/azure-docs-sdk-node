@@ -1,8 +1,6 @@
 ---
 title: Azure Core AMQP client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-amqp, core
-author: xirzec
-ms.author: jeffish
 ms.date: 04/06/2023
 ms.topic: reference
 ms.devlang: javascript

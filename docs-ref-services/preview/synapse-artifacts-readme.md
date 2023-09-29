@@ -1,8 +1,6 @@
 ---
 title: Azure Synapse Artifacts client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/synapse-artifacts, synapse
-author: joheredi
-ms.author: joheredi
 ms.date: 07/28/2023
 ms.topic: reference
 ms.devlang: javascript

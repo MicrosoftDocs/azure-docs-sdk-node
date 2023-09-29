@@ -1,8 +1,6 @@
 ---
 title: Azure ServiceNetworkingManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-servicenetworking, servicenetworking
-author: xirzec
-ms.author: jeffish
 ms.date: 05/23/2023
 ms.topic: reference
 ms.devlang: javascript

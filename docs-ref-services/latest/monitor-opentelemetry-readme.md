@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-author: hectorhdzg
-ms.author: hectorh
 ms.date: 09/20/2023
 ms.topic: reference
 ms.devlang: javascript

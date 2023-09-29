@@ -1,8 +1,6 @@
 ---
 title: Azure BillingBenefitsRp client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-billingbenefits, billingbenefits
-author: xirzec
-ms.author: jeffish
 ms.date: 12/20/2022
 ms.topic: reference
 ms.devlang: javascript

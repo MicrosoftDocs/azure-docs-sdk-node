@@ -1,8 +1,6 @@
 ---
 title: Azure MobileNetworkManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-mobilenetwork, mobilenetwork
-author: xirzec
-ms.author: jeffish
 ms.date: 07/28/2023
 ms.topic: reference
 ms.devlang: javascript

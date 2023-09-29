@@ -1,15 +1,12 @@
 ---
 title: Azure Synapse Monitoring client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/synapse-monitoring, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, javascript, SDK, API, @azure/synapse-monitoring,
 ms.date: 02/09/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: synapse-analytics
+ms.technology: azure
 ---
-
 ## Azure Synapse Monitoring client library for JavaScript - version 1.0.0-beta.2 
 
 

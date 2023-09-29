@@ -1,8 +1,6 @@
 ---
 title: Azure Microsoft Datadog client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-datadog, datadog
-author: xirzec
-ms.author: jeffish
 ms.date: 11/29/2022
 ms.topic: reference
 ms.devlang: javascript

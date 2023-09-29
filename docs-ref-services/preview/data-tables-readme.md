@@ -1,16 +1,13 @@
 ---
 title: Azure Tables client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/data-tables, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, javascript, SDK, API, @azure/data-tables,
 ms.date: 05/18/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: storage
 ms.subservice: tables
+ms.technology: azure
 ---
-
 # Azure Tables client library for JavaScript - version 12.0.0-beta.3 
 
 

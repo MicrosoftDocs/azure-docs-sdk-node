@@ -1,15 +1,12 @@
 ---
 title: Azure Key Vault Secret client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-secrets, keyvault
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 07/29/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: key-vault
+ms.technology: azure
 ---
-
 # Azure Key Vault Secret client library for JavaScript - version 4.3.0 
 
 

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-reservations, reservations
-author: xirzec
-ms.author: jeffish
 ms.date: 03/22/2023
 ms.topic: reference
 ms.devlang: javascript

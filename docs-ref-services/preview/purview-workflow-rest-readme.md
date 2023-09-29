@@ -1,8 +1,6 @@
 ---
 title: Azure Purview Workflow Rest-Level client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-workflow, purview
-author: qiaozha
-ms.author: qiaozha
 ms.date: 03/09/2023
 ms.topic: reference
 ms.devlang: javascript

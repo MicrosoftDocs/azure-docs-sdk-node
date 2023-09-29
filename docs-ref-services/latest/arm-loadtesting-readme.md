@@ -1,8 +1,6 @@
 ---
 title: Azure LoadTest client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-loadtesting, loadtestservice
-author: xirzec
-ms.author: jeffish
 ms.date: 02/01/2023
 ms.topic: reference
 ms.devlang: javascript

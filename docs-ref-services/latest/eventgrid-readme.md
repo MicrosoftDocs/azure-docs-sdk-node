@@ -1,8 +1,6 @@
 ---
 title: Azure Event Grid client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/eventgrid, eventgrid
-author: ellismg
-ms.author: matell
 ms.date: 09/14/2023
 ms.topic: reference
 ms.devlang: javascript

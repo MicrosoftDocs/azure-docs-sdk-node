@@ -1,8 +1,6 @@
 ---
 title: Azure Key Vault Key client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-keys, keyvault
-author: timovv
-ms.author: timov
 ms.date: 08/10/2023
 ms.topic: reference
 ms.devlang: javascript

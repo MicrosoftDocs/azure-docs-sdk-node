@@ -1,8 +1,6 @@
 ---
 title: Azure WebSiteManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-appservice, appservice
-author: xirzec
-ms.author: jeffish
 ms.date: 03/22/2023
 ms.topic: reference
 ms.devlang: javascript

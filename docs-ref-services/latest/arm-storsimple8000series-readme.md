@@ -1,8 +1,6 @@
 ---
 title: Azure StorSimple8000SeriesManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-storsimple8000series, storsimple8000series
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/16/2022
 ms.topic: reference
 ms.devlang: javascript

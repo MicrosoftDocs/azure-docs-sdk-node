@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: functions
 ---
-# Azure Functions SDK for JavaScript - latest
-## Packages - latest
+# Azure Functions SDK for JavaScript - legacy
+## Packages - legacy
 [!INCLUDE [packages](functions-index.md)]

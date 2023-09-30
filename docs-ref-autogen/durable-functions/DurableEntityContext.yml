@@ -1,0 +1,165 @@
+### YamlMime:TSType
+name: DurableEntityContext
+uid: durable-functions.DurableEntityContext
+package: durable-functions
+summary: Provides functionality for application code implementing an entity operation.
+fullName: DurableEntityContext<TState>
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: entityId
+    uid: durable-functions.DurableEntityContext.entityId
+    package: durable-functions
+    summary: Gets the id of the currently executing entity.
+    fullName: entityId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'entityId: EntityId'
+      return:
+        description: ''
+        type: <xref uid="durable-functions.EntityId" />
+  - name: entityKey
+    uid: durable-functions.DurableEntityContext.entityKey
+    package: durable-functions
+    summary: Gets the key of the currently executing entity.
+    fullName: entityKey
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'entityKey: string'
+      return:
+        description: ''
+        type: string
+  - name: entityName
+    uid: durable-functions.DurableEntityContext.entityName
+    package: durable-functions
+    summary: Gets the name of the currently executing entity.
+    fullName: entityName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'entityName: string'
+      return:
+        description: ''
+        type: string
+  - name: isNewlyConstructed
+    uid: durable-functions.DurableEntityContext.isNewlyConstructed
+    package: durable-functions
+    summary: |-
+      Whether this entity is freshly constructed, i.e. did not exist prior to
+      this operation being called.
+    fullName: isNewlyConstructed
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isNewlyConstructed: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: operationName
+    uid: durable-functions.DurableEntityContext.operationName
+    package: durable-functions
+    summary: |-
+      Gets the name of the operation that was called.
+
+      An operation invocation on an entity includes an operation name, which
+      states what operation to perform, and optionally an operation input.
+    fullName: operationName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'operationName: undefined | string'
+      return:
+        description: ''
+        type: undefined | string
+methods:
+  - name: destructOnExit()
+    uid: durable-functions.DurableEntityContext.destructOnExit
+    package: durable-functions
+    summary: Deletes this entity after this operation completes.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: function destructOnExit()
+  - name: getInput<TInput>()
+    uid: durable-functions.DurableEntityContext.getInput
+    package: durable-functions
+    summary: |-
+      Gets the input for this operation.
+
+      An operation invocation on an entity includes an operation name, which
+      states what operation to perform, and optionally an operation input.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getInput<TInput>(): undefined | TInput'
+      return:
+        description: The operation input, or undefined if none.
+        type: undefined | TInput
+  - name: getState(() => TState)
+    uid: durable-functions.DurableEntityContext.getState
+    package: durable-functions
+    summary: Gets the current state of this entity, for reading and/or writing.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getState(initializer?: () => TState): undefined | TState'
+      parameters:
+        - id: initializer
+          type: () =&gt; TState
+          description: |-
+            Provides an initial value to use for the state,
+            instead of TState's default.
+      return:
+        description: >-
+          The current state of this entity, or undefined if none has been set
+          yet.
+        type: undefined | TState
+  - name: return<TResult>(TResult)
+    uid: durable-functions.DurableEntityContext.return
+    package: durable-functions
+    summary: Returns the given result to the caller of this operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function return<TResult>(result: TResult)'
+      parameters:
+        - id: result
+          type: TResult
+          description: The result to return.
+  - name: setState(TState)
+    uid: durable-functions.DurableEntityContext.setState
+    package: durable-functions
+    summary: Sets the current state of this entity.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function setState(state: TState)'
+      parameters:
+        - id: state
+          type: TState
+          description: The state of the entity.
+  - name: signalEntity(EntityId, string, unknown)
+    uid: durable-functions.DurableEntityContext.signalEntity
+    package: durable-functions
+    summary: |-
+      Signals an entity to perform an operation, without waiting for a
+      response. Any result or exception is ignored (fire and forget).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function signalEntity(entity: EntityId, operationName: string,
+        operationInput?: unknown)
+      parameters:
+        - id: entity
+          type: <xref uid="durable-functions.EntityId" />
+          description: The target entity.
+        - id: operationName
+          type: string
+          description: The name of the operation.
+        - id: operationInput
+          type: unknown
+          description: The operation input.

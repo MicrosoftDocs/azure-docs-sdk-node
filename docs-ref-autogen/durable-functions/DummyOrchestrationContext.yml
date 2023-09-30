@@ -12,9 +12,7 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: >-
-      DummyOrchestrationContext(string, HistoryEvent[], any, string, string,
-      number, ReplaySchema, boolean, string)
+  - name: DummyOrchestrationContext(string, string, LogHandler)
     uid: durable-functions.DummyOrchestrationContext.constructor
     package: durable-functions
     summary: |-
@@ -25,90 +23,23 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new DummyOrchestrationContext(instanceId?: string, history?:
-        HistoryEvent[], input?: any, longRunningTimerIntervalDuration?: string,
-        maximumShortTimerDuration?: string,
-        defaultHttpAsyncRequestSleepTimeMillseconds?: number, schemaVersion?:
-        ReplaySchema, isReplaying?: boolean, parentInstanceId?: string)
+        new DummyOrchestrationContext(functionName?: string, invocationId?:
+        string, logHandler?: LogHandler)
       parameters:
-        - id: instanceId
+        - id: functionName
           type: string
-          description: The instanceId of the orchestration
-        - id: history
-          type: HistoryEvent[]
-          description: The history events array of the orchestration
-        - id: input
-          type: any
-          description: The input to the orchestration
-        - id: longRunningTimerIntervalDuration
+          description: The name of the orchestration function
+        - id: invocationId
           type: string
-          description: >-
-            The duration to break smaller timers into if a long timer exceeds
-            the maximum allowed duration
-        - id: maximumShortTimerDuration
-          type: string
-          description: >-
-            The maximum duration for a timer allowed by the underlying storage
-            infrastructure
-        - id: defaultHttpAsyncRequestSleepTimeMillseconds
-          type: number
-          description: ''
-        - id: schemaVersion
-          type: ReplaySchema
-          description: >-
-            The schema version currently used after being negotiated with the
-            extension
-        - id: isReplaying
-          type: boolean
-          description: >-
-            Whether the orchestration is to be marked as isReplaying the its
-            first event
-        - id: parentInstanceId
-          type: string
-          description: >-
-            The instanceId of the orchestration's parent, if this is a
-            sub-orchestration
+          description: The ID of this particular invocation of the orchestration
+        - id: logHandler
+          type: LogHandler
+          description: A handler to emit logs coming from the orchestration function
 properties:
-  - name: bindingData
-    uid: durable-functions.DummyOrchestrationContext.bindingData
-    package: durable-functions
-    summary: ''
-    fullName: bindingData
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'bindingData: ContextBindingData'
-      return:
-        description: ''
-        type: ContextBindingData
-  - name: bindingDefinitions
-    uid: durable-functions.DummyOrchestrationContext.bindingDefinitions
-    package: durable-functions
-    summary: ''
-    fullName: bindingDefinitions
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'bindingDefinitions: BindingDefinition[]'
-      return:
-        description: ''
-        type: BindingDefinition[]
-  - name: bindings
-    uid: durable-functions.DummyOrchestrationContext.bindings
-    package: durable-functions
-    summary: ''
-    fullName: bindings
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'bindings: ContextBindings'
-      return:
-        description: ''
-        type: ContextBindings
   - name: df
     uid: durable-functions.DummyOrchestrationContext.df
     package: durable-functions
-    summary: ''
+    summary: Object containing all DF orchestration APIs and properties
     fullName: df
     remarks: ''
     isDeprecated: false
@@ -116,47 +47,51 @@ properties:
       content: 'df: DurableOrchestrationContext'
       return:
         description: ''
-        type: DurableOrchestrationContext
-  - name: doneValue
-    uid: durable-functions.DummyOrchestrationContext.doneValue
+        type: <xref uid="durable-functions.DurableOrchestrationContext" />
+inheritedProperties:
+  - name: extraInputs
+    uid: durable-functions.DummyOrchestrationContext.extraInputs
     package: durable-functions
-    summary: ''
-    fullName: doneValue
+    summary: An object used to get secondary inputs
+    fullName: extraInputs
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'doneValue: undefined | IOrchestratorState'
+      content: 'extraInputs: InvocationContextExtraInputs'
       return:
         description: ''
-        type: undefined | IOrchestratorState
-  - name: err
-    uid: durable-functions.DummyOrchestrationContext.err
+        type: InvocationContextExtraInputs
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.extraInputs
+  - name: extraOutputs
+    uid: durable-functions.DummyOrchestrationContext.extraOutputs
     package: durable-functions
-    summary: ''
-    fullName: err
+    summary: An object used to set secondary outputs
+    fullName: extraOutputs
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'err: undefined | null | string | Error'
+      content: 'extraOutputs: InvocationContextExtraOutputs'
       return:
         description: ''
-        type: undefined | null | string | Error
-  - name: executionContext
-    uid: durable-functions.DummyOrchestrationContext.executionContext
+        type: InvocationContextExtraOutputs
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.extraOutputs
+  - name: functionName
+    uid: durable-functions.DummyOrchestrationContext.functionName
     package: durable-functions
-    summary: ''
-    fullName: executionContext
+    summary: The name of the function that is being invoked
+    fullName: functionName
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'executionContext: ExecutionContext'
+      content: 'functionName: string'
       return:
         description: ''
-        type: ExecutionContext
+        type: string
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.functionName
   - name: invocationId
     uid: durable-functions.DummyOrchestrationContext.invocationId
     package: durable-functions
-    summary: ''
+    summary: A unique guid specific to this invocation
     fullName: invocationId
     remarks: ''
     isDeprecated: false
@@ -165,79 +100,173 @@ properties:
       return:
         description: ''
         type: string
-  - name: log
-    uid: durable-functions.DummyOrchestrationContext.log
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.invocationId
+  - name: options
+    uid: durable-functions.DummyOrchestrationContext.options
     package: durable-functions
-    summary: ''
-    fullName: log
+    summary: >-
+      The options used when registering the function
+
+      NOTE: This value may differ slightly from the original because it has been
+      validated and defaults may have been explicitly added
+    fullName: options
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'log: Logger'
+      content: 'options: EffectiveFunctionOptions'
       return:
         description: ''
-        type: Logger
-  - name: req
-    uid: durable-functions.DummyOrchestrationContext.req
+        type: EffectiveFunctionOptions
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.options
+  - name: retryContext
+    uid: durable-functions.DummyOrchestrationContext.retryContext
     package: durable-functions
-    summary: ''
-    fullName: req
+    summary: >-
+      The retry context of the current function execution if the retry policy is
+      defined
+    fullName: retryContext
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'req?: HttpRequest'
+      content: 'retryContext?: RetryContext'
       return:
         description: ''
-        type: HttpRequest
-  - name: res
-    uid: durable-functions.DummyOrchestrationContext.res
-    package: durable-functions
-    summary: ''
-    fullName: res
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'res?: {[key: string]: any}'
-      return:
-        description: ''
-        type: '{[key: string]: any}'
-  - name: suppressAsyncDoneError
-    uid: durable-functions.DummyOrchestrationContext.suppressAsyncDoneError
-    package: durable-functions
-    summary: ''
-    fullName: suppressAsyncDoneError
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'suppressAsyncDoneError: boolean'
-      return:
-        description: ''
-        type: boolean
+        type: RetryContext
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.retryContext
   - name: traceContext
     uid: durable-functions.DummyOrchestrationContext.traceContext
     package: durable-functions
-    summary: ''
+    summary: TraceContext information to enable distributed tracing scenarios
     fullName: traceContext
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'traceContext: TraceContext'
+      content: 'traceContext?: TraceContext'
       return:
         description: ''
         type: TraceContext
-methods:
-  - name: done(string | Error, any)
-    uid: durable-functions.DummyOrchestrationContext.done
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.traceContext
+  - name: triggerMetadata
+    uid: durable-functions.DummyOrchestrationContext.triggerMetadata
     package: durable-functions
-    summary: ''
+    summary: >-
+      Metadata about the trigger or undefined if the metadata is already
+      represented elsewhere
+
+      For example, this will be undefined for http and timer triggers because
+      you can find that information on the request & timer object instead
+    fullName: triggerMetadata
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function done(err?: string | Error, result?: any)'
+      content: 'triggerMetadata?: TriggerMetadata'
+      return:
+        description: ''
+        type: TriggerMetadata
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.triggerMetadata
+inheritedMethods:
+  - name: debug(any[])
+    uid: durable-functions.DummyOrchestrationContext.debug
+    package: durable-functions
+    summary: >-
+      The recommended way to log debug data (level 1) during invocation.
+
+      Similar to Node.js's `console.debug`, but has integration with Azure
+      features like application insights
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function debug(args: any[])'
       parameters:
-        - id: err
-          type: string | Error
+        - id: args
+          type: any[]
           description: ''
-        - id: result
-          type: any
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.debug
+  - name: error(any[])
+    uid: durable-functions.DummyOrchestrationContext.error
+    package: durable-functions
+    summary: >-
+      The recommended way to log error data (level 4) during invocation.
+
+      Similar to Node.js's `console.error`, but has integration with Azure
+      features like application insights
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function error(args: any[])'
+      parameters:
+        - id: args
+          type: any[]
           description: ''
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.error
+  - name: info(any[])
+    uid: durable-functions.DummyOrchestrationContext.info
+    package: durable-functions
+    summary: >-
+      The recommended way to log information data (level 2) during invocation.
+
+      Similar to Node.js's `console.info`, but has integration with Azure
+      features like application insights
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function info(args: any[])'
+      parameters:
+        - id: args
+          type: any[]
+          description: ''
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.info
+  - name: log(any[])
+    uid: durable-functions.DummyOrchestrationContext.log
+    package: durable-functions
+    summary: >-
+      The recommended way to log data during invocation.
+
+      Similar to Node.js's `console.log`, but has integration with Azure
+      features like application insights
+
+      Uses the 'information' log level
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function log(args: any[])'
+      parameters:
+        - id: args
+          type: any[]
+          description: ''
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.log
+  - name: trace(any[])
+    uid: durable-functions.DummyOrchestrationContext.trace
+    package: durable-functions
+    summary: >-
+      The recommended way to log trace data (level 0) during invocation.
+
+      Similar to Node.js's `console.trace`, but has integration with Azure
+      features like application insights
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function trace(args: any[])'
+      parameters:
+        - id: args
+          type: any[]
+          description: ''
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.trace
+  - name: warn(any[])
+    uid: durable-functions.DummyOrchestrationContext.warn
+    package: durable-functions
+    summary: >-
+      The recommended way to log warning data (level 3) during invocation.
+
+      Similar to Node.js's `console.warn`, but has integration with Azure
+      features like application insights
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function warn(args: any[])'
+      parameters:
+        - id: args
+          type: any[]
+          description: ''
+    inheritanceDescription: <b>Inherited From</b> InvocationContext.warn
+extends: InvocationContext

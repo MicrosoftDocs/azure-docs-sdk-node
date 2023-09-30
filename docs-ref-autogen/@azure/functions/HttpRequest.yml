@@ -6,42 +6,83 @@ summary: HTTP request object. Provided to your function when using HTTP Bindings
 fullName: HttpRequest
 remarks: ''
 isDeprecated: false
-type: interface
+type: class
+constructors:
+  - name: HttpRequest(HttpRequestInit)
+    uid: '@azure/functions.HttpRequest.constructor'
+    package: '@azure/functions'
+    summary: >-
+      For testing purposes only. This will always be constructed for you when
+      run in the context of the Azure Functions runtime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new HttpRequest(httpRequestInit: HttpRequestInit)'
+      parameters:
+        - id: httpRequestInit
+          type: <xref uid="@azure/functions.HttpRequestInit" />
+          description: ''
 properties:
+  - name: arrayBuffer
+    uid: '@azure/functions.HttpRequest.arrayBuffer'
+    package: '@azure/functions'
+    summary: Returns a promise fulfilled with the body as an ArrayBuffer
+    fullName: arrayBuffer
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'arrayBuffer: () => Promise<ArrayBuffer>'
+      return:
+        description: ''
+        type: () =&gt; Promise&lt;ArrayBuffer&gt;
+  - name: blob
+    uid: '@azure/functions.HttpRequest.blob'
+    package: '@azure/functions'
+    summary: Returns a promise fulfilled with the body as a Blob
+    fullName: blob
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'blob: () => Promise<Blob>'
+      return:
+        description: ''
+        type: () =&gt; Promise&lt;Blob&gt;
   - name: body
     uid: '@azure/functions.HttpRequest.body'
     package: '@azure/functions'
-    summary: >-
-      The HTTP request body.
-
-      If the media type is 'application/octet-stream' or 'multipart/*', this
-      will be a Buffer
-
-      If the value is a JSON parse-able string, this will be the parsed object
-
-      Otherwise, this will be a string
+    summary: Returns the body as a ReadableStream
     fullName: body
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'body?: any'
+      content: 'body: null | ReadableStream<any>'
       return:
         description: ''
-        type: any
-  - name: bufferBody
-    uid: '@azure/functions.HttpRequest.bufferBody'
+        type: null | ReadableStream&lt;any&gt;
+  - name: bodyUsed
+    uid: '@azure/functions.HttpRequest.bodyUsed'
     package: '@azure/functions'
-    summary: >-
-      The raw Buffer representing the body before any decoding or parsing has
-      been done
-    fullName: bufferBody
+    summary: Returns whether the body has been read from
+    fullName: bodyUsed
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'bufferBody?: Buffer'
+      content: 'bodyUsed: boolean'
       return:
         description: ''
-        type: Buffer
+        type: boolean
+  - name: formData
+    uid: '@azure/functions.HttpRequest.formData'
+    package: '@azure/functions'
+    summary: Returns a promise fulfilled with the body as FormData
+    fullName: formData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'formData: () => Promise<FormData>'
+      return:
+        description: ''
+        type: () =&gt; Promise&lt;FormData&gt;
   - name: headers
     uid: '@azure/functions.HttpRequest.headers'
     package: '@azure/functions'
@@ -50,10 +91,22 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'headers: HttpRequestHeaders'
+      content: 'headers: Headers'
       return:
         description: ''
-        type: <xref uid="@azure/functions.HttpRequestHeaders" />
+        type: Headers
+  - name: json
+    uid: '@azure/functions.HttpRequest.json'
+    package: '@azure/functions'
+    summary: Returns a promise fulfilled with the body parsed as JSON
+    fullName: json
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'json: () => Promise<unknown>'
+      return:
+        description: ''
+        type: () =&gt; Promise&lt;unknown&gt;
   - name: method
     uid: '@azure/functions.HttpRequest.method'
     package: '@azure/functions'
@@ -62,10 +115,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'method: null | HttpMethod'
+      content: 'method: string'
       return:
         description: ''
-        type: null | <xref uid="@azure/functions.HttpMethod" />
+        type: string
   - name: params
     uid: '@azure/functions.HttpRequest.params'
     package: '@azure/functions'
@@ -86,28 +139,22 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'query: HttpRequestQuery'
+      content: 'query: URLSearchParams'
       return:
         description: ''
-        type: <xref uid="@azure/functions.HttpRequestQuery" />
-  - name: rawBody
-    uid: '@azure/functions.HttpRequest.rawBody'
+        type: URLSearchParams
+  - name: text
+    uid: '@azure/functions.HttpRequest.text'
     package: '@azure/functions'
-    summary: >-
-      The HTTP request body as a UTF-8 string. In this case, the name "raw" is
-      used because the string will never be parsed to an object even if it is
-      json.
-
-      Improvements to the naming are tracked in
-      https://github.com/Azure/azure-functions-nodejs-worker/issues/294
-    fullName: rawBody
+    summary: Returns a promise fulfilled with the body as a string
+    fullName: text
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'rawBody?: any'
+      content: 'text: () => Promise<string>'
       return:
         description: ''
-        type: any
+        type: () =&gt; Promise&lt;string&gt;
   - name: url
     uid: '@azure/functions.HttpRequest.url'
     package: '@azure/functions'
@@ -135,30 +182,3 @@ properties:
       return:
         description: ''
         type: null | <xref uid="@azure/functions.HttpRequestUser" />
-methods:
-  - name: get(string)
-    uid: '@azure/functions.HttpRequest.get'
-    package: '@azure/functions'
-    summary: Get the value of a particular header field
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function get(field: string): undefined | string'
-      parameters:
-        - id: field
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: undefined | string
-  - name: parseFormBody()
-    uid: '@azure/functions.HttpRequest.parseFormBody'
-    package: '@azure/functions'
-    summary: Parses the body and returns an object representing a form
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function parseFormBody(): Form'
-      return:
-        description: ''
-        type: <xref uid="@azure/functions.Form" />

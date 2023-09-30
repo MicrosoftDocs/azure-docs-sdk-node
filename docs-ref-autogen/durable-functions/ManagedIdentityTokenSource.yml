@@ -18,13 +18,12 @@ summary: >+
   const df = require("durable-functions");
 
 
-  module.exports = df.orchestrator(function*(context) {
-      return yield context.df.callHttp(
-          "GET",
-          "https://management.azure.com/subscriptions?api-version=2019-06-01",
-          undefined,
-          undefined,
-          df.ManagedIdentityTokenSource("https://management.core.windows.net"));
+  df.app.orchestration(function* (context) {
+    return yield context.df.callHttp({
+        method: "GET",
+        url: "https://management.azure.com/subscriptions?api-version=2019-06-01",
+        tokenSource: df.ManagedIdentityTokenSource("https://management.core.windows.net"),
+    });
   });
 
   ```

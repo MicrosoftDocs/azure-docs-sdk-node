@@ -1,0 +1,103 @@
+### YamlMime:TSPackage
+uid: durable-functions
+name: durable-functions
+summary: ''
+type: package
+enums:
+  - durable-functions.OrchestrationRuntimeStatus
+classes:
+  - durable-functions.DummyOrchestrationContext
+  - durable-functions.DurableHttpRequest
+  - durable-functions.DurableHttpResponse
+  - durable-functions.EntityId
+  - durable-functions.EntityStateResponse
+  - durable-functions.ManagedIdentityTokenSource
+  - durable-functions.RetryOptions
+functions:
+  - name: 'entity<T>((context: IEntityFunctionContext<T>) => void)'
+    uid: durable-functions.entity
+    package: durable-functions
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function entity<T>(fn: (context: IEntityFunctionContext<T>) => void):
+        (context: IEntityFunctionContext<T>) => void
+      parameters:
+        - id: fn
+          type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
+  - name: getClient(unknown)
+    uid: durable-functions.getClient
+    package: durable-functions
+    summary: |+
+      Returns an OrchestrationClient instance.
+
+      **Example**
+
+      Get an orchestration client instance
+      ```javascript
+      const df = require("durable-functions");
+
+      module.exports = async function (context, req) {
+          const client = df.getClient(context);
+          const instanceId = await client.startNew(req.params.functionName, undefined, req.body);
+
+          return client.createCheckStatusResponse(req, instanceId);
+      };
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getClient(context: unknown): DurableOrchestrationClient'
+      parameters:
+        - id: context
+          type: unknown
+          description: |-
+            The context object of the Azure function whose body
+             calls this method.
+      return:
+        description: ''
+        type: DurableOrchestrationClient
+  - name: >-
+      orchestrator((context: IOrchestrationFunctionContext) =>
+      Generator<unknown, unknown, any>)
+    uid: durable-functions.orchestrator
+    package: durable-functions
+    summary: |+
+      Enables a generator function to act as an orchestrator function.
+
+      Orchestration context methods can be access
+
+      **Example**
+
+      Initialize an orchestrator
+      ```javascript
+      const df = require("durable-functions");
+
+      module.exports = df.orchestrator(function*(context) {
+          // function body
+      });
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function orchestrator(fn: (context: IOrchestrationFunctionContext) =>
+        Generator<unknown, unknown, any>): (context:
+        IOrchestrationFunctionContext) => void
+      parameters:
+        - id: fn
+          type: >-
+            (context: IOrchestrationFunctionContext) =&gt; Generator&lt;unknown,
+            unknown, any&gt;
+          description: the generator function that should act as an orchestrator
+      return:
+        description: ''
+        type: '(context: IOrchestrationFunctionContext) =&gt; void'

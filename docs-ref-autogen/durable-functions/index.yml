@@ -6,98 +6,68 @@ type: package
 enums:
   - durable-functions.OrchestrationRuntimeStatus
 classes:
+  - durable-functions.AggregatedError
+  - durable-functions.DummyEntityContext
   - durable-functions.DummyOrchestrationContext
-  - durable-functions.DurableHttpRequest
-  - durable-functions.DurableHttpResponse
+  - durable-functions.DurableClient
+  - durable-functions.DurableError
+  - durable-functions.DurableOrchestrationContext
+  - durable-functions.DurableOrchestrationStatus
   - durable-functions.EntityId
   - durable-functions.EntityStateResponse
+  - durable-functions.HttpManagementPayload
   - durable-functions.ManagedIdentityTokenSource
+  - durable-functions.PurgeHistoryResult
   - durable-functions.RetryOptions
+interfaces:
+  - durable-functions.ActivityOptions
+  - durable-functions.ActivityTrigger
+  - durable-functions.CallHttpOptions
+  - durable-functions.DurableClientInput
+  - durable-functions.DurableClientOptions
+  - durable-functions.DurableEntityContext
+  - durable-functions.EntityContext
+  - durable-functions.EntityOptions
+  - durable-functions.EntityTrigger
+  - durable-functions.GetStatusOptions
+  - durable-functions.HttpDurableClientOptions
+  - durable-functions.OrchestrationContext
+  - durable-functions.OrchestrationFilter
+  - durable-functions.OrchestrationOptions
+  - durable-functions.OrchestrationTrigger
+  - durable-functions.RegisteredActivityTask
+  - durable-functions.RegisteredOrchestrationTask
+  - durable-functions.StartNewOptions
+  - durable-functions.Task
+  - durable-functions.TaskHubOptions
+  - durable-functions.TimerDurableClientOptions
+  - durable-functions.TimerTask
+  - durable-functions.WaitForCompletionOptions
+typeAliases:
+  - durable-functions.ActivityHandler
+  - durable-functions.DurableClientHandler
+  - durable-functions.EntityHandler
+  - durable-functions.HttpDurableClientHandler
+  - durable-functions.OrchestrationHandler
+  - durable-functions.RegisteredActivity
+  - durable-functions.RegisteredOrchestration
+  - durable-functions.TimerDurableClientHandler
+  - durable-functions.TokenSource
 functions:
-  - name: 'entity<T>((context: IEntityFunctionContext<T>) => void)'
-    uid: durable-functions.entity
-    package: durable-functions
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function entity<T>(fn: (context: IEntityFunctionContext<T>) => void):
-        (context: IEntityFunctionContext<T>) => void
-      parameters:
-        - id: fn
-          type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: '(context: IEntityFunctionContext&lt;T&gt;) =&gt; void'
-  - name: getClient(unknown)
+  - name: getClient(InvocationContext)
     uid: durable-functions.getClient
     package: durable-functions
-    summary: |+
-      Returns an OrchestrationClient instance.
-
-      **Example**
-
-      Get an orchestration client instance
-      ```javascript
-      const df = require("durable-functions");
-
-      module.exports = async function (context, req) {
-          const client = df.getClient(context);
-          const instanceId = await client.startNew(req.params.functionName, undefined, req.body);
-
-          return client.createCheckStatusResponse(req, instanceId);
-      };
-      ```
-
+    summary: Returns an OrchestrationClient instance.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function getClient(context: unknown): DurableOrchestrationClient'
+      content: 'function getClient(context: InvocationContext): DurableClient'
       parameters:
         - id: context
-          type: unknown
+          type: InvocationContext
           description: |-
             The context object of the Azure function whose body
              calls this method.
       return:
         description: ''
-        type: DurableOrchestrationClient
-  - name: >-
-      orchestrator((context: IOrchestrationFunctionContext) =>
-      Generator<unknown, unknown, any>)
-    uid: durable-functions.orchestrator
-    package: durable-functions
-    summary: |+
-      Enables a generator function to act as an orchestrator function.
-
-      Orchestration context methods can be access
-
-      **Example**
-
-      Initialize an orchestrator
-      ```javascript
-      const df = require("durable-functions");
-
-      module.exports = df.orchestrator(function*(context) {
-          // function body
-      });
-      ```
-
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function orchestrator(fn: (context: IOrchestrationFunctionContext) =>
-        Generator<unknown, unknown, any>): (context:
-        IOrchestrationFunctionContext) => void
-      parameters:
-        - id: fn
-          type: >-
-            (context: IOrchestrationFunctionContext) =&gt; Generator&lt;unknown,
-            unknown, any&gt;
-          description: the generator function that should act as an orchestrator
-      return:
-        description: ''
-        type: '(context: IOrchestrationFunctionContext) =&gt; void'
+        type: <xref uid="durable-functions.DurableClient" />

@@ -1,16 +1,13 @@
 ---
 title: Azure Notification Hubs modules for JavaScript
 description: Reference for Azure Notification Hubs modules for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
-manager: angrobe
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: notification-hubs
+manager: angrobe
+ms.technology: azure
 ---
-
 # Azure Notification Hubs modules for JavaScript
 
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.
@@ -40,3 +37,4 @@ npm install @azure/arm-notificationhubs
 * [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

@@ -1,8 +1,6 @@
 ---
 title: Azure BillingManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-billing, billing
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/18/2022
 ms.topic: reference
 ms.devlang: javascript

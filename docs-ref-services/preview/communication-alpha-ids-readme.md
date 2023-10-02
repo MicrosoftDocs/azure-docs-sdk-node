@@ -1,8 +1,6 @@
 ---
 title: Azure Communication Alpha IDs client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-tools/communication-alpha-ids, communication
-author: petrsvihlik
-ms.author: petrsvihlik
 ms.date: 09/22/2022
 ms.topic: reference
 ms.devlang: javascript

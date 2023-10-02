@@ -1,8 +1,6 @@
 ---
 title: Azure Abort Controller client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/abort-controller, core
-author: xirzec
-ms.author: jeffish
 ms.date: 05/05/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure ContainerService client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-containerservice, containerservice
-author: xirzec
-ms.author: jeffish
 ms.date: 09/15/2023
 ms.topic: reference
 ms.devlang: javascript

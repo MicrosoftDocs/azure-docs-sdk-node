@@ -1,8 +1,6 @@
 ---
 title: Azure DeveloperHubService client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-devhub, devhub
-author: xirzec
-ms.author: jeffish
 ms.date: 05/30/2023
 ms.topic: reference
 ms.devlang: javascript

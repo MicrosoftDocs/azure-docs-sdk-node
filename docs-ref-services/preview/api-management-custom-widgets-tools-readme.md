@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/api-management-custom-widgets-tools, apimanagement
-author: xirzec
-ms.author: jeffish
 ms.date: 08/03/2022
 ms.topic: reference
 ms.devlang: javascript

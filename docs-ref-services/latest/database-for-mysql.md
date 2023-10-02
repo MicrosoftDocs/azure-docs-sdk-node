@@ -1,14 +1,11 @@
 ---
 title: Azure MySQL modules for JavaScript
 description: Reference for Azure MySQL modules for JavaScript
-author: ajlam
-ms.author: andrela
 ms.date: 07/18/2017
 ms.topic: reference
 ms.devlang: nodejs
 ms.service: mysql
 ---
-
 # Azure MySQL modules for JavaScript
 
 The recommended client library for accessing Azure Database for MySQL is the open-source [JavaScript connection library for Azure Database for MySQL](https://github.com/sidorares/node-mysql2). 
@@ -72,3 +69,4 @@ npm install @azure/arm-mysql
 ### Example code
 
 Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-mysql)
+

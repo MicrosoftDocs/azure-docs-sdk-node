@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-digitaltwins, digitaltwins
-author: sjiherzig
-ms.author: seherzig
 ms.date: 03/20/2023
 ms.topic: reference
 ms.devlang: javascript

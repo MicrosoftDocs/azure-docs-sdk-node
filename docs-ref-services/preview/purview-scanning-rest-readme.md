@@ -1,15 +1,12 @@
 ---
 title: Azure Purview Scanning Rest-Level client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-scanning, purview
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 10/15/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: purview
+ms.technology: azure
 ---
-
 # Azure Purview Scanning Rest-Level client library for JavaScript - version 1.0.0-beta.2 
 
 

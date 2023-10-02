@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/core-sse, core
-author: xirzec
-ms.author: jeffish
 ms.date: 09/07/2023
 ms.topic: reference
 ms.devlang: javascript

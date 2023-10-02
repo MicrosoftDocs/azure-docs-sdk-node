@@ -1,8 +1,6 @@
 ---
 title: Azure SqlManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-sql, sql
-author: xirzec
-ms.author: jeffish
 ms.date: 09/22/2023
 ms.topic: reference
 ms.devlang: javascript

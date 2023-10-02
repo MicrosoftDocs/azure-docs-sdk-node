@@ -1,15 +1,12 @@
 ---
 title: Azure Site Recovery SDK for JavaScript
 description: Reference for Azure Site Recovery SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 03/30/2023
+ms.date: 03/30/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: siterecovery
 manager: carmonm
 ms.technology: azure
-ms.date: 03/30/2023
 ---
 # Azure Site Recovery modules for JavaScript
 
@@ -32,3 +29,4 @@ npm install @azure/arm-recoveryservices
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-recoveryservices)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

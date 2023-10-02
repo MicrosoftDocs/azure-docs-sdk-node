@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/opentelemetry-instrumentation-azure-sdk, instrumentation
-author: joheredi
-ms.author: joheredi
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/api-management-custom-widgets-scaffolder, apimanagement
-author: xirzec
-ms.author: jeffish
 ms.date: 08/26/2022
 ms.topic: reference
 ms.devlang: javascript

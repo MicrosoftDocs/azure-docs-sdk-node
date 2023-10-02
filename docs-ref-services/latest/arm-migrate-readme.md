@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-migrate, migrate
-author: qiaozha
-ms.author: qiaozha
 ms.date: 02/03/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,13 +1,11 @@
 ---
 title: Azure Monitor client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-monitor, monitor
-author: hectorhdzg
-ms.author: hectorhdzg
 ms.date: 12/21/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure-monitor
+ms.technology: azure
 ---
 # Azure Monitor client library for JavaScript - version 7.0.0 
 

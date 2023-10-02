@@ -1,17 +1,14 @@
 ---
 title: Azure Billing modules for JavaScript
 description: Reference for Azure Billing modules for JavaScript
-author: tfitzmac
-ms.author: tomfitz
-manager: timlt
 ms.date: 07/18/2017
 ms.topic: reference
 ms.devlang: nodejs
 ms.service: billing
+manager: timlt
+ms.technology: 
 ms.product: 
-ms.technology:
 ---
-
 # Azure Billing modules for JavaScript
 
 ## Overview
@@ -32,3 +29,4 @@ npm install @azure/arm-billing
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-billing)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

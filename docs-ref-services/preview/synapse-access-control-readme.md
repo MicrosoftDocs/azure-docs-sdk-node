@@ -1,15 +1,12 @@
 ---
 title: Azure Synapse Access Control client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/synapse-access-control, synapseanalytics
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 08/11/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: synapse-analytics
+ms.technology: azure
 ---
-
 ## Azure Synapse Access Control client library for JavaScript - version 1.0.0-beta.3 
 
 

@@ -1,8 +1,6 @@
 ---
 title: Azure Cognitive Search client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/search-documents, search
-author: dgetu
-ms.author: danielgetu
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: javascript

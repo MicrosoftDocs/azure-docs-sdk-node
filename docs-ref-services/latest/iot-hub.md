@@ -1,13 +1,10 @@
 ---
 title: Azure IoT Hub SDK for JavaScript
 description: Reference for Azure IoT Hub SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 02/10/2023
+ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: iot-hub
-ms.date: 06/15/2022
 ---
 # Azure IoT Hub modules for JavaScript
 
@@ -35,3 +32,4 @@ npm install @azure/arm-iothub
 - [Connect Raspberry Pi to Azure IoT Hub](/azure/iot-hub/iot-hub-raspberry-pi-kit-node-get-started)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](/samples/browse/?languages=javascript).
+

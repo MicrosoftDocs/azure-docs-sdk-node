@@ -1,16 +1,13 @@
 ---
 title: Azure Storage SDK for JavaScript
 description: Reference for Azure Storage SDK for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
-manager: twolley
 ms.date: 02/27/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: JavaScript
 ms.service: storage
+manager: twolley
+ms.technology: azure
 ---
-
 ## Azure Storage SDK for JavaScript - preview
 
 > [!NOTE]
@@ -29,3 +26,4 @@ ms.service: storage
 |-------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | [ARM Storage](/javascript/api/preview-docs/azure-arm-storage)                       | [azure-arm-storage@8.1.0](https://www.npmjs.com/package/azure-arm-storage)                         | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/storageManagement2)            |
 |                                                                                     |                                                                                                     |                                                                                                              |
+

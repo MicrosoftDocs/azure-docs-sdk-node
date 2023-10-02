@@ -1,13 +1,11 @@
 ---
 title: Azure PolicyInsights client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-policyinsights, policyinsights
-author: qiaozha
-ms.author: qiaozha
 ms.date: 01/24/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure-policy
+ms.technology: azure
 ---
 # Azure PolicyInsights client library for JavaScript - version 5.0.0 
 

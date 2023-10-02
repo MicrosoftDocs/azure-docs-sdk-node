@@ -1,8 +1,6 @@
 ---
 title: Azure MySQLManagementFlexibleServer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-mysql-flexible, mysql
-author: xirzec
-ms.author: jeffish
 ms.date: 05/22/2023
 ms.topic: reference
 ms.devlang: javascript

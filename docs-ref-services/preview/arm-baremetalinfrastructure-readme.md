@@ -1,8 +1,6 @@
 ---
 title: Azure bareMetalInfrastructure client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-baremetalinfrastructure, baremetalinfrastructure
-author: xirzec
-ms.author: jeffish
 ms.date: 05/25/2023
 ms.topic: reference
 ms.devlang: javascript

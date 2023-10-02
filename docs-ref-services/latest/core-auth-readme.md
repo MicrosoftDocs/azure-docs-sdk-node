@@ -1,8 +1,6 @@
 ---
 title: Azure Core Authentication client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-auth, core
-author: xirzec
-ms.author: jeffish
 ms.date: 08/03/2023
 ms.topic: reference
 ms.devlang: javascript

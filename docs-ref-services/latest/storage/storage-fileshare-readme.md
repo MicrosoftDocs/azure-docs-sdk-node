@@ -1,16 +1,13 @@
 ---
 title: Azure Files for JavaScript Readme
 description: Reference for Azure Storage modules for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
-manager: twolley
 ms.date: 03/12/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: storage
+manager: twolley
+ms.technology: azure
 ---
-
 # Azure Files for JavaScript Readme - Version 12.1.1
 
 Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol. Azure file shares can be mounted concurrently by cloud or on-premises deployments of Windows, Linux, and macOS. Additionally, Azure file shares can be cached on Windows Servers with Azure File Sync for fast access near where the data is being used.
@@ -487,3 +484,4 @@ More code samples
 - [File Share Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/samples/javascript)
 - [File Share Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/samples/typescript)
 - [File Share Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/test)
+

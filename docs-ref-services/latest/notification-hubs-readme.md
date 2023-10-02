@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/notification-hubs, notificationhubs
-author: xirzec
-ms.author: jeffish
 ms.date: 06/15/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,16 +1,13 @@
 ---
 title: Azure Storage SDK for JavaScript
 description: Reference for Azure Storage SDK for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
-manager: twolley
 ms.date: 02/27/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: JavaScript
 ms.service: storage
+manager: twolley
+ms.technology: azure
 ---
-
 # Azure Storage SDK for JavaScript - latest
 
 ## Client packages (12.x.x) - latest
@@ -32,3 +29,4 @@ ms.service: storage
 | [Storage Import/Export](/javascript/api/preview-docs/@azure/arm-storageimportexport) | [@azure/arm-storageimportexport@1.3.1](https://www.npmjs.com/package/@azure/arm-storageimportexport) | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storageimportexport/arm-storageimportexport) |
 | [Storage Sync](/javascript/api/preview-docs/@azure/arm-storagesync)                  | [@azure/arm-storagesync@8.1.1](https://www.npmjs.com/package/@azure/arm-storagesync)                 | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storagesync/arm-storagesync)                 |
 |                                                                         |                                                                                                      |                                                                                                                 |                                                                                |         |
+

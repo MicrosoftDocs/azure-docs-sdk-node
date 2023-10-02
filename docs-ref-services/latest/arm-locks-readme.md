@@ -1,8 +1,6 @@
 ---
 title: Azure ManagementLock client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-locks, locks
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/28/2022
 ms.topic: reference
 ms.devlang: javascript

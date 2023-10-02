@@ -1,13 +1,11 @@
 ---
 title: Azure Service client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-machinelearningservices, machinelearningservices
-author: qiaozha
-ms.author: qiaozha
 ms.date: 04/28/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: machine-learning
+ms.technology: azure
 ---
 # Azure Service client library for JavaScript - version 5.0.1 
 

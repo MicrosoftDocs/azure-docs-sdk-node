@@ -1,8 +1,6 @@
 ---
 title: Azure Communication Short Codes client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-tools/communication-short-codes, communication
-author: petrsvihlik
-ms.author: petrsvihlik
 ms.date: 08/18/2022
 ms.topic: reference
 ms.devlang: javascript

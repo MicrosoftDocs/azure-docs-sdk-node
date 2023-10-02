@@ -1,13 +1,11 @@
 ---
 title: Azure VideoAnalyzerManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-videoanalyzer, videoanalyzer
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/17/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure-video-analyzer
+ms.technology: azure
 ---
 # Azure VideoAnalyzerManagement client library for JavaScript - version 1.0.0-beta.2 
 

@@ -1,8 +1,6 @@
 ---
 title: Azure QumuloStorage client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-qumulo, liftrqumulo
-author: xirzec
-ms.author: jeffish
 ms.date: 05/31/2023
 ms.topic: reference
 ms.devlang: javascript

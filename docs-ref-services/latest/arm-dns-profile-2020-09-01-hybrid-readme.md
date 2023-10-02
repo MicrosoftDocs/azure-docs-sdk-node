@@ -1,8 +1,6 @@
 ---
 title: Azure DnsManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-dns-profile-2020-09-01-hybrid, dns
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/21/2022
 ms.topic: reference
 ms.devlang: javascript

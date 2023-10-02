@@ -1,8 +1,6 @@
 ---
 title: Azure Text Analysis client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-language-text, cognitivelanguage
-author: minhanh-phan
-ms.author: minhanhphan
 ms.date: 06/15/2023
 ms.topic: reference
 ms.devlang: javascript

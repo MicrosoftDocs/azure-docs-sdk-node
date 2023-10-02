@@ -1,15 +1,12 @@
 ---
 title: Azure Service Bus client library for Javascript
-keywords: Azure, , SDK, API, @azure/service-bus, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, , SDK, API, @azure/service-bus,
 ms.date: 11/23/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: 
 ms.service: service-bus
+ms.technology: azure
 ---
-
 # Azure Service Bus client library for JavaScript - version 7.0.0 
 
 

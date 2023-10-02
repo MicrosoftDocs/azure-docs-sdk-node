@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/core-tracing, core
-author: xirzec
-ms.author: jeffish
 ms.date: 05/05/2022
 ms.topic: reference
 ms.devlang: javascript

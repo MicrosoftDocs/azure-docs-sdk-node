@@ -1,8 +1,6 @@
 ---
 title: Azure Purview Sharing REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-sharing, purview
-author: qiaozha
-ms.author: qiaozha
 ms.date: 03/14/2023
 ms.topic: reference
 ms.devlang: javascript

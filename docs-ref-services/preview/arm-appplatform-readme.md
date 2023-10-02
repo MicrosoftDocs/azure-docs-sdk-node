@@ -1,8 +1,6 @@
 ---
 title: Azure AppPlatformManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-appplatform, appplatform
-author: xirzec
-ms.author: jeffish
 ms.date: 04/03/2023
 ms.topic: reference
 ms.devlang: javascript

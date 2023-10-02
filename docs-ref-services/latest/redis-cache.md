@@ -1,13 +1,10 @@
 ---
 title: Azure Redis Cache SDK for JavaScript
 description: Reference for Azure Redis Cache SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 02/15/2023
+ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cache
-ms.date: 06/15/2022
 ---
 # Azure Redis Cache modules for JavaScript
 
@@ -69,3 +66,4 @@ npm install @azure/arm-rediscache
 * [How to use Azure Redis Cache with JavaScript](/azure/redis-cache/cache-nodejs-get-started)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](/samples/browse/?languages=javascript)
+

@@ -1,8 +1,6 @@
 ---
 title: Azure Desktop Virtualization API client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-desktopvirtualization, desktopvirtualization
-author: xirzec
-ms.author: jeffish
 ms.date: 03/22/2023
 ms.topic: reference
 ms.devlang: javascript

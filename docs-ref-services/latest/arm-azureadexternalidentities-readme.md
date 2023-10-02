@@ -1,8 +1,6 @@
 ---
 title: Azure ExternalIdentitiesConfiguration client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-azureadexternalidentities, azureadexternalidentities
-author: xirzec
-ms.author: jeffish
 ms.date: 11/18/2022
 ms.topic: reference
 ms.devlang: javascript

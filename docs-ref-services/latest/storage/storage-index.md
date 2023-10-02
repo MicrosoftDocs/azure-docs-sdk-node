@@ -1,15 +1,12 @@
 ---
 title: Azure Storage modules for JavaScript
 description: Reference for Azure Storage modules for JavaScript
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
 ms.date: 01/16/2019
 ms.topic: reference
-ms.service: azure
 ms.devlang: javascript
+ms.service: azure
+manager: routlaw
 ---
-
 # Azure Storage Client Libraries Index for Javascript
 
 Azure Storage is a Microsoft-managed service providing cloud storage that is highly available, secure, durable, scalable, and redundant.
@@ -79,3 +76,4 @@ Please check out examples for each libraries
 - [File Storage Examples - Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/test)
 - [Queue Storage Examples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue/samples)
 - [Queue Storage Examples - Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue/test)
+

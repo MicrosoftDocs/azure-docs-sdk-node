@@ -1,8 +1,6 @@
 ---
 title: Azure AgriFoodMgmt client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-agrifood, agrifood
-author: joheredi
-ms.author: joheredi
 ms.date: 11/14/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure Storage Queue client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-queue, storage
-author: EmmaZhu
-ms.author: emmazhu
 ms.date: 09/15/2023
 ms.topic: reference
 ms.devlang: javascript

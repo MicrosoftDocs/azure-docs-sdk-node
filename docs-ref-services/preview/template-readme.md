@@ -1,8 +1,6 @@
 ---
 title: Azure Template client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/template, template
-author: ckairen
-ms.author: albertcheng
 ms.date: 05/25/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure Policy client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-policy-profile-2020-09-01-hybrid, policy
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/23/2022
 ms.topic: reference
 ms.devlang: javascript

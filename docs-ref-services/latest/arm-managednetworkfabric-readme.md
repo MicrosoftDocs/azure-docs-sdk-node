@@ -1,8 +1,6 @@
 ---
 title: Azure Network Fabric Management client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-managednetworkfabric, managednetworkfabric
-author: xirzec
-ms.author: jeffish
 ms.date: 07/27/2023
 ms.topic: reference
 ms.devlang: javascript

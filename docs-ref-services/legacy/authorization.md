@@ -1,16 +1,13 @@
 ---
 title: Azure Authorization modules for JavaScript
 description: Reference for Azure Authorization modules for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
-manager: angrobe
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: app-service
+manager: angrobe
+ms.technology: azure
 ---
-
 # Azure Authorization modules for JavaScript
 
 ## Overview
@@ -34,3 +31,4 @@ npm install @azure/arm-authorization
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-authorization)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

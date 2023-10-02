@@ -1,8 +1,6 @@
 ---
 title: Azure StorageManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-storage-profile-2020-09-01-hybrid, storage
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/23/2022
 ms.topic: reference
 ms.devlang: javascript

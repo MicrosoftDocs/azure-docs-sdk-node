@@ -1,8 +1,6 @@
 ---
 title: Azure Schema Registry Json Serializer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry-json, schemaregistry
-author: deyaaeldeen
-ms.author: dealmaha
 ms.date: 08/10/2023
 ms.topic: reference
 ms.devlang: javascript

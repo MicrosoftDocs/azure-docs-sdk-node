@@ -1,13 +1,11 @@
 ---
 title: Azure ManagementLink client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-links, links
-author: qiaozha
-ms.author: qiaozha
 ms.date: 04/20/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure
+ms.technology: azure
 ---
 # Azure ManagementLink client library for JavaScript - version 2.0.1 
 

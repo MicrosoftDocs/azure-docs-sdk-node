@@ -1,8 +1,6 @@
 ---
 title: Azure Template client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/template-dpg, template
-author: ckairen
-ms.author: albertcheng
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: javascript

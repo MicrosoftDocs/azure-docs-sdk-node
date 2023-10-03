@@ -1,8 +1,6 @@
 ---
 title: Azure Device Update for IoT Hub Rest Client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/iot-device-update, deviceupdate
-author: xirzec
-ms.author: jeffish
 ms.date: 09/09/2022
 ms.topic: reference
 ms.devlang: javascript

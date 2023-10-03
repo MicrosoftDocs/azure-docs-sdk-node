@@ -1,16 +1,13 @@
 ---
 title: Azure Active Directory Modules for Node.js
 description: Reference for Azure Active Directory Modules for Node.js
-author: celestedg
-ms.author: celested
-manager: mtillman
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: active-directory
+manager: mtillman
+ms.technology: azure
 ---
-
 # Azure Active Directory modules for Node.js
 
 ## Overview
@@ -68,3 +65,4 @@ context.acquireTokenWithClientCredentials(
 | Integrating Azure AD into a NodeJS web application | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 
 For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).
+

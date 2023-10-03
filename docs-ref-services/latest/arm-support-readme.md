@@ -1,8 +1,6 @@
 ---
 title: Azure MicrosoftSupport client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-support, support
-author: qiaozha
-ms.author: qiaozha
 ms.date: 02/03/2023
 ms.topic: reference
 ms.devlang: javascript

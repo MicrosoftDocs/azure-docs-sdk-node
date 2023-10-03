@@ -1,13 +1,10 @@
 ---
 title: Azure Cognitive Services SDK for JavaScript
 description: Reference for Azure Cognitive Services SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 09/29/2023
+ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitiveservices
-ms.date: 06/15/2022
 ---
 # JavaScript Azure Cognitive Services modules
 
@@ -182,3 +179,4 @@ npm install @azure/cognitiveservices-spellcheck
 ## Samples
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

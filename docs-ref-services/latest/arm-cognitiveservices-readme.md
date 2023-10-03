@@ -1,8 +1,6 @@
 ---
 title: Azure CognitiveServicesManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-cognitiveservices, cognitiveservices
-author: xirzec
-ms.author: jeffish
 ms.date: 07/25/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure Maps Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/maps-common, maps
-author: xirzec
-ms.author: jeffish
 ms.date: 11/08/2022
 ms.topic: reference
 ms.devlang: javascript

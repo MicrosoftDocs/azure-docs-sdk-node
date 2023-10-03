@@ -1,8 +1,6 @@
 ---
 title: Azure ResourceManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-resources-profile-2020-09-01-hybrid, resources
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/23/2022
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure CosmosDBManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-cosmosdb, cosmosdb
-author: kushagraThapar
-ms.author: kuthapar
 ms.date: 06/20/2023
 ms.topic: reference
 ms.devlang: javascript

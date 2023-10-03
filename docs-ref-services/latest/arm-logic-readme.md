@@ -1,8 +1,6 @@
 ---
 title: Azure LogicManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-logic, logic
-author: qiaozha
-ms.author: qiaozha
 ms.date: 01/29/2023
 ms.topic: reference
 ms.devlang: javascript

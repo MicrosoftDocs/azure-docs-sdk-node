@@ -1,8 +1,6 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-author: hectorhdzg
-ms.author: hectorh
 ms.date: 08/30/2023
 ms.topic: reference
 ms.devlang: javascript

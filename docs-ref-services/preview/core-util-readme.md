@@ -1,15 +1,12 @@
 ---
 title: Azure Core Util client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/core-util, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, javascript, SDK, API, @azure/core-util,
 ms.date: 05/07/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure
+ms.technology: azure
 ---
-
 # Azure Core Util client library for JavaScript - version 1.0.0-beta.1 
  (Experimental)
 

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-client, web-pubsub
-author: vicancy
-ms.author: lianwei
 ms.date: 04/10/2023
 ms.topic: reference
 ms.devlang: javascript

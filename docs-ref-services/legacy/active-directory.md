@@ -1,15 +1,12 @@
 ---
 title: Azure Active Directory SDK for JavaScript
 description: Reference for Azure Active Directory SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 09/29/2023
+ms.date: 07/18/2017
 ms.topic: reference
 ms.devlang: javascript
 ms.service: activedirectory
-ms.date: 07/18/2017
-ms.technology: azure
 manager: mtillman
+ms.technology: azure
 ---
 # Azure Active Directory modules for Node.js
 
@@ -68,3 +65,4 @@ context.acquireTokenWithClientCredentials(
 | Integrating Azure AD into a NodeJS web application | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 
 For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).
+

@@ -1,8 +1,6 @@
 ---
 title: Azure AdvisorManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-advisor, advisor
-author: xirzec
-ms.author: jeffish
 ms.date: 08/04/2023
 ms.topic: reference
 ms.devlang: javascript

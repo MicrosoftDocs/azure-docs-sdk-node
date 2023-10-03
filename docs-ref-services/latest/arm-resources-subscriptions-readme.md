@@ -1,8 +1,6 @@
 ---
 title: Azure Subscription client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-resources-subscriptions, resources-subscriptions
-author: xirzec
-ms.author: xirzec
 ms.date: 05/29/2023
 ms.topic: reference
 ms.devlang: javascript

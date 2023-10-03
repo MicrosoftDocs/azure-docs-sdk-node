@@ -1,8 +1,6 @@
 ---
 title: Azure OperationalInsightsManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-operationalinsights, operationalinsights
-author: qiaozha
-ms.author: qiaozha
 ms.date: 02/09/2023
 ms.topic: reference
 ms.devlang: javascript

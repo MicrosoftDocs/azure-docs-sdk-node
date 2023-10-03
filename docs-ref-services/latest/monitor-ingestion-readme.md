@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-ingestion, monitor
-author: hectorhdzg
-ms.author: hectorh
 ms.date: 02/17/2023
 ms.topic: reference
 ms.devlang: javascript

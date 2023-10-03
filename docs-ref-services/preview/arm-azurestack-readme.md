@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-azurestack, azurestack
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/18/2022
 ms.topic: reference
 ms.devlang: javascript

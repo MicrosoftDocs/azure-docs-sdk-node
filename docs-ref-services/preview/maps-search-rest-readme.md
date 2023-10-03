@@ -1,8 +1,6 @@
 ---
 title: Azure Maps Search REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/maps-search, maps
-author: dubiety
-ms.author: yuchungchen
 ms.date: 07/13/2023
 ms.topic: reference
 ms.devlang: javascript

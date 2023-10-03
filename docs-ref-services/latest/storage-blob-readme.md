@@ -1,8 +1,6 @@
 ---
 title: Azure Storage Blob client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-blob, storage
-author: EmmaZhu
-ms.author: emmazhu
 ms.date: 09/14/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-deploymentmanager, deploymentmanager
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/24/2022
 ms.topic: reference
 ms.devlang: javascript

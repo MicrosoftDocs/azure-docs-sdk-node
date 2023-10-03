@@ -1,8 +1,6 @@
 ---
 title: Azure Personalizer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-personalizer, personalizer
-author: sharathmalladi
-ms.author: sharathm
 ms.date: 09/13/2022
 ms.topic: reference
 ms.devlang: javascript

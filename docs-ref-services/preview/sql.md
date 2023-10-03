@@ -1,13 +1,10 @@
 ---
 title: Azure SQL SDK for JavaScript
 description: Reference for Azure SQL SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 09/29/2023
+ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: sql
-ms.date: 06/15/2022
 ---
 # Azure SQL modules for JavaScript
 
@@ -78,3 +75,4 @@ npm install @azure/arm-sql
 - [Azure SQL Database: Use JavaScript to connect and query data](https://docs.microsoft.com/azure/sql-database/sql-database-connect-query-nodejs)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

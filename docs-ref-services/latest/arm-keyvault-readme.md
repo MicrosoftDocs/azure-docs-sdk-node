@@ -1,8 +1,6 @@
 ---
 title: Azure KeyVaultManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-keyvault, keyvault
-author: timovv
-ms.author: timov
 ms.date: 04/25/2023
 ms.topic: reference
 ms.devlang: javascript

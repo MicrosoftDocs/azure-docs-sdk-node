@@ -1,13 +1,10 @@
 ---
 title: Azure Traffic Manager SDK for JavaScript
 description: Reference for Azure Traffic Manager SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 09/29/2023
+ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: trafficmanager
-ms.date: 06/15/2022
 ---
 # Azure Traffic Manager modules for JavaScript
 
@@ -32,3 +29,4 @@ npm install @azure/arm-trafficmanager
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-trafficmanager)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

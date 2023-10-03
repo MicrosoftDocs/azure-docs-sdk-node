@@ -1,8 +1,6 @@
 ---
 title: Azure ConversationAnalysis client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-language-conversations, cognitivelanguage
-author: xirzec
-ms.author: jeffish
 ms.date: 09/09/2022
 ms.topic: reference
 ms.devlang: javascript

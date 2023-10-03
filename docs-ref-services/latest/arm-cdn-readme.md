@@ -1,8 +1,6 @@
 ---
 title: Azure CdnManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-cdn, cdn
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/20/2022
 ms.topic: reference
 ms.devlang: javascript

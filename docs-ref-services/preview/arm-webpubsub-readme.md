@@ -1,8 +1,6 @@
 ---
 title: Azure WebPubSubManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-webpubsub, web-pubsub
-author: vicancy
-ms.author: lianwei
 ms.date: 07/27/2023
 ms.topic: reference
 ms.devlang: javascript

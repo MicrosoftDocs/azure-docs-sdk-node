@@ -1,8 +1,6 @@
 ---
 title: Azure iotDps client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-deviceprovisioningservices, deviceprovisioningservices
-author: qiaozha
-ms.author: qiaozha
 ms.date: 01/06/2023
 ms.topic: reference
 ms.devlang: javascript

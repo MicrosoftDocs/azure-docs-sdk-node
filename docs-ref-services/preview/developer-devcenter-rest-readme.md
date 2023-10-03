@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure-rest/developer-devcenter, devcenter
-author: xirzec
-ms.author: jeffish
 ms.date: 02/08/2023
 ms.topic: reference
 ms.devlang: javascript
@@ -85,5 +83,4 @@ setLogLevel("info");
 ```
 
 For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/core/logger).
-
 

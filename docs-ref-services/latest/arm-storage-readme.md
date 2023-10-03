@@ -1,8 +1,6 @@
 ---
 title: Azure StorageManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-storage, storage
-author: EmmaZhu
-ms.author: emmazhu
 ms.date: 08/23/2023
 ms.topic: reference
 ms.devlang: javascript

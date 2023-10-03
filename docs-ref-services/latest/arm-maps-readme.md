@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-maps, maps
-author: dubiety
-ms.author: yuchungchen
 ms.date: 08/23/2023
 ms.topic: reference
 ms.devlang: javascript

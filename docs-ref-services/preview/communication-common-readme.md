@@ -1,15 +1,12 @@
 ---
 title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, communication
-author: xirzec
-ms.author: jeffish
 ms.date: 03/29/2023
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure-communication-services
+ms.technology: azure
 ---
-
 # Azure Communication Common client library for JavaScript - version 3.0.0-beta.1 
 
 

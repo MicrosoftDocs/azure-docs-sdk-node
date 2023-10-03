@@ -1,13 +1,11 @@
 ---
 title: Azure MixedReality client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-mixedreality, mixedreality
-author: qiaozha
-ms.author: qiaozha
 ms.date: 01/20/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure
+ms.technology: azure
 ---
 # Azure MixedReality client library for JavaScript - version 4.0.1 
 

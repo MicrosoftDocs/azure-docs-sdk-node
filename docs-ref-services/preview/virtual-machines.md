@@ -1,16 +1,13 @@
 ---
 title: Virtual Machine Modules for JavaScript - Azure
 description: Azure Virtual Machine Modules for JavaScript reference guide
-author: iainfoulds
-ms.author: iainfou
-manager: jeconnoc
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: big-compute
+manager: jeconnoc
+ms.technology: azure
 ---
-
 # Azure Virtual Machine Modules for JavaScript
 
 ## Overview
@@ -36,3 +33,4 @@ Examples for using this module in Node.js as well as browser applications can be
 | [Azure virtual machines management sample with JavaScript](https://github.com/Azure-Samples/compute-node-manage-vm) | Demonstrates how to create, list, restart, and delete virtual machines. |
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

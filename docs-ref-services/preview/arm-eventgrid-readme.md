@@ -1,8 +1,6 @@
 ---
 title: Azure EventGridManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-eventgrid, eventgrid
-author: ellismg
-ms.author: matell
 ms.date: 05/19/2023
 ms.topic: reference
 ms.devlang: javascript

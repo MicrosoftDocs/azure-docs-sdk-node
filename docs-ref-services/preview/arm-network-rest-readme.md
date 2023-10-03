@@ -1,8 +1,6 @@
 ---
 title: Azure NetworkManagement REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/arm-network, network
-author: qiaozha
-ms.author: qiaozha
 ms.date: 09/29/2022
 ms.topic: reference
 ms.devlang: javascript

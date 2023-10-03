@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/communication-job-router, communication
-author: xirzec
-ms.author: jeffish
 ms.date: 07/27/2023
 ms.topic: reference
 ms.devlang: javascript

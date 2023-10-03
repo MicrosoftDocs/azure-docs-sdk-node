@@ -1,16 +1,13 @@
 ---
 title: Azure Service Fabric modules for JavaScript
 description: Azure Service Fabric modules for JavaScript reference
-author: rwike77
-ms.author: ryanwi
-manager: timlt
 ms.date: 11/12/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: service-fabric
+manager: timlt
+ms.technology: azure
 ---
-
 # Azure Service Fabric modules for JavaScript
 
 ## Overview
@@ -34,3 +31,4 @@ npm install @azure/servicefabric
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/servicefabric)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

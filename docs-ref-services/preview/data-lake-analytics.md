@@ -1,13 +1,10 @@
 ---
 title: Azure Data Lake Analytics SDK for JavaScript
 description: Reference for Azure Data Lake Analytics SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 02/09/2023
+ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: datalakeanalytics
-ms.date: 06/15/2022
 ---
 # Azure Data Lake Analytics modules for Node.JS
 
@@ -28,3 +25,4 @@ npm install azure-arm-datalake-analytics
 * Examples for using this module in Node.js can be found in the [README for the module](https://www.npmjs.com/package/azure-arm-datalake-analytics)
 
 * For more code samples that use various Azure packages, explore the [Node.JS samples](https://docs.microsoft.com/samples/browse/?languages=nodejs).
+

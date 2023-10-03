@@ -1,8 +1,6 @@
 ---
 title: Azure SynapseManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-synapse, synapse
-author: joheredi
-ms.author: joheredi
 ms.date: 02/21/2023
 ms.topic: reference
 ms.devlang: javascript

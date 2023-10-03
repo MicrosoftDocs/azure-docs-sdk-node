@@ -1,13 +1,10 @@
 ---
 title: Azure Active Directory SDK for JavaScript
 description: Reference for Azure Active Directory SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 09/12/2023
+ms.date: 06/15/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: activedirectory
-ms.date: 06/15/2022
 ---
 # Azure Active Directory modules for Node.js
 
@@ -65,3 +62,4 @@ context.acquireTokenWithClientCredentials(
 ## Other samples
 
 For more code samples that use various Azure packages, explore the [Node.js samples](https://docs.microsoft.com/samples/browse/?products=azure&terms=node.js).
+

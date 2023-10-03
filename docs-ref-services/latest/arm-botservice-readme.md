@@ -1,8 +1,6 @@
 ---
 title: Azure Bot client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-botservice, botservice
-author: qiaozha
-ms.author: qiaozha
 ms.date: 01/17/2023
 ms.topic: reference
 ms.devlang: javascript

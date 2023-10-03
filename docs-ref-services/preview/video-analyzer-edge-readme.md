@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/video-analyzer-edge, videoanalyzer
-author: hivyas
-ms.author: hivyas
 ms.date: 04/30/2022
 ms.topic: reference
 ms.devlang: javascript

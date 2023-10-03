@@ -1,8 +1,6 @@
 ---
 title: Azure IotCentral client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-iotcentral, iotcentral
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/02/2022
 ms.topic: reference
 ms.devlang: javascript

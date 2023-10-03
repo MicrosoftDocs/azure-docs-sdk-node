@@ -1,8 +1,6 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-sphere, sphere
-author: xirzec
-ms.author: jeffish
 ms.date: 07/31/2023
 ms.topic: reference
 ms.devlang: javascript

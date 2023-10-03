@@ -1,8 +1,6 @@
 ---
 title: Azure IoTFirmwareDefense client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-iotfirmwaredefense, iotfirmwaredefense
-author: qiaozha
-ms.author: qiaozha
 ms.date: 07/21/2023
 ms.topic: reference
 ms.devlang: javascript

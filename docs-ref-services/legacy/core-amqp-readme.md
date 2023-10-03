@@ -1,15 +1,12 @@
 ---
 title: 
-keywords: Azure, javascript, SDK, API, @azure/core-amqp, 
-author: ramya-rao-a
-ms.author: ramyar
+keywords: Azure, javascript, SDK, API, @azure/core-amqp,
 ms.date: 11/12/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: azure
+ms.technology: azure
 ---
-
 # Azure Core AMQP client library for AMQP operations
 
 Azure Core AMQP is a library that provides common functionality for **Azure** Javascript

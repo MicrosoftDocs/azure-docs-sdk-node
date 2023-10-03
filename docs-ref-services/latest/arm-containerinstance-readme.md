@@ -1,8 +1,6 @@
 ---
 title: Azure ContainerInstanceManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-containerinstance, containerinstance
-author: xirzec
-ms.author: jeffish
 ms.date: 04/24/2023
 ms.topic: reference
 ms.devlang: javascript

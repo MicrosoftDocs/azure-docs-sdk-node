@@ -1,16 +1,13 @@
 ---
 title: Microsoft Azure SDK for Node.js - azure-sb
 description: Reference for Azure Service Bus Modules for Node
-author: scbedd
-ms.author: scbedd
-manager: timlt
 ms.date: 07/23/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: service-bus
+manager: timlt
+ms.technology: azure
 ---
-
 # Microsoft Azure SDK for Node.js - azure-sb - Version 0.11.1
 
 This project provides a Node.js package for accessing the Azure ServiceBus service.

@@ -1,8 +1,6 @@
 ---
 title: Azure DataMigrationManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-datamigration, datamigration
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/29/2022
 ms.topic: reference
 ms.devlang: javascript

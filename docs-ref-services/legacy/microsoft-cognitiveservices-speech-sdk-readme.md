@@ -1,16 +1,13 @@
 ---
 title: Cognitive Services Speech SDK for JavaScript
 description: Reference for Cognitive Services Speech SDK for JavaScript
-author: mahilleb-msft
-ms.author: mahilleb
-manager: wolfma
 ms.date: 12/18/2018
 ms.topic: reference
 ms.devlang: nodejs
 ms.service: cognitive-services
 ms.subservice: speech-service
+manager: wolfma
 ---
-
 # Cognitive Services Speech SDK for JavaScript
 
 ## Overview
@@ -88,3 +85,4 @@ Check out our [step-by-step quickstart](/azure/cognitive-services/speech-service
 * [Step-by-step quickstart for JavaScript](/azure/cognitive-services/speech-service/quickstart-js-node).
 * [Step-by-step quickstart for the browser](/azure/cognitive-services/speech-service/quickstart-js-browser).
 * More samples can be found in our [Speech SDK sample repository](https://aka.ms/csspeech/samples).
+

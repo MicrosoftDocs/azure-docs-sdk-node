@@ -1,8 +1,6 @@
 ---
 title: Azure Communication Chat client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-chat, communication
-author: xirzec
-ms.author: jeffish
 ms.date: 08/24/2023
 ms.topic: reference
 ms.devlang: javascript

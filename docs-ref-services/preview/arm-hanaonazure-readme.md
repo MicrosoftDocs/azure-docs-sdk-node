@@ -1,8 +1,6 @@
 ---
 title: Azure HanaManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-hanaonazure, hanaonazure
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/29/2022
 ms.topic: reference
 ms.devlang: javascript

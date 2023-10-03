@@ -1,8 +1,6 @@
 ---
 title: Azure MapsRender REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/maps-render, maps
-author: dubiety
-ms.author: yuchungchen
 ms.date: 07/13/2023
 ms.topic: reference
 ms.devlang: javascript

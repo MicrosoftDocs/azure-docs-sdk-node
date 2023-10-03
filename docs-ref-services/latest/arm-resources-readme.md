@@ -1,8 +1,6 @@
 ---
 title: Azure ResourceManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-resources, resources
-author: xirzec
-ms.author: jeffish
 ms.date: 03/13/2023
 ms.topic: reference
 ms.devlang: javascript

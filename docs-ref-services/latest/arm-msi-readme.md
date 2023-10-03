@@ -1,8 +1,6 @@
 ---
 title: Azure ManagedServiceIdentity client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-msi, msi
-author: qiaozha
-ms.author: qiaozha
 ms.date: 02/03/2023
 ms.topic: reference
 ms.devlang: javascript

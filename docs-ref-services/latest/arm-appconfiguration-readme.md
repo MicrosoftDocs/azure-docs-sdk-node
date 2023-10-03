@@ -1,8 +1,6 @@
 ---
 title: Azure AppConfigurationManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-appconfiguration, appconfiguration
-author: HarshaNalluru
-ms.author: sanallur
 ms.date: 04/26/2023
 ms.topic: reference
 ms.devlang: javascript

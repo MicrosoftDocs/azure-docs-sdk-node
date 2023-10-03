@@ -1,15 +1,12 @@
 ---
 title: Azure PostgreSQL modules for JavaScript
 description: Reference for Azure PostgreSQL modules for JavaScript
-author: rachel-msft
-ms.author: raagyema
-manager: sukamat
 ms.date: 07/18/2017
 ms.topic: reference
 ms.devlang: nodejs
 ms.service: postgresql
+manager: sukamat
 ---
-
 # Azure PostgreSQL modules for JavaScript
 
 The recommended client library for accessing Azure Database for PostgreSQL is the open-source [JavaScript connection library for Azure Database for PostgreSQL](https://www.npmjs.com/package/pg). 
@@ -53,3 +50,4 @@ client.query(query, (err, res) => {
 | [JavaScript code snippets using PostgreSQL](https://www.npmjs.com/package/pg) | Learn how to create a pool, execute a query, obtain an exclusive client, and more.
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

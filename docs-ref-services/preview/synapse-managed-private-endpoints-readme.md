@@ -1,15 +1,12 @@
 ---
 title: Azure Synapse Managed Private Endpoints client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/synapse-managed-private-endpoints, synapseanalytics
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 09/08/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: synapse-analytics
+ms.technology: azure
 ---
-
 ## Azure Synapse Managed Private Endpoints client library for JavaScript - version 1.0.0-beta.4 
 
 

@@ -1,15 +1,12 @@
 ---
 title: Azure Synapse Spark client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/synapse-spark, synapseanalytics
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 10/05/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: synapse-analytics
+ms.technology: azure
 ---
-
 ## Azure Synapse Spark client library for JavaScript - version 1.0.0-beta.4 
 
 

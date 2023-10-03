@@ -1,8 +1,6 @@
 ---
 title: Azure Recovery Services Backup client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-recoveryservicesbackup, recoveryservicesbackup
-author: xirzec
-ms.author: jeffish
 ms.date: 09/05/2023
 ms.topic: reference
 ms.devlang: javascript

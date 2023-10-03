@@ -1,8 +1,6 @@
 ---
 title: Azure ML Team Account Management client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-machinelearningexperimentation, machinelearningexperimentation
-author: qiaozha
-ms.author: qiaozha
 ms.date: 01/29/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure RoomsApi client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-rooms, communication
-author: xirzec
-ms.author: jeffish
 ms.date: 06/13/2023
 ms.topic: reference
 ms.devlang: javascript

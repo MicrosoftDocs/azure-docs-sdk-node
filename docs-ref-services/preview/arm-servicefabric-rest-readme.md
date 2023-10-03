@@ -1,8 +1,6 @@
 ---
 title: Azure ServiceFabric client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/arm-servicefabric, servicefabric
-author: qiaozha
-ms.author: qiaozha
 ms.date: 07/15/2022
 ms.topic: reference
 ms.devlang: javascript

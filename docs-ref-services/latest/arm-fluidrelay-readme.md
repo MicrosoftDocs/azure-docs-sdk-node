@@ -1,8 +1,6 @@
 ---
 title: Azure FluidRelayManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-fluidrelay, fluidrelay
-author: xirzec
-ms.author: jeffish
 ms.date: 01/16/2023
 ms.topic: reference
 ms.devlang: javascript

@@ -1,8 +1,6 @@
 ---
 title: Azure MicrosoftVoiceServices client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-voiceservices, voiceservices
-author: xirzec
-ms.author: jeffish
 ms.date: 04/19/2023
 ms.topic: reference
 ms.devlang: javascript

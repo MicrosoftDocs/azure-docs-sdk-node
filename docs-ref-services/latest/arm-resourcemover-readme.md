@@ -1,8 +1,6 @@
 ---
 title: Azure Resource Mover client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-resourcemover, resourcemover
-author: qiaozha
-ms.author: qiaozha
 ms.date: 12/13/2022
 ms.topic: reference
 ms.devlang: javascript

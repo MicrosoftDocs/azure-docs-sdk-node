@@ -1,8 +1,6 @@
 ---
 title: Azure CustomerInsightsManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-customerinsights, customer-insights
-author: qiaozha
-ms.author: qiaozha
 ms.date: 11/23/2022
 ms.topic: reference
 ms.devlang: javascript

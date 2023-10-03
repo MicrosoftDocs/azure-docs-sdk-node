@@ -1,7 +1,7 @@
 ---
 title: Azure Service Bus SDK for JavaScript
 description: Reference for Azure Service Bus SDK for JavaScript
-ms.date: 06/15/2022
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: service-bus-messaging
@@ -33,4 +33,3 @@ npm install @azure/service-bus
 See the documentation for this package [here](https://docs.microsoft.com/javascript/api/@azure/service-bus/?view=azure-node-latest).
 
 For more code samples that use the @azure/service-bus package, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript&products=azure-service-bus).
-

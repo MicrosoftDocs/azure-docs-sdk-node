@@ -1,7 +1,7 @@
 ---
 title: Azure Advisor SDK for JavaScript
 description: Reference for Azure Advisor SDK for JavaScript
-ms.date: 06/15/2022
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: advisor
@@ -33,4 +33,3 @@ npm install @azure/arm-advisor
 
 
 * For more code samples that use various Azure packages, explore the [Node.JS samples](https://docs.microsoft.com/samples/browse/?languages=nodejs).
-

@@ -1,6 +1,7 @@
 ---
 title: Azure Dev Center SDK for JavaScript
 description: Reference for Azure Dev Center SDK for JavaScript
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: devcenter
@@ -8,4 +9,3 @@ ms.service: devcenter
 # Azure Dev Center SDK for JavaScript - preview
 ## Packages - preview
 [!INCLUDE [packages](dev-center-index.md)]
-

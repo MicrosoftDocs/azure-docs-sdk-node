@@ -1,7 +1,7 @@
 ---
 title: Azure Storage SDK for JavaScript
 description: Reference for Azure Storage SDK for JavaScript
-ms.date: 06/15/2022
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
@@ -17,4 +17,3 @@ ms.service: storage
 |-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | [Storage Blob Changefeed](/javascript/api/preview-docs/overview/azure/storage/storage-blob-changefeed-readme)                    | [@azure/storage-blob-changefeed@12.0.0-preview.2](https://www.npmjs.com/package/@azure/storage-blob-changefeed/v/12.0.0-preview.2)                   | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob-changefeed)          |
 |                                                                                               |                                                                                            |                                                                                                   |
-

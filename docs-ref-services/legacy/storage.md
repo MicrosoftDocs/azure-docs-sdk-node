@@ -1,7 +1,7 @@
 ---
 title: Azure Storage SDK for JavaScript
 description: Reference for Azure Storage SDK for JavaScript
-ms.date: 02/27/2020
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
@@ -69,4 +69,3 @@ msRestAzure
   .then(accounts => console.dir(accounts, { depth: null, colors: true }))
   .catch(err => console.log(err));
 ```
-

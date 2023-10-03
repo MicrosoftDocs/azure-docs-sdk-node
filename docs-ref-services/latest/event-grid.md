@@ -1,7 +1,7 @@
 ---
 title: Azure Event Grid SDK for JavaScript
 description: Reference for Azure Event Grid SDK for JavaScript
-ms.date: 06/15/2022
+ms.date: 10/03/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: event-grid
@@ -45,4 +45,3 @@ To create events, authenticate, and post to topics, we recommend you use the lat
 ## Learn more
 
 - [Receive events using the Event Grid SDK](/azure/event-grid/receive-events)
-

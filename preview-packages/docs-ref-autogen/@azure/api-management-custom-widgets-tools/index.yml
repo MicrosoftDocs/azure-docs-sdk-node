@@ -7,6 +7,7 @@ interfaces:
   - '@azure/api-management-custom-widgets-tools.EditorData'
   - '@azure/api-management-custom-widgets-tools.PortalData'
 typeAliases:
+  - '@azure/api-management-custom-widgets-tools.DeployConfig'
   - '@azure/api-management-custom-widgets-tools.Environment'
   - '@azure/api-management-custom-widgets-tools.OnChange'
   - '@azure/api-management-custom-widgets-tools.Secrets'
@@ -80,7 +81,7 @@ functions:
         type: >-
           <xref uid="@azure/api-management-custom-widgets-tools.OnChange"
           />&lt;Values&gt;
-  - name: deployNodeJS(ServiceInformation, string, string, string)
+  - name: deployNodeJS(ServiceInformation, string, string, DeployConfig)
     uid: '@azure/api-management-custom-widgets-tools.deployNodeJS'
     package: '@azure/api-management-custom-widgets-tools'
     summary: >-
@@ -91,7 +92,8 @@ functions:
     syntax:
       content: >-
         function deployNodeJS(serviceInformation: ServiceInformation, name:
-        string, fallbackConfigPath?: string, rootLocal?: string): Promise<void>
+        string, fallbackConfigPath?: string, config?: DeployConfig):
+        Promise<void>
       parameters:
         - id: serviceInformation
           type: >-
@@ -107,11 +109,11 @@ functions:
           description: >-
             local path to the config file (by default
             "./static/config.msapim.json")
-        - id: rootLocal
-          type: string
-          description: >-
-            optional, root of the local folder with compiled project to be
-            exported (by default "./dist")
+        - id: config
+          type: >-
+            <xref uid="@azure/api-management-custom-widgets-tools.DeployConfig"
+            />
+          description: optional config object
       return:
         description: ''
         type: Promise&lt;void&gt;

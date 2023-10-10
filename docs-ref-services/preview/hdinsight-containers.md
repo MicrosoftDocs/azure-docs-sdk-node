@@ -1,7 +1,7 @@
 ---
 title: Azure HDInsight Containers SDK for JavaScript
 description: Reference for Azure HDInsight Containers SDK for JavaScript
-ms.date: 10/09/2023
+ms.date: 10/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hdinsightcontainers

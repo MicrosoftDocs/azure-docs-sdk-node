@@ -111,7 +111,7 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/app-configuration.AddConfigurationSettingResponse" />&gt;
-  - name: archiveSnapshot(SnapshotId, UpdateSnapshotOptions)
+  - name: archiveSnapshot(string, UpdateSnapshotOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.archiveSnapshot'
     package: '@azure/app-configuration'
     summary: |-
@@ -119,18 +119,18 @@ methods:
 
       Example usage:
       ```ts
-      const result = await client.archiveSnapshot("MySnapshot");
+      const result = await client.archiveSnapshot({name: "MySnapshot"});
       ```
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function archiveSnapshot(snapshotId: SnapshotId, options?:
-        UpdateSnapshotOptions): Promise<UpdateSnapshotResponse>
+        function archiveSnapshot(name: string, options?: UpdateSnapshotOptions):
+        Promise<UpdateSnapshotResponse>
       parameters:
-        - id: snapshotId
-          type: <xref uid="@azure/app-configuration.SnapshotId" />
-          description: ''
+        - id: name
+          type: string
+          description: The name of the snapshot.
         - id: options
           type: <xref uid="@azure/app-configuration.UpdateSnapshotOptions" />
           description: Optional parameters for the request.
@@ -337,7 +337,9 @@ methods:
           uid="@azure/app-configuration.ConfigurationSetting" />&lt;string&gt;,
           <xref uid="@azure/app-configuration.ListConfigurationSettingPage" />,
           <xref uid="@azure/app-configuration.PageSettings" />&gt;
-  - name: listConfigurationSettingsForSnapshot(string, ListSettingsSnapshotsOptions)
+  - name: >-
+      listConfigurationSettingsForSnapshot(string,
+      ListConfigurationSettingsForSnapshotOptions)
     uid: >-
       @azure/app-configuration.AppConfigurationClient.listConfigurationSettingsForSnapshot
     package: '@azure/app-configuration'
@@ -361,7 +363,7 @@ methods:
     syntax:
       content: >-
         function listConfigurationSettingsForSnapshot(snapshotName: string,
-        options?: ListSettingsSnapshotsOptions):
+        options?: ListConfigurationSettingsForSnapshotOptions):
         PagedAsyncIterableIterator<ConfigurationSetting<string>,
         ListConfigurationSettingPage, PageSettings>
       parameters:
@@ -369,7 +371,10 @@ methods:
           type: string
           description: ''
         - id: options
-          type: <xref uid="@azure/app-configuration.ListSettingsSnapshotsOptions" />
+          type: >-
+            <xref
+            uid="@azure/app-configuration.ListConfigurationSettingsForSnapshotOptions"
+            />
           description: Optional parameters for the request.
       return:
         description: ''
@@ -422,7 +427,8 @@ methods:
     syntax:
       content: >-
         function listSnapshots(options?: ListSnapshotsOptions):
-        PagedAsyncIterableIterator<Snapshot, ListSnapshotsPage, PageSettings>
+        PagedAsyncIterableIterator<ConfigurationSnapshot, ListSnapshotsPage,
+        PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/app-configuration.ListSnapshotsOptions" />
@@ -431,10 +437,10 @@ methods:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/app-configuration.Snapshot" />, <xref
+          uid="@azure/app-configuration.ConfigurationSnapshot" />, <xref
           uid="@azure/app-configuration.ListSnapshotsPage" />, <xref
           uid="@azure/app-configuration.PageSettings" />&gt;
-  - name: recoverSnapshot(SnapshotId, UpdateSnapshotOptions)
+  - name: recoverSnapshot(string, UpdateSnapshotOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.recoverSnapshot'
     package: '@azure/app-configuration'
     summary: |-
@@ -448,12 +454,12 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function recoverSnapshot(snapshotId: SnapshotId, options?:
-        UpdateSnapshotOptions): Promise<UpdateSnapshotResponse>
+        function recoverSnapshot(name: string, options?: UpdateSnapshotOptions):
+        Promise<UpdateSnapshotResponse>
       parameters:
-        - id: snapshotId
-          type: <xref uid="@azure/app-configuration.SnapshotId" />
-          description: ''
+        - id: name
+          type: string
+          description: The name of the snapshot.
         - id: options
           type: <xref uid="@azure/app-configuration.UpdateSnapshotOptions" />
           description: Optional parameters for the request.

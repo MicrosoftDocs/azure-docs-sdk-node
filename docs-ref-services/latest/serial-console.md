@@ -1,7 +1,7 @@
 ---
 title: Azure Serial Console SDK for JavaScript
 description: Reference for Azure Serial Console SDK for JavaScript
-ms.date: 10/11/2023
+ms.date: 10/12/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: serialconsole

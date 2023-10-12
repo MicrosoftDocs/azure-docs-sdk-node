@@ -1,7 +1,7 @@
 ---
 title: Azure Policy Insights SDK for JavaScript
 description: Reference for Azure Policy Insights SDK for JavaScript
-ms.date: 10/11/2023
+ms.date: 10/12/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: policyinsights

@@ -1,7 +1,7 @@
 ---
 title: Azure Video Analyzer SDK for JavaScript
 description: Reference for Azure Video Analyzer SDK for JavaScript
-ms.date: 10/17/2023
+ms.date: 10/18/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: videoanalyzer

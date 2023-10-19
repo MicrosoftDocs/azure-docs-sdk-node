@@ -1,10 +1,10 @@
 ---
 title: Azure Event Hubs SDK for JavaScript
 description: Reference for Azure Event Hubs SDK for JavaScript
-ms.date: 10/18/2023
+ms.date: 10/19/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: eventhubs
+ms.service: event-hubs
 ---
 # Azure Event Hub modules for JavaScript
 

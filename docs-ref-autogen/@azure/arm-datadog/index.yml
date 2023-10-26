@@ -9,12 +9,20 @@ enums:
   - '@azure/arm-datadog.KnownManagedIdentityTypes'
   - '@azure/arm-datadog.KnownMarketplaceSubscriptionStatus'
   - '@azure/arm-datadog.KnownMonitoringStatus'
+  - '@azure/arm-datadog.KnownOperation'
   - '@azure/arm-datadog.KnownProvisioningState'
   - '@azure/arm-datadog.KnownSingleSignOnStates'
+  - '@azure/arm-datadog.KnownStatus'
   - '@azure/arm-datadog.KnownTagAction'
 classes:
   - '@azure/arm-datadog.MicrosoftDatadogClient'
 interfaces:
+  - '@azure/arm-datadog.CreateResourceSupportedProperties'
+  - '@azure/arm-datadog.CreateResourceSupportedResponse'
+  - '@azure/arm-datadog.CreateResourceSupportedResponseList'
+  - '@azure/arm-datadog.CreationSupported'
+  - '@azure/arm-datadog.CreationSupportedGetOptionalParams'
+  - '@azure/arm-datadog.CreationSupportedListOptionalParams'
   - '@azure/arm-datadog.DatadogAgreementProperties'
   - '@azure/arm-datadog.DatadogAgreementResource'
   - '@azure/arm-datadog.DatadogAgreementResourceListResponse'
@@ -51,6 +59,15 @@ interfaces:
   - '@azure/arm-datadog.MonitorUpdateProperties'
   - '@azure/arm-datadog.MonitoredResource'
   - '@azure/arm-datadog.MonitoredResourceListResponse'
+  - '@azure/arm-datadog.MonitoredSubscription'
+  - '@azure/arm-datadog.MonitoredSubscriptionProperties'
+  - '@azure/arm-datadog.MonitoredSubscriptionPropertiesList'
+  - '@azure/arm-datadog.MonitoredSubscriptions'
+  - '@azure/arm-datadog.MonitoredSubscriptionsCreateorUpdateOptionalParams'
+  - '@azure/arm-datadog.MonitoredSubscriptionsDeleteOptionalParams'
+  - '@azure/arm-datadog.MonitoredSubscriptionsGetOptionalParams'
+  - '@azure/arm-datadog.MonitoredSubscriptionsListOptionalParams'
+  - '@azure/arm-datadog.MonitoredSubscriptionsUpdateOptionalParams'
   - '@azure/arm-datadog.MonitoringTagRules'
   - '@azure/arm-datadog.MonitoringTagRulesListResponse'
   - '@azure/arm-datadog.MonitoringTagRulesProperties'
@@ -86,6 +103,7 @@ interfaces:
   - '@azure/arm-datadog.SingleSignOnConfigurationsGetOptionalParams'
   - '@azure/arm-datadog.SingleSignOnConfigurationsListNextOptionalParams'
   - '@azure/arm-datadog.SingleSignOnConfigurationsListOptionalParams'
+  - '@azure/arm-datadog.SubscriptionList'
   - '@azure/arm-datadog.SystemData'
   - '@azure/arm-datadog.TagRules'
   - '@azure/arm-datadog.TagRulesCreateOrUpdateOptionalParams'
@@ -95,12 +113,18 @@ interfaces:
   - '@azure/arm-datadog.UserInfo'
 typeAliases:
   - '@azure/arm-datadog.CreatedByType'
+  - '@azure/arm-datadog.CreationSupportedGetResponse'
+  - '@azure/arm-datadog.CreationSupportedListResponse'
   - '@azure/arm-datadog.LiftrResourceCategories'
   - '@azure/arm-datadog.ManagedIdentityTypes'
   - '@azure/arm-datadog.MarketplaceAgreementsCreateOrUpdateResponse'
   - '@azure/arm-datadog.MarketplaceAgreementsListNextResponse'
   - '@azure/arm-datadog.MarketplaceAgreementsListResponse'
   - '@azure/arm-datadog.MarketplaceSubscriptionStatus'
+  - '@azure/arm-datadog.MonitoredSubscriptionsCreateorUpdateResponse'
+  - '@azure/arm-datadog.MonitoredSubscriptionsGetResponse'
+  - '@azure/arm-datadog.MonitoredSubscriptionsListResponse'
+  - '@azure/arm-datadog.MonitoredSubscriptionsUpdateResponse'
   - '@azure/arm-datadog.MonitoringStatus'
   - '@azure/arm-datadog.MonitorsCreateResponse'
   - '@azure/arm-datadog.MonitorsGetDefaultKeyResponse'
@@ -119,6 +143,7 @@ typeAliases:
   - '@azure/arm-datadog.MonitorsListResponse'
   - '@azure/arm-datadog.MonitorsRefreshSetPasswordLinkResponse'
   - '@azure/arm-datadog.MonitorsUpdateResponse'
+  - '@azure/arm-datadog.Operation'
   - '@azure/arm-datadog.OperationsListNextResponse'
   - '@azure/arm-datadog.OperationsListResponse'
   - '@azure/arm-datadog.ProvisioningState'
@@ -127,6 +152,7 @@ typeAliases:
   - '@azure/arm-datadog.SingleSignOnConfigurationsListNextResponse'
   - '@azure/arm-datadog.SingleSignOnConfigurationsListResponse'
   - '@azure/arm-datadog.SingleSignOnStates'
+  - '@azure/arm-datadog.Status'
   - '@azure/arm-datadog.TagAction'
   - '@azure/arm-datadog.TagRulesCreateOrUpdateResponse'
   - '@azure/arm-datadog.TagRulesGetResponse'
@@ -137,8 +163,8 @@ functions:
     uid: '@azure/arm-datadog.getContinuationToken'
     package: '@azure/arm-datadog'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -147,7 +173,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

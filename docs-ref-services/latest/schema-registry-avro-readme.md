@@ -1,12 +1,12 @@
 ---
 title: Azure Schema Registry Avro Serializer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry-avro, schemaregistry
-ms.date: 05/10/2022
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: schemaregistry
 ---
-# Azure Schema Registry Avro Serializer client library for JavaScript - version 1.0.0 
+# Azure Schema Registry Avro Serializer client library for JavaScript - version 1.1.0 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
@@ -16,14 +16,14 @@ Avro-serialized data.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0/sdk/schemaregistry/schema-registry-avro)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/schemaregistry/schema-registry-avro)
 - [Package (npm)](https://www.npmjs.com/package/@azure/schema-registry-avro)
 - [API Reference Documentation](/javascript/api/@azure/schema-registry-avro)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0/sdk/schemaregistry/schema-registry-avro/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/schemaregistry/schema-registry-avro/samples)
 
 ## Getting started
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -73,7 +73,7 @@ adapters for their message types.
 
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
-import { createEventDataAdapter } from "@azure/event-hubs";
+const { createEventDataAdapter } = require("@azure/event-hubs");
 const { SchemaRegistryClient } = require("@azure/schema-registry");
 const { AvroSerializer } = require("@azure/schema-registry-avro");
 
@@ -124,7 +124,7 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0/sdk/schemaregistry/schema-registry-avro/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/schemaregistry/schema-registry-avro/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -147,7 +147,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 If you'd like to contribute to this library, please read the [contributing
-guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry-avro_1.0.0/CONTRIBUTING.md) to
+guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry-avro_1.1.0/CONTRIBUTING.md) to
 learn more about how to build and test the code.
 
 ## Related projects
@@ -159,8 +159,7 @@ learn more about how to build and test the code.
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/identity/identity#defaultazurecredential
 [resterror]: /javascript/api/@azure/core-rest-pipeline/resterror?view=azure-node-latest
 [schema_registry]: /javascript/api/overview/azure/schema-registry-readme?view=azure-node-latest
-

@@ -1,7 +1,7 @@
 ---
 title: Azure Notification Hubs SDK for JavaScript
 description: Reference for Azure Notification Hubs SDK for JavaScript
-ms.date: 06/15/2022
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: notificationhubs
@@ -35,4 +35,3 @@ npm install @azure/arm-notificationhubs
 * [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://github.com/Azure-Samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
-

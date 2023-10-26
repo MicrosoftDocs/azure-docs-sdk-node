@@ -1,7 +1,7 @@
 ---
 title: Azure HDInsight SDK for JavaScript
 description: Reference for Azure HDInsight SDK for JavaScript
-ms.date: 07/18/2017
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hdinsight
@@ -42,4 +42,3 @@ Examples for using this module in Node.js as well as browser applications can be
 ## Samples
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
-

@@ -1,6 +1,7 @@
 ---
 title: Azure Education SDK for JavaScript
 description: Reference for Azure Education SDK for JavaScript
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: education
@@ -8,4 +9,3 @@ ms.service: education
 # Azure Education SDK for JavaScript - preview
 ## Packages - preview
 [!INCLUDE [packages](education-index.md)]
-

@@ -1,7 +1,7 @@
 ---
 title: Azure Mixed Reality SDK for JavaScript
 description: Reference for Azure Mixed Reality SDK for JavaScript
-ms.date: 06/15/2022
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: mixedreality
@@ -28,4 +28,3 @@ npm install @azure/arm-mixedreality
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-mixedreality)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
-

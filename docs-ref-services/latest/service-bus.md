@@ -1,7 +1,7 @@
 ---
 title: Azure Service Bus SDK for JavaScript
 description: Reference for Azure Service Bus SDK for JavaScript
-ms.date: 06/15/2022
+ms.date: 10/25/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: service-bus-messaging
@@ -45,4 +45,3 @@ There is a much older package `azure-sb` that allows you to send and receive mes
 | NPM Package                                                        | Reference                                                                                            | Samples                                                                                                                              |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | [azure-sb](https://npmjs.com/package/azure-sb) | [API Reference for azure-sb](https://docs.microsoft.com/javascript/api/azure-sb/?view=azure-node-legacy) | [Samples for sending & receiving messages](https://www.npmjs.com/package/azure-sb#how-to-use) |
-

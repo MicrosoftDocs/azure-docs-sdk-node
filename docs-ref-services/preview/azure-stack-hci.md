@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: azurestackhci
 ---
-# Azure Azure Stack HCI SDK for JavaScript - latest
-## Packages - latest
+# Azure Azure Stack HCI SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](azure-stack-hci-index.md)]

@@ -1,7 +1,7 @@
 ---
 title: Azure Operator Nexus - Network Cloud SDK for JavaScript
 description: Reference for Azure Operator Nexus - Network Cloud SDK for JavaScript
-ms.date: 10/31/2023
+ms.date: 11/01/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: operatornexus-networkcloud

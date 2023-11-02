@@ -1,7 +1,7 @@
 ---
 title: Azure Search SDK for JavaScript
 description: Reference for Azure Search SDK for JavaScript
-ms.date: 11/01/2023
+ms.date: 11/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-search

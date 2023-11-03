@@ -2,7 +2,7 @@
 name: StorageRetryOptions
 uid: '@azure/storage-file-share.StorageRetryOptions'
 package: '@azure/storage-file-share'
-summary: Retry options interface.
+summary: Storage Blob retry options interface.
 fullName: StorageRetryOptions
 remarks: ''
 isDeprecated: false
@@ -71,6 +71,30 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/storage-file-share.StorageRetryPolicyType" />
+  - name: secondaryHost
+    uid: '@azure/storage-file-share.StorageRetryOptions.secondaryHost'
+    package: '@azure/storage-file-share'
+    summary: >-
+      If a secondaryHost is specified, retries will be tried against this host.
+      If secondaryHost is undefined
+
+      (the default) then operations are not retried against another host.
+
+
+      NOTE: Before setting this field, make sure you understand the issues
+      around
+
+      reading stale and potentially-inconsistent data at
+
+      https://docs.microsoft.com/en-us/azure/storage/common/storage-designing-ha-apps-with-ragrs
+    fullName: secondaryHost
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'secondaryHost?: string'
+      return:
+        description: ''
+        type: string
   - name: tryTimeoutInMs
     uid: '@azure/storage-file-share.StorageRetryOptions.tryTimeoutInMs'
     package: '@azure/storage-file-share'
@@ -78,20 +102,13 @@ properties:
       Optional. Indicates the maximum time in ms allowed for any single try of
       an HTTP request.
 
-      A value of zero or undefined means that you accept our default timeout,
-      60s or 60 * 1000ms.
+      A value of zero or undefined means no default timeout on SDK client, Azure
+
+      Storage server's default timeout policy will be used.
 
 
-      NOTE: When transferring large amounts of data, the default TryTimeout will
-      probably
-
-      not be sufficient. You should override this value based on the bandwidth
-      available to
-
-      the host machine and proximity to the Storage service. A good starting
-      point may be something
-
-      like (60 seconds per MB of anticipated-payload-size)
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-blob-service-operations
     fullName: tryTimeoutInMs
     remarks: ''
     isDeprecated: false

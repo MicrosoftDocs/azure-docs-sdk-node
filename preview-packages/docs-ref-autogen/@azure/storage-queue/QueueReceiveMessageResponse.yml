@@ -10,12 +10,8 @@ fullName: QueueReceiveMessageResponse
 remarks: ''
 isDeprecated: false
 syntax: |
-  type QueueReceiveMessageResponse = {
-    receivedMessageItems: ReceivedMessageItem[]
-  } & MessagesDequeueHeaders & {
-      _response: HttpResponse & {
-        bodyAsText: string
-        parsedBody: ReceivedMessageItem[]
-        parsedHeaders: MessagesDequeueHeaders
-      }
-    }
+  type QueueReceiveMessageResponse = WithResponse<
+    { receivedMessageItems: ReceivedMessageItem[] } & MessagesDequeueHeaders,
+    MessagesDequeueHeaders,
+    ReceivedMessageItem[]
+  >

@@ -7,13 +7,10 @@ fullName: FileSystemListDeletedPathsResponse
 remarks: ''
 isDeprecated: false
 syntax: |
-  type FileSystemListDeletedPathsResponse = DeletedPathList &
-    FileSystemListBlobHierarchySegmentHeaders &
-    ListBlobsHierarchySegmentResponse & {
-      _response: HttpResponse & {
-        bodyAsText: string
-        parsedBody: ListBlobsHierarchySegmentResponse
-        parsedHeaders: FileSystemListBlobHierarchySegmentHeaders
-      }
-      continuation?: string
-    }
+  type FileSystemListDeletedPathsResponse = WithResponse<
+    DeletedPathList &
+      FileSystemListBlobHierarchySegmentHeaders &
+      ListBlobsHierarchySegmentResponse & { continuation?: string },
+    FileSystemListBlobHierarchySegmentHeaders,
+    ListBlobsHierarchySegmentResponse
+  >

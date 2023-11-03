@@ -8,8 +8,6 @@ enums:
   - '@azure/storage-file-datalake.PathRenameMode'
   - '@azure/storage-file-datalake.PathResourceType'
   - '@azure/storage-file-datalake.SASProtocol'
-  - '@azure/storage-file-datalake.StorageDataLakeAudience'
-  - '@azure/storage-file-datalake.StorageRetryPolicyType'
 classes:
   - '@azure/storage-file-datalake.AccountSASPermissions'
   - '@azure/storage-file-datalake.AccountSASResourceTypes'
@@ -29,9 +27,7 @@ classes:
   - '@azure/storage-file-datalake.DataLakeServiceClient'
   - '@azure/storage-file-datalake.DirectorySASPermissions'
   - '@azure/storage-file-datalake.FileSystemSASPermissions'
-  - '@azure/storage-file-datalake.HttpHeaders'
   - '@azure/storage-file-datalake.Pipeline'
-  - '@azure/storage-file-datalake.RequestPolicyOptions'
   - '@azure/storage-file-datalake.RestError'
   - '@azure/storage-file-datalake.SASQueryParameters'
   - '@azure/storage-file-datalake.StorageBrowserPolicy'
@@ -40,7 +36,6 @@ classes:
   - '@azure/storage-file-datalake.StorageRetryPolicyFactory'
   - '@azure/storage-file-datalake.StorageSharedKeyCredential'
   - '@azure/storage-file-datalake.StorageSharedKeyCredentialPolicy'
-  - '@azure/storage-file-datalake.WebResource'
 interfaces:
   - '@azure/storage-file-datalake.AccessControlChangeCounters'
   - '@azure/storage-file-datalake.AccessControlChangeError'
@@ -104,6 +99,7 @@ interfaces:
   - '@azure/storage-file-datalake.FileSystemSetMetadataHeaders'
   - '@azure/storage-file-datalake.FileSystemSetMetadataOptions'
   - '@azure/storage-file-datalake.FileSystemUndeletePathOption'
+  - '@azure/storage-file-datalake.HttpHeaders'
   - '@azure/storage-file-datalake.HttpOperationResponse'
   - '@azure/storage-file-datalake.IHttpClient'
   - '@azure/storage-file-datalake.Lease'
@@ -153,10 +149,10 @@ interfaces:
   - '@azure/storage-file-datalake.PathSetPermissionsOptions'
   - '@azure/storage-file-datalake.PathUndeleteHeaders'
   - '@azure/storage-file-datalake.PathUpdateHeaders'
-  - '@azure/storage-file-datalake.PipelineOptions'
   - '@azure/storage-file-datalake.RawAccessPolicy'
   - '@azure/storage-file-datalake.RemovePathAccessControlItem'
-  - '@azure/storage-file-datalake.RequestPolicy'
+  - '@azure/storage-file-datalake.RequestPolicyFactory'
+  - '@azure/storage-file-datalake.RequestPolicyOptions'
   - '@azure/storage-file-datalake.RolePermissions'
   - '@azure/storage-file-datalake.SASQueryParametersOptions'
   - '@azure/storage-file-datalake.SasIPRange'
@@ -171,10 +167,10 @@ interfaces:
   - '@azure/storage-file-datalake.StorageRetryOptions'
   - '@azure/storage-file-datalake.UserDelegationKey'
   - '@azure/storage-file-datalake.UserDelegationKeyModel'
+  - '@azure/storage-file-datalake.WebResource'
 typeAliases:
   - '@azure/storage-file-datalake.AccessControlType'
   - '@azure/storage-file-datalake.CopyStatusType'
-  - '@azure/storage-file-datalake.CredentialPolicyCreator'
   - '@azure/storage-file-datalake.DataLakeServiceGetPropertiesResponse'
   - '@azure/storage-file-datalake.EncryptionAlgorithmType'
   - '@azure/storage-file-datalake.FileAppendResponse'
@@ -194,12 +190,12 @@ typeAliases:
   - '@azure/storage-file-datalake.FileSystemSetMetadataResponse'
   - '@azure/storage-file-datalake.FileSystemUndeletePathResponse'
   - '@azure/storage-file-datalake.FileSystemUndeleteResponse'
+  - '@azure/storage-file-datalake.FileUploadResponse'
   - '@azure/storage-file-datalake.HttpRequestBody'
   - '@azure/storage-file-datalake.LeaseDurationType'
   - '@azure/storage-file-datalake.LeaseOperationResponse'
   - '@azure/storage-file-datalake.LeaseStateType'
   - '@azure/storage-file-datalake.LeaseStatusType'
-  - '@azure/storage-file-datalake.ListPathsSegmentResponse'
   - '@azure/storage-file-datalake.ModifiedAccessConditions'
   - '@azure/storage-file-datalake.PathCreateResponse'
   - '@azure/storage-file-datalake.PathDeleteResponse'
@@ -212,38 +208,13 @@ typeAliases:
   - '@azure/storage-file-datalake.PathSetAccessControlResponse'
   - '@azure/storage-file-datalake.PathSetHttpHeadersResponse'
   - '@azure/storage-file-datalake.PathSetMetadataResponse'
+  - '@azure/storage-file-datalake.PathSetPermissionsResponse'
   - '@azure/storage-file-datalake.PublicAccessType'
-  - '@azure/storage-file-datalake.RequestPolicyFactory'
   - '@azure/storage-file-datalake.ServiceGetUserDelegationKeyResponse'
   - '@azure/storage-file-datalake.ServiceListContainersSegmentResponse'
   - '@azure/storage-file-datalake.ServiceListFileSystemsSegmentResponse'
   - '@azure/storage-file-datalake.ServiceRenameFileSystemOptions'
 functions:
-  - name: deserializationPolicy(DeserializationContentTypes, SerializerOptions)
-    uid: '@azure/storage-file-datalake.deserializationPolicy'
-    package: '@azure/storage-file-datalake'
-    summary: >-
-      Create a new serialization RequestPolicyCreator that will serialized HTTP
-      request bodies as they
-
-      pass through the HTTP pipeline.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deserializationPolicy(deserializationContentTypes?:
-        DeserializationContentTypes, parsingOptions?: SerializerOptions):
-        RequestPolicyFactory
-      parameters:
-        - id: deserializationContentTypes
-          type: DeserializationContentTypes
-          description: ''
-        - id: parsingOptions
-          type: SerializerOptions
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/storage-file-datalake.RequestPolicyFactory" />
   - name: >-
       generateAccountSASQueryParameters(AccountSASSignatureValues,
       StorageSharedKeyCredential)
@@ -451,23 +422,6 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/storage-file-datalake.SASQueryParameters" />
-  - name: getDataLakeServiceAccountAudience(string)
-    uid: '@azure/storage-file-datalake.getDataLakeServiceAccountAudience'
-    package: '@azure/storage-file-datalake'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getDataLakeServiceAccountAudience(storageAccountName: string):
-        string
-      parameters:
-        - id: storageAccountName
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: string
   - name: >-
       newPipeline(StorageSharedKeyCredential | AnonymousCredential |
       TokenCredential, StoragePipelineOptions)

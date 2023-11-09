@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 10/11/2023
+ms.date: 11/09/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -22,7 +22,7 @@ ms.service: monitor
 
 - [OpenTelemetry supported runtimes](https://github.com/open-telemetry/opentelemetry-js#supported-runtimes)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.1.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.1.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -97,7 +97,7 @@ useAzureMonitor(options);
 
 |Property|Description|Default|
 | ------------------------------- |------------------------------------------------------------------------------------------------------------|-------|
-| azureMonitorExporterOptions                     | Azure Monitor OpenTelemetry Exporter Configuration. [More info here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.1.0/sdk/monitor/monitor-opentelemetry-exporter)                                                | |
+| azureMonitorExporterOptions                     | Azure Monitor OpenTelemetry Exporter Configuration. [More info here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.1.1/sdk/monitor/monitor-opentelemetry-exporter)                                                | |
 | otlpTraceExporterConfig                     | OTLP Trace Exporter Configuration. [More info here](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/exporter-trace-otlp-http) 
 | otlpMetricExporterConfig                     | OTLP Trace Exporter Configuration. [More info here](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-exporter-metrics-otlp-http) 
 | otlpLogExporterConfig                     | OTLP Trace Exporter Configuration. [More info here](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/exporter-logs-otlp-http)                                         | |
@@ -144,7 +144,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
   - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-pg)
   - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis)
   - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis-4)
-  - [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.1.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+  - [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.1.1/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 - [HTTP/HTTPS](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-http) 
@@ -401,7 +401,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.1.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.1.1/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -416,7 +416,7 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.1.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/monitor-opentelemetry/README.png)
 

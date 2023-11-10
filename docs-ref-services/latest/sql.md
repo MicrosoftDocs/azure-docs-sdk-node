@@ -1,7 +1,7 @@
 ---
 title: Azure SQL SDK for JavaScript
 description: Reference for Azure SQL SDK for JavaScript
-ms.date: 11/09/2023
+ms.date: 11/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: sql

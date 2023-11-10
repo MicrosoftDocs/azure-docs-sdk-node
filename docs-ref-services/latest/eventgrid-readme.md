@@ -1,12 +1,12 @@
 ---
 title: Azure Event Grid client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/eventgrid, event-grid
-ms.date: 10/13/2023
+ms.date: 11/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: event-grid
 ---
-# Azure Event Grid client library for JavaScript - version 4.15.0 
+# Azure Event Grid client library for JavaScript - version 5.0.0 
 
 
 [Azure Event Grid](https://azure.microsoft.com/services/event-grid/) is a cloud-based service that provides reliable event delivery at massive scale.
@@ -19,11 +19,11 @@ Use the client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.15.0/sdk/eventgrid/eventgrid/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.0.0/sdk/eventgrid/eventgrid/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/eventgrid)
 - [API reference documentation](/javascript/api/@azure/eventgrid/)
 - [Product documentation](/azure/event-grid/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.15.0/sdk/eventgrid/eventgrid/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.0.0/sdk/eventgrid/eventgrid/samples)
 
 ## Getting started
 
@@ -32,7 +32,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.15.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -124,7 +124,7 @@ Azure EventGrid provides integration with Azure Active Directory (Azure AD) for 
 
 To send events to a topic or domain with a `TokenCredential`, the authenticated identity should have the "EventGrid Data Sender" role assigned.
 
-With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments. To learn more about Azure Active Directory, see the [`@azure/identity` README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.15.0/sdk/identity/identity/README.md).
+With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments. To learn more about Azure Active Directory, see the [`@azure/identity` README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.0.0/sdk/identity/identity/README.md).
 
 For example, use can use `DefaultAzureCredential` to construct a client which will authenticate using Azure Active Directory:
 
@@ -261,45 +261,38 @@ await client.send([
 
 ### Deserializing an Event
 
-`EventGridDeserializer` can be used to deserialize events delivered by Event Grid. When deserializing an event, you need to know the schema used to deliver the event. In this example we have events being delivered to an Azure Service Bus Queue in the Cloud Events schema. Using the Service Bus SDK we can receive these events from the Service Bus Queue and then deserialize them using `EventGridDeserializer` and use `isSystemEvent` to detect what type of events they are.
+`EventGridDeserializer` can be used to deserialize events delivered by Event Grid. In this example we have a cloud event that is deserialized using `EventGridDeserializer` and use `isSystemEvent` to detect what type of events they are.
 
 ```js
-const { ServiceBusClient } = require("@azure/service-bus");
-const { DefaultAzureCredential } = require("@azure/identity");
 const { EventGridDeserializer, isSystemEvent } = require("@azure/eventgrid");
 
-const client = new ServiceBusClient("<service bus hostname>", new DefaultAzureCredential());
+async function main() {
+  const deserializer = new EventGridDeserializer();
+  const message = {
+    id: "5bc888aa-c2f4-11ea-b3de-0242ac130004",
+    source:
+      "/subscriptions/<subscriptionid>/resourceGroups/dummy-rg/providers/Microsoft.EventGrid/topics/dummy-topic",
+    specversion: "1.0",
+    type: "Microsoft.ContainerRegistry.ImagePushed",
+    subject: "Test Subject",
+    time: "2020-07-10T21:27:12.925Z",
+    data: {
+      hello: "world",
+    },
+  };
+  const deserializedMessage = await deserializer.deserializeCloudEvents(message);
+  console.log(deserializedMessage);
 
-const receiver = client.createReceiver("<queue name>", "peekLock");
-
-const consumer = new EventGridDeserializer();
-
-async function processMessage(message) {
-  // When delivering to a Service Bus Queue or Topic, EventGrid delivers a single event per message.
-  // so we just pluck the first one.
-  const event = (await consumer.deserializeCloudEvents(message.body))[0];
-
-  if (isSystemEvent("Microsoft.ContainerRegistry.ImagePushed", event)) {
-    console.log(
-      `${event.time}: Container Registry Image Pushed event for image ${event.data.target.repository}:${event.data.target.tag}`
-    );
-  } else if (isSystemEvent("Microsoft.ContainerRegistry.ImageDeleted", event)) {
-    console.log(
-      `${event.time}: Container Registry Image Deleted event for repository ${event.data.target.repository}`
-    );
+  if (
+    deserializedMessage != null &&
+    deserializedMessage.length !== 0 &&
+    isSystemEvent("Microsoft.ContainerRegistry.ImagePushed", deserializedMessage[0])
+  ) {
+    console.log("This is a Microsoft.ContainerRegistry.ImagePushed event");
   }
-
-  await message.complete();
 }
 
-console.log("starting receiver");
-
-receiver.subscribe({
-  processError: async (err) => {
-    console.error(err);
-  },
-  processMessage,
-});
+main();
 ```
 
 ## Troubleshooting
@@ -314,17 +307,17 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable the logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.15.0/sdk/core/logger).
+For more detailed instructions on how to enable the logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.0.0/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.15.0/sdk/eventgrid/eventgrid/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.0.0/sdk/eventgrid/eventgrid/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.15.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -336,7 +329,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [event_grid]: /azure/event-grid
 [azure_portal]: https://portal.azure.com
-[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.15.0/sdk/core/core-tracing
+[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.0.0/sdk/core/core-tracing
 [cloud-events-distributed-tracing-spec]: https://github.com/cloudevents/spec/blob/v1.0.1/extensions/distributed-tracing.md
 [eventgrid-on-kubernetes-using-azure-arc]: /azure/event-grid/kubernetes/
 

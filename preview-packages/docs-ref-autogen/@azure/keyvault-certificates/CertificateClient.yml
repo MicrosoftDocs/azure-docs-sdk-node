@@ -1,0 +1,1471 @@
+### YamlMime:TSType
+name: CertificateClient
+uid: '@azure/keyvault-certificates.CertificateClient'
+package: '@azure/keyvault-certificates'
+summary: The client to interact with the KeyVault certificates functionality
+fullName: CertificateClient
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: CertificateClient(string, TokenCredential, CertificateClientOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.constructor'
+    package: '@azure/keyvault-certificates'
+    summary: Creates an instance of CertificateClient.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new CertificateClient(vaultUrl: string, credential: TokenCredential,
+        clientOptions?: CertificateClientOptions)
+      parameters:
+        - id: vaultUrl
+          type: string
+          description: >-
+            the base URL to the vault. You should validate that this URL
+            references a valid Key Vault resource. See
+            https://aka.ms/azsdk/blog/vault-uri for details.
+        - id: credential
+          type: TokenCredential
+          description: >-
+            An object that implements the `TokenCredential` interface used to
+            authenticate requests to the service. Use the @azure/identity
+            package to create a credential that suits your needs.
+        - id: clientOptions
+          type: <xref uid="@azure/keyvault-certificates.CertificateClientOptions" />
+          description: |-
+            Pipeline options used to configure Key Vault API requests.
+                                     Omit this parameter to use the default pipeline configuration.
+properties:
+  - name: vaultUrl
+    uid: '@azure/keyvault-certificates.CertificateClient.vaultUrl'
+    package: '@azure/keyvault-certificates'
+    summary: The base URL to the vault
+    fullName: vaultUrl
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vaultUrl: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: backupCertificate(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.backupCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Requests that a backup of the specified certificate be downloaded to the
+      client. All versions of the certificate will be downloaded.
+
+      This operation requires the certificates/backup permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      const backup = await client.backupCertificate("MyCertificate");
+
+      ```
+
+      Generates a backup of a certificate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function backupCertificate(certificateName: string, options?:
+        OperationOptions): Promise<undefined | Uint8Array>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: Promise&lt;undefined | Uint8Array&gt;
+  - name: >-
+      beginCreateCertificate(string, CertificatePolicy,
+      BeginCreateCertificateOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.beginCreateCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Creates a new certificate. If this is the first version, the certificate
+      resource is created.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
+
+      **Note:** Sending `Self` as the `issuerName` of the certificate's policy
+      will create a self-signed certificate.
+
+
+      This operation requires the certificates/create permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const certificatePolicy = {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      };
+
+      const createPoller = await client.beginCreateCertificate("MyCertificate",
+      certificatePolicy);
+
+
+      // The pending certificate can be obtained by calling the following
+      method:
+
+      const pendingCertificate = createPoller.getResult();
+
+
+      // Serializing the poller
+
+      const serialized = createPoller.toString();
+
+
+      // A new poller can be created with:
+
+      // const newPoller = await client.beginCreateCertificate("MyCertificate",
+      certificatePolicy, { resumeFrom: serialized });
+
+
+      // Waiting until it's done
+
+      const certificate = await createPoller.pollUntilDone();
+
+      console.log(certificate);
+
+      ```
+
+      Creates a certificate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateCertificate(certificateName: string, policy:
+        CertificatePolicy, options?: BeginCreateCertificateOptions):
+        Promise<PollerLikeWithCancellation<CreateCertificateState,
+        KeyVaultCertificateWithPolicy>>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: policy
+          type: <xref uid="@azure/keyvault-certificates.CertificatePolicy" />
+          description: ''
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/keyvault-certificates.BeginCreateCertificateOptions" />
+          description: Optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.PollerLikeWithCancellation"
+          />&lt;<xref uid="@azure/keyvault-certificates.CreateCertificateState"
+          />, <xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
+          />&gt;&gt;
+  - name: beginDeleteCertificate(string, CertificatePollerOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.beginDeleteCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      The DELETE operation applies to any certificate stored in Azure Key Vault.
+      DELETE cannot be applied
+
+      to an individual version of a certificate.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
+
+      This operation requires the certificates/delete permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const createPoller = await client.beginCreateCertificate("MyCertificate",
+      {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      await createPoller.pollUntilDone();
+
+
+      const deletePoller = await client.beginDeleteCertificate("MyCertificate");
+
+
+      // Serializing the poller
+
+      const serialized = deletePoller.toString();
+
+
+      // A new poller can be created with:
+
+      // const newPoller = await client.beginDeleteCertificate("MyCertificate",
+      { resumeFrom: serialized });
+
+
+      // Waiting until it's done
+
+      const deletedCertificate = await deletePoller.pollUntilDone();
+
+      console.log(deletedCertificate);
+
+      ```
+
+      Deletes a certificate from a specified key vault.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteCertificate(certificateName: string, options?:
+        CertificatePollerOptions): Promise<PollerLike<DeleteCertificateState,
+        DeletedCertificate>>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate.
+        - id: options
+          type: <xref uid="@azure/keyvault-certificates.CertificatePollerOptions" />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.PollerLike"
+          />&lt;<xref uid="@azure/keyvault-certificates.DeleteCertificateState"
+          />, <xref uid="@azure/keyvault-certificates.DeletedCertificate"
+          />&gt;&gt;
+  - name: beginRecoverDeletedCertificate(string, CertificatePollerOptions)
+    uid: >-
+      @azure/keyvault-certificates.CertificateClient.beginRecoverDeletedCertificate
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Recovers the deleted certificate in the specified vault. This operation
+      can only be performed on a soft-delete enabled vault. This operation
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
+
+      This operation requires the certificates/recover permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+
+      const deletePoller = await client.beginDeleteCertificate("MyCertificate");
+
+      await deletePoller.pollUntilDone();
+
+
+      const recoverPoller = await
+      client.beginRecoverDeletedCertificate("MyCertificate");
+
+
+      // Serializing the poller
+
+      const serialized = deletePoller.toString();
+
+
+      // A new poller can be created with:
+
+      // const newPoller = await
+      client.beginRecoverDeletedCertificate("MyCertificate", { resumeFrom:
+      serialized });
+
+
+      // Waiting until it's done
+
+      const certificate = await recoverPoller.pollUntilDone();
+
+      console.log(certificate);
+
+      ```
+
+      Recovers a deleted certificate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecoverDeletedCertificate(certificateName: string,
+        options?: CertificatePollerOptions):
+        Promise<PollerLike<RecoverDeletedCertificateState,
+        KeyVaultCertificateWithPolicy>>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the deleted certificate
+        - id: options
+          type: <xref uid="@azure/keyvault-certificates.CertificatePollerOptions" />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.PollerLike"
+          />&lt;<xref
+          uid="@azure/keyvault-certificates.RecoverDeletedCertificateState" />,
+          <xref uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
+          />&gt;&gt;
+  - name: createIssuer(string, string, CreateIssuerOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.createIssuer'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      The createIssuer operation adds or updates the specified certificate
+      issuer. This
+
+      operation requires the certificates/setissuers permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.createIssuer("IssuerName", "Test");
+
+      ```
+
+      Sets the specified certificate issuer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createIssuer(issuerName: string, provider: string, options?:
+        CreateIssuerOptions): Promise<CertificateIssuer>
+      parameters:
+        - id: issuerName
+          type: string
+          description: The name of the issuer.
+        - id: provider
+          type: string
+          description: The issuer provider.
+        - id: options
+          type: <xref uid="@azure/keyvault-certificates.CreateIssuerOptions" />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateIssuer"
+          />&gt;
+  - name: deleteCertificateOperation(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.deleteCertificateOperation'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Deletes the creation operation for a specified certificate that is in the
+      process of being created.
+
+      The certificate is no longer created. This operation requires the
+      certificates/update permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      await client.deleteCertificateOperation("MyCertificate");
+
+      await client.getCertificateOperation("MyCertificate"); // Throws error:
+      Pending certificate not found: "MyCertificate"
+
+      ```
+
+      Delete a certificate's operation
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteCertificateOperation(certificateName: string, options?:
+        OperationOptions): Promise<CertificateOperation>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.CertificateOperation" />&gt;
+  - name: deleteContacts(OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.deleteContacts'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Deletes all of the certificate contacts. This operation requires the
+      certificates/managecontacts permission.
+
+
+      Example usage:
+
+      ```ts
+
+      let client = new CertificateClient(url, credentials);
+
+      await client.setContacts([{
+        email: "b@b.com",
+        name: "b",
+        phone: "222222222222"
+      }]);
+
+      await client.deleteContacts();
+
+      ```
+
+      Deletes all of the certificate contacts
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteContacts(options?: OperationOptions): Promise<undefined |
+        CertificateContact[]>
+      parameters:
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;undefined | <xref
+          uid="@azure/keyvault-certificates.CertificateContact" />[]&gt;
+  - name: deleteIssuer(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.deleteIssuer'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      The deleteIssuer operation permanently removes the specified certificate
+      issuer from
+
+      the vault. This operation requires the
+      certificates/manageissuers/deleteissuers permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.createIssuer("IssuerName", "Provider");
+
+      await client.deleteIssuer("IssuerName");
+
+      ```
+
+      Deletes the specified certificate issuer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteIssuer(issuerName: string, options?: OperationOptions):
+        Promise<CertificateIssuer>
+      parameters:
+        - id: issuerName
+          type: string
+          description: The name of the issuer.
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateIssuer"
+          />&gt;
+  - name: getCertificate(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.getCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Gets the latest information available from a specific certificate,
+      including the certificate's policy. This operation requires the
+      certificates/get permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const poller = await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      await poller.pollUntilDone();
+
+      const certificate = await client.getCertificate("MyCertificate");
+
+      console.log(certificate);
+
+      ```
+
+      Retrieves a certificate from the certificate's name (includes the
+      certificate policy)
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getCertificate(certificateName: string, options?:
+        OperationOptions): Promise<KeyVaultCertificateWithPolicy>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
+          />&gt;
+  - name: getCertificateOperation(string, CertificatePollerOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.getCertificateOperation'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Gets the creation operation associated with a specified certificate. This
+      operation requires the certificates/get permission.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const createPoller = await client.beginCreateCertificate("MyCertificate",
+      {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+
+      const poller = await client.getCertificateOperation("MyCertificate");
+
+      const pendingCertificate = poller.getResult();
+
+
+      const certificateOperation =
+      poller.getOperationState().certificateOperation;
+
+      console.log(certificateOperation);
+
+      ```
+
+      Gets a certificate's poller operation
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getCertificateOperation(certificateName: string, options?:
+        CertificatePollerOptions):
+        Promise<PollerLikeWithCancellation<CertificateOperationState,
+        KeyVaultCertificateWithPolicy>>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: options
+          type: <xref uid="@azure/keyvault-certificates.CertificatePollerOptions" />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.PollerLikeWithCancellation"
+          />&lt;<xref
+          uid="@azure/keyvault-certificates.CertificateOperationState" />, <xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
+          />&gt;&gt;
+  - name: getCertificatePolicy(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.getCertificatePolicy'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      The getCertificatePolicy operation returns the specified certificate
+      policy resources in the specified key vault. This operation requires the
+      certificates/get permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      const policy = await client.getCertificatePolicy("MyCertificate");
+
+      console.log(policy);
+
+      ```
+
+      Gets a certificate's policy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getCertificatePolicy(certificateName: string, options?:
+        OperationOptions): Promise<CertificatePolicy>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificatePolicy"
+          />&gt;
+  - name: getCertificateVersion(string, string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.getCertificateVersion'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Gets information about a specific certificate on a specific version. It
+      won't return the certificate's policy. This operation requires the
+      certificates/get permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const poller = await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      await poller.pollUntilDone();
+
+      const certificateWithPolicy = await
+      client.getCertificate("MyCertificate");
+
+      const certificate = await client.getCertificateVersion("MyCertificate",
+      certificateWithPolicy.properties.version!);
+
+      console.log(certificate);
+
+      ```
+
+      Retrieves a certificate from the certificate's name and a specified
+      version
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getCertificateVersion(certificateName: string, version: string,
+        options?: OperationOptions): Promise<KeyVaultCertificate>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: version
+          type: string
+          description: The specific version of the certificate
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificate" />&gt;
+  - name: getContacts(OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.getContacts'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Returns the set of certificate contact resources in the specified key
+      vault. This operation requires the certificates/managecontacts permission.
+
+
+      Example usage:
+
+      ```ts
+
+      let client = new CertificateClient(url, credentials);
+
+      await client.setContacts([{
+        email: "b@b.com",
+        name: "b",
+        phone: "222222222222"
+      }]);
+
+      const contacts = await client.getContacts();
+
+      console.log(contacts);
+
+      ```
+
+      Sets the certificate contacts.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getContacts(options?: OperationOptions): Promise<undefined |
+        CertificateContact[]>
+      parameters:
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;undefined | <xref
+          uid="@azure/keyvault-certificates.CertificateContact" />[]&gt;
+  - name: getDeletedCertificate(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.getDeletedCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      retrieves the deleted certificate information plus its attributes, such as
+      retention interval, scheduled permanent deletion and the
+
+      current deletion recovery level. This operation requires the
+      certificates/get permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const deletedCertificate = await
+      client.getDeletedCertificate("MyDeletedCertificate");
+
+      console.log("Deleted certificate:", deletedCertificate);
+
+      ```
+
+      Gets a deleted certificate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getDeletedCertificate(certificateName: string, options?:
+        OperationOptions): Promise<DeletedCertificate>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.DeletedCertificate"
+          />&gt;
+  - name: getIssuer(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.getIssuer'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      The getIssuer operation returns the specified certificate issuer resources
+      in the
+
+      specified key vault. This operation requires the
+      certificates/manageissuers/getissuers
+
+      permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.createIssuer("IssuerName", "Test");
+
+      const certificateIssuer = await client.getIssuer("IssuerName");
+
+      console.log(certificateIssuer);
+
+      ```
+
+      Gets he specified certificate issuer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getIssuer(issuerName: string, options?: OperationOptions):
+        Promise<CertificateIssuer>
+      parameters:
+        - id: issuerName
+          type: string
+          description: The name of the issuer.
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateIssuer"
+          />&gt;
+  - name: importCertificate(string, Uint8Array, ImportCertificateOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.importCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Imports an existing valid certificate, containing a private key, into
+      Azure Key Vault. The certificate to be imported can be in either PFX or
+      PEM format.
+
+      If the certificate is in PEM format the PEM file must contain the key as
+      well as x509 certificates. This operation requires the certificates/import
+      permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      // See: @azure/keyvault-secrets
+
+      const certificateSecret = await secretClient.getSecret("MyCertificate");
+
+      const base64EncodedCertificate = certificateSecret.value!;
+
+      let buffer: Uint8Array;
+
+
+      if (isNode) {
+        buffer = Buffer.from(base64EncodedCertificate, "base64");
+      } else {
+        buffer = Uint8Array.from(atob(base64EncodedCertificate), (c) => c.charCodeAt(0));
+      }
+
+
+      await client.importCertificate("MyCertificate", buffer);
+
+      ```
+
+      Imports a certificate from a certificate's secret value
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function importCertificate(certificateName: string, certificateBytes:
+        Uint8Array, options?: ImportCertificateOptions):
+        Promise<KeyVaultCertificateWithPolicy>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: certificateBytes
+          type: Uint8Array
+          description: >-
+            The PFX or ASCII PEM formatted value of the certificate containing
+            both the X.509 certificates and the private key
+        - id: options
+          type: <xref uid="@azure/keyvault-certificates.ImportCertificateOptions" />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
+          />&gt;
+  - name: listDeletedCertificates(ListDeletedCertificatesOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.listDeletedCertificates'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Retrieves the certificates in the current vault which are in a deleted
+      state and ready for recovery or purging. This operation includes
+      deletion-specific
+
+      information. This operation requires the certificates/get/list permission.
+      This operation can only be enabled on soft-delete enabled vaults.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      for await (const deletedCertificate of client.listDeletedCertificates()) {
+        console.log(deletedCertificate);
+      }
+
+      for await (const page of client.listDeletedCertificates().byPage()) {
+        for (const deletedCertificate of page) {
+          console.log(deletedCertificate);
+        }
+      }
+
+      ```
+
+      Lists deleted certificates
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listDeletedCertificates(options?:
+        ListDeletedCertificatesOptions):
+        PagedAsyncIterableIterator<DeletedCertificate, DeletedCertificate[],
+        PageSettings>
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/keyvault-certificates.ListDeletedCertificatesOptions" />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-certificates.DeletedCertificate" />, <xref
+          uid="@azure/keyvault-certificates.DeletedCertificate" />[],
+          PageSettings&gt;
+  - name: listPropertiesOfCertificates(ListPropertiesOfCertificatesOptions)
+    uid: >-
+      @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificates
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Iterates the latest version of all certificates in the vault.  The full
+      certificate identifier and attributes are provided
+
+      in the response. No values are returned for the certificates. This
+      operations requires the certificates/list permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      // All in one call
+
+      for await (const certificateProperties of
+      client.listPropertiesOfCertificates()) {
+        console.log(certificateProperties);
+      }
+
+      // By pages
+
+      for await (const page of client.listPropertiesOfCertificates().byPage()) {
+        for (const certificateProperties of page) {
+          console.log(certificateProperties);
+        }
+      }
+
+      ```
+
+      List all versions of the specified certificate.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listPropertiesOfCertificates(options?:
+        ListPropertiesOfCertificatesOptions):
+        PagedAsyncIterableIterator<CertificateProperties,
+        CertificateProperties[], PageSettings>
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/keyvault-certificates.ListPropertiesOfCertificatesOptions"
+            />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-certificates.CertificateProperties" />, <xref
+          uid="@azure/keyvault-certificates.CertificateProperties" />[],
+          PageSettings&gt;
+  - name: listPropertiesOfCertificateVersions(string, OperationOptions)
+    uid: >-
+      @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificateVersions
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Returns the versions of a certificate in the specified key
+
+      vault. This operation requires the certificates/list permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      for await (const certificateProperties of
+      client.listPropertiesOfCertificateVersions("MyCertificate")) {
+        console.log(certificateProperties.version!);
+      }
+
+      ```
+
+      List the versions of a certificate.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listPropertiesOfCertificateVersions(certificateName: string,
+        options?: OperationOptions):
+        PagedAsyncIterableIterator<CertificateProperties,
+        CertificateProperties[], PageSettings>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate.
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-certificates.CertificateProperties" />, <xref
+          uid="@azure/keyvault-certificates.CertificateProperties" />[],
+          PageSettings&gt;
+  - name: listPropertiesOfIssuers(OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.listPropertiesOfIssuers'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Returns the set of certificate issuer resources in the specified key
+      vault. This operation requires the certificates/manageissuers/getissuers
+      permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.createIssuer("IssuerName", "Test");
+
+      // All in one call
+
+      for await (const issuerProperties of client.listPropertiesOfIssuers()) {
+        console.log(issuerProperties);
+      }
+
+      // By pages
+
+      for await (const page of client.listPropertiesOfIssuers().byPage()) {
+        for (const issuerProperties of page) {
+          console.log(issuerProperties);
+        }
+      }
+
+      ```
+
+      List the certificate issuers.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listPropertiesOfIssuers(options?: OperationOptions):
+        PagedAsyncIterableIterator<IssuerProperties, IssuerProperties[],
+        PageSettings>
+      parameters:
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-certificates.IssuerProperties" />, <xref
+          uid="@azure/keyvault-certificates.IssuerProperties" />[],
+          PageSettings&gt;
+  - name: mergeCertificate(string, Uint8Array[], OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.mergeCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Performs the merging of a certificate or certificate chain with a key pair
+      currently available in the service. This operation requires the
+      certificates/create permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Unknown",
+        subject: "cn=MyCert"
+      });
+
+      const poller = await client.getCertificateOperation("MyCertificate");
+
+      const { csr } = poller.getOperationState().certificateOperation!;
+
+      const base64Csr = Buffer.from(csr!).toString("base64");
+
+      const wrappedCsr = ["-----BEGIN CERTIFICATE REQUEST-----", base64Csr,
+      "-----END CERTIFICATE REQUEST-----"].join("\n");
+
+
+      const fs = require("fs");
+
+      fs.writeFileSync("test.csr", wrappedCsr);
+
+
+      // Certificate available locally made using:
+
+      //   openssl genrsa -out ca.key 2048
+
+      //   openssl req -new -x509 -key ca.key -out ca.crt
+
+      // You can read more about how to create a fake certificate authority
+      here: https://gist.github.com/Soarez/9688998
+
+
+      const childProcess = require("child_process");
+
+      childProcess.execSync("openssl x509 -req -in test.csr -CA ca.crt -CAkey
+      ca.key -CAcreateserial -out test.crt");
+
+      const base64Crt =
+      fs.readFileSync("test.crt").toString().split("\n").slice(1, -1).join("");
+
+
+      await client.mergeCertificate("MyCertificate", [Buffer.from(base64Crt)]);
+
+      ```
+
+      Merges a signed certificate request into a pending certificate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function mergeCertificate(certificateName: string, x509Certificates:
+        Uint8Array[], options?: OperationOptions):
+        Promise<KeyVaultCertificateWithPolicy>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: x509Certificates
+          type: Uint8Array[]
+          description: The certificate(s) to merge
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
+          />&gt;
+  - name: purgeDeletedCertificate(string, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.purgeDeletedCertificate'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Performs an irreversible deletion of the specified certificate, without
+      possibility for recovery. The operation is not available if the
+
+      recovery level does not specify 'Purgeable'. This operation requires the
+      certificate/purge permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const deletePoller = await client.beginDeleteCertificate("MyCertificate");
+
+      await deletePoller.pollUntilDone();
+
+      // Deleting a certificate takes time, make sure to wait before purging it
+
+      client.purgeDeletedCertificate("MyCertificate");
+
+      ```
+
+      Gets a deleted certificate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function purgeDeletedCertificate(certificateName: string, options?:
+        OperationOptions): Promise<null>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the deleted certificate to purge
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: Promise&lt;null&gt;
+  - name: restoreCertificateBackup(Uint8Array, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.restoreCertificateBackup'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Restores a backed up certificate, and all its versions, to a vault. This
+      operation requires the certificates/restore permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      const backup = await client.backupCertificate("MyCertificate");
+
+      const poller = await client.beginDeleteCertificate("MyCertificate");
+
+      await poller.pollUntilDone();
+
+      // Some time is required before we're able to restore the certificate
+
+      await client.restoreCertificateBackup(backup!);
+
+      ```
+
+      Restores a certificate from a backup
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function restoreCertificateBackup(backup: Uint8Array, options?:
+        OperationOptions): Promise<KeyVaultCertificateWithPolicy>
+      parameters:
+        - id: backup
+          type: Uint8Array
+          description: The back-up certificate to restore from
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
+          />&gt;
+  - name: setContacts(CertificateContact[], OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.setContacts'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Sets the certificate contacts for the key vault. This operation requires
+      the certificates/managecontacts permission.
+
+
+      Example usage:
+
+      ```ts
+
+      let client = new CertificateClient(url, credentials);
+
+      await client.setContacts([{
+        email: "b@b.com",
+        name: "b",
+        phone: "222222222222"
+      }]);
+
+      ```
+
+      Sets the certificate contacts.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setContacts(contacts: CertificateContact[], options?:
+        OperationOptions): Promise<undefined | CertificateContact[]>
+      parameters:
+        - id: contacts
+          type: <xref uid="@azure/keyvault-certificates.CertificateContact" />[]
+          description: The contacts to use
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;undefined | <xref
+          uid="@azure/keyvault-certificates.CertificateContact" />[]&gt;
+  - name: updateCertificatePolicy(string, CertificatePolicy, OperationOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.updateCertificatePolicy'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Updates the certificate policy for the specified certificate. This
+      operation requires the certificates/update permission.
+
+      Gets a certificate's policy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateCertificatePolicy(certificateName: string, policy:
+        CertificatePolicy, options?: OperationOptions):
+        Promise<CertificatePolicy>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: policy
+          type: <xref uid="@azure/keyvault-certificates.CertificatePolicy" />
+          description: The certificate policy
+        - id: options
+          type: OperationOptions
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificatePolicy"
+          />&gt;
+  - name: updateCertificateProperties(string, string, UpdateCertificateOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.updateCertificateProperties'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      Applies the specified update on the given certificate; the only elements
+      updated are the
+
+      certificate's attributes. This operation requires the certificates/update
+      permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+
+      // You may pass an empty string for version which will update
+
+      // the latest version of the certificate
+
+      await client.updateCertificateProperties("MyCertificate", "", {
+        tags: {
+          customTag: "value"
+        }
+      });
+
+      ```
+
+      Updates a certificate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateCertificateProperties(certificateName: string, version:
+        string, options?: UpdateCertificateOptions):
+        Promise<KeyVaultCertificate>
+      parameters:
+        - id: certificateName
+          type: string
+          description: The name of the certificate
+        - id: version
+          type: string
+          description: >-
+            The version of the certificate to update (an empty string will
+            update the latest version)
+        - id: options
+          type: <xref uid="@azure/keyvault-certificates.UpdateCertificateOptions" />
+          description: The options, including what to update
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/keyvault-certificates.KeyVaultCertificate" />&gt;
+  - name: updateIssuer(string, UpdateIssuerOptions)
+    uid: '@azure/keyvault-certificates.CertificateClient.updateIssuer'
+    package: '@azure/keyvault-certificates'
+    summary: >-
+      The updateIssuer operation performs an update on the specified certificate
+      issuer
+
+      entity. This operation requires the certificates/setissuers permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.createIssuer("IssuerName", "Test");
+
+      await client.updateIssuer("IssuerName", {
+        provider: "Provider2"
+      });
+
+      ```
+
+      Updates the specified certificate issuer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateIssuer(issuerName: string, options?:
+        UpdateIssuerOptions): Promise<CertificateIssuer>
+      parameters:
+        - id: issuerName
+          type: string
+          description: The name of the issuer.
+        - id: options
+          type: <xref uid="@azure/keyvault-certificates.UpdateIssuerOptions" />
+          description: The optional parameters
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateIssuer"
+          />&gt;

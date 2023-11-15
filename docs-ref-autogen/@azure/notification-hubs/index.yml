@@ -10,16 +10,20 @@ interfaces:
   - '@azure/notification-hubs.AdmNativeMessage'
   - '@azure/notification-hubs.AdmNativeNotification'
   - '@azure/notification-hubs.AdmNotification'
+  - '@azure/notification-hubs.AdmNotificationParams'
   - '@azure/notification-hubs.AdmRegistrationChannel'
   - '@azure/notification-hubs.AdmRegistrationDescription'
   - '@azure/notification-hubs.AdmRegistrationDescriptionCommon'
   - '@azure/notification-hubs.AdmTemplateRegistrationDescription'
   - '@azure/notification-hubs.AdmTemplateRegistrationDescriptionCommon'
   - '@azure/notification-hubs.AppleAlert'
+  - '@azure/notification-hubs.AppleApsNativeMessage'
   - '@azure/notification-hubs.AppleCriticalSound'
+  - '@azure/notification-hubs.AppleHeaders'
   - '@azure/notification-hubs.AppleInstallation'
   - '@azure/notification-hubs.AppleNativeMessage'
   - '@azure/notification-hubs.AppleNotification'
+  - '@azure/notification-hubs.AppleNotificationParams'
   - '@azure/notification-hubs.AppleRegistrationChannel'
   - '@azure/notification-hubs.AppleRegistrationDescription'
   - '@azure/notification-hubs.AppleRegistrationDescriptionCommon'
@@ -48,6 +52,7 @@ interfaces:
   - '@azure/notification-hubs.EntityOperationOptions'
   - '@azure/notification-hubs.FcmLegacyInstallation'
   - '@azure/notification-hubs.FcmLegacyNotification'
+  - '@azure/notification-hubs.FcmLegacyNotificationParams'
   - '@azure/notification-hubs.FirebaseLegacyAndroidNativePayload'
   - '@azure/notification-hubs.FirebaseLegacyAppleNativePayload'
   - '@azure/notification-hubs.FirebaseLegacyNativeMessage'
@@ -83,6 +88,7 @@ interfaces:
   - '@azure/notification-hubs.TemplateNotification'
   - '@azure/notification-hubs.TemplateRegistrationDescription'
   - '@azure/notification-hubs.WindowsBadgeNativeMessage'
+  - '@azure/notification-hubs.WindowsHeaders'
   - '@azure/notification-hubs.WindowsInstallation'
   - '@azure/notification-hubs.WindowsNotification'
   - '@azure/notification-hubs.WindowsRegistrationChannel'
@@ -90,6 +96,7 @@ interfaces:
   - '@azure/notification-hubs.WindowsRegistrationDescriptionCommon'
   - '@azure/notification-hubs.WindowsTemplateRegistrationDescription'
   - '@azure/notification-hubs.WindowsTemplateRegistrationDescriptionCommon'
+  - '@azure/notification-hubs.WnsNotificationParams'
   - '@azure/notification-hubs.XiaomiInstallation'
   - '@azure/notification-hubs.XiaomiNotification'
   - '@azure/notification-hubs.XiaomiRegistrationChannel'
@@ -98,6 +105,7 @@ interfaces:
   - '@azure/notification-hubs.XiaomiTemplateRegistrationDescription'
   - '@azure/notification-hubs.XiaomiTemplateRegistrationDescriptionCommon'
 typeAliases:
+  - '@azure/notification-hubs.ApnsPushTypes'
   - '@azure/notification-hubs.Installation'
   - '@azure/notification-hubs.JsonPatchOperation'
   - '@azure/notification-hubs.Notification'
@@ -111,6 +119,7 @@ typeAliases:
   - '@azure/notification-hubs.RegistrationType'
   - '@azure/notification-hubs.WindowsBadgeGlyphType'
   - '@azure/notification-hubs.WindowsContentType'
+  - '@azure/notification-hubs.WnsTypes'
 functions:
   - name: createAdmInstallation(DeviceTokenInstallation)
     uid: '@azure/notification-hubs.createAdmInstallation'
@@ -129,7 +138,7 @@ functions:
       return:
         description: The newly created ADM installation.
         type: <xref uid="@azure/notification-hubs.AdmInstallation" />
-  - name: createAdmNotification(NotificationCommon)
+  - name: createAdmNotification(AdmNotificationParams)
     uid: '@azure/notification-hubs.createAdmNotification'
     package: '@azure/notification-hubs'
     summary: Creates a notification to send to an Amazon Device Messaging device.
@@ -137,11 +146,11 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createAdmNotification(notification: NotificationCommon):
+        function createAdmNotification(notification: AdmNotificationParams):
         AdmNotification
       parameters:
         - id: notification
-          type: <xref uid="@azure/notification-hubs.NotificationCommon" />
+          type: <xref uid="@azure/notification-hubs.AdmNotificationParams" />
           description: >-
             A partial message used to create a message for Amazon Device
             Messaging.
@@ -225,7 +234,7 @@ functions:
       return:
         description: The newly created Apple installation.
         type: <xref uid="@azure/notification-hubs.AppleInstallation" />
-  - name: createAppleNotification(NotificationCommon)
+  - name: createAppleNotification(AppleNotificationParams)
     uid: '@azure/notification-hubs.createAppleNotification'
     package: '@azure/notification-hubs'
     summary: Creates a notification to send to an Apple device.
@@ -233,11 +242,11 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createAppleNotification(notification: NotificationCommon):
+        function createAppleNotification(notification: AppleNotificationParams):
         AppleNotification
       parameters:
         - id: notification
-          type: <xref uid="@azure/notification-hubs.NotificationCommon" />
+          type: <xref uid="@azure/notification-hubs.AppleNotificationParams" />
           description: A partial message used to create a message for Apple.
       return:
         description: A newly created Apple.
@@ -494,7 +503,7 @@ functions:
       return:
         description: The newly created Baidu installation.
         type: <xref uid="@azure/notification-hubs.FcmLegacyInstallation" />
-  - name: createFcmLegacyNotification(NotificationCommon)
+  - name: createFcmLegacyNotification(FcmLegacyNotificationParams)
     uid: '@azure/notification-hubs.createFcmLegacyNotification'
     package: '@azure/notification-hubs'
     summary: Creates a notification to send to Firebase.
@@ -502,11 +511,11 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createFcmLegacyNotification(notification: NotificationCommon):
-        FcmLegacyNotification
+        function createFcmLegacyNotification(notification:
+        FcmLegacyNotificationParams): FcmLegacyNotification
       parameters:
         - id: notification
-          type: <xref uid="@azure/notification-hubs.NotificationCommon" />
+          type: <xref uid="@azure/notification-hubs.FcmLegacyNotificationParams" />
           description: A partial message used to create a message for Firebase.
       return:
         description: A newly created Firebase notification.
@@ -605,7 +614,7 @@ functions:
       return:
         description: A newly created Firebase.
         type: <xref uid="@azure/notification-hubs.TemplateNotification" />
-  - name: createWindowsBadgeNotification(NotificationCommon)
+  - name: createWindowsBadgeNotification(WnsNotificationParams)
     uid: '@azure/notification-hubs.createWindowsBadgeNotification'
     package: '@azure/notification-hubs'
     summary: Creates a badge message to send to WNS.
@@ -614,10 +623,10 @@ functions:
     syntax:
       content: >-
         function createWindowsBadgeNotification(notification:
-        NotificationCommon): WindowsNotification
+        WnsNotificationParams): WindowsNotification
       parameters:
         - id: notification
-          type: <xref uid="@azure/notification-hubs.NotificationCommon" />
+          type: <xref uid="@azure/notification-hubs.WnsNotificationParams" />
           description: A partial message used to create a badge message for WNS.
       return:
         description: A newly created WNS badge.
@@ -656,7 +665,24 @@ functions:
       return:
         description: The newly created WNS installation.
         type: <xref uid="@azure/notification-hubs.WindowsInstallation" />
-  - name: createWindowsRawNotification(NotificationCommon)
+  - name: createWindowsNotification(WnsNotificationParams)
+    uid: '@azure/notification-hubs.createWindowsNotification'
+    package: '@azure/notification-hubs'
+    summary: Creates a notification to send to WNS.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createWindowsNotification(notification: WnsNotificationParams):
+        WindowsNotification
+      parameters:
+        - id: notification
+          type: <xref uid="@azure/notification-hubs.WnsNotificationParams" />
+          description: The WNS notification to send.
+      return:
+        description: A newly created WNS message.
+        type: <xref uid="@azure/notification-hubs.WindowsNotification" />
+  - name: createWindowsRawNotification(WnsNotificationParams)
     uid: '@azure/notification-hubs.createWindowsRawNotification'
     package: '@azure/notification-hubs'
     summary: Creates a notification to send to WNS in wns/raw format..
@@ -664,11 +690,11 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createWindowsRawNotification(notification: NotificationCommon):
-        WindowsNotification
+        function createWindowsRawNotification(notification:
+        WnsNotificationParams): WindowsNotification
       parameters:
         - id: notification
-          type: <xref uid="@azure/notification-hubs.NotificationCommon" />
+          type: <xref uid="@azure/notification-hubs.WnsNotificationParams" />
           description: A partial message used to create a message for WNS in XML format.
       return:
         description: A newly created WNS message using XML.
@@ -718,7 +744,7 @@ functions:
           <xref
           uid="@azure/notification-hubs.WindowsTemplateRegistrationDescription"
           />
-  - name: createWindowsTileNotification(NotificationCommon)
+  - name: createWindowsTileNotification(WnsNotificationParams)
     uid: '@azure/notification-hubs.createWindowsTileNotification'
     package: '@azure/notification-hubs'
     summary: Creates a tile message to send to WNS.
@@ -727,15 +753,15 @@ functions:
     syntax:
       content: >-
         function createWindowsTileNotification(notification:
-        NotificationCommon): WindowsNotification
+        WnsNotificationParams): WindowsNotification
       parameters:
         - id: notification
-          type: <xref uid="@azure/notification-hubs.NotificationCommon" />
+          type: <xref uid="@azure/notification-hubs.WnsNotificationParams" />
           description: A partial message used to create a tile message for WNS.
       return:
         description: A newly created WNS tile.
         type: <xref uid="@azure/notification-hubs.WindowsNotification" />
-  - name: createWindowsToastNotification(NotificationCommon)
+  - name: createWindowsToastNotification(WnsNotificationParams)
     uid: '@azure/notification-hubs.createWindowsToastNotification'
     package: '@azure/notification-hubs'
     summary: Creates a toast message to send to WNS.
@@ -744,10 +770,10 @@ functions:
     syntax:
       content: >-
         function createWindowsToastNotification(notification:
-        NotificationCommon): WindowsNotification
+        WnsNotificationParams): WindowsNotification
       parameters:
         - id: notification
-          type: <xref uid="@azure/notification-hubs.NotificationCommon" />
+          type: <xref uid="@azure/notification-hubs.WnsNotificationParams" />
           description: A partial message used to create a toast message for WNS.
       return:
         description: A newly created WNS toast.

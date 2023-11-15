@@ -1,17 +1,17 @@
 ### YamlMime:TSType
-name: SearchRequest
-uid: '@azure/search-documents.SearchRequest'
+name: BaseSearchRequestOptions
+uid: '@azure/search-documents.BaseSearchRequestOptions'
 package: '@azure/search-documents'
 summary: >-
   Parameters for filtering, sorting, faceting, paging, and other search query
   behaviors.
-fullName: SearchRequest
+fullName: BaseSearchRequestOptions<TModel, TFields>
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
   - name: facets
-    uid: '@azure/search-documents.SearchRequest.facets'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.facets'
     package: '@azure/search-documents'
     summary: >-
       The list of facet expressions to apply to the search query. Each facet
@@ -28,7 +28,7 @@ properties:
         description: ''
         type: string[]
   - name: filter
-    uid: '@azure/search-documents.SearchRequest.filter'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.filter'
     package: '@azure/search-documents'
     summary: The OData $filter expression to apply to the search query.
     fullName: filter
@@ -40,7 +40,7 @@ properties:
         description: ''
         type: string
   - name: highlightFields
-    uid: '@azure/search-documents.SearchRequest.highlightFields'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.highlightFields'
     package: '@azure/search-documents'
     summary: >-
       The comma-separated list of field names to use for hit highlights. Only
@@ -56,7 +56,7 @@ properties:
         description: ''
         type: string
   - name: highlightPostTag
-    uid: '@azure/search-documents.SearchRequest.highlightPostTag'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.highlightPostTag'
     package: '@azure/search-documents'
     summary: >-
       A string tag that is appended to hit highlights. Must be set with
@@ -72,7 +72,7 @@ properties:
         description: ''
         type: string
   - name: highlightPreTag
-    uid: '@azure/search-documents.SearchRequest.highlightPreTag'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.highlightPreTag'
     package: '@azure/search-documents'
     summary: >-
       A string tag that is prepended to hit highlights. Must be set with
@@ -88,7 +88,7 @@ properties:
         description: ''
         type: string
   - name: includeTotalCount
-    uid: '@azure/search-documents.SearchRequest.includeTotalCount'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.includeTotalCount'
     package: '@azure/search-documents'
     summary: >-
       A value that specifies whether to fetch the total count of results.
@@ -107,7 +107,7 @@ properties:
         description: ''
         type: boolean
   - name: minimumCoverage
-    uid: '@azure/search-documents.SearchRequest.minimumCoverage'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.minimumCoverage'
     package: '@azure/search-documents'
     summary: >-
       A number between 0 and 100 indicating the percentage of the index that
@@ -127,11 +127,10 @@ properties:
         description: ''
         type: number
   - name: orderBy
-    uid: '@azure/search-documents.SearchRequest.orderBy'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.orderBy'
     package: '@azure/search-documents'
     summary: >-
-      The comma-separated list of OData $orderby expressions by which to sort
-      the results. Each
+      The list of OData $orderby expressions by which to sort the results. Each
 
       expression can be either a field name or a call to either the
       geo.distance() or the
@@ -150,19 +149,19 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'orderBy?: string'
+      content: 'orderBy?: string[]'
       return:
         description: ''
-        type: string
+        type: string[]
   - name: queryType
-    uid: '@azure/search-documents.SearchRequest.queryType'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.queryType'
     package: '@azure/search-documents'
     summary: >-
       A value that specifies the syntax of the search query. The default is
       'simple'. Use 'full' if
 
       your query uses the Lucene query syntax. Possible values include:
-      'Simple', 'Full'
+      'simple', 'full', 'semantic'
     fullName: queryType
     remarks: ''
     isDeprecated: false
@@ -172,7 +171,7 @@ properties:
         description: ''
         type: <xref uid="@azure/search-documents.QueryType" />
   - name: scoringParameters
-    uid: '@azure/search-documents.SearchRequest.scoringParameters'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.scoringParameters'
     package: '@azure/search-documents'
     summary: >-
       The list of parameter values to be used in scoring functions (for example,
@@ -193,7 +192,7 @@ properties:
         description: ''
         type: string[]
   - name: scoringProfile
-    uid: '@azure/search-documents.SearchRequest.scoringProfile'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.scoringProfile'
     package: '@azure/search-documents'
     summary: >-
       The name of a scoring profile to evaluate match scores for matching
@@ -209,22 +208,16 @@ properties:
         description: ''
         type: string
   - name: scoringStatistics
-    uid: '@azure/search-documents.SearchRequest.scoringStatistics'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.scoringStatistics'
     package: '@azure/search-documents'
     summary: >-
       A value that specifies whether we want to calculate scoring statistics
       (such as document
 
       frequency) globally for more consistent scoring, or locally, for lower
-      latency. The default is
+      latency. Possible
 
-      'local'. Use 'global' to aggregate scoring statistics globally before
-      scoring. Using global
-
-      scoring statistics can increase latency of search queries. Possible values
-      include: 'Local',
-
-      'Global'
+      values include: 'Local', 'Global'
     fullName: scoringStatistics
     remarks: ''
     isDeprecated: false
@@ -234,7 +227,7 @@ properties:
         description: ''
         type: <xref uid="@azure/search-documents.ScoringStatistics" />
   - name: searchFields
-    uid: '@azure/search-documents.SearchRequest.searchFields'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.searchFields'
     package: '@azure/search-documents'
     summary: >-
       The comma-separated list of field names to which to scope the full-text
@@ -249,18 +242,18 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'searchFields?: string'
+      content: 'searchFields?: SearchFieldArray<TModel>'
       return:
         description: ''
-        type: string
+        type: <xref uid="@azure/search-documents.SearchFieldArray" />&lt;TModel&gt;
   - name: searchMode
-    uid: '@azure/search-documents.SearchRequest.searchMode'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.searchMode'
     package: '@azure/search-documents'
     summary: >-
       A value that specifies whether any or all of the search terms must be
       matched in order to
 
-      count the document as a match. Possible values include: 'Any', 'All'
+      count the document as a match. Possible values include: 'any', 'all'
     fullName: searchMode
     remarks: ''
     isDeprecated: false
@@ -269,41 +262,25 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/search-documents.SearchMode" />
-  - name: searchText
-    uid: '@azure/search-documents.SearchRequest.searchText'
-    package: '@azure/search-documents'
-    summary: >-
-      A full-text search query expression; Use "*" or omit this parameter to
-      match all documents.
-    fullName: searchText
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'searchText?: string'
-      return:
-        description: ''
-        type: string
   - name: select
-    uid: '@azure/search-documents.SearchRequest.select'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.select'
     package: '@azure/search-documents'
-    summary: >-
-      The comma-separated list of fields to retrieve. If unspecified, all fields
-      marked as
-
+    summary: |-
+      The list of fields to retrieve. If unspecified, all fields marked as
       retrievable in the schema are included.
     fullName: select
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'select?: string'
+      content: 'select?: SelectArray<TFields>'
       return:
         description: ''
-        type: string
+        type: <xref uid="@azure/search-documents.SelectArray" />&lt;TFields&gt;
   - name: sessionId
-    uid: '@azure/search-documents.SearchRequest.sessionId'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.sessionId'
     package: '@azure/search-documents'
     summary: >-
-      A value to be used to create a sticky session, which can help getting more
+      A value to be used to create a sticky session, which can help to get more
       consistent results.
 
       As long as the same sessionId is used, a best-effort attempt will be made
@@ -326,7 +303,7 @@ properties:
         description: ''
         type: string
   - name: skip
-    uid: '@azure/search-documents.SearchRequest.skip'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.skip'
     package: '@azure/search-documents'
     summary: >-
       The number of search results to skip. This value cannot be greater than
@@ -345,7 +322,7 @@ properties:
         description: ''
         type: number
   - name: top
-    uid: '@azure/search-documents.SearchRequest.top'
+    uid: '@azure/search-documents.BaseSearchRequestOptions.top'
     package: '@azure/search-documents'
     summary: >-
       The number of search results to retrieve. This can be used in conjunction
@@ -366,3 +343,17 @@ properties:
       return:
         description: ''
         type: number
+  - name: vectorSearchOptions
+    uid: '@azure/search-documents.BaseSearchRequestOptions.vectorSearchOptions'
+    package: '@azure/search-documents'
+    summary: Defines options for vector search queries
+    fullName: vectorSearchOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vectorSearchOptions?: VectorSearchOptions<TModel>'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/search-documents.VectorSearchOptions"
+          />&lt;TModel&gt;

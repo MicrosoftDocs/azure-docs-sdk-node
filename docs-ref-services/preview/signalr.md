@@ -1,7 +1,7 @@
 ---
 title: Azure SignalR SDK for JavaScript
 description: Reference for Azure SignalR SDK for JavaScript
-ms.date: 11/21/2023
+ms.date: 11/22/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: signalr

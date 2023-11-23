@@ -1,14 +1,12 @@
 ---
 title: Azure Communication Call Automation client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-call-automation, communication
-author: xirzec
-ms.author: jeffish
-ms.date: 11/06/2023
+ms.date: 11/23/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Call Automation client library for JavaScript - version 1.0.1 
+# Azure Communication Call Automation client library for JavaScript - version 1.1.0 
 
 
 This package contains a JavaScript SDK for Azure Communication Call Automation. Call Automation provides developers the ability to build server-based, intelligent call workflows, and call recording for voice and PSTN channels.
@@ -23,6 +21,7 @@ This package contains a JavaScript SDK for Azure Communication Call Automation. 
 - An existing Communication Services resource. If you need to create the resource, you can use the [Azure Portal][azure_portal], the [Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
 
 ### Installing
+
 ```bash
 npm install @azure/communication-call-automation
 ```
@@ -30,9 +29,11 @@ npm install @azure/communication-call-automation
 ### Browser support
 
 #### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation][build_doc].
 
 ## Key concepts
+
 | Name                 | Description                                                                                                                                                                                                                                                                                                                              |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CallAutomationClient | `CallAutomationClient` is the primary interface for developers using this client library. It can be used to initiate calls by `createCall` or `answerCall`.                                                                                                                                                                              |
@@ -43,7 +44,9 @@ To use this client library in the browser, first you need to use a bundler. For 
 | Incoming Call Event  | When incoming call happens (that can be answered with `answerCall`), incoming call eventgrid event will be sent. This is different from Callback events above, and should be setup on Azure portal. See [Incoming Call][incomingcall] for detail.                                                                                        |
 
 ## Examples
+
 ### Initialize CallAutomationClient
+
 ```JavaScript
 import { CallAutomationClient } from '@azure/communication-call-automation';
 
@@ -53,6 +56,7 @@ const callAutomationClient = new CallAutomationClient(endpointUrl);
 ```
 
 ### Create Call
+
 ```JavaScript
 import { PhoneNumberIdentifier } from "@azure/communication-common";
 import { CallAutomationClient, CallInvite } from '@azure/communication-call-automation';
@@ -82,6 +86,7 @@ const response = callAutomationClient.createCall(callInvite, callbackUrl);
 ```
 
 ### Play Media
+
 ```JavaScript
 // from callconnection of response above, play media of filesource
 const myFile: FileSource[] = [
@@ -96,9 +101,11 @@ const response = callConnection.getCallMedia().playToAll(myFile);
 ## Troubleshooting
 
 ## Next steps
+
 - [Call Automation Overview][overview]
 - [Incoming Call Concept][incomingcall]
 - [Quickstart: Make an outbound call using Call Automation][build5]
+- [Connect Azure Communication Services with Azure AI services][cognitive_integration]
 - [Quickstart: Play action][build3]
 - [Quickstart: Recognize action][build4]
 - [Read more about Call Recording in Azure Communication Services][recording1]
@@ -106,20 +113,22 @@ const response = callConnection.getCallMedia().playToAll(myFile);
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
+
 [overview]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/call-automation
 [product_docs]: /azure/communication-services/overview
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[build_doc]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.0.1/documentation/Bundling.md
+[build_doc]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.1.0/documentation/Bundling.md
 [incomingcall]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/incoming-call-notification
 [build3]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/play-action?pivots=programming-language-javascript
 [build4]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/recognize-action?pivots=programming-language-javascript
 [build5]: https://learn.microsoft.com/azure/communication-services/quickstarts/call-automation/quickstart-make-an-outbound-call?pivots=programming-language-javascript
 [recording1]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/call-recording
 [recording2]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/get-started-call-recording?pivots=programming-language-javascript
+[cognitive_integration]: https://learn.microsoft.com/azure/communication-services/concepts/call-automation/azure-communication-services-azure-cognitive-services-integration
 

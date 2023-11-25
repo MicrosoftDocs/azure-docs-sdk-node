@@ -8,29 +8,25 @@ remarks: ''
 isDeprecated: false
 type: interface
 methods:
-  - name: delete(string, string, string, HybridIdentityMetadataDeleteOptionalParams)
-    uid: '@azure/arm-hybridcontainerservice.HybridIdentityMetadataOperations.delete'
+  - name: beginDelete(string, HybridIdentityMetadataDeleteOptionalParams)
+    uid: >-
+      @azure/arm-hybridcontainerservice.HybridIdentityMetadataOperations.beginDelete
     package: '@azure/arm-hybridcontainerservice'
     summary: Deletes the hybrid identity metadata proxy resource.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function delete(resourceGroupName: string, resourceName: string,
-        hybridIdentityMetadataResourceName: string, options?:
-        HybridIdentityMetadataDeleteOptionalParams): Promise<void>
+        function beginDelete(connectedClusterResourceUri: string, options?:
+        HybridIdentityMetadataDeleteOptionalParams):
+        Promise<SimplePollerLike<OperationState<HybridIdentityMetadataDeleteHeaders>,
+        HybridIdentityMetadataDeleteHeaders>>
       parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: resourceName
-          type: string
-          description: Parameter for the name of the provisioned cluster
-        - id: hybridIdentityMetadataResourceName
+        - id: connectedClusterResourceUri
           type: string
           description: |-
-            Parameter for the name of the hybrid identity metadata
-                                                      resource.
+            The fully qualified Azure Resource manager identifier of the
+                                               connected cluster resource.
         - id: options
           type: >-
             <xref
@@ -39,8 +35,43 @@ methods:
           description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;void&gt;
-  - name: get(string, string, string, HybridIdentityMetadataGetOptionalParams)
+        type: >-
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;<xref
+          uid="@azure/arm-hybridcontainerservice.HybridIdentityMetadataDeleteHeaders"
+          />&gt;, <xref
+          uid="@azure/arm-hybridcontainerservice.HybridIdentityMetadataDeleteHeaders"
+          />&gt;&gt;
+  - name: beginDeleteAndWait(string, HybridIdentityMetadataDeleteOptionalParams)
+    uid: >-
+      @azure/arm-hybridcontainerservice.HybridIdentityMetadataOperations.beginDeleteAndWait
+    package: '@azure/arm-hybridcontainerservice'
+    summary: Deletes the hybrid identity metadata proxy resource.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(connectedClusterResourceUri: string,
+        options?: HybridIdentityMetadataDeleteOptionalParams):
+        Promise<HybridIdentityMetadataDeleteHeaders>
+      parameters:
+        - id: connectedClusterResourceUri
+          type: string
+          description: |-
+            The fully qualified Azure Resource manager identifier of the
+                                               connected cluster resource.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-hybridcontainerservice.HybridIdentityMetadataDeleteOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-hybridcontainerservice.HybridIdentityMetadataDeleteHeaders"
+          />&gt;
+  - name: get(string, HybridIdentityMetadataGetOptionalParams)
     uid: '@azure/arm-hybridcontainerservice.HybridIdentityMetadataOperations.get'
     package: '@azure/arm-hybridcontainerservice'
     summary: Get the hybrid identity metadata proxy resource.
@@ -48,22 +79,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function get(resourceGroupName: string, resourceName: string,
-        hybridIdentityMetadataResourceName: string, options?:
+        function get(connectedClusterResourceUri: string, options?:
         HybridIdentityMetadataGetOptionalParams):
         Promise<HybridIdentityMetadata>
       parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: resourceName
-          type: string
-          description: Parameter for the name of the provisioned cluster
-        - id: hybridIdentityMetadataResourceName
+        - id: connectedClusterResourceUri
           type: string
           description: |-
-            Parameter for the name of the hybrid identity metadata
-                                                      resource.
+            The fully qualified Azure Resource manager identifier of the
+                                               connected cluster resource.
         - id: options
           type: >-
             <xref
@@ -75,28 +99,27 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/arm-hybridcontainerservice.HybridIdentityMetadata" />&gt;
-  - name: >-
-      listByCluster(string, string,
-      HybridIdentityMetadataListByClusterOptionalParams)
+  - name: listByCluster(string, HybridIdentityMetadataListByClusterOptionalParams)
     uid: >-
       @azure/arm-hybridcontainerservice.HybridIdentityMetadataOperations.listByCluster
     package: '@azure/arm-hybridcontainerservice'
-    summary: Lists the hybrid identity metadata proxy resource in a cluster.
+    summary: >-
+      Lists the hybrid identity metadata proxy resource in a provisioned cluster
+      instance.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function listByCluster(resourceGroupName: string, resourceName: string,
-        options?: HybridIdentityMetadataListByClusterOptionalParams):
+        function listByCluster(connectedClusterResourceUri: string, options?:
+        HybridIdentityMetadataListByClusterOptionalParams):
         PagedAsyncIterableIterator<HybridIdentityMetadata,
         HybridIdentityMetadata[], PageSettings>
       parameters:
-        - id: resourceGroupName
+        - id: connectedClusterResourceUri
           type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: resourceName
-          type: string
-          description: Parameter for the name of the provisioned cluster
+          description: |-
+            The fully qualified Azure Resource manager identifier of the
+                                               connected cluster resource.
         - id: options
           type: >-
             <xref
@@ -111,7 +134,7 @@ methods:
           <xref uid="@azure/arm-hybridcontainerservice.HybridIdentityMetadata"
           />[], PageSettings&gt;
   - name: >-
-      put(string, string, string, HybridIdentityMetadata,
+      put(string, HybridIdentityMetadata,
       HybridIdentityMetadataPutOptionalParams)
     uid: '@azure/arm-hybridcontainerservice.HybridIdentityMetadataOperations.put'
     package: '@azure/arm-hybridcontainerservice'
@@ -124,23 +147,16 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function put(resourceGroupName: string, resourceName: string,
-        hybridIdentityMetadataResourceName: string, body:
+        function put(connectedClusterResourceUri: string, body:
         HybridIdentityMetadata, options?:
         HybridIdentityMetadataPutOptionalParams):
         Promise<HybridIdentityMetadata>
       parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: resourceName
-          type: string
-          description: Parameter for the name of the provisioned cluster
-        - id: hybridIdentityMetadataResourceName
+        - id: connectedClusterResourceUri
           type: string
           description: |-
-            Parameter for the name of the hybrid identity metadata
-                                                      resource.
+            The fully qualified Azure Resource manager identifier of the
+                                               connected cluster resource.
         - id: body
           type: >-
             <xref uid="@azure/arm-hybridcontainerservice.HybridIdentityMetadata"

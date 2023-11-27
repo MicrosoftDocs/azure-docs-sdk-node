@@ -1,7 +1,7 @@
 ---
 title: Azure Dynatrace SDK for JavaScript
 description: Reference for Azure Dynatrace SDK for JavaScript
-ms.date: 11/24/2023
+ms.date: 11/27/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: dynatrace

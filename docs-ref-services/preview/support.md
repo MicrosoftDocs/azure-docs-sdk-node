@@ -1,7 +1,7 @@
 ---
 title: Azure Support SDK for JavaScript
 description: Reference for Azure Support SDK for JavaScript
-ms.date: 11/27/2023
+ms.date: 11/28/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: support

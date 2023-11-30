@@ -1,7 +1,7 @@
 ---
 title: Azure Recoveryservicesdatareplication SDK for JavaScript
 description: Reference for Azure Recoveryservicesdatareplication SDK for JavaScript
-ms.date: 11/29/2023
+ms.date: 11/30/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: recoveryservicesdatareplication

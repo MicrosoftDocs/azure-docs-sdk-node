@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Identity client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-identity, communication
-ms.date: 10/13/2022
+ms.date: 11/30/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Identity client library for JavaScript - version 1.2.0 
+# Azure Communication Identity client library for JavaScript - version 1.3.0 
 
 
 The identity library is used for managing users and tokens for Azure Communication Services.
@@ -95,8 +95,11 @@ const user = await client.createUser();
 
 Use the `getToken` method to issue or refresh a token for an existing user. The method also takes in a list of communication token scopes. Scope options include:
 
-- `chat` (Chat)
-- `voip` (Voice over IP)
+- `chat` (Use this for full access to Chat APIs)
+- `voip` (Use this for full access to Calling APIs)
+- `chat.join` (Access to Chat APIs but without the authorization to create, delete or update chat threads)
+- `chat.join.limited` (A more limited version of chat.join that doesn't allow to add or remove participants)
+- `voip.join` (Access to Calling APIs but without the authorization to start new calls)
 
 ```typescript
 let { token } = await client.getToken(user, ["chat"]);
@@ -167,12 +170,12 @@ await client.getTokenForTeamsUser({
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.2.0/sdk/communication/communication-identity/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.3.0/sdk/communication/communication-identity/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

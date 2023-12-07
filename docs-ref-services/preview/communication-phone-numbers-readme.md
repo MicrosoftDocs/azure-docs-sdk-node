@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, communication
-ms.date: 08/18/2023
+ms.date: 12/07/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Phone Numbers client library for JavaScript - version 1.3.0-alpha.20230820.1 
+# Azure Communication Phone Numbers client library for JavaScript - version 1.3.0-beta.2 
 
 
 The phone numbers library provides capabilities for phone number administration.
@@ -144,6 +144,7 @@ const client = new SipRoutingClient("<endpoint-from-resource>", credential);
 The following sections provide code snippets that cover some of the common tasks using the Azure Communication Services Phone Numbers client. The scenarios that are covered here consist of:
 
 PhoneNumbersClient
+
 - [Search for available phone numbers](#search-for-available-phone-numbers)
 - [Purchase phone numbers from a search](#purchase-phone-numbers-from-a-search)
 - [Release a purchased phone number](#release-a-purchased-phone-number)
@@ -152,6 +153,7 @@ PhoneNumbersClient
 - [List purchased phone numbers](#list-purchased-phone-numbers)
 
 SipRoutingClient
+
 - [Retrieve SIP trunks and routes](#retrieve-sip-trunks-and-routes)
 - [Replace SIP trunks and routes](#replace-sip-trunks-and-routes)
 - [Retrieve single trunk](#retrieve-single-trunk)
@@ -169,7 +171,7 @@ Use the `beginSearchAvailablePhoneNumbers` method to search for phone numbers an
 ```typescript
 import {
   PhoneNumbersClient,
-  SearchAvailablePhoneNumbersRequest
+  SearchAvailablePhoneNumbersRequest,
 } from "@azure/communication-phone-numbers";
 
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
@@ -182,9 +184,9 @@ async function main() {
     assignmentType: "application",
     capabilities: {
       sms: "outbound",
-      calling: "none"
+      calling: "none",
     },
-    quantity: 1
+    quantity: 1,
   };
 
   const searchPoller = await client.beginSearchAvailablePhoneNumbers(searchRequest);
@@ -205,27 +207,30 @@ Use the `beginPurchasePhoneNumbers` method to purchase the phone numbers from yo
 `beginPurchasePhoneNumbers` is a long running operation and returns a poller.
 
 ```typescript
-import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
+import {
+  PhoneNumbersClient,
+  SearchAvailablePhoneNumbersRequest,
+} from "@azure/communication-phone-numbers";
 
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new PhoneNumbersClient(connectionString);
 
 async function main() {
-  const searchRequest = {
+  const searchRequest: SearchAvailablePhoneNumbersRequest = {
     countryCode: "US",
     phoneNumberType: "tollFree",
     assignmentType: "application",
     capabilities: {
       sms: "outbound",
-      calling: "none"
+      calling: "none",
     },
-    quantity: 1
+    quantity: 1,
   };
 
   const searchPoller = await client.beginSearchAvailablePhoneNumbers(searchRequest);
 
   // The search is underway. Wait to receive searchId.
-  const { searchId, phoneNumbers } = searchPoller.pollUntilDone();
+  const { searchId, phoneNumbers } = await searchPoller.pollUntilDone();
 
   const purchasePoller = await client.beginPurchasePhoneNumbers(searchId);
 
@@ -271,7 +276,7 @@ Use the `beginUpdatePhoneNumberCapabilities` method to update the capabilities o
 ```typescript
 import {
   PhoneNumbersClient,
-  PhoneNumberCapabilitiesRequest
+  PhoneNumberCapabilitiesRequest,
 } from "@azure/communication-phone-numbers";
 
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
@@ -283,7 +288,7 @@ async function main() {
   // This will update phone number to send and receive sms, but only send calls.
   const updateRequest: PhoneNumberCapabilitiesRequest = {
     sms: "inbound+outbound",
-    calling: "outbound"
+    calling: "outbound",
   };
 
   const updatePoller = await client.beginUpdatePhoneNumberCapabilities(
@@ -309,7 +314,7 @@ import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new PhoneNumbersClient(connectionString);
 
-async main function() {
+async function main() {
   const phoneNumberToGet = "<phone-number-to-get>";
 
   const phoneNumber = await client.getPurchasedPhoneNumber(phoneNumberToGet);
@@ -331,7 +336,7 @@ import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new PhoneNumbersClient(connectionString);
 
-async main function() {
+async function main() {
   const phoneNumbers = await client.listPurchasedPhoneNumbers();
 
   for await (const phoneNumber of phoneNumbers) {
@@ -358,18 +363,13 @@ const client = new SipRoutingClient(connectionString);
 async function main() {
   const trunks = await client.listTrunks();
   const routes = await client.listRoutes();
-  const domains = await client.listDomains();
-  for (const trunk of trunks) {
-    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort} with property enabled: ${trunk.enabled}`);
-  }
-  
-  for await(const route of routes) {
-    console.log(`Route ${route.name} with pattern ${route.numberPattern}`);
-    console.log(`Route's trunks: ${route.trunks?.join()}`);
+  for await (const trunk of trunks) {
+    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort}`);
   }
 
-  for (const domain of domains) {
-    console.log(`Domain ${domain.domainUri} with property enabled: ${domain.enabled}`);
+  for await (const route of routes) {
+    console.log(`Route ${route.name} with pattern ${route.numberPattern}`);
+    console.log(`Route's trunks: ${route.trunks?.join()}`);
   }
 }
 
@@ -389,35 +389,28 @@ const client = new SipRoutingClient(connectionString);
 async function main() {
   await client.setTrunks([
     {
-      fqdn: 'sbc.one.domain.com',
+      fqdn: "sbc.one.domain.com",
       sipSignalingPort: 1234,
-      enabled: true
-    },{
-      fqdn: 'sbc.two.domain.com',
+    },
+    {
+      fqdn: "sbc.two.domain.com",
       sipSignalingPort: 1234,
-      enabled: true
-    }
+    },
   ]);
 
   await client.setRoutes([
     {
       name: "First Route",
       description: "route's description",
-      numberPattern: "^\+[1-9][0-9]{3,23}$",
-      trunks: [ 'sbc.one.domain.com' ]
-    },{
+      numberPattern: "^+[1-9][0-9]{3,23}$",
+      trunks: ["sbc.one.domain.com"],
+    },
+    {
       name: "Second Route",
       description: "route's description",
       numberPattern: "^.*$",
-      trunks: [ 'sbc.two.domain.com', 'sbc.one.domain.com' ]
-    }
-  ]);
-
-  await client.setDomains([
-    {
-      fqdn: 'domain.com',
-      enabled: true
-    }
+      trunks: ["sbc.two.domain.com", "sbc.one.domain.com"],
+    },
   ]);
 }
 
@@ -433,11 +426,11 @@ const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new SipRoutingClient(connectionString);
 
 async function main() {
-  const trunk = await client.getTrunk('sbc.one.domain.com');
+  const trunk = await client.getTrunk("sbc.one.domain.com");
   if (trunk) {
     console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort}`);
   } else {
-      console.log('Trunk not found')
+    console.log("Trunk not found");
   }
 }
 
@@ -454,8 +447,8 @@ const client = new SipRoutingClient(connectionString);
 
 async function main() {
   await client.setTrunk({
-    fqdn: 'sbc.one.domain.com',
-    sipSignalingPort: 4321
+    fqdn: "sbc.one.domain.com",
+    sipSignalingPort: 4321,
   });
 }
 
@@ -471,7 +464,7 @@ const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new SipRoutingClient(connectionString);
 
 async function main() {
-  await client.deleteTrunk('sbc.one.domain.com');
+  await client.deleteTrunk("sbc.one.domain.com");
 }
 
 main();
@@ -482,12 +475,12 @@ main();
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/communication/communication-phone-numbers/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-beta.2/sdk/communication/communication-phone-numbers/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -497,9 +490,9 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-beta.2/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-beta.2/sdk/identity/identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-phone-numbers%2FREADME.png)
 

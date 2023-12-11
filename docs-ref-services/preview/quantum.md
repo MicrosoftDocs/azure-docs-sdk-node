@@ -1,7 +1,7 @@
 ---
 title: Azure Quantum SDK for JavaScript
 description: Reference for Azure Quantum SDK for JavaScript
-ms.date: 12/08/2023
+ms.date: 12/11/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: quantum

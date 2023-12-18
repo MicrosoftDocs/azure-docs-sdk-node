@@ -11,7 +11,7 @@ ms.service: cognitive-search
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SearchManagement client.
 
-Client that can be used to manage Azure Cognitive Search services and API keys.
+Client that can be used to manage Azure AI Search services and API keys.
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-search_3.2.0/sdk/search/arm-search) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-search) |

@@ -1,7 +1,7 @@
 ---
 title: Azure Consumption SDK for JavaScript
 description: Reference for Azure Consumption SDK for JavaScript
-ms.date: 12/21/2023
+ms.date: 12/22/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: consumption

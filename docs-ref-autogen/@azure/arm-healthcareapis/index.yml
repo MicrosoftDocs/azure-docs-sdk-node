@@ -21,6 +21,7 @@ classes:
   - '@azure/arm-healthcareapis.HealthcareApisManagementClient'
 interfaces:
   - '@azure/arm-healthcareapis.CheckNameAvailabilityParameters'
+  - '@azure/arm-healthcareapis.CorsConfiguration'
   - '@azure/arm-healthcareapis.DicomService'
   - '@azure/arm-healthcareapis.DicomServiceAuthenticationConfiguration'
   - '@azure/arm-healthcareapis.DicomServiceCollection'
@@ -32,6 +33,8 @@ interfaces:
   - '@azure/arm-healthcareapis.DicomServicesListByWorkspaceNextOptionalParams'
   - '@azure/arm-healthcareapis.DicomServicesListByWorkspaceOptionalParams'
   - '@azure/arm-healthcareapis.DicomServicesUpdateOptionalParams'
+  - '@azure/arm-healthcareapis.Encryption'
+  - '@azure/arm-healthcareapis.EncryptionCustomerManagedKeyEncryption'
   - '@azure/arm-healthcareapis.ErrorDetails'
   - '@azure/arm-healthcareapis.ErrorDetailsInternal'
   - '@azure/arm-healthcareapis.ErrorModel'
@@ -40,12 +43,12 @@ interfaces:
     @azure/arm-healthcareapis.FhirDestinationsListByIotConnectorNextOptionalParams
   - '@azure/arm-healthcareapis.FhirDestinationsListByIotConnectorOptionalParams'
   - '@azure/arm-healthcareapis.FhirService'
-  - '@azure/arm-healthcareapis.FhirServiceAccessPolicyEntry'
   - '@azure/arm-healthcareapis.FhirServiceAcrConfiguration'
   - '@azure/arm-healthcareapis.FhirServiceAuthenticationConfiguration'
   - '@azure/arm-healthcareapis.FhirServiceCollection'
   - '@azure/arm-healthcareapis.FhirServiceCorsConfiguration'
   - '@azure/arm-healthcareapis.FhirServiceExportConfiguration'
+  - '@azure/arm-healthcareapis.FhirServiceImportConfiguration'
   - '@azure/arm-healthcareapis.FhirServicePatchResource'
   - '@azure/arm-healthcareapis.FhirServices'
   - '@azure/arm-healthcareapis.FhirServicesCreateOrUpdateOptionalParams'
@@ -55,6 +58,7 @@ interfaces:
   - '@azure/arm-healthcareapis.FhirServicesListByWorkspaceOptionalParams'
   - '@azure/arm-healthcareapis.FhirServicesUpdateOptionalParams'
   - '@azure/arm-healthcareapis.HealthcareApisManagementClientOptionalParams'
+  - '@azure/arm-healthcareapis.ImplementationGuidesConfiguration'
   - '@azure/arm-healthcareapis.IotConnector'
   - '@azure/arm-healthcareapis.IotConnectorCollection'
   - '@azure/arm-healthcareapis.IotConnectorFhirDestination'
@@ -119,6 +123,7 @@ interfaces:
   - '@azure/arm-healthcareapis.ServiceCorsConfigurationInfo'
   - '@azure/arm-healthcareapis.ServiceCosmosDbConfigurationInfo'
   - '@azure/arm-healthcareapis.ServiceExportConfigurationInfo'
+  - '@azure/arm-healthcareapis.ServiceImportConfigurationInfo'
   - '@azure/arm-healthcareapis.ServiceManagedIdentity'
   - '@azure/arm-healthcareapis.ServiceManagedIdentityIdentity'
   - '@azure/arm-healthcareapis.ServiceOciArtifactEntry'
@@ -240,8 +245,8 @@ functions:
     uid: '@azure/arm-healthcareapis.getContinuationToken'
     package: '@azure/arm-healthcareapis'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -250,7 +255,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/core-sse, core
-ms.date: 09/07/2023
+ms.date: 01/02/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
@@ -19,7 +19,7 @@ This is an implementation of server-sent events which work in the browser and No
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-sse_1.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-sse_2.0.0/SUPPORT.md) for more details.
 
 ### Installation
 
@@ -45,7 +45,7 @@ If you run into issues while using this library, please feel free to [file an is
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-sse_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-sse_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fcore-rest-pipeline%2FREADME.png)
 

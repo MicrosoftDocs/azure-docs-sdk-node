@@ -311,7 +311,7 @@ main().catch((err) => {
 
 ### Analyze Business Data
 
-This example generates chat responses to input chat questions about your business data. The business data is provided through an Azure Cognitive Search index. To learn more about how to setup an Azure Cognitive Search index as a data source, see [Quickstart: Chat with Azure OpenAI models using your own data][msdocs_quickstart_byod].
+This example generates chat responses to input chat questions about your business data. The business data is provided through an Azure AI Search index. To learn more about how to setup an Azure AI Search index as a data source, see [Quickstart: Chat with Azure OpenAI models using your own data][msdocs_quickstart_byod].
 
 
 ```javascript
@@ -337,9 +337,9 @@ async function main(){
         {
           type: "AzureCognitiveSearch",
           parameters: {
-            endpoint: "<Azure Cognitive Search endpoint>",
-            key: "<Azure Cognitive Search admin key>",
-            indexName: "<Azure Cognitive Search index name>",
+            endpoint: "<Azure AI Search endpoint>",
+            key: "<Azure AI Search admin key>",
+            indexName: "<Azure AI Search index name>",
           },
         },
       ],

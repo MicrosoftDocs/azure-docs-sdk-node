@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: openai
 ---
-# Azure OpenAI client library for JavaScript - version 1.0.0-beta.9 
+# Azure OpenAI client library for JavaScript - version 1.0.0-beta.10 
 
 
 The Azure OpenAI client library for JavaScript is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -37,11 +37,11 @@ Checkout the following examples:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.9/sdk/openai/openai)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.10/sdk/openai/openai)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/openai)
 - [API reference documentation](https://aka.ms/openai-js-api)
 - [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.9/sdk/openai/openai/samples/v1-beta)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.10/sdk/openai/openai/samples/v1-beta)
 
 ## Getting started
 
@@ -162,7 +162,7 @@ main().catch((err) => {
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.9/sdk/openai/openai/samples/v1-beta).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.10/sdk/openai/openai/samples/v1-beta).
 
 ### Generate Chatbot Response
 
@@ -509,18 +509,18 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.9/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.10/sdk/core/logger).
 
 <!-- LINKS -->
-[get_completions_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.9/sdk/openai/openai/samples/v1-beta/javascript/completions.js
-[stream_chat_completion_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.9/sdk/openai/openai/samples/v1-beta/javascript/streamChatCompletions.js
-[byod_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.9/sdk/openai/openai/samples/v1-beta/javascript/bringYourOwnData.js
-[get_images_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.9/sdk/openai/openai/samples/v1-beta/javascript/getImages.js
-[transcribe_audio_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.9/sdk/openai/openai/samples-dev/audioTranscription.ts
+[get_completions_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.10/sdk/openai/openai/samples/v1-beta/javascript/completions.js
+[stream_chat_completion_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.10/sdk/openai/openai/samples/v1-beta/javascript/streamChatCompletions.js
+[byod_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.10/sdk/openai/openai/samples/v1-beta/javascript/bringYourOwnData.js
+[get_images_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.10/sdk/openai/openai/samples/v1-beta/javascript/getImages.js
+[transcribe_audio_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.10/sdk/openai/openai/samples-dev/audioTranscription.ts
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.9/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.9/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.10/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.10/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

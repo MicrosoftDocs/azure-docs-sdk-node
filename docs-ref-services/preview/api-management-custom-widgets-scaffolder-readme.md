@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/api-management-custom-widgets-scaffolder, apimanagement
-ms.date: 10/05/2023
+ms.date: 01/04/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: apimanagement
@@ -12,7 +12,7 @@ This repository is managed by the [Microsoft Azure API Management](https://aka.m
 source code for scaffolding a custom widgets for the Developer portal. Refer to
 the [official Azure documentation](https://aka.ms/apimdocs/portal/customwidgets) for more information and instructions.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-scaffolder_1.0.0-beta.3/sdk/apimanagement/api-management-custom-widgets-scaffolder/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-scaffolder_1.0.0-beta.4/sdk/apimanagement/api-management-custom-widgets-scaffolder/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/api-management-custom-widgets-scaffolder) |
 [Product documentation](https://aka.ms/apimdocs/portal/)
 
@@ -41,7 +41,7 @@ This package should not be confused with `@azure/api-management-custom-widgets-t
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-scaffolder_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-scaffolder_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 To execute the tests you'll need to run:
 
@@ -50,7 +50,7 @@ To execute the tests you'll need to run:
 3. `cd sdk\apimanagement\api-management-custom-widgets-scaffolder`
 4. `npm run test`
 
-View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-scaffolder_1.0.0-beta.3/sdk/apimanagement/api-management-custom-widgets-scaffolder/test)
+View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-scaffolder_1.0.0-beta.4/sdk/apimanagement/api-management-custom-widgets-scaffolder/test)
 folder for more details.
 
 ## Related projects

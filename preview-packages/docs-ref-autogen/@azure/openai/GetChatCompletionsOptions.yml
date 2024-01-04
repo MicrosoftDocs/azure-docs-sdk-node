@@ -5,7 +5,7 @@ package: '@azure/openai'
 summary: |-
   This module contains models that we want to live side-by-side with the
   corresponding generated models. This is useful for providing customer-facing
-  models that has different names/types than the generated models.
+  models that have different names/types than the generated models.
 fullName: GetChatCompletionsOptions
 remarks: ''
 isDeprecated: false
@@ -62,10 +62,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'functionCall?: string | FunctionName'
+      content: 'functionCall?: FunctionName | FunctionCallPreset'
       return:
         description: ''
-        type: string | <xref uid="@azure/openai.FunctionName" />
+        type: >-
+          <xref uid="@azure/openai.FunctionName" /> | <xref
+          uid="@azure/openai.FunctionCallPreset" />
   - name: functions
     uid: '@azure/openai.GetChatCompletionsOptions.functions'
     package: '@azure/openai'
@@ -115,24 +117,6 @@ properties:
       return:
         description: ''
         type: number
-  - name: model
-    uid: '@azure/openai.GetChatCompletionsOptions.model'
-    package: '@azure/openai'
-    summary: >-
-      The model name to provide as part of this completions request.
-
-      Not applicable to Azure OpenAI, where deployment information should be
-      included in the Azure
-
-      resource URI that's connected to.
-    fullName: model
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'model?: string'
-      return:
-        description: ''
-        type: string
   - name: 'n'
     uid: '@azure/openai.GetChatCompletionsOptions.n'
     package: '@azure/openai'
@@ -145,7 +129,7 @@ properties:
       Because this setting can generate many completions, it may quickly consume
       your token quota.
 
-      Use carefully and ensure reasonable settings for max_tokens and stop.
+      Use carefully and ensure reasonable settings for maxTokens and stop.
     fullName: 'n'
     remarks: ''
     isDeprecated: false
@@ -175,6 +159,39 @@ properties:
       return:
         description: ''
         type: number
+  - name: responseFormat
+    uid: '@azure/openai.GetChatCompletionsOptions.responseFormat'
+    package: '@azure/openai'
+    summary: >-
+      An object specifying the format that the model must output. Used to enable
+      JSON mode.
+    fullName: responseFormat
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'responseFormat?: ChatCompletionsResponseFormat'
+      return:
+        description: ''
+        type: <xref uid="@azure/openai.ChatCompletionsResponseFormat" />
+  - name: seed
+    uid: '@azure/openai.GetChatCompletionsOptions.seed'
+    package: '@azure/openai'
+    summary: >-
+      If specified, the system will make a best effort to sample
+      deterministically such that repeated requests with the
+
+      same seed and parameters should return the same result. Determinism is not
+      guaranteed, and you should refer to the
+
+      system_fingerprint response parameter to monitor changes in the backend."
+    fullName: seed
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'seed?: number'
+      return:
+        description: ''
+        type: number
   - name: stop
     uid: '@azure/openai.GetChatCompletionsOptions.stop'
     package: '@azure/openai'
@@ -187,20 +204,6 @@ properties:
       return:
         description: ''
         type: string[]
-  - name: stream
-    uid: '@azure/openai.GetChatCompletionsOptions.stream'
-    package: '@azure/openai'
-    summary: >-
-      A value indicating whether chat completions should be streamed for this
-      request.
-    fullName: stream
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'stream?: boolean'
-      return:
-        description: ''
-        type: boolean
   - name: temperature
     uid: '@azure/openai.GetChatCompletionsOptions.temperature'
     package: '@azure/openai'
@@ -213,7 +216,7 @@ properties:
 
       and deterministic.
 
-      It is not recommended to modify temperature and top_p for the same
+      It is not recommended to modify temperature and topP for the same
       completions request as the
 
       interaction of these two settings is difficult to predict.
@@ -225,6 +228,34 @@ properties:
       return:
         description: ''
         type: number
+  - name: toolChoice
+    uid: '@azure/openai.GetChatCompletionsOptions.toolChoice'
+    package: '@azure/openai'
+    summary: >-
+      If specified, the model will configure which of the provided tools it can
+      use for the chat completions response.
+    fullName: toolChoice
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'toolChoice?: ChatCompletionsNamedToolSelection'
+      return:
+        description: ''
+        type: <xref uid="@azure/openai.ChatCompletionsNamedToolSelection" />
+  - name: tools
+    uid: '@azure/openai.GetChatCompletionsOptions.tools'
+    package: '@azure/openai'
+    summary: >-
+      The available tool definitions that the chat completions request can use,
+      including caller-defined functions.
+    fullName: tools
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'tools?: ChatCompletionsFunctionToolDefinition[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/openai.ChatCompletionsFunctionToolDefinition" />[]
   - name: topP
     uid: '@azure/openai.GetChatCompletionsOptions.topP'
     package: '@azure/openai'
@@ -240,7 +271,7 @@ properties:
 
       considered.
 
-      It is not recommended to modify temperature and top_p for the same
+      It is not recommended to modify temperature and topP for the same
       completions request as the
 
       interaction of these two settings is difficult to predict.

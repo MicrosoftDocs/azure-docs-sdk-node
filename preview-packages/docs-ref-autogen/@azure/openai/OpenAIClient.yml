@@ -2,7 +2,59 @@
 name: OpenAIClient
 uid: '@azure/openai.OpenAIClient'
 package: '@azure/openai'
-summary: ''
+summary: >-
+  A client for interacting with Azure OpenAI.
+
+
+  The client needs the endpoint of an OpenAI resource and an authentication
+
+  method such as an API key or token. The API key and endpoint can be found in
+
+  the OpenAI resource page. They will be located in the resource's Keys and
+  Endpoint page.
+
+
+  ### Examples for authentication:
+
+
+  #### API Key
+
+
+  ```js
+
+  import { OpenAIClient } from "@azure/openai";
+
+  import { AzureKeyCredential } from "@azure/core-auth";
+
+
+  const endpoint = "<azure endpoint>";
+
+  const credential = new AzureKeyCredential("<api key>");
+
+
+  const client = new OpenAIClient(endpoint, credential);
+
+  ```
+
+
+  #### Azure Active Directory
+
+
+  ```js
+
+  import { OpenAIClient } from "@azure/openai";
+
+  import { DefaultAzureCredential } from "@azure/identity";
+
+
+  const endpoint = "<azure endpoint>";
+
+  const credential = new DefaultAzureCredential();
+
+
+  const client = new OpenAIClient(endpoint, credential);
+
+  ```
 fullName: OpenAIClient
 remarks: ''
 isDeprecated: false
@@ -206,7 +258,9 @@ methods:
       return:
         description: The audio translation result.
         type: Promise&lt;<xref uid="@azure/openai.AudioResult" />&lt;Format&gt;&gt;
-  - name: getChatCompletions(string, ChatMessage[], GetChatCompletionsOptions)
+  - name: >-
+      getChatCompletions(string, ChatRequestMessage[],
+      GetChatCompletionsOptions)
     uid: '@azure/openai.OpenAIClient.getChatCompletions'
     package: '@azure/openai'
     summary: Get chat completions for provided chat context messages.
@@ -215,7 +269,7 @@ methods:
     syntax:
       content: >-
         function getChatCompletions(deploymentName: string, messages:
-        ChatMessage[], options?: GetChatCompletionsOptions):
+        ChatRequestMessage[], options?: GetChatCompletionsOptions):
         Promise<ChatCompletions>
       parameters:
         - id: deploymentName
@@ -224,7 +278,7 @@ methods:
             The name of the model deployment (when using Azure OpenAI) or model
             name (when using non-Azure OpenAI) to use for this request.
         - id: messages
-          type: <xref uid="@azure/openai.ChatMessage" />[]
+          type: <xref uid="@azure/openai.ChatRequestMessage" />[]
           description: The chat context messages to use for this request.
         - id: options
           type: <xref uid="@azure/openai.GetChatCompletionsOptions" />
@@ -282,7 +336,7 @@ methods:
       return:
         description: The embeddings for the given prompt.
         type: Promise&lt;<xref uid="@azure/openai.Embeddings" />&gt;
-  - name: getImages(string, ImageGenerationOptions)
+  - name: getImages(string, string, GetImagesOptions)
     uid: '@azure/openai.OpenAIClient.getImages'
     package: '@azure/openai'
     summary: Starts the generation of a batch of images from a text caption
@@ -290,20 +344,27 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function getImages(prompt: string, options?: ImageGenerationOptions):
-        Promise<ImageGenerations>
+        function getImages(deploymentName: string, prompt: string, options?:
+        GetImagesOptions): Promise<ImageGenerations>
       parameters:
+        - id: deploymentName
+          type: string
+          description: >-
+            The name of the model deployment (when using Azure OpenAI) or model
+            name (when using non-Azure OpenAI) to use for this request.
         - id: prompt
           type: string
           description: The prompt to use for this request.
         - id: options
-          type: <xref uid="@azure/openai.ImageGenerationOptions" />
+          type: <xref uid="@azure/openai.GetImagesOptions" />
           description: The options for this image request.
       return:
         description: The image generation response (containing url or base64 data).
         type: Promise&lt;<xref uid="@azure/openai.ImageGenerations" />&gt;
-  - name: listChatCompletions(string, ChatMessage[], GetChatCompletionsOptions)
-    uid: '@azure/openai.OpenAIClient.listChatCompletions'
+  - name: >-
+      streamChatCompletions(string, ChatRequestMessage[],
+      GetChatCompletionsOptions)
+    uid: '@azure/openai.OpenAIClient.streamChatCompletions'
     package: '@azure/openai'
     summary: >-
       Lists the chat completions tokens as they become available for a chat
@@ -312,9 +373,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listChatCompletions(deploymentName: string, messages:
-        ChatMessage[], options?: GetChatCompletionsOptions):
-        AsyncIterable<ChatCompletions>
+        function streamChatCompletions(deploymentName: string, messages:
+        ChatRequestMessage[], options?: GetChatCompletionsOptions):
+        Promise<EventStream<ChatCompletions>>
       parameters:
         - id: deploymentName
           type: string
@@ -322,25 +383,27 @@ methods:
             The name of the model deployment (when using Azure OpenAI) or model
             name (when using non-Azure OpenAI) to use for this request.
         - id: messages
-          type: <xref uid="@azure/openai.ChatMessage" />[]
+          type: <xref uid="@azure/openai.ChatRequestMessage" />[]
           description: The chat context messages to use for this request.
         - id: options
           type: <xref uid="@azure/openai.GetChatCompletionsOptions" />
           description: The chat completions options for this chat completions request.
       return:
         description: An asynchronous iterable of chat completions tokens.
-        type: AsyncIterable&lt;<xref uid="@azure/openai.ChatCompletions" />&gt;
-  - name: listCompletions(string, string[], GetCompletionsOptions)
-    uid: '@azure/openai.OpenAIClient.listCompletions'
+        type: >-
+          Promise&lt;<xref uid="@azure/openai.EventStream" />&lt;<xref
+          uid="@azure/openai.ChatCompletions" />&gt;&gt;
+  - name: streamCompletions(string, string[], GetCompletionsOptions)
+    uid: '@azure/openai.OpenAIClient.streamCompletions'
     package: '@azure/openai'
     summary: Lists the completions tokens as they become available for a given prompt.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function listCompletions(deploymentName: string, prompt: string[],
-        options?: GetCompletionsOptions): AsyncIterable<Omit<Completions,
-        "usage">>
+        function streamCompletions(deploymentName: string, prompt: string[],
+        options?: GetCompletionsOptions): Promise<EventStream<Omit<Completions,
+        "usage">>>
       parameters:
         - id: deploymentName
           type: string
@@ -356,5 +419,5 @@ methods:
       return:
         description: An asynchronous iterable of completions tokens.
         type: >-
-          AsyncIterable&lt;Omit&lt;<xref uid="@azure/openai.Completions" />,
-          "usage"&gt;&gt;
+          Promise&lt;<xref uid="@azure/openai.EventStream" />&lt;Omit&lt;<xref
+          uid="@azure/openai.Completions" />, "usage"&gt;&gt;&gt;

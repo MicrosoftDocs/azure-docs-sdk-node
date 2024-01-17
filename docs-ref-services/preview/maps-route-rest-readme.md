@@ -1,17 +1,17 @@
 ---
 title: Azure MapsRoute client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/maps-route, maps
-ms.date: 07/13/2023
+ms.date: 01/16/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: maps
 ---
-# Azure MapsRoute client library for JavaScript - version 1.0.0-beta.2 
+# Azure MapsRoute client library for JavaScript - version 1.0.0-beta.3 
 /TypeScript
 
 The Route Directions and Route Matrix APIs in Azure Maps Route Service can be used to calculate the estimated arrival times (ETAs) for each requested route. Route APIs consider factors such as real-time traffic information and historic traffic data, like the typical road speeds on the requested day of the week and time of day. The APIs return the shortest or fastest routes available to multiple destinations at a time in sequence or in optimized order, based on time or distance. Users can also request specialized routes and details for walkers, bicyclists, and commercial vehicles like trucks.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-route_1.0.0-beta.2/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-route_1.0.0-beta.3/documentation/rest-clients.md) to use this library**
 
 Key links:
 
@@ -24,7 +24,7 @@ Key links:
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
 ### Prerequisites
@@ -81,6 +81,52 @@ const credential = new AzureKeyCredential("<subscription-key>");
 const client = MapsRoute(credential);
 ```
 
+#### Using a Shared Access Signature (SAS) Token Credential
+
+Shared access signature (SAS) tokens are authentication tokens created using the JSON Web token (JWT) format and are cryptographically signed to prove authentication for an application to the Azure Maps REST API.
+
+You can get the SAS token using [`AzureMapsManagementClient.accounts.listSas`](https://learn.microsoft.com/javascript/api/%40azure/arm-maps/accounts?view=azure-node-latest#@azure-arm-maps-accounts-listsas) from ["@azure/arm-maps"](https://www.npmjs.com/package/@azure/arm-maps) package. Please follow the section [Create and authenticate a `AzureMapsManagementClient`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.3/sdk/maps/arm-maps#create-and-authenticate-a-azuremapsmanagementclient) to setup first.
+
+Second, follow [Managed identities for Azure Maps](https://techcommunity.microsoft.com/t5/azure-maps-blog/managed-identities-for-azure-maps/ba-p/3666312) to create a managed identity for your Azure Maps account. Copy the principal ID (object ID) of the managed identity.
+
+Third, you will need to install["@azure/core-auth"](https://www.npmjs.com/package/@azure/core-auth)package to use `AzureSASCredential`:
+
+```bash
+npm install @azure/core-auth
+```
+
+Finally, you can use the SAS token to authenticate the client:
+
+```javascript
+  const MapsRoute = require("@azure-rest/maps-route").default;
+  const { AzureSASCredential } = require("@azure/core-auth");
+  const { DefaultAzureCredential } = require("@azure/identity");
+  const { AzureMapsManagementClient } = require("@azure/arm-maps");
+
+  const subscriptionId = "<subscription ID of the map account>"
+  const resourceGroupName = "<resource group name of the map account>";
+  const accountName = "<name of the map account>";
+  const mapsAccountSasParameters = {
+    start: "<start time in ISO format>", // e.g. "2023-11-24T03:51:53.161Z"
+    expiry: "<expiry time in ISO format>", // maximum value to start + 1 day
+    maxRatePerSecond: 500,
+    principalId: "<principle ID (object ID) of the managed identity>",
+    signingKey: "primaryKey",
+  };
+  const credential = new DefaultAzureCredential();
+  const managementClient = new AzureMapsManagementClient(credential, subscriptionId);
+  const {accountSasToken} = await managementClient.accounts.listSas(
+    resourceGroupName,
+    accountName,
+    mapsAccountSasParameters
+  );
+  if (accountSasToken === undefined) {
+    throw new Error("No accountSasToken was found for the Maps Account.");
+  }
+  const sasCredential = new AzureSASCredential(accountSasToken);
+  const client = MapsRoute(sasCredential);
+```
+
 ## Examples
 
 The following sections provide several code snippets covering some of the most common Azure Maps Route tasks, including:
@@ -98,15 +144,15 @@ To retrieve the route direction, you need to pass in the parameters the coordina
 By default, the Route service will return an array of coordinates. The response will contain the coordinates that make up the path in a list named points. Route response also includes the distance from the start of the route and the estimated elapsed time. These values can be used to calculate the average speed for the entire route.
 
 ```javascript
-const routeDirectionsResult = await client.path("/route/directions/{format}", "json").get({
+const { toColonDelimitedLatLonString, isUnexpected } = require("@azure-rest/maps-route");
+const routeDirectionsResult1 = await client.path("/route/directions/{format}", "json").get({
   queryParameters: {
     query: "51.368752,-0.118332:41.385426,-0.128929",
   },
 });
 
 // You can use the helper function `toColonDelimitedLatLonString` to compose the query string.
-const { toColonDelimitedLatLonString } = require("@azure-rest/maps-route");
-const routeDirectionsResult = await client.path("/route/directions/{format}", "json").get({
+const routeDirectionsResult2 = await client.path("/route/directions/{format}", "json").get({
   queryParameters: {
     query: toColonDelimitedLatLonString([
       // Origin:
@@ -122,11 +168,11 @@ const routeDirectionsResult = await client.path("/route/directions/{format}", "j
 });
 
 // Handle the error if the request failed
-if (isUnexpected(routeDirectionsResult)) {
-  throw routeDirectionsResult.body.error;
+if (isUnexpected(routeDirectionsResult2)) {
+  throw routeDirectionsResult2.body.error;
 }
 
-routeDirectionsResult.body.routes.forEach(({ summary, legs }) => {
+routeDirectionsResult2.body.routes.forEach(({ summary, legs }) => {
   console.log(
     `The total distance is ${summary.lengthInMeters} meters, and it takes ${summary.travelTimeInSeconds} seconds.`
   );
@@ -146,6 +192,7 @@ routeDirectionsResult.body.routes.forEach(({ summary, legs }) => {
 The service supports commercial vehicle routing, covering commercial trucks routing. The APIs consider specified limits. Such as, the height and weight of the vehicle, and if the vehicle is carrying hazardous cargo. For example, if a vehicle is carrying flammable, the routing engine avoid certain tunnels that are near residential areas.
 
 ```javascript
+const { toColonDelimitedLatLonString, isUnexpected } = require("@azure-rest/maps-route");
 const routeDirectionsResult = await client.path("/route/directions/{format}", "json").get({
   queryParameters: {
     query: toColonDelimitedLatLonString([
@@ -197,6 +244,7 @@ For multi-stop routing, up to 150 waypoints may be specified in a single route r
 If you want to optimize the best order to visit the given waypoints, then you need to specify `computeBestWaypointOrder=true`. This scenario is also known as the traveling salesman optimization problem.
 
 ```javascript
+const { toColonDelimitedLatLonString, isUnexpected } = require("@azure-rest/maps-route");
 const routeDirectionsResult = await client.path("/route/directions/{format}", "json").get({
   queryParameters: {
     query: toColonDelimitedLatLonString([
@@ -209,7 +257,7 @@ const routeDirectionsResult = await client.path("/route/directions/{format}", "j
       // Destination:
       [41.385426, -0.128929],
     ]),
-    computeBestWaypointOrder: true,
+    computeBestOrder: true,
     routeType: "shortest",
   },
 });
@@ -218,7 +266,7 @@ if (isUnexpected(routeDirectionsResult)) {
   throw routeDirectionsResult.body.error;
 }
 
-const { summary } = routeDirectionsResult.body.routes;
+const { summary } = routeDirectionsResult.body.routes[0]; 
 console.log(
   `The optimized distance is ${summary.lengthInMeters} meters, and it takes ${summary.travelTimeInSeconds} seconds.`
 );
@@ -240,7 +288,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.3/sdk/core/logger).
 
 ## Next steps
 
@@ -248,7 +296,7 @@ Please take a look at the [samples][samples] directory for detailed examples on 
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-route_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-route_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -256,14 +304,14 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fmaps%2Fmaps-route-rest%2FREADME.png)
 
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.2/sdk/maps/maps-route-rest
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.3/sdk/maps/maps-route-rest
 [npm_link]: https://www.npmjs.com/package/@azure-rest/maps-route
 [api_ref]: /javascript/api/@azure-rest/maps-route
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.2/sdk/maps/maps-route-rest/samples
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.3/sdk/maps/maps-route-rest/samples
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.maps/new-azmapsaccount
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.2/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.3/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-route_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
 

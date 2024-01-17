@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/arm-devtestlabs, devtestlabs
 ms.date: 11/24/2022
 ms.topic: reference
 ms.devlang: javascript
-ms.service: devtestlabs
+ms.service: devtest-lab
 ---
 # Azure DevTestLabs client library for JavaScript - version 4.1.0 
 

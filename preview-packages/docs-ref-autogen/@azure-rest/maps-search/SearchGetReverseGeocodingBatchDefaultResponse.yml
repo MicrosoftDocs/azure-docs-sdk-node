@@ -1,0 +1,144 @@
+### YamlMime:TSType
+name: SearchGetReverseGeocodingBatchDefaultResponse
+uid: '@azure-rest/maps-search.SearchGetReverseGeocodingBatchDefaultResponse'
+package: '@azure-rest/maps-search'
+summary: >-
+  **Reverse Geocoding Batch API**
+
+
+
+  **Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).
+
+
+
+
+  The Reverse Geocoding Batch API sends batches of queries to [Reverse Geocoding
+  API](https://docs.microsoft.com/rest/api/maps/search-v2/get-reverse-geocoding)
+  using just a single API call. The API allows caller to batch up to **100**
+  queries.
+
+
+  ### Submit Synchronous Batch Request
+
+  The Synchronous API is recommended for lightweight batch requests. When the
+  service receives a request, it will respond as soon as the batch items are
+  calculated and there will be no possibility to retrieve the results later. The
+  Synchronous API will return a timeout error (a 408 response) if the request
+  takes longer than 60 seconds. The number of batch items is limited to **100**
+  for this API.
+
+  ```
+
+  POST https://atlas.microsoft.com/reverseGeocode:batch?api-version=2023-06-01
+
+  ```
+
+  ### POST Body for Batch Request
+
+  To send the _reverse geocoding_ queries you will use a `POST` request where
+  the request body will contain the `batchItems` array in `json` format and the
+  `Content-Type` header will be set to `application/json`. Here's a sample
+  request body containing 2 _reverse geocoding_ queries:
+
+
+
+  ```
+
+  {
+    "batchItems": [
+      {
+        "coordinates": [-122.128275, 47.639429],
+        "resultTypes": ["Address", "PopulatedPlace"]
+      },
+      {
+        "coordinates": [-122.341979399674, 47.6095253501216]
+      }
+    ]
+  }
+
+  ```
+
+
+  A _reverse geocoding_ batchItem object can accept any of the supported
+  _reverse geocoding_ [URI
+  parameters](https://docs.microsoft.com/rest/api/maps/search-v2/get-reverse-geocoding#uri-parameters).
+
+
+
+  The batch should contain at least **1** query.
+
+
+
+  ### Batch Response Model
+
+  The batch response contains a `summary` component that indicates the
+  `totalRequests` that were part of the original batch request and
+  `successfulRequests` i.e. queries which were executed successfully. The batch
+  response also includes a `batchItems` array which contains a response for each
+  and every query in the batch request. The `batchItems` will contain the
+  results in the exact same order the original queries were sent in the batch
+  request. Each item is of one of the following types:
+
+    - [`GeocodingResponse`](https://docs.microsoft.com/rest/api/maps/search-v2/get-reverse-geocoding#geocodingresponse) - If the query completed successfully.
+
+    - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.
+fullName: SearchGetReverseGeocodingBatchDefaultResponse
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: body
+    uid: '@azure-rest/maps-search.SearchGetReverseGeocodingBatchDefaultResponse.body'
+    package: '@azure-rest/maps-search'
+    summary: ''
+    fullName: body
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'body: ErrorResponseOutput'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/maps-search.ErrorResponseOutput" />
+  - name: status
+    uid: >-
+      @azure-rest/maps-search.SearchGetReverseGeocodingBatchDefaultResponse.status
+    package: '@azure-rest/maps-search'
+    summary: ''
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'status: string'
+      return:
+        description: ''
+        type: string
+inheritedProperties:
+  - name: headers
+    uid: >-
+      @azure-rest/maps-search.SearchGetReverseGeocodingBatchDefaultResponse.headers
+    package: '@azure-rest/maps-search'
+    summary: The HTTP response headers.
+    fullName: headers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'headers: RawHttpHeaders'
+      return:
+        description: ''
+        type: RawHttpHeaders
+    inheritanceDescription: <b>Inherited From</b> HttpResponse.headers
+  - name: request
+    uid: >-
+      @azure-rest/maps-search.SearchGetReverseGeocodingBatchDefaultResponse.request
+    package: '@azure-rest/maps-search'
+    summary: The request that generated this response.
+    fullName: request
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'request: PipelineRequest'
+      return:
+        description: ''
+        type: PipelineRequest
+    inheritanceDescription: <b>Inherited From</b> HttpResponse.request
+extends: HttpResponse

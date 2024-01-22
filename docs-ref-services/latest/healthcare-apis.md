@@ -1,7 +1,7 @@
 ---
 title: Azure Healthcare APIs SDK for JavaScript
 description: Reference for Azure Healthcare APIs SDK for JavaScript
-ms.date: 01/19/2024
+ms.date: 01/22/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: healthcareapis

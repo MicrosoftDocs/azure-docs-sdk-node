@@ -1,7 +1,7 @@
 ---
 title: Azure Defender EASM SDK for JavaScript
 description: Reference for Azure Defender EASM SDK for JavaScript
-ms.date: 02/07/2024
+ms.date: 02/08/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: defendereasm

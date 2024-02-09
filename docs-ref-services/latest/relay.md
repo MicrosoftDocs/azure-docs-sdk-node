@@ -1,7 +1,7 @@
 ---
 title: Azure Relay SDK for JavaScript
 description: Reference for Azure Relay SDK for JavaScript
-ms.date: 02/08/2024
+ms.date: 02/09/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: service-bus-relay

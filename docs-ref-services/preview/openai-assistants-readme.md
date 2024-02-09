@@ -1,12 +1,12 @@
 ---
 title: Azure OpenAI Assistants client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/openai-assistants, openai
-ms.date: 02/06/2024
+ms.date: 02/09/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: openai
 ---
-# Azure OpenAI Assistants client library for JavaScript - version 1.0.0-beta.1 
+# Azure OpenAI Assistants client library for JavaScript - version 1.0.0-beta.2 
 
 
 The Azure OpenAI Assistants client library for JavaScript is an adaptation of OpenAI's REST APIs that provides an idiomatic interface and rich integration with the rest of the Azure SDK ecosystem. It can connect to Azure OpenAI resources or to the non-Azure OpenAI inference endpoint, making it a great choice for even non-Azure OpenAI development.
@@ -349,11 +349,11 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.2/sdk/core/logger).
 
 <!-- LINKS -->
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.2/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

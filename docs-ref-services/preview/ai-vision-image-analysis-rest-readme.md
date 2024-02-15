@@ -1,12 +1,12 @@
 ---
 title: Azure AI Vision Image Analysis client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-vision-image-analysis, vision
-ms.date: 01/22/2024
+ms.date: 02/15/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: vision
 ---
-# Azure AI Vision Image Analysis client library for JavaScript - version 1.0.0-beta.1 
+# Azure AI Vision Image Analysis client library for JavaScript - version 1.0.0-beta.2 
 
 
 The Image Analysis service provides AI algorithms for processing images and returning information about their content. In a single service call, you can extract one or more visual features from the image simultaneously, including getting a caption for the image, extracting text shown in the image (OCR) and detecting objects. For more information on the service and the supported visual features, see [Image Analysis overview][image_analysis_overview], and the [Concepts][image_analysis_concepts] page.
@@ -22,7 +22,7 @@ Use the Image Analysis client library to:
 | [Vision Studio][vision_studio]
 | [API reference documentation](https://aka.ms/azsdk/image-analysis/ref-docs/js)
 | [Package (npm)](https://aka.ms/azsdk/image-analysis/package/npm)
-| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.1/sdk/vision/ai-vision-image-analysis-rest/src)
+| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.2/sdk/vision/ai-vision-image-analysis-rest/src)
 
 ## Getting started
 
@@ -31,7 +31,7 @@ Use the Image Analysis client library to:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -59,8 +59,8 @@ To use this client library in the browser, first, you need to use a bundler. For
 
 Once you've initialized an `ImageAnalysisClient`, you need to select one or more visual features to analyze. The options are specified by the enum class `VisualFeatures`. The following features are supported:
 
-1. `VisualFeatures.Caption`: ([Examples](#analyze-an-image-from-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.1/sdk/vision/ai-vision-image-analysis-rest/samples)) Generate a human-readable sentence that describes the content of an image.
-1. `VisualFeatures.Read`: ([Examples](#extract-text-from-an-image-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.1/sdk/vision/ai-vision-image-analysis-rest/samples)) Also known as Optical Character Recognition (OCR). Extract printed or handwritten text from images.
+1. `VisualFeatures.Caption`: ([Examples](#analyze-an-image-from-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.2/sdk/vision/ai-vision-image-analysis-rest/samples)) Generate a human-readable sentence that describes the content of an image.
+1. `VisualFeatures.Read`: ([Examples](#extract-text-from-an-image-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.2/sdk/vision/ai-vision-image-analysis-rest/samples)) Also known as Optical Character Recognition (OCR). Extract printed or handwritten text from images.
 1. `VisualFeatures.DenseCaptions`: Dense Captions provides more details by generating one-sentence captions for up to 10 different regions in the image, including one for the whole image.
 1. `VisualFeatures.Tags`: Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in images.
 1. `VisualFeatures.Objects`: Object detection. This is similar to tagging, but focused on detecting physical objects in the image and returning their location.
@@ -153,7 +153,7 @@ analyzeImageFromFile();
 ```
 
 ### Extract text from an image Url
-This example demonstrates how to extract printed or hand-written text for the image file [sample.jpg](https://aka.ms/azai/vision/image-analysis-sample.jpg) using the ImageAnalysisClient. The method call returns an ImageAnalysisResult object. The ReadResult property on the returned object includes a list of text lines and a bounding polygon surrounding each text line. For each line, it also returns a list of words in the text line and a bounding polygon surrounding each word.
+This example demonstrates how to extract printed or hand-written text for the image file [sample.jpg](https://aka.ms/azsdk/image-analysis/sample.jpg) using the ImageAnalysisClient. The method call returns an ImageAnalysisResult object. The ReadResult property on the returned object includes a list of text lines and a bounding polygon surrounding each text line. For each line, it also returns a list of words in the text line and a bounding polygon surrounding each word.
 ``` javascript Snippet:readmeText
 const client: ImageAnalysisClient = createImageAnalysisClient(endpoint, credential);
 
@@ -161,7 +161,7 @@ const features: string[] = [
   'Read'
 ];
 
-const imageUrl: string = 'https://aka.ms/azai/vision/image-analysis-sample.jpg';
+const imageUrl: string = 'https://aka.ms/azsdk/image-analysis/sample.jpg';
 
 client.path('/imageanalysis:analyze').post({
   body: { url: imageUrl },
@@ -192,15 +192,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.1/sdk/vision/ai-vision-image-analysis-rest/samples) directory for detailed examples that demonstrate how to use the client libraries.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.2/sdk/vision/ai-vision-image-analysis-rest/samples) directory for detailed examples that demonstrate how to use the client libraries.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

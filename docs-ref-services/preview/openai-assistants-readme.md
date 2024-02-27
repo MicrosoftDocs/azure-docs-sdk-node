@@ -1,12 +1,12 @@
 ---
 title: Azure OpenAI Assistants client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/openai-assistants, openai
-ms.date: 02/09/2024
+ms.date: 02/27/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: openai
 ---
-# Azure OpenAI Assistants client library for JavaScript - version 1.0.0-beta.2 
+# Azure OpenAI Assistants client library for JavaScript - version 1.0.0-beta.4 
 
 
 The Azure OpenAI Assistants client library for JavaScript is an adaptation of OpenAI's REST APIs that provides an idiomatic interface and rich integration with the rest of the Azure SDK ecosystem. It can connect to Azure OpenAI resources or to the non-Azure OpenAI inference endpoint, making it a great choice for even non-Azure OpenAI development.
@@ -99,7 +99,8 @@ const messageResponse = await assistantsClient.createMessage(assistantThread.id,
 A Run represent an invocation of an Assistant on a Thread. The Assistant uses it’s configuration and the Thread’s Messages to perform tasks by calling models and tools. As part of a Run, the Assistant appends Messages to the Thread.
 A run can then be started that evaluates the thread against an assistant:
 ```javascript Snippet:OverviewCreateRun
-let runResponse = await assistantsClient.createRun(assistantThread.id, assistant.id, {
+let runResponse = await assistantsClient.createRun(assistantThread.id, {
+   assistantId: assistant.id,
    instructions: "Please address the user as Jane Doe. The user has a premium account." 
 });
 ```
@@ -349,11 +350,11 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.4/sdk/core/logger).
 
 <!-- LINKS -->
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai-assistants_1.0.0-beta.4/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

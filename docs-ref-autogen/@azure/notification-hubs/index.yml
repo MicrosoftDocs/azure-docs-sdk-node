@@ -53,11 +53,30 @@ interfaces:
   - '@azure/notification-hubs.FcmLegacyInstallation'
   - '@azure/notification-hubs.FcmLegacyNotification'
   - '@azure/notification-hubs.FcmLegacyNotificationParams'
+  - '@azure/notification-hubs.FcmV1Installation'
+  - '@azure/notification-hubs.FcmV1Notification'
+  - '@azure/notification-hubs.FcmV1NotificationParams'
+  - '@azure/notification-hubs.FcmV1RegistrationDescription'
+  - '@azure/notification-hubs.FcmV1RegistrationDescriptionCommon'
+  - '@azure/notification-hubs.FcmV1TemplateRegistrationDescription'
+  - '@azure/notification-hubs.FcmV1TemplateRegistrationDescriptionCommon'
   - '@azure/notification-hubs.FirebaseLegacyAndroidNativePayload'
   - '@azure/notification-hubs.FirebaseLegacyAppleNativePayload'
   - '@azure/notification-hubs.FirebaseLegacyNativeMessage'
   - '@azure/notification-hubs.FirebaseLegacyRegistrationChannel'
   - '@azure/notification-hubs.FirebaseLegacyWebNativePayload'
+  - '@azure/notification-hubs.FirebaseV1AndroidConfig'
+  - '@azure/notification-hubs.FirebaseV1AndroidFcmOptions'
+  - '@azure/notification-hubs.FirebaseV1AndroidNotification'
+  - '@azure/notification-hubs.FirebaseV1ApnsConfig'
+  - '@azure/notification-hubs.FirebaseV1ApnsFcmOptions'
+  - '@azure/notification-hubs.FirebaseV1FcmOptions'
+  - '@azure/notification-hubs.FirebaseV1NativeMessage'
+  - '@azure/notification-hubs.FirebaseV1NativeNotification'
+  - '@azure/notification-hubs.FirebaseV1RegistrationChannel'
+  - '@azure/notification-hubs.FirebaseV1WebPushConfig'
+  - '@azure/notification-hubs.FirebaseV1WebPushFcmOptions'
+  - '@azure/notification-hubs.FirebaseV1WebPushNotification'
   - '@azure/notification-hubs.GcmRegistrationDescription'
   - '@azure/notification-hubs.GcmRegistrationDescriptionCommon'
   - '@azure/notification-hubs.GcmTemplateRegistrationDescription'
@@ -563,6 +582,85 @@ functions:
         type: >-
           <xref
           uid="@azure/notification-hubs.GcmTemplateRegistrationDescription" />
+  - name: createFcmV1Installation(DeviceTokenInstallation)
+    uid: '@azure/notification-hubs.createFcmV1Installation'
+    package: '@azure/notification-hubs'
+    summary: Creates an Firebase V1 Cloud Messaging based installation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createFcmV1Installation(installation: DeviceTokenInstallation):
+        FcmV1Installation
+      parameters:
+        - id: installation
+          type: <xref uid="@azure/notification-hubs.DeviceTokenInstallation" />
+          description: >-
+            A partial installation used to create the Firebase V1 Cloud
+            Messaging installation.
+      return:
+        description: The newly created Firebase V1 Cloud Messaging installation.
+        type: <xref uid="@azure/notification-hubs.FcmV1Installation" />
+  - name: createFcmV1Notification(FcmV1NotificationParams)
+    uid: '@azure/notification-hubs.createFcmV1Notification'
+    package: '@azure/notification-hubs'
+    summary: Creates a notification to send to Firebase.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createFcmV1Notification(notification: FcmV1NotificationParams):
+        FcmV1Notification
+      parameters:
+        - id: notification
+          type: <xref uid="@azure/notification-hubs.FcmV1NotificationParams" />
+          description: A partial message used to create a message for Firebase.
+      return:
+        description: A newly created Firebase notification.
+        type: <xref uid="@azure/notification-hubs.FcmV1Notification" />
+  - name: createFcmV1RegistrationDescription(FcmV1RegistrationDescriptionCommon)
+    uid: '@azure/notification-hubs.createFcmV1RegistrationDescription'
+    package: '@azure/notification-hubs'
+    summary: Creates a Firebase V1 registration description.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createFcmV1RegistrationDescription(description:
+        FcmV1RegistrationDescriptionCommon): FcmV1RegistrationDescription
+      parameters:
+        - id: description
+          type: >-
+            <xref
+            uid="@azure/notification-hubs.FcmV1RegistrationDescriptionCommon" />
+          description: A partial FCM V1 registration description.
+      return:
+        description: A created FCM V1 registration description.
+        type: <xref uid="@azure/notification-hubs.FcmV1RegistrationDescription" />
+  - name: >-
+      createFcmV1TemplateRegistrationDescription(FcmV1TemplateRegistrationDescriptionCommon)
+    uid: '@azure/notification-hubs.createFcmV1TemplateRegistrationDescription'
+    package: '@azure/notification-hubs'
+    summary: Creates a FCM V1 template registration description.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createFcmV1TemplateRegistrationDescription(description:
+        FcmV1TemplateRegistrationDescriptionCommon):
+        FcmV1TemplateRegistrationDescription
+      parameters:
+        - id: description
+          type: >-
+            <xref
+            uid="@azure/notification-hubs.FcmV1TemplateRegistrationDescriptionCommon"
+            />
+          description: A partial FCM V1 template registration description.
+      return:
+        description: A created FCM V1 template registration description.
+        type: >-
+          <xref
+          uid="@azure/notification-hubs.FcmV1TemplateRegistrationDescription" />
   - name: createFirebaseLegacyNotificationBody(FirebaseLegacyNativeMessage)
     uid: '@azure/notification-hubs.createFirebaseLegacyNotificationBody'
     package: '@azure/notification-hubs'
@@ -576,6 +674,23 @@ functions:
       parameters:
         - id: nativeMessage
           type: <xref uid="@azure/notification-hubs.FirebaseLegacyNativeMessage" />
+          description: The native message payload to send to Notification Hubs.
+      return:
+        description: The JSON body to send to Notification Hubs.
+        type: string
+  - name: createFirebaseV1NotificationBody(FirebaseV1NativeMessage)
+    uid: '@azure/notification-hubs.createFirebaseV1NotificationBody'
+    package: '@azure/notification-hubs'
+    summary: Creates a FcmV1Notification from a native Firebase payload.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createFirebaseV1NotificationBody(nativeMessage:
+        FirebaseV1NativeMessage): string
+      parameters:
+        - id: nativeMessage
+          type: <xref uid="@azure/notification-hubs.FirebaseV1NativeMessage" />
           description: The native message payload to send to Notification Hubs.
       return:
         description: The JSON body to send to Notification Hubs.

@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Connectivity SDK for JavaScript
 description: Reference for Azure Hybrid Connectivity SDK for JavaScript
-ms.date: 03/05/2024
+ms.date: 03/06/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hybridconnectivity

@@ -1,7 +1,7 @@
 ---
 title: Azure Health Bot SDK for JavaScript
 description: Reference for Azure Health Bot SDK for JavaScript
-ms.date: 03/06/2024
+ms.date: 03/07/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: healthbot

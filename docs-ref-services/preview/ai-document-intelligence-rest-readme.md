@@ -1,23 +1,48 @@
 ---
 title: Azure DocumentIntelligence (formerly FormRecognizer) REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-document-intelligence, documentintelligence
-ms.date: 11/17/2023
+ms.date: 03/07/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: documentintelligence
 ---
-# Azure DocumentIntelligence (formerly FormRecognizer) REST client library for JavaScript - version 1.0.0-beta.1 
+# Azure DocumentIntelligence (formerly FormRecognizer) REST client library for JavaScript - version 1.0.0-beta.2 
 
 
 Extracts content, layout, and structured data from documents.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-beta.2/documentation/rest-clients.md) to use this library**
+
+> NOTE: Form Recognizer has been rebranded to Document Intelligence. Please check the [Migration Guide from `@azure/ai-form-recognizer` to `@azure-rest/ai-document-intelligence`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/documentintelligence/ai-document-intelligence-rest/MIGRATION-FR_v4-DI_v1.md).
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.1/sdk/documentintelligence/ai-document-intelligence-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/documentintelligence/ai-document-intelligence-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-document-intelligence)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.1/sdk/documentintelligence/ai-document-intelligence-rest/samples)
+- [API reference documentation](/javascript/api/@azure-rest/ai-document-intelligence?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/documentintelligence/ai-document-intelligence-rest/samples)
+- [Changelog](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/documentintelligence/ai-document-intelligence-rest/CHANGELOG.md)
+- [Migration Guide from Form Recognizer](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/documentintelligence/ai-document-intelligence-rest/MIGRATION-FR_v4-DI_v1.md)
+
+> This version of the client library defaults to the `"2024-02-29-preview"` version of the service.
+
+This table shows the relationship between SDK versions and supported API versions of the service:
+
+| SDK version  | Supported API version of service |
+| ------------ | -------------------------------- |
+| 1.0.0-beta.2 | 2024-02-29-preview               |
+| 1.0.0-beta.1 | 2023-10-31-preview               |
+
+> Please rely on the older `@azure/ai-form-recognizer` library through the older service API versions for retired models, such as `"prebuilt-businessCard"` and `"prebuilt-document"`. For more information, see [Changelog](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/documentintelligence/ai-document-intelligence-rest/CHANGELOG.md).
+
+The below table describes the relationship of each client and its supported API version(s):
+
+| Service API version | Supported clients                                            | Package                                                       |
+| ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- |
+| 2024-02-29-preview  | DocumentIntelligenceClient                                   | `@azure-rest/ai-document-intelligence` version `1.0.0-beta.2` |
+| 2023-10-31-preview  | DocumentIntelligenceClient                                   | `@azure-rest/ai-document-intelligence` version `1.0.0-beta.1` |
+| 2023-07-31          | DocumentAnalysisClient and DocumentModelAdministrationClient | `@azure/ai-form-recognizer` version `^5.0.0`                  |
+| 2022-08-01          | DocumentAnalysisClient and DocumentModelAdministrationClient | `@azure/ai-form-recognizer` version `^4.0.0`                  |
 
 ## Getting started
 
@@ -39,14 +64,14 @@ npm install @azure-rest/ai-document-intelligence
 
 ### Create and authenticate a `DocumentIntelligenceClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -71,32 +96,6 @@ import DocumentIntelligence from "@azure-rest/ai-document-intelligence";
 const client = DocumentIntelligence(process.env["DOCUMENT_INTELLIGENCE_ENDPOINT"], {
   key: process.env["DOCUMENT_INTELLIGENCE_API_KEY"],
 });
-```
-
-## Get Info
-
-```ts
-const response = await client.path("/info").get();
-if (isUnexpected(response)) {
-  throw response.body.error;
-}
-console.log(response.body.customDocumentModels.limit);
-// 20000
-```
-
-## List Document Models
-
-```ts
-import { paginate } from "@azure-rest/ai-document-intelligence";
-const response = await client.path("/documentModels").get();
-if (isUnexpected(response)) {
-  throw response.body.error;
-}
-
-const modelsInAccount: string[] = [];
-for await (const model of paginate(client, response)) {
-  console.log(model.modelId);
-}
 ```
 
 ## Document Models
@@ -164,6 +163,63 @@ console.log(result);
 // }
 ```
 
+### Markdown content format
+
+Supports output with Markdown content format along with the default plain _text_. For now, this is only supported for "prebuilt-layout". Markdown content format is deemed a more friendly format for LLM consumption in a chat or automation use scenario.
+
+Service follows the GFM spec ([GitHub Flavored Markdown](https://github.github.com/gfm/)) for the Markdown format. Also introduces a new _contentFormat_ property with value "text" or "markdown" to indicate the result content format.
+
+```ts
+import DocumentIntelligence from "@azure-rest/ai-document-intelligence";
+const client = DocumentIntelligence(process.env["DOCUMENT_INTELLIGENCE_ENDPOINT"], {
+  key: process.env["DOCUMENT_INTELLIGENCE_API_KEY"],
+});
+
+const initialResponse = await client
+  .path("/documentModels/{modelId}:analyze", "prebuilt-layout")
+  .post({
+    contentType: "application/json",
+    body: {
+      urlSource:
+        "https://raw.githubusercontent.com/Azure/azure-sdk-for-js/6704eff082aaaf2d97c1371a28461f512f8d748a/sdk/formrecognizer/ai-form-recognizer/assets/forms/Invoice_1.pdf",
+    },
+    queryParameters: { outputContentFormat: "markdown" }, // <-- new query parameter
+  });
+```
+
+### Query Fields
+
+When this feature flag is specified, the service will further extract the values of the fields specified via the queryFields query parameter to supplement any existing fields defined by the model as fallback.
+
+```ts
+await client.path("/documentModels/{modelId}:analyze", "prebuilt-layout").post({
+  contentType: "application/json",
+  body: { urlSource: "..." },
+  queryParameters: {
+    features: ["queryFields"],
+    queryFields: ["NumberOfGuests", "StoreNumber"],
+  }, // <-- new query parameter
+});
+```
+
+### Split Options
+
+In the previous API versions supported by the older `@azure/ai-form-recognizer` library, document splitting and classification operation (`"/documentClassifiers/{classifierId}:analyze"`) always tried to split the input file into multiple documents.
+
+To enable a wider set of scenarios, service introduces a "split" query parameter with the new "2023-10-31-preview" service version. The following values are supported:
+
+- `split: "auto"`
+
+  Let service determine where to split.
+
+- `split: "none"`
+
+  The entire file is treated as a single document. No splitting is performed.
+
+- `split: "perPage"`
+
+  Each page is treated as a separate document. Each empty page is kept as its own document.
+
 ## Document Classifiers #Build
 
 ```ts
@@ -218,6 +274,32 @@ console.log(response);
 //  }
 ```
 
+## Get Info
+
+```ts
+const response = await client.path("/info").get();
+if (isUnexpected(response)) {
+  throw response.body.error;
+}
+console.log(response.body.customDocumentModels.limit);
+// 20000
+```
+
+## List Document Models
+
+```ts
+import { paginate } from "@azure-rest/ai-document-intelligence";
+const response = await client.path("/documentModels").get();
+if (isUnexpected(response)) {
+  throw response.body.error;
+}
+
+const modelsInAccount: string[] = [];
+for await (const model of paginate(client, response)) {
+  console.log(model.modelId);
+}
+```
+
 ## Troubleshooting
 
 ### Logging
@@ -230,5 +312,5 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.2/sdk/core/logger).
 

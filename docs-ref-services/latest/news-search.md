@@ -1,7 +1,7 @@
 ---
 title: Azure News Search SDK for JavaScript
 description: Reference for Azure News Search SDK for JavaScript
-ms.date: 03/12/2024
+ms.date: 03/13/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: newssearch

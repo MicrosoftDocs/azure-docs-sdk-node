@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 01/24/2024
+ms.date: 03/18/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -22,7 +22,9 @@ ms.service: monitor
 
 - [OpenTelemetry supported runtimes](https://github.com/open-telemetry/opentelemetry-js#supported-runtimes)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.2.0/SUPPORT.md) for more details.
+> *Warning:* This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.3.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -35,7 +37,7 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/m
 
 
 ```typescript
-const { useAzureMonitor, AzureMonitorOpenTelemetryOptions } = require("@azure/monitor-opentelemetry");
+import { useAzureMonitor, AzureMonitorOpenTelemetryOptions } from "@azure/monitor-opentelemetry";
 
 const options: AzureMonitorOpenTelemetryOptions = {
   azureMonitorExporterOptions: {
@@ -52,8 +54,8 @@ useAzureMonitor(options);
 
 
 ```typescript
-const { AzureMonitorOpenTelemetryClient, AzureMonitorOpenTelemetryOptions } = require("@azure/monitor-opentelemetry");
-const { Resource } = require("@opentelemetry/resources");
+import { AzureMonitorOpenTelemetryOptions, useAzureMonitor } from "@azure/monitor-opentelemetry";
+import { Resource } from "@opentelemetry/resources";
 
 const resource = new Resource({ "testAttribute": "testValue" });
 const options: AzureMonitorOpenTelemetryOptions = {
@@ -63,11 +65,12 @@ const options: AzureMonitorOpenTelemetryOptions = {
         // Automatic retries
         disableOfflineStorage: false,
         // Application Insights Connection String
-        connectionString:   process.env["APPLICATIONINSIGHTS_CONNECTION_STRING"] || "<your connection string>",
+        connectionString:
+              process.env["APPLICATIONINSIGHTS_CONNECTION_STRING"] || "<your connection string>",
     },
     samplingRatio: 1,
     instrumentationOptions: {
-      // Instrumentations generating traces
+        // Instrumentations generating traces
         azureSdk: { enabled: true },
         http: { enabled: true },
         mongoDb: { enabled: true },
@@ -85,23 +88,26 @@ const options: AzureMonitorOpenTelemetryOptions = {
         connectionString: "",
     },
     resource: resource
+    logRecordProcessors: [],
+    spanProcessors: []
 };
 
 useAzureMonitor(options);
-
 ```
 
 
 |Property|Description|Default|
 | ------------------------------- |------------------------------------------------------------------------------------------------------------|-------|
-| azureMonitorExporterOptions                     | Azure Monitor OpenTelemetry Exporter Configuration. [More info here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.2.0/sdk/monitor/monitor-opentelemetry-exporter)                                                | |                                    | |
-| samplingRatio              | Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out.                       | 1|
+| azureMonitorExporterOptions     | Azure Monitor OpenTelemetry Exporter Configuration. [More info here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.3.0/sdk/monitor/monitor-opentelemetry-exporter) | | | |
+| samplingRatio              | Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out. | 1|
 | instrumentationOptions| Allow configuration of OpenTelemetry Instrumentations. |  {"http": { enabled: true },"azureSdk": { enabled: false },"mongoDb": { enabled: false },"mySql": { enabled: false },"postgreSql": { enabled: false },"redis": { enabled: false },"bunyan": { enabled: false }}|
-| browserSdkLoaderOptions| Allow configuration of Web Instrumentations. | { enabled: false, connectionString: "", config: {} }
-| resource       | Opentelemetry Resource. [More info here](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-resources)         ||
-| samplingRatio              | Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out. 
-| enableLiveMetrics          | Enable/Disable Live Metrics.
-| enableStandardMetrics      | Enable/Disable Standard Metrics. 
+| browserSdkLoaderOptions| Allow configuration of Web Instrumentations. | { enabled: false, connectionString: "" } |
+| resource       | Opentelemetry Resource. [More info here](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-resources) ||
+| samplingRatio              | Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out. |
+| enableLiveMetrics          | Enable/Disable Live Metrics. |
+| enableStandardMetrics      | Enable/Disable Standard Metrics. |
+| logRecordProcessors        | Array of log record processors to register to the global logger provider. |
+| spanProcessors             | Array of span processors to register to the global tracer provider. |
 
 Options could be set using configuration file `applicationinsights.json` located under root folder of @azure/monitor-opentelemetry package installation folder, Ex: `node_modules/@azure/monitor-opentelemetry`. These configuration values will be applied to all AzureMonitorOpenTelemetryClient instances. 
 
@@ -118,7 +124,6 @@ Options could be set using configuration file `applicationinsights.json` located
     },
     ...
 }
-  
 ```
 
 Custom JSON file could be provided using `APPLICATIONINSIGHTS_CONFIGURATION_FILE` environment variable.
@@ -143,7 +148,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
   - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-pg)
   - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis)
   - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis-4)
-  - [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.2.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+  - [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.3.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 - [HTTP/HTTPS](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-http) 
@@ -155,21 +160,20 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 Other OpenTelemetry Instrumentations are available [here](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node) and could be added using TracerProvider in AzureMonitorOpenTelemetryClient.
 
  ```typescript
-    const { useAzureMonitor } = require("@azure/monitor-opentelemetry");
-    const { metrics, trace } = require("@opentelemetry/api");
-    const { registerInstrumentations } = require("@opentelemetry/instrumentation");
-    const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
+import { useAzureMonitor } from "@azure/monitor-opentelemetry";
+import { metrics, trace } from "@opentelemetry/api";
+import { registerInstrumentations } from "@opentelemetry/instrumentation";
+import { ExpressInstrumentation } from "@opentelemetry/instrumentation-express";
 
-    useAzureMonitor();
-    const instrumentations = [
-        new ExpressInstrumentation(),
-    ];
-    registerInstrumentations({
-        tracerProvider:  trace.getTracerProvider(),
-        meterProvider: metrics.getMeterProvider(),
-        instrumentations: instrumentations,
-    });
-    
+useAzureMonitor();
+const instrumentations = [
+    new ExpressInstrumentation(),
+];
+registerInstrumentations({
+    tracerProvider:  trace.getTracerProvider(),
+    meterProvider: metrics.getMeterProvider(),
+    instrumentations: instrumentations,
+});  
 ```
 
 ### Application Insights Browser SDK Loader
@@ -189,9 +193,9 @@ You might set the Cloud Role Name and the Cloud Role Instance via [OpenTelemetry
 
 
 ```typescript
-const { useAzureMonitor, AzureMonitorOpenTelemetryOptions } = require("@azure/monitor-opentelemetry");
-const { Resource } = require("@opentelemetry/resources");
-const { SemanticResourceAttributes } = require("@opentelemetry/semantic-conventions");
+import { useAzureMonitor, AzureMonitorOpenTelemetryOptions } from "@azure/monitor-opentelemetry";
+import { Resource } from "@opentelemetry/resources";
+import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
 
 // ----------------------------------------
 // Setting role name and role instance
@@ -230,11 +234,11 @@ Any [attributes](#add-span-attributes) you add to spans are exported as custom p
 Use a custom processor:
 
 ```typescript
-const { useAzureMonitor } = require("@azure/monitor-opentelemetry");
-const { trace } = require("@opentelemetry/api");
-const { ReadableSpan, Span, SpanProcessor } = require("@opentelemetry/sdk-trace-base");
-const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
-const { SemanticAttributes } = require("@opentelemetry/semantic-conventions");
+import { useAzureMonitor } from "@azure/monitor-opentelemetry";
+import { ProxyTracerProvider, trace } from "@opentelemetry/api";
+import { ReadableSpan, Span, SpanProcessor } from "@opentelemetry/sdk-trace-base";
+import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
+import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
 
 useAzureMonitor();
 
@@ -253,7 +257,7 @@ class SpanEnrichingProcessor implements SpanProcessor{
   }
 }
 
-const tracerProvider = trace.getTracerProvider().getDelegate();
+const tracerProvider = (trace.getTracerProvider() as ProxyTracerProvider).getDelegate() as NodeTracerProvider;
 tracerProvider.addSpanProcessor(new SpanEnrichingProcessor());
 ```
 
@@ -266,10 +270,10 @@ You might use the following ways to filter out telemetry before it leaves your a
     The following example shows how to exclude a certain URL from being tracked by using the [HTTP/HTTPS instrumentation library](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-http):
     
     ```typescript
-    const { useAzureMonitor, AzureMonitorOpenTelemetryOptions } = require("@azure/monitor-opentelemetry");
-    const { IncomingMessage } = require("http");
-    const { RequestOptions } = require("https");
-    const { HttpInstrumentationConfig }= require("@opentelemetry/instrumentation-http");
+    import { useAzureMonitor, AzureMonitorOpenTelemetryOptions } from "@azure/monitor-opentelemetry";
+    import { IncomingMessage } from "http";
+    import { RequestOptions } from "https";
+    import { HttpInstrumentationConfig } from "@opentelemetry/instrumentation-http";
 
     const httpInstrumentationConfig: HttpInstrumentationConfig = {
         enabled: true,
@@ -290,11 +294,10 @@ You might use the following ways to filter out telemetry before it leaves your a
     };
     const options : AzureMonitorOpenTelemetryOptions = {
         instrumentationOptions: {
-          http:  httpInstrumentationConfig,
+        http:  httpInstrumentationConfig,
         }
     };
     useAzureMonitor(options);
-    
     ```
 
 1. Use a custom processor. You can use a custom span processor to exclude certain spans from being exported. To mark spans to not be exported, set `TraceFlag` to `DEFAULT`.
@@ -303,10 +306,11 @@ Use the add [custom property example](#add-a-custom-property-to-a-trace), but re
     ```typescript
     ...
     import { SpanKind, TraceFlags } from "@opentelemetry/api";
-    
-    class SpanEnrichingProcessor implements SpanProcessor{
+    import { ReadableSpan, SpanProcessor } from "@opentelemetry/sdk-trace-base";
+        
+    class SpanEnrichingProcessor implements SpanProcessor {
         ...
-    
+
         onEnd(span: ReadableSpan) {
             if(span.kind == SpanKind.INTERNAL){
                 span.spanContext().traceFlags = TraceFlags.NONE;
@@ -343,27 +347,27 @@ The [OpenTelemetry Specification](https://github.com/open-telemetry/opentelemetr
 describes the instruments and provides examples of when you might use each one.
 
 ```typescript
-    const { useAzureMonitor } = require("@azure/monitor-opentelemetry");
-    const { metrics } = require("@opentelemetry/api");
+import { useAzureMonitor } from "@azure/monitor-opentelemetry";
+import { ObservableResult, metrics } from "@opentelemetry/api";
 
-    useAzureMonitor();
-    const meter =  metrics.getMeter("testMeter");
+useAzureMonitor();
+const meter =  metrics.getMeter("testMeter");
 
-    let histogram = meter.createHistogram("histogram");
-    let counter = meter.createCounter("counter");
-    let gauge = meter.createObservableGauge("gauge");
-    gauge.addCallback((observableResult: ObservableResult) => {
-        let randomNumber = Math.floor(Math.random() * 100);
-        observableResult.observe(randomNumber, {"testKey": "testValue"});
-    });
+let histogram = meter.createHistogram("histogram");
+let counter = meter.createCounter("counter");
+let gauge = meter.createObservableGauge("gauge");
+gauge.addCallback((observableResult: ObservableResult) => {
+    let randomNumber = Math.floor(Math.random() * 100);
+    observableResult.observe(randomNumber, {"testKey": "testValue"});
+});
 
-    histogram.record(1, { "testKey": "testValue" });
-    histogram.record(30, { "testKey": "testValue2" });
-    histogram.record(100, { "testKey2": "testValue" });
+histogram.record(1, { "testKey": "testValue" });
+histogram.record(30, { "testKey": "testValue2" });
+histogram.record(100, { "testKey2": "testValue" });
 
-    counter.add(1, { "testKey": "testValue" });
-    counter.add(5, { "testKey2": "testValue" });
-    counter.add(3, { "testKey": "testValue2" });
+counter.add(1, { "testKey": "testValue" });
+counter.add(5, { "testKey2": "testValue" });
+counter.add(3, { "testKey": "testValue2" });
 ```
 
 
@@ -375,8 +379,8 @@ For instance, exceptions caught by your code are *not* ordinarily not reported, 
 and thus draw attention to them in relevant experiences including the failures blade and end-to-end transaction view.
 
 ```typescript
-const { useAzureMonitor } = require("@azure/monitor-opentelemetry");
-const { trace } = require("@opentelemetry/api");
+import { useAzureMonitor } from "@azure/monitor-opentelemetry";
+import { trace } from "@opentelemetry/api";
 
 useAzureMonitor();
 const tracer =  trace.getTracer("testMeter");
@@ -397,8 +401,8 @@ catch(error){
 Azure Monitor OpenTelemetry uses the OpenTelemetry API Logger for internal logs. To enable it, use the following code:
 
 ```typescript
-const { useAzureMonitor } = require("@azure/monitor-opentelemetry");
-const { DiagLogLevel } = require("@opentelemetry/api");
+import { useAzureMonitor } from "@azure/monitor-opentelemetry";
+import { DiagLogLevel } from "@opentelemetry/api";
 
 process.env.APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL = "VERBOSE";
 process.env.APPLICATIONINSIGHTS_LOG_DESTINATION = "file";
@@ -414,7 +418,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.2.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.3.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -429,7 +433,7 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/monitor-opentelemetry/README.png)
 

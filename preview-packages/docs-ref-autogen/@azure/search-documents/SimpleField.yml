@@ -90,20 +90,21 @@ properties:
     package: '@azure/search-documents'
     summary: >-
       A value indicating whether the field can be returned in a search result.
-      You can enable this
+      You can disable this
 
       option if you want to use a field (for example, margin) as a filter,
       sorting, or scoring
 
       mechanism but do not want the field to be visible to the end user. This
-      property must be false
+      property must be true
 
-      for key fields. This property can be changed on existing fields.
+      for key fields. This property can be changed on existing fields. Enabling
+      this property does
 
-      Disabling this property does not cause any increase in index storage
-      requirements.
+      not cause any increase in index storage requirements. Default is true for
+      simple fields and
 
-      Default is false.
+      false for vector fields.
     fullName: hidden
     remarks: ''
     isDeprecated: false
@@ -270,6 +271,40 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: stored
+    uid: '@azure/search-documents.SimpleField.stored'
+    package: '@azure/search-documents'
+    summary: >-
+      An immutable value indicating whether the field will be persisted
+      separately on disk to be
+
+      returned in a search result. You can disable this option if you don't plan
+      to return the field
+
+      contents in a search response to save on storage overhead. This can only
+      be set during index
+
+      creation and only for vector fields. This property cannot be changed for
+      existing fields or set
+
+      as false for new fields. If this property is set as false, the property
+      `hidden` must be set as
+
+      true. This property must be true or unset for key fields, for new fields,
+      and for non-vector
+
+      fields, and it must be null for complex fields. Disabling this property
+      will reduce index
+
+      storage requirements. The default is true for vector fields.
+    fullName: stored
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'stored?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: synonymMapNames
     uid: '@azure/search-documents.SimpleField.synonymMapNames'
     package: '@azure/search-documents'
@@ -331,19 +366,19 @@ properties:
       return:
         description: ''
         type: number
-  - name: vectorSearchProfile
-    uid: '@azure/search-documents.SimpleField.vectorSearchProfile'
+  - name: vectorSearchProfileName
+    uid: '@azure/search-documents.SimpleField.vectorSearchProfileName'
     package: '@azure/search-documents'
     summary: >-
       The name of the vector search algorithm configuration that specifies the
       algorithm and
 
       optional parameters for searching the vector field.
-    fullName: vectorSearchProfile
+    fullName: vectorSearchProfileName
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'vectorSearchProfile?: string'
+      content: 'vectorSearchProfileName?: string'
       return:
         description: ''
         type: string

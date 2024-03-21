@@ -30,7 +30,7 @@ constructors:
           type: string
           description: the name of the table
         - id: credential
-          type: <xref uid="@azure/data-tables.NamedKeyCredential" />
+          type: <xref uid="@azure/core-auth.NamedKeyCredential" />
           description: >-
             NamedKeyCredential used to authenticate requests. Only Supported for
             Node
@@ -86,7 +86,7 @@ constructors:
           type: string
           description: the name of the table
         - id: credential
-          type: SASCredential
+          type: <xref uid="@azure/core-auth.SASCredential" />
           description: SASCredential used to authenticate requests
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
@@ -177,7 +177,7 @@ constructors:
           type: string
           description: the name of the table
         - id: credential
-          type: TokenCredential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
           description: Azure Active Directory credential used to authenticate requests
         - id: options
           type: <xref uid="@azure/data-tables.TableServiceClientOptions" />
@@ -266,10 +266,12 @@ methods:
         OperationOptions): Promise<TableInsertEntityHeaders>
       parameters:
         - id: entity
-          type: <xref uid="@azure/data-tables.TableEntity" />&lt;T&gt;
+          type: >-
+            <xref uid="@azure/data-tables.TableEntity" />&lt;<xref
+            uid="@azure/data-tables.T" />&gt;
           description: The properties for the table entity.
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/core-client.OperationOptions" />
           description: >-
             The options parameters.
 
@@ -322,7 +324,7 @@ methods:
       content: 'function createTable(options?: OperationOptions): Promise<void>'
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/core-client.OperationOptions" />
           description: >-
             The options parameters.
 
@@ -434,7 +436,7 @@ methods:
       content: 'function deleteTable(options?: OperationOptions): Promise<void>'
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/core-client.OperationOptions" />
           description: >-
             The options parameters.
 
@@ -521,7 +523,7 @@ methods:
         Promise<GetAccessPolicyResponse>
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/core-client.OperationOptions" />
           description: The options parameters.
       return:
         description: ''
@@ -591,8 +593,8 @@ methods:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/data-tables.GetTableEntityResponse"
-          />&lt;<xref uid="@azure/data-tables.TableEntityResult"
-          />&lt;T&gt;&gt;&gt;
+          />&lt;<xref uid="@azure/data-tables.TableEntityResult" />&lt;<xref
+          uid="@azure/data-tables.T" />&gt;&gt;&gt;
   - name: listEntities<T>(ListTableEntitiesOptions)
     uid: '@azure/data-tables.TableClient.listEntities'
     package: '@azure/data-tables'
@@ -656,10 +658,12 @@ methods:
       return:
         description: ''
         type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/data-tables.TableEntityResult" />&lt;T&gt;, <xref
-          uid="@azure/data-tables.TableEntityResultPage" />&lt;T&gt;,
-          PageSettings&gt;
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/data-tables.TableEntityResult" />&lt;<xref
+          uid="@azure/data-tables.T" />&gt;, <xref
+          uid="@azure/data-tables.TableEntityResultPage" />&lt;<xref
+          uid="@azure/data-tables.T" />&gt;, <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
   - name: setAccessPolicy(SignedIdentifier[], OperationOptions)
     uid: '@azure/data-tables.TableClient.setAccessPolicy'
     package: '@azure/data-tables'
@@ -677,7 +681,7 @@ methods:
           type: <xref uid="@azure/data-tables.SignedIdentifier" />[]
           description: The Access Control List for the table.
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/core-client.OperationOptions" />
           description: The options parameters.
       return:
         description: ''
@@ -778,7 +782,9 @@ methods:
         options?: UpdateTableEntityOptions): Promise<TableUpdateEntityHeaders>
       parameters:
         - id: entity
-          type: <xref uid="@azure/data-tables.TableEntity" />&lt;T&gt;
+          type: >-
+            <xref uid="@azure/data-tables.TableEntity" />&lt;<xref
+            uid="@azure/data-tables.T" />&gt;
           description: The properties of the entity to be updated.
         - id: mode
           type: <xref uid="@azure/data-tables.UpdateMode" />
@@ -868,7 +874,9 @@ methods:
         options?: OperationOptions): Promise<TableMergeEntityHeaders>
       parameters:
         - id: entity
-          type: <xref uid="@azure/data-tables.TableEntity" />&lt;T&gt;
+          type: >-
+            <xref uid="@azure/data-tables.TableEntity" />&lt;<xref
+            uid="@azure/data-tables.T" />&gt;
           description: The properties for the table entity.
         - id: mode
           type: <xref uid="@azure/data-tables.UpdateMode" />
@@ -877,7 +885,7 @@ methods:
                           - Merge: Updates an entity by updating the entity's properties without replacing the existing entity.
                           - Replace: Updates an existing entity by replacing the entire entity.
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/core-client.OperationOptions" />
           description: >-
             The options parameters.
 

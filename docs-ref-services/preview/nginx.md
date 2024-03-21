@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: nginx
 ---
-# Azure Nginx SDK for JavaScript - latest
-## Packages - latest
+# Azure Nginx SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](nginx-index.md)]

@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: sphere
 ---
-# Azure Sphere SDK for JavaScript - preview
-## Packages - preview
+# Azure Sphere SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](sphere-index.md)]

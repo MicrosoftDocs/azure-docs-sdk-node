@@ -11,7 +11,9 @@ properties:
   - name: aggregation
     uid: '@azure/arm-monitor.MetricsListOptionalParams.aggregation'
     package: '@azure/arm-monitor'
-    summary: The list of aggregation types (comma separated) to retrieve.
+    summary: |-
+      The list of aggregation types (comma separated) to retrieve.
+      *Examples: average, minimum, maximum*
     fullName: aggregation
     remarks: ''
     isDeprecated: false
@@ -20,25 +22,36 @@ properties:
       return:
         description: ''
         type: string
+  - name: autoAdjustTimegrain
+    uid: '@azure/arm-monitor.MetricsListOptionalParams.autoAdjustTimegrain'
+    package: '@azure/arm-monitor'
+    summary: >-
+      When set to true, if the timespan passed in is not supported by this
+      metric, the API will return the result using the closest supported
+      timespan. When set to false, an error is returned for invalid timespan
+      parameters. Defaults to false.
+    fullName: autoAdjustTimegrain
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'autoAdjustTimegrain?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: filter
     uid: '@azure/arm-monitor.MetricsListOptionalParams.filter'
     package: '@azure/arm-monitor'
     summary: >-
-      The **$filter** is used to reduce the set of metric data returned.
-      Example: Metric contains metadata A, B and C. - Return all time series of
-      C where A = a1 and B = b1 or b2 **$filter=A eq 'a1' and B eq 'b1' or B eq
-      'b2' and C eq '*'** - Invalid variant: **$filter=A eq 'a1' and B eq 'b1'
-      and C eq '*' or B = 'b2'** This is invalid because the logical or operator
-      cannot separate two different metadata names. - Return all time series
-      where A = a1, B = b1 and C = c1: **$filter=A eq 'a1' and B eq 'b1' and C
-      eq 'c1'** - Return all time series where A = a1 **$filter=A eq 'a1' and B
-      eq '*' and C eq '*'**. Special case: When dimension name or dimension
-      value uses round brackets. Eg: When dimension name is **dim (test) 1**
-      Instead of using $filter= "dim (test) 1 eq '*' " use **$filter= "dim
-      %2528test%2529 1 eq '*' "** When dimension name is **dim (test) 3** and
-      dimension value is **dim3 (test) val** Instead of using $filter= "dim
-      (test) 3 eq 'dim3 (test) val' " use **$filter= "dim %2528test%2529 3 eq
-      'dim3 %2528test%2529 val' "**
+      The **$filter** is used to reduce the set of metric data
+      returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return
+      all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’
+      and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid
+      variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B =
+      ‘b2’**<br>This is invalid because the logical or operator cannot separate
+      two different metadata names.<br>- Return all time series where A = a1, B
+      = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>-
+      Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’
+      and C eq ‘*’**.
     fullName: filter
     remarks: ''
     isDeprecated: false
@@ -50,7 +63,12 @@ properties:
   - name: interval
     uid: '@azure/arm-monitor.MetricsListOptionalParams.interval'
     package: '@azure/arm-monitor'
-    summary: The interval (i.e. timegrain) of the query.
+    summary: >-
+      The interval (i.e. timegrain) of the query in ISO 8601 duration format.
+      Defaults to PT1M. Special case for 'FULL' value that returns single
+      datapoint for entire time span requested.
+
+      *Examples: PT15M, PT1H, P1D, FULL*
     fullName: interval
     remarks: ''
     isDeprecated: false
@@ -62,10 +80,7 @@ properties:
   - name: metricnames
     uid: '@azure/arm-monitor.MetricsListOptionalParams.metricnames'
     package: '@azure/arm-monitor'
-    summary: >-
-      The names of the metrics (comma separated) to retrieve. Special case: If a
-      metricname itself has a comma in it then use %2 to indicate it. Eg:
-      'Metric,Name1' should be **'Metric%2Name1'**
+    summary: The names of the metrics (comma separated) to retrieve.
     fullName: metricnames
     remarks: ''
     isDeprecated: false
@@ -77,7 +92,7 @@ properties:
   - name: metricnamespace
     uid: '@azure/arm-monitor.MetricsListOptionalParams.metricnamespace'
     package: '@azure/arm-monitor'
-    summary: Metric namespace to query metric definitions for.
+    summary: Metric namespace where the metrics you want reside.
     fullName: metricnamespace
     remarks: ''
     isDeprecated: false
@@ -92,7 +107,7 @@ properties:
     summary: |-
       The aggregation to use for sorting results and the direction of the sort.
       Only one order can be specified.
-      Examples: sum asc.
+      *Examples: sum asc*
     fullName: orderby
     remarks: ''
     isDeprecated: false
@@ -115,6 +130,23 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-monitor.ResultType" />
+  - name: rollupby
+    uid: '@azure/arm-monitor.MetricsListOptionalParams.rollupby'
+    package: '@azure/arm-monitor'
+    summary: >-
+      Dimension name(s) to rollup results by. For example if you only want to
+      see metric values with a filter like 'City eq Seattle or City eq Tacoma'
+      but don't want to see separate values for each city, you can specify
+      'RollUpBy=City' to see the results for Seattle and Tacoma rolled up into
+      one timeseries.
+    fullName: rollupby
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'rollupby?: string'
+      return:
+        description: ''
+        type: string
   - name: timespan
     uid: '@azure/arm-monitor.MetricsListOptionalParams.timespan'
     package: '@azure/arm-monitor'
@@ -133,8 +165,8 @@ properties:
     uid: '@azure/arm-monitor.MetricsListOptionalParams.top'
     package: '@azure/arm-monitor'
     summary: |-
-      The maximum number of records to retrieve.
-      Valid only if $filter is specified.
+      The maximum number of records to retrieve per resource ID in the request.
+      Valid only if filter is specified.
       Defaults to 10.
     fullName: top
     remarks: ''
@@ -144,6 +176,21 @@ properties:
       return:
         description: ''
         type: number
+  - name: validateDimensions
+    uid: '@azure/arm-monitor.MetricsListOptionalParams.validateDimensions'
+    package: '@azure/arm-monitor'
+    summary: >-
+      When set to false, invalid filter parameter values will be ignored. When
+      set to true, an error is returned for invalid filter parameters. Defaults
+      to true.
+    fullName: validateDimensions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'validateDimensions?: boolean'
+      return:
+        description: ''
+        type: boolean
 inheritedProperties:
   - name: abortSignal
     uid: '@azure/arm-monitor.MetricsListOptionalParams.abortSignal'

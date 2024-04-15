@@ -1,6 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
 |[Content Safety](ai-content-safety-rest-readme.md)|[@azure-rest/ai-content-safety](https://www.npmjs.com/package/@azure-rest/ai-content-safety)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/contentsafety/ai-content-safety-rest)|
+|[Document Intelligence](ai-document-intelligence-rest-readme.md)|[@azure-rest/ai-document-intelligence](https://www.npmjs.com/package/@azure-rest/ai-document-intelligence)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/documentintelligence/ai-document-intelligence-rest)|
 |Document Translation|[@azure-rest/ai-document-translator](https://www.npmjs.com/package/@azure-rest/ai-document-translator)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Personalizer](ai-personalizer-rest-readme.md)|[@azure-rest/ai-personalizer](https://www.npmjs.com/package/@azure-rest/ai-personalizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/personalizer/ai-personalizer-rest)|
 |[Text Translation](ai-translation-text-rest-readme.md)|[@azure-rest/ai-translation-text](https://www.npmjs.com/package/@azure-rest/ai-translation-text)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/translation/ai-translation-text-rest)|

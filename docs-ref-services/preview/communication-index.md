@@ -1,5 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
+|[Communication Job Router](communication-job-router-rest-readme.md)|[@azure-rest/communication-job-router](https://www.npmjs.com/package/@azure-rest/communication-job-router)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-job-router-rest)|
 |[@azure/communication-administration](communication-administration-readme.md)|[@azure/communication-administration](https://www.npmjs.com/package/@azure/communication-administration)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |[Communication Call Automation](communication-call-automation-readme.md)|[@azure/communication-call-automation](https://www.npmjs.com/package/@azure/communication-call-automation)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-call-automation)|
 |[Communication Chat](communication-chat-readme.md)|[@azure/communication-chat](https://www.npmjs.com/package/@azure/communication-chat)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-chat)|

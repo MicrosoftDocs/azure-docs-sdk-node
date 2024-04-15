@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Resource Management - Recovery Services](arm-recoveryservices-readme.md)|[@azure/arm-recoveryservices](https://www.npmjs.com/package/@azure/arm-recoveryservices)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/recoveryservices/arm-recoveryservices)|
+|[Resource Management - Recovery Services Data Replication](arm-recoveryservicesdatareplication-readme.md)|[@azure/arm-recoveryservicesdatareplication](https://www.npmjs.com/package/@azure/arm-recoveryservicesdatareplication)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/recoveryservicesdatareplication/arm-recoveryservicesdatareplication)|

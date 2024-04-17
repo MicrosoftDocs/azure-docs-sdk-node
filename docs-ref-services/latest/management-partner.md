@@ -1,7 +1,7 @@
 ---
 title: Azure Management Partner SDK for JavaScript
 description: Reference for Azure Management Partner SDK for JavaScript
-ms.date: 04/16/2024
+ms.date: 04/17/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: managementpartner

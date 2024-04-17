@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 03/18/2024
+ms.date: 04/17/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -24,7 +24,7 @@ ms.service: monitor
 
 > *Warning:* This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.3.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.4.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -87,7 +87,7 @@ const options: AzureMonitorOpenTelemetryOptions = {
         enabled: false,
         connectionString: "",
     },
-    resource: resource
+    resource: resource,
     logRecordProcessors: [],
     spanProcessors: []
 };
@@ -98,16 +98,17 @@ useAzureMonitor(options);
 
 |Property|Description|Default|
 | ------------------------------- |------------------------------------------------------------------------------------------------------------|-------|
-| azureMonitorExporterOptions     | Azure Monitor OpenTelemetry Exporter Configuration. [More info here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.3.0/sdk/monitor/monitor-opentelemetry-exporter) | | | |
+| azureMonitorExporterOptions     | Azure Monitor OpenTelemetry Exporter Configuration. [More info here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.4.0/sdk/monitor/monitor-opentelemetry-exporter) | | | |
 | samplingRatio              | Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out. | 1|
 | instrumentationOptions| Allow configuration of OpenTelemetry Instrumentations. |  {"http": { enabled: true },"azureSdk": { enabled: false },"mongoDb": { enabled: false },"mySql": { enabled: false },"postgreSql": { enabled: false },"redis": { enabled: false },"bunyan": { enabled: false }}|
 | browserSdkLoaderOptions| Allow configuration of Web Instrumentations. | { enabled: false, connectionString: "" } |
 | resource       | Opentelemetry Resource. [More info here](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-resources) ||
-| samplingRatio              | Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out. |
-| enableLiveMetrics          | Enable/Disable Live Metrics. |
-| enableStandardMetrics      | Enable/Disable Standard Metrics. |
-| logRecordProcessors        | Array of log record processors to register to the global logger provider. |
-| spanProcessors             | Array of span processors to register to the global tracer provider. |
+| samplingRatio              | Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out. |1|
+| enableLiveMetrics          | Enable/Disable Live Metrics. |false|
+| enableStandardMetrics      | Enable/Disable Standard Metrics. |true|
+| logRecordProcessors        | Array of log record processors to register to the global logger provider. ||
+| spanProcessors             | Array of span processors to register to the global tracer provider. ||
+<!--- TODO: Enable when feature is released | enableTraceBasedSamplingForLogs      | Enable log sampling based on trace. |true|-->
 
 Options could be set using configuration file `applicationinsights.json` located under root folder of @azure/monitor-opentelemetry package installation folder, Ex: `node_modules/@azure/monitor-opentelemetry`. These configuration values will be applied to all AzureMonitorOpenTelemetryClient instances. 
 
@@ -148,7 +149,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
   - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-pg)
   - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis)
   - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis-4)
-  - [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.3.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+  - [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.4.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 - [HTTP/HTTPS](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-http) 
@@ -234,13 +235,10 @@ Any [attributes](#add-span-attributes) you add to spans are exported as custom p
 Use a custom processor:
 
 ```typescript
-import { useAzureMonitor } from "@azure/monitor-opentelemetry";
-import { ProxyTracerProvider, trace } from "@opentelemetry/api";
+import { useAzureMonitor, AzureMonitorOpenTelemetryOptions } from "@azure/monitor-opentelemetry";
 import { ReadableSpan, Span, SpanProcessor } from "@opentelemetry/sdk-trace-base";
-import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { SemanticAttributes } from "@opentelemetry/semantic-conventions";
 
-useAzureMonitor();
 
 class SpanEnrichingProcessor implements SpanProcessor{
   forceFlush(): Promise<void>{
@@ -257,8 +255,12 @@ class SpanEnrichingProcessor implements SpanProcessor{
   }
 }
 
-const tracerProvider = (trace.getTracerProvider() as ProxyTracerProvider).getDelegate() as NodeTracerProvider;
-tracerProvider.addSpanProcessor(new SpanEnrichingProcessor());
+// Enable Azure Monitor integration.
+const options: AzureMonitorOpenTelemetryOptions = {
+    // Add the SpanEnrichingProcessor
+    spanProcessors: [new SpanEnrichingProcessor()] 
+}
+useAzureMonitor(options);
 ```
 
 ### Filter telemetry
@@ -418,7 +420,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.3.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.4.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -433,7 +435,7 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.4.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/monitor-opentelemetry/README.png)
 

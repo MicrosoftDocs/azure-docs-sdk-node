@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-ms.date: 03/08/2024
+ms.date: 04/17/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.21 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.22 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
@@ -23,7 +23,7 @@ This exporter package assumes your application is [already instrumented](https:/
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.21/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.22/SUPPORT.md) for more details.
 
 > *Warning:* This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for browser environments.
 
@@ -124,6 +124,8 @@ You can enable sampling to limit the amount of telemetry records you receive. In
 const { ApplicationInsightsSampler } = require("@azure/monitor-opentelemetry-exporter");
 const { BatchSpanProcessor } = require("@opentelemetry/sdk-trace-base");
 const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+const { Resource } = require("@opentelemetry/resources"); 
+const { SemanticResourceAttributes } = require("@opentelemetry/semantic-conventions"); 
 
 // Sampler expects a sample rate of between 0 and 1 inclusive
 // A rate of 0.75 means approximately 75 % of your traces will be sent
@@ -139,7 +141,7 @@ provider.register();
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.21/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.22/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
 
 ## Key concepts
 
@@ -172,7 +174,7 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.21/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.22/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/monitor-opentelemetry-exporter/README.png)
 

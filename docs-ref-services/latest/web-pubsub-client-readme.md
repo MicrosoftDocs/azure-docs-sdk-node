@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-client, web-pubsub
-ms.date: 01/02/2024
+ms.date: 04/24/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
@@ -167,7 +167,7 @@ const client = new WebPubSubClient({
 
 await client.start();
 ```
-_To see the full code of this sample, please refer to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0/sdk/web-pubsub/web-pubsub-client/samples-browser)._
+_To see the full code of this sample, please refer to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.1/sdk/web-pubsub/web-pubsub-client/samples-browser)._
 
 ---
 ### A client consumes messages from the application server or joined groups
@@ -266,7 +266,7 @@ Each of the Web PubSub clients is safe to cache and be used as a singleton for t
 ---
 ## JavaScript Bundle
 
-To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.0/documentation/Bundling.md).
+To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.1/documentation/Bundling.md).
 
 ---
 
@@ -280,7 +280,7 @@ To use this client library in the browser, first, you need to use a bundler. For
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.1/sdk/core/logger).
 
 - ### Live Trace
 
@@ -296,7 +296,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 ---
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 
 [azure_sub]: https://azure.microsoft.com/free/

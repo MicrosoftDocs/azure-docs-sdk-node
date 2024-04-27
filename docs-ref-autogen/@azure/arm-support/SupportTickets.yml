@@ -66,7 +66,7 @@ methods:
         function beginCreate(supportTicketName: string,
         createSupportTicketParameters: SupportTicketDetails, options?:
         SupportTicketsCreateOptionalParams):
-        Promise<PollerLike<PollOperationState<SupportTicketDetails>,
+        Promise<SimplePollerLike<OperationState<SupportTicketDetails>,
         SupportTicketDetails>>
       parameters:
         - id: supportTicketName
@@ -81,8 +81,8 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;<xref
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
           uid="@azure/arm-support.SupportTicketDetails" />&gt;, <xref
           uid="@azure/arm-support.SupportTicketDetails" />&gt;&gt;
   - name: >-
@@ -223,16 +223,17 @@ methods:
       Lists all the support tickets for an Azure subscription. You can also
       filter the support tickets by
 
-      _Status_ or _CreatedDate_ using the $filter parameter. Output will be a
-      paged result with
+      _Status_, _CreatedDate_, _ServiceId_, and _ProblemClassificationId_ using
+      the $filter parameter.
 
-      _nextLink_, using which you can retrieve the next set of support tickets.
-      <br/><br/>Support ticket
+      Output will be a paged result with _nextLink_, using which you can
+      retrieve the next set of support
 
-      data is available for 18 months after ticket creation. If a ticket was
-      created more than 18 months
+      tickets. <br/><br/>Support ticket data is available for 18 months after
+      ticket creation. If a ticket
 
-      ago, a request for data might cause an error.
+      was created more than 18 months ago, a request for data might cause an
+      error.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -255,25 +256,19 @@ methods:
     uid: '@azure/arm-support.SupportTickets.update'
     package: '@azure/arm-support'
     summary: >-
-      This API allows you to update the severity level, ticket status, and your
-      contact information in the
+      This API allows you to update the severity level, ticket status, advanced
+      diagnostic consent and
 
-      support ticket.<br/><br/>Note: The severity levels cannot be changed if a
-      support ticket is actively
+      your contact information in the support ticket.<br/><br/>Note: The
+      severity levels cannot be changed
 
-      being worked upon by an Azure support engineer. In such a case, contact
-      your support engineer to
+      if a support ticket is actively being worked upon by an Azure support
+      engineer. In such a case,
 
-      request severity update by adding a new communication using the
-      Communications
+      contact your support engineer to request severity update by adding a new
+      communication using the
 
-      API.<br/><br/>Changing the ticket status to _closed_ is allowed only on an
-      unassigned case. When an
-
-      engineer is actively working on the ticket, send your ticket closure
-      request by sending a note to
-
-      your engineer.
+      Communications API.
     remarks: ''
     isDeprecated: false
     syntax:

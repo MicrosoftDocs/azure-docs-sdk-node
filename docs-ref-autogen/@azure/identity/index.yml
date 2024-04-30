@@ -53,6 +53,7 @@ interfaces:
   - '@azure/identity.DeviceCodeInfo'
   - '@azure/identity.EnvironmentCredentialOptions'
   - '@azure/identity.ErrorResponse'
+  - '@azure/identity.GetBearerTokenProviderOptions'
   - '@azure/identity.GetTokenOptions'
   - '@azure/identity.InteractiveBrowserCredentialInBrowserOptions'
   - '@azure/identity.InteractiveBrowserCredentialNodeOptions'
@@ -118,6 +119,58 @@ functions:
       return:
         description: AuthenticationRecord.
         type: <xref uid="@azure/identity.AuthenticationRecord" />
+  - name: >-
+      getBearerTokenProvider(TokenCredential, string | string[],
+      GetBearerTokenProviderOptions)
+    uid: '@azure/identity.getBearerTokenProvider'
+    package: '@azure/identity'
+    summary: >-
+      Returns a callback that provides a bearer token.
+
+      For example, the bearer token can be used to authenticate a request as
+      follows:
+
+      ```js
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const scope = "https://cognitiveservices.azure.com/.default";
+
+      const getAccessToken = getBearerTokenProvider(credential, scope);
+
+      const token = await getAccessToken();
+
+
+      // usage
+
+      const request = createPipelineRequest({ url: "https://example.com" });
+
+      request.headers.set("Authorization", `Bearer ${token}`);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getBearerTokenProvider(credential: TokenCredential, scopes:
+        string | string[], options?: GetBearerTokenProviderOptions): () =>
+        Promise<string>
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/identity.TokenCredential" />
+          description: The credential used to authenticate the request.
+        - id: scopes
+          type: string | string[]
+          description: The scopes required for the bearer token.
+        - id: options
+          type: <xref uid="@azure/identity.GetBearerTokenProviderOptions" />
+          description: Options to configure the token provider.
+      return:
+        description: a callback that provides a bearer token.
+        type: () =&gt; Promise&lt;string&gt;
   - name: getDefaultAzureCredential()
     uid: '@azure/identity.getDefaultAzureCredential'
     package: '@azure/identity'

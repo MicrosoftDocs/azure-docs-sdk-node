@@ -1,7 +1,7 @@
 ---
 title: Azure Managed Network Fabric SDK for JavaScript
 description: Reference for Azure Managed Network Fabric SDK for JavaScript
-ms.date: 04/30/2024
+ms.date: 05/01/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: managednetworkfabric

@@ -1,7 +1,7 @@
 ---
 title: Azure Schema Registry SDK for JavaScript
 description: Reference for Azure Schema Registry SDK for JavaScript
-ms.date: 05/06/2024
+ms.date: 05/07/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: schemaregistry

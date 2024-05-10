@@ -1,7 +1,7 @@
 ---
 title: Azure Advisor SDK for JavaScript
 description: Reference for Azure Advisor SDK for JavaScript
-ms.date: 05/09/2024
+ms.date: 05/10/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: advisor

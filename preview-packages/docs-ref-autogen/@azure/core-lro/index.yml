@@ -5,13 +5,13 @@ summary: ''
 type: package
 interfaces:
   - '@azure/core-lro.CreateHttpPollerOptions'
-  - '@azure/core-lro.LongRunningOperation'
   - '@azure/core-lro.OperationConfig'
   - '@azure/core-lro.OperationResponse'
   - '@azure/core-lro.OperationState'
   - '@azure/core-lro.PollerLike'
   - '@azure/core-lro.RawRequest'
   - '@azure/core-lro.RawResponse'
+  - '@azure/core-lro.RunningOperation'
 typeAliases:
   - '@azure/core-lro.CancelOnProgress'
   - '@azure/core-lro.OperationStatus'
@@ -19,7 +19,7 @@ typeAliases:
   - '@azure/core-lro.RestorableOperationState'
 functions:
   - name: >-
-      createHttpPoller<TResult, TState>(LongRunningOperation<unknown>,
+      createHttpPoller<TResult, TState>(RunningOperation<unknown>,
       CreateHttpPollerOptions<TResult, TState>)
     uid: '@azure/core-lro.createHttpPoller'
     package: '@azure/core-lro'
@@ -29,11 +29,11 @@ functions:
     syntax:
       content: >-
         function createHttpPoller<TResult, TState>(lro:
-        LongRunningOperation<unknown>, options?:
-        CreateHttpPollerOptions<TResult, TState>): PollerLike<TState, TResult>
+        RunningOperation<unknown>, options?: CreateHttpPollerOptions<TResult,
+        TState>): PollerLike<TState, TResult>
       parameters:
         - id: lro
-          type: <xref uid="@azure/core-lro.LongRunningOperation" />&lt;unknown&gt;
+          type: <xref uid="@azure/core-lro.RunningOperation" />&lt;unknown&gt;
           description: Description of the long-running operation
         - id: options
           type: >-
@@ -43,7 +43,7 @@ functions:
       return:
         description: an initialized poller
         type: <xref uid="@azure/core-lro.PollerLike" />&lt;TState, TResult&gt;
-  - name: deserializeState<TState>(string)
+  - name: deserializeState<TResult, TState>(string)
     uid: '@azure/core-lro.deserializeState'
     package: '@azure/core-lro'
     summary: Deserializes the state
@@ -51,12 +51,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function deserializeState<TState>(serializedState: string):
-        RestorableOperationState<TState>
+        function deserializeState<TResult, TState>(serializedState: string):
+        RestorableOperationState<TResult, TState>
       parameters:
         - id: serializedState
           type: string
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/core-lro.RestorableOperationState" />&lt;TState&gt;
+        type: >-
+          <xref uid="@azure/core-lro.RestorableOperationState" />&lt;TResult,
+          TState&gt;

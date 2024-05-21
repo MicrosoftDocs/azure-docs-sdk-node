@@ -45,8 +45,18 @@ properties:
     uid: '@azure/search-documents.BaseVectorQuery.kind'
     package: '@azure/search-documents'
     summary: >-
-      Polymorphic discriminator, which specifies the different types this object
-      can be
+      ### Known values supported by the service
+
+      **vector**: Vector query where a raw vector value is provided.
+
+      **text**: Vector query where a text value that needs to be vectorized is
+      provided.
+
+      **imageUrl**: Vector query where an url that represents an image value
+      that needs to be vectorized is provided.
+
+      **imageBinary**: Vector query where a base 64 encoded binary of an image
+      that needs to be vectorized is provided.
     fullName: kind
     remarks: ''
     isDeprecated: false
@@ -86,6 +96,39 @@ properties:
     isDeprecated: false
     syntax:
       content: 'oversampling?: number'
+      return:
+        description: ''
+        type: number
+  - name: threshold
+    uid: '@azure/search-documents.BaseVectorQuery.threshold'
+    package: '@azure/search-documents'
+    summary: >-
+      The threshold used for vector queries. Note this can only be set if all
+      'fields' use the same similarity metric.
+    fullName: threshold
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'threshold?: VectorThreshold'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.VectorThreshold" />
+  - name: weight
+    uid: '@azure/search-documents.BaseVectorQuery.weight'
+    package: '@azure/search-documents'
+    summary: >-
+      Relative weight of the vector query when compared to other vector query
+      and/or the text query within the same search request. This value is used
+      when combining the results of multiple ranking lists produced by the
+      different vector queries and/or the results retrieved through the text
+      query. The higher the weight, the higher the documents that matched that
+      query will be in the final ranking. Default is 1.0 and the value needs to
+      be a positive number larger than zero.
+    fullName: weight
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'weight?: number'
       return:
         description: ''
         type: number

@@ -1,7 +1,7 @@
 ---
 title: Azure Video Search SDK for JavaScript
 description: Reference for Azure Video Search SDK for JavaScript
-ms.date: 05/23/2024
+ms.date: 05/24/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: videosearch

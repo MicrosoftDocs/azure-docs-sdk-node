@@ -1,6 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
 |[Content Safety](ai-content-safety-rest-readme.md)|[@azure-rest/ai-content-safety](https://www.npmjs.com/package/@azure-rest/ai-content-safety)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/contentsafety/ai-content-safety-rest)|
+|[Text Translation](ai-translation-text-rest-readme.md)|[@azure-rest/ai-translation-text](https://www.npmjs.com/package/@azure-rest/ai-translation-text)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/translation/ai-translation-text-rest)|
 |[Form Recognizer](ai-form-recognizer-readme.md)|[@azure/ai-form-recognizer](https://www.npmjs.com/package/@azure/ai-form-recognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer)|
 |[Language Text](ai-language-text-readme.md)|[@azure/ai-language-text](https://www.npmjs.com/package/@azure/ai-language-text)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text)|
 |[Text Analytics](ai-text-analytics-readme.md)|[@azure/ai-text-analytics](https://www.npmjs.com/package/@azure/ai-text-analytics)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/textanalytics/ai-text-analytics)|

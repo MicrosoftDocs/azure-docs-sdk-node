@@ -29,10 +29,8 @@ classes:
   - '@azure/storage-blob.ContainerSASPermissions'
   - '@azure/storage-blob.Credential'
   - '@azure/storage-blob.CredentialPolicy'
-  - '@azure/storage-blob.HttpHeaders'
   - '@azure/storage-blob.PageBlobClient'
   - '@azure/storage-blob.Pipeline'
-  - '@azure/storage-blob.RequestPolicyOptions'
   - '@azure/storage-blob.RestError'
   - '@azure/storage-blob.SASQueryParameters'
   - '@azure/storage-blob.StorageBrowserPolicy'
@@ -41,7 +39,6 @@ classes:
   - '@azure/storage-blob.StorageRetryPolicyFactory'
   - '@azure/storage-blob.StorageSharedKeyCredential'
   - '@azure/storage-blob.StorageSharedKeyCredentialPolicy'
-  - '@azure/storage-blob.WebResource'
 interfaces:
   - '@azure/storage-blob.AccessPolicy'
   - '@azure/storage-blob.AccountSASPermissionsLike'
@@ -148,6 +145,7 @@ interfaces:
   - '@azure/storage-blob.BlockBlobUploadOptions'
   - '@azure/storage-blob.BlockBlobUploadStreamOptions'
   - '@azure/storage-blob.BlockList'
+  - '@azure/storage-blob.ClearRange'
   - '@azure/storage-blob.CommonGenerateSasUrlOptions'
   - '@azure/storage-blob.CommonOptions'
   - '@azure/storage-blob.ContainerAcquireLeaseOptions'
@@ -193,7 +191,9 @@ interfaces:
   - '@azure/storage-blob.FilterBlobSegmentModel'
   - '@azure/storage-blob.GeoReplication'
   - '@azure/storage-blob.HttpAuthorization'
+  - '@azure/storage-blob.HttpHeaders'
   - '@azure/storage-blob.HttpOperationResponse'
+  - '@azure/storage-blob.HttpResponse'
   - '@azure/storage-blob.IHttpClient'
   - '@azure/storage-blob.Lease'
   - '@azure/storage-blob.LeaseAccessConditions'
@@ -238,6 +238,8 @@ interfaces:
   - '@azure/storage-blob.PageBlobUploadPagesHeaders'
   - '@azure/storage-blob.PageBlobUploadPagesOptions'
   - '@azure/storage-blob.PageList'
+  - '@azure/storage-blob.PageListInternal'
+  - '@azure/storage-blob.PageRange'
   - '@azure/storage-blob.PageRangeInfo'
   - '@azure/storage-blob.ParsedBatchResponse'
   - '@azure/storage-blob.PipelineLike'
@@ -246,11 +248,16 @@ interfaces:
   - '@azure/storage-blob.PollerLike'
   - '@azure/storage-blob.PollerLikeWithCancellation'
   - '@azure/storage-blob.Range'
-  - '@azure/storage-blob.RequestPolicy'
+  - '@azure/storage-blob.RequestPolicyFactory'
+  - '@azure/storage-blob.RequestPolicyOptions'
+  - '@azure/storage-blob.ResponseLike'
+  - '@azure/storage-blob.ResponseWithBody'
+  - '@azure/storage-blob.ResponseWithHeaders'
   - '@azure/storage-blob.RetentionPolicy'
   - '@azure/storage-blob.SASQueryParametersOptions'
   - '@azure/storage-blob.SasIPRange'
   - '@azure/storage-blob.SequenceNumberAccessConditions'
+  - '@azure/storage-blob.ServiceClientOptions'
   - '@azure/storage-blob.ServiceFilterBlobsHeaders'
   - '@azure/storage-blob.ServiceFindBlobByTagsOptions'
   - '@azure/storage-blob.ServiceGenerateAccountSasUrlOptions'
@@ -278,6 +285,7 @@ interfaces:
   - '@azure/storage-blob.TagConditions'
   - '@azure/storage-blob.UserDelegationKey'
   - '@azure/storage-blob.UserDelegationKeyModel'
+  - '@azure/storage-blob.WebResource'
 typeAliases:
   - '@azure/storage-blob.AccessTier'
   - '@azure/storage-blob.AccountKind'
@@ -294,11 +302,13 @@ typeAliases:
   - '@azure/storage-blob.BlobCreateSnapshotResponse'
   - '@azure/storage-blob.BlobDeleteImmutabilityPolicyResponse'
   - '@azure/storage-blob.BlobDeleteResponse'
+  - '@azure/storage-blob.BlobDownloadResponseInternal'
   - '@azure/storage-blob.BlobDownloadResponseModel'
   - '@azure/storage-blob.BlobGetPropertiesResponseModel'
   - '@azure/storage-blob.BlobGetTagsResponse'
   - '@azure/storage-blob.BlobImmutabilityPolicyMode'
   - '@azure/storage-blob.BlobQueryArrowFieldType'
+  - '@azure/storage-blob.BlobQueryResponseInternal'
   - '@azure/storage-blob.BlobQueryResponseModel'
   - '@azure/storage-blob.BlobSetHTTPHeadersResponse'
   - '@azure/storage-blob.BlobSetImmutabilityPolicyResponse'
@@ -312,6 +322,7 @@ typeAliases:
   - '@azure/storage-blob.BlobUploadCommonResponse'
   - '@azure/storage-blob.BlockBlobCommitBlockListResponse'
   - '@azure/storage-blob.BlockBlobGetBlockListResponse'
+  - '@azure/storage-blob.BlockBlobGetBlockListResponseInternal'
   - '@azure/storage-blob.BlockBlobPutBlobFromUrlResponse'
   - '@azure/storage-blob.BlockBlobStageBlockFromURLResponse'
   - '@azure/storage-blob.BlockBlobStageBlockResponse'
@@ -319,8 +330,10 @@ typeAliases:
   - '@azure/storage-blob.BlockListType'
   - '@azure/storage-blob.ContainerCreateResponse'
   - '@azure/storage-blob.ContainerDeleteResponse'
+  - '@azure/storage-blob.ContainerFilterBlobsResponse'
   - '@azure/storage-blob.ContainerFindBlobsByTagsSegmentResponse'
   - '@azure/storage-blob.ContainerGetAccessPolicyResponse'
+  - '@azure/storage-blob.ContainerGetAccessPolicyResponseModel'
   - '@azure/storage-blob.ContainerGetPropertiesResponse'
   - '@azure/storage-blob.ContainerListBlobFlatSegmentResponse'
   - '@azure/storage-blob.ContainerListBlobHierarchySegmentResponse'
@@ -343,7 +356,9 @@ typeAliases:
   - '@azure/storage-blob.PageBlobClearPagesResponse'
   - '@azure/storage-blob.PageBlobCopyIncrementalResponse'
   - '@azure/storage-blob.PageBlobCreateResponse'
+  - '@azure/storage-blob.PageBlobGetPageRangesDiffResponseInternal'
   - '@azure/storage-blob.PageBlobGetPageRangesDiffResponseModel'
+  - '@azure/storage-blob.PageBlobGetPageRangesResponseInternal'
   - '@azure/storage-blob.PageBlobGetPageRangesResponseModel'
   - '@azure/storage-blob.PageBlobResizeResponse'
   - '@azure/storage-blob.PageBlobUpdateSequenceNumberResponse'
@@ -351,45 +366,24 @@ typeAliases:
   - '@azure/storage-blob.PageBlobUploadPagesResponse'
   - '@azure/storage-blob.PublicAccessType'
   - '@azure/storage-blob.RehydratePriority'
-  - '@azure/storage-blob.RequestPolicyFactory'
   - '@azure/storage-blob.SequenceNumberActionType'
   - '@azure/storage-blob.ServiceFindBlobsByTagsSegmentResponse'
   - '@azure/storage-blob.ServiceGetAccountInfoResponse'
   - '@azure/storage-blob.ServiceGetPropertiesResponse'
+  - '@azure/storage-blob.ServiceGetPropertiesResponseInternal'
   - '@azure/storage-blob.ServiceGetStatisticsResponse'
+  - '@azure/storage-blob.ServiceGetStatisticsResponseInternal'
   - '@azure/storage-blob.ServiceGetUserDelegationKeyResponse'
   - '@azure/storage-blob.ServiceListContainersSegmentResponse'
+  - '@azure/storage-blob.ServiceListContainersSegmentResponseInternal'
   - '@azure/storage-blob.ServiceSetPropertiesResponse'
+  - '@azure/storage-blob.ServiceSubmitBatchResponseInternal'
   - '@azure/storage-blob.ServiceSubmitBatchResponseModel'
   - '@azure/storage-blob.SkuName'
   - '@azure/storage-blob.SyncCopyStatusType'
   - '@azure/storage-blob.Tags'
+  - '@azure/storage-blob.WithResponse'
 functions:
-  - name: deserializationPolicy(DeserializationContentTypes, SerializerOptions)
-    uid: '@azure/storage-blob.deserializationPolicy'
-    package: '@azure/storage-blob'
-    summary: >-
-      Create a new serialization RequestPolicyCreator that will serialized HTTP
-      request bodies as they
-
-      pass through the HTTP pipeline.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deserializationPolicy(deserializationContentTypes?:
-        DeserializationContentTypes, parsingOptions?: SerializerOptions):
-        RequestPolicyFactory
-      parameters:
-        - id: deserializationContentTypes
-          type: <xref uid="@azure/core-http.DeserializationContentTypes" />
-          description: ''
-        - id: parsingOptions
-          type: <xref uid="@azure/core-http.SerializerOptions" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/storage-blob.RequestPolicyFactory" />
   - name: >-
       generateAccountSASQueryParameters(AccountSASSignatureValues,
       StorageSharedKeyCredential)
@@ -467,7 +461,7 @@ functions:
           containerName, // Required
           permissions: ContainerSASPermissions.parse("racwdl"), // Required
           startsOn: new Date(), // Optional
-          expiresOn: new Date(new Date().valueOf() + 86400), // Required. Date type
+          expiresOn: new Date(new Date().valueOf() + 86400 * 1000), // Required. Date type
           ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
           protocol: SASProtocol.HttpsAndHttp, // Optional
           version: "2016-05-31" // Optional
@@ -492,7 +486,7 @@ functions:
       await containerClient.setAccessPolicy(undefined, [
         {
           accessPolicy: {
-            expiresOn: new Date(new Date().valueOf() + 86400), // Date type
+            expiresOn: new Date(new Date().valueOf() + 86400 * 1000), // Date type
             permissions: ContainerSASPermissions.parse("racwdl").toString(),
             startsOn: new Date() // Date type
           },
@@ -524,7 +518,7 @@ functions:
           blobName, // Required
           permissions: BlobSASPermissions.parse("racwd"), // Required
           startsOn: new Date(), // Optional
-          expiresOn: new Date(new Date().valueOf() + 86400), // Required. Date type
+          expiresOn: new Date(new Date().valueOf() + 86400 * 1000), // Required. Date type
           cacheControl: "cache-control-override", // Optional
           contentDisposition: "content-disposition-override", // Optional
           contentEncoding: "content-encoding-override", // Optional
@@ -617,7 +611,7 @@ functions:
   - name: getBlobServiceAccountAudience(string)
     uid: '@azure/storage-blob.getBlobServiceAccountAudience'
     package: '@azure/storage-blob'
-    summary: ''
+    summary: To get OAuth audience for a storage account for blob service.
     remarks: ''
     isDeprecated: false
     syntax:

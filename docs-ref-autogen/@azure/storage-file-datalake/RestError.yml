@@ -2,46 +2,32 @@
 name: RestError
 uid: '@azure/storage-file-datalake.RestError'
 package: '@azure/storage-file-datalake'
-summary: An error resulting from an HTTP request to a service endpoint.
+summary: A custom error type for failed pipeline requests.
 fullName: RestError
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: RestError(string, string, number, WebResourceLike, HttpOperationResponse)
+  - name: RestError(string, RestErrorOptions)
     uid: '@azure/storage-file-datalake.RestError.constructor'
     package: '@azure/storage-file-datalake'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        new RestError(message: string, code?: string, statusCode?: number,
-        request?: WebResourceLike, response?: HttpOperationResponse)
+      content: 'new RestError(message: string, options?: RestErrorOptions)'
       parameters:
         - id: message
           type: string
           description: ''
-        - id: code
-          type: string
-          description: ''
-        - id: statusCode
-          type: number
-          description: ''
-        - id: request
-          type: <xref uid="@azure/core-http.WebResourceLike" />
-          description: ''
-        - id: response
-          type: <xref uid="@azure/storage-file-datalake.HttpOperationResponse" />
+        - id: options
+          type: <xref uid="@azure/core-rest-pipeline.RestErrorOptions" />
           description: ''
 properties:
   - name: code
     uid: '@azure/storage-file-datalake.RestError.code'
     package: '@azure/storage-file-datalake'
-    summary: >-
-      The error code, if any. Can be one of the static error code properties
-      (REQUEST_SEND_ERROR / PARSE_ERROR) or can be a string code from an
-      underlying system call (E_NOENT).
+    summary: The code of the error itself (use statics on RestError if possible.)
     fullName: code
     remarks: ''
     isDeprecated: false
@@ -53,9 +39,7 @@ properties:
   - name: details
     uid: '@azure/storage-file-datalake.RestError.details'
     package: '@azure/storage-file-datalake'
-    summary: >-
-      Any additional details. In the case of deserialization errors, can be the
-      processed response.
+    summary: Bonus property set by the throw site.
     fullName: details
     remarks: ''
     isDeprecated: false
@@ -67,10 +51,9 @@ properties:
   - name: PARSE_ERROR
     uid: '@azure/storage-file-datalake.RestError.PARSE_ERROR'
     package: '@azure/storage-file-datalake'
-    summary: >-
-      A constant string to identify errors that may arise from parsing an
-      incoming HTTP response. Usually indicates a malformed HTTP body, such as
-      an encoded JSON payload that is incomplete.
+    summary: |-
+      This means that parsing the response from the server failed.
+      It may have been malformed.
     fullName: PARSE_ERROR
     remarks: ''
     isDeprecated: false
@@ -82,22 +65,22 @@ properties:
   - name: request
     uid: '@azure/storage-file-datalake.RestError.request'
     package: '@azure/storage-file-datalake'
-    summary: Outgoing request.
+    summary: The request that was made.
     fullName: request
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'request?: WebResourceLike'
+      content: 'request?: PipelineRequest'
       return:
         description: ''
-        type: <xref uid="@azure/core-http.WebResourceLike" />
+        type: <xref uid="@azure/core-rest-pipeline.PipelineRequest" />
   - name: REQUEST_SEND_ERROR
     uid: '@azure/storage-file-datalake.RestError.REQUEST_SEND_ERROR'
     package: '@azure/storage-file-datalake'
-    summary: >-
-      A constant string to identify errors that may arise when making an HTTP
-      request that indicates an issue with the transport layer (e.g. the
-      hostname of the URL cannot be resolved via DNS.)
+    summary: |-
+      Something went wrong when making the request.
+      This means the actual request failed for some reason,
+      such as a DNS issue or the connection being lost.
     fullName: REQUEST_SEND_ERROR
     remarks: ''
     isDeprecated: false
@@ -109,19 +92,19 @@ properties:
   - name: response
     uid: '@azure/storage-file-datalake.RestError.response'
     package: '@azure/storage-file-datalake'
-    summary: Incoming response.
+    summary: The response received (if any.)
     fullName: response
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'response?: HttpOperationResponse'
+      content: 'response?: PipelineResponse'
       return:
         description: ''
-        type: <xref uid="@azure/storage-file-datalake.HttpOperationResponse" />
+        type: <xref uid="@azure/core-rest-pipeline.PipelineResponse" />
   - name: statusCode
     uid: '@azure/storage-file-datalake.RestError.statusCode'
     package: '@azure/storage-file-datalake'
-    summary: The HTTP status code of the response, if one was returned.
+    summary: The HTTP status code of the request (if applicable.)
     fullName: statusCode
     remarks: ''
     isDeprecated: false

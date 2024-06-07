@@ -7,8 +7,10 @@ fullName: FileReadResponse
 remarks: ''
 isDeprecated: false
 syntax: |
-  type FileReadResponse = FileReadHeaders & {
-    _response: HttpResponse & { parsedHeaders: FileReadHeaders }
-    contentAsBlob?: Promise<Blob>
-    readableStreamBody?: NodeJS.ReadableStream
-  }
+  type FileReadResponse = WithResponse<
+    FileReadHeaders & {
+      contentAsBlob?: Promise<Blob>
+      readableStreamBody?: NodeJS.ReadableStream
+    },
+    FileReadHeaders
+  >

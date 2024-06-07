@@ -2,14 +2,37 @@
 name: HttpOperationResponse
 uid: '@azure/storage-file-share.HttpOperationResponse'
 package: '@azure/storage-file-share'
-summary: |-
-  Wrapper object for http request and response. Deserialized object is stored in
-  the `parsedBody` property when the response body is received in JSON or XML.
+summary: Http Response that is compatible with the core-v1(core-http).
 fullName: HttpOperationResponse
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: headers
+    uid: '@azure/storage-file-share.HttpOperationResponse.headers'
+    package: '@azure/storage-file-share'
+    summary: A collection of HTTP header key/value pairs.
+    fullName: headers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'headers: HttpHeadersLike'
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-file-share.HttpHeaders" />
+  - name: request
+    uid: '@azure/storage-file-share.HttpOperationResponse.request'
+    package: '@azure/storage-file-share'
+    summary: A description of a HTTP request to be made to a remote server.
+    fullName: request
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'request: WebResourceLike'
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-file-share.WebResource" />
+inheritedProperties:
   - name: blobBody
     uid: '@azure/storage-file-share.HttpOperationResponse.blobBody'
     package: '@azure/storage-file-share'
@@ -26,6 +49,7 @@ properties:
       return:
         description: ''
         type: Promise&lt;Blob&gt;
+    inheritanceDescription: <b>Inherited From</b> Omit.blobBody
   - name: bodyAsText
     uid: '@azure/storage-file-share.HttpOperationResponse.bodyAsText'
     package: '@azure/storage-file-share'
@@ -38,10 +62,28 @@ properties:
       return:
         description: ''
         type: null | string
+    inheritanceDescription: <b>Inherited From</b> Omit.bodyAsText
+  - name: browserStreamBody
+    uid: '@azure/storage-file-share.HttpOperationResponse.browserStreamBody'
+    package: '@azure/storage-file-share'
+    summary: |-
+      BROWSER ONLY
+
+      The response body as a browser ReadableStream.
+      Always undefined in node.js.
+    fullName: browserStreamBody
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'browserStreamBody?: ReadableStream<Uint8Array>'
+      return:
+        description: ''
+        type: ReadableStream&lt;Uint8Array&gt;
+    inheritanceDescription: <b>Inherited From</b> Omit.browserStreamBody
   - name: parsedBody
     uid: '@azure/storage-file-share.HttpOperationResponse.parsedBody'
     package: '@azure/storage-file-share'
-    summary: The response body as parsed JSON or XML
+    summary: The response body as parsed JSON or XML.
     fullName: parsedBody
     remarks: ''
     isDeprecated: false
@@ -50,6 +92,7 @@ properties:
       return:
         description: ''
         type: any
+    inheritanceDescription: <b>Inherited From</b> Omit.parsedBody
   - name: parsedHeaders
     uid: '@azure/storage-file-share.HttpOperationResponse.parsedHeaders'
     package: '@azure/storage-file-share'
@@ -58,10 +101,11 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'parsedHeaders?: {[key: string]: any}'
+      content: 'parsedHeaders?: {[key: string]: unknown}'
       return:
         description: ''
-        type: '{[key: string]: any}'
+        type: '{[key: string]: unknown}'
+    inheritanceDescription: <b>Inherited From</b> Omit.parsedHeaders
   - name: readableStreamBody
     uid: '@azure/storage-file-share.HttpOperationResponse.readableStreamBody'
     package: '@azure/storage-file-share'
@@ -78,37 +122,11 @@ properties:
       return:
         description: ''
         type: ReadableStream
-inheritedProperties:
-  - name: headers
-    uid: '@azure/storage-file-share.HttpOperationResponse.headers'
-    package: '@azure/storage-file-share'
-    summary: The HTTP response headers.
-    fullName: headers
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'headers: HttpHeadersLike'
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http.HttpHeadersLike" />
-    inheritanceDescription: <b>Inherited From</b> HttpResponse.headers
-  - name: request
-    uid: '@azure/storage-file-share.HttpOperationResponse.request'
-    package: '@azure/storage-file-share'
-    summary: The raw request
-    fullName: request
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'request: WebResourceLike'
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http.WebResourceLike" />
-    inheritanceDescription: <b>Inherited From</b> HttpResponse.request
+    inheritanceDescription: <b>Inherited From</b> Omit.readableStreamBody
   - name: status
     uid: '@azure/storage-file-share.HttpOperationResponse.status'
     package: '@azure/storage-file-share'
-    summary: The HTTP response status (e.g. 200)
+    summary: The HTTP status code of the response.
     fullName: status
     remarks: ''
     isDeprecated: false
@@ -117,5 +135,7 @@ inheritedProperties:
       return:
         description: ''
         type: number
-    inheritanceDescription: <b>Inherited From</b> HttpResponse.status
-extends: <xref uid="@azure/core-http.HttpResponse" />
+    inheritanceDescription: <b>Inherited From</b> Omit.status
+extends: >-
+  Omit&lt;<xref uid="@azure/core-client.FullOperationResponse" />, "request" |
+  "headers"&gt;

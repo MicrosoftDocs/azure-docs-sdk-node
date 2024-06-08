@@ -16,12 +16,10 @@ classes:
   - '@azure/storage-queue.BaseRequestPolicy'
   - '@azure/storage-queue.Credential'
   - '@azure/storage-queue.CredentialPolicy'
-  - '@azure/storage-queue.HttpHeaders'
   - '@azure/storage-queue.Pipeline'
   - '@azure/storage-queue.QueueClient'
   - '@azure/storage-queue.QueueSASPermissions'
   - '@azure/storage-queue.QueueServiceClient'
-  - '@azure/storage-queue.RequestPolicyOptions'
   - '@azure/storage-queue.RestError'
   - '@azure/storage-queue.SASQueryParameters'
   - '@azure/storage-queue.StorageBrowserPolicy'
@@ -30,7 +28,6 @@ classes:
   - '@azure/storage-queue.StorageRetryPolicyFactory'
   - '@azure/storage-queue.StorageSharedKeyCredential'
   - '@azure/storage-queue.StorageSharedKeyCredentialPolicy'
-  - '@azure/storage-queue.WebResource'
 interfaces:
   - '@azure/storage-queue.AccessPolicy'
   - '@azure/storage-queue.AccountSASSignatureValues'
@@ -39,7 +36,9 @@ interfaces:
   - '@azure/storage-queue.DequeuedMessageItem'
   - '@azure/storage-queue.EnqueuedMessage'
   - '@azure/storage-queue.GeoReplication'
+  - '@azure/storage-queue.HttpHeaders'
   - '@azure/storage-queue.HttpOperationResponse'
+  - '@azure/storage-queue.HttpResponse'
   - '@azure/storage-queue.IHttpClient'
   - '@azure/storage-queue.ListQueuesSegmentResponse'
   - '@azure/storage-queue.Logging'
@@ -55,6 +54,7 @@ interfaces:
   - '@azure/storage-queue.Metadata'
   - '@azure/storage-queue.Metrics'
   - '@azure/storage-queue.PeekedMessageItem'
+  - '@azure/storage-queue.PipelineLike'
   - '@azure/storage-queue.PipelineOptions'
   - '@azure/storage-queue.QueueClearMessagesOptions'
   - '@azure/storage-queue.QueueCreateHeaders'
@@ -82,9 +82,14 @@ interfaces:
   - '@azure/storage-queue.QueueSetMetadataHeaders'
   - '@azure/storage-queue.QueueSetMetadataOptions'
   - '@azure/storage-queue.QueueUpdateMessageOptions'
-  - '@azure/storage-queue.RequestPolicy'
+  - '@azure/storage-queue.RequestPolicyFactory'
+  - '@azure/storage-queue.RequestPolicyOptions'
+  - '@azure/storage-queue.ResponseLike'
+  - '@azure/storage-queue.ResponseWithBody'
+  - '@azure/storage-queue.ResponseWithHeaders'
   - '@azure/storage-queue.RetentionPolicy'
   - '@azure/storage-queue.SasIPRange'
+  - '@azure/storage-queue.ServiceClientOptions'
   - '@azure/storage-queue.ServiceGenerateAccountSasUrlOptions'
   - '@azure/storage-queue.ServiceGetPropertiesHeaders'
   - '@azure/storage-queue.ServiceGetPropertiesOptions'
@@ -98,6 +103,7 @@ interfaces:
   - '@azure/storage-queue.SignedIdentifierModel'
   - '@azure/storage-queue.StoragePipelineOptions'
   - '@azure/storage-queue.StorageRetryOptions'
+  - '@azure/storage-queue.WebResource'
 typeAliases:
   - '@azure/storage-queue.CredentialPolicyCreator'
   - '@azure/storage-queue.GeoReplicationStatusType'
@@ -119,37 +125,12 @@ typeAliases:
   - '@azure/storage-queue.QueueSetMetadataResponse'
   - '@azure/storage-queue.QueueUpdateMessageResponse'
   - '@azure/storage-queue.ReceivedMessageItem'
-  - '@azure/storage-queue.RequestPolicyFactory'
   - '@azure/storage-queue.ServiceGetPropertiesResponse'
   - '@azure/storage-queue.ServiceGetStatisticsResponse'
   - '@azure/storage-queue.ServiceListQueuesSegmentResponse'
   - '@azure/storage-queue.ServiceSetPropertiesResponse'
+  - '@azure/storage-queue.WithResponse'
 functions:
-  - name: deserializationPolicy(DeserializationContentTypes, SerializerOptions)
-    uid: '@azure/storage-queue.deserializationPolicy'
-    package: '@azure/storage-queue'
-    summary: >-
-      Create a new serialization RequestPolicyCreator that will serialized HTTP
-      request bodies as they
-
-      pass through the HTTP pipeline.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deserializationPolicy(deserializationContentTypes?:
-        DeserializationContentTypes, parsingOptions?: SerializerOptions):
-        RequestPolicyFactory
-      parameters:
-        - id: deserializationContentTypes
-          type: <xref uid="@azure/core-http.DeserializationContentTypes" />
-          description: ''
-        - id: parsingOptions
-          type: <xref uid="@azure/core-http.SerializerOptions" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/storage-queue.RequestPolicyFactory" />
   - name: >-
       generateAccountSASQueryParameters(AccountSASSignatureValues,
       StorageSharedKeyCredential)
@@ -231,7 +212,7 @@ functions:
   - name: getQueueServiceAccountAudience(string)
     uid: '@azure/storage-queue.getQueueServiceAccountAudience'
     package: '@azure/storage-queue'
-    summary: ''
+    summary: To get OAuth audience for a storage account for queue service.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -245,6 +226,21 @@ functions:
       return:
         description: ''
         type: string
+  - name: isPipelineLike(unknown)
+    uid: '@azure/storage-queue.isPipelineLike'
+    package: '@azure/storage-queue'
+    summary: A helper to decide if a given argument satisfies the Pipeline contract
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isPipelineLike(pipeline: unknown): pipeline'
+      parameters:
+        - id: pipeline
+          type: unknown
+          description: An argument that may be a Pipeline
+      return:
+        description: true when the argument satisfies the Pipeline contract
+        type: pipeline
   - name: >-
       newPipeline(StorageSharedKeyCredential | AnonymousCredential |
       TokenCredential, StoragePipelineOptions)
@@ -272,7 +268,7 @@ functions:
             AnonymousCredential is used.
         - id: pipelineOptions
           type: <xref uid="@azure/storage-queue.StoragePipelineOptions" />
-          description: Options.
+          description: Optional. Options.
       return:
         description: A new Pipeline object.
         type: <xref uid="@azure/storage-queue.Pipeline" />

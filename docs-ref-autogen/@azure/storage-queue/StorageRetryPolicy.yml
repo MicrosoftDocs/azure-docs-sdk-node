@@ -9,7 +9,7 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      StorageRetryPolicy(RequestPolicy, RequestPolicyOptions,
+      StorageRetryPolicy(RequestPolicy, RequestPolicyOptionsLike,
       StorageRetryOptions)
     uid: '@azure/storage-queue.StorageRetryPolicy.constructor'
     package: '@azure/storage-queue'
@@ -19,10 +19,10 @@ constructors:
     syntax:
       content: >-
         new StorageRetryPolicy(nextPolicy: RequestPolicy, options:
-        RequestPolicyOptions, retryOptions?: StorageRetryOptions)
+        RequestPolicyOptionsLike, retryOptions?: StorageRetryOptions)
       parameters:
         - id: nextPolicy
-          type: <xref uid="@azure/storage-queue.RequestPolicy" />
+          type: <xref uid="@azure/storage-queue.IHttpClient" />
           description: ''
         - id: options
           type: <xref uid="@azure/storage-queue.RequestPolicyOptions" />
@@ -46,7 +46,7 @@ inheritedMethods:
       content: 'function log(logLevel: HttpPipelineLogLevel, message: string)'
       parameters:
         - id: logLevel
-          type: <xref uid="@azure/core-http.HttpPipelineLogLevel" />
+          type: <xref uid="@azure/core-http-compat.HttpPipelineLogLevel" />
           description: The log level of this log.
         - id: message
           type: string
@@ -64,7 +64,7 @@ inheritedMethods:
       content: 'function shouldLog(logLevel: HttpPipelineLogLevel): boolean'
       parameters:
         - id: logLevel
-          type: <xref uid="@azure/core-http.HttpPipelineLogLevel" />
+          type: <xref uid="@azure/core-http-compat.HttpPipelineLogLevel" />
           description: The log level of the log that will be logged.
       return:
         description: Whether or not a log with the provided log level should be logged.
@@ -73,16 +73,14 @@ inheritedMethods:
       <b>Inherited From</b>
       [BaseRequestPolicy.shouldLog](xref:@azure/storage-queue.BaseRequestPolicy.shouldLog)
 methods:
-  - name: sendRequest(WebResource)
+  - name: sendRequest(WebResourceLike)
     uid: '@azure/storage-queue.StorageRetryPolicy.sendRequest'
     package: '@azure/storage-queue'
     summary: Sends request.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function sendRequest(request: WebResource):
-        Promise<HttpOperationResponse>
+      content: 'function sendRequest(request: WebResourceLike): Promise<CompatResponse>'
       parameters:
         - id: request
           type: <xref uid="@azure/storage-queue.WebResource" />

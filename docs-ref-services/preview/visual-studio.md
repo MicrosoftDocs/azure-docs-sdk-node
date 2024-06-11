@@ -1,7 +1,7 @@
 ---
 title: Azure Visual Studio SDK for JavaScript
 description: Reference for Azure Visual Studio SDK for JavaScript
-ms.date: 06/10/2024
+ms.date: 06/11/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: visualstudio

@@ -82,6 +82,8 @@ interfaces:
   - '@azure/storage-blob.BlobFlatListSegment'
   - '@azure/storage-blob.BlobFlatListSegmentModel'
   - '@azure/storage-blob.BlobGenerateSasUrlOptions'
+  - '@azure/storage-blob.BlobGetAccountInfoHeaders'
+  - '@azure/storage-blob.BlobGetAccountInfoOptions'
   - '@azure/storage-blob.BlobGetPropertiesHeaders'
   - '@azure/storage-blob.BlobGetPropertiesOptions'
   - '@azure/storage-blob.BlobGetPropertiesResponse'
@@ -166,6 +168,8 @@ interfaces:
   - '@azure/storage-blob.ContainerGenerateSasUrlOptions'
   - '@azure/storage-blob.ContainerGetAccessPolicyHeaders'
   - '@azure/storage-blob.ContainerGetAccessPolicyOptions'
+  - '@azure/storage-blob.ContainerGetAccountInfoHeaders'
+  - '@azure/storage-blob.ContainerGetAccountInfoOptions'
   - '@azure/storage-blob.ContainerGetPropertiesHeaders'
   - '@azure/storage-blob.ContainerGetPropertiesOptions'
   - '@azure/storage-blob.ContainerItem'
@@ -304,6 +308,7 @@ typeAliases:
   - '@azure/storage-blob.BlobDeleteResponse'
   - '@azure/storage-blob.BlobDownloadResponseInternal'
   - '@azure/storage-blob.BlobDownloadResponseModel'
+  - '@azure/storage-blob.BlobGetAccountInfoResponse'
   - '@azure/storage-blob.BlobGetPropertiesResponseModel'
   - '@azure/storage-blob.BlobGetTagsResponse'
   - '@azure/storage-blob.BlobImmutabilityPolicyMode'
@@ -334,6 +339,7 @@ typeAliases:
   - '@azure/storage-blob.ContainerFindBlobsByTagsSegmentResponse'
   - '@azure/storage-blob.ContainerGetAccessPolicyResponse'
   - '@azure/storage-blob.ContainerGetAccessPolicyResponseModel'
+  - '@azure/storage-blob.ContainerGetAccountInfoResponse'
   - '@azure/storage-blob.ContainerGetPropertiesResponse'
   - '@azure/storage-blob.ContainerListBlobFlatSegmentResponse'
   - '@azure/storage-blob.ContainerListBlobHierarchySegmentResponse'
@@ -380,6 +386,7 @@ typeAliases:
   - '@azure/storage-blob.ServiceSubmitBatchResponseInternal'
   - '@azure/storage-blob.ServiceSubmitBatchResponseModel'
   - '@azure/storage-blob.SkuName'
+  - '@azure/storage-blob.SyncCopyStatusType'
   - '@azure/storage-blob.Tags'
   - '@azure/storage-blob.WithResponse'
 functions:
@@ -460,7 +467,7 @@ functions:
           containerName, // Required
           permissions: ContainerSASPermissions.parse("racwdl"), // Required
           startsOn: new Date(), // Optional
-          expiresOn: new Date(new Date().valueOf() + 86400), // Required. Date type
+          expiresOn: new Date(new Date().valueOf() + 86400 * 1000), // Required. Date type
           ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
           protocol: SASProtocol.HttpsAndHttp, // Optional
           version: "2016-05-31" // Optional
@@ -485,7 +492,7 @@ functions:
       await containerClient.setAccessPolicy(undefined, [
         {
           accessPolicy: {
-            expiresOn: new Date(new Date().valueOf() + 86400), // Date type
+            expiresOn: new Date(new Date().valueOf() + 86400 * 1000), // Date type
             permissions: ContainerSASPermissions.parse("racwdl").toString(),
             startsOn: new Date() // Date type
           },
@@ -517,7 +524,7 @@ functions:
           blobName, // Required
           permissions: BlobSASPermissions.parse("racwd"), // Required
           startsOn: new Date(), // Optional
-          expiresOn: new Date(new Date().valueOf() + 86400), // Required. Date type
+          expiresOn: new Date(new Date().valueOf() + 86400 * 1000), // Required. Date type
           cacheControl: "cache-control-override", // Optional
           contentDisposition: "content-disposition-override", // Optional
           contentEncoding: "content-encoding-override", // Optional
@@ -607,6 +614,23 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/storage-blob.SASQueryParameters" />
+  - name: getBlobServiceAccountAudience(string)
+    uid: '@azure/storage-blob.getBlobServiceAccountAudience'
+    package: '@azure/storage-blob'
+    summary: To get OAuth audience for a storage account for blob service.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getBlobServiceAccountAudience(storageAccountName: string):
+        string
+      parameters:
+        - id: storageAccountName
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: string
   - name: isPipelineLike(unknown)
     uid: '@azure/storage-blob.isPipelineLike'
     package: '@azure/storage-blob'

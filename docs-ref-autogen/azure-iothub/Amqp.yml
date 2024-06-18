@@ -603,18 +603,24 @@ inheritedMethods:
       StaticEventEmitterOptions)
     uid: azure-iothub.Amqp.on
     package: azure-iothub
-    summary: |-
+    summary: >-
       ```js
+
       import { on, EventEmitter } from 'node:events';
+
       import process from 'node:process';
+
 
       const ee = new EventEmitter();
 
+
       // Emit later on
+
       process.nextTick(() => {
         ee.emit('foo', 'bar');
         ee.emit('foo', 42);
       });
+
 
       for await (const event of on(ee, 'foo')) {
         // The execution of this inner block is synchronous and it
@@ -622,21 +628,33 @@ inheritedMethods:
         // if concurrent execution is required.
         console.log(event); // prints ['bar'] [42]
       }
+
       // Unreachable here
+
       ```
 
+
       Returns an `AsyncIterator` that iterates `eventName` events. It will throw
+
       if the `EventEmitter` emits `'error'`. It removes all listeners when
+
       exiting the loop. The `value` returned by each iteration is an array
+
       composed of the emitted event arguments.
+
 
       An `AbortSignal` can be used to cancel waiting on events:
 
+
       ```js
+
       import { on, EventEmitter } from 'node:events';
+
       import process from 'node:process';
 
+
       const ac = new AbortController();
+
 
       (async () => {
         const ee = new EventEmitter();
@@ -656,7 +674,43 @@ inheritedMethods:
         // Unreachable here
       })();
 
+
       process.nextTick(() => ac.abort());
+
+      ```
+
+
+      Use the `close` option to specify an array of event names that will end
+      the iteration:
+
+
+      ```js
+
+      import { on, EventEmitter } from 'node:events';
+
+      import process from 'node:process';
+
+
+      const ee = new EventEmitter();
+
+
+      // Emit later on
+
+      process.nextTick(() => {
+        ee.emit('foo', 'bar');
+        ee.emit('foo', 42);
+        ee.emit('close');
+      });
+
+
+      for await (const event of on(ee, 'foo', { close: ['close'] })) {
+        console.log(event); // prints ['bar'] [42]
+      }
+
+      // the loop will exit after 'close' is emitted
+
+      console.log('done'); // prints 'done'
+
       ```
     remarks: ''
     isDeprecated: false
@@ -681,7 +735,7 @@ inheritedMethods:
           `emitter`
         type: AsyncIterableIterator&lt;any&gt;
     inheritanceDescription: <b>Inherited From</b> EventEmitter.on
-  - name: on(EventTarget, string, StaticEventEmitterOptions)
+  - name: on(EventTarget, string, StaticEventEmitterIteratorOptions)
     uid: azure-iothub.Amqp.on_1
     package: azure-iothub
     summary: ''
@@ -690,7 +744,7 @@ inheritedMethods:
     syntax:
       content: >-
         static function on(emitter: EventTarget, eventName: string, options?:
-        StaticEventEmitterOptions): AsyncIterableIterator<any>
+        StaticEventEmitterIteratorOptions): AsyncIterableIterator<any>
       parameters:
         - id: emitter
           type: EventTarget
@@ -699,7 +753,7 @@ inheritedMethods:
           type: string
           description: ''
         - id: options
-          type: StaticEventEmitterOptions
+          type: StaticEventEmitterIteratorOptions
           description: ''
       return:
         description: ''
@@ -1398,5 +1452,5 @@ inheritedMethods:
         - id: args
           type: AnyRest
           description: ''
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.__@captureRejectionSymbol@122
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.__@captureRejectionSymbol@123
 extends: EventEmitter

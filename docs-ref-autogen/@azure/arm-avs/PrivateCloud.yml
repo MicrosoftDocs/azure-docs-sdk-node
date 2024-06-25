@@ -34,6 +34,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-avs.Circuit" />
+  - name: dnsZoneType
+    uid: '@azure/arm-avs.PrivateCloud.dnsZoneType'
+    package: '@azure/arm-avs'
+    summary: The type of DNS zone to use.
+    fullName: dnsZoneType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'dnsZoneType?: string'
+      return:
+        description: ''
+        type: string
   - name: encryption
     uid: '@azure/arm-avs.PrivateCloud.encryption'
     package: '@azure/arm-avs'
@@ -67,9 +79,15 @@ properties:
     package: '@azure/arm-avs'
     summary: >-
       Array of additional networks noncontiguous with networkBlock. Networks
-      must be unique and non-overlapping across VNet in your subscription,
-      on-premise, and this privateCloud networkBlock attribute. Make sure the
-      CIDR format conforms to (A.B.C.D/X).
+      must be
+
+      unique and non-overlapping across VNet in your subscription, on-premise,
+      and
+
+      this privateCloud networkBlock attribute. Make sure the CIDR format
+      conforms to
+
+      (A.B.C.D/X).
     fullName: extendedNetworkBlocks
     remarks: ''
     isDeprecated: false
@@ -97,15 +115,15 @@ properties:
   - name: identity
     uid: '@azure/arm-avs.PrivateCloud.identity'
     package: '@azure/arm-avs'
-    summary: The identity of the private cloud, if configured.
+    summary: The managed service identities assigned to this resource.
     fullName: identity
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'identity?: PrivateCloudIdentity'
+      content: 'identity?: SystemAssignedServiceIdentity'
       return:
         description: ''
-        type: <xref uid="@azure/arm-avs.PrivateCloudIdentity" />
+        type: <xref uid="@azure/arm-avs.SystemAssignedServiceIdentity" />
   - name: identitySources
     uid: '@azure/arm-avs.PrivateCloud.identitySources'
     package: '@azure/arm-avs'
@@ -163,8 +181,12 @@ properties:
     package: '@azure/arm-avs'
     summary: >-
       The block of addresses should be unique across VNet in your subscription
-      as well as on-premise. Make sure the CIDR format is conformed to
-      (A.B.C.D/X) where A,B,C,D are between 0 and 255, and X is between 0 and 22
+      as
+
+      well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X)
+      where
+
+      A,B,C,D are between 0 and 255, and X is between 0 and 22
     fullName: networkBlock
     remarks: ''
     isDeprecated: false
@@ -178,7 +200,9 @@ properties:
     package: '@azure/arm-avs'
     summary: >-
       Flag to indicate whether the private cloud has the quota for provisioned
-      NSX Public IP count raised from 64 to 1024
+      NSX
+
+      Public IP count raised from 64 to 1024
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -212,6 +236,9 @@ properties:
     summary: >-
       Optionally, set the NSX-T Manager password when the private cloud is
       created
+
+      This value contains a credential. Consider obscuring before showing to
+      users
     fullName: nsxtPassword
     remarks: ''
     isDeprecated: false
@@ -255,7 +282,7 @@ properties:
   - name: secondaryCircuit
     uid: '@azure/arm-avs.PrivateCloud.secondaryCircuit'
     package: '@azure/arm-avs'
-    summary: >-
+    summary: |-
       A secondary expressRoute circuit from a separate AZ. Only present in a
       stretched private cloud
     fullName: secondaryCircuit
@@ -269,7 +296,7 @@ properties:
   - name: sku
     uid: '@azure/arm-avs.PrivateCloud.sku'
     package: '@azure/arm-avs'
-    summary: The private cloud SKU
+    summary: The SKU (Stock Keeping Unit) assigned to this resource.
     fullName: sku
     remarks: ''
     isDeprecated: false
@@ -300,11 +327,26 @@ properties:
     summary: >-
       Optionally, set the vCenter admin password when the private cloud is
       created
+
+      This value contains a credential. Consider obscuring before showing to
+      users
     fullName: vcenterPassword
     remarks: ''
     isDeprecated: false
     syntax:
       content: 'vcenterPassword?: string'
+      return:
+        description: ''
+        type: string
+  - name: virtualNetworkId
+    uid: '@azure/arm-avs.PrivateCloud.virtualNetworkId'
+    package: '@azure/arm-avs'
+    summary: Azure resource ID of the virtual network
+    fullName: virtualNetworkId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'virtualNetworkId?: string'
       return:
         description: ''
         type: string
@@ -329,7 +371,8 @@ inheritedProperties:
     uid: '@azure/arm-avs.PrivateCloud.id'
     package: '@azure/arm-avs'
     summary: >-
-      Resource ID.
+      Fully qualified resource ID for the resource. E.g.
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -347,12 +390,12 @@ inheritedProperties:
   - name: location
     uid: '@azure/arm-avs.PrivateCloud.location'
     package: '@azure/arm-avs'
-    summary: Resource location
+    summary: The geo-location where the resource lives
     fullName: location
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'location?: string'
+      content: 'location: string'
       return:
         description: ''
         type: string
@@ -363,7 +406,7 @@ inheritedProperties:
     uid: '@azure/arm-avs.PrivateCloud.name'
     package: '@azure/arm-avs'
     summary: >-
-      Resource name.
+      The name of the resource
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -378,10 +421,30 @@ inheritedProperties:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.name](xref:@azure/arm-avs.TrackedResource.name)
+  - name: systemData
+    uid: '@azure/arm-avs.PrivateCloud.systemData'
+    package: '@azure/arm-avs'
+    summary: >-
+      Azure Resource Manager metadata containing createdBy and modifiedBy
+      information.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: systemData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'systemData?: SystemData'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-avs.SystemData" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.systemData](xref:@azure/arm-avs.TrackedResource.systemData)
   - name: tags
     uid: '@azure/arm-avs.PrivateCloud.tags'
     package: '@azure/arm-avs'
-    summary: Resource tags
+    summary: Resource tags.
     fullName: tags
     remarks: ''
     isDeprecated: false
@@ -397,7 +460,8 @@ inheritedProperties:
     uid: '@azure/arm-avs.PrivateCloud.type'
     package: '@azure/arm-avs'
     summary: >-
-      Resource type.
+      The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+      "Microsoft.Storage/storageAccounts"
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.

@@ -1,19 +1,19 @@
 ---
 title: Azure StorageMover client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-storagemover, storagemover
-ms.date: 10/23/2023
+ms.date: 06/25/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storagemover
 ---
-# Azure StorageMover client library for JavaScript - version 2.0.0 
+# Azure StorageMover client library for JavaScript - version 2.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorageMover client.
 
 The Azure Storage Mover REST API.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.0.0/sdk/storagemover/arm-storagemover) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.1.0/sdk/storagemover/arm-storagemover) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-storagemover) |
 [API reference documentation](/javascript/api/@azure/arm-storagemover) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -25,7 +25,7 @@ The Azure Storage Mover REST API.
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagemover_2.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagemover_2.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +44,7 @@ npm install @azure/arm-storagemover
 To create a client object to access the Azure StorageMover API, you will need the `endpoint` of your Azure StorageMover resource and a `credential`. The Azure StorageMover client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure StorageMover resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagemover_2.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagemover_2.1.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -94,7 +94,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.1.0/sdk/core/logger).
 
 ## Next steps
 
@@ -102,7 +102,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagemover_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagemover_2.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -114,6 +114,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.1.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagemover_2.1.0/sdk/identity/identity#defaultazurecredential
 

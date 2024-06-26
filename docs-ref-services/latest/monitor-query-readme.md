@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor Query client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-query, monitor
-ms.date: 03/26/2024
+ms.date: 06/11/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor Query client library for JavaScript - version 1.2.0 
+# Azure Monitor Query client library for JavaScript - version 1.3.0 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:
@@ -30,7 +30,7 @@ The Azure Monitor Query client library is used to execute read-only queries agai
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Microsoft Edge, and Firefox
 
-For more information, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/SUPPORT.md).
+For more information, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/SUPPORT.md).
 
 ### Prerequisites
 
@@ -46,12 +46,12 @@ For more information, see our [support policy](https://github.com/Azure/azure-sd
 Install the Azure Monitor Query client library for JavaScript with npm:
 
 ```bash
-npm install @azure/monitor-query
+npm install --save @azure/monitor-query
 ```
 
 ### Create the client
 
-An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
+An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
 
 ```ts
 import { DefaultAzureCredential } from "@azure/identity";
@@ -65,29 +65,33 @@ const metricsQueryClient: MetricsQueryClient = new MetricsQueryClient(credential
 // or
 const endPoint: string = "<YOUR_METRICS_ENDPOINT>"; //for example, https://eastus.metrics.monitor.azure.com/
 
-const metricsQueryClient: MetricsQueryClient = new MetricsQueryClient(
-  endPoint,
-  credential
-);
+const metricsQueryClient: MetricsQueryClient = new MetricsQueryClient(endPoint, credential);
 ```
 
 #### Configure client for Azure sovereign cloud
 
-By default, `LogsQueryClient` and `MetricsQueryClient` are configured to use the Azure Public Cloud. To use a sovereign cloud instead, provide the correct `endpoint` argument. For example:
+By default, the library's clients are configured to use the Azure Public Cloud. To use a sovereign cloud instead, provide the correct endpoint and audience value when instantiating a client. For example:
 
 ```ts
 import { DefaultAzureCredential } from "@azure/identity";
-import { LogsQueryClient, MetricsQueryClient } from "@azure/monitor-query";
+import { LogsQueryClient, MetricsQueryClient, MetricsClient } from "@azure/monitor-query";
 
 const credential = new DefaultAzureCredential();
 
-const logsQueryClient = new LogsQueryClient(credential, {
+const logsQueryClient: LogsQueryClient = new LogsQueryClient(credential, {
   endpoint: "https://api.loganalytics.azure.cn/v1",
+  audience: "https://api.loganalytics.azure.cn/.default",
 });
-
 // or
-const metricsQueryClient = new MetricsQueryClient(credential{
+const metricsQueryClient: MetricsQueryClient = new MetricsQueryClient(credential, {
   endpoint: "https://management.chinacloudapi.cn",
+  audience: "https://monitor.azure.cn/.default",
+});
+// or
+const endPoint: string = "<YOUR_METRICS_ENDPOINT>"; //for example, https://eastus.metrics.monitor.azure.com/
+
+const metricsClient: MetricsClient = new MetricsClient(endPoint, credential, {
+  audience: "https://monitor.azure.cn/.default",
 });
 ```
 
@@ -125,6 +129,8 @@ Each set of metric values is a time series with the following characteristics:
 - [Advanced logs query scenarios](#advanced-logs-query-scenarios)
   - [Set logs query timeout](#set-logs-query-timeout)
   - [Query multiple workspaces](#query-multiple-workspaces)
+  - [Include statistics](#include-statistics)
+  - [Include visualization](#include-visualization)
 - [Metrics query](#metrics-query)
   - [Handle metrics query response](#handle-metrics-query-response)
   - [Example of handling response](#example-of-handling-response)
@@ -134,7 +140,7 @@ Each set of metric values is a time series with the following characteristics:
 
 The `LogsQueryClient` can be used to query a Log Analytics workspace using the [Kusto Query Language][kusto_query_language]. The `timespan.duration` can be specified as a string in an ISO 8601 duration format. You can use the `Durations` constants provided for some commonly used ISO 8601 durations.
 
-You can query logs by workspace ID or resource ID. The result is returned as a table with a collection of rows.
+You can query logs by Log Analytics workspace ID or Azure resource ID. The result is returned as a table with a collection of rows.
 
 #### Workspace-centric logs query
 
@@ -224,7 +230,7 @@ export async function main() {
     throw new Error("LOGS_RESOURCE_ID must be set in the environment for this sample");
   }
 
-  const kustoQuery = `MyTable_CL | summarize count()`
+  const kustoQuery = `MyTable_CL | summarize count()`;
 
   console.log(`Running '${kustoQuery}' over the last One Hour`);
   const queryLogsOptions: LogsQueryOptions = {
@@ -236,10 +242,11 @@ export async function main() {
   };
 
   const result = await logsQueryClient.queryResource(
-    logsResourceId, 
+    logsResourceId,
     kustoQuery,
     { duration: Durations.sevenDays },
-    queryLogsOptions);
+    queryLogsOptions,
+  );
 
   const executionTime =
     result.statistics && result.statistics.query && (result.statistics.query as any).executionTime;
@@ -247,7 +254,7 @@ export async function main() {
   console.log(
     `Results for query '${kustoQuery}', execution time: ${
       executionTime == null ? "unknown" : executionTime
-    }`
+    }`,
   );
 
   if (result.status === LogsQueryResultStatus.Success) {
@@ -339,7 +346,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
 
 ### Batch logs query
 
@@ -391,16 +398,16 @@ export async function main() {
     console.log(`Results for query with query: ${queriesBatch[i]}`);
     if (response.status === LogsQueryResultStatus.Success) {
       console.log(
-        `Printing results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`
+        `Printing results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`,
       );
       processTables(response.tables);
     } else if (response.status === LogsQueryResultStatus.PartialFailure) {
       console.log(
-        `Printing partial results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`
+        `Printing partial results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`,
       );
       processTables(response.partialTables);
       console.log(
-        ` Query had errors:${response.partialError.message} with code ${response.partialError.code}`
+        ` Query had errors:${response.partialError.message} with code ${response.partialError.code}`,
       );
     } else {
       console.log(`Printing errors from query '${queriesBatch[i].query}'`);
@@ -481,16 +488,16 @@ async function processBatchResult(result: LogsQueryBatchResult) {
     console.log(`Results for query with query: ${queriesBatch[i]}`);
     if (response.status === LogsQueryResultStatus.Success) {
       console.log(
-        `Printing results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`
+        `Printing results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`,
       );
       processTables(response.tables);
     } else if (response.status === LogsQueryResultStatus.PartialFailure) {
       console.log(
-        `Printing partial results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`
+        `Printing partial results from query '${queriesBatch[i].query}' for '${queriesBatch[i].timespan}'`,
       );
       processTables(response.partialTables);
       console.log(
-        ` Query had errors:${response.partialError.message} with code ${response.partialError.code}`
+        ` Query had errors:${response.partialError.message} with code ${response.partialError.code}`,
       );
     } else {
       console.log(`Printing errors from query '${queriesBatch[i].query}'`);
@@ -516,7 +523,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
 
 ### Advanced logs query scenarios
 
@@ -535,7 +542,7 @@ const result = await logsQueryClient.queryWorkspace(
   azureLogAnalyticsWorkspaceId,
   kustoQuery,
   { duration: Durations.twentyFourHours },
-  queryLogsOptions
+  queryLogsOptions,
 );
 
 const tablesFromResult = result.tables;
@@ -563,7 +570,7 @@ const result = await logsQueryClient.queryWorkspace(
   azureLogAnalyticsWorkspaceId,
   kustoQuery,
   { duration: Durations.twentyFourHours },
-  queryLogsOptions
+  queryLogsOptions,
 );
 ```
 
@@ -581,7 +588,7 @@ AppEvents | order by TenantId
 AppEvents | filter TenantId == "<workspace2>"
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
 
 #### Include statistics
 
@@ -593,7 +600,7 @@ To get logs query execution statistics, such as CPU and memory consumption:
 The following example prints the query execution time:
 
 ```ts
-const workspaceId = "<workspace_id>";
+const monitorWorkspaceId = "<workspace_id>";
 const logsQueryClient = new LogsQueryClient(new DefaultAzureCredential());
 const kustoQuery = "AzureActivity | top 10 by TimeGenerated";
 
@@ -603,7 +610,7 @@ const result = await logsQueryClient.queryWorkspace(
   { duration: Durations.oneDay },
   {
     includeQueryStatistics: true,
-  }
+  },
 );
 
 const executionTime =
@@ -612,7 +619,7 @@ const executionTime =
 console.log(
   `Results for query '${kustoQuery}', execution time: ${
     executionTime == null ? "unknown" : executionTime
-  }`
+  }`,
 );
 ```
 
@@ -639,16 +646,16 @@ To get visualization data for logs queries using the [render operator](https://l
 For example:
 
 ```ts
-const workspaceId = "<workspace_id>";
+const monitorWorkspaceId = "<workspace_id>";
 const logsQueryClient = new LogsQueryClient(new DefaultAzureCredential());
 
 const result = await logsQueryClient.queryWorkspace(
     monitorWorkspaceId,
-    @"StormEvents
+    `StormEvents
         | summarize event_count = count() by State
         | where event_count > 10
         | project State, event_count
-        | render columnchart",
+        | render columnchart`,
     { duration: Durations.oneDay },
     {
       includeVisualization: true
@@ -728,11 +735,11 @@ export async function main() {
       {
         granularity: "PT1M",
         timespan: { duration: Durations.fiveMinutes },
-      }
+      },
     );
 
     console.log(
-      `Query cost: ${metricsResponse.cost}, interval: ${metricsResponse.granularity}, time span: ${metricsResponse.timespan}`
+      `Query cost: ${metricsResponse.cost}, interval: ${metricsResponse.granularity}, time span: ${metricsResponse.timespan}`,
     );
 
     const metrics: Metric[] = metricsResponse.metrics;
@@ -797,7 +804,7 @@ export async function main() {
 
   if (!metricsResourceId) {
     throw new Error(
-      "METRICS_RESOURCE_ID for an Azure Metrics Advisor subscription must be set in the environment for this sample"
+      "METRICS_RESOURCE_ID for an Azure Metrics Advisor subscription must be set in the environment for this sample",
     );
   }
 
@@ -812,11 +819,11 @@ export async function main() {
       },
       granularity: "PT1M",
       aggregations: ["Count"],
-    }
+    },
   );
 
   console.log(
-    `Query cost: ${metricsResponse.cost}, granularity: ${metricsResponse.granularity}, time span: ${metricsResponse.timespan}`
+    `Query cost: ${metricsResponse.cost}, granularity: ${metricsResponse.granularity}, time span: ${metricsResponse.timespan}`,
   );
 
   const metrics: Metric[] = metricsResponse.metrics;
@@ -838,13 +845,13 @@ main().catch((err) => {
 });
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
 
 #### Query metrics for multiple resources
 
-To query metrics for multiple Azure resources in a single request, use the `MetricsQueryClient.queryResources` method. This method:
+To query metrics for multiple Azure resources in a single request, use the `MetricsClient.queryResources` method. This method:
 
-- Calls a different API than the `MetricsQueryClient` methods.
+- Calls a different API than the `MetricsClient` methods.
 - Requires a regional endpoint when creating the client. For example, "https://westus3.metrics.monitor.azure.com".
 
 Each Azure resource must reside in:
@@ -852,7 +859,10 @@ Each Azure resource must reside in:
 - The same region as the endpoint specified when creating the client.
 - The same Azure subscription.
 
-Furthermore, the metric namespace containing the metrics to be queried must be provided. For a list of metric namespaces, see [Supported metrics and log categories by resource type][metric_namespaces].
+Furthermore:
+
+- The user must be authorized to read monitoring data at the Azure subscription level. For example, the [Monitoring Reader role](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/monitor#monitoring-reader) on the subscription to be queried.
+- The metric namespace containing the metrics to be queried must be provided. For a list of metric namespaces, see [Supported metrics and log categories by resource type][metric_namespaces].
 
 ```ts
 let resourceIds: string[] = [
@@ -861,18 +871,18 @@ let resourceIds: string[] = [
 ];
 let metricsNamespace: string = "<YOUR_METRICS_NAMESPACE>";
 let metricNames: string[] = ["requests", "count"];
-const batchEndPoint: string = "<YOUR_METRICS_ENDPOINT>"; //for example, https://eastus.metrics.monitor.azure.com/
+const endpoint: string = "<YOUR_METRICS_ENDPOINT>"; //for example, https://eastus.metrics.monitor.azure.com/
 
 const credential = new DefaultAzureCredential();
-const metricsQueryClient: MetricsQueryClient = new MetricsQueryClient(
-  batchEndPoint,
+const metricsClient: MetricsClient = new MetricsClient(
+  endpoint,
   credential
 );
 
-const result: : MetricsQueryResult[] = await metricsQueryClient.queryResources(
+const result: : MetricsQueryResult[] = await metricsClient.queryResources(
   resourceIds,
-  metricsNamespace,
-  metricNames
+  metricNames,
+  metricsNamespace
 );
 ```
 
@@ -880,7 +890,7 @@ For an inventory of metrics and dimensions available for each Azure resource typ
 
 ## Troubleshooting
 
-To diagnose various failure scenarios, see the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/TROUBLESHOOTING.md).
+To diagnose various failure scenarios, see the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/TROUBLESHOOTING.md).
 
 ## Next steps
 
@@ -888,7 +898,7 @@ To learn more about Azure Monitor, see the [Azure Monitor service documentation]
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure Monitor instance. To execute the tests, you'll need to run:
 
@@ -899,7 +909,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 5. Open the `.env` file in an editor and fill in the values.
 6. `npm run test`.
 
-For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/test) folder.
+For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/test) folder.
 
 ## Related projects
 
@@ -911,11 +921,11 @@ For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blo
 [azure_monitor_create_using_portal]: https://learn.microsoft.com/azure/azure-monitor/logs/quick-create-workspace
 [azure_monitor_overview]: https://learn.microsoft.com/azure/azure-monitor/overview
 [azure_subscription]: https://azure.microsoft.com/free/
-[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/CHANGELOG.md
+[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/CHANGELOG.md
 [kusto_query_language]: https://learn.microsoft.com/azure/data-explorer/kusto/query/
 [metric_namespaces]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/metrics-index#supported-metrics-and-log-categories-by-resource-type
 [msdocs_apiref]: https://learn.microsoft.com/javascript/api/@azure/monitor-query
 [package]: https://www.npmjs.com/package/@azure/monitor-query
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/samples
-[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0/sdk/monitor/monitor-query/
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/samples
+[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.3.0/sdk/monitor/monitor-query/
 

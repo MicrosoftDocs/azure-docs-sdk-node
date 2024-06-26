@@ -9,16 +9,14 @@ fullName: QueueSendMessageResponse
 remarks: ''
 isDeprecated: false
 syntax: |
-  type QueueSendMessageResponse = {
-    expiresOn: Date
-    insertedOn: Date
-    messageId: string
-    nextVisibleOn: Date
-    popReceipt: string
-  } & MessagesEnqueueHeaders & {
-      _response: HttpResponse & {
-        bodyAsText: string
-        parsedBody: EnqueuedMessage[]
-        parsedHeaders: MessagesEnqueueHeaders
-      }
-    }
+  type QueueSendMessageResponse = WithResponse<
+    {
+      expiresOn: Date
+      insertedOn: Date
+      messageId: string
+      nextVisibleOn: Date
+      popReceipt: string
+    } & MessagesEnqueueHeaders,
+    MessagesEnqueueHeaders,
+    EnqueuedMessage[]
+  >

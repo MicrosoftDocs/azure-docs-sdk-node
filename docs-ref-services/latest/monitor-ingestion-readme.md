@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-ingestion, monitor
-ms.date: 02/17/2023
+ms.date: 06/11/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -14,10 +14,10 @@ This library allows you to send data from virtually any source to supported buil
 
 **Resources:**
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0/sdk/monitor/monitor-ingestion/src)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.1.0/sdk/monitor/monitor-ingestion/src)
 - [Package (NPM)](https://www.npmjs.com/)
 - [Service documentation][azure_monitor_overview]
-- [Change log](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0/sdk/monitor/monitor-ingestion/CHANGELOG.md)
+- [Change log](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.1.0/sdk/monitor/monitor-ingestion/CHANGELOG.md)
 
 ## Getting started
 
@@ -53,6 +53,25 @@ const logsIngestionEndpoint = process.env.LOGS_INGESTION_ENDPOINT || "logs_inges
 
 const credential = new DefaultAzureCredential();
 const logsIngestionClient = new LogsIngestionClient(logsIngestionEndpoint, credential);
+```
+
+#### Configure client for Azure sovereign cloud
+
+By default, the client is configured to use the Azure Public Cloud. To use a sovereign cloud instead, provide the correct endpoint and audience value when instantiating the client. For example:
+
+```ts
+import { DefaultAzureCredential } from "@azure/identity";
+import { LogsIngestionClient } from "@azure/monitor-ingestion";
+
+import * as dotenv from "dotenv";
+dotenv.config();
+
+const logsIngestionEndpoint = process.env.LOGS_INGESTION_ENDPOINT || "logs_ingestion_endpoint";
+
+const credential = new DefaultAzureCredential();
+const logsIngestionClient = new LogsIngestionClient(logsIngestionEndpoint, credential, {
+  audience: "https://api.loganalytics.azure.cn/.default",
+});
 ```
 
 ## Key concepts
@@ -147,7 +166,7 @@ module.exports = { main };
 
 ### Verify logs
 
-You can verify that your data has been uploaded correctly by using the [@azure/monitor-query](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0/sdk/monitor/monitor-query/README.md#install-the-package) library. Run the [Upload custom logs](#upload-custom-logs) sample first before verifying the logs.
+You can verify that your data has been uploaded correctly by using the [@azure/monitor-query](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.1.0/sdk/monitor/monitor-query/README.md#install-the-package) library. Run the [Upload custom logs](#upload-custom-logs) sample first before verifying the logs.
 
 ```js
 // Copyright (c) Microsoft Corporation.
@@ -252,17 +271,7 @@ Logs uploaded using the Monitor Ingestion client library can be retrieved using 
 
 ## Troubleshooting
 
-### Logging
-
-Enabling logging may help uncover useful information about failures. To see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
-
-```ts
-import { setLogLevel } from "@azure/logger";
-
-setLogLevel("info");
-```
-
-For detailed instructions on how to enable logs, see the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-ingestion_1.0.0/sdk/core/logger).
+For details on diagnosing various failure scenarios, see our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.1.0/sdk/monitor/monitor-ingestion/TROUBLESHOOTING.md).
 
 ## Next steps
 
@@ -270,7 +279,7 @@ To learn more about Azure Monitor, see the [Azure Monitor service documentation]
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 
@@ -279,8 +288,8 @@ If you'd like to contribute to this library, please read the [contributing guide
 [data_collection_rule]: https://learn.microsoft.com/azure/azure-monitor/essentials/data-collection-rule-overview
 [data_collection_rule_tutorial]: https://learn.microsoft.com/azure/azure-monitor/logs/tutorial-logs-ingestion-portal#collect-information-from-the-dcr
 [ingestion_overview]: https://learn.microsoft.com/azure/azure-monitor/logs/logs-ingestion-api-overview
-[azure_monitor_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-ingestion_1.0.0/sdk/monitor/monitor-ingestion/samples/v1-beta
-[monitor_query]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-ingestion_1.0.0/sdk/monitor/monitor-query
+[azure_monitor_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-ingestion_1.1.0/sdk/monitor/monitor-ingestion/samples/v1-beta
+[monitor_query]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-ingestion_1.1.0/sdk/monitor/monitor-query
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/monitor-ingestion/README.png)
 

@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: scvmm
 ---
-# Azure Scvmm SDK for JavaScript - preview
-## Packages - preview
+# Azure Scvmm SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](scvmm-index.md)]

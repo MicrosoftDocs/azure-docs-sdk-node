@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: appcomplianceautomation
 ---
-# Azure App Compliance Automation SDK for JavaScript - preview
-## Packages - preview
+# Azure App Compliance Automation SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](app-compliance-automation-index.md)]

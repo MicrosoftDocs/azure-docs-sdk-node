@@ -3,30 +3,23 @@ uid: '@azure/core-lro'
 name: '@azure/core-lro'
 summary: ''
 type: package
-classes:
-  - '@azure/core-lro.LroEngine'
-  - '@azure/core-lro.Poller'
-  - '@azure/core-lro.PollerCancelledError'
-  - '@azure/core-lro.PollerStoppedError'
 interfaces:
   - '@azure/core-lro.CreateHttpPollerOptions'
-  - '@azure/core-lro.LongRunningOperation'
-  - '@azure/core-lro.LroEngineOptions'
-  - '@azure/core-lro.LroResponse'
+  - '@azure/core-lro.OperationConfig'
+  - '@azure/core-lro.OperationResponse'
   - '@azure/core-lro.OperationState'
-  - '@azure/core-lro.PollOperation'
-  - '@azure/core-lro.PollOperationState'
   - '@azure/core-lro.PollerLike'
+  - '@azure/core-lro.RawRequest'
   - '@azure/core-lro.RawResponse'
-  - '@azure/core-lro.SimplePollerLike'
+  - '@azure/core-lro.RunningOperation'
 typeAliases:
   - '@azure/core-lro.CancelOnProgress'
-  - '@azure/core-lro.LroResourceLocationConfig'
   - '@azure/core-lro.OperationStatus'
-  - '@azure/core-lro.PollProgressCallback'
+  - '@azure/core-lro.ResourceLocationConfig'
+  - '@azure/core-lro.RestorableOperationState'
 functions:
   - name: >-
-      createHttpPoller<TResult, TState>(LongRunningOperation<unknown>,
+      createHttpPoller<TResult, TState>(RunningOperation<unknown>,
       CreateHttpPollerOptions<TResult, TState>)
     uid: '@azure/core-lro.createHttpPoller'
     package: '@azure/core-lro'
@@ -36,12 +29,11 @@ functions:
     syntax:
       content: >-
         function createHttpPoller<TResult, TState>(lro:
-        LongRunningOperation<unknown>, options?:
-        CreateHttpPollerOptions<TResult, TState>):
-        Promise<SimplePollerLike<TState, TResult>>
+        RunningOperation<unknown>, options?: CreateHttpPollerOptions<TResult,
+        TState>): PollerLike<TState, TResult>
       parameters:
         - id: lro
-          type: <xref uid="@azure/core-lro.LongRunningOperation" />&lt;unknown&gt;
+          type: <xref uid="@azure/core-lro.RunningOperation" />&lt;unknown&gt;
           description: Description of the long-running operation
         - id: options
           type: >-
@@ -50,6 +42,23 @@ functions:
           description: options to configure the poller
       return:
         description: an initialized poller
+        type: <xref uid="@azure/core-lro.PollerLike" />&lt;TState, TResult&gt;
+  - name: deserializeState<TResult, TState>(string)
+    uid: '@azure/core-lro.deserializeState'
+    package: '@azure/core-lro'
+    summary: Deserializes the state
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deserializeState<TResult, TState>(serializedState: string):
+        RestorableOperationState<TResult, TState>
+      parameters:
+        - id: serializedState
+          type: string
+          description: ''
+      return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;TState,
-          TResult&gt;&gt;
+          <xref uid="@azure/core-lro.RestorableOperationState" />&lt;TResult,
+          TState&gt;

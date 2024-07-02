@@ -1,0 +1,320 @@
+### YamlMime:TSPackage
+uid: '@azure/core-util'
+name: '@azure/core-util'
+summary: ''
+type: package
+interfaces:
+  - '@azure/core-util.AbortOptions'
+  - '@azure/core-util.CreateAbortablePromiseOptions'
+  - '@azure/core-util.DelayOptions'
+typeAliases:
+  - '@azure/core-util.AbortablePromiseBuilder'
+  - '@azure/core-util.EncodingType'
+  - '@azure/core-util.UnknownObject'
+functions:
+  - name: >-
+      cancelablePromiseRace<T>(AbortablePromiseBuilder<T[number]>[], {
+      abortSignal?: AbortSignalLike })
+    uid: '@azure/core-util.cancelablePromiseRace'
+    package: '@azure/core-util'
+    summary: >-
+      promise.race() wrapper that aborts rest of promises as soon as the first
+      promise settles.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function cancelablePromiseRace<T>(abortablePromiseBuilders:
+        AbortablePromiseBuilder<T[number]>[], options?: { abortSignal?:
+        AbortSignalLike }): Promise<T[number]>
+      parameters:
+        - id: abortablePromiseBuilders
+          type: >-
+            <xref uid="@azure/core-util.AbortablePromiseBuilder"
+            />&lt;T[number]&gt;[]
+          description: ''
+        - id: options
+          type: '{ abortSignal?: AbortSignalLike }'
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;T[number]&gt;
+  - name: computeSha256Hash(string, "base64" | "hex")
+    uid: '@azure/core-util.computeSha256Hash'
+    package: '@azure/core-util'
+    summary: Generates a SHA-256 hash.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function computeSha256Hash(content: string, encoding: "base64" | "hex"):
+        Promise<string>
+      parameters:
+        - id: content
+          type: string
+          description: The data to be included in the hash.
+        - id: encoding
+          type: '"base64" | "hex"'
+          description: The textual encoding to use for the returned hash.
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: computeSha256Hmac(string, string, "base64" | "hex")
+    uid: '@azure/core-util.computeSha256Hmac'
+    package: '@azure/core-util'
+    summary: Generates a SHA-256 HMAC signature.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function computeSha256Hmac(key: string, stringToSign: string, encoding:
+        "base64" | "hex"): Promise<string>
+      parameters:
+        - id: key
+          type: string
+          description: >-
+            The HMAC key represented as a base64 string, used to generate the
+            cryptographic HMAC hash.
+        - id: stringToSign
+          type: string
+          description: The data to be signed.
+        - id: encoding
+          type: '"base64" | "hex"'
+          description: The textual encoding to use for the returned HMAC digest.
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: >-
+      createAbortablePromise<T>((resolve: (value: T | PromiseLike<T>) => void,
+      reject: (reason?: any) => void) => void, CreateAbortablePromiseOptions)
+    uid: '@azure/core-util.createAbortablePromise'
+    package: '@azure/core-util'
+    summary: Creates an abortable promise.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createAbortablePromise<T>(buildPromise: (resolve: (value: T |
+        PromiseLike<T>) => void, reject: (reason?: any) => void) => void,
+        options?: CreateAbortablePromiseOptions): Promise<T>
+      parameters:
+        - id: buildPromise
+          type: >-
+            (resolve: (value: T | PromiseLike&lt;T&gt;) =&gt; void, reject:
+            (reason?: any) =&gt; void) =&gt; void
+          description: >-
+            A function that takes the resolve and reject functions as
+            parameters.
+        - id: options
+          type: <xref uid="@azure/core-util.CreateAbortablePromiseOptions" />
+          description: The options for the abortable promise.
+      return:
+        description: A promise that can be aborted.
+        type: Promise&lt;T&gt;
+  - name: delay(number, DelayOptions)
+    uid: '@azure/core-util.delay'
+    package: '@azure/core-util'
+    summary: >-
+      A wrapper for setTimeout that resolves a promise after timeInMs
+      milliseconds.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function delay(timeInMs: number, options?: DelayOptions): Promise<void>'
+      parameters:
+        - id: timeInMs
+          type: number
+          description: The number of milliseconds to be delayed.
+        - id: options
+          type: <xref uid="@azure/core-util.DelayOptions" />
+          description: The options for delay - currently abort options
+      return:
+        description: Promise that is resolved after timeInMs
+        type: Promise&lt;void&gt;
+  - name: getErrorMessage(unknown)
+    uid: '@azure/core-util.getErrorMessage'
+    package: '@azure/core-util'
+    summary: >-
+      Given what is thought to be an error object, return the message if
+      possible.
+
+      If the message is missing, returns a stringified version of the input.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getErrorMessage(e: unknown): string'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something thrown from a try block
+      return:
+        description: The error message or a string of the input
+        type: string
+  - name: getRandomIntegerInclusive(number, number)
+    uid: '@azure/core-util.getRandomIntegerInclusive'
+    package: '@azure/core-util'
+    summary: |-
+      Returns a random integer value between a lower and upper bound,
+      inclusive of both bounds.
+      Note that this uses Math.random and isn't secure. If you need to use
+      this for any kind of security purpose, find a better source of random.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getRandomIntegerInclusive(min: number, max: number): number'
+      parameters:
+        - id: min
+          type: number
+          description: The smallest integer value allowed.
+        - id: max
+          type: number
+          description: The largest integer value allowed.
+      return:
+        description: ''
+        type: number
+  - name: isDefined<T>(undefined | null | T)
+    uid: '@azure/core-util.isDefined'
+    package: '@azure/core-util'
+    summary: Helper TypeGuard that checks if something is defined or not.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isDefined<T>(thing: undefined | null | T): thing'
+      parameters:
+        - id: thing
+          type: undefined | null | T
+          description: Anything
+      return:
+        description: ''
+        type: thing
+  - name: isError(unknown)
+    uid: '@azure/core-util.isError'
+    package: '@azure/core-util'
+    summary: Typeguard for an error object shape (has name and message)
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
+  - name: isObject(unknown)
+    uid: '@azure/core-util.isObject'
+    package: '@azure/core-util'
+    summary: Helper to determine when an input is a generic JS object.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isObject(input: unknown): input'
+      parameters:
+        - id: input
+          type: unknown
+          description: ''
+      return:
+        description: >-
+          true when input is an object type that is not null, Array, RegExp, or
+          Date.
+        type: input
+  - name: isObjectWithProperties<Thing, PropertyName>(Thing, PropertyName[])
+    uid: '@azure/core-util.isObjectWithProperties'
+    package: '@azure/core-util'
+    summary: >-
+      Helper TypeGuard that checks if the input is an object with the specified
+      properties.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isObjectWithProperties<Thing, PropertyName>(thing: Thing,
+        properties: PropertyName[]): thing
+      parameters:
+        - id: thing
+          type: Thing
+          description: Anything.
+        - id: properties
+          type: PropertyName[]
+          description: The name of the properties that should appear in the object.
+      return:
+        description: ''
+        type: thing
+  - name: objectHasProperty<Thing, PropertyName>(Thing, PropertyName)
+    uid: '@azure/core-util.objectHasProperty'
+    package: '@azure/core-util'
+    summary: >-
+      Helper TypeGuard that checks if the input is an object with the specified
+      property.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function objectHasProperty<Thing, PropertyName>(thing: Thing, property:
+        PropertyName): thing
+      parameters:
+        - id: thing
+          type: Thing
+          description: Any object.
+        - id: property
+          type: PropertyName
+          description: The name of the property that should appear in the object.
+      return:
+        description: ''
+        type: thing
+  - name: randomUUID()
+    uid: '@azure/core-util.randomUUID'
+    package: '@azure/core-util'
+    summary: Generated Universally Unique Identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function randomUUID(): string'
+      return:
+        description: RFC4122 v4 UUID.
+        type: string
+  - name: stringToUint8Array(string, EncodingType)
+    uid: '@azure/core-util.stringToUint8Array'
+    package: '@azure/core-util'
+    summary: >-
+      The helper that transforms string to specific character encoded bytes
+      array.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function stringToUint8Array(value: string, format: EncodingType):
+        Uint8Array
+      parameters:
+        - id: value
+          type: string
+          description: the string to be converted
+        - id: format
+          type: <xref uid="@azure/core-util.EncodingType" />
+          description: the format we use to decode the value
+      return:
+        description: a uint8array
+        type: Uint8Array
+  - name: uint8ArrayToString(Uint8Array, EncodingType)
+    uid: '@azure/core-util.uint8ArrayToString'
+    package: '@azure/core-util'
+    summary: >-
+      The helper that transforms bytes with specific character encoding into
+      string
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uint8ArrayToString(bytes: Uint8Array, format: EncodingType):
+        string
+      parameters:
+        - id: bytes
+          type: Uint8Array
+          description: the uint8array bytes
+        - id: format
+          type: <xref uid="@azure/core-util.EncodingType" />
+          description: the format we use to encode the byte
+      return:
+        description: a string of the encoded string
+        type: string

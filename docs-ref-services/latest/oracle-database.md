@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: oracledatabase
 ---
-# Azure Oracle Database SDK for JavaScript - preview
-## Packages - preview
+# Azure Oracle Database SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](oracle-database-index.md)]

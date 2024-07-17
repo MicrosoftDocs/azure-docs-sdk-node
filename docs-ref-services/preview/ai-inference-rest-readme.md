@@ -1,24 +1,24 @@
 ---
 title: Azure Inference REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-inference, ai
-ms.date: 07/16/2024
+ms.date: 07/17/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure Inference REST client library for JavaScript - version 1.0.0-beta.1 
+# Azure Inference REST client library for JavaScript - version 1.0.0-beta.2 
 
 
 Inference API for Azure-supported AI models
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-beta.2/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.1/sdk/ai/ai-inference-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.2/sdk/ai/ai-inference-rest)
 - [Package (NPM)](https://aka.ms/npm-azure-rest-ai-inference)
 - [API reference documentation](https://aka.ms/AAp1kxa)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.1/sdk/ai/ai-inference-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.2/sdk/ai/ai-inference-rest/samples)
 
 ## Getting started
 
@@ -413,6 +413,48 @@ const response = await client.path("/chat/completions").post({
 console.log(`Chatbot: ${response.choices[0].message?.content}`);
 ```
 
+### Text Embeddings example
+
+This example demonstrates how to get text embeddings with Entra ID authentication. 
+
+```javascript
+import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const endpoint = "<your_model_endpoint>";
+const credential = new DefaultAzureCredential();
+
+async function main(){
+  const client = ModelClient(endpoint, credential);
+  const response = await client.path("/embeddings").post({
+    body: {
+      input: ["first phrase", "second phrase", "third phrase"]
+    }
+  });
+
+  if (isUnexpected(response)) {
+    throw response.body.error;
+  }
+  for (const data of response.body.data) {
+    console.log(`data length: ${data.length}, [${data[0]}, ${data[1]}, ..., ${data[data.length - 2]}, ${data[data.length - 1]}]`);
+  }
+}
+
+main().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});
+```
+
+The length of the embedding vector depends on the model, but you should see something like this:
+
+```text
+data: length=1024, [0.0013399124, -0.01576233, ..., 0.007843018, 0.000238657]
+data: length=1024, [0.036590576, -0.0059547424, ..., 0.011405945, 0.004863739]
+data: length=1024, [0.04196167, 0.029083252, ..., -0.0027484894, 0.0073127747]
+```
+
+To generate embeddings for additional phrases, simply call `client.path("/embeddings").post` multiple times using the same `client`.
+
 ## Troubleshooting
 
 ### Logging
@@ -425,14 +467,14 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.2/sdk/core/logger).
 
 <!-- LINKS -->
-[stream_chat_completion_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-beta.1/sdk/ai/ai-inference-rest/samples/v1-beta/typescript/streamChatCompletions.ts
+[stream_chat_completion_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-beta.2/sdk/ai/ai-inference-rest/samples/v1-beta/typescript/streamChatCompletions.ts
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.1/sdk/identity/identity
-[azure_core_auth]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.1/sdk/core/core-auth
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.2/sdk/identity/identity
+[azure_core_auth]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.2/sdk/core/core-auth
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

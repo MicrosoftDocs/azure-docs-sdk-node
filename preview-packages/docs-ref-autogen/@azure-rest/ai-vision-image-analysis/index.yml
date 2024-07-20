@@ -30,12 +30,12 @@ interfaces:
   - '@azure-rest/ai-vision-image-analysis.DetectedTextBlockOutput'
   - '@azure-rest/ai-vision-image-analysis.DetectedTextLineOutput'
   - '@azure-rest/ai-vision-image-analysis.DetectedTextWordOutput'
+  - '@azure-rest/ai-vision-image-analysis.ImageAnalysisClientOptions'
   - '@azure-rest/ai-vision-image-analysis.ImageAnalysisResultOutput'
   - '@azure-rest/ai-vision-image-analysis.ImageBoundingBoxOutput'
   - '@azure-rest/ai-vision-image-analysis.ImageMetadataOutput'
   - '@azure-rest/ai-vision-image-analysis.ImagePointOutput'
   - '@azure-rest/ai-vision-image-analysis.ImageUrl'
-  - '@azure-rest/ai-vision-image-analysis.ImageUrlOutput'
   - '@azure-rest/ai-vision-image-analysis.ObjectsResultOutput'
   - '@azure-rest/ai-vision-image-analysis.PeopleResultOutput'
   - '@azure-rest/ai-vision-image-analysis.ReadResultOutput'
@@ -46,8 +46,11 @@ typeAliases:
   - '@azure-rest/ai-vision-image-analysis.AnalyzeFromImageDataParameters'
   - '@azure-rest/ai-vision-image-analysis.AnalyzeFromUrlParameters'
   - '@azure-rest/ai-vision-image-analysis.ImageAnalysisClient'
+  - '@azure-rest/ai-vision-image-analysis.VisualFeatures'
 functions:
-  - name: default(string, KeyCredential, ClientOptions)
+  - name: >-
+      default(string, TokenCredential | KeyCredential,
+      ImageAnalysisClientOptions)
     uid: '@azure-rest/ai-vision-image-analysis.default'
     package: '@azure-rest/ai-vision-image-analysis'
     summary: Initialize a new instance of `ImageAnalysisClient`
@@ -55,10 +58,11 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function default(endpoint: string, credentials: KeyCredential, options?:
-        ClientOptions): ImageAnalysisClient
+        function default(endpointParam: string, credentials: TokenCredential |
+        KeyCredential, options?: ImageAnalysisClientOptions):
+        ImageAnalysisClient
       parameters:
-        - id: endpoint
+        - id: endpointParam
           type: string
           description: >-
             Azure AI Computer Vision endpoint (protocol and hostname, for
@@ -66,10 +70,15 @@ functions:
 
             https://<resource-name>.cognitiveservices.azure.com).
         - id: credentials
-          type: <xref uid="@azure/core-auth.KeyCredential" />
+          type: >-
+            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
+            uid="@azure/core-auth.KeyCredential" />
           description: uniquely identify client credential
         - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          type: >-
+            <xref
+            uid="@azure-rest/ai-vision-image-analysis.ImageAnalysisClientOptions"
+            />
           description: the parameter for all optional parameters
       return:
         description: ''
@@ -77,7 +86,7 @@ functions:
           <xref uid="@azure-rest/ai-vision-image-analysis.ImageAnalysisClient"
           />
   - name: >-
-      isUnexpected(AnalyzeFromImageData200Response | AnalyzeFromUrl200Response |
+      isUnexpected(AnalyzeFromImageData200Response |
       AnalyzeFromImageDataDefaultResponse)
     uid: '@azure-rest/ai-vision-image-analysis.isUnexpected'
     package: '@azure-rest/ai-vision-image-analysis'
@@ -87,17 +96,36 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: AnalyzeFromImageData200Response |
-        AnalyzeFromUrl200Response | AnalyzeFromImageDataDefaultResponse):
-        response
+        AnalyzeFromImageDataDefaultResponse): response
       parameters:
         - id: response
           type: >-
             <xref
             uid="@azure-rest/ai-vision-image-analysis.AnalyzeFromImageData200Response"
             /> | <xref
+            uid="@azure-rest/ai-vision-image-analysis.AnalyzeFromImageDataDefaultResponse"
+            />
+          description: ''
+      return:
+        description: ''
+        type: response
+  - name: isUnexpected(AnalyzeFromUrl200Response | AnalyzeFromUrlDefaultResponse)
+    uid: '@azure-rest/ai-vision-image-analysis.isUnexpected_1'
+    package: '@azure-rest/ai-vision-image-analysis'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isUnexpected(response: AnalyzeFromUrl200Response |
+        AnalyzeFromUrlDefaultResponse): response
+      parameters:
+        - id: response
+          type: >-
+            <xref
             uid="@azure-rest/ai-vision-image-analysis.AnalyzeFromUrl200Response"
             /> | <xref
-            uid="@azure-rest/ai-vision-image-analysis.AnalyzeFromImageDataDefaultResponse"
+            uid="@azure-rest/ai-vision-image-analysis.AnalyzeFromUrlDefaultResponse"
             />
           description: ''
       return:

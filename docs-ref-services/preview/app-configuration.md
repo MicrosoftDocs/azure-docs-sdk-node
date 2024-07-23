@@ -1,7 +1,7 @@
 ---
 title: Azure App Configuration SDK for JavaScript
 description: Reference for Azure App Configuration SDK for JavaScript
-ms.date: 07/22/2024
+ms.date: 07/23/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appconfiguration

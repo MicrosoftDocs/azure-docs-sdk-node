@@ -1,40 +1,51 @@
 ---
-title: Azure Cognitive Search client library for JavaScript
+title: Azure AI Search client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/search-documents, search
-ms.date: 11/14/2023
+ms.date: 07/24/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: search
 ---
-# Azure AI Search client library for JavaScript - version 12.0.0 
+# Azure AI Search client library for JavaScript - version 12.1.0 
+
 
 [Azure AI Search](/azure/search/) (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.
 
-Azure AI Search is well suited for the following application scenarios:
+The Azure AI Search service is well suited for the following application scenarios:
 
-- Consolidate varied content types into a single searchable index. To populate an index, you can push JSON documents that contain your content, or if your data is already in Azure, create an indexer to pull in data automatically.
-- Attach skillsets to an indexer to create searchable content from images and large text documents. A skillset leverages APIs from AI services for built-in OCR, entity recognition, key phrase extraction, language detection, text translation, and sentiment analysis. You can also add custom skills to integrate external processing of your content during data ingestion.
-- In a search client application, implement query logic and user experiences similar to commercial web search engines.
+- Consolidate varied content types into a single searchable index.
+  To populate an index, you can push JSON documents that contain your content,
+  or if your data is already in Azure, create an indexer to pull in data
+  automatically.
+- Attach skillsets to an indexer to create searchable content from images
+  and unstructured documents. A skillset leverages APIs from Azure AI Services
+  for built-in OCR, entity recognition, key phrase extraction, language
+  detection, text translation, and sentiment analysis. You can also add
+  custom skills to integrate external processing of your content during
+  data ingestion.
+- In a search client application, implement query logic and user experiences
+  similar to commercial web search engines and chat-style apps.
 
 Use the @azure/search-documents client library to:
 
 - Submit queries using vector, keyword, and hybrid query forms.
-- Implement filtered queries for metadata, geospatial search, faceted navigation, or to narrow results based on filter criteria.
+- Implement filtered queries for metadata, geospatial search, faceted navigation,
+  or to narrow results based on filter criteria.
 - Create and manage search indexes.
 - Upload and update documents in the search index.
 - Create and manage indexers that pull data from Azure into an index.
 - Create and manage skillsets that add AI enrichment to data ingestion.
 - Create and manage analyzers for advanced text analysis or multi-lingual content.
-- Optimize results through scoring profiles to factor in business logic or freshness.
+- Optimize results through semantic ranking and scoring profiles to factor in business logic or freshness.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0/sdk/search/search-documents/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.1.0/sdk/search/search-documents/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/search-documents)
 - [API reference documentation](/javascript/api/@azure/search-documents)
 - [REST API documentation](/rest/api/searchservice/)
 - [Product documentation](/azure/search/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0/sdk/search/search-documents/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.1.0/sdk/search/search-documents/samples)
 
 ## Getting started
 
@@ -47,14 +58,14 @@ npm install @azure/search-documents
 ### Currently supported environments
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
-- Latest versions of Safari, Chrome, Edge, and Firefox.
+- Latest versions of Safari, Chrome, Microsoft Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
 - An [Azure subscription](https://azure.microsoft.com/free/)
-- An [Azure AI Search service][create_search_service_docs]
+- A [Search service][create_search_service_docs]
 
 To create a new search service, you can use the [Azure portal][create_search_service_docs], [Azure PowerShell][create_search_service_ps], or the [Azure CLI][create_search_service_cli]. Here's an example using the Azure CLI to create a free instance for getting started:
 
@@ -66,21 +77,23 @@ See [choosing a pricing tier](/azure/search/search-sku-tier) for more informatio
 
 ### Authenticate the client
 
-To interact with the search service, you'll need to create an instance of the appropriate client class: `SearchClient` for searching indexed documents, `SearchIndexClient` for managing indexes, or `SearchIndexerClient` for crawling data sources and loading search documents into an index. 
-
-To instantiate a client object, you'll need an **endpoint** and **Azure roles** or an **API key**. You can refer to the documentation for more information on [supported authenticating approaches](https://learn.microsoft.com/azure/search/search-security-overview#authentication) with the search service.
+To interact with the search service, you'll need to create an instance of the appropriate client class: `SearchClient` for searching indexed documents, `SearchIndexClient` for managing indexes, or `SearchIndexerClient` for crawling data sources and loading search documents into an index. To instantiate a client object, you'll need an **endpoint** and **Azure roles** or an **API key**. You can refer to the documentation for more information on [supported authenticating approaches](https://learn.microsoft.com/azure/search/search-security-overview#authentication) with the search service.
 
 #### Get an API Key
 
 An API key can be an easier approach to start with because it doesn't require pre-existing role assignments.
 
-You can get the **endpoint** and an **API key** from the search service in the [Azure Portal](https://portal.azure.com/). Please refer the [documentation](/azure/search/search-security-api-keys) for instructions on how to get an API key.
+You can get the **endpoint** and an **API key** from the search service in the [Azure portal](https://portal.azure.com/). Please refer the [documentation](/azure/search/search-security-api-keys) for instructions on how to get an API key.
 
 Alternatively, you can use the following [Azure CLI](https://learn.microsoft.com/cli/azure/) command to retrieve the API key from the search service:
 
 ```Powershell
-az search admin-key show --service-name <mysearch> --resource-group <mysearch-rg>
+az search admin-key show --resource-group <your-resource-group-name> --service-name <your-resource-name>
 ```
+
+There are two types of keys used to access your search service: **admin** _(read-write)_ and **query** _(read-only)_ keys. Restricting access and operations in client apps is essential to safeguarding the search assets on your service. Always use a query key rather than an admin key for any query originating from a client app.
+
+_Note: The example Azure CLI snippet above retrieves an admin key so it's easier to get started exploring APIs, but it should be managed carefully._
 
 Once you have an api-key, you can use it as follows:
 
@@ -148,7 +161,9 @@ An Azure AI Search service contains one or more indexes that provide persistent 
 exposes operations on these resources through three main client types.
 
 - `SearchClient` helps with:
-  - Searching your indexed documents using [vector queries](https://learn.microsoft.com/azure/search/vector-search-how-to-query),
+
+  - [Searching](/azure/search/search-lucene-query-architecture)
+    your indexed documents using [vector queries](https://learn.microsoft.com/azure/search/vector-search-how-to-query),
     [keyword queries](https://learn.microsoft.com/azure/search/search-query-create)
     and [hybrid queries](https://learn.microsoft.com/azure/search/hybrid-search-how-to-query)
   - [Vector query filters](https://learn.microsoft.com/azure/search/vector-search-filters) and [Text query filters](https://learn.microsoft.com/azure/search/search-filters)
@@ -158,6 +173,7 @@ exposes operations on these resources through three main client types.
   - [Adding, Updating or Deleting Documents](/rest/api/searchservice/addupdate-or-delete-documents) documents from an index
 
 - `SearchIndexClient` allows you to:
+
   - [Create, delete, update, or configure a search index](/rest/api/searchservice/index-operations)
   - [Declare custom synonym maps to expand or rewrite queries](/rest/api/searchservice/synonym-map-operations)
 
@@ -171,7 +187,7 @@ exposes operations on these resources through three main client types.
 
 ### Documents
 
-An item stored inside a search index. The shape of this document is described in the index using `Field`s. Each Field has a name, a datatype, and additional metadata such as if it is searchable or filterable.
+An item stored inside a search index. The shape of this document is described in the index using the `fields` property. Each `SearchField` has a name, a datatype, and additional metadata such as if it is searchable or filterable.
 
 ### Pagination
 
@@ -189,7 +205,7 @@ Typically you will only wish to [show a subset of search results](/azure/search/
 
 ## Examples
 
-The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0/sdk/search/search-documents/samples) for much more.
+The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.1.0/sdk/search/search-documents/samples) for much more.
 
 - [Creating an index](#create-an-index)
 - [Retrieving a specific document from your index](#retrieve-a-specific-document-from-an-index)
@@ -344,14 +360,14 @@ interface Hotel {
   hotelId?: string;
   hotelName?: string | null;
   description?: string | null;
-  descriptionVector?: Array<number> | null;
+  descriptionVector?: Array<number>;
   parkingIncluded?: boolean | null;
   lastRenovationDate?: Date | null;
   rating?: number | null;
   rooms?: Array<{
     beds?: number | null;
     description?: string | null;
-  } | null>;
+  }>;
 }
 
 const client = new SearchClient<Hotel>(
@@ -401,7 +417,7 @@ async function main() {
   const searchResults = await client.search("WiFi", {
     filter: odata`Rooms/any(room: room/BaseRate lt ${baseRateMax}) and Rating ge ${ratingMin}`,
     orderBy: ["Rating desc"],
-    select: ["hotelId", "hotelName", "rating"],
+    select: ["hotelId", "hotelName", "Rating"],
   });
   for await (const result of searchResults.results) {
     // Each result will have "HotelId", "HotelName", and "Rating"
@@ -415,20 +431,29 @@ main();
 
 #### Querying with vectors
 
-Text embeddings can be queried using the `vector` search parameter.
+Text embeddings can be queried using the `vector` search parameter. See [Query vectors](https://learn.microsoft.com/azure/search/vector-search-how-to-query) and [Filter vector queries](https://learn.microsoft.com/azure/search/vector-search-filters) for more information.
 
 ```js
-const { SearchClient, AzureKeyCredential, odata } = require("@azure/search-documents");
+const { SearchClient, AzureKeyCredential } = require("@azure/search-documents");
 
-const searchClient = new SearchClient("<endpoint>", "<indexName>", new AzureKeyCredential("<apiKey>"));
+const searchClient = new SearchClient(
+  "<endpoint>",
+  "<indexName>",
+  new AzureKeyCredential("<apiKey>")
+);
 
 async function main() {
-  const queryVector = [...]
+  const queryVector = [...];
   const searchResults = await searchClient.search("*", {
-    vector: {
-      fields: ["descriptionVector"],
-      kNearestNeighborsCount: 3,
-      value: queryVector,
+    vectorSearchOptions: {
+      queries: [
+        {
+          kind: "vector",
+          vector: queryVector,
+          fields: ["descriptionVector"],
+          kNearestNeighborsCount: 3,
+        },
+      ],
     },
   });
   for await (const result of searchResults.results) {
@@ -478,7 +503,7 @@ When retrieving results, a `facets` property will be available that will indicat
 
 ### Logging
 
-Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
+Enabling logging can help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
 ```javascript
 import { setLogLevel } from "@azure/logger";
@@ -486,24 +511,24 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.1.0/sdk/core/logger).
 
 ## Next steps
 
-- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0/sdk/search/search-documents/samples)
+- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.1.0/sdk/search/search-documents/samples)
 - [Read more about the Azure AI Search service](/azure/search/search-what-is-azure-search)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
 
-This project has adopted the [Microsoft Open Source Code of Conduct][coc].For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
+This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 ## Related projects
 
-- [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
+- [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fsearch%2Fsearch%2FREADME.png)
 

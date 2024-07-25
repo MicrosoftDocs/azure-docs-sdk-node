@@ -16,16 +16,13 @@ properties:
     uid: '@azure/search-documents.SimpleField.analyzerName'
     package: '@azure/search-documents'
     summary: >-
-      The name of the language analyzer to use for the field. This option can be
-      used only with
+      The name of the analyzer to use for the field. This option can be used
+      only with searchable
 
-      searchable fields and it can't be set together with either searchAnalyzer
-      or indexAnalyzer.
+      fields and it can't be set together with either searchAnalyzer or
+      indexAnalyzer. Once the
 
-      Once the analyzer is chosen, it cannot be changed for the field.
-
-      [KnownAnalyzerNames](xref:@azure/search-documents.KnownAnalyzerNames) is
-      an enum containing built-in analyzer names.
+      analyzer is chosen, it cannot be changed for the field.
     fullName: analyzerName
     remarks: ''
     isDeprecated: false
@@ -45,12 +42,12 @@ properties:
       category (for example,
 
       search for digital cameras and see hits by brand, by megapixels, by price,
-      and so on).
+      and so on). Fields
 
-      Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot
-      be facetable.
+      of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be
+      facetable. Default is
 
-      Default is false for all other simple fields.
+      false.
     fullName: facetable
     remarks: ''
     isDeprecated: false
@@ -64,20 +61,18 @@ properties:
     package: '@azure/search-documents'
     summary: >-
       A value indicating whether to enable the field to be referenced in $filter
-      queries. Filterable
+      queries. filterable
 
       differs from searchable in how strings are handled. Fields of type
       Edm.String or
 
       Collection(Edm.String) that are filterable do not undergo word-breaking,
-      so comparisons are
+      so comparisons are for
 
-      for exact matches only. For example, if you set such a field f to "sunny
-      day", $filter=f eq
+      exact matches only. For example, if you set such a field f to "sunny day",
+      $filter=f eq 'sunny'
 
-      'sunny' will find no matches, but $filter=f eq 'sunny day' will.
-
-      Default is false.
+      will find no matches, but $filter=f eq 'sunny day' will. Default is false.
     fullName: filterable
     remarks: ''
     isDeprecated: false
@@ -91,7 +86,7 @@ properties:
     package: '@azure/search-documents'
     summary: >-
       A value indicating whether the field can be returned in a search result.
-      You can enable this
+      You can disable this
 
       option if you want to use a field (for example, margin) as a filter,
       sorting, or scoring
@@ -99,12 +94,13 @@ properties:
       mechanism but do not want the field to be visible to the end user. This
       property must be false
 
-      for key fields. This property can be changed on existing fields.
+      for key fields. This property can be changed on existing fields. Enabling
+      this property does
 
-      Disabling this property does not cause any increase in index storage
-      requirements.
+      not cause any increase in index storage requirements. Default is true for
+      vector fields, false
 
-      Default is false.
+      otherwise.
     fullName: hidden
     remarks: ''
     isDeprecated: false
@@ -123,12 +119,13 @@ properties:
       with searchable fields. It must be set together with searchAnalyzer and it
       cannot be set
 
-      together with the analyzer option. Once the analyzer is chosen, it cannot
-      be changed for the
+      together with the analyzer option.  This property cannot be set to the
+      name of a language
 
-      field.
-      [KnownAnalyzerNames](xref:@azure/search-documents.KnownAnalyzerNames) is
-      an enum containing built-in analyzer names.
+      analyzer; use the analyzer property instead if you need a language
+      analyzer. Once the analyzer
+
+      is chosen, it cannot be changed for the field.
     fullName: indexAnalyzerName
     remarks: ''
     isDeprecated: false
@@ -188,17 +185,21 @@ properties:
       "sunny day", internally it will be split into the individual tokens
       "sunny" and "day". This
 
-      enables full-text searches for these terms. This property must be false
-      for simple
+      enables full-text searches for these terms. Fields of type Edm.String or
+      Collection(Edm.String)
 
-      fields of other non-string data types.
+      are searchable by default. This property must be false for simple fields
+      of other non-string
 
-      Note: searchable fields consume extra space in your index since Azure
-      Cognitive Search will store an
+      data types. Note: searchable fields consume extra space
 
-      additional tokenized version of the field value for full-text searches.
+      in your index to accommodate additional tokenized versions of the field
+      value for full-text
 
-      Defaults to false for simple fields.
+      searches. If you want to save space in your index and you don't need a
+      field to be included in
+
+      searches, set searchable to false. Default is false.
     fullName: searchable
     remarks: ''
     isDeprecated: false
@@ -214,14 +215,16 @@ properties:
       The name of the analyzer used at search time for the field. This option
       can be used only with
 
-      searchable fields. It must be set together with indexAnalyzer and it
-      cannot be set together
+      searchable fields. It must be set together with `indexAnalyzerName` and it
+      cannot be set
 
-      with the analyzer option. This analyzer can be updated on an existing
-      field.
+      together with the `analyzerName` option. This property cannot be set to
+      the name of a language
 
-      [KnownAnalyzerNames](xref:@azure/search-documents.KnownAnalyzerNames) is
-      an enum containing built-in analyzer names.
+      analyzer; use the `analyzerName` property instead if you need a language
+      analyzer. This
+
+      analyzer can be updated on an existing field.
     fullName: searchAnalyzerName
     remarks: ''
     isDeprecated: false
@@ -237,28 +240,59 @@ properties:
       A value indicating whether to enable the field to be referenced in
       $orderby expressions. By
 
-      default Azure Cognitive Search sorts results by score, but in many
-      experiences users will want
+      default, the search engine sorts results by score, but in many experiences
+      users will want to
 
-      to sort by fields in the documents. A simple field can be sortable only if
-      it is single-valued
+      sort by fields in the documents. A simple field can be sortable only if it
+      is single-valued (it
 
-      (it has a single value in the scope of the parent document). Simple
-      collection fields cannot
+      has a single value in the scope of the parent document). Simple collection
+      fields cannot be
 
-      be sortable, since they are multi-valued. Simple sub-fields of complex
+      sortable, since they are multi-valued. Simple sub-fields of complex
       collections are also
 
       multi-valued, and therefore cannot be sortable. This is true whether it's
       an immediate parent
 
-      field, or an ancestor field, that's the complex collection. The default
-      for sortable is false.
+      field, or an ancestor field, that's the complex collection. The default is
+      false.
     fullName: sortable
     remarks: ''
     isDeprecated: false
     syntax:
       content: 'sortable?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: stored
+    uid: '@azure/search-documents.SimpleField.stored'
+    package: '@azure/search-documents'
+    summary: >-
+      An immutable value indicating whether the field will be persisted
+      separately on disk to be
+
+      returned in a search result. You can disable this option if you don't plan
+      to return the field
+
+      contents in a search response to save on storage overhead. This can only
+      be set during index
+
+      creation and only for vector fields. This property cannot be changed for
+      existing fields or set
+
+      as false for new fields. If this property is set as false, the property
+      'hidden' must be set to
+
+      'true'. This property must be false or unset for key fields, for new
+      fields, and for non-vector
+
+      fields. Disabling this property will reduce index storage requirements.
+    fullName: stored
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'stored?: boolean'
       return:
         description: ''
         type: boolean
@@ -273,12 +307,10 @@ properties:
       supported. Assigning a
 
       synonym map to a field ensures that query terms targeting that field are
-      expanded at
+      expanded at query-time
 
-      query-time using the rules in the synonym map. This attribute can be
-      changed on existing
-
-      fields.
+      using the rules in the synonym map. This attribute can be changed on
+      existing fields.
     fullName: synonymMapNames
     remarks: ''
     isDeprecated: false
@@ -290,19 +322,7 @@ properties:
   - name: type
     uid: '@azure/search-documents.SimpleField.type'
     package: '@azure/search-documents'
-    summary: >-
-      The data type of the field. Possible values include: 'Edm.String',
-      'Edm.Int32', 'Edm.Int64',
-
-      'Edm.Double', 'Edm.Boolean', 'Edm.DateTimeOffset', 'Edm.GeographyPoint',
-
-      'Collection(Edm.String)', 'Collection(Edm.Int32)',
-      'Collection(Edm.Int64)',
-
-      'Collection(Edm.Double)', 'Collection(Edm.Boolean)',
-      'Collection(Edm.DateTimeOffset)',
-
-      'Collection(Edm.GeographyPoint)', 'Collection(Edm.Single)'
+    summary: The data type of the field.
     fullName: type
     remarks: ''
     isDeprecated: false
@@ -311,6 +331,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/search-documents.SearchFieldDataType" />
+  - name: vectorEncodingFormat
+    uid: '@azure/search-documents.SimpleField.vectorEncodingFormat'
+    package: '@azure/search-documents'
+    summary: The encoding format to interpret the field contents.
+    fullName: vectorEncodingFormat
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vectorEncodingFormat?: string'
+      return:
+        description: ''
+        type: string
   - name: vectorSearchDimensions
     uid: '@azure/search-documents.SimpleField.vectorSearchDimensions'
     package: '@azure/search-documents'
@@ -327,10 +359,10 @@ properties:
     uid: '@azure/search-documents.SimpleField.vectorSearchProfileName'
     package: '@azure/search-documents'
     summary: >-
-      The name of the vector search algorithm configuration that specifies the
-      algorithm and
+      The name of the vector search profile that specifies the algorithm and
+      vectorizer to use when
 
-      optional parameters for searching the vector field.
+      searching the vector field.
     fullName: vectorSearchProfileName
     remarks: ''
     isDeprecated: false

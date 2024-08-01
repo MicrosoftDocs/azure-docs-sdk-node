@@ -1,7 +1,7 @@
 ---
 title: Azure Hardware Security Modules SDK for JavaScript
 description: Reference for Azure Hardware Security Modules SDK for JavaScript
-ms.date: 07/31/2024
+ms.date: 08/01/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hardwaresecuritymodules

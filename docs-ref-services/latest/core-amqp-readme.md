@@ -1,12 +1,12 @@
 ---
 title: Azure Core AMQP client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-amqp, core
-ms.date: 07/18/2024
+ms.date: 08/02/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Core AMQP client library for JavaScript - version 4.3.1 
+# Azure Core AMQP client library for JavaScript - version 4.3.2 
 
 
 The `@azure/core-amqp` package provides common functionality for **Azure** JavaScript
@@ -28,7 +28,7 @@ npm install @azure/core-amqp
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.2/SUPPORT.md) for more details.
 
 ## Key concepts
 
@@ -124,7 +124,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or

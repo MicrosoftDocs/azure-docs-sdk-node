@@ -1,0 +1,309 @@
+### YamlMime:TSType
+name: AttestationAdministrationClient
+uid: '@azure/attestation.AttestationAdministrationClient'
+package: '@azure/attestation'
+summary: |-
+  Attestation Client class.
+
+  The AttestationClient class enables access to the Attestation related APIs:
+
+  - getPolicy
+  - setPolicy
+  - resetPolicy
+  - getPolicyManagementCertificates
+  - addPolicyManagementCertificate
+  - removePolicyManagementCertificate
+fullName: AttestationAdministrationClient
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: >-
+      AttestationAdministrationClient(string, TokenCredential,
+      AttestationAdministrationClientOptions)
+    uid: '@azure/attestation.AttestationAdministrationClient.constructor'
+    package: '@azure/attestation'
+    summary: |-
+      Creates an instance of AttestationAdministrationClient.
+
+      Example usage:
+      ```ts
+      import { AttestationAdministrationClient } from "@azure/attestation";
+
+      const client = new AttestationAdministrationClient(
+         "<service endpoint>",
+         new TokenCredential("<>")
+      );
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new AttestationAdministrationClient(endpoint: string, credentials:
+        TokenCredential, options?: AttestationAdministrationClientOptions)
+      parameters:
+        - id: endpoint
+          type: string
+          description: >-
+            The attestation instance endpoint, for example
+            https://mytenant.attest.azure.net.
+        - id: credentials
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: ''
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/attestation.AttestationAdministrationClientOptions" />
+          description: Used to configure the Form Recognizer client.
+methods:
+  - name: >-
+      addPolicyManagementCertificate(string, string, string,
+      AttestationAdministrationClientPolicyCertificateOperationOptions)
+    uid: >-
+      @azure/attestation.AttestationAdministrationClient.addPolicyManagementCertificate
+    package: '@azure/attestation'
+    summary: Add a new certificate chain to the set of policy management certificates.
+    remarks: >-
+      This API is only supported on `isolated` attestation instances.
+
+
+      The signing key MUST be one of the existing attestation signing
+      certificates. The
+
+      new pemCertificate is signed using the signingKey and the service will
+      validate the
+
+      signature before allowing the addition.
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addPolicyManagementCertificate(pemCertificate: string,
+        privateKey: string, certificate: string, options?:
+        AttestationAdministrationClientPolicyCertificateOperationOptions):
+        Promise<AttestationResponse<PolicyCertificatesModificationResult>>
+      parameters:
+        - id: pemCertificate
+          type: string
+          description: >-
+            PEM encoded certificate to add to the set of policy management
+            certificates.
+        - id: privateKey
+          type: string
+          description: Existing attestation private key used to sign the incoming request.
+        - id: certificate
+          type: string
+          description: >-
+            Existing attestation certificate used to verify the incoming
+            request.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/attestation.AttestationAdministrationClientPolicyCertificateOperationOptions"
+            />
+          description: Options used in the call to the service.
+      return:
+        description: >-
+          An attestation response including a
+          PolicyCertificatesModificationResult
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;<xref
+          uid="@azure/attestation.PolicyCertificatesModificationResult"
+          />&gt;&gt;
+  - name: getPolicy(string, AttestationAdministrationClientPolicyOperationOptions)
+    uid: '@azure/attestation.AttestationAdministrationClient.getPolicy'
+    package: '@azure/attestation'
+    summary: |-
+      Retrieves the attestation policy document from the server, and returns it
+      to the caller.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getPolicy(attestationType: string, options?:
+        AttestationAdministrationClientPolicyOperationOptions):
+        Promise<AttestationResponse<string>>
+      parameters:
+        - id: attestationType
+          type: string
+          description: AttestationType for which to retrieve policy.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/attestation.AttestationAdministrationClientPolicyOperationOptions"
+            />
+          description: Pipeline and client options for the `getPolicy` call.
+      return:
+        description: |-
+          `AttestationResponse<string>` - the `value` property is the
+               attestation policy,  the `token` property will be the actual token
+               returned by the attestation service.
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;string&gt;&gt;
+  - name: >-
+      getPolicyManagementCertificates(AttestationAdministrationClientPolicyCertificateOperationOptions)
+    uid: >-
+      @azure/attestation.AttestationAdministrationClient.getPolicyManagementCertificates
+    package: '@azure/attestation'
+    summary: >-
+      Returns the set of policy management certificates for this attestation
+      instance.
+    remarks: |-
+      If the attestation instance is not in `Isolated` mode, this list will
+         always be empty.
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getPolicyManagementCertificates(options?:
+        AttestationAdministrationClientPolicyCertificateOperationOptions):
+        Promise<AttestationResponse<AttestationSigner[]>>
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/attestation.AttestationAdministrationClientPolicyCertificateOperationOptions"
+            />
+          description: Options for the call to the attestation service.
+      return:
+        description: AttestationResponse wrapping a list of Attestation Signers.
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;<xref uid="@azure/attestation.AttestationSigner" />[]&gt;&gt;
+  - name: >-
+      removePolicyManagementCertificate(string, string, string,
+      AttestationAdministrationClientPolicyCertificateOperationOptions)
+    uid: >-
+      @azure/attestation.AttestationAdministrationClient.removePolicyManagementCertificate
+    package: '@azure/attestation'
+    summary: Add a new certificate chain to the set of policy management certificates.
+    remarks: >-
+      This API is only supported on `isolated` attestation instances.
+
+
+      The signing key MUST be one of the existing attestation signing
+      certificates. The
+
+      new pemCertificate is signed using the signingKey and the service will
+      validate the
+
+      signature before allowing the addition.
+    isDeprecated: false
+    syntax:
+      content: >-
+        function removePolicyManagementCertificate(pemCertificate: string,
+        privateKey: string, certificate: string, options?:
+        AttestationAdministrationClientPolicyCertificateOperationOptions):
+        Promise<AttestationResponse<PolicyCertificatesModificationResult>>
+      parameters:
+        - id: pemCertificate
+          type: string
+          description: >-
+            PEM encoded certificate to add to the set of policy management
+            certificates.
+        - id: privateKey
+          type: string
+          description: Existing attestation private key used to sign the incoming request.
+        - id: certificate
+          type: string
+          description: >-
+            Existing attestation certificate used to verify the incoming
+            request.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/attestation.AttestationAdministrationClientPolicyCertificateOperationOptions"
+            />
+          description: Options used in the call to the service.
+      return:
+        description: >-
+          An attestation response including a
+          PolicyCertificatesModificationResult
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;<xref
+          uid="@azure/attestation.PolicyCertificatesModificationResult"
+          />&gt;&gt;
+  - name: resetPolicy(string, AttestationAdministrationClientPolicyOperationOptions)
+    uid: '@azure/attestation.AttestationAdministrationClient.resetPolicy'
+    package: '@azure/attestation'
+    summary: >-
+      Resets the attestation policy for the specified [attestationType](xref:23)
+      to
+
+      the default value.
+    remarks: >-
+      Please note that if the attestation service instance is running in
+      "Isolated"
+
+      mode, the <xref:signingKey> must be one of the signing keys configured for
+      the
+
+      service instance.
+    isDeprecated: false
+    syntax:
+      content: >-
+        function resetPolicy(attestationType: string, options?:
+        AttestationAdministrationClientPolicyOperationOptions):
+        Promise<AttestationResponse<PolicyResult>>
+      parameters:
+        - id: attestationType
+          type: string
+          description: Attestation Type for which to set policy.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/attestation.AttestationAdministrationClientPolicyOperationOptions"
+            />
+          description: call options.
+      return:
+        description: >-
+          An [AttestationResponse](xref:@azure/attestation.AttestationResponse)
+          wrapping a [PolicyResult](xref:@azure/attestation.PolicyResult).
+           Clients can use the PolicyResult to validate that the policy was actually
+           reset by the attestation service.
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;<xref uid="@azure/attestation.PolicyResult" />&gt;&gt;
+  - name: >-
+      setPolicy(string, string,
+      AttestationAdministrationClientPolicyOperationOptions)
+    uid: '@azure/attestation.AttestationAdministrationClient.setPolicy'
+    package: '@azure/attestation'
+    summary: Sets the attestation policy for the specified [attestationType](xref:18).
+    remarks: >-
+      Please note that if the attestation service instance is running in
+      "Isolated"
+
+      mode, the <xref:signingKey> must be one of the signing keys configured for
+      the
+
+      service instance.
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setPolicy(attestationType: string, newPolicyDocument: string,
+        options?: AttestationAdministrationClientPolicyOperationOptions):
+        Promise<AttestationResponse<PolicyResult>>
+      parameters:
+        - id: attestationType
+          type: string
+          description: Attestation Type for which to set policy.
+        - id: newPolicyDocument
+          type: string
+          description: Policy document to be set.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/attestation.AttestationAdministrationClientPolicyOperationOptions"
+            />
+          description: call options.
+      return:
+        description: >-
+          An [AttestationResponse](xref:@azure/attestation.AttestationResponse)
+          wrapping a [PolicyResult](xref:@azure/attestation.PolicyResult).
+           Clients can use the PolicyResult to validate that the policy was actually
+           set by the attestation service.
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;<xref uid="@azure/attestation.PolicyResult" />&gt;&gt;

@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-translation-document, translation
-ms.date: 07/01/2024
+ms.date: 08/08/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: translation
@@ -34,9 +34,9 @@ The following operations are supported by the Document Translation feature:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/translation/ai-translation-document-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/translation/ai-translation-document-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-translation-document)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/translation/ai-translation-document-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/translation/ai-translation-document-rest/samples)
 
 ## Getting started
 
@@ -345,11 +345,11 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 Please refer to the service documentation for a conceptual discussion of [languages][languages_doc].
 
 [service_errors]: https://learn.microsoft.com/azure/ai-services/translator/document-translation/how-to-guides/use-rest-api-programmatically?tabs=csharp#common-http-status-codes
 [translator_resource_create]: https://learn.microsoft.com/azure/cognitive-services/Translator/create-translator-resource
-[documentTranslationClient_class]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/translation/ai-translation-document-rest/src/documentTranslationClient.ts
+[documentTranslationClient_class]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/translation/ai-translation-document-rest/src/documentTranslationClient.ts
 [pre_requisities]: https://learn.microsoft.com/azure/ai-services/translator/document-translation/how-to-guides/use-rest-api-programmatically?tabs=csharp#prerequisites
 

@@ -1,0 +1,129 @@
+### YamlMime:TSType
+name: TableCheckpointStore
+uid: '@azure/eventhubs-checkpointstore-table.TableCheckpointStore'
+package: '@azure/eventhubs-checkpointstore-table'
+summary: >-
+  An implementation of CheckpointStore that uses Azure Table Storage to persist
+  checkpoint data.
+fullName: TableCheckpointStore
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: TableCheckpointStore(TableClient)
+    uid: '@azure/eventhubs-checkpointstore-table.TableCheckpointStore.constructor'
+    package: '@azure/eventhubs-checkpointstore-table'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new TableCheckpointStore(tableClient: TableClient)'
+      parameters:
+        - id: tableClient
+          type: <xref uid="@azure/data-tables.TableClient" />
+          description: ''
+methods:
+  - name: claimOwnership(PartitionOwnership[])
+    uid: '@azure/eventhubs-checkpointstore-table.TableCheckpointStore.claimOwnership'
+    package: '@azure/eventhubs-checkpointstore-table'
+    summary: >-
+      Claim ownership of a list of partitions. This will return the list of
+      partitions that were
+
+      successfully claimed.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function claimOwnership(partitionOwnership: PartitionOwnership[]):
+        Promise<PartitionOwnership[]>
+      parameters:
+        - id: partitionOwnership
+          type: <xref uid="@azure/event-hubs.PartitionOwnership" />[]
+          description: The list of partition ownership this instance is claiming to own.
+      return:
+        description: A list partitions this instance successfully claimed ownership.
+        type: Promise&lt;<xref uid="@azure/event-hubs.PartitionOwnership" />[]&gt;
+  - name: listCheckpoints(string, string, string)
+    uid: >-
+      @azure/eventhubs-checkpointstore-table.TableCheckpointStore.listCheckpoints
+    package: '@azure/eventhubs-checkpointstore-table'
+    summary: >-
+      Lists all the checkpoints in a data store for a given namespace, eventhub
+      and consumer group.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listCheckpoints(fullyQualifiedNamespace: string, eventHubName:
+        string, consumerGroup: string): Promise<Checkpoint[]>
+      parameters:
+        - id: fullyQualifiedNamespace
+          type: string
+          description: >-
+            The fully qualified Event Hubs namespace. This is likely to be
+            similar to
+
+            <yournamespace>.servicebus.windows.net.
+        - id: eventHubName
+          type: string
+          description: The event hub name.
+        - id: consumerGroup
+          type: string
+          description: The consumer group name.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/event-hubs.Checkpoint" />[]&gt;
+  - name: listOwnership(string, string, string)
+    uid: '@azure/eventhubs-checkpointstore-table.TableCheckpointStore.listOwnership'
+    package: '@azure/eventhubs-checkpointstore-table'
+    summary: >-
+      Get the list of all existing partition ownership from the underlying data
+      store. May return empty
+
+      results if there are is no existing ownership information.
+
+      Partition Ownership contains the information on which
+      `EventHubConsumerClient` subscribe call is currently processing the
+      partition.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listOwnership(fullyQualifiedNamespace: string, eventHubName:
+        string, consumerGroup: string): Promise<PartitionOwnership[]>
+      parameters:
+        - id: fullyQualifiedNamespace
+          type: string
+          description: >-
+            The fully qualified Event Hubs namespace. This is likely to be
+            similar to
+
+            <yournamespace>.servicebus.windows.net.
+        - id: eventHubName
+          type: string
+          description: The event hub name.
+        - id: consumerGroup
+          type: string
+          description: The consumer group name.
+      return:
+        description: >-
+          Partition ownership details of all the partitions that have had an
+          owner.
+        type: Promise&lt;<xref uid="@azure/event-hubs.PartitionOwnership" />[]&gt;
+  - name: updateCheckpoint(Checkpoint)
+    uid: >-
+      @azure/eventhubs-checkpointstore-table.TableCheckpointStore.updateCheckpoint
+    package: '@azure/eventhubs-checkpointstore-table'
+    summary: Updates the checkpoint in the data store for a partition.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function updateCheckpoint(checkpoint: Checkpoint): Promise<void>'
+      parameters:
+        - id: checkpoint
+          type: <xref uid="@azure/event-hubs.Checkpoint" />
+          description: The checkpoint.
+      return:
+        description: A promise that resolves when the checkpoint has been updated.
+        type: Promise&lt;void&gt;

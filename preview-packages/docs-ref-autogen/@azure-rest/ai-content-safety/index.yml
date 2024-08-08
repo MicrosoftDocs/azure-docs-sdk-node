@@ -4,13 +4,13 @@ name: '@azure-rest/ai-content-safety'
 summary: ''
 type: package
 interfaces:
-  - '@azure-rest/ai-content-safety.AddBlockItems'
-  - '@azure-rest/ai-content-safety.AddBlockItems200Response'
-  - '@azure-rest/ai-content-safety.AddBlockItemsBodyParam'
-  - '@azure-rest/ai-content-safety.AddBlockItemsDefaultHeaders'
-  - '@azure-rest/ai-content-safety.AddBlockItemsDefaultResponse'
-  - '@azure-rest/ai-content-safety.AddBlockItemsOptions'
-  - '@azure-rest/ai-content-safety.AddBlockItemsResultOutput'
+  - '@azure-rest/ai-content-safety.AddOrUpdateBlocklistItems'
+  - '@azure-rest/ai-content-safety.AddOrUpdateBlocklistItems200Response'
+  - '@azure-rest/ai-content-safety.AddOrUpdateBlocklistItemsBodyParam'
+  - '@azure-rest/ai-content-safety.AddOrUpdateBlocklistItemsDefaultHeaders'
+  - '@azure-rest/ai-content-safety.AddOrUpdateBlocklistItemsDefaultResponse'
+  - '@azure-rest/ai-content-safety.AddOrUpdateTextBlocklistItemsOptions'
+  - '@azure-rest/ai-content-safety.AddOrUpdateTextBlocklistItemsResultOutput'
   - '@azure-rest/ai-content-safety.AnalyzeImage'
   - '@azure-rest/ai-content-safety.AnalyzeImage200Response'
   - '@azure-rest/ai-content-safety.AnalyzeImageBodyParam'
@@ -44,7 +44,7 @@ interfaces:
   - '@azure-rest/ai-content-safety.GetTextBlocklistItem200Response'
   - '@azure-rest/ai-content-safety.GetTextBlocklistItemDefaultHeaders'
   - '@azure-rest/ai-content-safety.GetTextBlocklistItemDefaultResponse'
-  - '@azure-rest/ai-content-safety.ImageAnalyzeSeverityResultOutput'
+  - '@azure-rest/ai-content-safety.ImageCategoriesAnalysisOutput'
   - '@azure-rest/ai-content-safety.ImageData'
   - '@azure-rest/ai-content-safety.ImageDataOutput'
   - '@azure-rest/ai-content-safety.ListTextBlocklistItems'
@@ -58,21 +58,21 @@ interfaces:
   - '@azure-rest/ai-content-safety.ListTextBlocklistsDefaultHeaders'
   - '@azure-rest/ai-content-safety.ListTextBlocklistsDefaultResponse'
   - '@azure-rest/ai-content-safety.PagingOptions'
-  - '@azure-rest/ai-content-safety.RemoveBlockItems'
-  - '@azure-rest/ai-content-safety.RemoveBlockItems204Response'
-  - '@azure-rest/ai-content-safety.RemoveBlockItemsBodyParam'
-  - '@azure-rest/ai-content-safety.RemoveBlockItemsDefaultHeaders'
-  - '@azure-rest/ai-content-safety.RemoveBlockItemsDefaultResponse'
-  - '@azure-rest/ai-content-safety.RemoveBlockItemsOptions'
+  - '@azure-rest/ai-content-safety.RemoveBlocklistItems'
+  - '@azure-rest/ai-content-safety.RemoveBlocklistItems204Response'
+  - '@azure-rest/ai-content-safety.RemoveBlocklistItemsBodyParam'
+  - '@azure-rest/ai-content-safety.RemoveBlocklistItemsDefaultHeaders'
+  - '@azure-rest/ai-content-safety.RemoveBlocklistItemsDefaultResponse'
+  - '@azure-rest/ai-content-safety.RemoveTextBlocklistItemsOptions'
   - '@azure-rest/ai-content-safety.Routes'
-  - '@azure-rest/ai-content-safety.TextAnalyzeSeverityResultOutput'
-  - '@azure-rest/ai-content-safety.TextBlockItemInfo'
-  - '@azure-rest/ai-content-safety.TextBlockItemOutput'
   - '@azure-rest/ai-content-safety.TextBlocklist'
-  - '@azure-rest/ai-content-safety.TextBlocklistMatchResultOutput'
+  - '@azure-rest/ai-content-safety.TextBlocklistItem'
+  - '@azure-rest/ai-content-safety.TextBlocklistItemOutput'
+  - '@azure-rest/ai-content-safety.TextBlocklistMatchOutput'
   - '@azure-rest/ai-content-safety.TextBlocklistOutput'
+  - '@azure-rest/ai-content-safety.TextCategoriesAnalysisOutput'
 typeAliases:
-  - '@azure-rest/ai-content-safety.AddBlockItemsParameters'
+  - '@azure-rest/ai-content-safety.AddOrUpdateBlocklistItemsParameters'
   - '@azure-rest/ai-content-safety.AnalyzeImageParameters'
   - '@azure-rest/ai-content-safety.AnalyzeTextParameters'
   - '@azure-rest/ai-content-safety.ContentSafetyClient'
@@ -84,13 +84,13 @@ typeAliases:
   - '@azure-rest/ai-content-safety.GetTextBlocklistParameters'
   - '@azure-rest/ai-content-safety.ListTextBlocklistItemsParameters'
   - '@azure-rest/ai-content-safety.ListTextBlocklistsParameters'
+  - '@azure-rest/ai-content-safety.PagedTextBlocklistItemOutput'
+  - '@azure-rest/ai-content-safety.PagedTextBlocklistOutput'
   - '@azure-rest/ai-content-safety.PaginateReturn'
-  - '@azure-rest/ai-content-safety.RemoveBlockItemsParameters'
-  - '@azure-rest/ai-content-safety.TextBlockItemListOutput'
-  - '@azure-rest/ai-content-safety.TextBlocklistListOutput'
+  - '@azure-rest/ai-content-safety.RemoveBlocklistItemsParameters'
   - '@azure-rest/ai-content-safety.TextBlocklistResourceMergeAndPatch'
 functions:
-  - name: default(string, KeyCredential, ClientOptions)
+  - name: default(string, TokenCredential | KeyCredential, ClientOptions)
     uid: '@azure-rest/ai-content-safety.default'
     package: '@azure-rest/ai-content-safety'
     summary: Initialize a new instance of `ContentSafetyClient`
@@ -98,8 +98,8 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function default(endpoint: string, credentials: KeyCredential, options?:
-        ClientOptions): ContentSafetyClient
+        function default(endpoint: string, credentials: TokenCredential |
+        KeyCredential, options?: ClientOptions): ContentSafetyClient
       parameters:
         - id: endpoint
           type: string
@@ -109,7 +109,9 @@ functions:
 
             https://<resource-name>.cognitiveservices.azure.com).
         - id: credentials
-          type: <xref uid="@azure/core-auth.KeyCredential" />
+          type: >-
+            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
+            uid="@azure/core-auth.KeyCredential" />
           description: uniquely identify client credential
         - id: options
           type: <xref uid="@azure-rest/core-client.ClientOptions" />
@@ -257,7 +259,9 @@ functions:
       return:
         description: ''
         type: response
-  - name: isUnexpected(AddBlockItems200Response | AddBlockItemsDefaultResponse)
+  - name: >-
+      isUnexpected(AddOrUpdateBlocklistItems200Response |
+      AddOrUpdateBlocklistItemsDefaultResponse)
     uid: '@azure-rest/ai-content-safety.isUnexpected_6'
     package: '@azure-rest/ai-content-safety'
     summary: ''
@@ -265,21 +269,23 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isUnexpected(response: AddBlockItems200Response |
-        AddBlockItemsDefaultResponse): response
+        function isUnexpected(response: AddOrUpdateBlocklistItems200Response |
+        AddOrUpdateBlocklistItemsDefaultResponse): response
       parameters:
         - id: response
           type: >-
-            <xref uid="@azure-rest/ai-content-safety.AddBlockItems200Response"
+            <xref
+            uid="@azure-rest/ai-content-safety.AddOrUpdateBlocklistItems200Response"
             /> | <xref
-            uid="@azure-rest/ai-content-safety.AddBlockItemsDefaultResponse" />
+            uid="@azure-rest/ai-content-safety.AddOrUpdateBlocklistItemsDefaultResponse"
+            />
           description: ''
       return:
         description: ''
         type: response
   - name: >-
-      isUnexpected(RemoveBlockItems204Response |
-      RemoveBlockItemsDefaultResponse)
+      isUnexpected(RemoveBlocklistItems204Response |
+      RemoveBlocklistItemsDefaultResponse)
     uid: '@azure-rest/ai-content-safety.isUnexpected_7'
     package: '@azure-rest/ai-content-safety'
     summary: ''
@@ -287,15 +293,15 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isUnexpected(response: RemoveBlockItems204Response |
-        RemoveBlockItemsDefaultResponse): response
+        function isUnexpected(response: RemoveBlocklistItems204Response |
+        RemoveBlocklistItemsDefaultResponse): response
       parameters:
         - id: response
           type: >-
             <xref
-            uid="@azure-rest/ai-content-safety.RemoveBlockItems204Response" /> |
-            <xref
-            uid="@azure-rest/ai-content-safety.RemoveBlockItemsDefaultResponse"
+            uid="@azure-rest/ai-content-safety.RemoveBlocklistItems204Response"
+            /> | <xref
+            uid="@azure-rest/ai-content-safety.RemoveBlocklistItemsDefaultResponse"
             />
           description: ''
       return:

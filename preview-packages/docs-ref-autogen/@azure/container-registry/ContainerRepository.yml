@@ -1,0 +1,226 @@
+### YamlMime:TSType
+name: ContainerRepository
+uid: '@azure/container-registry.ContainerRepository'
+package: '@azure/container-registry'
+summary: >-
+  A `repository` in a container registry is a logical grouping of images or
+  artifacts that share the same name.  For example,
+
+  different versions of a `hello-world` application could have tags `v1` and
+  `v2`, and be grouped by the repository `hello-world`.
+
+
+  The [ContainerRepository](xref:@azure/container-registry.ContainerRepository)
+  interface is a helper that groups information and operations about a
+  repository in this
+
+  container registry.
+fullName: ContainerRepository
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: name
+    uid: '@azure/container-registry.ContainerRepository.name'
+    package: '@azure/container-registry'
+    summary: Repository name.
+    fullName: name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'name: string'
+      return:
+        description: ''
+        type: string
+  - name: registryEndpoint
+    uid: '@azure/container-registry.ContainerRepository.registryEndpoint'
+    package: '@azure/container-registry'
+    summary: The Azure Container Registry endpoint.
+    fullName: registryEndpoint
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'registryEndpoint: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: delete(DeleteRepositoryOptions)
+    uid: '@azure/container-registry.ContainerRepository.delete'
+    package: '@azure/container-registry'
+    summary: >-
+      Deletes this repository and all artifacts that are part of its logical
+      group.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function delete(options?: DeleteRepositoryOptions): Promise<void>'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/container-registry.DeleteRepositoryOptions" />
+          description: optional configuration for the operation
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: getArtifact(string)
+    uid: '@azure/container-registry.ContainerRepository.getArtifact'
+    package: '@azure/container-registry'
+    summary: >-
+      Returns an helper instance of
+      [RegistryArtifact](xref:@azure/container-registry.RegistryArtifact) for
+      the given tag or digest.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getArtifact(tagOrDigest: string): RegistryArtifact'
+      parameters:
+        - id: tagOrDigest
+          type: string
+          description: the tag or digest of the artifact
+      return:
+        description: ''
+        type: <xref uid="@azure/container-registry.RegistryArtifact" />
+  - name: getProperties(GetRepositoryPropertiesOptions)
+    uid: '@azure/container-registry.ContainerRepository.getProperties'
+    package: '@azure/container-registry'
+    summary: Retrieves the properties of this repository.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getProperties(options?: GetRepositoryPropertiesOptions):
+        Promise<ContainerRepositoryProperties>
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@azure/container-registry.GetRepositoryPropertiesOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/container-registry.ContainerRepositoryProperties" />&gt;
+  - name: listManifestProperties(ListManifestPropertiesOptions)
+    uid: '@azure/container-registry.ContainerRepository.listManifestProperties'
+    package: '@azure/container-registry'
+    summary: >-
+      Returns an async iterable iterator to list manifest properties.
+
+      This is useful for determining the collection of artifacts associated with
+
+      this repository, as each artifact is uniquely identified by its manifest.
+
+
+      Example using `for-await-of` syntax:
+
+
+      ```javascript
+
+      const client = new ContainerRegistryClient(url, credential);
+
+      const repository = client.getRepository(repositoryName)
+
+      for await (const manifest of repository.listManifestProperties()) {
+        console.log("manifest: ", manifest);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```javascript
+
+      const iter = repository.listManifestProperties();
+
+      let item = await iter.next();
+
+      while (!item.done) {
+        console.log("manifest properties: ", item.value);
+        item = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```javascript
+
+      const pages = repository.listManifestProperties().byPage({ maxPageSize: 2
+      });
+
+      let page = await pages.next();
+
+      let i = 1;
+
+      while (!page.done) {
+       if (page.value) {
+         console.log(`-- page ${i++}`);
+         for (const manifestProperties of page.value) {
+           console.log(`  manifest properties: ${manifestProperties}`);
+         }
+       }
+       page = await pages.next();
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listManifestProperties(options?:
+        ListManifestPropertiesOptions):
+        PagedAsyncIterableIterator<ArtifactManifestProperties,
+        ArtifactManifestProperties[], PageSettings>
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@azure/container-registry.ListManifestPropertiesOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/container-registry.ArtifactManifestProperties" />, <xref
+          uid="@azure/container-registry.ArtifactManifestProperties" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
+  - name: updateProperties(UpdateRepositoryPropertiesOptions)
+    uid: '@azure/container-registry.ContainerRepository.updateProperties'
+    package: '@azure/container-registry'
+    summary: |-
+      Updates the properties of this repository.
+
+      Example usage:
+
+      ```javascript
+      const client = new ContainerRegistryClient(url, credential);
+      const repository = client.getRepository(repositoryName)
+      const updated = await repository.updateProperties({
+        canDelete: false,
+        canList: false,
+        canRead: false,
+        canWrite: false
+      });
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateProperties(options: UpdateRepositoryPropertiesOptions):
+        Promise<ContainerRepositoryProperties>
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/container-registry.UpdateRepositoryPropertiesOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/container-registry.ContainerRepositoryProperties" />&gt;

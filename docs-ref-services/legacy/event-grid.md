@@ -5,8 +5,8 @@ ms.date: 08/08/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: event-grid
-ms.prod: 
 ms.technology: 
+ms.prod: 
 manager: angerobe
 ms.custom: devcenter
 ---

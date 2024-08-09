@@ -1,12 +1,12 @@
 ---
 title: Azure Cosmos DB client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/cosmos, cosmosdb
-ms.date: 09/12/2023
+ms.date: 08/08/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cosmosdb
 ---
-# Azure Cosmos DB client library for JavaScript - version 4.0.0 
+# Azure Cosmos DB client library for JavaScript - version 4.1.0 
 /TypeScript
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]
@@ -200,7 +200,7 @@ console.log(container.id);
 Insert an item with hierarchical partition key defined as - `["/name", "/address/zip"]`
 ```js
 const item = {
-  id: 1,
+  id: "1",
   name: 'foo',
   address: {
     zip: 100
@@ -278,8 +278,8 @@ There are four starting positions for change feed:
 ```js
 // Signals the iterator to read changefeed from the beginning of time.
 const options = {
-  changeFeedStartFrom: ChangeFeedStartFrom.Beginning();
-}
+  changeFeedStartFrom: ChangeFeedStartFrom.Beginning(),
+};
 const iterator = container.getChangeFeedIterator(options);
 ```
 
@@ -287,10 +287,10 @@ const iterator = container.getChangeFeedIterator(options);
 
 ```js
 // Signals the iterator to read changefeed from a particular point of time.
-const time = new Date("2023/09/11") // some sample date
+const time = new Date("2023/09/11"); // some sample date
 const options = {
-  changeFeedStartFrom: ChangeFeedStartFrom.Time(time);
-}
+  changeFeedStartFrom: ChangeFeedStartFrom.Time(time),
+};
 ```
 
 - `Now`
@@ -298,8 +298,8 @@ const options = {
 ```js
 // Signals the iterator to read changefeed from this moment onward.
 const options = {
-  changeFeedStartFrom: ChangeFeedStartFrom.Now();
-}
+  changeFeedStartFrom: ChangeFeedStartFrom.Now(),
+};
 ```
 
 - `Continuation`
@@ -308,8 +308,8 @@ const options = {
 // Signals the iterator to read changefeed from a saved point.
 const continuationToken = "some continuation token recieved from previous request";
 const options = {
-  changeFeedStartFrom: ChangeFeedStartFrom.Continuation(continuationToken);
-}
+  changeFeedStartFrom: ChangeFeedStartFrom.Continuation(continuationToken),
+};
 ```
 
 Here's an example of fetching change feed for a partition key
@@ -327,6 +327,7 @@ while (iterator.hasMoreResults) {
   // process this response
 }
 ```
+
 Because the change feed is effectively an infinite list of items that encompasses all future writes and updates, the value of `hasMoreResults` is always `true`. When you try to read the change feed and there are no new changes available, you receive a response with `NotModified` status.
 
 More detailed usage guidelines and examples of change feed can be found [here](https://learn.microsoft.com/azure/cosmos-db/nosql/change-feed-pull-model?tabs=javascript).
@@ -401,7 +402,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.0/sdk/core/logger).
 
 ### Diagnostics
 
@@ -514,8 +515,7 @@ To execute non-streamable queries without the use of continuation tokens, you ca
 
 ```javascript
 const querySpec = {
-  query: "SELECT * FROM c WHERE c.status = @status",
-  parameters: [{ name: "@status", value: "active" }],
+  query: "SELECT c.status, COUNT(c.id) AS count FROM c GROUP BY c.status",
 };
 const queryOptions = {
   maxItemCount: 10, // maximum number of items to return per page
@@ -543,7 +543,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 - [Welcome to Azure Cosmos DB](/azure/cosmos-db/community)
 - [Quick start](/azure/cosmos-db/sql-api-nodejs-get-started)
 - [Tutorial](/azure/cosmos-db/sql-api-nodejs-application)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.0.0/sdk/cosmosdb/cosmos/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.0/sdk/cosmosdb/cosmos/samples)
 - [Introduction to Resource Model of Azure Cosmos DB Service](/azure/cosmos-db/sql-api-resources)
 - [Introduction to SQL API of Azure Cosmos DB Service](/azure/cosmos-db/sql-api-sql-query)
 - [Partitioning](/azure/cosmos-db/sql-api-partition-data)
@@ -551,7 +551,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcosmosdb%2Fcosmos%2FREADME.png)
 
@@ -573,7 +573,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [cosmos_item]: /azure/cosmos-db/databases-containers-items#azure-cosmos-items
 [cosmos_request_units]: /azure/cosmos-db/request-units
 [cosmos_resources]: /azure/cosmos-db/databases-containers-items
-[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.0.0/sdk/cosmosdb/cosmos/samples
+[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.0/sdk/cosmosdb/cosmos/samples
 [cosmos_sql_queries]: /azure/cosmos-db/how-to-sql-query
 [cosmos_ttl]: /azure/cosmos-db/time-to-live
 [npm]: https://www.npmjs.com/package/@azure/cosmos

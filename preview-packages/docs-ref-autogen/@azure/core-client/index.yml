@@ -1,0 +1,220 @@
+### YamlMime:TSPackage
+uid: '@azure/core-client'
+name: '@azure/core-client'
+summary: ''
+type: package
+classes:
+  - '@azure/core-client.ServiceClient'
+interfaces:
+  - '@azure/core-client.AdditionalPolicyConfig'
+  - '@azure/core-client.BaseMapper'
+  - '@azure/core-client.CommonClientOptions'
+  - '@azure/core-client.CompositeMapper'
+  - '@azure/core-client.CompositeMapperType'
+  - '@azure/core-client.DeserializationContentTypes'
+  - '@azure/core-client.DeserializationPolicyOptions'
+  - '@azure/core-client.DictionaryMapper'
+  - '@azure/core-client.DictionaryMapperType'
+  - '@azure/core-client.EnumMapper'
+  - '@azure/core-client.EnumMapperType'
+  - '@azure/core-client.FullOperationResponse'
+  - '@azure/core-client.InternalClientPipelineOptions'
+  - '@azure/core-client.MapperConstraints'
+  - '@azure/core-client.OperationArguments'
+  - '@azure/core-client.OperationOptions'
+  - '@azure/core-client.OperationParameter'
+  - '@azure/core-client.OperationQueryParameter'
+  - '@azure/core-client.OperationRequestInfo'
+  - '@azure/core-client.OperationRequestOptions'
+  - '@azure/core-client.OperationResponseMap'
+  - '@azure/core-client.OperationSpec'
+  - '@azure/core-client.OperationURLParameter'
+  - '@azure/core-client.PolymorphicDiscriminator'
+  - '@azure/core-client.SequenceMapper'
+  - '@azure/core-client.SequenceMapperType'
+  - '@azure/core-client.SerializationPolicyOptions'
+  - '@azure/core-client.Serializer'
+  - '@azure/core-client.SerializerOptions'
+  - '@azure/core-client.ServiceClientOptions'
+  - '@azure/core-client.SimpleMapperType'
+  - '@azure/core-client.SpanConfig'
+  - '@azure/core-client.XmlOptions'
+typeAliases:
+  - '@azure/core-client.Mapper'
+  - '@azure/core-client.MapperType'
+  - '@azure/core-client.OperationRequest'
+  - '@azure/core-client.ParameterPath'
+  - '@azure/core-client.QueryCollectionFormat'
+  - '@azure/core-client.RawResponseCallback'
+functions:
+  - name: authorizeRequestOnClaimChallenge(AuthorizeRequestOnChallengeOptions)
+    uid: '@azure/core-client.authorizeRequestOnClaimChallenge'
+    package: '@azure/core-client'
+    summary: >-
+      This function can be used as a callback for the
+      `bearerTokenAuthenticationPolicy` of `@azure/core-rest-pipeline`, to
+      support CAE challenges:
+
+      [Continuous Access
+      Evaluation](https://docs.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation).
+
+
+      Call the `bearerTokenAuthenticationPolicy` with the following options:
+
+
+      ```ts
+
+      import { bearerTokenAuthenticationPolicy } from
+      "@azure/core-rest-pipeline";
+
+      import { authorizeRequestOnClaimChallenge } from "@azure/core-client";
+
+
+      const bearerTokenAuthenticationPolicy = bearerTokenAuthenticationPolicy({
+        authorizeRequestOnChallenge: authorizeRequestOnClaimChallenge
+      });
+
+      ```
+
+
+      Once provided, the `bearerTokenAuthenticationPolicy` policy will
+      internally handle Continuous Access Evaluation (CAE) challenges.
+
+      When it can't complete a challenge it will return the 401 (unauthorized)
+      response from ARM.
+
+
+      Example challenge with claims:
+
+
+      ```
+
+      Bearer authorization_uri="https://login.windows-ppe.net/",
+      error="invalid_token",
+
+      error_description="User session has been revoked",
+
+      claims="eyJhY2Nlc3NfdG9rZW4iOnsibmJmIjp7ImVzc2VudGlhbCI6dHJ1ZSwgInZhbHVlIjoiMTYwMzc0MjgwMCJ9fX0="
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function authorizeRequestOnClaimChallenge(onChallengeOptions:
+        AuthorizeRequestOnChallengeOptions): Promise<boolean>
+      parameters:
+        - id: onChallengeOptions
+          type: >-
+            <xref
+            uid="@azure/core-rest-pipeline.AuthorizeRequestOnChallengeOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;boolean&gt;
+  - name: authorizeRequestOnTenantChallenge(AuthorizeRequestOnChallengeOptions)
+    uid: '@azure/core-client.authorizeRequestOnTenantChallenge'
+    package: '@azure/core-client'
+    summary: >-
+      Defines a callback to handle auth challenge for Storage APIs.
+
+      This implements the bearer challenge process described here:
+      https://docs.microsoft.com/rest/api/storageservices/authorize-with-azure-active-directory#bearer-challenge
+
+      Handling has specific features for storage that departs to the general AAD
+      challenge docs.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function authorizeRequestOnTenantChallenge(challengeOptions:
+        AuthorizeRequestOnChallengeOptions): Promise<boolean>
+      parameters:
+        - id: challengeOptions
+          type: >-
+            <xref
+            uid="@azure/core-rest-pipeline.AuthorizeRequestOnChallengeOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;boolean&gt;
+  - name: createClientPipeline(InternalClientPipelineOptions)
+    uid: '@azure/core-client.createClientPipeline'
+    package: '@azure/core-client'
+    summary: |-
+      Creates a new Pipeline for use with a Service Client.
+      Adds in deserializationPolicy by default.
+      Also adds in bearerTokenAuthenticationPolicy if passed a TokenCredential.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createClientPipeline(options?: InternalClientPipelineOptions):
+        Pipeline
+      parameters:
+        - id: options
+          type: <xref uid="@azure/core-client.InternalClientPipelineOptions" />
+          description: Options to customize the created pipeline.
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.Pipeline" />
+  - name: 'createSerializer({[key: string]: any}, boolean)'
+    uid: '@azure/core-client.createSerializer'
+    package: '@azure/core-client'
+    summary: Method that creates and returns a Serializer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createSerializer(modelMappers?: {[key: string]: any}, isXML?:
+        boolean): Serializer
+      parameters:
+        - id: modelMappers
+          type: '{[key: string]: any}'
+          description: Known models to map
+        - id: isXML
+          type: boolean
+          description: If XML should be supported
+      return:
+        description: ''
+        type: <xref uid="@azure/core-client.Serializer" />
+  - name: deserializationPolicy(DeserializationPolicyOptions)
+    uid: '@azure/core-client.deserializationPolicy'
+    package: '@azure/core-client'
+    summary: >-
+      This policy handles parsing out responses according to OperationSpecs on
+      the request.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deserializationPolicy(options?: DeserializationPolicyOptions):
+        PipelinePolicy
+      parameters:
+        - id: options
+          type: <xref uid="@azure/core-client.DeserializationPolicyOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: serializationPolicy(SerializationPolicyOptions)
+    uid: '@azure/core-client.serializationPolicy'
+    package: '@azure/core-client'
+    summary: |-
+      This policy handles assembling the request body and headers using
+      an OperationSpec and OperationArguments on the request.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function serializationPolicy(options?: SerializationPolicyOptions):
+        PipelinePolicy
+      parameters:
+        - id: options
+          type: <xref uid="@azure/core-client.SerializationPolicyOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />

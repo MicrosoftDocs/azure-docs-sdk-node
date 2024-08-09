@@ -48,21 +48,6 @@ properties:
         type: >-
           <xref uid="@azure/arm-containerservice.ManagedClusterAgentPoolProfile"
           />[]
-  - name: aiToolchainOperatorProfile
-    uid: '@azure/arm-containerservice.ManagedCluster.aiToolchainOperatorProfile'
-    package: '@azure/arm-containerservice'
-    summary: AI toolchain operator settings that apply to the whole cluster.
-    fullName: aiToolchainOperatorProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile'
-      return:
-        description: ''
-        type: >-
-          <xref
-          uid="@azure/arm-containerservice.ManagedClusterAIToolchainOperatorProfile"
-          />
   - name: apiServerAccessProfile
     uid: '@azure/arm-containerservice.ManagedCluster.apiServerAccessProfile'
     package: '@azure/arm-containerservice'
@@ -110,7 +95,7 @@ properties:
   - name: azureMonitorProfile
     uid: '@azure/arm-containerservice.ManagedCluster.azureMonitorProfile'
     package: '@azure/arm-containerservice'
-    summary: Prometheus addon profile for the container service cluster
+    summary: Azure Monitor addon profiles for monitoring the managed cluster.
     fullName: azureMonitorProfile
     remarks: ''
     isDeprecated: false
@@ -140,39 +125,14 @@ properties:
       return:
         description: ''
         type: string
-  - name: bootstrapProfile
-    uid: '@azure/arm-containerservice.ManagedCluster.bootstrapProfile'
-    package: '@azure/arm-containerservice'
-    summary: Profile of the cluster bootstrap configuration.
-    fullName: bootstrapProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'bootstrapProfile?: ManagedClusterBootstrapProfile'
-      return:
-        description: ''
-        type: >-
-          <xref uid="@azure/arm-containerservice.ManagedClusterBootstrapProfile"
-          />
-  - name: creationData
-    uid: '@azure/arm-containerservice.ManagedCluster.creationData'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      CreationData to be used to specify the source Snapshot ID if the cluster
-      will be created/upgraded using a snapshot.
-    fullName: creationData
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'creationData?: CreationData'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-containerservice.CreationData" />
   - name: currentKubernetesVersion
     uid: '@azure/arm-containerservice.ManagedCluster.currentKubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
-      The version of Kubernetes the Managed Cluster is running.
+      If kubernetesVersion was a fully specified version <major.minor.patch>,
+      this field will be exactly equal to it. If kubernetesVersion was
+      <major.minor>, this field will contain the full <major.minor.patch>
+      version being used.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -226,22 +186,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: enableNamespaceResources
-    uid: '@azure/arm-containerservice.ManagedCluster.enableNamespaceResources'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      The default value is false. It can be enabled/disabled on creation and
-      updating of the managed cluster. See
-      [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource)
-      for more details on Namespace as a ARM Resource.
-    fullName: enableNamespaceResources
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'enableNamespaceResources?: boolean'
-      return:
-        description: ''
-        type: boolean
   - name: enablePodSecurityPolicy
     uid: '@azure/arm-containerservice.ManagedCluster.enablePodSecurityPolicy'
     package: '@azure/arm-containerservice'
@@ -270,25 +214,6 @@ properties:
       return:
         description: ''
         type: boolean
-  - name: eTag
-    uid: '@azure/arm-containerservice.ManagedCluster.eTag'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      Unique read-only string used to implement optimistic concurrency. The eTag
-      value will change when the resource is updated. Specify an if-match or
-      if-none-match header with the eTag value for a subsequent request to
-      enable optimistic concurrency per the normal etag convention.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
-    fullName: eTag
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'eTag?: string'
-      return:
-        description: ''
-        type: string
   - name: extendedLocation
     uid: '@azure/arm-containerservice.ManagedCluster.extendedLocation'
     package: '@azure/arm-containerservice'
@@ -383,24 +308,15 @@ properties:
         type: >-
           <xref uid="@azure/arm-containerservice.ManagedClusterIngressProfile"
           />
-  - name: kind
-    uid: '@azure/arm-containerservice.ManagedCluster.kind'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      This is primarily used to expose different UI experiences in the portal
-      for different kinds
-    fullName: kind
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'kind?: string'
-      return:
-        description: ''
-        type: string
   - name: kubernetesVersion
     uid: '@azure/arm-containerservice.ManagedCluster.kubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
+      Both patch version <major.minor.patch> (e.g. 1.20.13) and <major.minor>
+      (e.g. 1.20) are supported. When <major.minor> is specified, the latest
+      supported GA patch version is chosen automatically. Updating the cluster
+      with the same <major.minor> once it has been created (e.g. 1.14.x -> 1.14)
+      will not trigger an upgrade, even if a newer patch version is available.
       When you upgrade a supported AKS cluster, Kubernetes minor versions cannot
       be skipped. All upgrades must be performed sequentially by major version
       number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x
@@ -473,21 +389,6 @@ properties:
         type: >-
           <xref uid="@azure/arm-containerservice.ContainerServiceNetworkProfile"
           />
-  - name: nodeProvisioningProfile
-    uid: '@azure/arm-containerservice.ManagedCluster.nodeProvisioningProfile'
-    package: '@azure/arm-containerservice'
-    summary: Node provisioning settings that apply to the whole cluster.
-    fullName: nodeProvisioningProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'nodeProvisioningProfile?: ManagedClusterNodeProvisioningProfile'
-      return:
-        description: ''
-        type: >-
-          <xref
-          uid="@azure/arm-containerservice.ManagedClusterNodeProvisioningProfile"
-          />
   - name: nodeResourceGroup
     uid: '@azure/arm-containerservice.ManagedCluster.nodeResourceGroup'
     package: '@azure/arm-containerservice'
@@ -500,21 +401,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: nodeResourceGroupProfile
-    uid: '@azure/arm-containerservice.ManagedCluster.nodeResourceGroupProfile'
-    package: '@azure/arm-containerservice'
-    summary: The node resource group configuration profile.
-    fullName: nodeResourceGroupProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'nodeResourceGroupProfile?: ManagedClusterNodeResourceGroupProfile'
-      return:
-        description: ''
-        type: >-
-          <xref
-          uid="@azure/arm-containerservice.ManagedClusterNodeResourceGroupProfile"
-          />
   - name: oidcIssuerProfile
     uid: '@azure/arm-containerservice.ManagedCluster.oidcIssuerProfile'
     package: '@azure/arm-containerservice'
@@ -635,20 +521,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: safeguardsProfile
-    uid: '@azure/arm-containerservice.ManagedCluster.safeguardsProfile'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      The Safeguards profile holds all the safeguards information for a given
-      cluster
-    fullName: safeguardsProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'safeguardsProfile?: SafeguardsProfile'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-containerservice.SafeguardsProfile" />
   - name: securityProfile
     uid: '@azure/arm-containerservice.ManagedCluster.securityProfile'
     package: '@azure/arm-containerservice'

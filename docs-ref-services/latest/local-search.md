@@ -1,7 +1,7 @@
 ---
 title: Azure Local Search SDK for JavaScript
 description: Reference for Azure Local Search SDK for JavaScript
-ms.date: 08/08/2024
+ms.date: 08/09/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: localsearch

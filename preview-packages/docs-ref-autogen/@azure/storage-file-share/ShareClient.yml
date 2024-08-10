@@ -258,7 +258,7 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.ShareCreateIfNotExistsResponse" />&gt;
-  - name: createPermission(string, ShareCreatePermissionOptions)
+  - name: createPermission(string | SharePermission, ShareCreatePermissionOptions)
     uid: '@azure/storage-file-share.ShareClient.createPermission'
     package: '@azure/storage-file-share'
     summary: >-
@@ -274,11 +274,12 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createPermission(filePermission: string, options?:
-        ShareCreatePermissionOptions): Promise<ShareCreatePermissionResponse>
+        function createPermission(filePermission: string | SharePermission,
+        options?: ShareCreatePermissionOptions):
+        Promise<ShareCreatePermissionResponse>
       parameters:
         - id: filePermission
-          type: string
+          type: string | <xref uid="@azure/storage-file-share.SharePermission" />
           description: File permission described in the SDDL
         - id: options
           type: >-
@@ -466,6 +467,37 @@ methods:
       return:
         description: ''
         type: Promise&lt;boolean&gt;
+  - name: generateSasStringToSign(ShareGenerateSasUrlOptions)
+    uid: '@azure/storage-file-share.ShareClient.generateSasStringToSign'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Only available for ShareClient constructed with a shared key credential.
+
+
+      Generates string to sign for a Service Shared Access Signature (SAS) URI
+      based on the client properties
+
+      and parameters passed in. The SAS is signed by the shared key credential
+      of the client.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function generateSasStringToSign(options: ShareGenerateSasUrlOptions):
+        string
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-file-share.ShareGenerateSasUrlOptions" />
+          description: Optional parameters.
+      return:
+        description: >-
+          The SAS URI consisting of the URI to the resource represented by this
+          client, followed by the generated SAS token.
+        type: string
   - name: generateSasUrl(ShareGenerateSasUrlOptions)
     uid: '@azure/storage-file-share.ShareClient.generateSasUrl'
     package: '@azure/storage-file-share'
@@ -617,6 +649,23 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.ShareGetPropertiesResponse" />&gt;
+  - name: getShareLeaseClient(string)
+    uid: '@azure/storage-file-share.ShareClient.getShareLeaseClient'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Get a [ShareLeaseClient](xref:@azure/storage-file-share.ShareLeaseClient)
+      that manages leases on the file.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getShareLeaseClient(proposeLeaseId?: string): ShareLeaseClient'
+      parameters:
+        - id: proposeLeaseId
+          type: string
+          description: Initial proposed lease Id.
+      return:
+        description: A new ShareLeaseClient object for managing leases on the file.
+        type: <xref uid="@azure/storage-file-share.ShareLeaseClient" />
   - name: getStatistics(ShareGetStatisticsOptions)
     uid: '@azure/storage-file-share.ShareClient.getStatistics'
     package: '@azure/storage-file-share'

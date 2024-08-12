@@ -1,12 +1,12 @@
 ---
 title: Azure Web PubSub service client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub, web-pubsub
-ms.date: 01/03/2023
+ms.date: 08/12/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
 ---
-# Azure Web PubSub service client library for JavaScript - version 1.1.1 
+# Azure Web PubSub service client library for JavaScript - version 1.1.3 
 
 
 [Azure Web PubSub service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe pattern. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from server or submitting HTTP requests can also use Azure Web PubSub service.
@@ -23,7 +23,7 @@ You can use this library in your app server side to manage the WebSocket client 
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.1/sdk/web-pubsub/web-pubsub) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.3/sdk/web-pubsub/web-pubsub) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub) |
 [API reference documentation](https://aka.ms/awps/sdk/js) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -252,7 +252,7 @@ You can set the following environment variable to get the debug logs when using 
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.3/sdk/core/logger).
 
 ### Live Trace
 
@@ -266,13 +266,13 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
 [azure_sub]: https://azure.microsoft.com/free/
-[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.1/sdk/web-pubsub/web-pubsub/samples
+[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.3/sdk/web-pubsub/web-pubsub/samples
 [aad_doc]: https://aka.ms/awps/aad
 

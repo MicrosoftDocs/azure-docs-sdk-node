@@ -1,7 +1,7 @@
 ---
 title: Azure Graph Services SDK for JavaScript
 description: Reference for Azure Graph Services SDK for JavaScript
-ms.date: 08/12/2024
+ms.date: 08/13/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: graphservices

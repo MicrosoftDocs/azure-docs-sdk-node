@@ -1,7 +1,7 @@
 ---
 title: Azure Custom Search SDK for JavaScript
 description: Reference for Azure Custom Search SDK for JavaScript
-ms.date: 08/12/2024
+ms.date: 08/13/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: customsearch

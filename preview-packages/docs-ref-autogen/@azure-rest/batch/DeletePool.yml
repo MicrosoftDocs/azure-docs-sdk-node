@@ -1,0 +1,133 @@
+### YamlMime:TSType
+name: DeletePool
+uid: '@azure-rest/batch.DeletePool'
+package: '@azure-rest/batch'
+summary: ''
+fullName: DeletePool
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: delete(DeletePoolParameters)
+    uid: '@azure-rest/batch.DeletePool.delete'
+    package: '@azure-rest/batch'
+    summary: >-
+      When you request that a Pool be deleted, the following actions occur: the
+      Pool
+
+      state is set to deleting; any ongoing resize operation on the Pool are
+      stopped;
+
+      the Batch service starts resizing the Pool to zero Compute Nodes; any
+      Tasks
+
+      running on existing Compute Nodes are terminated and requeued (as if a
+      resize
+
+      Pool operation had been requested with the default requeue option);
+      finally,
+
+      the Pool is removed from the system. Because running Tasks are requeued,
+      the
+
+      user can rerun these Tasks by updating their Job to target a different
+      Pool.
+
+      The Tasks can then run on the new Pool. If you want to override the
+      requeue
+
+      behavior, then you should call resize Pool explicitly to shrink the Pool
+      to
+
+      zero size before deleting the Pool. If you call an Update, Patch or Delete
+      API
+
+      on a Pool in the deleting state, it will fail with HTTP status code 409
+      with
+
+      error code PoolBeingDeleted.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function delete(options?: DeletePoolParameters):
+        StreamableMethod<DeletePool202Response | DeletePoolDefaultResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure-rest/batch.DeletePoolParameters" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure-rest/core-client.StreamableMethod" />&lt;<xref
+          uid="@azure-rest/batch.DeletePool202Response" /> | <xref
+          uid="@azure-rest/batch.DeletePoolDefaultResponse" />&gt;
+  - name: get(GetPoolParameters)
+    uid: '@azure-rest/batch.DeletePool.get'
+    package: '@azure-rest/batch'
+    summary: Gets information about the specified Pool.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function get(options?: GetPoolParameters):
+        StreamableMethod<GetPool200Response | GetPoolDefaultResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure-rest/batch.GetPoolParameters" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure-rest/core-client.StreamableMethod" />&lt;<xref
+          uid="@azure-rest/batch.GetPool200Response" /> | <xref
+          uid="@azure-rest/batch.GetPoolDefaultResponse" />&gt;
+  - name: head(PoolExistsParameters)
+    uid: '@azure-rest/batch.DeletePool.head'
+    package: '@azure-rest/batch'
+    summary: Gets basic properties of a Pool.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function head(options?: PoolExistsParameters):
+        StreamableMethod<PoolExists200Response | PoolExists404Response |
+        PoolExistsDefaultResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure-rest/batch.PoolExistsParameters" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure-rest/core-client.StreamableMethod" />&lt;<xref
+          uid="@azure-rest/batch.PoolExists200Response" /> | <xref
+          uid="@azure-rest/batch.PoolExists404Response" /> | <xref
+          uid="@azure-rest/batch.PoolExistsDefaultResponse" />&gt;
+  - name: patch(UpdatePoolParameters)
+    uid: '@azure-rest/batch.DeletePool.patch'
+    package: '@azure-rest/batch'
+    summary: >-
+      This only replaces the Pool properties specified in the request. For
+      example,
+
+      if the Pool has a StartTask associated with it, and a request does not
+      specify
+
+      a StartTask element, then the Pool keeps the existing StartTask.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function patch(options: UpdatePoolParameters):
+        StreamableMethod<UpdatePool200Response | UpdatePoolDefaultResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure-rest/batch.UpdatePoolParameters" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure-rest/core-client.StreamableMethod" />&lt;<xref
+          uid="@azure-rest/batch.UpdatePool200Response" /> | <xref
+          uid="@azure-rest/batch.UpdatePoolDefaultResponse" />&gt;

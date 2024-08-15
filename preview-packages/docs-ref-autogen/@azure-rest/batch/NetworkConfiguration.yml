@@ -1,0 +1,103 @@
+### YamlMime:TSType
+name: NetworkConfiguration
+uid: '@azure-rest/batch.NetworkConfiguration'
+package: '@azure-rest/batch'
+summary: The network configuration for a Pool.
+fullName: NetworkConfiguration
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: dynamicVNetAssignmentScope
+    uid: '@azure-rest/batch.NetworkConfiguration.dynamicVNetAssignmentScope'
+    package: '@azure-rest/batch'
+    summary: The scope of dynamic vnet assignment.
+    fullName: dynamicVNetAssignmentScope
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'dynamicVNetAssignmentScope?: string'
+      return:
+        description: ''
+        type: string
+  - name: enableAcceleratedNetworking
+    uid: '@azure-rest/batch.NetworkConfiguration.enableAcceleratedNetworking'
+    package: '@azure-rest/batch'
+    summary: >-
+      Whether this pool should enable accelerated networking. Accelerated
+      networking enables single root I/O virtualization (SR-IOV) to a VM, which
+      may lead to improved networking performance. For more details, see:
+      https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.
+    fullName: enableAcceleratedNetworking
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enableAcceleratedNetworking?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: endpointConfiguration
+    uid: '@azure-rest/batch.NetworkConfiguration.endpointConfiguration'
+    package: '@azure-rest/batch'
+    summary: >-
+      The configuration for endpoints on Compute Nodes in the Batch Pool. Pool
+      endpoint configuration is only supported on Pools with the
+      virtualMachineConfiguration property.
+    fullName: endpointConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'endpointConfiguration?: BatchPoolEndpointConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.BatchPoolEndpointConfiguration" />
+  - name: publicIPAddressConfiguration
+    uid: '@azure-rest/batch.NetworkConfiguration.publicIPAddressConfiguration'
+    package: '@azure-rest/batch'
+    summary: >-
+      The Public IPAddress configuration for Compute Nodes in the Batch Pool.
+      Public IP configuration property is only supported on Pools with the
+      virtualMachineConfiguration property.
+    fullName: publicIPAddressConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'publicIPAddressConfiguration?: PublicIpAddressConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.PublicIpAddressConfiguration" />
+  - name: subnetId
+    uid: '@azure-rest/batch.NetworkConfiguration.subnetId'
+    package: '@azure-rest/batch'
+    summary: >-
+      The ARM resource identifier of the virtual network subnet which the
+      Compute Nodes of the Pool will join. This is of the form
+      /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.
+      The virtual network must be in the same region and subscription as the
+      Azure Batch Account. The specified subnet should have enough free IP
+      addresses to accommodate the number of Compute Nodes in the Pool. If the
+      subnet doesn't have enough free IP addresses, the Pool will partially
+      allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch'
+      service principal must have the 'Classic Virtual Machine Contributor'
+      Role-Based Access Control (RBAC) role for the specified VNet. The
+      specified subnet must allow communication from the Azure Batch service to
+      be able to schedule Tasks on the Nodes. This can be verified by checking
+      if the specified VNet has any associated Network Security Groups (NSG). If
+      communication to the Nodes in the specified subnet is denied by an NSG,
+      then the Batch service will set the state of the Compute Nodes to
+      unusable. For Pools created with virtualMachineConfiguration only ARM
+      virtual networks ('Microsoft.Network/virtualNetworks') are supported. If
+      the specified VNet has any associated Network Security Groups (NSG), then
+      a few reserved system ports must be enabled for inbound communication. For
+      Pools created with a virtual machine configuration, enable ports 29876 and
+      29877, as well as port 22 for Linux and port 3389 for Windows. Also enable
+      outbound connections to Azure Storage on port 443. For more details see:
+      https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.
+    fullName: subnetId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'subnetId?: string'
+      return:
+        description: ''
+        type: string

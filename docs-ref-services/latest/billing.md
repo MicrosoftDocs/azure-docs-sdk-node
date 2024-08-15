@@ -6,8 +6,8 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: billing
 ms.technology: 
-ms.product: 
 manager: timlt
+ms.product: 
 ---
 # Azure Billing modules for JavaScript
 

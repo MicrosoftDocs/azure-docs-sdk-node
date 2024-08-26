@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Network SDK for JavaScript
 description: Reference for Azure Hybrid Network SDK for JavaScript
-ms.date: 08/23/2024
+ms.date: 08/26/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hybridnetwork

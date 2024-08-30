@@ -1,12 +1,12 @@
 ---
 title: Azure Cosmos DB client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/cosmos, cosmosdb
-ms.date: 08/08/2024
+ms.date: 08/30/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cosmosdb
 ---
-# Azure Cosmos DB client library for JavaScript - version 4.1.0 
+# Azure Cosmos DB client library for JavaScript - version 4.1.1 
 /TypeScript
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]
@@ -43,7 +43,7 @@ Or you can create an account in the [Azure Portal](https://portal.azure.com/#cre
 
 #### NodeJS
 
-This package is distributed via [npm][npm] which comes preinstalled with [NodeJS](https://nodejs.org/en/). You should be using Node v10 or above.
+This package is distributed via [npm][npm] which comes preinstalled with [NodeJS](https://nodejs.org/en/) using an LTS version.
 
 #### CORS
 
@@ -402,7 +402,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.1/sdk/core/logger).
 
 ### Diagnostics
 
@@ -492,7 +492,6 @@ Currently the features below are **not supported**. For alternatives options, ch
 * Aggregate cross-partition queries, like sorting, counting, and distinct, don't support continuation tokens.       Streamable queries, like SELECT \* FROM <table> WHERE <condition>, support continuation tokens. See the "Workaround" section for executing non-streamable queries without a continuation token.
 * Change Feed: Processor
 * Change Feed: Read multiple partitions key values
-* Change Feed pull model all versions and delete mode [#27058](https://github.com/Azure/azure-sdk-for-js/issues/27058)
 * Change Feed pull model support for partial hierarchical partition keys [#27059](https://github.com/Azure/azure-sdk-for-js/issues/27059)
 * Cross-partition ORDER BY for mixed types
 
@@ -543,7 +542,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 - [Welcome to Azure Cosmos DB](/azure/cosmos-db/community)
 - [Quick start](/azure/cosmos-db/sql-api-nodejs-get-started)
 - [Tutorial](/azure/cosmos-db/sql-api-nodejs-application)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.0/sdk/cosmosdb/cosmos/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.1/sdk/cosmosdb/cosmos/samples)
 - [Introduction to Resource Model of Azure Cosmos DB Service](/azure/cosmos-db/sql-api-resources)
 - [Introduction to SQL API of Azure Cosmos DB Service](/azure/cosmos-db/sql-api-sql-query)
 - [Partitioning](/azure/cosmos-db/sql-api-partition-data)
@@ -551,7 +550,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.1.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcosmosdb%2Fcosmos%2FREADME.png)
 
@@ -573,7 +572,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [cosmos_item]: /azure/cosmos-db/databases-containers-items#azure-cosmos-items
 [cosmos_request_units]: /azure/cosmos-db/request-units
 [cosmos_resources]: /azure/cosmos-db/databases-containers-items
-[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.0/sdk/cosmosdb/cosmos/samples
+[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.1.1/sdk/cosmosdb/cosmos/samples
 [cosmos_sql_queries]: /azure/cosmos-db/how-to-sql-query
 [cosmos_ttl]: /azure/cosmos-db/time-to-live
 [npm]: https://www.npmjs.com/package/@azure/cosmos

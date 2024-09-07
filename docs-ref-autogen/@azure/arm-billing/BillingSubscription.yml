@@ -2,17 +2,83 @@
 name: BillingSubscription
 uid: '@azure/arm-billing.BillingSubscription'
 package: '@azure/arm-billing'
-summary: A billing subscription.
+summary: The billing properties of a subscription.
 fullName: BillingSubscription
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: autoRenew
+    uid: '@azure/arm-billing.BillingSubscription.autoRenew'
+    package: '@azure/arm-billing'
+    summary: Indicates whether auto renewal is turned on or off for a product.
+    fullName: autoRenew
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'autoRenew?: string'
+      return:
+        description: ''
+        type: string
+  - name: beneficiary
+    uid: '@azure/arm-billing.BillingSubscription.beneficiary'
+    package: '@azure/arm-billing'
+    summary: The beneficiary of the billing subscription.
+    fullName: beneficiary
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'beneficiary?: Beneficiary'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-billing.Beneficiary" />
+  - name: beneficiaryTenantId
+    uid: '@azure/arm-billing.BillingSubscription.beneficiaryTenantId'
+    package: '@azure/arm-billing'
+    summary: The provisioning tenant of the subscription.
+    fullName: beneficiaryTenantId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'beneficiaryTenantId?: string'
+      return:
+        description: ''
+        type: string
+  - name: billingFrequency
+    uid: '@azure/arm-billing.BillingSubscription.billingFrequency'
+    package: '@azure/arm-billing'
+    summary: >-
+      The billing frequency in ISO8601 format of product in the subscription.
+      Example: P1M, P3M, P1Y
+    fullName: billingFrequency
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'billingFrequency?: string'
+      return:
+        description: ''
+        type: string
+  - name: billingPolicies
+    uid: '@azure/arm-billing.BillingSubscription.billingPolicies'
+    package: '@azure/arm-billing'
+    summary: >-
+      Dictionary of billing policies associated with the subscription.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: billingPolicies
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'billingPolicies?: {[propertyName: string]: string}'
+      return:
+        description: ''
+        type: '{[propertyName: string]: string}'
   - name: billingProfileDisplayName
     uid: '@azure/arm-billing.BillingSubscription.billingProfileDisplayName'
     package: '@azure/arm-billing'
     summary: >-
-      The name of the billing profile to which the subscription is billed.
+      The name of the billing profile.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -27,11 +93,7 @@ properties:
   - name: billingProfileId
     uid: '@azure/arm-billing.BillingSubscription.billingProfileId'
     package: '@azure/arm-billing'
-    summary: >-
-      The ID of the billing profile to which the subscription is billed.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The fully qualified ID that uniquely identifies a billing profile.
     fullName: billingProfileId
     remarks: ''
     isDeprecated: false
@@ -40,15 +102,34 @@ properties:
       return:
         description: ''
         type: string
-  - name: costCenter
-    uid: '@azure/arm-billing.BillingSubscription.costCenter'
+  - name: billingProfileName
+    uid: '@azure/arm-billing.BillingSubscription.billingProfileName'
     package: '@azure/arm-billing'
-    summary: The cost center applied to the subscription.
-    fullName: costCenter
+    summary: >-
+      The ID that uniquely identifies a billing profile.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: billingProfileName
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'costCenter?: string'
+      content: 'billingProfileName?: string'
+      return:
+        description: ''
+        type: string
+  - name: consumptionCostCenter
+    uid: '@azure/arm-billing.BillingSubscription.consumptionCostCenter'
+    package: '@azure/arm-billing'
+    summary: >-
+      The cost center applied to the subscription. This field is only available
+      for consumption subscriptions of Microsoft Customer Agreement or
+      Enterprise Agreement Type billing accounts.
+    fullName: consumptionCostCenter
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'consumptionCostCenter?: string'
       return:
         description: ''
         type: string
@@ -56,8 +137,7 @@ properties:
     uid: '@azure/arm-billing.BillingSubscription.customerDisplayName'
     package: '@azure/arm-billing'
     summary: >-
-      The name of the customer for whom the subscription was created. The field
-      is applicable only for Microsoft Partner Agreement billing account.
+      The name of the customer.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -72,12 +152,7 @@ properties:
   - name: customerId
     uid: '@azure/arm-billing.BillingSubscription.customerId'
     package: '@azure/arm-billing'
-    summary: >-
-      The ID of the customer for whom the subscription was created. The field is
-      applicable only for Microsoft Partner Agreement billing account.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The fully qualified ID that uniquely identifies a customer.
     fullName: customerId
     remarks: ''
     isDeprecated: false
@@ -86,14 +161,26 @@ properties:
       return:
         description: ''
         type: string
-  - name: displayName
-    uid: '@azure/arm-billing.BillingSubscription.displayName'
+  - name: customerName
+    uid: '@azure/arm-billing.BillingSubscription.customerName'
     package: '@azure/arm-billing'
     summary: >-
-      The name of the subscription.
+      The ID that uniquely identifies a customer.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
+    fullName: customerName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'customerName?: string'
+      return:
+        description: ''
+        type: string
+  - name: displayName
+    uid: '@azure/arm-billing.BillingSubscription.displayName'
+    package: '@azure/arm-billing'
+    summary: The name of the billing subscription.
     fullName: displayName
     remarks: ''
     isDeprecated: false
@@ -102,11 +189,62 @@ properties:
       return:
         description: ''
         type: string
+  - name: enrollmentAccountDisplayName
+    uid: '@azure/arm-billing.BillingSubscription.enrollmentAccountDisplayName'
+    package: '@azure/arm-billing'
+    summary: >-
+      The enrollment Account name associated with the subscription. This field
+      is available only for the Enterprise Agreement Type billing accounts.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: enrollmentAccountDisplayName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enrollmentAccountDisplayName?: string'
+      return:
+        description: ''
+        type: string
+  - name: enrollmentAccountId
+    uid: '@azure/arm-billing.BillingSubscription.enrollmentAccountId'
+    package: '@azure/arm-billing'
+    summary: >-
+      The enrollment Account ID associated with the subscription. This field is
+      available only for the Enterprise Agreement Type billing accounts.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: enrollmentAccountId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enrollmentAccountId?: string'
+      return:
+        description: ''
+        type: string
+  - name: enrollmentAccountStartDate
+    uid: '@azure/arm-billing.BillingSubscription.enrollmentAccountStartDate'
+    package: '@azure/arm-billing'
+    summary: >-
+      The enrollment Account and the subscription association start date. This
+      field is available only for the Enterprise Agreement Type.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: enrollmentAccountStartDate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enrollmentAccountStartDate?: Date'
+      return:
+        description: ''
+        type: Date
   - name: invoiceSectionDisplayName
     uid: '@azure/arm-billing.BillingSubscription.invoiceSectionDisplayName'
     package: '@azure/arm-billing'
     summary: >-
-      The name of the invoice section to which the subscription is billed.
+      The name of the invoice section.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -121,11 +259,7 @@ properties:
   - name: invoiceSectionId
     uid: '@azure/arm-billing.BillingSubscription.invoiceSectionId'
     package: '@azure/arm-billing'
-    summary: >-
-      The ID of the invoice section to which the subscription is billed.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The fully qualified ID that uniquely identifies an invoice section.
     fullName: invoiceSectionId
     remarks: ''
     isDeprecated: false
@@ -134,11 +268,28 @@ properties:
       return:
         description: ''
         type: string
+  - name: invoiceSectionName
+    uid: '@azure/arm-billing.BillingSubscription.invoiceSectionName'
+    package: '@azure/arm-billing'
+    summary: >-
+      The ID that uniquely identifies an invoice section.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: invoiceSectionName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'invoiceSectionName?: string'
+      return:
+        description: ''
+        type: string
   - name: lastMonthCharges
     uid: '@azure/arm-billing.BillingSubscription.lastMonthCharges'
     package: '@azure/arm-billing'
     summary: >-
-      The last month charges.
+      The last month's charges. This field is only available for usage based
+      subscriptions of Microsoft Customer Agreement billing accounts.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -154,7 +305,8 @@ properties:
     uid: '@azure/arm-billing.BillingSubscription.monthToDateCharges'
     package: '@azure/arm-billing'
     summary: >-
-      The current month to date charges.
+      The current month to date charges. This field is only available for usage
+      based subscriptions of Microsoft Customer Agreement billing accounts.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -166,11 +318,182 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-billing.Amount" />
+  - name: nextBillingCycleDetails
+    uid: '@azure/arm-billing.BillingSubscription.nextBillingCycleDetails'
+    package: '@azure/arm-billing'
+    summary: >-
+      Next billing cycle details of the subscription.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: nextBillingCycleDetails
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'nextBillingCycleDetails?: NextBillingCycleDetails'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-billing.NextBillingCycleDetails" />
+  - name: offerId
+    uid: '@azure/arm-billing.BillingSubscription.offerId'
+    package: '@azure/arm-billing'
+    summary: >-
+      The offer ID for the subscription. This field is only available for the
+      Microsoft Online Services Program billing accounts.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: offerId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'offerId?: string'
+      return:
+        description: ''
+        type: string
+  - name: operationStatus
+    uid: '@azure/arm-billing.BillingSubscription.operationStatus'
+    package: '@azure/arm-billing'
+    summary: >-
+      The status of an operation on the subscription. When None, there is no
+      ongoing operation. When LockedForUpdate, write operations will be blocked
+      on the Billing Subscription. Other is the default value and you may need
+      to refer to the latest API version for more details.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: operationStatus
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'operationStatus?: string'
+      return:
+        description: ''
+        type: string
+  - name: productCategory
+    uid: '@azure/arm-billing.BillingSubscription.productCategory'
+    package: '@azure/arm-billing'
+    summary: >-
+      The category of the product for which the subscription is purchased.
+      Possible values include: AzureSupport, Hardware, ReservationOrder, SaaS,
+      SavingsPlanOrder, Software, UsageBased, Other.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: productCategory
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'productCategory?: string'
+      return:
+        description: ''
+        type: string
+  - name: productType
+    uid: '@azure/arm-billing.BillingSubscription.productType'
+    package: '@azure/arm-billing'
+    summary: >-
+      Type of the product for which the subscription is purchased.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: productType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'productType?: string'
+      return:
+        description: ''
+        type: string
+  - name: productTypeId
+    uid: '@azure/arm-billing.BillingSubscription.productTypeId'
+    package: '@azure/arm-billing'
+    summary: Id of the product for which the subscription is purchased.
+    fullName: productTypeId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'productTypeId?: string'
+      return:
+        description: ''
+        type: string
+  - name: provisioningState
+    uid: '@azure/arm-billing.BillingSubscription.provisioningState'
+    package: '@azure/arm-billing'
+    summary: >-
+      The provisioning state of the resource during a long-running operation.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: provisioningState
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'provisioningState?: string'
+      return:
+        description: ''
+        type: string
+  - name: provisioningTenantId
+    uid: '@azure/arm-billing.BillingSubscription.provisioningTenantId'
+    package: '@azure/arm-billing'
+    summary: The tenant in which the subscription is provisioned.
+    fullName: provisioningTenantId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'provisioningTenantId?: string'
+      return:
+        description: ''
+        type: string
+  - name: purchaseDate
+    uid: '@azure/arm-billing.BillingSubscription.purchaseDate'
+    package: '@azure/arm-billing'
+    summary: >-
+      Purchase date of the product in UTC time.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: purchaseDate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'purchaseDate?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: quantity
+    uid: '@azure/arm-billing.BillingSubscription.quantity'
+    package: '@azure/arm-billing'
+    summary: The quantity of licenses or fulfillment units for the subscription.
+    fullName: quantity
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'quantity?: number'
+      return:
+        description: ''
+        type: number
+  - name: renewalTermDetails
+    uid: '@azure/arm-billing.BillingSubscription.renewalTermDetails'
+    package: '@azure/arm-billing'
+    summary: >-
+      Details for the next renewal term of a subscription.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: renewalTermDetails
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'renewalTermDetails?: RenewalTermDetails'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-billing.RenewalTermDetails" />
   - name: reseller
     uid: '@azure/arm-billing.BillingSubscription.reseller'
     package: '@azure/arm-billing'
     summary: >-
-      Reseller for this subscription.
+      Reseller for this subscription. The fields is not available for Microsoft
+      Partner Agreement billing accounts.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -182,11 +505,30 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-billing.Reseller" />
+  - name: resourceUri
+    uid: '@azure/arm-billing.BillingSubscription.resourceUri'
+    package: '@azure/arm-billing'
+    summary: >-
+      Unique identifier of the linked resource.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: resourceUri
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'resourceUri?: string'
+      return:
+        description: ''
+        type: string
   - name: skuDescription
     uid: '@azure/arm-billing.BillingSubscription.skuDescription'
     package: '@azure/arm-billing'
     summary: >-
-      The sku description of the Azure plan for the subscription.
+      The SKU description of the product for which the subscription is
+      purchased. This field is is only available for billing accounts with
+      agreement type Microsoft Customer Agreement and Microsoft Partner
+      Agreement.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -201,7 +543,10 @@ properties:
   - name: skuId
     uid: '@azure/arm-billing.BillingSubscription.skuId'
     package: '@azure/arm-billing'
-    summary: The sku ID of the Azure plan for the subscription.
+    summary: >-
+      The SKU ID of the product for which the subscription is purchased. This
+      field is is only available  for Microsoft Customer Agreement billing
+      accounts.
     fullName: skuId
     remarks: ''
     isDeprecated: false
@@ -210,15 +555,37 @@ properties:
       return:
         description: ''
         type: string
-  - name: subscriptionBillingStatus
-    uid: '@azure/arm-billing.BillingSubscription.subscriptionBillingStatus'
+  - name: status
+    uid: '@azure/arm-billing.BillingSubscription.status'
     package: '@azure/arm-billing'
-    summary: The current billing status of the subscription.
-    fullName: subscriptionBillingStatus
+    summary: >-
+      The status of the subscription. This field is not available for Enterprise
+      Agreement billing accounts
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: status
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'subscriptionBillingStatus?: string'
+      content: 'status?: string'
+      return:
+        description: ''
+        type: string
+  - name: subscriptionEnrollmentAccountStatus
+    uid: '@azure/arm-billing.BillingSubscription.subscriptionEnrollmentAccountStatus'
+    package: '@azure/arm-billing'
+    summary: >-
+      The current enrollment account status of the subscription. This field is
+      available only for the Enterprise Agreement Type.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: subscriptionEnrollmentAccountStatus
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'subscriptionEnrollmentAccountStatus?: string'
       return:
         description: ''
         type: string
@@ -238,12 +605,29 @@ properties:
       return:
         description: ''
         type: string
+  - name: suspensionReasonDetails
+    uid: '@azure/arm-billing.BillingSubscription.suspensionReasonDetails'
+    package: '@azure/arm-billing'
+    summary: >-
+      The suspension details for a subscription. This field is not available for
+      Enterprise Agreement billing accounts.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: suspensionReasonDetails
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'suspensionReasonDetails?: BillingSubscriptionStatusDetails[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-billing.BillingSubscriptionStatusDetails" />[]
   - name: suspensionReasons
     uid: '@azure/arm-billing.BillingSubscription.suspensionReasons'
     package: '@azure/arm-billing'
     summary: >-
-      The suspension reason for a subscription. Applies only to subscriptions in
-      Microsoft Online Services Program billing accounts.
+      The suspension reason for a subscription. This field is not available for
+      Enterprise Agreement billing accounts.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -255,12 +639,71 @@ properties:
       return:
         description: ''
         type: string[]
+  - name: systemOverrides
+    uid: '@azure/arm-billing.BillingSubscription.systemOverrides'
+    package: '@azure/arm-billing'
+    summary: System imposed policies that regulate behavior of the subscription.
+    fullName: systemOverrides
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'systemOverrides?: SystemOverrides'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-billing.SystemOverrides" />
+  - name: termDuration
+    uid: '@azure/arm-billing.BillingSubscription.termDuration'
+    package: '@azure/arm-billing'
+    summary: >-
+      The duration in ISO8601 format for which you can use the subscription.
+      Example: P1M, P3M, P1Y
+    fullName: termDuration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'termDuration?: string'
+      return:
+        description: ''
+        type: string
+  - name: termEndDate
+    uid: '@azure/arm-billing.BillingSubscription.termEndDate'
+    package: '@azure/arm-billing'
+    summary: >-
+      End date of the term in UTC time.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: termEndDate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'termEndDate?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: termStartDate
+    uid: '@azure/arm-billing.BillingSubscription.termStartDate'
+    package: '@azure/arm-billing'
+    summary: >-
+      Start date of the term in UTC time.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: termStartDate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'termStartDate?: Date'
+      return:
+        description: ''
+        type: Date
 inheritedProperties:
   - name: id
     uid: '@azure/arm-billing.BillingSubscription.id'
     package: '@azure/arm-billing'
     summary: >-
-      Resource Id.
+      Fully qualified resource ID for the resource. E.g.
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -272,12 +715,14 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> [Resource.id](xref:@azure/arm-billing.Resource.id)
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProxyResourceWithTags.id](xref:@azure/arm-billing.ProxyResourceWithTags.id)
   - name: name
     uid: '@azure/arm-billing.BillingSubscription.name'
     package: '@azure/arm-billing'
     summary: >-
-      Resource name.
+      The name of the resource
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -291,12 +736,52 @@ inheritedProperties:
         type: string
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [Resource.name](xref:@azure/arm-billing.Resource.name)
+      [ProxyResourceWithTags.name](xref:@azure/arm-billing.ProxyResourceWithTags.name)
+  - name: systemData
+    uid: '@azure/arm-billing.BillingSubscription.systemData'
+    package: '@azure/arm-billing'
+    summary: >-
+      Azure Resource Manager metadata containing createdBy and modifiedBy
+      information.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: systemData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'systemData?: SystemData'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-billing.SystemData" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProxyResourceWithTags.systemData](xref:@azure/arm-billing.ProxyResourceWithTags.systemData)
+  - name: tags
+    uid: '@azure/arm-billing.BillingSubscription.tags'
+    package: '@azure/arm-billing'
+    summary: >-
+      Dictionary of metadata associated with the resource. It may not be
+      populated for all resource types. Maximum key/value length supported of
+      256 characters. Keys/value should not empty value nor null. Keys can not
+      contain < > % & \ ? /
+    fullName: tags
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'tags?: {[propertyName: string]: string}'
+      return:
+        description: ''
+        type: '{[propertyName: string]: string}'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProxyResourceWithTags.tags](xref:@azure/arm-billing.ProxyResourceWithTags.tags)
   - name: type
     uid: '@azure/arm-billing.BillingSubscription.type'
     package: '@azure/arm-billing'
     summary: >-
-      Resource type.
+      The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+      "Microsoft.Storage/storageAccounts"
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -310,5 +795,5 @@ inheritedProperties:
         type: string
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [Resource.type](xref:@azure/arm-billing.Resource.type)
-extends: <xref uid="@azure/arm-billing.Resource" />
+      [ProxyResourceWithTags.type](xref:@azure/arm-billing.ProxyResourceWithTags.type)
+extends: <xref uid="@azure/arm-billing.ProxyResourceWithTags" />

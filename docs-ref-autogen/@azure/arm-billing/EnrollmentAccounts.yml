@@ -8,20 +8,28 @@ remarks: ''
 isDeprecated: false
 type: interface
 methods:
-  - name: get(string, EnrollmentAccountsGetOptionalParams)
+  - name: get(string, string, EnrollmentAccountsGetOptionalParams)
     uid: '@azure/arm-billing.EnrollmentAccounts.get'
     package: '@azure/arm-billing'
-    summary: Gets a enrollment account by name.
+    summary: >-
+      Gets an enrollment account by ID. The operation is supported only for
+      billing accounts with
+
+      agreement type Enterprise Agreement.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function get(name: string, options?:
-        EnrollmentAccountsGetOptionalParams): Promise<EnrollmentAccountSummary>
+        function get(billingAccountName: string, enrollmentAccountName: string,
+        options?: EnrollmentAccountsGetOptionalParams):
+        Promise<EnrollmentAccount>
       parameters:
-        - id: name
+        - id: billingAccountName
           type: string
-          description: Enrollment Account name.
+          description: The ID that uniquely identifies a billing account.
+        - id: enrollmentAccountName
+          type: string
+          description: The name of the enrollment account.
         - id: options
           type: >-
             <xref uid="@azure/arm-billing.EnrollmentAccountsGetOptionalParams"
@@ -29,30 +37,114 @@ methods:
           description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-billing.EnrollmentAccountSummary"
-          />&gt;
-  - name: list(EnrollmentAccountsListOptionalParams)
-    uid: '@azure/arm-billing.EnrollmentAccounts.list'
+        type: Promise&lt;<xref uid="@azure/arm-billing.EnrollmentAccount" />&gt;
+  - name: >-
+      getByDepartment(string, string, string,
+      EnrollmentAccountsGetByDepartmentOptionalParams)
+    uid: '@azure/arm-billing.EnrollmentAccounts.getByDepartment'
     package: '@azure/arm-billing'
-    summary: Lists the enrollment accounts the caller has access to.
+    summary: >-
+      Gets an enrollment account by department. The operation is supported only
+      for billing accounts with
+
+      agreement type Enterprise Agreement.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function list(options?: EnrollmentAccountsListOptionalParams):
-        PagedAsyncIterableIterator<EnrollmentAccountSummary,
-        EnrollmentAccountSummary[], PageSettings>
+        function getByDepartment(billingAccountName: string, departmentName:
+        string, enrollmentAccountName: string, options?:
+        EnrollmentAccountsGetByDepartmentOptionalParams):
+        Promise<EnrollmentAccount>
       parameters:
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: departmentName
+          type: string
+          description: The name of the department.
+        - id: enrollmentAccountName
+          type: string
+          description: The name of the enrollment account.
         - id: options
           type: >-
-            <xref uid="@azure/arm-billing.EnrollmentAccountsListOptionalParams"
+            <xref
+            uid="@azure/arm-billing.EnrollmentAccountsGetByDepartmentOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-billing.EnrollmentAccount" />&gt;
+  - name: >-
+      listByBillingAccount(string,
+      EnrollmentAccountsListByBillingAccountOptionalParams)
+    uid: '@azure/arm-billing.EnrollmentAccounts.listByBillingAccount'
+    package: '@azure/arm-billing'
+    summary: >-
+      Lists the enrollment accounts for a billing account. The operation is
+      supported only for billing
+
+      accounts with agreement type Enterprise Agreement.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByBillingAccount(billingAccountName: string, options?:
+        EnrollmentAccountsListByBillingAccountOptionalParams):
+        PagedAsyncIterableIterator<EnrollmentAccount, EnrollmentAccount[],
+        PageSettings>
+      parameters:
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-billing.EnrollmentAccountsListByBillingAccountOptionalParams"
             />
           description: The options parameters.
       return:
         description: ''
         type: >-
           <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure/arm-billing.EnrollmentAccountSummary" />, <xref
-          uid="@azure/arm-billing.EnrollmentAccountSummary" />[], <xref
+          uid="@azure/arm-billing.EnrollmentAccount" />, <xref
+          uid="@azure/arm-billing.EnrollmentAccount" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
+  - name: >-
+      listByDepartment(string, string,
+      EnrollmentAccountsListByDepartmentOptionalParams)
+    uid: '@azure/arm-billing.EnrollmentAccounts.listByDepartment'
+    package: '@azure/arm-billing'
+    summary: >-
+      Lists the enrollment accounts for a department. The operation is supported
+      only for billing accounts
+
+      with agreement type Enterprise Agreement.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByDepartment(billingAccountName: string, departmentName:
+        string, options?: EnrollmentAccountsListByDepartmentOptionalParams):
+        PagedAsyncIterableIterator<EnrollmentAccount, EnrollmentAccount[],
+        PageSettings>
+      parameters:
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: departmentName
+          type: string
+          description: The name of the department.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-billing.EnrollmentAccountsListByDepartmentOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-billing.EnrollmentAccount" />, <xref
+          uid="@azure/arm-billing.EnrollmentAccount" />[], <xref
           uid="@azure/core-paging.PageSettings" />&gt;

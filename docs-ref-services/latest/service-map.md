@@ -1,7 +1,7 @@
 ---
 title: Azure Service Map SDK for JavaScript
 description: Reference for Azure Service Map SDK for JavaScript
-ms.date: 09/12/2024
+ms.date: 09/13/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: servicemap

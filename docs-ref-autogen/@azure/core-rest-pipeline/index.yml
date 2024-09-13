@@ -12,7 +12,10 @@ interfaces:
   - '@azure/core-rest-pipeline.AuthorizeRequestOptions'
   - '@azure/core-rest-pipeline.AuxiliaryAuthenticationHeaderPolicyOptions'
   - '@azure/core-rest-pipeline.BearerTokenAuthenticationPolicyOptions'
+  - '@azure/core-rest-pipeline.BodyPart'
   - '@azure/core-rest-pipeline.ChallengeCallbacks'
+  - '@azure/core-rest-pipeline.CreateFileFromStreamOptions'
+  - '@azure/core-rest-pipeline.CreateFileOptions'
   - '@azure/core-rest-pipeline.DefaultRetryPolicyOptions'
   - '@azure/core-rest-pipeline.ExponentialRetryPolicyOptions'
   - '@azure/core-rest-pipeline.HttpClient'
@@ -20,6 +23,7 @@ interfaces:
   - '@azure/core-rest-pipeline.InternalPipelineOptions'
   - '@azure/core-rest-pipeline.KeyObject'
   - '@azure/core-rest-pipeline.LogPolicyOptions'
+  - '@azure/core-rest-pipeline.MultipartRequestBody'
   - '@azure/core-rest-pipeline.Pipeline'
   - '@azure/core-rest-pipeline.PipelineOptions'
   - '@azure/core-rest-pipeline.PipelinePolicy'
@@ -131,6 +135,91 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.Pipeline" />
+  - name: createFile(Uint8Array, string, CreateFileOptions)
+    uid: '@azure/core-rest-pipeline.createFile'
+    package: '@azure/core-rest-pipeline'
+    summary: >-
+      Create an object that implements the File interface. This object is
+      intended to be
+
+      passed into RequestBodyType.formData, and is not guaranteed to work as
+      expected in
+
+      other situations.
+
+
+      Use this function create a File object for use in RequestBodyType.formData
+      in environments where the global File object is unavailable.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createFile(content: Uint8Array, name: string, options?:
+        CreateFileOptions): File
+      parameters:
+        - id: content
+          type: Uint8Array
+          description: the content of the file as a Uint8Array in memory.
+        - id: name
+          type: string
+          description: the name of the file.
+        - id: options
+          type: <xref uid="@azure/core-rest-pipeline.CreateFileOptions" />
+          description: >-
+            optional metadata about the file, e.g. file name, file size, MIME
+            type.
+      return:
+        description: ''
+        type: File
+  - name: >-
+      createFileFromStream(() => ReadableStream<Uint8Array> | ReadableStream,
+      string, CreateFileFromStreamOptions)
+    uid: '@azure/core-rest-pipeline.createFileFromStream'
+    package: '@azure/core-rest-pipeline'
+    summary: >-
+      Create an object that implements the File interface. This object is
+      intended to be
+
+      passed into RequestBodyType.formData, and is not guaranteed to work as
+      expected in
+
+      other situations.
+
+
+      Use this function to:
+
+      - Create a File object for use in RequestBodyType.formData in environments
+      where the
+        global File object is unavailable.
+      - Create a File-like object from a readable stream without reading the
+      stream into memory.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createFileFromStream(stream: () => ReadableStream<Uint8Array> |
+        ReadableStream, name: string, options?: CreateFileFromStreamOptions):
+        File
+      parameters:
+        - id: stream
+          type: () =&gt; ReadableStream&lt;Uint8Array&gt; | ReadableStream
+          description: >-
+            the content of the file as a callback returning a stream. When a
+            File object made using createFile is
+                             passed in a request's form data map, the stream will not be read into memory
+                             and instead will be streamed when the request is made. In the event of a retry, the
+                             stream needs to be read again, so this callback SHOULD return a fresh stream if possible.
+        - id: name
+          type: string
+          description: the name of the file.
+        - id: options
+          type: <xref uid="@azure/core-rest-pipeline.CreateFileFromStreamOptions" />
+          description: >-
+            optional metadata about the file, e.g. file name, file size, MIME
+            type.
+      return:
+        description: ''
+        type: File
   - name: createHttpHeaders(RawHttpHeadersInput)
     uid: '@azure/core-rest-pipeline.createHttpHeaders'
     package: '@azure/core-rest-pipeline'
@@ -271,7 +360,10 @@ functions:
 
       variables `HTTPS_PROXY` or `HTTP_PROXY`.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      - Internally this method is no longer necessary when setting proxy
+      information.
     syntax:
       content: >-
         function getDefaultProxySettings(proxyUrl?: string): ProxySettings |
@@ -310,6 +402,17 @@ functions:
         - id: options
           type: <xref uid="@azure/core-rest-pipeline.LogPolicyOptions" />
           description: Options to configure logPolicy.
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: multipartPolicy()
+    uid: '@azure/core-rest-pipeline.multipartPolicy'
+    package: '@azure/core-rest-pipeline'
+    summary: Pipeline policy for multipart requests
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function multipartPolicy(): PipelinePolicy'
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />

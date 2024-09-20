@@ -1,7 +1,7 @@
 ---
 title: Azure Features SDK for JavaScript
 description: Reference for Azure Features SDK for JavaScript
-ms.date: 09/19/2024
+ms.date: 09/20/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: features

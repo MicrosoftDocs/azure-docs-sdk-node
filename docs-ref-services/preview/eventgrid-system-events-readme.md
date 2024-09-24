@@ -1,19 +1,19 @@
 ---
 title: Azure Event Grid Namespaces client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/eventgrid-system-events, eventgrid
-ms.date: 08/20/2024
+ms.date: 09/24/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: eventgrid
 ---
-# Azure Event Grid Namespaces client library for JavaScript - version 1.0.0-beta.3 
+# Azure Event Grid Namespaces client library for JavaScript - version 1.0.0-beta.4 
 
 
 Azure Event Grid system events are published by Azure services to system topics. The models in this package map to events sent by various Azure services.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid-system-events_1.0.0-beta.3/sdk/eventgrid/eventgrid-system-events/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid-system-events_1.0.0-beta.4/sdk/eventgrid/eventgrid-system-events/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/eventgrid-system-events)
 - [API reference documentation](/javascript/api/@azure/eventgrid-namespaces/)
 - [Product documentation](/azure/event-grid/)
@@ -25,7 +25,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid-system-events_1.0.0-beta.3/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid-system-events_1.0.0-beta.4/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -70,11 +70,11 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable the logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid-system-events_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable the logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid-system-events_1.0.0-beta.4/sdk/core/logger).
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid-system-events_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid-system-events_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -86,7 +86,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [event_grid]: /azure/event-grid
 [azure_portal]: https://portal.azure.com
-[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid-system-events_1.0.0-beta.3/sdk/core/core-tracing
+[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid-system-events_1.0.0-beta.4/sdk/core/core-tracing
 [cloud-events-distributed-tracing-spec]: https://github.com/cloudevents/spec/blob/v1.0.1/extensions/distributed-tracing.md
 [eventgrid-on-kubernetes-using-azure-arc]: /azure/event-grid/kubernetes/
 

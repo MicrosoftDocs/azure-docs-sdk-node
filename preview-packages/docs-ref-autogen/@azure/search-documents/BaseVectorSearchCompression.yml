@@ -1,18 +1,29 @@
 ### YamlMime:TSType
-name: BaseVectorSearchCompressionConfiguration
-uid: '@azure/search-documents.BaseVectorSearchCompressionConfiguration'
+name: BaseVectorSearchCompression
+uid: '@azure/search-documents.BaseVectorSearchCompression'
 package: '@azure/search-documents'
 summary: >-
   Contains configuration options specific to the compression method used during
   indexing or querying.
-fullName: BaseVectorSearchCompressionConfiguration
+fullName: BaseVectorSearchCompression
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: compressionName
+    uid: '@azure/search-documents.BaseVectorSearchCompression.compressionName'
+    package: '@azure/search-documents'
+    summary: The name to associate with this particular configuration.
+    fullName: compressionName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'compressionName: string'
+      return:
+        description: ''
+        type: string
   - name: defaultOversampling
-    uid: >-
-      @azure/search-documents.BaseVectorSearchCompressionConfiguration.defaultOversampling
+    uid: '@azure/search-documents.BaseVectorSearchCompression.defaultOversampling'
     package: '@azure/search-documents'
     summary: >-
       Default oversampling factor. Oversampling will internally request more
@@ -31,7 +42,7 @@ properties:
         description: ''
         type: number
   - name: kind
-    uid: '@azure/search-documents.BaseVectorSearchCompressionConfiguration.kind'
+    uid: '@azure/search-documents.BaseVectorSearchCompression.kind'
     package: '@azure/search-documents'
     summary: >-
       Polymorphic discriminator, which specifies the different types this object
@@ -40,25 +51,13 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'kind: "scalarQuantization"'
+      content: 'kind: "scalarQuantization" | "binaryQuantization"'
       return:
         description: ''
-        type: '"scalarQuantization"'
-  - name: name
-    uid: '@azure/search-documents.BaseVectorSearchCompressionConfiguration.name'
-    package: '@azure/search-documents'
-    summary: The name to associate with this particular configuration.
-    fullName: name
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'name: string'
-      return:
-        description: ''
-        type: string
+        type: '"scalarQuantization" | "binaryQuantization"'
   - name: rerankWithOriginalVectors
     uid: >-
-      @azure/search-documents.BaseVectorSearchCompressionConfiguration.rerankWithOriginalVectors
+      @azure/search-documents.BaseVectorSearchCompression.rerankWithOriginalVectors
     package: '@azure/search-documents'
     summary: >-
       If set to true, once the ordered set of results calculated using
@@ -73,3 +72,22 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: truncationDimension
+    uid: '@azure/search-documents.BaseVectorSearchCompression.truncationDimension'
+    package: '@azure/search-documents'
+    summary: >-
+      The number of dimensions to truncate the vectors to. Truncating the
+      vectors reduces the size of the vectors and the amount of data that needs
+      to be transferred during search. This can save storage cost and improve
+      search performance at the expense of recall. It should be only used for
+      embeddings trained with Matryoshka Representation Learning (MRL) such as
+      OpenAI text-embedding-3-large (small). The default value is null, which
+      means no truncation.
+    fullName: truncationDimension
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'truncationDimension?: number'
+      return:
+        description: ''
+        type: number

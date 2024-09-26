@@ -8,18 +8,58 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: azureOpenAITokenizerParameters
+    uid: '@azure/search-documents.SplitSkill.azureOpenAITokenizerParameters'
+    package: '@azure/search-documents'
+    summary: >-
+      Only applies if the unit is set to azureOpenAITokens. If specified, the
+      splitSkill will use these parameters when performing the tokenization. The
+      parameters are a valid 'encoderModelName' and an optional
+      'allowedSpecialTokens' property.
+    fullName: azureOpenAITokenizerParameters
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.AzureOpenAITokenizerParameters" />
   - name: defaultLanguageCode
     uid: '@azure/search-documents.SplitSkill.defaultLanguageCode'
     package: '@azure/search-documents'
-    summary: A value indicating which language code to use. Default is en.
+    summary: A value indicating which language code to use. Default is `en`.
     fullName: defaultLanguageCode
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'defaultLanguageCode?: SplitSkillLanguage'
+      content: >-
+        defaultLanguageCode?: "da" | "de" | "en" | "es" | "fi" | "fr" | "it" |
+        "ko" | "pt" | "cs" | "nl" | "hu" | "ja" | "pl" | "ru" | "sv" | "tr" |
+        "bs" | "et" | "he" | "hi" | "hr" | "id" | "lv" | "nb" | "sk" | "sl" |
+        "zh" | "is" | "sr" | "ur" | "am" | "pt-br"
       return:
         description: ''
-        type: <xref uid="@azure/search-documents.SplitSkillLanguage" />
+        type: >-
+          "da" | "de" | "en" | "es" | "fi" | "fr" | "it" | "ko" | "pt" | "cs" |
+          "nl" | "hu" | "ja" | "pl" | "ru" | "sv" | "tr" | "bs" | "et" | "he" |
+          "hi" | "hr" | "id" | "lv" | "nb" | "sk" | "sl" | "zh" | "is" | "sr" |
+          "ur" | "am" | "pt-br"
+  - name: maximumPagesToTake
+    uid: '@azure/search-documents.SplitSkill.maximumPagesToTake'
+    package: '@azure/search-documents'
+    summary: >-
+      Only applicable when textSplitMode is set to 'pages'. If specified, the
+      SplitSkill will discontinue splitting after processing the first
+      'maximumPagesToTake' pages, in order to improve performance when only a
+      few initial pages are needed from each document.
+    fullName: maximumPagesToTake
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maximumPagesToTake?: number'
+      return:
+        description: ''
+        type: number
   - name: maxPageLength
     uid: '@azure/search-documents.SplitSkill.maxPageLength'
     package: '@azure/search-documents'
@@ -46,6 +86,21 @@ properties:
       return:
         description: ''
         type: '"#<xref uid="Microsoft.Skills.Text.SplitSkill" />"'
+  - name: pageOverlapLength
+    uid: '@azure/search-documents.SplitSkill.pageOverlapLength'
+    package: '@azure/search-documents'
+    summary: >-
+      Only applicable when textSplitMode is set to 'pages'. If specified, n+1th
+      chunk will start with this number of characters/tokens from the end of the
+      nth chunk.
+    fullName: pageOverlapLength
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pageOverlapLength?: number'
+      return:
+        description: ''
+        type: number
   - name: textSplitMode
     uid: '@azure/search-documents.SplitSkill.textSplitMode'
     package: '@azure/search-documents'
@@ -54,10 +109,26 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'textSplitMode?: TextSplitMode'
+      content: 'textSplitMode?: "pages" | "sentences"'
       return:
         description: ''
-        type: <xref uid="@azure/search-documents.TextSplitMode" />
+        type: '"pages" | "sentences"'
+  - name: unit
+    uid: '@azure/search-documents.SplitSkill.unit'
+    package: '@azure/search-documents'
+    summary: >-
+      Only applies if textSplitMode is set to pages. There are two possible
+      values. The choice of the values will decide the length (maximumPageLength
+      and pageOverlapLength) measurement. The default is 'characters', which
+      means the length will be measured by character.
+    fullName: unit
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'unit?: string'
+      return:
+        description: ''
+        type: string
 inheritedProperties:
   - name: context
     uid: '@azure/search-documents.SplitSkill.context'

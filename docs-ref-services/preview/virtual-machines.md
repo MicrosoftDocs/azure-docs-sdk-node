@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: big-compute
 manager: jeconnoc
-ms.technology: azure
 ---
 # Azure Virtual Machine Modules for JavaScript
 

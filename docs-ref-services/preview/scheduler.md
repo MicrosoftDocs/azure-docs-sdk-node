@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: scheduler
 manager: angrobe
-ms.technology: azure
 ---
 # Azure Scheduler modules for JavaScript
 

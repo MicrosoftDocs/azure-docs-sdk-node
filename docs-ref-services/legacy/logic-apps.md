@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: logic-apps
 manager: cfowler
-ms.technology: azure
 ---
 # Azure Logic Apps modules for JavaScript
 

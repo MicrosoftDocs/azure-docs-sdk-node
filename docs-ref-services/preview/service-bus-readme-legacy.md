@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: service-bus
 manager: timlt
-ms.technology: azure
 ---
 # Microsoft Azure SDK for Node.js - azure-sb - Version 0.11.1
 

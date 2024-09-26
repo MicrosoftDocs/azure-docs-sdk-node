@@ -5,7 +5,6 @@ ms.date: 11/11/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: identity
-ms.technology: azure
 ---
 ## Azure Identity client library for JavaScript - version 1.2.0 
 

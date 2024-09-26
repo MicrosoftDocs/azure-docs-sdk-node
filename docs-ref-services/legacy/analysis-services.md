@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: azure-analysis-services
 manager: kfile
-ms.technology: azure
 ---
 # Azure Analysis Services modules for JavaScript
 

@@ -5,7 +5,6 @@ ms.date: 04/01/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
-ms.technology: azure
 ---
 # Azure Service client library for JavaScript - version 1.0.0 
 

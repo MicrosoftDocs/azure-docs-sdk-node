@@ -5,7 +5,6 @@ ms.date: 07/31/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-search
-ms.technology: azure
 ---
 # Azure Cognitive Search client library for JavaScript - version 11.0.2 
 

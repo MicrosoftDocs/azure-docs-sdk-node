@@ -5,7 +5,6 @@ ms.date: 02/23/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: digital-twins
-ms.technology: azure
 ---
 # Azure Model Parser client library for JavaScript - version 1.0.0-beta.2 
 

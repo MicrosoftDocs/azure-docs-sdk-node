@@ -5,7 +5,6 @@ ms.date: 12/21/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-monitor
-ms.technology: azure
 ---
 # Azure Monitor client library for JavaScript - version 7.0.0 
 

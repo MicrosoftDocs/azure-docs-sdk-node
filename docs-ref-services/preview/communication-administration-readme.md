@@ -5,7 +5,6 @@ ms.date: 11/16/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-communication-services
-ms.technology: azure
 ---
 # Azure Communication Administration client library for JavaScript - version 1.0.0-beta.3 
 

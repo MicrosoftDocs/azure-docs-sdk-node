@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: iot-hub
 manager: timlt
-ms.technology: azure
 ---
 # Azure IoT Hub modules for JavaScript
 

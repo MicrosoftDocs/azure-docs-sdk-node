@@ -5,7 +5,6 @@ ms.date: 11/09/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cosmos-db
-ms.technology: azure
 ---
 # Azure Cosmos DB client library for JavaScript - version 3.9.3 
 /TypeScript

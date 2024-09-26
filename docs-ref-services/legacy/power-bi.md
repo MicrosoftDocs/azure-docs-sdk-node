@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: power-bi-embedded
 manager: kfile
-ms.technology: azure
 ---
 # Azure PowerBI Embedded modules for JavaScript
 

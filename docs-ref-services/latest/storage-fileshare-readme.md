@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ms.subservice: files
-ms.technology: azure
 manager: twolley
 ---
 # Azure Files for JavaScript Readme - Version 12.1.1

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: applied-ai-services
 ms.subservice: forms-recognizer
-ms.technology: azure
 ---
 # Azure Form Recognizer client library for JavaScript - version 3.0.0 
 

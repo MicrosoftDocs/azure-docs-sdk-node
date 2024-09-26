@@ -5,7 +5,6 @@ ms.date: 01/24/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-policy
-ms.technology: azure
 ---
 # Azure PolicyInsights client library for JavaScript - version 5.0.0 
 

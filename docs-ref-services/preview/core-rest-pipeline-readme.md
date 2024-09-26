@@ -5,7 +5,6 @@ ms.date: 06/04/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
-ms.technology: azure
 ---
 # Azure Core HTTP client library for JavaScript - version 1.1.0-beta.3 
  (Experimental)

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: site-recovery
 manager: carmonm
-ms.technology: azure
 ---
 # Azure Site Recovery modules for JavaScript
 

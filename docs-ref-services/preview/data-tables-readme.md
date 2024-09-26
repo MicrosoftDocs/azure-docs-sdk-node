@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ms.subservice: tables
-ms.technology: azure
 ---
 # Azure Tables client library for JavaScript - version 12.0.0-beta.3 
 

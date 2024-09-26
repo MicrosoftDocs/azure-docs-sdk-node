@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: JavaScript
 ms.service: storage
 manager: twolley
-ms.technology: azure
 ---
 ## Azure Storage SDK for JavaScript - preview
 

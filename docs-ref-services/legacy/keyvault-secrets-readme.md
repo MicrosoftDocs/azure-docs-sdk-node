@@ -5,7 +5,6 @@ ms.date: 08/12/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: key-vault
-ms.technology: azure
 ---
 # Azure Key Vault Secret client library for JavaScript - version 4.1.0 
 

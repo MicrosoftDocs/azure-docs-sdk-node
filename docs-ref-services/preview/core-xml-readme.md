@@ -5,7 +5,6 @@ ms.date: 02/05/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
-ms.technology: azure
 ---
 # Azure Core XML client library for JavaScript - version 1.0.0-beta.1 
  (Experimental)

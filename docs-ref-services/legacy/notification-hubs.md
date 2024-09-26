@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: notification-hubs
 manager: angrobe
-ms.technology: azure
 ---
 # Azure Notification Hubs modules for JavaScript
 

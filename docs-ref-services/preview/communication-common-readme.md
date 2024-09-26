@@ -5,7 +5,6 @@ ms.date: 03/29/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-communication-services
-ms.technology: azure
 ---
 # Azure Communication Common client library for JavaScript - version 3.0.0-beta.1 
 

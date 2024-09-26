@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: container-service
 manager: jeconnoc
-ms.technology: azure
 ---
 # Microsoft Azure SDK for JavaScript - ContainerServiceClient
 This project provides a JavaScript package for accessing Azure. Right now it supports:

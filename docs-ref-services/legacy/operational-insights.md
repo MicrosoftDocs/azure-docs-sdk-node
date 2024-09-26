@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: operational-insights
 manager: carmonm
-ms.technology: azure
 ---
 # Azure Operational Insights Modules for JavaScript
 

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: azure-maps
 manager: carmonm
-ms.technology: azure
 ---
 # Azure Service Map modules for JavaScript
 

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-services
 ms.subservice: metrics-advisor
-ms.technology: azure
 ---
 # Azure Metrics Advisor client library for JavaScript - version 1.0.0 
 

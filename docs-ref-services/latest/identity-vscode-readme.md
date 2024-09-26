@@ -5,7 +5,6 @@ ms.date: 10/16/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: identity
-ms.technology: azure
 ---
 ## Azure Identity Plugin for Visual Studio Code Authentication
 

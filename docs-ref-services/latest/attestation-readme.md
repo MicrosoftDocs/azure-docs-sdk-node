@@ -5,7 +5,6 @@ ms.date: 08/13/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: attestation
-ms.technology: azure
 ---
 # Azure Attestation client library for JavaScript - version 1.0.0 
 

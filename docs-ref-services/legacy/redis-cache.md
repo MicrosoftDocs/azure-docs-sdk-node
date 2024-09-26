@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: cache
 manager: cfowler
-ms.technology: azure
 ---
 # Azure Redis Cache modules for JavaScript
 

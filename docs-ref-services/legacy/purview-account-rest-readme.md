@@ -5,7 +5,6 @@ ms.date: 09/01/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: purview
-ms.technology: azure
 ---
 # Azure Purview Account REST client library for JavaScript - version 1.0.0-beta.1 
 

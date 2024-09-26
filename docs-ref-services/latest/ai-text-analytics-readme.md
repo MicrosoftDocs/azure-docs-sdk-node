@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-services
 ms.subservice: text-analytics
-ms.technology: azure
 ---
 # Azure Text Analytics client library for JavaScript - version 5.1.0 
 

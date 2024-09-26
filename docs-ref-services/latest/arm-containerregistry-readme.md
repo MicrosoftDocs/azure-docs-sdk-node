@@ -5,7 +5,6 @@ ms.date: 03/22/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: container-registry
-ms.technology: azure
 ---
 # Azure ContainerRegistryManagement client library for JavaScript - version 10.1.0 
 

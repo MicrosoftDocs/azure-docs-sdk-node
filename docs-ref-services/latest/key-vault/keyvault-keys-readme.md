@@ -5,7 +5,6 @@ ms.date: 07/29/2021
 ms.topic: article
 ms.devlang: javascript
 ms.service: key-vault
-ms.technology: azure
 ---
 # Azure Key Vault Key client library for JavaScript - version 4.3.0 
 

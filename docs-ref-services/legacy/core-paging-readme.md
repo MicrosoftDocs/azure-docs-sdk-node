@@ -5,7 +5,6 @@ ms.date: 09/30/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
-ms.technology: azure
 ---
 # Azure Core Paging client library for JavaScript - version 1.1.3 
 

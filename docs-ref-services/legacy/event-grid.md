@@ -8,7 +8,7 @@ ms.service: azure-event-grid
 manager: angerobe
 ms.prod: 
 ms.custom: devcenter
-ms.technology: 
+manager: angerobe
 ---
 # Azure Event Grid libraries for JavaScript
 

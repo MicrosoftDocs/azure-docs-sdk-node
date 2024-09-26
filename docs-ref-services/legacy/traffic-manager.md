@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: traffic-manager
 manager: jeconnoc
-ms.technology: azure
 ---
 # Azure Traffic Manager modules for JavaScript
 

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: batch-ai
 manager: cjgronlund
-ms.technology: azure
 ---
 # Batch AI Modules for JavaScript
 

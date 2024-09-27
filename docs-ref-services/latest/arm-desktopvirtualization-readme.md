@@ -1,19 +1,19 @@
 ---
 title: Azure Desktop Virtualization API client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-desktopvirtualization, desktopvirtualization
-ms.date: 10/23/2023
+ms.date: 09/27/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: desktopvirtualization
 ---
-# Azure Desktop Virtualization API client library for JavaScript - version 1.1.0 
+# Azure Desktop Virtualization API client library for JavaScript - version 1.2.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Desktop Virtualization API client.
 
 
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.1.0/sdk/desktopvirtualization/arm-desktopvirtualization) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.2.0/sdk/desktopvirtualization/arm-desktopvirtualization) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-desktopvirtualization) |
 [API reference documentation](/javascript/api/@azure/arm-desktopvirtualization) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -25,7 +25,7 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-desktopvirtualization_1.1.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-desktopvirtualization_1.2.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +44,7 @@ npm install @azure/arm-desktopvirtualization
 To create a client object to access the Azure Desktop Virtualization API API, you will need the `endpoint` of your Azure Desktop Virtualization API resource and a `credential`. The Azure Desktop Virtualization API client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure Desktop Virtualization API resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-desktopvirtualization_1.1.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-desktopvirtualization_1.2.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -94,7 +94,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.1.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.2.0/sdk/core/logger).
 
 ## Next steps
 
@@ -102,7 +102,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-desktopvirtualization_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-desktopvirtualization_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -114,6 +114,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.1.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.1.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.2.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-desktopvirtualization_1.2.0/sdk/identity/identity#defaultazurecredential
 

@@ -5,7 +5,6 @@ ms.date: 11/03/2020
 ms.topic: reference
 ms.devlang: javascript
 ms.service: digital-twins
-ms.technology: azure
 ---
 # Azure Azure Digital Twins Core client library for JavaScript - version 1.0.0 
 

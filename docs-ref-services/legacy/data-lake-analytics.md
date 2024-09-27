@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: data-lake-analytics
 manager: routlaw
-ms.technology: azure
 ---
 # Azure Data Lake Analytics modules for Node.JS
 

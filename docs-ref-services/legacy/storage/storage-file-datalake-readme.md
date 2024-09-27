@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ms.subservice: data-lake-storage-gen2
-ms.technology: azure
 ---
 # Azure Storage File Data Lake client library for JavaScript - version 12.2.0 
 

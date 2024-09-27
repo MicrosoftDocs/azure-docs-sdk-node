@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ms.subservice: queues
-ms.technology: azure
 ---
 # Azure Storage SDK V10 for JavaScript - Queue
 

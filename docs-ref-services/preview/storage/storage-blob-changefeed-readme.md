@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ms.subservice: blobs
-ms.technology: azure
 ---
 # Azure Storage Blob Change Feed client library for JavaScript - version 12.0.0-preview.2
 

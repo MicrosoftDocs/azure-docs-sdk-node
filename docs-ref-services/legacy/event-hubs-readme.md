@@ -5,7 +5,6 @@ ms.date: 02/02/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: event-hubs
-ms.technology: azure
 ---
 # Azure Event Hubs client library for JavaScript - version 2.1.4 
 

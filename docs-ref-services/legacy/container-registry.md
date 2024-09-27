@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: container-registry
 manager: jeconnoc
-ms.technology: azure
 ---
 # Azure Container Registry modules for JavaScript
 

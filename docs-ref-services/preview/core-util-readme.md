@@ -5,7 +5,6 @@ ms.date: 05/07/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
-ms.technology: azure
 ---
 # Azure Core Util client library for JavaScript - version 1.0.0-beta.1 
  (Experimental)

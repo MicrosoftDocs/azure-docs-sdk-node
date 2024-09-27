@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: app-service
 manager: jhubbard
-ms.technology: azure
 ---
 # Azure App Service modules for JavaScript
 

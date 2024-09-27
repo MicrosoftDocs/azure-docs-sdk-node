@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: azure-resource-manager
 manager: timlt
-ms.technology: azure
 ---
 # Azure Resource modules for JavaScript
 

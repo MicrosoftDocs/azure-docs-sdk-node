@@ -5,7 +5,6 @@ ms.date: 02/04/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-communication-services
-ms.technology: azure
 ---
 # Azure Communication Network Traversal client library for JavaScript - version 1.0.0 
 

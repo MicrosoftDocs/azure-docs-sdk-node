@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: azure-cdn
 manager: v-laurab
-ms.technology: azure
 ---
 # Azure CDN modules for JavaScript
 

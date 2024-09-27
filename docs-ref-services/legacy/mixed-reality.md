@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: azure
 manager: dgriff
-ms.technology: azure
 ---
 # Azure Mixed Reality Resource Management Modules for JavaScript
 

@@ -5,7 +5,6 @@ ms.date: 01/20/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: iot-central
-ms.technology: azure
 ---
 # Azure IotCentral client library for JavaScript - version 6.0.0 
 

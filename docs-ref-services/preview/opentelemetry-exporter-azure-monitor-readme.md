@@ -5,7 +5,6 @@ ms.date: 01/20/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-monitor
-ms.technology: azure
 ---
 # Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.2 
 

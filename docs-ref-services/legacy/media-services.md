@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: media-services
 manager: cfowler
-ms.technology: azure
 ---
 # Azure Media Services modules for JavaScript
 

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: dns
 manager: jeconnoc
-ms.technology: azure
 ---
 # Azure DNS modules for JavaScript
 

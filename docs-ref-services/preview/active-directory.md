@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: active-directory
 manager: mtillman
-ms.technology: azure
 ---
 # Azure Active Directory modules for Node.js
 

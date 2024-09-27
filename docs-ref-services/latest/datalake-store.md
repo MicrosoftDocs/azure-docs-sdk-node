@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: data-lake-store
 manager: routlaw
-ms.technology: azure
 ---
 # Azure Data Lake Store modules for Node.JS
 

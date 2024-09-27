@@ -5,7 +5,6 @@ ms.date: 06/25/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
-ms.technology: azure
 ---
 # Azure IoTSpaces client library for JavaScript - version 1.0.0-beta.2 
 

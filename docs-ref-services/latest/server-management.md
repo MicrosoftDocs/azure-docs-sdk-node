@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: azure-asm
 manager: angrobe
-ms.technology: azure
 ---
 # Azure Server Management modules for JavaScript
 

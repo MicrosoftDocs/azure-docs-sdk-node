@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: virtual-network
 manager: jeconnoc
-ms.technology: azure
 ---
 # Azure Virtual Network modules for JavaScript
 

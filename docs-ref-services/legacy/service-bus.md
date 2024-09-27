@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: service-bus
 manager: timlt
-ms.technology: azure
 ---
 # Azure Service Bus Modules for JavaScript
 

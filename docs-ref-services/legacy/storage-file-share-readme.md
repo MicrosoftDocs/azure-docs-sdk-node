@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ms.subservice: files
-ms.technology: azure
 ---
 # Azure Storage File Share client library for JavaScript - version 12.3.0 
 

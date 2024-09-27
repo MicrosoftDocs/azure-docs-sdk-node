@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: service-bus-relay
 manager: timlt
-ms.technology: azure
 ---
 # Azure Relay modules for JavaScript
 

@@ -5,7 +5,6 @@ ms.date: 08/06/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
-ms.technology: azure
 ---
 # Azure Rest Core Paging library for JavaScript (Experimental)
 

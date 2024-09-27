@@ -5,7 +5,6 @@ ms.date: 01/14/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: synapse-analytics
-ms.technology: azure
 ---
 # Azure SynapseManagement client library for JavaScript - version 8.0.0 
 

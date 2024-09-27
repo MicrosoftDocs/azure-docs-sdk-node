@@ -5,7 +5,6 @@ ms.date: 04/28/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: machine-learning
-ms.technology: azure
 ---
 # Azure ML Commitment Plans Management client library for JavaScript - version 2.0.0-beta.2 
 

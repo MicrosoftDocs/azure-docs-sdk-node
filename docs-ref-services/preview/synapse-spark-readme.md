@@ -5,7 +5,6 @@ ms.date: 10/05/2021
 ms.topic: reference
 ms.devlang: javascript
 ms.service: synapse-analytics
-ms.technology: azure
 ---
 ## Azure Synapse Spark client library for JavaScript - version 1.0.0-beta.4 
 

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-services
 ms.subservice: anomaly-detector
-ms.technology: azure
 ---
 # Azure Anomaly Detector client library for JavaScript - version 3.0.0-beta.5 
 

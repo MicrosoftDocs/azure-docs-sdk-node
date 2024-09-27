@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: azure
 manager: angrobew
-ms.technology: azure
 ---
 # Azure Commerce modules for JavaScript
 

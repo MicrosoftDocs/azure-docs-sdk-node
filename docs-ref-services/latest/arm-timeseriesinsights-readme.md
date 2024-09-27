@@ -5,7 +5,6 @@ ms.date: 01/21/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: time-series-insights
-ms.technology: azure
 ---
 # Azure TimeSeriesInsights client library for JavaScript - version 2.0.0 
 

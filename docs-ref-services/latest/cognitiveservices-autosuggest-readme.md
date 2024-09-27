@@ -5,7 +5,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-services
 ms.subservice: bing-autosuggest
-ms.technology: azure
 ---
 # Bing Autosuggest
 

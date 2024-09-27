@@ -5,7 +5,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-services
 ms.subservice: bing-web-search
-ms.technology: azure
 ---
 # Bing Web Search API
 

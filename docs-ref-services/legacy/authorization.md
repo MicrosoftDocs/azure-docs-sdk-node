@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: app-service
 manager: angrobe
-ms.technology: azure
 ---
 # Azure Authorization modules for JavaScript
 

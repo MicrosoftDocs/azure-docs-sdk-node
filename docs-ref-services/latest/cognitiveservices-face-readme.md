@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitive-services
 ms.subservice: face-api
-ms.technology: 
 ---
 # Azure Face API
 

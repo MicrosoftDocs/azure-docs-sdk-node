@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: service-fabric
 manager: timlt
-ms.technology: azure
 ---
 # Azure Service Fabric modules for JavaScript
 

@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: key-vault
 manager: mbaldwin
-ms.technology: azure
 ---
 ## Azure Key Vault SDK for JavaScript - latest
 

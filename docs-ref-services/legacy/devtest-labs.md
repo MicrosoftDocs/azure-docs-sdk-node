@@ -6,7 +6,6 @@ ms.topic: reference
 ms.devlang: nodejs
 ms.service: devtest-lab
 manager: v-laurab
-ms.technology: azure
 ---
 # Azure DevTest Labs modules for JavaScript
 

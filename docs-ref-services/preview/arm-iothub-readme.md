@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: iothub
 ---
-# Azure iotHub client library for JavaScript - version 6.3.1-alpha.20241001.1 
+# Azure iotHub client library for JavaScript - version 6.3.1-alpha.20241002.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure iotHub client.

@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: confidentialledger
 ---
-# Azure ConfidentialLedger client library for JavaScript - version 1.3.0-alpha.20241001.1 
+# Azure ConfidentialLedger client library for JavaScript - version 1.3.0-alpha.20241002.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ConfidentialLedger client.

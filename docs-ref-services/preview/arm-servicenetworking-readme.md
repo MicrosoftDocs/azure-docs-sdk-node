@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: servicenetworking
 ---
-# Azure ServiceNetworkingManagement client library for JavaScript - version 1.1.0-alpha.20241001.1 
+# Azure ServiceNetworkingManagement client library for JavaScript - version 1.1.0-alpha.20241002.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ServiceNetworkingManagement client.

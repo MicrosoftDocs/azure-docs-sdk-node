@@ -1,12 +1,12 @@
 ---
 title: Azure Synapse Monitoring client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/synapse-monitoring,
-ms.date: 02/09/2021
+keywords: Azure, javascript, SDK, API, @azure/synapse-monitoring, synapse-analytics
+ms.date: 10/16/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: synapse-analytics
 ---
-## Azure Synapse Monitoring client library for JavaScript - version 1.0.0-beta.2 
+## Azure Synapse Monitoring client library for JavaScript - version 1.0.0-alpha.20241016.1 
 
 
 This package contains an isomorphic SDK for Monitoring.
@@ -21,8 +21,10 @@ npm install @azure/synapse-monitoring
 
 ### Currently supported environments
 
-- Node.js version 8.x.x or higher
-- Browser JavaScript
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
+- Latest versions of Safari, Chrome, Edge, and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ## Key concepts
 
@@ -63,7 +65,7 @@ In the future, you'll find additional code samples here.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-monitoring_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
 

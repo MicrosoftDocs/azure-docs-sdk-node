@@ -1,21 +1,21 @@
 ---
 title: Azure Workloads client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-workloadssapvirtualinstance, workloads
+keywords: Azure, javascript, SDK, API, @azure/arm-workloads, workloads
 ms.date: 10/17/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: workloads
 ---
-# Azure Workloads client library for JavaScript - version 1.0.0-alpha.20241017.1 
+# Azure Workloads client library for JavaScript - version 1.0.1-alpha.20241017.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Workloads client.
 
-Workloads client provides access to various workload operations.
+Workloads client provides access to various workload operations.<br>Azure Center for SAP solutions is currently in PREVIEW. See the [Azure Center for SAP solutions - Legal Terms](https://learn.microsoft.com/legal/azure-center-for-sap-solutions/azure-center-for-sap-solutions-legal-terms) for legal notices applicable to Azure Center for SAP solutions.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/workloads/arm-workloadssapvirtualinstance) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-workloadssapvirtualinstance) |
-[API reference documentation](/javascript/api/@azure/arm-workloadssapvirtualinstance?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/workloads/arm-workloads) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-workloads) |
+[API reference documentation](/javascript/api/@azure/arm-workloads) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-workloadssapvirtualinstance` package
+### Install the `@azure/arm-workloads` package
 
 Install the Azure Workloads client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-workloadssapvirtualinstance
+npm install @azure/arm-workloads
 ```
 
 ### Create and authenticate a `WorkloadsClient`
@@ -58,7 +58,7 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
-const { WorkloadsClient } = require("@azure/arm-workloadssapvirtualinstance");
+const { WorkloadsClient } = require("@azure/arm-workloads");
 const { DefaultAzureCredential } = require("@azure/identity");
 // For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
 
@@ -108,7 +108,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fworkloads%2Farm-workloadssapvirtualinstance%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fworkloads%2Farm-workloads%2FREADME.png)
 
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

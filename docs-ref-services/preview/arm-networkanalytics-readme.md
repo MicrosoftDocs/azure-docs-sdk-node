@@ -1,19 +1,19 @@
 ---
 title: Azure MicrosoftNetworkAnalytics client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-networkanalytics, networkanalytics
-ms.date: 11/30/2023
+ms.date: 10/18/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: networkanalytics
 ---
-# Azure MicrosoftNetworkAnalytics client library for JavaScript - version 1.0.0-beta.1 
+# Azure MicrosoftNetworkAnalytics client library for JavaScript - version 1.0.1-alpha.20241018.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure MicrosoftNetworkAnalytics client.
 
 
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-networkanalytics_1.0.0-beta.1/sdk/networkanalytics/arm-networkanalytics) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/networkanalytics/arm-networkanalytics) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-networkanalytics) |
 [API reference documentation](/javascript/api/@azure/arm-networkanalytics) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -25,7 +25,7 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-networkanalytics_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +44,7 @@ npm install @azure/arm-networkanalytics
 To create a client object to access the Azure MicrosoftNetworkAnalytics API, you will need the `endpoint` of your Azure MicrosoftNetworkAnalytics resource and a `credential`. The Azure MicrosoftNetworkAnalytics client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure MicrosoftNetworkAnalytics resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-networkanalytics_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -94,7 +94,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-networkanalytics_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -102,7 +102,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-networkanalytics_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -114,6 +114,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-networkanalytics_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-networkanalytics_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

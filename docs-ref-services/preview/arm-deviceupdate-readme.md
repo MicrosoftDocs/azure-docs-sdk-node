@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: deviceupdate
 ---
-# Azure DeviceUpdate client library for JavaScript - version 1.2.1-alpha.20241022.1 
+# Azure DeviceUpdate client library for JavaScript - version 1.2.1-alpha.20241023.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DeviceUpdate client.

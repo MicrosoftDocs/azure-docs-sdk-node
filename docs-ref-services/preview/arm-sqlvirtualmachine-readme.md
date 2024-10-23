@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: sqlvirtualmachine
 ---
-# Azure SqlVirtualMachineManagement client library for JavaScript - version 5.0.0-alpha.20241022.1 
+# Azure SqlVirtualMachineManagement client library for JavaScript - version 5.0.0-alpha.20241023.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SqlVirtualMachineManagement client.

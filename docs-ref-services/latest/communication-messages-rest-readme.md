@@ -1,12 +1,12 @@
 ---
 title: Azure CommunicationMessages REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/communication-messages, communication
-ms.date: 03/06/2024
+ms.date: 10/23/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure CommunicationMessages REST client library for JavaScript - version 1.0.1 
+# Azure CommunicationMessages REST client library for JavaScript - version 2.0.0 
 
 
 This package contains a JavaScript SDK for Azure Communication Messages Services.
@@ -75,7 +75,7 @@ import { DefaultAzureCredential } from "@azure/identity";
 import MessageClient, { MessagesServiceClient } from "@azure-rest/communication-messages";
 
 const endpoint = "https://<resource-name>.communication.azure.com";
-let credential = new DefaultAzureCredential();
+const credential = new DefaultAzureCredential();
 const client:MessagesServiceClient = MessageClient(endpoint, credential);
 ```
 
@@ -222,15 +222,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_1.0.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_2.0.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-messages_1.0.1/sdk/communication/communication-messages-rest/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-messages_2.0.0/sdk/communication/communication-messages-rest/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-messages_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-messages_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 
 ## Related projects
@@ -241,8 +241,8 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_1.0.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_1.0.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_2.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_2.0.0/sdk/identity/identity
 [azure_communication_messaging_qs]: https://learn.microsoft.com/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-overview
 [register_whatsapp_business_account]: https://learn.microsoft.com/azure/communication-services/quickstarts/advanced-messaging/whatsapp/connect-whatsapp-business-account
 [create-manage-whatsapp-template]: https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates/

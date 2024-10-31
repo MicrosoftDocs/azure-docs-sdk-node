@@ -292,7 +292,7 @@ inheritedMethods:
         description: Disposable that removes the `abort` listener.
         type: Disposable
     inheritanceDescription: <b>Inherited From</b> InternalClient.addAbortListener
-  - name: 'addListener<K>(string | symbol, (args: any[]) => void)'
+  - name: addListener<EventName>(EventName, Listener<{}, EventName>)
     uid: azure-iot-device.Client.addListener
     package: azure-iot-device
     summary: Alias for `emitter.on(eventName, listener)`.
@@ -300,14 +300,35 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function addListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): Client
+        function addListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
         - id: listener
-          type: '(args: any[]) =&gt; void'
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.addListener
+  - name: addListener<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.addListener_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
           description: ''
       return:
         description: ''
@@ -347,7 +368,7 @@ inheritedMethods:
           type: Callback&lt;MessageCompleted&gt;
           description: ''
     inheritanceDescription: <b>Inherited From</b> InternalClient.complete
-  - name: emit<K>(string | symbol, AnyRest)
+  - name: emit<EventName>(EventName, Args<{}, EventName>)
     uid: azure-iot-device.Client.emit
     package: azure-iot-device
     summary: >-
@@ -416,13 +437,36 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function emit<K>(eventName: string | symbol, args: AnyRest): boolean'
+      content: >-
+        function emit<EventName>(eventName: EventName, args: Args<{},
+        EventName>): boolean
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
         - id: args
-          type: AnyRest
+          type: Args&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: <b>Inherited From</b> InternalClient.emit
+  - name: emit<EventName>(EventName, Args<{}, EventName>)
+    uid: azure-iot-device.Client.emit_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function emit<EventName>(eventName: EventName, args: Args<{},
+        EventName>): boolean
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: args
+          type: Args&lt;{}, EventName&gt;
           description: ''
       return:
         description: ''
@@ -456,9 +500,28 @@ inheritedMethods:
         description: ''
         type: (string | symbol)[]
     inheritanceDescription: <b>Inherited From</b> InternalClient.eventNames
-  - name: >-
-      getEventListeners(EventEmitter<DefaultEventMap> | EventTarget, string |
-      symbol)
+  - name: getEventListeners(EventEmitter<{}> | EventTarget, string | symbol)
+    uid: azure-iot-device.Client.getEventListeners_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function getEventListeners(emitter: EventEmitter<{}> |
+        EventTarget, name: string | symbol): Function[]
+      parameters:
+        - id: emitter
+          type: EventEmitter&lt;{}&gt; | EventTarget
+          description: ''
+        - id: name
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> InternalClient.getEventListeners
+  - name: getEventListeners<Events, EventName>(EventEmitter<Events>, EventName)
     uid: azure-iot-device.Client.getEventListeners
     package: azure-iot-device
     summary: >-
@@ -500,18 +563,18 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function getEventListeners(emitter: EventEmitter<DefaultEventMap>
-        | EventTarget, name: string | symbol): Function[]
+        static function getEventListeners<Events, EventName>(emitter:
+        EventEmitter<Events>, name: EventName): Listener<Events, EventName>[]
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt; | EventTarget
+          type: EventEmitter&lt;Events&gt;
           description: ''
         - id: name
-          type: string | symbol
+          type: EventName
           description: ''
       return:
         description: ''
-        type: Function[]
+        type: Listener&lt;Events, EventName&gt;[]
     inheritanceDescription: <b>Inherited From</b> InternalClient.getEventListeners
   - name: getMaxListeners()
     uid: azure-iot-device.Client.getMaxListeners
@@ -530,7 +593,7 @@ inheritedMethods:
         description: ''
         type: number
     inheritanceDescription: <b>Inherited From</b> InternalClient.getMaxListeners
-  - name: getMaxListeners(EventEmitter<DefaultEventMap> | EventTarget)
+  - name: getMaxListeners(EventEmitter<{}> | EventTarget)
     uid: azure-iot-device.Client.getMaxListeners
     package: azure-iot-device
     summary: >-
@@ -577,11 +640,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function getMaxListeners(emitter: EventEmitter<DefaultEventMap> |
+        static function getMaxListeners(emitter: EventEmitter<{}> |
         EventTarget): number
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt; | EventTarget
+          type: EventEmitter&lt;{}&gt; | EventTarget
           description: ''
       return:
         description: ''
@@ -612,7 +675,97 @@ inheritedMethods:
           type: Callback&lt;<xref uid="azure-iot-device.Twin" />&gt;
           description: ''
     inheritanceDescription: <b>Inherited From</b> InternalClient.getTwin
-  - name: listenerCount(EventEmitter<DefaultEventMap>, string | symbol)
+  - name: listenerCount(EventEmitter<{}>, string | symbol)
+    uid: azure-iot-device.Client.listenerCount_1
+    package: azure-iot-device
+    summary: >-
+      A class method that returns the number of listeners for the given
+      `eventName` registered on the given `emitter`.
+
+
+      ```js
+
+      import { EventEmitter, listenerCount } from 'node:events';
+
+
+      const myEmitter = new EventEmitter();
+
+      myEmitter.on('event', () => {});
+
+      myEmitter.on('event', () => {});
+
+      console.log(listenerCount(myEmitter, 'event'));
+
+      // Prints: 2
+
+      ```
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Since v3.2.0 - Use `listenerCount` instead.
+    syntax:
+      content: >-
+        static function listenerCount(emitter: EventEmitter<{}>, eventName:
+        string | symbol): number
+      parameters:
+        - id: emitter
+          type: EventEmitter&lt;{}&gt;
+          description: The emitter to query
+        - id: eventName
+          type: string | symbol
+          description: The event name
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> InternalClient.listenerCount
+  - name: listenerCount<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.listenerCount
+    package: azure-iot-device
+    summary: >-
+      Returns the number of listeners listening for the event named `eventName`.
+
+      If `listener` is provided, it will return how many times the listener is
+      found
+
+      in the list of the listeners of the event.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listenerCount<EventName>(eventName: EventName, listener?:
+        Listener<{}, EventName>): number
+      parameters:
+        - id: eventName
+          type: EventName
+          description: The name of the event being listened for
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: The event handler function
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> InternalClient.listenerCount
+  - name: listenerCount<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.listenerCount_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listenerCount<EventName>(eventName: EventName, listener?:
+        Listener<{}, EventName>): number
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> InternalClient.listenerCount
+  - name: listenerCount<Events, EventName>(EventEmitter<Events>, EventName)
     uid: azure-iot-device.Client.listenerCount
     package: azure-iot-device
     summary: >-
@@ -641,47 +794,20 @@ inheritedMethods:
     customDeprecatedMessage: Since v3.2.0 - Use `listenerCount` instead.
     syntax:
       content: >-
-        static function listenerCount(emitter: EventEmitter<DefaultEventMap>,
-        eventName: string | symbol): number
+        static function listenerCount<Events, EventName>(emitter:
+        EventEmitter<Events>, eventName: EventName): number
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter&lt;Events&gt;
           description: The emitter to query
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: The event name
       return:
         description: ''
         type: number
     inheritanceDescription: <b>Inherited From</b> InternalClient.listenerCount
-  - name: listenerCount<K>(string | symbol, Function)
-    uid: azure-iot-device.Client.listenerCount
-    package: azure-iot-device
-    summary: >-
-      Returns the number of listeners listening for the event named `eventName`.
-
-      If `listener` is provided, it will return how many times the listener is
-      found
-
-      in the list of the listeners of the event.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listenerCount<K>(eventName: string | symbol, listener?:
-        Function): number
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event being listened for
-        - id: listener
-          type: Function
-          description: The event handler function
-      return:
-        description: ''
-        type: number
-    inheritanceDescription: <b>Inherited From</b> InternalClient.listenerCount
-  - name: listeners<K>(string | symbol)
+  - name: listeners<EventName>(EventName)
     uid: azure-iot-device.Client.listeners
     package: azure-iot-device
     summary: |-
@@ -697,16 +823,36 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function listeners<K>(eventName: string | symbol): Function[]'
+      content: >-
+        function listeners<EventName>(eventName: EventName): Listener<{},
+        EventName>[]
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
       return:
         description: ''
-        type: Function[]
+        type: Listener&lt;{}, EventName&gt;[]
     inheritanceDescription: <b>Inherited From</b> InternalClient.listeners
-  - name: 'off<K>(string | symbol, (args: any[]) => void)'
+  - name: listeners<EventName>(EventName)
+    uid: azure-iot-device.Client.listeners_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listeners<EventName>(eventName: EventName): Listener<{},
+        EventName>[]
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+      return:
+        description: ''
+        type: Listener&lt;{}, EventName&gt;[]
+    inheritanceDescription: <b>Inherited From</b> InternalClient.listeners
+  - name: off<EventName>(EventName, Listener<{}, EventName>)
     uid: azure-iot-device.Client.off
     package: azure-iot-device
     summary: Alias for `emitter.removeListener()`.
@@ -714,21 +860,182 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function off<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): Client
+        function off<EventName>(eventName: EventName, listener: Listener<{},
+        EventName>): Client
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
         - id: listener
-          type: '(args: any[]) =&gt; void'
+          type: Listener&lt;{}, EventName&gt;
           description: ''
       return:
         description: ''
         type: <xref uid="azure-iot-device.Client" />
     inheritanceDescription: <b>Inherited From</b> InternalClient.off
+  - name: off<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.off_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function off<EventName>(eventName: EventName, listener: Listener<{},
+        EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.off
+  - name: on(EventEmitter<{}>, string | symbol, StaticEventEmitterIteratorOptions)
+    uid: azure-iot-device.Client.on_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function on(emitter: EventEmitter<{}>, eventName: string |
+        symbol, options?: StaticEventEmitterIteratorOptions):
+        AsyncIterator<any[], any, any>
+      parameters:
+        - id: emitter
+          type: EventEmitter&lt;{}&gt;
+          description: ''
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: options
+          type: StaticEventEmitterIteratorOptions
+          description: ''
+      return:
+        description: ''
+        type: AsyncIterator&lt;any[], any, any&gt;
+    inheritanceDescription: <b>Inherited From</b> InternalClient.on
+  - name: on(EventTarget, string, StaticEventEmitterIteratorOptions)
+    uid: azure-iot-device.Client.on_2
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function on(emitter: EventTarget, eventName: string, options?:
+        StaticEventEmitterIteratorOptions): AsyncIterator<any[], any, any>
+      parameters:
+        - id: emitter
+          type: EventTarget
+          description: ''
+        - id: eventName
+          type: string
+          description: ''
+        - id: options
+          type: StaticEventEmitterIteratorOptions
+          description: ''
+      return:
+        description: ''
+        type: AsyncIterator&lt;any[], any, any&gt;
+    inheritanceDescription: <b>Inherited From</b> InternalClient.on
+  - name: on<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.on
+    package: azure-iot-device
+    summary: >-
+      Adds the `listener` function to the end of the listeners array for the
+      event
+
+      named `eventName`. No checks are made to see if the `listener` has already
+
+      been added. Multiple calls passing the same combination of `eventName` and
+
+      `listener` will result in the `listener` being added, and called, multiple
+      times.
+
+
+      ```js
+
+      server.on('connection', (stream) => {
+        console.log('someone connected!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+
+
+      By default, event listeners are invoked in the order they are added. The
+      `emitter.prependListener()` method can be used as an alternative to add
+      the
+
+      event listener to the beginning of the listeners array.
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      const myEE = new EventEmitter();
+
+      myEE.on('foo', () => console.log('a'));
+
+      myEE.prependListener('foo', () => console.log('b'));
+
+      myEE.emit('foo');
+
+      // Prints:
+
+      //   b
+
+      //   a
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on<EventName>(eventName: EventName, listener: Listener<{},
+        EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: The name of the event.
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: The callback function
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.on
+  - name: on<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.on_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on<EventName>(eventName: EventName, listener: Listener<{},
+        EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.on
   - name: >-
-      on(EventEmitter<DefaultEventMap>, string | symbol,
+      on<Events, EventName>(EventEmitter<Events>, EventName,
       StaticEventEmitterIteratorOptions)
     uid: azure-iot-device.Client.on
     package: azure-iot-device
@@ -845,15 +1152,15 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function on(emitter: EventEmitter<DefaultEventMap>, eventName:
-        string | symbol, options?: StaticEventEmitterIteratorOptions):
-        AsyncIterator<any[], any, any>
+        static function on<Events, EventName>(emitter: EventEmitter<Events>,
+        eventName: EventName, options?: StaticEventEmitterIteratorOptions):
+        AsyncIterator<Args<Events, EventName>, any, any>
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter&lt;Events&gt;
           description: ''
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
         - id: options
           type: StaticEventEmitterIteratorOptions
@@ -862,18 +1169,42 @@ inheritedMethods:
         description: >-
           An `AsyncIterator` that iterates `eventName` events emitted by the
           `emitter`
-        type: AsyncIterator&lt;any[], any, any&gt;
+        type: AsyncIterator&lt;Args&lt;Events, EventName&gt;, any, any&gt;
     inheritanceDescription: <b>Inherited From</b> InternalClient.on
-  - name: on(EventTarget, string, StaticEventEmitterIteratorOptions)
-    uid: azure-iot-device.Client.on_1
+  - name: once(EventEmitter<{}>, string | symbol, StaticEventEmitterOptions)
+    uid: azure-iot-device.Client.once_1
     package: azure-iot-device
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        static function on(emitter: EventTarget, eventName: string, options?:
-        StaticEventEmitterIteratorOptions): AsyncIterator<any[], any, any>
+        static function once(emitter: EventEmitter<{}>, eventName: string |
+        symbol, options?: StaticEventEmitterOptions): Promise<any[]>
+      parameters:
+        - id: emitter
+          type: EventEmitter&lt;{}&gt;
+          description: ''
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: options
+          type: StaticEventEmitterOptions
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any[]&gt;
+    inheritanceDescription: <b>Inherited From</b> InternalClient.once
+  - name: once(EventTarget, string, StaticEventEmitterOptions)
+    uid: azure-iot-device.Client.once_2
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function once(emitter: EventTarget, eventName: string, options?:
+        StaticEventEmitterOptions): Promise<any[]>
       parameters:
         - id: emitter
           type: EventTarget
@@ -882,31 +1213,27 @@ inheritedMethods:
           type: string
           description: ''
         - id: options
-          type: StaticEventEmitterIteratorOptions
+          type: StaticEventEmitterOptions
           description: ''
       return:
         description: ''
-        type: AsyncIterator&lt;any[], any, any&gt;
-    inheritanceDescription: <b>Inherited From</b> InternalClient.on
-  - name: 'on<K>(string | symbol, (args: any[]) => void)'
-    uid: azure-iot-device.Client.on
+        type: Promise&lt;any[]&gt;
+    inheritanceDescription: <b>Inherited From</b> InternalClient.once
+  - name: once<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.once
     package: azure-iot-device
     summary: >-
-      Adds the `listener` function to the end of the listeners array for the
-      event
+      Adds a **one-time** `listener` function for the event named `eventName`.
+      The
 
-      named `eventName`. No checks are made to see if the `listener` has already
-
-      been added. Multiple calls passing the same combination of `eventName` and
-
-      `listener` will result in the `listener` being added, and called, multiple
-      times.
+      next time `eventName` is triggered, this listener is removed and then
+      invoked.
 
 
       ```js
 
-      server.on('connection', (stream) => {
-        console.log('someone connected!');
+      server.once('connection', (stream) => {
+        console.log('Ah, we have our first user!');
       });
 
       ```
@@ -916,8 +1243,8 @@ inheritedMethods:
 
 
       By default, event listeners are invoked in the order they are added. The
-      `emitter.prependListener()` method can be used as an alternative to add
-      the
+      `emitter.prependOnceListener()` method can be used as an alternative to
+      add the
 
       event listener to the beginning of the listeners array.
 
@@ -928,9 +1255,9 @@ inheritedMethods:
 
       const myEE = new EventEmitter();
 
-      myEE.on('foo', () => console.log('a'));
+      myEE.once('foo', () => console.log('a'));
 
-      myEE.prependListener('foo', () => console.log('b'));
+      myEE.prependOnceListener('foo', () => console.log('b'));
 
       myEE.emit('foo');
 
@@ -945,21 +1272,42 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function on<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): Client
+        function once<EventName>(eventName: EventName, listener: Listener<{},
+        EventName>): Client
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: The name of the event.
         - id: listener
-          type: '(args: any[]) =&gt; void'
+          type: Listener&lt;{}, EventName&gt;
           description: The callback function
       return:
         description: ''
         type: <xref uid="azure-iot-device.Client" />
-    inheritanceDescription: <b>Inherited From</b> InternalClient.on
+    inheritanceDescription: <b>Inherited From</b> InternalClient.once
+  - name: once<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.once_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function once<EventName>(eventName: EventName, listener: Listener<{},
+        EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.once
   - name: >-
-      once(EventEmitter<DefaultEventMap>, string | symbol,
+      once<Events, EventName>(EventEmitter<Events>, EventName,
       StaticEventEmitterOptions)
     uid: azure-iot-device.Client.once
     package: azure-iot-device
@@ -1087,111 +1435,22 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function once(emitter: EventEmitter<DefaultEventMap>, eventName:
-        string | symbol, options?: StaticEventEmitterOptions): Promise<any[]>
+        static function once<Events, EventName>(emitter: EventEmitter<Events>,
+        eventName: EventName, options?: StaticEventEmitterOptions):
+        Promise<Args<Events, EventName>>
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter&lt;Events&gt;
           description: ''
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
         - id: options
           type: StaticEventEmitterOptions
           description: ''
       return:
         description: ''
-        type: Promise&lt;any[]&gt;
-    inheritanceDescription: <b>Inherited From</b> InternalClient.once
-  - name: once(EventTarget, string, StaticEventEmitterOptions)
-    uid: azure-iot-device.Client.once_1
-    package: azure-iot-device
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function once(emitter: EventTarget, eventName: string, options?:
-        StaticEventEmitterOptions): Promise<any[]>
-      parameters:
-        - id: emitter
-          type: EventTarget
-          description: ''
-        - id: eventName
-          type: string
-          description: ''
-        - id: options
-          type: StaticEventEmitterOptions
-          description: ''
-      return:
-        description: ''
-        type: Promise&lt;any[]&gt;
-    inheritanceDescription: <b>Inherited From</b> InternalClient.once
-  - name: 'once<K>(string | symbol, (args: any[]) => void)'
-    uid: azure-iot-device.Client.once
-    package: azure-iot-device
-    summary: >-
-      Adds a **one-time** `listener` function for the event named `eventName`.
-      The
-
-      next time `eventName` is triggered, this listener is removed and then
-      invoked.
-
-
-      ```js
-
-      server.once('connection', (stream) => {
-        console.log('Ah, we have our first user!');
-      });
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-
-
-      By default, event listeners are invoked in the order they are added. The
-      `emitter.prependOnceListener()` method can be used as an alternative to
-      add the
-
-      event listener to the beginning of the listeners array.
-
-
-      ```js
-
-      import { EventEmitter } from 'node:events';
-
-      const myEE = new EventEmitter();
-
-      myEE.once('foo', () => console.log('a'));
-
-      myEE.prependOnceListener('foo', () => console.log('b'));
-
-      myEE.emit('foo');
-
-      // Prints:
-
-      //   b
-
-      //   a
-
-      ```
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function once<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): Client
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event.
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: The callback function
-      return:
-        description: ''
-        type: <xref uid="azure-iot-device.Client" />
+        type: Promise&lt;Args&lt;Events, EventName&gt;&gt;
     inheritanceDescription: <b>Inherited From</b> InternalClient.once
   - name: open()
     uid: azure-iot-device.Client.open_1
@@ -1218,7 +1477,7 @@ inheritedMethods:
           type: Callback&lt;Connected&gt;
           description: ''
     inheritanceDescription: <b>Inherited From</b> InternalClient.open
-  - name: 'prependListener<K>(string | symbol, (args: any[]) => void)'
+  - name: prependListener<EventName>(EventName, Listener<{}, EventName>)
     uid: azure-iot-device.Client.prependListener
     package: azure-iot-device
     summary: >-
@@ -1248,20 +1507,41 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function prependListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): Client
+        function prependListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: The name of the event.
         - id: listener
-          type: '(args: any[]) =&gt; void'
+          type: Listener&lt;{}, EventName&gt;
           description: The callback function
       return:
         description: ''
         type: <xref uid="azure-iot-device.Client" />
     inheritanceDescription: <b>Inherited From</b> InternalClient.prependListener
-  - name: 'prependOnceListener<K>(string | symbol, (args: any[]) => void)'
+  - name: prependListener<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.prependListener_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.prependListener
+  - name: prependOnceListener<EventName>(EventName, Listener<{}, EventName>)
     uid: azure-iot-device.Client.prependOnceListener
     package: azure-iot-device
     summary: >-
@@ -1286,20 +1566,41 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function prependOnceListener<K>(eventName: string | symbol, listener:
-        (args: any[]) => void): Client
+        function prependOnceListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: The name of the event.
         - id: listener
-          type: '(args: any[]) =&gt; void'
+          type: Listener&lt;{}, EventName&gt;
           description: The callback function
       return:
         description: ''
         type: <xref uid="azure-iot-device.Client" />
     inheritanceDescription: <b>Inherited From</b> InternalClient.prependOnceListener
-  - name: rawListeners<K>(string | symbol)
+  - name: prependOnceListener<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.prependOnceListener_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependOnceListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.prependOnceListener
+  - name: rawListeners<EventName>(EventName)
     uid: azure-iot-device.Client.rawListeners
     package: azure-iot-device
     summary: |-
@@ -1333,14 +1634,34 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function rawListeners<K>(eventName: string | symbol): Function[]'
+      content: >-
+        function rawListeners<EventName>(eventName: EventName): Listener<{},
+        EventName>[]
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
       return:
         description: ''
-        type: Function[]
+        type: Listener&lt;{}, EventName&gt;[]
+    inheritanceDescription: <b>Inherited From</b> InternalClient.rawListeners
+  - name: rawListeners<EventName>(EventName)
+    uid: azure-iot-device.Client.rawListeners_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function rawListeners<EventName>(eventName: EventName): Listener<{},
+        EventName>[]
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+      return:
+        description: ''
+        type: Listener&lt;{}, EventName&gt;[]
     inheritanceDescription: <b>Inherited From</b> InternalClient.rawListeners
   - name: reject(Message)
     uid: azure-iot-device.Client.reject_1
@@ -1376,7 +1697,7 @@ inheritedMethods:
           type: Callback&lt;MessageRejected&gt;
           description: ''
     inheritanceDescription: <b>Inherited From</b> InternalClient.reject
-  - name: removeAllListeners(string | symbol)
+  - name: removeAllListeners<EventName>(EventName)
     uid: azure-iot-device.Client.removeAllListeners
     package: azure-iot-device
     summary: |-
@@ -1390,16 +1711,32 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function removeAllListeners(eventName?: string | symbol): Client'
+      content: 'function removeAllListeners<EventName>(eventName: EventName): Client'
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
       return:
         description: ''
         type: <xref uid="azure-iot-device.Client" />
     inheritanceDescription: <b>Inherited From</b> InternalClient.removeAllListeners
-  - name: 'removeListener<K>(string | symbol, (args: any[]) => void)'
+  - name: removeAllListeners<EventName>(EventName)
+    uid: azure-iot-device.Client.removeAllListeners_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function removeAllListeners<EventName>(eventName?: EventName): Client'
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.removeAllListeners
+  - name: removeListener<EventName>(EventName, Listener<{}, EventName>)
     uid: azure-iot-device.Client.removeListener
     package: azure-iot-device
     summary: >-
@@ -1549,14 +1886,35 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function removeListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): Client
+        function removeListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
       parameters:
         - id: eventName
-          type: string | symbol
+          type: EventName
           description: ''
         - id: listener
-          type: '(args: any[]) =&gt; void'
+          type: Listener&lt;{}, EventName&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iot-device.Client" />
+    inheritanceDescription: <b>Inherited From</b> InternalClient.removeListener
+  - name: removeListener<EventName>(EventName, Listener<{}, EventName>)
+    uid: azure-iot-device.Client.removeListener_1
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function removeListener<EventName>(eventName: EventName, listener:
+        Listener<{}, EventName>): Client
+      parameters:
+        - id: eventName
+          type: EventName
+          description: ''
+        - id: listener
+          type: Listener&lt;{}, EventName&gt;
           description: ''
       return:
         description: ''
@@ -1659,7 +2017,7 @@ inheritedMethods:
         description: ''
         type: <xref uid="azure-iot-device.Client" />
     inheritanceDescription: <b>Inherited From</b> InternalClient.setMaxListeners
-  - name: setMaxListeners(number, (EventEmitter<DefaultEventMap> | EventTarget)[])
+  - name: setMaxListeners(number, (EventEmitter<{}> | EventTarget)[])
     uid: azure-iot-device.Client.setMaxListeners
     package: azure-iot-device
     summary: |-
@@ -1676,7 +2034,7 @@ inheritedMethods:
     syntax:
       content: >-
         static function setMaxListeners(n?: number, eventTargets:
-        (EventEmitter<DefaultEventMap> | EventTarget)[])
+        (EventEmitter<{}> | EventTarget)[])
       parameters:
         - id: 'n'
           type: number
@@ -1684,7 +2042,7 @@ inheritedMethods:
             A non-negative number. The maximum number of listeners per
             `EventTarget` event.
         - id: eventTargets
-          type: (EventEmitter&lt;DefaultEventMap&gt; | EventTarget)[]
+          type: (EventEmitter&lt;{}&gt; | EventTarget)[]
           description: >-
             Zero or more {EventTarget} or {EventEmitter} instances. If none are
             specified, `n` is set as the default max for all newly created
@@ -1763,16 +2121,16 @@ inheritedMethods:
           type: Callback&lt;SharedAccessSignatureUpdated&gt;
           description: ''
     inheritanceDescription: <b>Inherited From</b> InternalClient.updateSharedAccessSignature
-  - name: '[captureRejectionSymbol]<K>(Error, string | symbol, AnyRest)'
-    uid: azure-iot-device.Client.[captureRejectionSymbol]
+  - name: '[captureRejectionSymbol](Error, string | symbol, any[])'
+    uid: azure-iot-device.Client.[captureRejectionSymbol]_1
     package: azure-iot-device
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function [captureRejectionSymbol]<K>(error: Error, event: string |
-        symbol, args: AnyRest)
+        function [captureRejectionSymbol](error: Error, event: string | symbol,
+        args: any[])
       parameters:
         - id: error
           type: Error
@@ -1781,9 +2139,30 @@ inheritedMethods:
           type: string | symbol
           description: ''
         - id: args
-          type: AnyRest
+          type: any[]
           description: ''
-    inheritanceDescription: <b>Inherited From</b> InternalClient.__@captureRejectionSymbol@141
+    inheritanceDescription: <b>Inherited From</b> InternalClient.__@captureRejectionSymbol@178
+  - name: '[captureRejectionSymbol]<EventName>(Error, EventName, Args<{}, EventName>)'
+    uid: azure-iot-device.Client.[captureRejectionSymbol]
+    package: azure-iot-device
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function [captureRejectionSymbol]<EventName>(error: Error, event:
+        EventName, args: Args<{}, EventName>)
+      parameters:
+        - id: error
+          type: Error
+          description: ''
+        - id: event
+          type: EventName
+          description: ''
+        - id: args
+          type: Args&lt;{}, EventName&gt;
+          description: ''
+    inheritanceDescription: <b>Inherited From</b> InternalClient.__@captureRejectionSymbol@178
 methods:
   - name: close()
     uid: azure-iot-device.Client.close_1

@@ -1,12 +1,12 @@
 ---
 title: Azure AI Face client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure-rest/ai-vision-face, face
-ms.date: 05/27/2024
+keywords: Azure, javascript, SDK, API, @azure-rest/ai-vision-face, azure-ai-face
+ms.date: 10/31/2024
 ms.topic: reference
 ms.devlang: javascript
-ms.service: face
+ms.service: azure-ai-face
 ---
-# Azure AI Face client library for JavaScript - version 1.0.0-beta.1 
+# Azure AI Face client library for JavaScript - version 1.0.0-beta.2 
 
 
 The Azure AI Face service provides AI algorithms that detect, recognize, and analyze human faces in images. It includes the following main features:
@@ -20,9 +20,9 @@ The Azure AI Face service provides AI algorithms that detect, recognize, and ana
 - Group faces
 
 [Product documentation](https://learn.microsoft.com/azure/ai-services/computer-vision/overview-identity)
-| [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.1/sdk/face/ai-vision-face-rest)
+| [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.2/sdk/face/ai-vision-face-rest)
 | [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-vision-face)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.1/sdk/face/ai-vision-face-rest/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.2/sdk/face/ai-vision-face-rest/samples)
 | [API reference documentation](https://aka.ms/azsdk-javascript-face-ref)
 
 ## Getting started
@@ -31,7 +31,7 @@ The Azure AI Face service provides AI algorithms that detect, recognize, and ana
 
 - LTS versions of Node.js
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-face_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-face_1.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -443,13 +443,13 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
 ### More sample code
 
-See the [Sample README](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.1/sdk/face/ai-vision-face-rest/samples) for several code snippets illustrating common patterns used in the Face JavaScript API.
+See the [Sample README](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.2/sdk/face/ai-vision-face-rest/samples) for several code snippets illustrating common patterns used in the Face JavaScript API.
 
 ### Additional documentation
 

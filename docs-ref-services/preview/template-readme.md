@@ -1,12 +1,12 @@
 ---
 title: Azure Template client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/template, template
-ms.date: 11/06/2024
+ms.date: 11/07/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: template
 ---
-# Azure Template client library for JavaScript - version 1.0.12-beta.4303173 
+# Azure Template client library for JavaScript - version 1.0.12-beta.4310667 
 
 
 <!-- NOTE: This README file is a template. Read through it and replace the instructions (keeping an eye out for package names like "@azure/template") with the ones that pertain to your package. For a complete example based on the real Azure App Configuration SDK, see README-TEMPLATE.md in this directory. -->
@@ -20,7 +20,7 @@ This project is used as a template package for the Azure SDK for JavaScript. It 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.12-beta.4303173/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.12-beta.4310667/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -48,7 +48,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 NOTE: if your service supports CORS natively please provide instructions for enabling CORS at the service level (similar to the sample below), otherwise replace this section with guidance such as:
 
-Due to Azure template service CORS limitation this library cannot be used to make direct calls to the template service from a browser. Please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.12-beta.4303173/samples/cors/ts/README.md) for guidance.
+Due to Azure template service CORS limitation this library cannot be used to make direct calls to the template service from a browser. Please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.12-beta.4310667/samples/cors/ts/README.md) for guidance.
 
 -->
 
@@ -106,15 +106,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("verbose");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.12-beta.4303173/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.12-beta.4310667/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.12-beta.4303173/sdk/template/template/samples) directory for detailed examples that demonstrate how to use the client libraries.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.12-beta.4310667/sdk/template/template/samples) directory for detailed examples that demonstrate how to use the client libraries.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.12-beta.4303173/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.12-beta.4310667/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

@@ -1,7 +1,7 @@
 ---
 title: Azure Network Analytics SDK for JavaScript
 description: Reference for Azure Network Analytics SDK for JavaScript
-ms.date: 09/26/2024
+ms.date: 11/11/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: networkanalytics

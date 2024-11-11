@@ -451,6 +451,37 @@ methods:
           uid="@azure/notification-hubs.RegistrationDescription" />, <xref
           uid="@azure/notification-hubs.RegistrationDescription" />[], <xref
           uid="@azure/core-paging.PageSettings" />&gt;
+  - name: scheduleBroadcastNotification(Date, Notification, OperationOptions)
+    uid: >-
+      @azure/notification-hubs.NotificationHubsClient.scheduleBroadcastNotification
+    package: '@azure/notification-hubs'
+    summary: |-
+      Schedules a push notification to all devices at the specified time.
+      NOTE: This is only available in Standard SKU Azure Notification Hubs.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function scheduleBroadcastNotification(scheduledTime: Date,
+        notification: Notification, options?: OperationOptions):
+        Promise<NotificationHubsMessageResponse>
+      parameters:
+        - id: scheduledTime
+          type: Date
+          description: The Date to send the push notification.
+        - id: notification
+          type: <xref uid="@azure/notification-hubs.Notification" />
+          description: The notification to send to the matching devices.
+        - id: options
+          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          description: The operation options.
+      return:
+        description: >-
+          A NotificationHubResponse with the tracking ID, correlation ID and
+          location.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/notification-hubs.NotificationHubsMessageResponse" />&gt;
   - name: scheduleNotification(Date, Notification, ScheduleNotificationOptions)
     uid: '@azure/notification-hubs.NotificationHubsClient.scheduleNotification'
     package: '@azure/notification-hubs'
@@ -464,7 +495,7 @@ methods:
     syntax:
       content: >-
         function scheduleNotification(scheduledTime: Date, notification:
-        Notification, options?: ScheduleNotificationOptions):
+        Notification, options: ScheduleNotificationOptions):
         Promise<NotificationHubsMessageResponse>
       parameters:
         - id: scheduledTime
@@ -485,6 +516,33 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/notification-hubs.NotificationHubsMessageResponse" />&gt;
+  - name: sendBroadcastNotification(Notification, BroadcastSendNotificationOptions)
+    uid: '@azure/notification-hubs.NotificationHubsClient.sendBroadcastNotification'
+    package: '@azure/notification-hubs'
+    summary: Sends push notifications to devices all devices.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendBroadcastNotification(notification: Notification, options?:
+        BroadcastSendNotificationOptions):
+        Promise<NotificationHubsMessageResponse>
+      parameters:
+        - id: notification
+          type: <xref uid="@azure/notification-hubs.Notification" />
+          description: The notification to send to all devices.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/notification-hubs.BroadcastSendNotificationOptions" />
+          description: Options for the notification including whether to enable test send.
+      return:
+        description: >-
+          A NotificationHubResponse with the tracking ID, correlation ID and
+          location.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/notification-hubs.NotificationHubsMessageResponse" />&gt;
   - name: >-
       sendNotification(Notification, DirectSendNotificationOptions |
       SendNotificationOptions)
@@ -497,7 +555,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendNotification(notification: Notification, options?:
+        function sendNotification(notification: Notification, options:
         DirectSendNotificationOptions | SendNotificationOptions):
         Promise<NotificationHubsMessageResponse>
       parameters:

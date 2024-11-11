@@ -4,15 +4,17 @@ name: '@azure/keyvault-common'
 summary: ''
 type: package
 interfaces:
-  - '@azure/keyvault-common.CreateChallengeCallbacksOptions'
+  - '@azure/keyvault-common.KeyVaultAuthenticationPolicyOptions'
   - '@azure/keyvault-common.KeyVaultEntityIdentifier'
 functions:
-  - name: createKeyVaultChallengeCallbacks(CreateChallengeCallbacksOptions)
-    uid: '@azure/keyvault-common.createKeyVaultChallengeCallbacks'
+  - name: >-
+      keyVaultAuthenticationPolicy(TokenCredential,
+      KeyVaultAuthenticationPolicyOptions)
+    uid: '@azure/keyvault-common.keyVaultAuthenticationPolicy'
     package: '@azure/keyvault-common'
     summary: >-
-      Creates challenge callback handlers to manage CAE lifecycle in Azure Key
-      Vault.
+      A custom implementation of the bearer-token authentication policy that
+      handles Key Vault and CAE challenges.
 
 
       Key Vault supports other authentication schemes, but we ensure challenge
@@ -36,17 +38,20 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createKeyVaultChallengeCallbacks(options?:
-        CreateChallengeCallbacksOptions): ChallengeCallbacks
+        function keyVaultAuthenticationPolicy(credential: TokenCredential,
+        options?: KeyVaultAuthenticationPolicyOptions): PipelinePolicy
       parameters:
+        - id: credential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: ''
         - id: options
           type: >-
-            <xref uid="@azure/keyvault-common.CreateChallengeCallbacksOptions"
-            />
+            <xref
+            uid="@azure/keyvault-common.KeyVaultAuthenticationPolicyOptions" />
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/core-rest-pipeline.ChallengeCallbacks" />
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
   - name: parseKeyVaultIdentifier(string, undefined | string)
     uid: '@azure/keyvault-common.parseKeyVaultIdentifier'
     package: '@azure/keyvault-common'

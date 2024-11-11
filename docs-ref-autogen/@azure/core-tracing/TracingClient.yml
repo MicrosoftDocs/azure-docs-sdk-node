@@ -146,11 +146,27 @@ methods:
       Example:
 
 
-      ```ts
+      ```ts snippet:with_span_example
 
-      const myOperationResult = await
-      tracingClient.withSpan("myClassName.myOperationName", options,
-      (updatedOptions) => myOperation(updatedOptions));
+      import { createTracingClient } from "@azure/core-tracing";
+
+
+      const tracingClient = createTracingClient({
+        namespace: "test.namespace",
+        packageName: "test-package",
+        packageVersion: "1.0.0",
+      });
+
+      const options = {};
+
+      const myOperationResult = await tracingClient.withSpan(
+        "myClassName.myOperationName",
+        options,
+        (updatedOptions) => {
+          // Do something with the updated options.
+          return "myOperationResult";
+        },
+      );
 
       ```
     remarks: ''

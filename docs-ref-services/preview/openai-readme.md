@@ -7,7 +7,7 @@ ms.devlang: javascript
 ms.service: openai
 ---
 
-# Azure OpenAI library for TypeScript
+# Azure OpenAI library for TypeScript - 2.0.0-beta.3
 
 The [Azure OpenAI Service][service_overview] provides access to advanced AI models for conversational, content creation, and data grounding use cases. The Azure OpenAI library for TypeScript is a companion to the official [OpenAI client library for JavaScript][openai_pkg]. The Azure OpenAI library provides additional strongly typed support for request and response models specific to Azure OpenAI scenarios.
 

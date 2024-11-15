@@ -1,17 +1,17 @@
 ---
 title: Azure MapsRender REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/maps-render, maps
-ms.date: 01/16/2024
+ms.date: 11/15/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: maps
 ---
-# Azure MapsRender REST client library for JavaScript - version 1.0.0-beta.3 
+# Azure MapsRender REST client library for JavaScript - version 2.0.0-beta.1 
 
 
 Azure Maps Render Client
 
-\*\*If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-render_1.0.0-beta.3/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api
+\*\*If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-render_2.0.0-beta.1/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api
 
 Key links:
 
@@ -19,6 +19,11 @@ Key links:
 - [Package (NPM)][npm_package]
 - [API reference documentation][api_ref]
 - [Product Information][product_info]
+
+| Package Version | Service Version |
+|-----------------|-----------------|
+| ^1.0.0-beta.4   | V1              |
+| ^2.0.0-beta.1   | 2024-04-01      |
 
 ## Getting started
 
@@ -48,21 +53,21 @@ npm install @azure-rest/maps-render
 
 ### Create and authenticate a `MapsRenderClient`
 
-You'll need a `credential` instance for authentication when creating the `MapsRenderClient` instance used to access the Azure Maps render APIs. You can use either an Azure Active Directory (Azure AD) credential or an Azure subscription key to authenticate. For more information on authentication, see [Authentication with Azure Maps][az_map_auth].
+You'll need a `credential` instance for authentication when creating the `MapsRenderClient` instance used to access the Azure Maps render APIs. You can use either a Microsoft Entra ID credential or an Azure subscription key to authenticate. For more information on authentication, see [Authentication with Azure Maps][az_map_auth].
 
-#### Using an Azure AD credential
+#### Using an Microsoft Entra ID credential
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-render_1.0.0-beta.3/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Microsoft Entra ID token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-render_2.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_1.0.0-beta.3/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_2.0.0-beta.1/sdk/identity/identity#credentials) library.
 
-To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
+To authenticate with Microsoft Entra ID, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_1.0.0-beta.3/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_2.0.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_2.0.0-beta.1/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
-You'll need to register the new Azure AD application and grant access to Azure Maps by assigning the required role to your service principal. For more information, see [Host a daemon on non-Azure resources](https://learn.microsoft.com/azure/azure-maps/how-to-secure-daemon-app#host-a-daemon-on-non-azure-resources). Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
+You'll need to register the new Microsoft Entra ID application and grant access to Azure Maps by assigning the required role to your service principal. For more information, see [Host a daemon on non-Azure resources](https://learn.microsoft.com/azure/azure-maps/how-to-secure-daemon-app#host-a-daemon-on-non-azure-resources). Set the values of the client ID, tenant ID, and client secret of the Microsoft Entra ID application as environment variables:
 `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 You will also need to specify the Azure Maps resource you intend to use by specifying the `clientId` in the client options.
@@ -96,7 +101,7 @@ const client = MapsRender(credential);
 
 Shared access signature (SAS) tokens are authentication tokens created using the JSON Web token (JWT) format and are cryptographically signed to prove authentication for an application to the Azure Maps REST API.
 
-You can get the SAS token using [`AzureMapsManagementClient.accounts.listSas`](https://learn.microsoft.com/javascript/api/%40azure/arm-maps/accounts?view=azure-node-latest#@azure-arm-maps-accounts-listsas) from ["@azure/arm-maps"](https://www.npmjs.com/package/@azure/arm-maps) package. Please follow the section [Create and authenticate a `AzureMapsManagementClient`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_1.0.0-beta.3/sdk/maps/arm-maps#create-and-authenticate-a-azuremapsmanagementclient) to setup first.
+You can get the SAS token using [`AzureMapsManagementClient.accounts.listSas`](https://learn.microsoft.com/javascript/api/%40azure/arm-maps/accounts?view=azure-node-latest#@azure-arm-maps-accounts-listsas) from ["@azure/arm-maps"](https://www.npmjs.com/package/@azure/arm-maps) package. Please follow the section [Create and authenticate a `AzureMapsManagementClient`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_2.0.0-beta.1/sdk/maps/arm-maps#create-and-authenticate-a-azuremapsmanagementclient) to setup first.
 
 Second, follow [Managed identities for Azure Maps](https://techcommunity.microsoft.com/t5/azure-maps-blog/managed-identities-for-azure-maps/ba-p/3666312) to create a managed identity for your Azure Maps account. Copy the principal ID (object ID) of the managed identity.
 
@@ -109,33 +114,33 @@ npm install @azure/core-auth
 Finally, you can use the SAS token to authenticate the client:
 
 ```javascript
-  const MapsRender = require("@azure-rest/maps-render").default;
-  const { AzureSASCredential } = require("@azure/core-auth");
-  const { DefaultAzureCredential } = require("@azure/identity");
-  const { AzureMapsManagementClient } = require("@azure/arm-maps");
+const MapsRender = require("@azure-rest/maps-render").default;
+const { AzureSASCredential } = require("@azure/core-auth");
+const { DefaultAzureCredential } = require("@azure/identity");
+const { AzureMapsManagementClient } = require("@azure/arm-maps");
 
-  const subscriptionId = "<subscription ID of the map account>"
-  const resourceGroupName = "<resource group name of the map account>";
-  const accountName = "<name of the map account>";
-  const mapsAccountSasParameters = {
-    start: "<start time in ISO format>", // e.g. "2023-11-24T03:51:53.161Z"
-    expiry: "<expiry time in ISO format>", // maximum value to start + 1 day
-    maxRatePerSecond: 500,
-    principalId: "<principle ID (object ID) of the managed identity>",
-    signingKey: "primaryKey",
-  };
-  const credential = new DefaultAzureCredential();
-  const managementClient = new AzureMapsManagementClient(credential, subscriptionId);
-  const {accountSasToken} = await managementClient.accounts.listSas(
-    resourceGroupName,
-    accountName,
-    mapsAccountSasParameters
-  );
-  if (accountSasToken === undefined) {
-    throw new Error("No accountSasToken was found for the Maps Account.");
-  }
-  const sasCredential = new AzureSASCredential(accountSasToken);
-  const client = MapsRender(sasCredential);
+const subscriptionId = "<subscription ID of the map account>";
+const resourceGroupName = "<resource group name of the map account>";
+const accountName = "<name of the map account>";
+const mapsAccountSasParameters = {
+  start: "<start time in ISO format>", // e.g. "2023-11-24T03:51:53.161Z"
+  expiry: "<expiry time in ISO format>", // maximum value to start + 1 day
+  maxRatePerSecond: 500,
+  principalId: "<principle ID (object ID) of the managed identity>",
+  signingKey: "primaryKey",
+};
+const credential = new DefaultAzureCredential();
+const managementClient = new AzureMapsManagementClient(credential, subscriptionId);
+const { accountSasToken } = await managementClient.accounts.listSas(
+  resourceGroupName,
+  accountName,
+  mapsAccountSasParameters,
+);
+if (accountSasToken === undefined) {
+  throw new Error("No accountSasToken was found for the Maps Account.");
+}
+const sasCredential = new AzureSASCredential(accountSasToken);
+const client = MapsRender(sasCredential);
 ```
 
 ## Key concepts
@@ -230,7 +235,7 @@ console.log("The metadata of Microsoft Base tileset: ");
 const { maxzoom, minzoom, bounds = [] } = response.body;
 console.log(`The zoom range started from ${minzoom} to ${maxzoom}`);
 console.log(
-  `The left bound is ${bounds[0]}, bottom bound is ${bounds[1]}, right bound is ${bounds[2]}, and top bound is ${bounds[3]}`
+  `The left bound is ${bounds[0]}, bottom bound is ${bounds[1]}, right bound is ${bounds[2]}, and top bound is ${bounds[3]}`,
 );
 ```
 
@@ -246,7 +251,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_2.0.0-beta.1/sdk/core/logger).
 
 ## Next steps
 
@@ -254,7 +259,7 @@ Please take a look at the [samples][samples] directory for detailed examples on 
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-render_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-render_2.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -262,10 +267,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fmaps%2Fmaps-render-rest%2FREADME.png)
 
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_1.0.0-beta.3/sdk/maps/maps-render-rest
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_2.0.0-beta.1/sdk/maps/maps-render-rest
 [npm_package]: https://www.npmjs.com/package/@azure-rest/maps-render
 [api_ref]: /javascript/api/@azure-rest/maps-render?view=azure-node-preview
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_1.0.0-beta.3/sdk/maps/maps-render-rest/samples
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-render_2.0.0-beta.1/sdk/maps/maps-render-rest/samples
 [product_info]: /rest/api/maps/render
 [nodejs_release]: https://github.com/nodejs/release#release-schedule
 [az_subscription]: https://azure.microsoft.com/free/

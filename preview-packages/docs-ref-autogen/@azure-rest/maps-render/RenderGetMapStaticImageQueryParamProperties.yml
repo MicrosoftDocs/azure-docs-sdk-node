@@ -11,15 +11,24 @@ properties:
   - name: bbox
     uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.bbox'
     package: '@azure-rest/maps-render'
-    summary: |-
-      Bounding box. Projection used - EPSG:3857. Format : 'minLon, minLat,
-      maxLon, maxLat'.
+    summary: >-
+      A bounding box is defined by two latitudes and two longitudes that
+      represent the four sides of a rectangular area on the Earth. Format :
+      'minLon, minLat,
+
+      maxLon, maxLat' (in double).
+
 
       Note: Either bbox or center are required
-      parameters. They are mutually exclusive. It shouldn’t be used with
+
+      parameters. They are mutually exclusive. bbox shouldn’t be used with
+
       height or width.
 
-      The maximum allowed ranges for Lat and Lon are defined for each zoom level
+
+      The maximum and minimum allowed ranges for Lat and Lon are defined for
+      each zoom level
+
       in the table at the top of this page.
     fullName: bbox
     remarks: ''
@@ -32,11 +41,13 @@ properties:
   - name: center
     uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.center'
     package: '@azure-rest/maps-render'
-    summary: |-
-      Coordinates of the center point. Format: 'lon,lat'. Projection used
-      - EPSG:3857. Longitude range: -180 to 180. Latitude range: -85 to 85.
+    summary: >-
+      Coordinates of the center point in double. Format: 'lon,lat'. Longitude
+      range: -180 to 180. Latitude range: -90 to 90.
+
 
       Note: Either center or bbox are required parameters. They are
+
       mutually exclusive.
     fullName: center
     remarks: ''
@@ -50,7 +61,7 @@ properties:
     uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.height'
     package: '@azure-rest/maps-render'
     summary: |-
-      Height of the resulting image in pixels. Range is 1 to 8192. Default
+      Height of the resulting image in pixels. Range from 80 to 1500. Default
       is 512. It shouldn’t be used with bbox.
     fullName: height
     remarks: ''
@@ -81,26 +92,12 @@ properties:
       return:
         description: ''
         type: string
-  - name: layer
-    uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.layer'
-    package: '@azure-rest/maps-render'
-    summary: >-
-      Map layer requested. If layer is set to labels or hybrid, the format
-      should be png.
-    fullName: layer
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'layer?: "basic" | "hybrid" | "labels"'
-      return:
-        description: ''
-        type: '"basic" | "hybrid" | "labels"'
   - name: path
     uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.path'
     package: '@azure-rest/maps-render'
     summary: >-
-      Path style and locations. Use this parameter to optionally add lines,
-      polygons or circles to the image.
+      Path style and locations (in double). Use this parameter to optionally add
+      lines, polygons or circles to the image.
 
       The path style describes the appearance of the line and fill. (Be sure to
       properly URL-encode values of this
@@ -146,16 +143,16 @@ properties:
       `path=||-122 45|-119.5 43.2|-121.67 47.12`
 
 
-      To render a polygon, last location must be equal to the start location.
-      For example, use
+      A polygon is specified with a closed path, where the first and last points
+      are equal. For example, use
 
 
       `path=||-122 45|-119.5 43.2|-121.67 47.12|-122 45`
 
 
-      Longitude and latitude values for locations of lines and polygons can be
-      in the range from -360 to 360 to allow for rendering of geometries
-      crossing the anti-meridian.
+      Longitude value for locations of lines and polygons can be in the range
+      from -360 to 360 to allow for rendering of geometries crossing the
+      anti-meridian.
 
 
       ### Style Modifiers
@@ -182,8 +179,8 @@ properties:
       `path=lcFF1493||-122 45|-119.5 43.2`
 
 
-      Multiple style modifiers may be combined together to create a more complex
-      visual style.
+      Multiple style modifiers may be combined to create a more complex visual
+      style.
 
 
       `lc0000FF|lw3|la0.60|fa0.50||-122.2 47.6|-122.2 47.7|-122.3 47.7|-122.3
@@ -193,21 +190,21 @@ properties:
       ### Style Modifier Summary
 
 
-      Modifier  | Description            | Range
+      Modifier  | Description       | Type     | Range
 
-      :--------:|------------------------|------------------
+      :--------:|---------------|--------|----------
 
-      lc        | Line color             | 000000 to FFFFFF
+      lc        | Line color      | string       | 000000 to FFFFFF
 
-      fc        | Fill color             | 000000 to FFFFFF
+      fc        | Fill color        | string       | 000000 to FFFFFF
 
-      la        | Line alpha (opacity)   | 0 to 1
+      la    | Line alpha (opacity)     |  float     | 0 to 1
 
-      fa        | Fill alpha (opacity)   | 0 to 1
+      fa  | Fill alpha (opacity)   |     float       | 0 to 1
 
-      lw        | Line width             | Greater than 0
+      lw   | Line width     |int32        | (0, 50]
 
-      ra        | Circle radius (meters) | Greater than 0
+      ra        | Circle radius (meters) |   float  | Greater than 0
     fullName: path
     remarks: ''
     isDeprecated: false
@@ -226,18 +223,18 @@ properties:
       The pushpin style describes the appearance of the pushpins, and the
       instances specify
 
-      the coordinates of the pushpins and optional labels for each pin. (Be sure
-      to properly URL-encode values of this
+      the coordinates of the pushpins (in double) and optional labels for each
+      pin. (Be sure to properly URL-encode values of this
 
       parameter since it will contain reserved characters such as pipes and
       punctuation.)
 
 
       The Azure Maps account S0 SKU only supports a single instance of the pins
-      parameter. Other SKUs
+      parameter and the number of locations is limited to 5 per pin. Other SKUs
 
-      allow multiple instances of the pins parameter to specify multiple pin
-      styles.
+      allow up to 25 instances of the pins parameter to specify multiple pin
+      styles, and the number of locations is limited to 50 per pin.
 
 
       To render a pushpin at latitude 45°N and longitude 122°W using the default
@@ -301,7 +298,8 @@ properties:
 
 
       To add a label to the pins, put the label in single quotes just before the
-      coordinates. For example, to label
+      coordinates. Avoid using special character such as `|` or `||` in label.
+      For example, to label
 
       three pins with the values '1', '2', and '3', use
 
@@ -309,7 +307,7 @@ properties:
       `pins=default||'1'-122 45|'2'-119.5 43.2|'3'-121.67 47.12`
 
 
-      There is a built in pushpin style called 'none' that does not display a
+      There is a built-in pushpin style called 'none' that does not display a
       pushpin image. You can use this if
 
       you want to display labels without any pin image. For example,
@@ -364,7 +362,8 @@ properties:
       To use a custom pushpin image, use the word 'custom' as the pin style
       name, and then specify a URL after the
 
-      location and label information. Use two pipe characters to indicate that
+      location and label information. The maximum allowed size for a customized
+      label image is 65,536 pixels. Use two pipe characters to indicate that
       you're done specifying locations and are
 
       starting the URL. For example,
@@ -452,25 +451,25 @@ properties:
       ### Style Modifier Summary
 
 
-      Modifier  | Description     | Range
+      Modifier  | Description    | Type    | Range
 
-      :--------:|-----------------|------------------
+      :--------:|---------------|--------|----------
 
-      al        | Alpha (opacity) | 0 to 1
+      al        | Alpha (opacity) |  float | 0 to 1
 
-      an        | Pin anchor      | *
+      an        | Pin anchor    | <int32, int32>  | *
 
-      co        | Pin color       | 000000 to FFFFFF
+      co        | Pin color      | string | 000000 to FFFFFF
 
-      la        | Label anchor    | *
+      la        | Label anchor   | <int32, int32> | *
 
-      lc        | Label color     | 000000 to FFFFFF
+      lc        | Label color   | string  | 000000 to FFFFFF
 
-      ls        | Label size      | Greater than 0
+      ls        | Label size      | float | Greater than 0
 
-      ro        | Rotation        | -360 to 360
+      ro        | Rotation    | float    | -360 to 360
 
-      sc        | Scale           | Greater than 0
+      sc        | Scale         | float  | Greater than 0
 
 
       * X and Y coordinates can be anywhere within pin image or a margin around
@@ -485,18 +484,73 @@ properties:
       return:
         description: ''
         type: string
-  - name: style
-    uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.style'
+  - name: tilesetId
+    uid: >-
+      @azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.tilesetId
     package: '@azure-rest/maps-render'
-    summary: Map style to be returned. Possible values are main and dark.
-    fullName: style
+    summary: >-
+      Map style to be returned. Possible values are microsoft.base.road,
+      microsoft.base.darkgrey, and microsoft.imagery.  Default value is set to
+      be microsoft.base.road. For more information, see [Render
+      TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid).
+    fullName: tilesetId
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'style?: "main" | "dark"'
+      content: >-
+        tilesetId?: "microsoft.base" | "microsoft.base.labels" |
+        "microsoft.base.hybrid" | "microsoft.terra.main" | "microsoft.base.road"
+        | "microsoft.base.darkgrey" | "microsoft.base.labels.road" |
+        "microsoft.base.labels.darkgrey" | "microsoft.base.hybrid.road" |
+        "microsoft.base.hybrid.darkgrey" | "microsoft.imagery" |
+        "microsoft.weather.radar.main" | "microsoft.weather.infrared.main" |
+        "microsoft.traffic.absolute" | "microsoft.traffic.absolute.main" |
+        "microsoft.traffic.relative" | "microsoft.traffic.relative.main" |
+        "microsoft.traffic.relative.dark" | "microsoft.traffic.delay" |
+        "microsoft.traffic.delay.main" | "microsoft.traffic.reduced.main" |
+        "microsoft.traffic.incident"
       return:
         description: ''
-        type: '"main" | "dark"'
+        type: >-
+          "<xref uid="microsoft.base" />" | "<xref uid="microsoft.base.labels"
+          />" | "<xref uid="microsoft.base.hybrid" />" | "<xref
+          uid="microsoft.terra.main" />" | "<xref uid="microsoft.base.road" />"
+          | "<xref uid="microsoft.base.darkgrey" />" | "<xref
+          uid="microsoft.base.labels.road" />" | "<xref
+          uid="microsoft.base.labels.darkgrey" />" | "<xref
+          uid="microsoft.base.hybrid.road" />" | "<xref
+          uid="microsoft.base.hybrid.darkgrey" />" | "<xref
+          uid="microsoft.imagery" />" | "<xref
+          uid="microsoft.weather.radar.main" />" | "<xref
+          uid="microsoft.weather.infrared.main" />" | "<xref
+          uid="microsoft.traffic.absolute" />" | "<xref
+          uid="microsoft.traffic.absolute.main" />" | "<xref
+          uid="microsoft.traffic.relative" />" | "<xref
+          uid="microsoft.traffic.relative.main" />" | "<xref
+          uid="microsoft.traffic.relative.dark" />" | "<xref
+          uid="microsoft.traffic.delay" />" | "<xref
+          uid="microsoft.traffic.delay.main" />" | "<xref
+          uid="microsoft.traffic.reduced.main" />" | "<xref
+          uid="microsoft.traffic.incident" />"
+  - name: trafficLayer
+    uid: >-
+      @azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.trafficLayer
+    package: '@azure-rest/maps-render'
+    summary: >-
+      Optional Value, indicating no traffic flow overlaid on the image result.
+      Possible values are microsoft.traffic.relative.main and none. Default
+      value is none, indicating no traffic flow returned. If traffic related
+      tilesetId is provided, will return map image with corresponding traffic
+      layer. For more information, see [Render
+      TilesetId](https://learn.microsoft.com/en-us/rest/api/maps/render/get-map-tileset?view=rest-maps-2023-06-01&tabs=HTTP#tilesetid).
+    fullName: trafficLayer
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'trafficLayer?: "none" | "microsoft.traffic.relative.main"'
+      return:
+        description: ''
+        type: '"none" | "<xref uid="microsoft.traffic.relative.main" />"'
   - name: view
     uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.view'
     package: '@azure-rest/maps-render'
@@ -536,8 +590,8 @@ properties:
     uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.width'
     package: '@azure-rest/maps-render'
     summary: >-
-      Width of the resulting image in pixels. Range is 1 to 8192. Default is
-      512. It shouldn’t be used with bbox.
+      Width of the resulting image in pixels. Range from 80 to 2000. Default is
+      512. It should not be used with bbox.
     fullName: width
     remarks: ''
     isDeprecated: false
@@ -550,10 +604,12 @@ properties:
     uid: '@azure-rest/maps-render.RenderGetMapStaticImageQueryParamProperties.zoom'
     package: '@azure-rest/maps-render'
     summary: >-
-      Desired zoom level of the map. Zoom value must be in the range: 0-20
-      (inclusive). Default value is 12.<br><br>Please see [Zoom Levels and Tile
-      Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid)
-      for details.
+      Desired zoom level of the map. Support zoom value range from 0-20
+      (inclusive) for tilesetId being microsoft.base.road or
+      microsoft.base.darkgrey. Support zoom value range from 0-19 (inclusive)
+      for tilesetId being microsoft.imagery. Default value is 12.<br><br>For
+      more information, see [Zoom Levels and Tile
+      Grid](https://docs.microsoft.com/azure/location-based-services/zoom-levels-and-tile-grid).
     fullName: zoom
     remarks: ''
     isDeprecated: false

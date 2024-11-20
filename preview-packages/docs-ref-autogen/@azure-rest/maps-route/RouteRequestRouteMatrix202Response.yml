@@ -3,19 +3,18 @@ name: RouteRequestRouteMatrix202Response
 uid: '@azure-rest/maps-route.RouteRequestRouteMatrix202Response'
 package: '@azure-rest/maps-route'
 summary: >-
-  **Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).
-
-
-  The Matrix Routing service allows calculation of a matrix of route summaries
-  for a set of routes defined by origin and destination locations by using an
-  asynchronous (async) or synchronous (sync) POST request. For every given
-  origin, the service calculates the cost of routing from that origin to every
-  given destination. The set of origins and the set of destinations can be
-  thought of as the column and row headers of a table and each cell in the table
-  contains the costs of routing from the origin to the destination for that
-  cell. As an example, let's say a food delivery company has 20 drivers and they
-  need to find the closest driver to pick up the delivery from the restaurant.
-  To solve this use case, they can call Matrix Route API.
+  The `Post Route Matrix` API is an HTTP `POST` request that allows calculation
+  of a matrix of route summaries for a set of routes defined by origin and
+  destination locations by using an asynchronous (async) request. To make a
+  synchronous (sync) request, see [Post Route Matrix
+  Sync](/rest/api/maps/route/post-route-matrix-sync). For every given origin,
+  the service calculates the cost of routing from that origin to every given
+  destination. The set of origins and the set of destinations can be thought of
+  as the column and row headers of a table and each cell in the table contains
+  the costs of routing from the origin to the destination for that cell. As an
+  example, let's say a food delivery company has 20 drivers and they need to
+  find the closest driver to pick up the delivery from the restaurant. To solve
+  this use case, they can call Matrix Route API.
 
 
 
@@ -27,6 +26,13 @@ summary: >-
 
   The maximum size of a matrix for async request is **700** and for sync request
   it's **100** (the number of origins multiplied by the number of destinations).
+
+
+  > [!NOTE]
+
+  > All origins and destinations should be contained in an axis-aligned 400 km x
+  400 km bounding box. Otherwise some matrix cells will be resolved as
+  OUT_OF_REGION.
 
 
 
@@ -68,7 +74,7 @@ summary: >-
 
 
 
-  The asynchronous responses are stored for **14** days. The redirect URL
+  The asynchronous responses are stored for **24** hours. The redirect URL
   returns a 404 response if used after the expiration period.
 
 
@@ -139,18 +145,6 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: body
-    uid: '@azure-rest/maps-route.RouteRequestRouteMatrix202Response.body'
-    package: '@azure-rest/maps-route'
-    summary: ''
-    fullName: body
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'body: Record<string, unknown>'
-      return:
-        description: ''
-        type: Record&lt;string, unknown&gt;
   - name: headers
     uid: '@azure-rest/maps-route.RouteRequestRouteMatrix202Response.headers'
     package: '@azure-rest/maps-route'
@@ -178,6 +172,19 @@ properties:
         description: ''
         type: '"202"'
 inheritedProperties:
+  - name: body
+    uid: '@azure-rest/maps-route.RouteRequestRouteMatrix202Response.body'
+    package: '@azure-rest/maps-route'
+    summary: Parsed body
+    fullName: body
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'body: unknown'
+      return:
+        description: ''
+        type: unknown
+    inheritanceDescription: <b>Inherited From</b> HttpResponse.body
   - name: request
     uid: '@azure-rest/maps-route.RouteRequestRouteMatrix202Response.request'
     package: '@azure-rest/maps-route'

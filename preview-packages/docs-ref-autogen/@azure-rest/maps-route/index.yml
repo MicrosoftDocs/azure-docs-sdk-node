@@ -35,6 +35,7 @@ interfaces:
   - '@azure-rest/maps-route.GetRouteDirections'
   - '@azure-rest/maps-route.GetRouteRange'
   - '@azure-rest/maps-route.LatLongPairOutput'
+  - '@azure-rest/maps-route.MapsRouteClientOptions'
   - '@azure-rest/maps-route.RequestRouteDirectionsBatch'
   - '@azure-rest/maps-route.RequestRouteDirectionsBatchSync'
   - '@azure-rest/maps-route.RequestRouteMatrix'
@@ -113,6 +114,7 @@ interfaces:
   - '@azure-rest/maps-route.RouteSectionTecOutput'
   - '@azure-rest/maps-route.RouteSummaryOutput'
   - '@azure-rest/maps-route.Routes'
+  - '@azure-rest/maps-route.SimplePollerLike'
 typeAliases:
   - '@azure-rest/maps-route.GeoJsonGeometry'
   - '@azure-rest/maps-route.GeoJsonObject'
@@ -128,6 +130,26 @@ typeAliases:
   - '@azure-rest/maps-route.RouteRequestRouteMatrixParameters'
   - '@azure-rest/maps-route.RouteRequestRouteMatrixSyncParameters'
 functions:
+  - name: buildMultiCollection(string[], string)
+    uid: '@azure-rest/maps-route.buildMultiCollection'
+    package: '@azure-rest/maps-route'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildMultiCollection(items: string[], parameterName: string):
+        string
+      parameters:
+        - id: items
+          type: string[]
+          description: ''
+        - id: parameterName
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: string
   - name: >-
       createRouteDirectionsBatchRequest(RouteGetRouteDirectionsQueryParamProperties[])
     uid: '@azure-rest/maps-route.createRouteDirectionsBatchRequest'
@@ -263,8 +285,8 @@ functions:
         description: ''
         type: <xref uid="@azure-rest/maps-route.MapsRouteClient" />
   - name: >-
-      getLongRunningPoller<TResult>(Client, TResult, LroEngineOptions<TResult,
-      PollOperationState<TResult>>)
+      getLongRunningPoller<TResult>(Client, TResult,
+      CreateHttpPollerOptions<TResult, OperationState<TResult>>)
     uid: '@azure-rest/maps-route.getLongRunningPoller'
     package: '@azure-rest/maps-route'
     summary: >-
@@ -275,9 +297,9 @@ functions:
     syntax:
       content: >-
         function getLongRunningPoller<TResult>(client: Client, initialResponse:
-        TResult, options?: LroEngineOptions<TResult,
-        PollOperationState<TResult>>): PollerLike<PollOperationState<TResult>,
-        TResult>
+        TResult, options?: CreateHttpPollerOptions<TResult,
+        OperationState<TResult>>):
+        Promise<SimplePollerLike<OperationState<TResult>, TResult>>
       parameters:
         - id: client
           type: <xref uid="@azure-rest/core-client.Client" />
@@ -287,17 +309,17 @@ functions:
           description: The initial response.
         - id: options
           type: >-
-            <xref uid="@azure/core-lro.LroEngineOptions" />&lt;TResult, <xref
-            uid="@azure/core-lro.PollOperationState" />&lt;TResult&gt;&gt;
+            <xref uid="@azure/core-lro.CreateHttpPollerOptions" />&lt;TResult,
+            <xref uid="@azure/core-lro.OperationState" />&lt;TResult&gt;&gt;
           description: Options to set a resume state or custom polling interval.
       return:
         description: >-
           - A poller object to poll for operation state updates and eventually
           get the final response.
         type: >-
-          <xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;TResult&gt;,
-          TResult&gt;
+          Promise&lt;<xref uid="@azure-rest/maps-route.SimplePollerLike"
+          />&lt;<xref uid="@azure/core-lro.OperationState" />&lt;TResult&gt;,
+          TResult&gt;&gt;
   - name: >-
       isUnexpected(RouteRequestRouteMatrixSync200Response |
       RouteRequestRouteMatrixSync408Response |

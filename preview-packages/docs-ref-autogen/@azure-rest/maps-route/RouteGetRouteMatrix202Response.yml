@@ -3,11 +3,105 @@ name: RouteGetRouteMatrix202Response
 uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response'
 package: '@azure-rest/maps-route'
 summary: >-
-  **Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).
+  The `Get Route Matrix` API is an HTTP `GET` request that computes the travel
+  time and distance for all possible pairs in a list of origins and
+  destinations. Unlike the [Get Route
+  Directions](/rest/api/maps/route/get-route-directions) API, which provide
+  detailed route instructions, this API focuses on efficiency by giving you the
+  cost (travel time and distance) of routing from each origin to every
+  destination.  For more information, see [Best practices for Azure Maps Route
+  service](/azure/azure-maps/how-to-use-best-practices-for-routing).
 
 
-  If the Matrix Route request was accepted successfully, the Location header in
-  the response contains the URL to download the results of the request. This
+  For every given origin, the service calculates the cost of routing from that
+  origin to every given destination. The set of origins and the set of
+  destinations can be thought of as the column and row headers of a table and
+  each cell in the table contains the costs of routing from the origin to the
+  destination for that cell. As an example, let's say a food delivery company
+  has 20 drivers and they need to find the closest driver to pick up the
+  delivery from the restaurant. To solve this use case, they can call Matrix
+  Route API.
+
+
+
+  For each route, the travel times and distances are returned. You can use the
+  computed costs to determine which detailed routes to calculate using the Route
+  Directions API.
+
+
+
+  The maximum size of a matrix for async request is **700** and for sync request
+  it's **100** (the number of origins multiplied by the number of destinations).
+
+
+
+
+  ### Submit Synchronous Route Matrix Request
+
+  If your scenario requires synchronous requests and the maximum size of the
+  matrix is less than or equal to 100, you might want to make synchronous
+  request. The maximum size of a matrix for this API is **100** (the number of
+  origins multiplied by the number of destinations). With that constraint in
+  mind, examples of possible matrix dimensions are: 10x10, 6x8, 9x8 (it does not
+  need to be square).
+
+
+  ```
+
+  GET
+  https://atlas.microsoft.com/route/matrix/sync/json?api-version=1.0&subscription-key={subscription-key}
+
+  ```
+
+
+  ### Submit Asynchronous Route Matrix Request
+
+  The Asynchronous API is appropriate for processing big volumes of relatively
+  complex routing requests. When you make a request by using async request, by
+  default the service returns a 202 response code along a redirect URL in the
+  Location field of the response header. This URL should be checked periodically
+  until the response data or error information is available. If `waitForResults`
+  parameter in the request is set to true, user will get a 200 response if the
+  request is finished under 120 seconds.
+
+
+
+  The maximum size of a matrix for this API is **700** (the number of origins
+  multiplied by the number of destinations). With that constraint in mind,
+  examples of possible matrix dimensions are: 50x10, 10x10, 28x25. 10x70 (it
+  does not need to be square).
+
+
+
+  The asynchronous responses are stored for **24** hours. The redirect URL
+  returns a 404 response if used after the expiration period.
+
+
+
+
+
+  ```
+
+  GET
+  https://atlas.microsoft.com/route/matrix/json?api-version=1.0&subscription-key={subscription-key}
+
+  ```
+
+
+  Here's a typical sequence of asynchronous operations:
+
+  1. Client sends a Route Matrix GET request to Azure Maps
+
+
+  2. The server will respond with one of the following:
+
+      > HTTP `202 Accepted` -  Route Matrix request has been accepted.
+
+      > HTTP `Error` - There was an error processing your Route Matrix request. This could either be a 400 Bad Request or any other Error status code.
+
+
+  3. If the Matrix Route request was accepted successfully, the Location header
+  in the response contains the URL to download the results of the request. This
   status URI looks like the following:
 
     ```
@@ -21,10 +115,10 @@ summary: >-
 
   ### Download Sync Results
 
-  When you make a POST request for Route Matrix Sync API, the service returns
-  200 response code for successful request and a response array. The response
-  body will contain the data and there will be no possibility to retrieve the
-  results later.
+  When you make a GET request for Route Matrix Sync API, the service returns 200
+  response code for successful request and a response array. The response body
+  will contain the data and there will be no possibility to retrieve the results
+  later.
 
 
   ### Download Async Results
@@ -50,18 +144,6 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: body
-    uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.body'
-    package: '@azure-rest/maps-route'
-    summary: ''
-    fullName: body
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'body: Record<string, unknown>'
-      return:
-        description: ''
-        type: Record&lt;string, unknown&gt;
   - name: headers
     uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.headers'
     package: '@azure-rest/maps-route'
@@ -89,6 +171,19 @@ properties:
         description: ''
         type: '"202"'
 inheritedProperties:
+  - name: body
+    uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.body'
+    package: '@azure-rest/maps-route'
+    summary: Parsed body
+    fullName: body
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'body: unknown'
+      return:
+        description: ''
+        type: unknown
+    inheritanceDescription: <b>Inherited From</b> HttpResponse.body
   - name: request
     uid: '@azure-rest/maps-route.RouteGetRouteMatrix202Response.request'
     package: '@azure-rest/maps-route'

@@ -13,11 +13,19 @@ properties:
       @azure-rest/maps-route.RouteRequestRouteMatrixQueryParamProperties.arriveAt
     package: '@azure-rest/maps-route'
     summary: >-
-      The date and time of arrival at the destination point. It must be
-      specified as a dateTime. When a time zone offset is not specified it will
-      be assumed to be that of the destination point. The arriveAt value must be
-      in the future. The arriveAt parameter cannot be used in conjunction with
-      departAt, minDeviationDistance or minDeviationTime.
+      The date and time of arrival at the destination point formatted as a
+      `dateTime` value as defined in [RFC 3339, section
+      5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6), with an optional
+      time zone offset. When a time zone offset is not specified it will be
+      assumed to be that of the destination point.
+
+
+      Examples:
+        * 2023-12-19T16:39:57
+        * 2023-12-19T16:39:57-08:00
+
+      The `arriveAt` parameter cannot be used in conjunction with `departAt`,
+      `minDeviationDistance` or `minDeviationTime`.
     fullName: arriveAt
     remarks: ''
     isDeprecated: false
@@ -32,9 +40,8 @@ properties:
     summary: >-
       Specifies something that the route calculation should try to avoid when
       determining the route. Can be specified multiple times in one request, for
-      example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In
-      calculateReachableRange requests, the value alreadyUsedRoads must not be
-      used.
+      example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In Route Range
+      requests, the value alreadyUsedRoads must not be used.
     fullName: avoid
     remarks: ''
     isDeprecated: false
@@ -68,11 +75,19 @@ properties:
       @azure-rest/maps-route.RouteRequestRouteMatrixQueryParamProperties.departAt
     package: '@azure-rest/maps-route'
     summary: >-
-      The date and time of departure from the origin point. Departure times
-      apart from now must be specified as a dateTime. When a time zone offset is
-      not specified, it will be assumed to be that of the origin point. The
-      departAt value must be in the future in the date-time format
-      (1996-12-19T16:39:57-08:00).
+      The date and time of departure from the origin point formatted as a
+      `dateTime` value as defined in [RFC 3339, section
+      5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6), with an optional
+      time zone offset. When a time zone offset is not specified, it will be
+      assumed to be that of the origin point.
+        * Default value: now
+        * Other value: `dateTime`
+
+      Examples:
+        * 2023-12-19T16:39:57
+        * 2023-12-19T16:39:57-08:00
+
+      The `departAt` parameter cannot be used in conjunction with `arriveAt`.
     fullName: departAt
     remarks: ''
     isDeprecated: false
@@ -116,7 +131,9 @@ properties:
     summary: >-
       Specifies which of the section types is reported in the route response.
       <br><br>For example if sectionType = pedestrian the sections which are
-      suited for pedestrians only are returned. Multiple types can be used. The
+      suited for pedestrians only are returned. Can be specified multiple times
+      in one request, for example,
+      '&sectionType=carTrain&sectionType=pedestrian&sectionType=motorway'. The
       default sectionType refers to the travelMode input. By default travelMode
       is set to car
     fullName: sectionType
@@ -124,15 +141,15 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        sectionType?: "carTrain" | "country" | "ferry" | "motorway" |
+        sectionType?: ("carTrain" | "country" | "ferry" | "motorway" |
         "pedestrian" | "tollRoad" | "tollVignette" | "traffic" | "travelMode" |
-        "tunnel" | "carpool" | "urban"
+        "tunnel" | "carpool" | "urban")[]
       return:
         description: ''
         type: >-
-          "carTrain" | "country" | "ferry" | "motorway" | "pedestrian" |
+          ("carTrain" | "country" | "ferry" | "motorway" | "pedestrian" |
           "tollRoad" | "tollVignette" | "traffic" | "travelMode" | "tunnel" |
-          "carpool" | "urban"
+          "carpool" | "urban")[]
   - name: traffic
     uid: '@azure-rest/maps-route.RouteRequestRouteMatrixQueryParamProperties.traffic'
     package: '@azure-rest/maps-route'
@@ -160,8 +177,7 @@ properties:
       particular section, the travelMode element of the response for that
       section will be "other". Note that travel modes bus, motorcycle, taxi and
       van are BETA functionality. Full restriction data is not available in all
-      areas. In **calculateReachableRange** requests, the values bicycle and
-      pedestrian must not be used.
+      areas.
     fullName: travelMode
     remarks: ''
     isDeprecated: false
@@ -227,10 +243,10 @@ properties:
       Types of cargo that may be classified as hazardous materials and
       restricted from some roads. Available vehicleLoadType values are US Hazmat
       classes 1 through 9, plus generic classifications for use in other
-      countries. Values beginning with USHazmat are for US routing while
-      otherHazmat should be used for all other countries. vehicleLoadType can be
-      specified multiple times. This parameter is currently only considered for
-      travelMode=truck.
+      countries/regions. Values beginning with USHazmat are for US routing while
+      otherHazmat should be used for all other countries/regions.
+      vehicleLoadType can be specified multiple times. This parameter is
+      currently only considered for travelMode=truck.
     fullName: vehicleLoadType
     remarks: ''
     isDeprecated: false

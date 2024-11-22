@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-hardwaresecuritymodules, hardwaresecuritymodules
-ms.date: 01/26/2024
+ms.date: 11/22/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hardwaresecuritymodules
@@ -12,7 +12,7 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 
 The Azure management API provides a RESTful set of web services that interact with Azure HSM RP.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.1/sdk/hardwaresecuritymodules/arm-hardwaresecuritymodules) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.2/sdk/hardwaresecuritymodules/arm-hardwaresecuritymodules) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-hardwaresecuritymodules) |
 [API reference documentation](/javascript/api/@azure/arm-hardwaresecuritymodules?view=azure-node-preview) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -24,7 +24,7 @@ The Azure management API provides a RESTful set of web services that interact wi
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-hardwaresecuritymodules_2.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-hardwaresecuritymodules_2.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ npm install @azure/arm-hardwaresecuritymodules
 To create a client object to access the AzureHsmResourceProvider API, you will need the `endpoint` of your AzureHsmResourceProvider resource and a `credential`. The AzureHsmResourceProvider client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your AzureHsmResourceProvider resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-hardwaresecuritymodules_2.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-hardwaresecuritymodules_2.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -93,7 +93,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
@@ -101,7 +101,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-hardwaresecuritymodules_2.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-hardwaresecuritymodules_2.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -113,6 +113,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-hardwaresecuritymodules_2.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

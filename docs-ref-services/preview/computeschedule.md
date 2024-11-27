@@ -1,7 +1,7 @@
 ---
 title: Azure Computeschedule SDK for JavaScript
 description: Reference for Azure Computeschedule SDK for JavaScript
-ms.date: 11/26/2024
+ms.date: 11/27/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: computeschedule

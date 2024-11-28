@@ -1,7 +1,7 @@
 ---
 title: Azure Edge Zones SDK for JavaScript
 description: Reference for Azure Edge Zones SDK for JavaScript
-ms.date: 11/27/2024
+ms.date: 11/28/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: edgezones

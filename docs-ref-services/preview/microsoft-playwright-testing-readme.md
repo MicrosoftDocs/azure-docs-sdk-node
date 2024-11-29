@@ -1,10 +1,10 @@
 ---
 title: 
-keywords: Azure, javascript, SDK, API, @azure/microsoft-playwright-testing, playwrighttesting
-ms.date: 11/18/2024
+keywords: Azure, javascript, SDK, API, @azure/microsoft-playwright-testing, playwright-testing
+ms.date: 11/29/2024
 ms.topic: reference
 ms.devlang: javascript
-ms.service: playwrighttesting
+ms.service: playwright-testing
 ---
 # Microsoft Playwright Testing preview
 

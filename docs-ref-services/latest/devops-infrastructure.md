@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: devopsinfrastructure
 ---
-# Azure DevOps Infrastructure SDK for JavaScript - preview
-## Packages - preview
+# Azure DevOps Infrastructure SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](devops-infrastructure-index.md)]

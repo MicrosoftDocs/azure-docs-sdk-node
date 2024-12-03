@@ -1,0 +1,102 @@
+### YamlMime:TSType
+name: TracingSpan
+uid: '@typespec/ts-http-runtime.TracingSpan'
+package: '@typespec/ts-http-runtime'
+summary: Represents an implementation agnostic tracing span.
+fullName: TracingSpan
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: addEvent(string, AddEventOptions)
+    uid: '@typespec/ts-http-runtime.TracingSpan.addEvent'
+    package: '@typespec/ts-http-runtime'
+    summary: Adds an event to the span.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function addEvent(name: string, options?: AddEventOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@typespec/ts-http-runtime.AddEventOptions" />
+          description: ''
+  - name: end()
+    uid: '@typespec/ts-http-runtime.TracingSpan.end'
+    package: '@typespec/ts-http-runtime'
+    summary: Ends the span.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: function end()
+  - name: isRecording()
+    uid: '@typespec/ts-http-runtime.TracingSpan.isRecording'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Returns true if this
+      [TracingSpan](xref:@typespec/ts-http-runtime.TracingSpan) is recording
+      information.
+
+
+      Depending on the span implementation, this may return false if the span is
+      not being sampled.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRecording(): boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: recordException(string | Error)
+    uid: '@typespec/ts-http-runtime.TracingSpan.recordException'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Records an exception on a
+      [TracingSpan](xref:@typespec/ts-http-runtime.TracingSpan) without
+      modifying its status.
+
+
+      When recording an unhandled exception that should fail the span, please
+      use [setStatus](xref:@typespec/ts-http-runtime.TracingSpan.setStatus)
+      instead.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function recordException(exception: string | Error)'
+      parameters:
+        - id: exception
+          type: string | Error
+          description: The exception to record on the span.
+  - name: setAttribute(string, unknown)
+    uid: '@typespec/ts-http-runtime.TracingSpan.setAttribute'
+    package: '@typespec/ts-http-runtime'
+    summary: Sets a given attribute on a span.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function setAttribute(name: string, value: unknown)'
+      parameters:
+        - id: name
+          type: string
+          description: The attribute's name.
+        - id: value
+          type: unknown
+          description: The attribute's value to set. May be any non-nullish value.
+  - name: setStatus(SpanStatus)
+    uid: '@typespec/ts-http-runtime.TracingSpan.setStatus'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Sets the status of the span. When an error is provided, it will be
+      recorded on the span as well.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function setStatus(status: SpanStatus)'
+      parameters:
+        - id: status
+          type: <xref uid="@typespec/ts-http-runtime.SpanStatus" />
+          description: >-
+            The [SpanStatus](xref:@typespec/ts-http-runtime.SpanStatus) to set
+            on the span.

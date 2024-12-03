@@ -1,0 +1,203 @@
+### YamlMime:TSType
+name: TracingClient
+uid: '@typespec/ts-http-runtime.TracingClient'
+package: '@typespec/ts-http-runtime'
+summary: >-
+  Represents a client that can integrate with the currently configured
+  [Instrumenter](xref:@typespec/ts-http-runtime.Instrumenter).
+
+
+  Create an instance using
+  [createTracingClient](xref:@typespec/ts-http-runtime.createTracingClient).
+fullName: TracingClient
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: createRequestHeaders(TracingContext)
+    uid: '@typespec/ts-http-runtime.TracingClient.createRequestHeaders'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Creates a set of request headers to propagate tracing information to a
+      backend.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createRequestHeaders(tracingContext?: TracingContext):
+        Record<string, string>
+      parameters:
+        - id: tracingContext
+          type: <xref uid="@typespec/ts-http-runtime.TracingContext" />
+          description: The context containing the span to propagate.
+      return:
+        description: The set of headers to add to a request.
+        type: Record&lt;string, string&gt;
+  - name: parseTraceparentHeader(string)
+    uid: '@typespec/ts-http-runtime.TracingClient.parseTraceparentHeader'
+    package: '@typespec/ts-http-runtime'
+    summary: Parses a traceparent header value into a <xref:TracingSpanContext>.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function parseTraceparentHeader(traceparentHeader: string): undefined |
+        TracingContext
+      parameters:
+        - id: traceparentHeader
+          type: string
+          description: The traceparent header to parse.
+      return:
+        description: An implementation-specific identifier for the span.
+        type: undefined | <xref uid="@typespec/ts-http-runtime.TracingContext" />
+  - name: startSpan<Options>(string, Options, TracingSpanOptions)
+    uid: '@typespec/ts-http-runtime.TracingClient.startSpan'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Starts a given span but does not set it as the active span.
+
+
+      You must end the span using
+      [end](xref:@typespec/ts-http-runtime.TracingSpan.end).
+
+
+      Most of the time you will want to use
+      [withSpan](xref:@typespec/ts-http-runtime.TracingClient.withSpan) instead.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startSpan<Options>(name: string, operationOptions?: Options,
+        spanOptions?: TracingSpanOptions): { span: TracingSpan, updatedOptions:
+        OptionsWithTracingContext<Options> }
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the span. By convention this should be
+            `${className}.${methodName}`.
+        - id: operationOptions
+          type: Options
+          description: The original operation options.
+        - id: spanOptions
+          type: <xref uid="@typespec/ts-http-runtime.TracingSpanOptions" />
+          description: The options to use when creating the span.
+      return:
+        description: >-
+          A [TracingSpan](xref:@typespec/ts-http-runtime.TracingSpan) and the
+          updated operation options.
+        type: >-
+          { span: TracingSpan, updatedOptions:
+          OptionsWithTracingContext&lt;Options&gt; }
+  - name: >-
+      withContext<CallbackArgs, Callback>(TracingContext, Callback,
+      CallbackArgs)
+    uid: '@typespec/ts-http-runtime.TracingClient.withContext'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Wraps a callback with an active context and calls the callback.
+
+      Depending on the implementation, this may set the globally available
+      active context.
+
+
+      Useful when you want to leave the boundaries of the SDK (make a request or
+      callback to user code) and are unable to use the
+      [withSpan](xref:@typespec/ts-http-runtime.TracingClient.withSpan) API.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withContext<CallbackArgs, Callback>(context: TracingContext,
+        callback: Callback, callbackArgs: CallbackArgs): ReturnType<Callback>
+      parameters:
+        - id: context
+          type: <xref uid="@typespec/ts-http-runtime.TracingContext" />
+          description: >-
+            The [TracingContext](xref:@typespec/ts-http-runtime.TracingContext)
+            to use as the active context in the scope of the callback.
+        - id: callback
+          type: Callback
+          description: >-
+            The callback to be invoked with the given context set as the
+            globally active context.
+        - id: callbackArgs
+          type: CallbackArgs
+          description: The callback arguments.
+      return:
+        description: ''
+        type: ReturnType&lt;Callback&gt;
+  - name: withSpan<Options, Callback>(string, Options, Callback, TracingSpanOptions)
+    uid: '@typespec/ts-http-runtime.TracingClient.withSpan'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Wraps a callback in a tracing span, calls the callback, and closes the
+      span.
+
+
+      This is the primary interface for using Tracing and will handle error
+      recording as well as setting the status on the span.
+
+
+      Both synchronous and asynchronous functions will be awaited in order to
+      reflect the result of the callback on the span.
+
+
+      Example:
+
+
+      ```ts snippet:with_span_example
+
+      import { createTracingClient } from "@typespec/ts-http-runtime";
+
+
+      const tracingClient = createTracingClient({
+        namespace: "test.namespace",
+        packageName: "test-package",
+        packageVersion: "1.0.0",
+      });
+
+      const options = {};
+
+      const myOperationResult = await tracingClient.withSpan(
+        "myClassName.myOperationName",
+        options,
+        (updatedOptions) => {
+          // Do something with the updated options.
+          return "myOperationResult";
+        },
+      );
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withSpan<Options, Callback>(name: string, operationOptions:
+        Options, callback: Callback, spanOptions?: TracingSpanOptions):
+        Promise<Resolved<ReturnType<Callback>>>
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the span. By convention this should be
+            `${className}.${methodName}`.
+        - id: operationOptions
+          type: Options
+          description: >-
+            The original options passed to the method. The callback will receive
+            these options with the newly created
+            [TracingContext](xref:@typespec/ts-http-runtime.TracingContext).
+        - id: callback
+          type: Callback
+          description: >-
+            The callback to be invoked with the updated options and newly
+            created [TracingSpan](xref:@typespec/ts-http-runtime.TracingSpan).
+        - id: spanOptions
+          type: <xref uid="@typespec/ts-http-runtime.TracingSpanOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@typespec/ts-http-runtime.Resolved"
+          />&lt;ReturnType&lt;Callback&gt;&gt;&gt;

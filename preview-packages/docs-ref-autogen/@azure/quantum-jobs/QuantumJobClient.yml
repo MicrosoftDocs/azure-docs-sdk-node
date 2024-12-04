@@ -9,8 +9,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      QuantumJobClient(TokenCredential | ServiceClientCredentials, string,
-      string, string, QuantumJobClientOptionalParams)
+      QuantumJobClient(TokenCredential, string, string, string,
+      QuantumJobClientOptionalParams)
     uid: '@azure/quantum-jobs.QuantumJobClient.constructor'
     package: '@azure/quantum-jobs'
     summary: Initializes a new instance of the QuantumJobClient class.
@@ -18,14 +18,12 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new QuantumJobClient(credentials: TokenCredential |
-        ServiceClientCredentials, subscriptionId: string, resourceGroupName:
-        string, workspaceName: string, options?: QuantumJobClientOptionalParams)
+        new QuantumJobClient(credentials: TokenCredential, subscriptionId:
+        string, resourceGroupName: string, workspaceName: string, options?:
+        QuantumJobClientOptionalParams)
       parameters:
         - id: credentials
-          type: >-
-            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
-            uid="@azure/core-http.ServiceClientCredentials" />
+          type: <xref uid="@azure/core-auth.TokenCredential" />
           description: >-
             Subscription credentials which uniquely identify client
             subscription.
@@ -44,6 +42,18 @@ constructors:
           type: <xref uid="@azure/quantum-jobs.QuantumJobClientOptionalParams" />
           description: The parameter options
 properties:
+  - name: $host
+    uid: '@azure/quantum-jobs.QuantumJobClient.$host'
+    package: '@azure/quantum-jobs'
+    summary: ''
+    fullName: $host
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: '$host: string'
+      return:
+        description: ''
+        type: string
   - name: jobs
     uid: '@azure/quantum-jobs.QuantumJobClient.jobs'
     package: '@azure/quantum-jobs'
@@ -80,34 +90,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/quantum-jobs.Quotas" />
-  - name: storage
-    uid: '@azure/quantum-jobs.QuantumJobClient.storage'
-    package: '@azure/quantum-jobs'
-    summary: ''
-    fullName: storage
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'storage: Storage'
-      return:
-        description: ''
-        type: <xref uid="@azure/quantum-jobs.Storage" />
-inheritedProperties:
-  - name: $host
-    uid: '@azure/quantum-jobs.QuantumJobClient.$host'
-    package: '@azure/quantum-jobs'
-    summary: ''
-    fullName: $host
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: '$host: string'
-      return:
-        description: ''
-        type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [QuantumJobClientContext.$host](xref:@azure/quantum-jobs.QuantumJobClientContext.$host)
   - name: resourceGroupName
     uid: '@azure/quantum-jobs.QuantumJobClient.resourceGroupName'
     package: '@azure/quantum-jobs'
@@ -120,9 +102,18 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [QuantumJobClientContext.resourceGroupName](xref:@azure/quantum-jobs.QuantumJobClientContext.resourceGroupName)
+  - name: storage
+    uid: '@azure/quantum-jobs.QuantumJobClient.storage'
+    package: '@azure/quantum-jobs'
+    summary: ''
+    fullName: storage
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'storage: Storage_2'
+      return:
+        description: ''
+        type: <xref uid="@azure/quantum-jobs.Storage" />
   - name: subscriptionId
     uid: '@azure/quantum-jobs.QuantumJobClient.subscriptionId'
     package: '@azure/quantum-jobs'
@@ -135,9 +126,6 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [QuantumJobClientContext.subscriptionId](xref:@azure/quantum-jobs.QuantumJobClientContext.subscriptionId)
   - name: workspaceName
     uid: '@azure/quantum-jobs.QuantumJobClient.workspaceName'
     package: '@azure/quantum-jobs'
@@ -150,13 +138,22 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [QuantumJobClientContext.workspaceName](xref:@azure/quantum-jobs.QuantumJobClientContext.workspaceName)
+inheritedProperties:
+  - name: pipeline
+    uid: '@azure/quantum-jobs.QuantumJobClient.pipeline'
+    package: '@azure/quantum-jobs'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.Pipeline" />
+    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClient.pipeline
 inheritedMethods:
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
+  - name: sendOperationRequest<T>(OperationArguments, OperationSpec)
     uid: '@azure/quantum-jobs.QuantumJobClient.sendOperationRequest'
     package: '@azure/quantum-jobs'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
@@ -164,28 +161,22 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
-        Promise<RestResponse>
+        function sendOperationRequest<T>(operationArguments: OperationArguments,
+        operationSpec: OperationSpec): Promise<T>
       parameters:
         - id: operationArguments
-          type: <xref uid="@azure/core-http.OperationArguments" />
+          type: <xref uid="@azure/core-client.OperationArguments" />
           description: >-
             The arguments that the HTTP request's templated values will be
             populated from.
         - id: operationSpec
-          type: <xref uid="@azure/core-http.OperationSpec" />
+          type: <xref uid="@azure/core-client.OperationSpec" />
           description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: <xref uid="@azure/core-http.ServiceCallback" />&lt;any&gt;
-          description: The callback to call when the response is received.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/core-http.RestResponse" />&gt;
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [QuantumJobClientContext.sendOperationRequest](xref:@azure/quantum-jobs.QuantumJobClientContext.sendOperationRequest)
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+        type: Promise&lt;T&gt;
+    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClient.sendOperationRequest
+  - name: sendRequest(PipelineRequest)
     uid: '@azure/quantum-jobs.QuantumJobClient.sendRequest'
     package: '@azure/quantum-jobs'
     summary: Send the provided httpRequest.
@@ -193,18 +184,16 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
-        Promise<HttpOperationResponse>
+        function sendRequest(request: PipelineRequest):
+        Promise<PipelineResponse>
       parameters:
-        - id: options
-          type: >-
-            <xref uid="@azure/core-http.RequestPrepareOptions" /> | <xref
-            uid="@azure/core-http.WebResourceLike" />
+        - id: request
+          type: <xref uid="@azure/core-rest-pipeline.PipelineRequest" />
           description: ''
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [QuantumJobClientContext.sendRequest](xref:@azure/quantum-jobs.QuantumJobClientContext.sendRequest)
-extends: <xref uid="@azure/quantum-jobs.QuantumJobClientContext" />
+        type: >-
+          Promise&lt;<xref uid="@azure/core-rest-pipeline.PipelineResponse"
+          />&gt;
+    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClient.sendRequest
+extends: <xref uid="@azure/core-client.ServiceClient" />

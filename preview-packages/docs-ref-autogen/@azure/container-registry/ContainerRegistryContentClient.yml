@@ -1,0 +1,224 @@
+### YamlMime:TSType
+name: ContainerRegistryContentClient
+uid: '@azure/container-registry.ContainerRegistryContentClient'
+package: '@azure/container-registry'
+summary: >-
+  The Azure Container Registry blob client, responsible for uploading and
+  downloading blobs and manifests, the building blocks of artifacts.
+fullName: ContainerRegistryContentClient
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: >-
+      ContainerRegistryContentClient(string, string, TokenCredential,
+      ContainerRegistryContentClientOptions)
+    uid: '@azure/container-registry.ContainerRegistryContentClient.constructor'
+    package: '@azure/container-registry'
+    summary: >-
+      Creates an instance of a ContainerRegistryContentClient for managing
+      container images and artifacts.
+
+
+      Example usage:
+
+      ```ts
+
+      import { ContainerRegistryContentClient } from
+      "@azure/container-registry";
+
+      import { DefaultAzureCredential} from "@azure/identity";
+
+
+      const client = new ContainerRegistryContentClient(
+         "<container registry API endpoint>",
+         "<repository name>",
+         new DefaultAzureCredential()
+      );
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new ContainerRegistryContentClient(endpoint: string, repositoryName:
+        string, credential: TokenCredential, options?:
+        ContainerRegistryContentClientOptions)
+      parameters:
+        - id: endpoint
+          type: string
+          description: the URL endpoint of the container registry
+        - id: repositoryName
+          type: string
+          description: the name of the repository that logically groups the artifact parts
+        - id: credential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: used to authenticate requests to the service
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/container-registry.ContainerRegistryContentClientOptions"
+            />
+          description: optional configuration used to send requests to the service
+properties:
+  - name: endpoint
+    uid: '@azure/container-registry.ContainerRegistryContentClient.endpoint'
+    package: '@azure/container-registry'
+    summary: The Azure Container Registry endpoint.
+    fullName: endpoint
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'endpoint: string'
+      return:
+        description: ''
+        type: string
+  - name: repositoryName
+    uid: '@azure/container-registry.ContainerRegistryContentClient.repositoryName'
+    package: '@azure/container-registry'
+    summary: The name of the repository that logically groups the artifact parts.
+    fullName: repositoryName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'repositoryName: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: deleteBlob(string, DeleteBlobOptions)
+    uid: '@azure/container-registry.ContainerRegistryContentClient.deleteBlob'
+    package: '@azure/container-registry'
+    summary: Delete a blob.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteBlob(digest: string, options?: DeleteBlobOptions):
+        Promise<void>
+      parameters:
+        - id: digest
+          type: string
+          description: the digest of the blob to delete
+        - id: options
+          type: <xref uid="@azure/container-registry.DeleteBlobOptions" />
+          description: optional configuration used to send requests to the service
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteManifest(string, DeleteManifestOptions)
+    uid: '@azure/container-registry.ContainerRegistryContentClient.deleteManifest'
+    package: '@azure/container-registry'
+    summary: >-
+      Delete a manifest. Doing so effectively deletes an artifact from the
+      registry.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteManifest(digest: string, options?:
+        DeleteManifestOptions): Promise<void>
+      parameters:
+        - id: digest
+          type: string
+          description: the digest of the manifest to delete
+        - id: options
+          type: <xref uid="@azure/container-registry.DeleteManifestOptions" />
+          description: optional configuration used to send requests to the service
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: downloadBlob(string, DownloadBlobOptions)
+    uid: '@azure/container-registry.ContainerRegistryContentClient.downloadBlob'
+    package: '@azure/container-registry'
+    summary: Download a blob that is part of an artifact.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function downloadBlob(digest: string, options?: DownloadBlobOptions):
+        Promise<DownloadBlobResult>
+      parameters:
+        - id: digest
+          type: string
+          description: the digest of the blob to download
+        - id: options
+          type: <xref uid="@azure/container-registry.DownloadBlobOptions" />
+          description: optional configuration used to send requests to the service
+      return:
+        description: '- the downloaded blob'
+        type: >-
+          Promise&lt;<xref uid="@azure/container-registry.DownloadBlobResult"
+          />&gt;
+  - name: getManifest(string, GetManifestOptions)
+    uid: '@azure/container-registry.ContainerRegistryContentClient.getManifest'
+    package: '@azure/container-registry'
+    summary: Downloads the manifest for an OCI artifact.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getManifest(tagOrDigest: string, options?: GetManifestOptions):
+        Promise<GetManifestResult>
+      parameters:
+        - id: tagOrDigest
+          type: string
+          description: a tag or digest that identifies the artifact
+        - id: options
+          type: <xref uid="@azure/container-registry.GetManifestOptions" />
+          description: ''
+      return:
+        description: '- the downloaded manifest.'
+        type: >-
+          Promise&lt;<xref uid="@azure/container-registry.GetManifestResult"
+          />&gt;
+  - name: >-
+      setManifest(Buffer | ReadableStream | OciImageManifest | Record<string,
+      unknown>, SetManifestOptions)
+    uid: '@azure/container-registry.ContainerRegistryContentClient.setManifest'
+    package: '@azure/container-registry'
+    summary: Upload a manifest for an OCI artifact.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setManifest(manifest: Buffer | ReadableStream |
+        OciImageManifest | Record<string, unknown>, options?:
+        SetManifestOptions): Promise<SetManifestResult>
+      parameters:
+        - id: manifest
+          type: >-
+            Buffer | ReadableStream | <xref
+            uid="@azure/container-registry.OciImageManifest" /> |
+            Record&lt;string, unknown&gt;
+          description: the manifest to upload.
+        - id: options
+          type: <xref uid="@azure/container-registry.SetManifestOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/container-registry.SetManifestResult"
+          />&gt;
+  - name: uploadBlob(Buffer | ReadableStream, UploadBlobOptions)
+    uid: '@azure/container-registry.ContainerRegistryContentClient.uploadBlob'
+    package: '@azure/container-registry'
+    summary: Upload an artifact blob.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uploadBlob(blob: Buffer | ReadableStream, options?:
+        UploadBlobOptions): Promise<UploadBlobResult>
+      parameters:
+        - id: blob
+          type: Buffer | ReadableStream
+          description: ''
+        - id: options
+          type: <xref uid="@azure/container-registry.UploadBlobOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/container-registry.UploadBlobResult"
+          />&gt;

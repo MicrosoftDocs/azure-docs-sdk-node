@@ -1,7 +1,7 @@
 ---
 title: Azure Mobile Network SDK for JavaScript
 description: Reference for Azure Mobile Network SDK for JavaScript
-ms.date: 12/05/2024
+ms.date: 12/06/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: mobilenetwork

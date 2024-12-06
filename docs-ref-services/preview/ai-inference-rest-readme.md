@@ -1,24 +1,24 @@
 ---
 title: Azure Inference REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-inference, ai
-ms.date: 11/07/2024
+ms.date: 12/06/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure Inference REST client library for JavaScript - version 1.0.0-beta.4 
+# Azure Inference REST client library for JavaScript - version 1.0.0-alpha.20241206.1 
 
 
 Inference API for Azure-supported AI models
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-beta.4/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.4/sdk/ai/ai-inference-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/sdk/ai/ai-inference-rest)
 - [Package (NPM)](https://aka.ms/npm-azure-rest-ai-inference)
-- [API reference documentation](https://aka.ms/AAp1kxa)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.4/sdk/ai/ai-inference-rest/samples)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/ai-inference/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/sdk/ai/ai-inference-rest/samples)
 
 ## Getting started
 
@@ -546,14 +546,14 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.4/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/sdk/core/logger).
 
 <!-- LINKS -->
-[stream_chat_completion_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-beta.4/sdk/ai/ai-inference-rest/samples/v1-beta/typescript/streamChatCompletions.ts
+[stream_chat_completion_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/sdk/ai/ai-inference-rest/samples/v1-beta/typescript/streamChatCompletions.ts
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.4/sdk/identity/identity
-[azure_core_auth]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-beta.4/sdk/core/core-auth
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/sdk/identity/identity
+[azure_core_auth]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-inference_1.0.0-alpha.20241206.1/sdk/core/core-auth
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

@@ -1,12 +1,12 @@
 ---
 title: Azure Communication SMS client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-sms, communication
-ms.date: 05/02/2024
+ms.date: 12/11/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication SMS client library for JavaScript - version 1.2.0-beta.1 
+# Azure Communication SMS client library for JavaScript - version 1.2.0-beta.2 
 
 
 Azure Communication SMS services gives developers the ability to send SMS messages from a phone number that can be purchased through Communication Services.
@@ -85,7 +85,7 @@ import { DefaultAzureCredential } from "@azure/identity";
 import { SmsClient } from "@azure/communication-sms";
 
 const endpoint = "https://<resource-name>.communication.azure.com";
-let credential = new DefaultAzureCredential();
+const credential = new DefaultAzureCredential();
 const client = new SmsClient(endpoint, credential);
 ```
 
@@ -144,13 +144,13 @@ try {
 
 ## Next steps
 
-- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.1/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
+- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.2/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
 - [Read more about SMS in Azure Communication Services][next_steps]
 - For a basic guide on how to configure Delivery Reporting for your SMS messages please refer to the [Handle SMS Events quickstart][handle_sms_events].
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -160,11 +160,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.2/sdk/identity/identity
 [get_phone_number_az_portal]: /azure/communication-services/quickstarts/telephony/get-phone-number?pivots=platform-azp
-[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.1/sdk/communication/communication-phone-numbers
-[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.1/sdk/communication/communication-phone-numbers/README.md
+[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.2/sdk/communication/communication-phone-numbers
+[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.2/sdk/communication/communication-phone-numbers/README.md
 [handle_sms_events]: /azure/communication-services/quickstarts/telephony-sms/handle-sms-events
 [next_steps]: /azure/communication-services/quickstarts/telephony-sms/send?pivots=programming-language-javascript
 

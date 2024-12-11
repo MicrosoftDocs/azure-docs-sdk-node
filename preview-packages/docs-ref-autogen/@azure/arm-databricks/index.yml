@@ -8,6 +8,7 @@ enums:
   - '@azure/arm-databricks.KnownCustomParameterType'
   - '@azure/arm-databricks.KnownEncryptionKeySource'
   - '@azure/arm-databricks.KnownKeySource'
+  - '@azure/arm-databricks.KnownManagedServiceIdentityType'
   - '@azure/arm-databricks.KnownPeeringProvisioningState'
   - '@azure/arm-databricks.KnownPeeringState'
   - '@azure/arm-databricks.KnownPrivateEndpointConnectionProvisioningState'
@@ -18,6 +19,19 @@ enums:
 classes:
   - '@azure/arm-databricks.AzureDatabricksManagementClient'
 interfaces:
+  - '@azure/arm-databricks.AccessConnector'
+  - '@azure/arm-databricks.AccessConnectorListResult'
+  - '@azure/arm-databricks.AccessConnectorProperties'
+  - '@azure/arm-databricks.AccessConnectorUpdate'
+  - '@azure/arm-databricks.AccessConnectors'
+  - '@azure/arm-databricks.AccessConnectorsCreateOrUpdateOptionalParams'
+  - '@azure/arm-databricks.AccessConnectorsDeleteOptionalParams'
+  - '@azure/arm-databricks.AccessConnectorsGetOptionalParams'
+  - '@azure/arm-databricks.AccessConnectorsListByResourceGroupNextOptionalParams'
+  - '@azure/arm-databricks.AccessConnectorsListByResourceGroupOptionalParams'
+  - '@azure/arm-databricks.AccessConnectorsListBySubscriptionNextOptionalParams'
+  - '@azure/arm-databricks.AccessConnectorsListBySubscriptionOptionalParams'
+  - '@azure/arm-databricks.AccessConnectorsUpdateOptionalParams'
   - '@azure/arm-databricks.AddressSpace'
   - '@azure/arm-databricks.AzureDatabricksManagementClientOptionalParams'
   - '@azure/arm-databricks.CreatedBy'
@@ -32,7 +46,10 @@ interfaces:
   - '@azure/arm-databricks.ErrorResponse'
   - '@azure/arm-databricks.GroupIdInformation'
   - '@azure/arm-databricks.GroupIdInformationProperties'
+  - '@azure/arm-databricks.ManagedDiskEncryption'
+  - '@azure/arm-databricks.ManagedDiskEncryptionKeyVaultProperties'
   - '@azure/arm-databricks.ManagedIdentityConfiguration'
+  - '@azure/arm-databricks.ManagedServiceIdentity'
   - '@azure/arm-databricks.Operation'
   - '@azure/arm-databricks.OperationDisplay'
   - '@azure/arm-databricks.OperationListResult'
@@ -62,6 +79,7 @@ interfaces:
   - '@azure/arm-databricks.Sku'
   - '@azure/arm-databricks.SystemData'
   - '@azure/arm-databricks.TrackedResource'
+  - '@azure/arm-databricks.UserAssignedIdentity'
   - '@azure/arm-databricks.VNetPeering'
   - '@azure/arm-databricks.VNetPeeringCreateOrUpdateOptionalParams'
   - '@azure/arm-databricks.VNetPeeringDeleteOptionalParams'
@@ -94,10 +112,18 @@ interfaces:
   - '@azure/arm-databricks.WorkspacesListBySubscriptionOptionalParams'
   - '@azure/arm-databricks.WorkspacesUpdateOptionalParams'
 typeAliases:
+  - '@azure/arm-databricks.AccessConnectorsCreateOrUpdateResponse'
+  - '@azure/arm-databricks.AccessConnectorsGetResponse'
+  - '@azure/arm-databricks.AccessConnectorsListByResourceGroupNextResponse'
+  - '@azure/arm-databricks.AccessConnectorsListByResourceGroupResponse'
+  - '@azure/arm-databricks.AccessConnectorsListBySubscriptionNextResponse'
+  - '@azure/arm-databricks.AccessConnectorsListBySubscriptionResponse'
+  - '@azure/arm-databricks.AccessConnectorsUpdateResponse'
   - '@azure/arm-databricks.CreatedByType'
   - '@azure/arm-databricks.CustomParameterType'
   - '@azure/arm-databricks.EncryptionKeySource'
   - '@azure/arm-databricks.KeySource'
+  - '@azure/arm-databricks.ManagedServiceIdentityType'
   - '@azure/arm-databricks.OperationsListNextResponse'
   - '@azure/arm-databricks.OperationsListResponse'
   - '@azure/arm-databricks.OutboundNetworkDependenciesEndpointsListResponse'
@@ -131,8 +157,8 @@ functions:
     uid: '@azure/arm-databricks.getContinuationToken'
     package: '@azure/arm-databricks'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -141,7 +167,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

@@ -1,0 +1,116 @@
+### YamlMime:TSType
+name: TlsSettings
+uid: '@typespec/ts-http-runtime.TlsSettings'
+package: '@typespec/ts-http-runtime'
+summary: Represents a certificate for TLS authentication.
+fullName: TlsSettings
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: ca
+    uid: '@typespec/ts-http-runtime.TlsSettings.ca'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      Optionally override the trusted CA certificates. Default is to trust
+      the well-known CAs curated by Mozilla. Mozilla's CAs are completely
+      replaced when CAs are explicitly specified using this option.
+    fullName: ca
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'ca?: string | Buffer | (string | Buffer)[]'
+      return:
+        description: ''
+        type: string | Buffer | (string | Buffer)[]
+  - name: cert
+    uid: '@typespec/ts-http-runtime.TlsSettings.cert'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      Cert chains in PEM format. One cert chain should be provided per
+       private key. Each cert chain should consist of the PEM formatted
+       certificate for a provided private key, followed by the PEM
+       formatted intermediate certificates (if any), in order, and not
+       including the root CA (the root CA must be pre-known to the peer,
+       see ca). When providing multiple cert chains, they do not have to
+       be in the same order as their private keys in key. If the
+       intermediate certificates are not provided, the peer will not be
+       able to validate the certificate, and the handshake will fail.
+    fullName: cert
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'cert?: string | Buffer | (string | Buffer)[]'
+      return:
+        description: ''
+        type: string | Buffer | (string | Buffer)[]
+  - name: key
+    uid: '@typespec/ts-http-runtime.TlsSettings.key'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Private keys in PEM format. PEM allows the option of private keys
+
+      being encrypted. Encrypted keys will be decrypted with
+
+      options.passphrase. Multiple keys using different algorithms can be
+
+      provided either as an array of unencrypted key strings or buffers,
+
+      or an array of objects in the form `{pem: <string|buffer>[,passphrase:
+      <string>]}`.
+
+      The object form can only occur in an array.object.passphrase is optional.
+
+      Encrypted keys will be decrypted with object.passphrase if provided, or
+      options.passphrase if it is not.
+    fullName: key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'key?: string | Buffer | (KeyObject | Buffer)[]'
+      return:
+        description: ''
+        type: >-
+          string | Buffer | (<xref uid="@typespec/ts-http-runtime.KeyObject" />
+          | Buffer)[]
+  - name: passphrase
+    uid: '@typespec/ts-http-runtime.TlsSettings.passphrase'
+    package: '@typespec/ts-http-runtime'
+    summary: Shared passphrase used for a single private key and/or a PFX.
+    fullName: passphrase
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'passphrase?: string'
+      return:
+        description: ''
+        type: string
+  - name: pfx
+    uid: '@typespec/ts-http-runtime.TlsSettings.pfx'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      PFX or PKCS12 encoded private key and certificate chain. pfx is an
+
+      alternative to providing key and cert individually. PFX is usually
+
+      encrypted, if it is, passphrase will be used to decrypt it. Multiple
+
+      PFX can be provided either as an array of unencrypted PFX buffers,
+
+      or an array of objects in the form `{buf: <string|buffer>[,passphrase:
+      <string>]}`.
+
+      The object form can only occur in an array.object.passphrase is optional.
+
+      Encrypted PFX will be decrypted with object.passphrase if provided, or
+      options.passphrase if it is not.
+    fullName: pfx
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pfx?: string | Buffer | (string | Buffer | PxfObject)[]'
+      return:
+        description: ''
+        type: >-
+          string | Buffer | (string | Buffer | <xref
+          uid="@typespec/ts-http-runtime.PxfObject" />)[]

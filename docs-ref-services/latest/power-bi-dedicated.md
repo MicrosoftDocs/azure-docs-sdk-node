@@ -1,7 +1,7 @@
 ---
 title: Azure Power BI Dedicated SDK for JavaScript
 description: Reference for Azure Power BI Dedicated SDK for JavaScript
-ms.date: 12/11/2024
+ms.date: 12/12/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: powerbidedicated

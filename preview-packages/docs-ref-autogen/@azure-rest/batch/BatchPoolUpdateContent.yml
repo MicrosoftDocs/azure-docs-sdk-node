@@ -27,6 +27,38 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure-rest/batch.BatchApplicationPackageReference" />[]
+  - name: displayName
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.displayName'
+    package: '@azure-rest/batch'
+    summary: >-
+      The display name for the Pool. The display name need not be unique and can
+      contain any Unicode characters up to a maximum length of 1024. This field
+      can be updated only when the pool is empty.
+    fullName: displayName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'displayName?: string'
+      return:
+        description: ''
+        type: string
+  - name: enableInterNodeCommunication
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.enableInterNodeCommunication'
+    package: '@azure-rest/batch'
+    summary: >-
+      Whether the Pool permits direct communication between Compute Nodes.
+      Enabling inter-node communication limits the maximum size of the Pool due
+      to deployment restrictions on the Compute Nodes of the Pool. This may
+      result in the Pool not reaching its desired size. The default value is
+      false.<br /><br />This field can be updated only when the pool is empty.
+    fullName: enableInterNodeCommunication
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enableInterNodeCommunication?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: metadata
     uid: '@azure-rest/batch.BatchPoolUpdateContent.metadata'
     package: '@azure-rest/batch'
@@ -43,6 +75,54 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure-rest/batch.MetadataItem" />[]
+  - name: mountConfiguration
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.mountConfiguration'
+    package: '@azure-rest/batch'
+    summary: >-
+      Mount storage using specified file system for the entire lifetime of the
+      pool. Mount the storage using Azure fileshare, NFS, CIFS or Blobfuse based
+      file system.<br /><br />This field can be updated only when the pool is
+      empty.
+    fullName: mountConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'mountConfiguration?: MountConfiguration[]'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.MountConfiguration" />[]
+  - name: networkConfiguration
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.networkConfiguration'
+    package: '@azure-rest/batch'
+    summary: >-
+      The network configuration for the Pool. This field can be updated only
+      when the pool is empty.
+    fullName: networkConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'networkConfiguration?: NetworkConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.NetworkConfiguration" />
+  - name: resourceTags
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.resourceTags'
+    package: '@azure-rest/batch'
+    summary: >-
+      The user-specified tags associated with the pool. The user-defined tags to
+      be associated with the Azure Batch Pool. When specified, these tags are
+      propagated to the backing Azure resources associated with the pool. This
+      property can only be specified when the Batch account was created with the
+      poolAllocationMode property set to 'UserSubscription'.<br /><br />This
+      field can be updated only when the pool is empty.
+    fullName: resourceTags
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'resourceTags?: Record<string, string>'
+      return:
+        description: ''
+        type: Record&lt;string, string&gt;
   - name: startTask
     uid: '@azure-rest/batch.BatchPoolUpdateContent.startTask'
     package: '@azure-rest/batch'
@@ -66,11 +146,106 @@ properties:
       The desired node communication mode for the pool. If this element is
       present, it replaces the existing targetNodeCommunicationMode configured
       on the Pool. If omitted, any existing metadata is left unchanged.
+
+
+      Possible values: "default", "classic", "simplified"
     fullName: targetNodeCommunicationMode
     remarks: ''
     isDeprecated: false
     syntax:
       content: 'targetNodeCommunicationMode?: string'
+      return:
+        description: ''
+        type: string
+  - name: taskSchedulingPolicy
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.taskSchedulingPolicy'
+    package: '@azure-rest/batch'
+    summary: >-
+      How Tasks are distributed across Compute Nodes in a Pool. If not
+      specified, the default is spread.<br /><br />This field can be updated
+      only when the pool is empty.
+    fullName: taskSchedulingPolicy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'taskSchedulingPolicy?: BatchTaskSchedulingPolicy'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.BatchTaskSchedulingPolicy" />
+  - name: taskSlotsPerNode
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.taskSlotsPerNode'
+    package: '@azure-rest/batch'
+    summary: >-
+      The number of task slots that can be used to run concurrent tasks on a
+      single compute node in the pool. The default value is 1. The maximum value
+      is the smaller of 4 times the number of cores of the vmSize of the pool or
+      256.<br /><br />This field can be updated only when the pool is empty.
+    fullName: taskSlotsPerNode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'taskSlotsPerNode?: number'
+      return:
+        description: ''
+        type: number
+  - name: upgradePolicy
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.upgradePolicy'
+    package: '@azure-rest/batch'
+    summary: >-
+      The upgrade policy for the Pool. Describes an upgrade policy - automatic,
+      manual, or rolling.<br /><br />This field can be updated only when the
+      pool is empty.
+    fullName: upgradePolicy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'upgradePolicy?: UpgradePolicy'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.UpgradePolicy" />
+  - name: userAccounts
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.userAccounts'
+    package: '@azure-rest/batch'
+    summary: >-
+      The list of user Accounts to be created on each Compute Node in the Pool.
+      This field can be updated only when the pool is empty.
+    fullName: userAccounts
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'userAccounts?: UserAccount[]'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.UserAccount" />[]
+  - name: virtualMachineConfiguration
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.virtualMachineConfiguration'
+    package: '@azure-rest/batch'
+    summary: >-
+      The virtual machine configuration for the Pool. This property must be
+      specified.<br /><br />This field can be updated only when the pool is
+      empty.
+    fullName: virtualMachineConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'virtualMachineConfiguration?: VirtualMachineConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/batch.VirtualMachineConfiguration" />
+  - name: vmSize
+    uid: '@azure-rest/batch.BatchPoolUpdateContent.vmSize'
+    package: '@azure-rest/batch'
+    summary: >-
+      The size of virtual machines in the Pool. For information about available
+      sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes
+      in an Azure Batch Pool
+      (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).<br /><br
+      />This field can be updated only when the pool is empty.
+    fullName: vmSize
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vmSize?: string'
       return:
         description: ''
         type: string

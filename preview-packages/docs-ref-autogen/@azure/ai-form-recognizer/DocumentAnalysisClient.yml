@@ -1,0 +1,816 @@
+### YamlMime:TSType
+name: DocumentAnalysisClient
+uid: '@azure/ai-form-recognizer.DocumentAnalysisClient'
+package: '@azure/ai-form-recognizer'
+summary: >-
+  A client for interacting with the Form Recognizer service's analysis features.
+
+
+  ### Examples:
+
+
+  The Form Recognizer service and clients support two means of authentication:
+
+
+  #### Azure Active Directory
+
+
+  ```javascript
+
+  import { DocumentAnalysisClient } from "@azure/ai-form-recognizer";
+
+  import { DefaultAzureCredential } from "@azure/identity";
+
+
+  const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+
+  const credential = new DefaultAzureCredential();
+
+
+  const client = new DocumentAnalysisClient(endpoint, credential);
+
+  ```
+
+
+  #### API Key (Subscription Key)
+
+
+  ```javascript
+
+  import { DocumentAnalysisClient, AzureKeyCredential } from
+  "@azure/ai-form-recognizer";
+
+
+  const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+
+  const credential = new AzureKeyCredential("<api key>");
+
+
+  const client = new DocumentAnalysisClient(endpoint, credential);
+
+  ```
+fullName: DocumentAnalysisClient
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: >-
+      DocumentAnalysisClient(string, KeyCredential,
+      DocumentAnalysisClientOptions)
+    uid: '@azure/ai-form-recognizer.DocumentAnalysisClient.constructor_1'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Create a `DocumentAnalysisClient` instance from a resource endpoint and a
+      static API key (`KeyCredential`),
+
+
+      ### Example:
+
+
+      ```javascript
+
+      import { DocumentAnalysisClient, AzureKeyCredential } from
+      "@azure/ai-form-recognizer";
+
+
+      const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+
+      const credential = new AzureKeyCredential("<api key>");
+
+
+      const client = new DocumentAnalysisClient(endpoint, credential);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new DocumentAnalysisClient(endpoint: string, credential: KeyCredential,
+        options?: DocumentAnalysisClientOptions)
+      parameters:
+        - id: endpoint
+          type: string
+          description: the endpoint URL of an Azure Cognitive Services instance
+        - id: credential
+          type: <xref uid="@azure/core-auth.KeyCredential" />
+          description: >-
+            a KeyCredential containing the Cognitive Services instance
+            subscription key
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.DocumentAnalysisClientOptions"
+            />
+          description: optional settings for configuring all methods in the client
+  - name: >-
+      DocumentAnalysisClient(string, TokenCredential,
+      DocumentAnalysisClientOptions)
+    uid: '@azure/ai-form-recognizer.DocumentAnalysisClient.constructor'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Create a `DocumentAnalysisClient` instance from a resource endpoint and a
+      an Azure Identity `TokenCredential`.
+
+
+      See the [`@azure/identity`](https://npmjs.com/package/@azure/identity)
+      package for more information about
+
+      authenticating with Azure Active Directory.
+
+
+      ### Example:
+
+
+      ```javascript
+
+      import { DocumentAnalysisClient } from "@azure/ai-form-recognizer";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+
+      const credential = new DefaultAzureCredential();
+
+
+      const client = new DocumentAnalysisClient(endpoint, credential);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new DocumentAnalysisClient(endpoint: string, credential:
+        TokenCredential, options?: DocumentAnalysisClientOptions)
+      parameters:
+        - id: endpoint
+          type: string
+          description: the endpoint URL of an Azure Cognitive Services instance
+        - id: credential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: a TokenCredential instance from the `@azure/identity` package
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.DocumentAnalysisClientOptions"
+            />
+          description: optional settings for configuring all methods in the client
+methods:
+  - name: >-
+      beginAnalyzeDocument(string, FormRecognizerRequestBody,
+      AnalyzeDocumentOptions<AnalyzeResult<AnalyzedDocument>>)
+    uid: '@azure/ai-form-recognizer.DocumentAnalysisClient.beginAnalyzeDocument'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Extract data from an input using a model given by its unique ID.
+
+
+      This operation supports custom as well as prebuilt models. For example, to
+      use the prebuilt invoice model, provide
+
+      the model ID "prebuilt-invoice", or to use the simpler prebuilt layout
+      model, provide the model ID
+
+      "prebuilt-layout".
+
+
+      The fields produced in the `AnalyzeResult` depend on the model that is
+      used for analysis, and the values in any
+
+      extracted documents' fields depend on the document types in the model (if
+      any) and their corresponding field
+
+      schemas.
+
+
+      ### Examples
+
+
+      This method supports streamable request bodies
+      ([FormRecognizerRequestBody](xref:@azure/ai-form-recognizer.FormRecognizerRequestBody))
+      such as Node.JS `ReadableStream`
+
+      objects, browser `Blob`s, and `ArrayBuffer`s. The contents of the body
+      will be uploaded to the service for analysis.
+
+
+      ```javascript
+
+      import * as fs from "fs";
+
+
+      const file = fs.createReadStream("path/to/receipt.pdf");
+
+
+      // The model that is passed to the following function call determines the
+      type of the eventual result. In the
+
+      // example, we will use the prebuilt receipt model, but you could use a
+      custom model ID/name instead.
+
+      const poller = await client.beginAnalyzeDocument("prebuilt-receipt",
+      file);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain lines and words
+        tables, // extracted tables, organized into cells that contain their contents
+        styles, // text styles (ex. handwriting) that were observed in the document
+        keyValuePairs, // extracted pairs of elements  (directed associations from one element in the input to another)
+        entities, // extracted entities in the input's content, which are categorized (ex. "Location" or "Organization")
+        documents // extracted documents (instances of one of the model's document types and its field schema)
+      } = await poller.pollUntilDone();
+
+
+      // Extract the fields of the first document. These fields constitute a
+      receipt, because we used the receipt model
+
+      const [{ fields: receipt }] = documents;
+
+
+      // The fields correspond to the model's document types and their field
+      schemas. Refer to the Form Recognizer
+
+      // documentation for information about the document types and field
+      schemas within a model, or use the `getModel`
+
+      // operation to view this information programmatically.
+
+      console.log("The type of this receipt is:",
+      receipt?.["ReceiptType"]?.value);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginAnalyzeDocument(modelId: string, document:
+        FormRecognizerRequestBody, options?:
+        AnalyzeDocumentOptions<AnalyzeResult<AnalyzedDocument>>):
+        Promise<AnalysisPoller<AnalyzeResult<AnalyzedDocument>>>
+      parameters:
+        - id: modelId
+          type: string
+          description: the unique ID (name) of the model within this client's resource
+        - id: document
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: >-
+            a
+            [FormRecognizerRequestBody](xref:@azure/ai-form-recognizer.FormRecognizerRequestBody)
+            that will be uploaded with the request
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.AnalyzeDocumentOptions"
+            />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult"
+            />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzedDocument"
+            />&gt;&gt;
+          description: optional settings for the analysis operation and poller
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce an
+          `AnalyzeResult`
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult" />&lt;<xref
+          uid="@azure/ai-form-recognizer.AnalyzedDocument" />&gt;&gt;&gt;
+  - name: >-
+      beginAnalyzeDocument<Result>(DocumentModel<Result>,
+      FormRecognizerRequestBody, AnalyzeDocumentOptions<Result>)
+    uid: '@azure/ai-form-recognizer.DocumentAnalysisClient.beginAnalyzeDocument_1'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Extract data from an input using a model that has a known, strongly-typed
+      document schema (a
+      [DocumentModel](xref:@azure/ai-form-recognizer.DocumentModel)).
+
+
+      The fields produced in the `AnalyzeResult` depend on the model that is
+      used for analysis. In TypeScript, the type
+
+      of the result for this method overload is inferred from the type of the
+      input `DocumentModel`.
+
+
+      ### Examples
+
+
+      This method supports streamable request bodies
+      ([FormRecognizerRequestBody](xref:@azure/ai-form-recognizer.FormRecognizerRequestBody))
+      such as Node.JS `ReadableStream`
+
+      objects, browser `Blob`s, and `ArrayBuffer`s. The contents of the body
+      will be uploaded to the service for analysis.
+
+
+      If the input provided is a string, it will be treated as a URL to the
+      location of a document to be analyzed. See the
+
+      [beginAnalyzeDocumentFromUrl](xref:@azure/ai-form-recognizer.DocumentAnalysisClient.beginAnalyzeDocumentFromUrl_1)
+      method for more information. Use of that method is preferred when using
+      URLs,
+
+      and URL support is only provided in this method for backwards
+      compatibility.
+
+
+      ```typescript
+
+      import * as fs from "fs";
+
+
+      // See the `prebuilt` folder in the SDK samples
+      (http://aka.ms/azsdk/formrecognizer/js/samples) for examples of
+
+      // DocumentModels for known prebuilts.
+
+      import { PrebuiltReceiptModel } from "./prebuilt-receipt.ts";
+
+
+      const file = fs.createReadStream("path/to/receipt.pdf");
+
+
+      // The model that is passed to the following function call determines the
+      type of the eventual result. In the
+
+      // example, we will use the prebuilt receipt model.
+
+      const poller = await client.beginAnalyzeDocument(PrebuiltReceiptModel,
+      file);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain lines and words
+        tables, // extracted tables, organized into cells that contain their contents
+        styles, // text styles (ex. handwriting) that were observed in the document
+        keyValuePairs, // extracted pairs of elements  (directed associations from one element in the input to another)
+
+        documents // extracted documents (instances of one of the model's document types and its field schema)
+      } = await poller.pollUntilDone();
+
+
+      // Extract the fields of the first document. These fields constitute a
+      receipt, because we used the receipt model
+
+      const [{ fields: receipt }] = documents;
+
+
+      // Since we used the strongly-typed PrebuiltReceiptModel object instead of
+      the "prebuilt-receipt" model ID
+
+      // string, the fields of the receipt are strongly-typed and have camelCase
+      names (as opposed to PascalCase).
+
+      console.log("The type of this receipt is:", receipt.receiptType?.value);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginAnalyzeDocument<Result>(model: DocumentModel<Result>,
+        document: FormRecognizerRequestBody, options?:
+        AnalyzeDocumentOptions<Result>): Promise<AnalysisPoller<Result>>
+      parameters:
+        - id: model
+          type: <xref uid="@azure/ai-form-recognizer.DocumentModel" />&lt;Result&gt;
+          description: >-
+            a [DocumentModel](xref:@azure/ai-form-recognizer.DocumentModel)
+            representing the model to use for analysis and the expected output
+            type
+        - id: document
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: >-
+            a
+            [FormRecognizerRequestBody](xref:@azure/ai-form-recognizer.FormRecognizerRequestBody)
+            that will be uploaded with the request
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.AnalyzeDocumentOptions"
+            />&lt;Result&gt;
+          description: optional settings for the analysis operation and poller
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce an
+          `AnalyzeResult` with documents that have
+                   the result type associated with the input model
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;Result&gt;&gt;
+  - name: >-
+      beginAnalyzeDocumentFromUrl(string, string,
+      AnalyzeDocumentOptions<AnalyzeResult<AnalyzedDocument>>)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentAnalysisClient.beginAnalyzeDocumentFromUrl
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Extract data from an input using a model given by its unique ID.
+
+
+      This operation supports custom as well as prebuilt models. For example, to
+      use the prebuilt invoice model, provide
+
+      the model ID "prebuilt-invoice", or to use the simpler prebuilt layout
+      model, provide the model ID
+
+      "prebuilt-layout".
+
+
+      The fields produced in the `AnalyzeResult` depend on the model that is
+      used for analysis, and the values in any
+
+      extracted documents' fields depend on the document types in the model (if
+      any) and their corresponding field
+
+      schemas.
+
+
+      ### Examples
+
+
+      This method supports extracting data from a file at a given URL. The Form
+      Recognizer service will attempt to
+
+      download a file using the submitted URL, so the URL must be accessible
+      from the public internet. For example, a SAS
+
+      token can be used to grant read access to a blob in Azure Storage, and the
+      service will use the SAS-encoded URL to
+
+      request the file.
+
+
+      ```javascript
+
+      // the URL must be publicly accessible
+
+      const url = "<receipt document url>";
+
+
+      // The model that is passed to the following function call determines the
+      type of the eventual result. In the
+
+      // example, we will use the prebuilt receipt model, but you could use a
+      custom model ID/name instead.
+
+      const poller = await client.beginAnalyzeDocument("prebuilt-receipt", url);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain lines and words
+        tables, // extracted tables, organized into cells that contain their contents
+        styles, // text styles (ex. handwriting) that were observed in the document
+        keyValuePairs, // extracted pairs of elements  (directed associations from one element in the input to another)
+
+        documents // extracted documents (instances of one of the model's document types and its field schema)
+      } = await poller.pollUntilDone();
+
+
+      // Extract the fields of the first document. These fields constitute a
+      receipt, because we used the receipt model
+
+      const [{ fields: receipt }] = documents;
+
+
+      // The fields correspond to the model's document types and their field
+      schemas. Refer to the Form Recognizer
+
+      // documentation for information about the document types and field
+      schemas within a model, or use the `getModel`
+
+      // operation to view this information programmatically.
+
+      console.log("The type of this receipt is:",
+      receipt?.["ReceiptType"]?.value);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginAnalyzeDocumentFromUrl(modelId: string, documentUrl:
+        string, options?:
+        AnalyzeDocumentOptions<AnalyzeResult<AnalyzedDocument>>):
+        Promise<AnalysisPoller<AnalyzeResult<AnalyzedDocument>>>
+      parameters:
+        - id: modelId
+          type: string
+          description: the unique ID (name) of the model within this client's resource
+        - id: documentUrl
+          type: string
+          description: >-
+            a URL (string) to an input document accessible from the public
+            internet
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.AnalyzeDocumentOptions"
+            />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult"
+            />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzedDocument"
+            />&gt;&gt;
+          description: optional settings for the analysis operation and poller
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce an
+          `AnalyzeResult`
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult" />&lt;<xref
+          uid="@azure/ai-form-recognizer.AnalyzedDocument" />&gt;&gt;&gt;
+  - name: >-
+      beginAnalyzeDocumentFromUrl<Result>(DocumentModel<Result>, string,
+      AnalyzeDocumentOptions<Result>)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentAnalysisClient.beginAnalyzeDocumentFromUrl_1
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Extract data from an input using a model that has a known, strongly-typed
+      document schema (a
+      [DocumentModel](xref:@azure/ai-form-recognizer.DocumentModel)).
+
+
+      The fields produced in the `AnalyzeResult` depend on the model that is
+      used for analysis. In TypeScript, the type
+
+      of the result for this method overload is inferred from the type of the
+      input `DocumentModel`.
+
+
+      ### Examples
+
+
+      This method supports extracting data from a file at a given URL. The Form
+      Recognizer service will attempt to
+
+      download a file using the submitted URL, so the URL must be accessible
+      from the public internet. For example, a SAS
+
+      token can be used to grant read access to a blob in Azure Storage, and the
+      service will use the SAS-encoded URL to
+
+      request the file.
+
+
+      ```typescript
+
+      // See the `prebuilt` folder in the SDK samples
+      (http://aka.ms/azsdk/formrecognizer/js/samples) for examples of
+
+      // DocumentModels for known prebuilts.
+
+      import { PrebuiltReceiptModel } from "./prebuilt-receipt.ts";
+
+
+      // the URL must be publicly accessible
+
+      const url = "<receipt document url>";
+
+
+      // The model that is passed to the following function call determines the
+      type of the eventual result. In the
+
+      // example, we will use the prebuilt receipt model.
+
+      const poller = await client.beginAnalyzeDocument(PrebuiltReceiptModel,
+      url);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain lines and words
+        tables, // extracted tables, organized into cells that contain their contents
+        styles, // text styles (ex. handwriting) that were observed in the document
+        keyValuePairs, // extracted pairs of elements  (directed associations from one element in the input to another)
+
+        documents // extracted documents (instances of one of the model's document types and its field schema)
+      } = await poller.pollUntilDone();
+
+
+      // Extract the fields of the first document. These fields constitute a
+      receipt, because we used the receipt model
+
+      const [{ fields: receipt }] = documents;
+
+
+      // Since we used the strongly-typed PrebuiltReceiptModel object instead of
+      the "prebuilt-receipt" model ID
+
+      // string, the fields of the receipt are strongly-typed and have camelCase
+      names (as opposed to PascalCase).
+
+      console.log("The type of this receipt is:", receipt.receiptType?.value);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginAnalyzeDocumentFromUrl<Result>(model:
+        DocumentModel<Result>, documentUrl: string, options?:
+        AnalyzeDocumentOptions<Result>): Promise<AnalysisPoller<Result>>
+      parameters:
+        - id: model
+          type: <xref uid="@azure/ai-form-recognizer.DocumentModel" />&lt;Result&gt;
+          description: >-
+            a [DocumentModel](xref:@azure/ai-form-recognizer.DocumentModel)
+            representing the model to use for analysis and the expected output
+            type
+        - id: documentUrl
+          type: string
+          description: >-
+            a URL (string) to an input document accessible from the public
+            internet
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.AnalyzeDocumentOptions"
+            />&lt;Result&gt;
+          description: optional settings for the analysis operation and poller
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce an
+          `AnalyzeResult`
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;Result&gt;&gt;
+  - name: >-
+      beginClassifyDocument(string, FormRecognizerRequestBody,
+      ClassifyDocumentOptions)
+    uid: '@azure/ai-form-recognizer.DocumentAnalysisClient.beginClassifyDocument'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Classify a document using a custom classifier given by its ID.
+
+
+      This method produces a long-running operation (poller) that will
+      eventually produce an `AnalyzeResult`. This is the
+
+      same type as `beginAnalyzeDocument` and `beginAnalyzeDocumentFromUrl`, but
+      the result will only contain a small
+
+      subset of its fields. Only the `documents` field and `pages` field will be
+      populated, and only minimal page
+
+      information will be returned. The `documents` field will contain
+      information about all the identified documents and
+
+      the `docType` that they were classified as.
+
+
+      ### Example
+
+
+      This method supports streamable request bodies
+      ([FormRecognizerRequestBody](xref:@azure/ai-form-recognizer.FormRecognizerRequestBody))
+      such as Node.JS `ReadableStream`
+
+      objects, browser `Blob`s, and `ArrayBuffer`s. The contents of the body
+      will be uploaded to the service for analysis.
+
+
+      ```typescript
+
+      import * as fs from "fs";
+
+
+      const file = fs.createReadStream("path/to/file.pdf");
+
+
+      const poller = await client.beginClassifyDocument("<classifier ID>",
+      file);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain only basic information for classifiers
+        documents // extracted documents and their types
+      } = await poller.pollUntilDone();
+
+
+      // We'll print the documents and their types
+
+      for (const { docType } of documents) {
+        console.log("The type of this document is:", docType);
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginClassifyDocument(classifierId: string, document:
+        FormRecognizerRequestBody, options?: ClassifyDocumentOptions):
+        Promise<AnalysisPoller<AnalyzeResult<AnalyzedDocument>>>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the ID of the custom classifier to use for analysis
+        - id: document
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: the document to classify
+        - id: options
+          type: <xref uid="@azure/ai-form-recognizer.ClassifyDocumentOptions" />
+          description: options for the classification operation
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce an
+          `AnalyzeResult`
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult" />&lt;<xref
+          uid="@azure/ai-form-recognizer.AnalyzedDocument" />&gt;&gt;&gt;
+  - name: beginClassifyDocumentFromUrl(string, string, ClassifyDocumentOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentAnalysisClient.beginClassifyDocumentFromUrl
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Classify a document from a URL using a custom classifier given by its ID.
+
+
+      This method produces a long-running operation (poller) that will
+      eventually produce an `AnalyzeResult`. This is the
+
+      same type as `beginAnalyzeDocument` and `beginAnalyzeDocumentFromUrl`, but
+      the result will only contain a small
+
+      subset of its fields. Only the `documents` field and `pages` field will be
+      populated, and only minimal page
+
+      information will be returned. The `documents` field will contain
+      information about all the identified documents and
+
+      the `docType` that they were classified as.
+
+
+      ### Example
+
+
+      This method supports extracting data from a file at a given URL. The Form
+      Recognizer service will attempt to
+
+      download a file using the submitted URL, so the URL must be accessible
+      from the public internet. For example, a SAS
+
+      token can be used to grant read access to a blob in Azure Storage, and the
+      service will use the SAS-encoded URL to
+
+      request the file.
+
+
+      ```typescript
+
+      // the URL must be publicly accessible
+
+      const url = "<file url>";
+
+
+      const poller = await client.beginClassifyDocument("<classifier ID>", url);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain only basic information for classifiers
+        documents // extracted documents and their types
+      } = await poller.pollUntilDone();
+
+
+      // We'll print the documents and their types
+
+      for (const { docType } of documents) {
+        console.log("The type of this document is:", docType);
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginClassifyDocumentFromUrl(classifierId: string, documentUrl:
+        string, options?: ClassifyDocumentOptions):
+        Promise<AnalysisPoller<AnalyzeResult<AnalyzedDocument>>>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the ID of the custom classifier to use for analysis
+        - id: documentUrl
+          type: string
+          description: the URL of the document to classify
+        - id: options
+          type: <xref uid="@azure/ai-form-recognizer.ClassifyDocumentOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult" />&lt;<xref
+          uid="@azure/ai-form-recognizer.AnalyzedDocument" />&gt;&gt;&gt;

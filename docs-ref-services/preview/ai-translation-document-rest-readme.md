@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-translation-document, translation
-ms.date: 07/01/2024
+ms.date: 12/20/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: translation
@@ -34,9 +34,9 @@ The following operations are supported by the Document Translation feature:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/translation/ai-translation-document-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-alpha.20241220.1/sdk/translation/ai-translation-document-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-translation-document)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/translation/ai-translation-document-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-alpha.20241220.1/sdk/translation/ai-translation-document-rest/samples)
 
 ## Getting started
 
@@ -60,6 +60,11 @@ npm install @azure-rest/ai-translation-document
 #### Create a Translator service resource
 
 You can create Translator resource following [Create a Translator resource][translator_resource_create].
+
+#### Setup Azure Blob Storage Account
+For more information about creating an Azure Blob Storage account see [here][azure_blob_storage_account]. For creating containers for your source and target files see [here][container]. Make sure to authorize your Translation resource storage access, more info [here][storage_container_authorization]. 
+
+When "Allow Storage Account Key Access" is disabled on the storage account , Managed Identity is enabled on the Translator resource and it is assigned the role "Storage Blob Data Contributor" on the storage account, then you can use the container URLs directly and no SAS URIs will be need to be generated.
 
 ### Create a `DocumentTranslationClient` using an endpoint URL and API key `KeyCredential`
 
@@ -345,11 +350,14 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-document_1.0.0-alpha.20241220.1/sdk/core/logger).
 Please refer to the service documentation for a conceptual discussion of [languages][languages_doc].
 
 [service_errors]: https://learn.microsoft.com/azure/ai-services/translator/document-translation/how-to-guides/use-rest-api-programmatically?tabs=csharp#common-http-status-codes
 [translator_resource_create]: https://learn.microsoft.com/azure/cognitive-services/Translator/create-translator-resource
-[documentTranslationClient_class]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-translation-document_1.0.0-beta.2/sdk/translation/ai-translation-document-rest/src/documentTranslationClient.ts
+[documentTranslationClient_class]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-translation-document_1.0.0-alpha.20241220.1/sdk/translation/ai-translation-document-rest/src/documentTranslationClient.ts
 [pre_requisities]: https://learn.microsoft.com/azure/ai-services/translator/document-translation/how-to-guides/use-rest-api-programmatically?tabs=csharp#prerequisites
+[azure_blob_storage_account]: https://ms.portal.azure.com/#create/Microsoft.StorageAccount
+[container]: https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container
+[storage_container_authorization]: https://learn.microsoft.com/azure/ai-services/translator/document-translation/quickstarts/client-library-sdks?tabs=dotnet&pivots=programming-language-csharp#storage-container-authorization
 

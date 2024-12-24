@@ -10,7 +10,7 @@ type: class
 constructors:
   - name: >-
       CallMedia(string, string, TokenCredential | KeyCredential,
-      CallAutomationApiClientOptionalParams)
+      CallAutomationEventProcessor, CallAutomationApiClientOptionalParams)
     uid: '@azure/communication-call-automation.CallMedia.constructor'
     package: '@azure/communication-call-automation'
     summary: ''
@@ -19,7 +19,8 @@ constructors:
     syntax:
       content: >-
         new CallMedia(callConnectionId: string, endpoint: string, credential:
-        TokenCredential | KeyCredential, options?:
+        TokenCredential | KeyCredential, eventProcessor:
+        CallAutomationEventProcessor, options?:
         CallAutomationApiClientOptionalParams)
       parameters:
         - id: callConnectionId
@@ -33,6 +34,12 @@ constructors:
             <xref uid="@azure/core-auth.TokenCredential" /> | <xref
             uid="@azure/core-auth.KeyCredential" />
           description: ''
+        - id: eventProcessor
+          type: >-
+            <xref
+            uid="@azure/communication-call-automation.CallAutomationEventProcessor"
+            />
+          description: ''
         - id: options
           type: CallAutomationApiClientOptionalParams
           description: ''
@@ -44,10 +51,13 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function cancelAllOperations(): Promise<void>'
+      content: 'function cancelAllOperations(): Promise<CancelAllMediaOperationsResult>'
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/communication-call-automation.CancelAllMediaOperationsResult"
+          />&gt;
   - name: hold(CommunicationIdentifier, HoldOptions)
     uid: '@azure/communication-call-automation.CallMedia.hold'
     package: '@azure/communication-call-automation'
@@ -79,7 +89,8 @@ methods:
     syntax:
       content: >-
         function play(playSources: (FileSource | TextSource | SsmlSource)[],
-        playTo: CommunicationIdentifier[], options?: PlayOptions): Promise<void>
+        playTo: CommunicationIdentifier[], options?: PlayOptions):
+        Promise<PlayResult>
       parameters:
         - id: playSources
           type: >-
@@ -97,8 +108,10 @@ methods:
           description: Additional attributes for play.
       return:
         description: ''
-        type: Promise&lt;void&gt;
-  - name: playToAll((FileSource | TextSource | SsmlSource)[], PlayToAllOptions)
+        type: >-
+          Promise&lt;<xref uid="@azure/communication-call-automation.PlayResult"
+          />&gt;
+  - name: playToAll((FileSource | TextSource | SsmlSource)[], PlayOptions)
     uid: '@azure/communication-call-automation.CallMedia.playToAll'
     package: '@azure/communication-call-automation'
     summary: Play to all participants.
@@ -107,7 +120,7 @@ methods:
     syntax:
       content: >-
         function playToAll(playSources: (FileSource | TextSource |
-        SsmlSource)[], options?: PlayToAllOptions): Promise<void>
+        SsmlSource)[], options?: PlayOptions): Promise<PlayResult>
       parameters:
         - id: playSources
           type: >-
@@ -118,11 +131,13 @@ methods:
             A PlaySource representing the sources to play. Currently only single
             play source per request is supported.
         - id: options
-          type: <xref uid="@azure/communication-call-automation.PlayToAllOptions" />
+          type: <xref uid="@azure/communication-call-automation.PlayOptions" />
           description: Additional attributes for play.
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/communication-call-automation.PlayResult"
+          />&gt;
   - name: >-
       sendDtmfTones(string[] | DtmfTone[], CommunicationIdentifier,
       SendDtmfTonesOptions)
@@ -182,23 +197,41 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: startMediaStreaming(StartMediaStreamingOptions)
-    uid: '@azure/communication-call-automation.CallMedia.startMediaStreaming'
+  - name: >-
+      startHoldMusic(CommunicationIdentifier, FileSource | TextSource |
+      SsmlSource, boolean, string, string)
+    uid: '@azure/communication-call-automation.CallMedia.startHoldMusic'
     package: '@azure/communication-call-automation'
-    summary: Starts media streaming in the call.
+    summary: Put participant on hold while playing audio.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: '- This operations is deprecated, please use hold instead.'
     syntax:
       content: >-
-        function startMediaStreaming(options?: StartMediaStreamingOptions):
-        Promise<void>
+        function startHoldMusic(targetParticipant: CommunicationIdentifier,
+        playSource?: FileSource | TextSource | SsmlSource, loop?: boolean,
+        operationContext?: string, operationCallbackUri?: string): Promise<void>
       parameters:
-        - id: options
+        - id: targetParticipant
+          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
+          description: The targets to play to.
+        - id: playSource
           type: >-
-            <xref
-            uid="@azure/communication-call-automation.StartMediaStreamingOptions"
-            />
-          description: Additional attributes for start media streaming.
+            <xref uid="@azure/communication-call-automation.FileSource" /> |
+            <xref uid="@azure/communication-call-automation.TextSource" /> |
+            <xref uid="@azure/communication-call-automation.SsmlSource" />
+          description: A PlaySource representing the source to play.
+        - id: loop
+          type: boolean
+          description: ''
+        - id: operationContext
+          type: string
+          description: Operation Context.
+        - id: operationCallbackUri
+          type: string
+          description: >-
+            Set a callback URI that overrides the default callback URI set by
+            CreateCall/AnswerCall for this operation.
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -216,7 +249,7 @@ methods:
         function startRecognizing(targetParticipant: CommunicationIdentifier,
         options: CallMediaRecognizeDtmfOptions | CallMediaRecognizeChoiceOptions
         | CallMediaRecognizeSpeechOptions |
-        CallMediaRecognizeSpeechOrDtmfOptions): Promise<void>
+        CallMediaRecognizeSpeechOrDtmfOptions): Promise<StartRecognizingResult>
       parameters:
         - id: targetParticipant
           type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
@@ -235,7 +268,10 @@ methods:
           description: Different attributes for recognize.
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/communication-call-automation.StartRecognizingResult"
+          />&gt;
   - name: >-
       startRecognizing(CommunicationIdentifier, number,
       CallMediaRecognizeDtmfOptions)
@@ -252,7 +288,7 @@ methods:
       content: >-
         function startRecognizing(targetParticipant: CommunicationIdentifier,
         maxTonesToCollect: number, options: CallMediaRecognizeDtmfOptions):
-        Promise<void>
+        Promise<StartRecognizingResult>
       parameters:
         - id: targetParticipant
           type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
@@ -268,7 +304,10 @@ methods:
           description: Different attributes for recognize.
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/communication-call-automation.StartRecognizingResult"
+          />&gt;
   - name: startTranscription(StartTranscriptionOptions)
     uid: '@azure/communication-call-automation.CallMedia.startTranscription'
     package: '@azure/communication-call-automation'
@@ -316,23 +355,24 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: stopMediaStreaming(StopMediaStreamingOptions)
-    uid: '@azure/communication-call-automation.CallMedia.stopMediaStreaming'
+  - name: stopHoldMusic(CommunicationIdentifier, string)
+    uid: '@azure/communication-call-automation.CallMedia.stopHoldMusic'
     package: '@azure/communication-call-automation'
-    summary: Stops media streaming in the call.
+    summary: Remove participant from hold.
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: '- This operations is deprecated, please use unhold instead.'
     syntax:
       content: >-
-        function stopMediaStreaming(options?: StopMediaStreamingOptions):
-        Promise<void>
+        function stopHoldMusic(targetParticipant: CommunicationIdentifier,
+        operationContext?: string): Promise<void>
       parameters:
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/communication-call-automation.StopMediaStreamingOptions"
-            />
-          description: Additional attributes for stop media streaming.
+        - id: targetParticipant
+          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
+          description: The targets to play to.
+        - id: operationContext
+          type: string
+          description: Operation Context.
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -376,26 +416,18 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: updateTranscription(string, UpdateTranscriptionOptions)
+  - name: updateTranscription(string)
     uid: '@azure/communication-call-automation.CallMedia.updateTranscription'
     package: '@azure/communication-call-automation'
     summary: Update transcription language.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function updateTranscription(locale: string, options?:
-        UpdateTranscriptionOptions): Promise<void>
+      content: 'function updateTranscription(locale: string): Promise<void>'
       parameters:
         - id: locale
           type: string
           description: Defines new locale for transcription.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/communication-call-automation.UpdateTranscriptionOptions"
-            />
-          description: ''
       return:
         description: ''
         type: Promise&lt;void&gt;

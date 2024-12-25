@@ -69,6 +69,83 @@ properties:
         description: ''
         type: string
 methods:
+  - name: beginBackup(string, KeyVaultBeginBackupOptions)
+    uid: '@azure/keyvault-admin.KeyVaultBackupClient.beginBackup_1'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Starts generating a backup of an Azure Key Vault on the specified Storage
+      Blob account, using a user-assigned Managed Identity
+
+      to access the Storage account.
+
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the Key Vault backup is generated.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultBackupClient(url, credentials);
+
+
+      const blobStorageUri = "<blob-storage-uri>"; // <Blob storage URL>/<folder
+      name>
+
+      const sasToken = "<sas-token>";
+
+      const poller = await client.beginBackup(blobStorageUri);
+
+
+      // Serializing the poller
+
+      //
+
+      //   const serialized = poller.toString();
+
+      //
+
+      // A new poller can be created with:
+
+      //
+
+      //   await client.beginBackup(blobStorageUri, { resumeFrom: serialized });
+
+      //
+
+
+      // Waiting until it's done
+
+      const backupUri = await poller.pollUntilDone();
+
+      console.log(backupUri);
+
+      ```
+
+      Starts a full backup operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginBackup(blobStorageUri: string, options?:
+        KeyVaultBeginBackupOptions):
+        Promise<PollerLike<KeyVaultBackupOperationState, KeyVaultBackupResult>>
+      parameters:
+        - id: blobStorageUri
+          type: string
+          description: >-
+            The URL of the blob storage resource, including the path to the
+            container where the backup will end up being stored.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.KeyVaultBeginBackupOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
+          uid="@azure/keyvault-admin.KeyVaultBackupOperationState" />, <xref
+          uid="@azure/keyvault-admin.KeyVaultBackupResult" />&gt;&gt;
   - name: beginBackup(string, string, KeyVaultBeginBackupOptions)
     uid: '@azure/keyvault-admin.KeyVaultBackupClient.beginBackup'
     package: '@azure/keyvault-admin'
@@ -127,8 +204,8 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginBackup(blobStorageUri: string, sasToken?: string,
-        options?: KeyVaultBeginBackupOptions):
+        function beginBackup(blobStorageUri: string, sasToken: string, options?:
+        KeyVaultBeginBackupOptions):
         Promise<PollerLike<KeyVaultBackupOperationState, KeyVaultBackupResult>>
       parameters:
         - id: blobStorageUri
@@ -138,9 +215,7 @@ methods:
             container where the backup will end up being stored.
         - id: sasToken
           type: string
-          description: >-
-            The SAS token. If no SAS token is provided, user-assigned Managed
-            Identity will be used to access the blob storage resource.
+          description: The SAS token used to access the blob storage resource.
         - id: options
           type: <xref uid="@azure/keyvault-admin.KeyVaultBeginBackupOptions" />
           description: The optional parameters.
@@ -150,6 +225,86 @@ methods:
           Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
           uid="@azure/keyvault-admin.KeyVaultBackupOperationState" />, <xref
           uid="@azure/keyvault-admin.KeyVaultBackupResult" />&gt;&gt;
+  - name: beginRestore(string, KeyVaultBeginRestoreOptions)
+    uid: '@azure/keyvault-admin.KeyVaultBackupClient.beginRestore_1'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Starts restoring all key materials using the SAS token pointing to a
+      previously stored Azure Blob storage
+
+      backup folder, using a user-assigned Managed Identity to access the
+      storage account.
+
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the Key Vault restore operation is complete.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultBackupClient(url, credentials);
+
+
+      const blobStorageUri = "<blob-storage-uri>"; // <Blob storage URL>/<folder
+      name>
+
+      const sasToken = "<sas-token>";
+
+      const poller = await client.beginRestore(blobStorageUri);
+
+
+      // The poller can be serialized with:
+
+      //
+
+      //   const serialized = poller.toString();
+
+      //
+
+      // A new poller can be created with:
+
+      //
+
+      //   await client.beginRestore(blobStorageUri, { resumeFrom: serialized
+      });
+
+      //
+
+
+      // Waiting until it's done
+
+      const backupUri = await poller.pollUntilDone();
+
+      console.log(backupUri);
+
+      ```
+
+      Starts a full restore operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRestore(folderUri: string, options?:
+        KeyVaultBeginRestoreOptions):
+        Promise<PollerLike<KeyVaultRestoreOperationState,
+        KeyVaultRestoreResult>>
+      parameters:
+        - id: folderUri
+          type: string
+          description: >-
+            The URL of the blob storage resource where the previous successful
+            full backup was stored.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.KeyVaultBeginRestoreOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
+          uid="@azure/keyvault-admin.KeyVaultRestoreOperationState" />, <xref
+          uid="@azure/keyvault-admin.KeyVaultRestoreResult" />&gt;&gt;
   - name: beginRestore(string, string, KeyVaultBeginRestoreOptions)
     uid: '@azure/keyvault-admin.KeyVaultBackupClient.beginRestore'
     package: '@azure/keyvault-admin'
@@ -210,7 +365,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginRestore(folderUri: string, sasToken?: string, options?:
+        function beginRestore(folderUri: string, sasToken: string, options?:
         KeyVaultBeginRestoreOptions):
         Promise<PollerLike<KeyVaultRestoreOperationState,
         KeyVaultRestoreResult>>
@@ -234,6 +389,95 @@ methods:
           Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
           uid="@azure/keyvault-admin.KeyVaultRestoreOperationState" />, <xref
           uid="@azure/keyvault-admin.KeyVaultRestoreResult" />&gt;&gt;
+  - name: >-
+      beginSelectiveKeyRestore(string, string,
+      KeyVaultBeginSelectiveKeyRestoreOptions)
+    uid: '@azure/keyvault-admin.KeyVaultBackupClient.beginSelectiveKeyRestore_1'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Starts restoring all key versions of a given key using to a previously
+
+      stored Azure Blob storage backup folder. The Blob storage backup folder
+      will be accessed using user-assigned Managed Identity.
+
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the Key Vault selective restore is complete.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultBackupClient(url, credentials);
+
+
+      const blobStorageUri = "<blob-storage-uri>";
+
+      const sasToken = "<sas-token>";
+
+      const keyName = "<key-name>";
+
+      const poller = await client.beginSelectiveKeyRestore(keyName,
+      blobStorageUri, sasToken);
+
+
+      // Serializing the poller
+
+      //
+
+      //   const serialized = poller.toString();
+
+      //
+
+      // A new poller can be created with:
+
+      //
+
+      //   await client.beginSelectiveKeyRestore(keyName, blobStorageUri,
+      sasToken, { resumeFrom: serialized });
+
+      //
+
+
+      // Waiting until it's done
+
+      await poller.pollUntilDone();
+
+      ```
+
+      Creates a new role assignment.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginSelectiveKeyRestore(keyName: string, folderUri: string,
+        options?: KeyVaultBeginSelectiveKeyRestoreOptions):
+        Promise<PollerLike<KeyVaultSelectiveKeyRestoreOperationState,
+        KeyVaultSelectiveKeyRestoreResult>>
+      parameters:
+        - id: keyName
+          type: string
+          description: The name of the key that wants to be restored.
+        - id: folderUri
+          type: string
+          description: >-
+            The URL of the blob storage resource, with the folder name of the
+            blob where the previous successful full backup was stored.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/keyvault-admin.KeyVaultBeginSelectiveKeyRestoreOptions"
+            />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
+          uid="@azure/keyvault-admin.KeyVaultSelectiveKeyRestoreOperationState"
+          />, <xref
+          uid="@azure/keyvault-admin.KeyVaultSelectiveKeyRestoreResult"
+          />&gt;&gt;
   - name: >-
       beginSelectiveKeyRestore(string, string, string,
       KeyVaultBeginSelectiveKeyRestoreOptions)
@@ -297,7 +541,7 @@ methods:
     syntax:
       content: >-
         function beginSelectiveKeyRestore(keyName: string, folderUri: string,
-        sasToken?: string, options?: KeyVaultBeginSelectiveKeyRestoreOptions):
+        sasToken: string, options?: KeyVaultBeginSelectiveKeyRestoreOptions):
         Promise<PollerLike<KeyVaultSelectiveKeyRestoreOperationState,
         KeyVaultSelectiveKeyRestoreResult>>
       parameters:

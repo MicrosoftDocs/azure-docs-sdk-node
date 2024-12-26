@@ -8,18 +8,6 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: assetType
-    uid: '@azure/arm-deviceregistry.AssetUpdateProperties.assetType'
-    package: '@azure/arm-deviceregistry'
-    summary: Resource path to asset type (model) definition.
-    fullName: assetType
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'assetType?: string'
-      return:
-        description: ''
-        type: string
   - name: attributes
     uid: '@azure/arm-deviceregistry.AssetUpdateProperties.attributes'
     package: '@azure/arm-deviceregistry'
@@ -30,38 +18,37 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'attributes?: {[propertyName: string]: any}'
+      content: 'attributes?: Record<string, any>'
       return:
         description: ''
-        type: '{[propertyName: string]: any}'
-  - name: dataPoints
-    uid: '@azure/arm-deviceregistry.AssetUpdateProperties.dataPoints'
+        type: Record&lt;string, any&gt;
+  - name: datasets
+    uid: '@azure/arm-deviceregistry.AssetUpdateProperties.datasets'
     package: '@azure/arm-deviceregistry'
     summary: >-
-      Array of data points that are part of the asset. Each data point can
-      reference an asset type capability and have per-data point configuration.
-      See below for more details for the definition of the dataPoints element.
-    fullName: dataPoints
+      Array of datasets that are part of the asset. Each dataset describes the
+      data points that make up the set.
+    fullName: datasets
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'dataPoints?: DataPoint[]'
+      content: 'datasets?: Dataset[]'
       return:
         description: ''
-        type: <xref uid="@azure/arm-deviceregistry.DataPoint" />[]
-  - name: defaultDataPointsConfiguration
+        type: <xref uid="@azure/arm-deviceregistry.Dataset" />[]
+  - name: defaultDatasetsConfiguration
     uid: >-
-      @azure/arm-deviceregistry.AssetUpdateProperties.defaultDataPointsConfiguration
+      @azure/arm-deviceregistry.AssetUpdateProperties.defaultDatasetsConfiguration
     package: '@azure/arm-deviceregistry'
     summary: >-
-      Protocol-specific default configuration for all data points. Each data
-      point can have its own configuration that overrides the default settings
-      here. This assumes that each asset instance has one protocol.
-    fullName: defaultDataPointsConfiguration
+      Stringified JSON that contains connector-specific default configuration
+      for all datasets. Each dataset can have its own configuration that
+      overrides the default settings here.
+    fullName: defaultDatasetsConfiguration
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'defaultDataPointsConfiguration?: string'
+      content: 'defaultDatasetsConfiguration?: string'
       return:
         description: ''
         type: string
@@ -69,9 +56,9 @@ properties:
     uid: '@azure/arm-deviceregistry.AssetUpdateProperties.defaultEventsConfiguration'
     package: '@azure/arm-deviceregistry'
     summary: >-
-      Protocol-specific default configuration for all events. Each event can
-      have its own configuration that overrides the default settings here. This
-      assumes that each asset instance has one protocol.
+      Stringified JSON that contains connector-specific default configuration
+      for all events. Each event can have its own configuration that overrides
+      the default settings here.
     fullName: defaultEventsConfiguration
     remarks: ''
     isDeprecated: false
@@ -80,6 +67,18 @@ properties:
       return:
         description: ''
         type: string
+  - name: defaultTopic
+    uid: '@azure/arm-deviceregistry.AssetUpdateProperties.defaultTopic'
+    package: '@azure/arm-deviceregistry'
+    summary: Object that describes the default topic information for the asset.
+    fullName: defaultTopic
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'defaultTopic?: Topic'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-deviceregistry.Topic" />
   - name: description
     uid: '@azure/arm-deviceregistry.AssetUpdateProperties.description'
     package: '@azure/arm-deviceregistry'
@@ -132,14 +131,13 @@ properties:
     uid: '@azure/arm-deviceregistry.AssetUpdateProperties.events'
     package: '@azure/arm-deviceregistry'
     summary: >-
-      Array of events that are part of the asset. Each event can reference an
-      asset type capability and have per-event configuration. See below for more
-      details about the definition of the events element.
+      Array of events that are part of the asset. Each event can have per-event
+      configuration.
     fullName: events
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'events?: Event_2[]'
+      content: 'events?: Event[]'
       return:
         description: ''
         type: <xref uid="@azure/arm-deviceregistry.Event" />[]

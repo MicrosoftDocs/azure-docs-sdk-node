@@ -1,0 +1,110 @@
+### YamlMime:TSType
+name: Instrumenter
+uid: '@azure/core-tracing.Instrumenter'
+package: '@azure/core-tracing'
+summary: Represents an implementation agnostic instrumenter.
+fullName: Instrumenter
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: createRequestHeaders(TracingContext)
+    uid: '@azure/core-tracing.Instrumenter.createRequestHeaders'
+    package: '@azure/core-tracing'
+    summary: >-
+      Provides an implementation-specific method to serialize a
+      [TracingSpan](xref:@azure/core-tracing.TracingSpan) to a set of headers.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createRequestHeaders(tracingContext?: TracingContext):
+        Record<string, string>
+      parameters:
+        - id: tracingContext
+          type: <xref uid="@azure/core-tracing.TracingContext" />
+          description: The context containing the span to serialize.
+      return:
+        description: ''
+        type: Record&lt;string, string&gt;
+  - name: parseTraceparentHeader(string)
+    uid: '@azure/core-tracing.Instrumenter.parseTraceparentHeader'
+    package: '@azure/core-tracing'
+    summary: >-
+      Provides an implementation-specific method to parse a
+      https://www.w3.org/TR/trace-context/#traceparent-header
+
+      into a <xref:TracingSpanContext> which can be used to link non-parented
+      spans together.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function parseTraceparentHeader(traceparentHeader: string): undefined |
+        TracingContext
+      parameters:
+        - id: traceparentHeader
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: undefined | <xref uid="@azure/core-tracing.TracingContext" />
+  - name: startSpan(string, InstrumenterSpanOptions)
+    uid: '@azure/core-tracing.Instrumenter.startSpan'
+    package: '@azure/core-tracing'
+    summary: >-
+      Creates a new [TracingSpan](xref:@azure/core-tracing.TracingSpan) with the
+      given name and options and sets it on a new context.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startSpan(name: string, spanOptions: InstrumenterSpanOptions):
+        { span: TracingSpan, tracingContext: TracingContext }
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the span. By convention this should be
+            `${className}.${methodName}`.
+        - id: spanOptions
+          type: <xref uid="@azure/core-tracing.InstrumenterSpanOptions" />
+          description: The options to use when creating the span.
+      return:
+        description: >-
+          A [TracingSpan](xref:@azure/core-tracing.TracingSpan) that can be used
+          to end the span, and the context this span has been set on.
+        type: '{ span: TracingSpan, tracingContext: TracingContext }'
+  - name: >-
+      withContext<CallbackArgs, Callback>(TracingContext, Callback,
+      CallbackArgs)
+    uid: '@azure/core-tracing.Instrumenter.withContext'
+    package: '@azure/core-tracing'
+    summary: >-
+      Wraps a callback with an active context and calls the callback.
+
+      Depending on the implementation, this may set the globally available
+      active context.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withContext<CallbackArgs, Callback>(context: TracingContext,
+        callback: Callback, callbackArgs: CallbackArgs): ReturnType<Callback>
+      parameters:
+        - id: context
+          type: <xref uid="@azure/core-tracing.TracingContext" />
+          description: >-
+            The [TracingContext](xref:@azure/core-tracing.TracingContext) to use
+            as the active context in the scope of the callback.
+        - id: callback
+          type: Callback
+          description: >-
+            The callback to be invoked with the given context set as the
+            globally active context.
+        - id: callbackArgs
+          type: CallbackArgs
+          description: The callback arguments.
+      return:
+        description: ''
+        type: ReturnType&lt;Callback&gt;

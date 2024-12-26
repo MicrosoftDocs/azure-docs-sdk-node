@@ -1,21 +1,21 @@
 ---
 title: Azure RoomsApi client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-rooms, communication
-ms.date: 04/18/2024
+ms.date: 12/05/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure RoomsApi client library for JavaScript - version 1.1.0 
+# Azure RoomsApi client library for JavaScript - version 1.1.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure RoomsApi client.
 
 Communication Rooms Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.0/sdk/communication/communication-rooms) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/communication/communication-rooms) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/communication-rooms) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.0/sdk/communication/communication-rooms/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/communication/communication-rooms/samples)
 
 ## Getting started
 
@@ -94,7 +94,7 @@ When defining `participants`, if `role` is not specified, then it will be `atten
 
 Starting in 1.1.0 release, `PstnDialOutEnabled` property is added to enable or disable PSTN Dial-Out feature in a room. The `PstnDialOutEnabled` is an optional property. If `PstnDialOutEnabled` is not provided, then the default for `PstnDialOutEnabled` is false.
 
-```js
+```typescript
 // create users with CommunicationIdentityClient
 const identityClient = new CommunicationIdentityClient(connectionString);
 const user1 = await identityClient.createUserAndToken(["voip"]);
@@ -103,10 +103,10 @@ const user1 = await identityClient.createUserAndToken(["voip"]);
 const roomsClient: RoomsClient = new RoomsClient(CONNECTION_STRING);
 
 const validFrom = new Date(Date.now());
-let validForDays = 10;
-let validUntil = new Date(validFrom.getTime());
+const validForDays = 10;
+const validUntil = new Date(validFrom.getTime());
 validUntil.setDate(validFrom.getDate() + validForDays);
-let pstnDialOutEnabled = true;
+const pstnDialOutEnabled = true;
 
 // options payload to create a room
 const createRoomOptions: CreateRoomOptions = {
@@ -133,7 +133,7 @@ To update the `validFrom` and `validUntil` settings of a room use the `updateRoo
 
 Starting in 1.1.0 release, `PstnDialOutEnabled` property is added to enable or disable PSTN Dial-Out feature in a room.
 
-```js
+```typescript
 validForDays = 60;
 validUntil.setDate(validFrom.getDate() + validForDays);
 pstnDialOutEnabled = false;
@@ -152,7 +152,7 @@ const updatedRoom = await roomsClient.updateRoom(room.id, updateRoomOptions);
 
 To get a room use the `getRoom` method.
 
-```js
+```typescript
 const roomId = "ROOM_ID";
 room = await roomsClient.getRoom(roomId);
 ```
@@ -161,7 +161,7 @@ room = await roomsClient.getRoom(roomId);
 
 List all rooms using the `listRooms` method.
 
-```js
+```typescript
 const roomsList = await roomsClient.listRooms();
 for await (const currentRoom of roomsList) {
   // access room data
@@ -173,9 +173,9 @@ for await (const currentRoom of roomsList) {
 
 To add new participants, or update existing participants, use the `addOrUpdateParticipants` method.
 
-```js
+```typescript
 const user2 = await identityClient.createUserAndToken(["voip"]);
-const updateParticipantsList = [
+const updateParticipantsList: RoomParticipantPatch[] = [
   {
     id: user1.user,
     role: "Presenter",
@@ -193,7 +193,7 @@ await roomsClient.addOrUpdateParticipants(room.id, updateParticipantsList);
 
 To remove participants call the `removeParticipants` method.
 
-```js
+```typescript
 const participantsToRemove = [user1.user, user2.user];
 await roomsClient.removeParticipants(room.id, participantsToRemove);
 ```
@@ -202,7 +202,7 @@ await roomsClient.removeParticipants(room.id, participantsToRemove);
 
 To list all the participants in a room call the `listParticipants` method.
 
-```js
+```typescript
 const participantsList = await roomsClient.listParticipants(room.id);
 for await (const participant of participantsList) {
   // access participant data
@@ -214,7 +214,7 @@ for await (const participant of participantsList) {
 
 Use the `deleteRoom` method to delete a room.
 
-```js
+```typescript
 await roomsClient.deleteRoom(room.id);
 ```
 
@@ -229,15 +229,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.0/sdk/communication/communication-rooms/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/communication/communication-rooms/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-rooms_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-rooms_1.1.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -249,7 +249,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/identity/identity#defaultazurecredential
 [communication_identity]: https://github.com/Azure/azure-sdk-for-js/edit/main/sdk/communication/communication-identity
 

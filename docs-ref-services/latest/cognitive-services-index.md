@@ -1,6 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
 |[Content Safety](ai-content-safety-rest-readme.md)|[@azure-rest/ai-content-safety](https://www.npmjs.com/package/@azure-rest/ai-content-safety)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/contentsafety/ai-content-safety-rest)|
+|[Document Intelligence](ai-document-intelligence-rest-readme.md)|[@azure-rest/ai-document-intelligence](https://www.npmjs.com/package/@azure-rest/ai-document-intelligence)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/documentintelligence/ai-document-intelligence-rest)|
 |[Document Translation](ai-translation-document-rest-readme.md)|[@azure-rest/ai-translation-document](https://www.npmjs.com/package/@azure-rest/ai-translation-document)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/translation/ai-translation-document-rest)|
 |[Text Translation](ai-translation-text-rest-readme.md)|[@azure-rest/ai-translation-text](https://www.npmjs.com/package/@azure-rest/ai-translation-text)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/translation/ai-translation-text-rest)|
 |[Form Recognizer](ai-form-recognizer-readme.md)|[@azure/ai-form-recognizer](https://www.npmjs.com/package/@azure/ai-form-recognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer)|

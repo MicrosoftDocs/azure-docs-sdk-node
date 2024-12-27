@@ -1,25 +1,24 @@
 ---
 title: Azure Communication Services Job Router REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/communication-job-router, communication
-ms.date: 04/12/2024
+ms.date: 12/27/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Services Job Router REST client library for JavaScript - version 1.1.0-beta.1 
+# Azure Communication Services Job Router REST client library for JavaScript - version 1.1.0-alpha.20241227.1 
 
 
 This package contains a JavaScript SDK for Azure Communication Services Job Router.
 Read more about Azure Communication Services [here](https://learn.microsoft.com/azure/communication-services/overview)
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-beta.1/sdk/communication/communication-job-router-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/sdk/communication/communication-job-router-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/communication-job-router)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-beta.1/sdk/communication/communication-job-router-rest/samples)
-
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/sdk/communication/communication-job-router-rest/samples)
 
 ## Getting started
 
@@ -45,14 +44,14 @@ npm install @azure-rest/communication-job-router
 
 ### Create and authenticate an `AzureCommunicationRoutingServiceClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -95,7 +94,8 @@ First we need to construct an `AzureCommunicationRoutingServiceClient`.
 ```js
 const JobRouterClient = require("@azure-rest/communication-job-router").default;
 
-const connectionString = "endpoint=https://<YOUR_ACS>.communication.azure.com/;accesskey=<YOUR_ACCESS_KEY>";
+const connectionString =
+  "endpoint=https://<YOUR_ACS>.communication.azure.com/;accesskey=<YOUR_ACCESS_KEY>";
 const routerClient = JobRouterClient(connectionString);
 ```
 
@@ -105,18 +105,20 @@ This policy determines which workers will receive job offers as jobs are distrib
 
 ```js
 const distributionPolicyId = "distribution-policy-id-1";
-const distributionPolicy = await routerClient.path("/routing/distributionPolicies/{id}", distributionPolicyId).patch({
-  contentType: "application/merge-patch+json",
-  body: {
-    name: "Default Distribution Policy",
-    offerExpiresAfterSeconds: 30,
-    mode: {
-      kind: "longestIdle",
-      minConcurrentOffers: 1,
-      maxConcurrentOffers: 3,
+const distributionPolicy = await routerClient
+  .path("/routing/distributionPolicies/{id}", distributionPolicyId)
+  .patch({
+    contentType: "application/merge-patch+json",
+    body: {
+      name: "Default Distribution Policy",
+      offerExpiresAfterSeconds: 30,
+      mode: {
+        kind: "longestIdle",
+        minConcurrentOffers: 1,
+        maxConcurrentOffers: 3,
+      },
     },
-  }
-});
+  });
 ```
 
 ### Create a Queue
@@ -131,7 +133,7 @@ const salesQueue = await routerClient.path("/routing/queues/{id}", salesQueueId)
     distributionPolicyId: distributionPolicyId,
     name: "Main",
     labels: {},
-  }
+  },
 });
 ```
 
@@ -153,7 +155,7 @@ const workerAlice = await routerClient.path("/routing/workers/{id}", workerAlice
     labels: {
       Xbox: 5,
       german: 4,
-      name: "Alice"
+      name: "Alice",
     },
     channels: [
       {
@@ -165,7 +167,7 @@ const workerAlice = await routerClient.path("/routing/workers/{id}", workerAlice
         capacityCostPerJob: 100,
       },
     ],
-  }
+  },
 });
 
 // Create worker "Bob".
@@ -178,7 +180,7 @@ const workerBob = await routerClient.path("/routing/workers/{id}", workerBobId).
     labels: {
       Xbox: 5,
       english: 3,
-      name: "Alice"
+      name: "Alice",
     },
     channels: [
       {
@@ -190,7 +192,7 @@ const workerBob = await routerClient.path("/routing/workers/{id}", workerBobId).
         capacityCostPerJob: 100,
       },
     ],
-  }
+  },
 });
 ```
 
@@ -212,7 +214,7 @@ const result = await routerClient.path("/routing/jobs/{id}", jobId).patch({
     priority: 2,
     queueId: salesQueueId,
     labels: {},
-  }
+  },
 });
 ```
 
@@ -224,30 +226,32 @@ This policy classifies jobs upon creation.
 
 ```js
 const classificationPolicyId = "classification-policy-1";
-const classificationPolicy = await routerClient.path("/routing/classificationPolicies/{id}", classificationPolicyId).patch({
-  contentType: "application/merge-patch+json",
-  body: {
-    name: "Default Classification Policy",
-    fallbackQueueId: salesQueueId,
-    queueSelectorAttachments: [
-      {
-        kind: "static",
-        queueSelector: { key: "department", labelOperator: "equal", value: "xbox" }
+const classificationPolicy = await routerClient
+  .path("/routing/classificationPolicies/{id}", classificationPolicyId)
+  .patch({
+    contentType: "application/merge-patch+json",
+    body: {
+      name: "Default Classification Policy",
+      fallbackQueueId: salesQueueId,
+      queueSelectorAttachments: [
+        {
+          kind: "static",
+          queueSelector: { key: "department", labelOperator: "equal", value: "xbox" },
+        },
+      ],
+      workerSelectorAttachments: [
+        {
+          kind: "static",
+          workerSelector: { key: "english", labelOperator: "greaterThan", value: 5 },
+        },
+      ],
+      prioritizationRule: {
+        kind: "expression",
+        language: "powerFx",
+        expression: 'If(job.department = "xbox", 2, 1)',
       },
-    ],
-    workerSelectorAttachments: [
-      {
-        kind: "static",
-        workerSelector: { key: "english", labelOperator: "greaterThan", value: 5 }
-      }
-    ],
-    prioritizationRule: {
-      kind: "expression",
-      language: "powerFx",
-      expression: "If(job.department = \"xbox\", 2, 1)"
-    }
-  }
-});
+    },
+  });
 ```
 
 - Refer to our [classification concepts documentation](https://learn.microsoft.com/azure/communication-services/concepts/router/classification-concepts) to better understand queue selectors and worker selectors.
@@ -265,15 +269,15 @@ const job = await routerClient.path("/routing/jobs/{id}", jobId).patch({
     channelId: "voice",
     classificationPolicyId: classificationPolicy.body.id,
     labels: {
-      department: "xbox"
+      department: "xbox",
     },
-  }
+  },
 });
 ```
 
 ## Events
 
-Job Router events are delivered via Azure Event Grid. Refer to our [Azure Event Grid documentation](/azure/event-grid/overview) to better understand Azure Event Grid.
+Job Router events are delivered via Azure Event Grid. Refer to our [Azure Event Grid documentation](https://learn.microsoft.com/azure/event-grid/overview) to better understand Azure Event Grid.
 
 In the previous example:
 
@@ -349,9 +353,13 @@ Once you receive a `RouterWorkerOfferIssued` event you can accept or decline the
 - `offerId` - Id of the offer being accepted or declined.
 
 ```js
-const acceptResponse = await routerClient.path("/routing/workers/{workerId}/offers/{offerId}:accept", workerId, offerId).post();
+const acceptResponse = await routerClient
+  .path("/routing/workers/{workerId}/offers/{offerId}:accept", workerId, offerId)
+  .post();
 // or
-const declineResponse = await routerClient.path("/routing/workers/{workerId}/offers/{offerId}:decline", workerId, offerId).post();
+const declineResponse = await routerClient
+  .path("/routing/workers/{workerId}/offers/{offerId}:decline", workerId, offerId)
+  .post();
 ```
 
 ### Complete the Job
@@ -359,11 +367,17 @@ const declineResponse = await routerClient.path("/routing/workers/{workerId}/off
 The `assignmentId` received from the previous step's response is required to complete the job. Completing the job puts it in the wrap-up phase of its lifecycle.
 
 ```ts
-const completeJob = await routerClient.path("/routing/jobs/{jobId}/assignments/{assignmentId}:complete", jobId, acceptResponse.body.assignmentId).post({
-  body: {
-    note: `Job has been completed by ${workerId} at ${new Date()}`
-  }
-});
+const completeJob = await routerClient
+  .path(
+    "/routing/jobs/{jobId}/assignments/{assignmentId}:complete",
+    jobId,
+    acceptResponse.body.assignmentId,
+  )
+  .post({
+    body: {
+      note: `Job has been completed by ${workerId} at ${new Date()}`,
+    },
+  });
 ```
 
 ### Close the Job
@@ -371,11 +385,17 @@ const completeJob = await routerClient.path("/routing/jobs/{jobId}/assignments/{
 Once the worker has completed the wrap-up phase of the job we can close the job and attach a note to it for future reference.
 
 ```ts
-const closeJob = await routerClient.path("/routing/jobs/{jobId}/assignments/{assignmentId}:close", jobId, acceptResponse.body.assignmentId).post({
-  body: {
-    note: `Job has been closed by ${workerId} at ${new Date()}`
-  }
-});
+const closeJob = await routerClient
+  .path(
+    "/routing/jobs/{jobId}/assignments/{assignmentId}:close",
+    jobId,
+    acceptResponse.body.assignmentId,
+  )
+  .post({
+    body: {
+      note: `Job has been closed by ${workerId} at ${new Date()}`,
+    },
+  });
 ```
 
 ## Troubleshooting
@@ -390,5 +410,5 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20241227.1/sdk/core/logger).
 

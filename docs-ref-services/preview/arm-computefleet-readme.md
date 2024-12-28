@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-computefleet, computefleet
-ms.date: 08/01/2024
+ms.date: 12/28/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: computefleet
@@ -12,9 +12,9 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 
 Azure Fleet Service
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.0-beta.1/sdk/computefleet/arm-computefleet) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.1-alpha.20241227.1/sdk/computefleet/arm-computefleet) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-computefleet) |
-[API reference documentation](/javascript/api/@azure/arm-computefleet?view=azure-node-preview) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-computefleet?view=azure-node-preview) |
 
 ## Getting started
 
@@ -23,7 +23,7 @@ Azure Fleet Service
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-computefleet_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-computefleet_1.0.1-alpha.20241227.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -42,7 +42,7 @@ npm install @azure/arm-computefleet
 To create a client object to access the AzureFleet API, you will need the `endpoint` of your AzureFleet resource and a `credential`. The AzureFleet client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your AzureFleet resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-computefleet_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-computefleet_1.0.1-alpha.20241227.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -53,7 +53,7 @@ npm install @azure/identity
 You will also need to **register a new AAD application and grant access to AzureFleet** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
-For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
+For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
 const { AzureFleetClient } = require("@azure/arm-computefleet");
@@ -71,8 +71,8 @@ const client = new AzureFleetClient(new DefaultAzureCredential(), subscriptionId
 // const client = new AzureFleetClient(credential, subscriptionId);
 ```
 
-
 ### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
@@ -92,12 +92,11 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.0-beta.1/sdk/core/logger).
-
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.1-alpha.20241227.1/sdk/core/logger).
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-computefleet_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-computefleet_1.0.1-alpha.20241227.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -105,6 +104,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.1-alpha.20241227.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-computefleet_1.0.1-alpha.20241227.1/sdk/identity/identity#defaultazurecredential
 

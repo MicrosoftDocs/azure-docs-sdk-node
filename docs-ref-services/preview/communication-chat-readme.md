@@ -1,17 +1,17 @@
 ---
 title: Azure Communication Chat client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-chat, communication
-ms.date: 06/24/2024
+ms.date: 12/30/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Chat client library for JavaScript - version 1.6.0-beta.3 
+# Azure Communication Chat client library for JavaScript - version 1.5.5-alpha.20241230.1 
 
 
 Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.
 
-Read more about Azure Communication Services [here](/azure/communication-services/overview)
+Read more about Azure Communication Services [here](https://learn.microsoft.com/azure/communication-services/overview)
 
 ## Getting started
 
@@ -176,7 +176,7 @@ for await (const chatMessage of chatThreadClient.listMessages()) {
 
 Once a thread is created, you can then add and remove users from that thread. By adding users, you give them access to be able to send messages to the thread.
 You will need to start by getting a new access token and identity for that user. The user will need that access token in order to initialize their chat client.
-More information on tokens here: [Authenticate to Azure Communication Services](/azure/communication-services/concepts/authentication?tabs=javascript)
+More information on tokens here: [Authenticate to Azure Communication Services](https://learn.microsoft.com/azure/communication-services/concepts/authentication?tabs=javascript)
 
 ```JavaScript
 
@@ -205,6 +205,7 @@ await chatThreadClient.removeParticipant({ communicationUserId: '<MEMBER_ID>' })
 ```
 
 ### Subscribe to connection status of real time notifications
+
 Subscription to events `realTimeNotificationConnected` and `realTimeNotificationDisconnected` allows you to know when the connection to the call server is active.
 
 ```JavaScript
@@ -237,10 +238,10 @@ In this quickstart you learned how to:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.6.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.5.5-alpha.20241230.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
+[azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
 

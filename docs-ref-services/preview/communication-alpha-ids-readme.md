@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Alpha IDs client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-tools/communication-alpha-ids, communication
-ms.date: 09/22/2022
+ms.date: 12/31/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Alpha IDs client library for JavaScript - version 1.0.0-beta.1 
+# Azure Communication Alpha IDs client library for JavaScript - version 1.0.0-alpha.20241231.2 
 
 
 The Alpha IDs library provides capabilities for Alpha IDs administration.
@@ -74,10 +74,10 @@ npm install @azure/identity
 The [`@azure/identity`][azure_identity] package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`][azure_identity_readme] provides more details and samples to get you started.
 
 ```javascript
-const { DefaultAzureCredential } = require ("@azure/identity");
+const { DefaultAzureCredential } = require("@azure/identity");
 const { AlphaIdsClient } = require("@azure-tools/communication-alpha-ids");
 
-let credential = new DefaultAzureCredential();
+const credential = new DefaultAzureCredential();
 const client = new AlphaIdsClient("<endpoint-from-resource>", credential);
 ```
 
@@ -88,6 +88,7 @@ The following sections provide code snippets that cover some of the common tasks
 - [Get the current applied configuration](#get-the-current-applied-configuration)
 
 ### Get the current applied configuration
+
 Use the `getConfiguration` method to obtain the current applied configuration for your resource.
 
 ```javascript
@@ -97,9 +98,9 @@ const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new AlphaIdsClient(connectionString);
 
 // get the current configuration
-var configuration = await client.getConfiguration();
+const configuration = await client.getConfiguration();
 
-console.log(`Usage of Alpha IDs is currently ${(configuration.enabled ? "enabled" : "disabled")}`);
+console.log(`Usage of Alpha IDs is currently ${configuration.enabled ? "enabled" : "disabled"}`);
 ```
 
 ## Troubleshooting
@@ -110,18 +111,19 @@ Please take a look at the samples directory for detailed examples on how to use 
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-alpha.20241231.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-beta.1/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-beta.1/sdk/identity/identity/README.md
+[azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-alpha.20241231.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-alpha.20241231.2/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-alpha.20241231.2/sdk/identity/identity/README.md
+
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-alpha-ids%2FREADME.png)
 

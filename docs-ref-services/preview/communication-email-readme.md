@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Email client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-email, communication
-ms.date: 09/25/2024
+ms.date: 12/31/2024
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Email client library for JavaScript - version 1.0.1-beta.1 
+# Azure Communication Email client library for JavaScript - version 1.0.1-alpha.20241231.2 
 
 
 This package contains a JavaScript/TypeScript SDK for Azure Communication Services for Email.
@@ -166,6 +166,39 @@ const poller = await emailClient.beginSend(message);
 const response = await poller.pollUntilDone();
 ```
 
+### Send Email with Inline Attachments
+
+Azure Communication Services support sending email with inline attachments.
+Adding an optional `contentId` parameter to an `attachment` will make it an inline attachment.
+
+```javascript Snippet:Azure_Communication_Email_Send_With_Attachments
+const imageBuffer = await fs.readFile("C:/path/to/my_inline_image.jpg");
+const contentInBase64 = imageBuffer.toString("base64");
+
+const message = {
+  senderAddress: senderAddress,
+  content: {
+    subject: "This is the subject",
+    plainText: "This is the body",
+    html: '<html>This is the body<br /><img src="cid:inline_image" /></html>',
+  },
+  recipients: {
+    to: [{ address: recipientAddress, displayName: "Customer Name" }],
+  },
+  attachments: [
+    {
+      name: "myinlineimage.jpg",
+      contentType: "image/jpeg",
+      contentInBase64: contentInBase64,
+      contentId: "inline_image",
+    },
+  ],
+};
+
+const poller = await emailClient.beginSend(message);
+const response = await poller.pollUntilDone();
+```
+
 ## Next steps
 
 - [Read more about Email in Azure Communication Services][nextsteps]
@@ -184,13 +217,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-email_1.0.1-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-email_1.0.1-beta.1/sdk/identity/identity
-[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-email_1.0.1-alpha.20241231.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-email_1.0.1-alpha.20241231.2/sdk/identity/identity
+[communication_resource_docs]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
 [email_resource_docs]: https://aka.ms/acsemail/createemailresource
-[communication_resource_create_portal]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
-[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[communication_resource_create_portal]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
 [package]: https://www.nuget.org/packages/Azure.Communication.Common/
 [product_docs]: https://aka.ms/acsemail/overview
 [nextsteps]: https://aka.ms/acsemail/overview

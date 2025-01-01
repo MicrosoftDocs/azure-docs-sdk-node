@@ -1,25 +1,25 @@
 ---
 title: Azure Maps Search REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/maps-search, maps
-ms.date: 11/15/2024
+ms.date: 01/01/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: maps
 ---
-# Azure Maps Search REST client library for JavaScript - version 2.0.0-beta.2 
+# Azure Maps Search REST client library for JavaScript - version 2.0.0-alpha.20241231.1 
 
 
 Azure Maps Search Client
 
-\*\*If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-search_2.0.0-beta.2/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api
+\*\*If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-search_2.0.0-alpha.20241231.1/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-beta.2/sdk/maps/maps-search-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-alpha.20241231.1/sdk/maps/maps-search-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/maps-search)
-- [API reference documentation](/javascript/api/@azure-rest/maps-search?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-beta.2/sdk/maps/maps-search-rest/samples)
-- [Product Information](/rest/api/maps/search)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/maps-search?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-alpha.20241231.1/sdk/maps/maps-search-rest/samples)
+- [Product Information](https://learn.microsoft.com/rest/api/maps/search)
 
 | Package Version | Service Version |
 | --------------- | --------------- |
@@ -36,9 +36,9 @@ Key links:
 ### Prerequisites
 
 - You must have an [Azure subscription](https://azure.microsoft.com/free/) to use this package.
-- An [Azure Maps account](/azure/azure-maps/how-to-manage-account-keys). You can create the resource via the [Azure Portal](https://portal.azure.com), the [Azure PowerShell](/powershell/module/az.maps/new-azmapsaccount), or the [Azure CLI](/cli/azure).
+- An [Azure Maps account](https://learn.microsoft.com/azure/azure-maps/how-to-manage-account-keys). You can create the resource via the [Azure Portal](https://portal.azure.com), the [Azure PowerShell](https://learn.microsoft.com/powershell/module/az.maps/new-azmapsaccount), or the [Azure CLI](https://learn.microsoft.com/cli/azure).
 
-If you use Azure CLI, replace `<resource-group-name>` and `<map-account-name>` of your choice, and select a proper [pricing tier](/azure/azure-maps/choose-pricing-tier) based on your needs via the `<sku-name>` parameter. Please refer to [this page](/cli/azure/maps/account?view=azure-cli-latest#az_maps_account_create) for more details.
+If you use Azure CLI, replace `<resource-group-name>` and `<map-account-name>` of your choice, and select a proper [pricing tier](https://learn.microsoft.com/azure/azure-maps/choose-pricing-tier) based on your needs via the `<sku-name>` parameter. Please refer to [this page](https://learn.microsoft.com/cli/azure/maps/account?view=azure-cli-latest#az_maps_account_create) for more details.
 
 ```bash
 az maps account create --resource-group <resource-group-name> --name <map-account-name> --sku <sku-name>
@@ -58,18 +58,18 @@ To create a client object to access the Azure Maps Search APIs, you will need a 
 
 #### Using a Microsoft Entra ID Credential
 
-You can authenticate with Microsoft Entra ID using the [Azure Identity library](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-beta.2/sdk/identity/identity). To use the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-beta.2/sdk/identity/identity#defaultazurecredential) provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
+You can authenticate with Microsoft Entra ID using the [Azure Identity library](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-alpha.20241231.1/sdk/identity/identity). To use the [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-alpha.20241231.1/sdk/identity/identity#defaultazurecredential) provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
 ```bash
 npm install @azure/identity
 ```
 
-You will also need to register a new Microsoft Entra ID application and grant access to Azure Maps by assigning the suitable role to your service principal. Please refer to the [Manage authentication](/azure/azure-maps/how-to-manage-authentication) page.
+You will also need to register a new Microsoft Entra ID application and grant access to Azure Maps by assigning the suitable role to your service principal. Please refer to the [Manage authentication](https://learn.microsoft.com/azure/azure-maps/how-to-manage-authentication) page.
 
 Set the values of the client ID, tenant ID, and client secret of the Microsoft Entra ID application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 You will also need to specify the Azure Maps resource you intend to use by specifying the `clientId` in the client options.
-The Azure Maps resource client id can be found in the Authentication sections in the Azure Maps resource. Please refer to the [documentation](/azure/azure-maps/how-to-manage-authentication#view-authentication-details) on how to find it.
+The Azure Maps resource client id can be found in the Authentication sections in the Azure Maps resource. Please refer to the [documentation](https://learn.microsoft.com/azure/azure-maps/how-to-manage-authentication#view-authentication-details) on how to find it.
 
 ```javascript
 const MapsSearch = require("@azure-rest/maps-search").default;
@@ -95,7 +95,7 @@ const client = MapsSearch(credential);
 
 Shared access signature (SAS) tokens are authentication tokens created using the JSON Web token (JWT) format and are cryptographically signed to prove authentication for an application to the Azure Maps REST API.
 
-You can get the SAS token using [`AzureMapsManagementClient.accounts.listSas`](https://learn.microsoft.com/javascript/api/%40azure/arm-maps/accounts?view=azure-node-latest#@azure-arm-maps-accounts-listsas) from ["@azure/arm-maps"](https://www.npmjs.com/package/@azure/arm-maps) package. Please follow the section [Create and authenticate a `AzureMapsManagementClient`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-beta.2/sdk/maps/arm-maps#create-and-authenticate-a-azuremapsmanagementclient) to setup first.
+You can get the SAS token using [`AzureMapsManagementClient.accounts.listSas`](https://learn.microsoft.com/javascript/api/%40azure/arm-maps/accounts?view=azure-node-latest#@azure-arm-maps-accounts-listsas) from ["@azure/arm-maps"](https://www.npmjs.com/package/@azure/arm-maps) package. Please follow the section [Create and authenticate a `AzureMapsManagementClient`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-alpha.20241231.1/sdk/maps/arm-maps#create-and-authenticate-a-azuremapsmanagementclient) to setup first.
 
 Second, follow [Managed identities for Azure Maps](https://techcommunity.microsoft.com/t5/azure-maps-blog/managed-identities-for-azure-maps/ba-p/3666312) to create a managed identity for your Azure Maps account. Copy the principal ID (object ID) of the managed identity.
 
@@ -312,7 +312,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-search_2.0.0-alpha.20241231.1/sdk/core/logger).
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fmaps%2Fmap-search-rest%2FREADME.png)
 

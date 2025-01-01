@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure-rest/agrifood-farming, agrifood
-ms.date: 02/23/2023
+ms.date: 01/01/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: agrifood
@@ -29,7 +29,7 @@ Key links:
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -174,17 +174,17 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-alpha.20250101.1/sdk/core/logger).
 
 ## Next steps
 
 ### Additional documentation
 
-For more extensive documentation on the FarmBeats, see the [FarmBeats documentation][product_docs] on docs.microsoft.com.
+For more extensive documentation on the FarmBeats, see the [FarmBeats documentation][product_docs] on learn.microsoft.com.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-alpha.20250101.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -192,17 +192,17 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fagrifood%2Fagrifood-farming-rest%2FREADME.png)
 
-[product_documentation]: /azure/industry/agriculture/overview-azure-farmbeats
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-beta.2/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/agrifood/agrifood-farming-rest
+[product_documentation]: https://learn.microsoft.com/azure/industry/agriculture/overview-azure-farmbeats
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-alpha.20250101.1/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-alpha.20250101.1/sdk/agrifood/agrifood-farming-rest
 [npm]: https://www.npmjs.com/org/azure-rest
 [ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
-[farmbeats_resource]: /azure/industry/agriculture/install-azure-farmbeats
-[authenticate_with_token]: /azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/identity/identity#credentials
+[farmbeats_resource]: https://learn.microsoft.com/azure/industry/agriculture/install-azure-farmbeats
+[authenticate_with_token]: https://learn.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-alpha.20250101.1/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-alpha.20250101.1/sdk/identity/identity#defaultazurecredential
 [install_farmbeats]: https://aka.ms/FarmBeatsInstallDocumentationPaaS
 [farm_hierarchy]: https://aka.ms/FarmBeatsFarmHierarchyDocs
 [scenes]: https://aka.ms/FarmBeatsSatellitePaaSDocumentation

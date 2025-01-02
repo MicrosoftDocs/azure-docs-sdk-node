@@ -1,15 +1,12 @@
 ---
 title: Azure Automation Modules for JavaScript
 description: Reference for Azure Automation Modules for JavaScript
-author: eamonoreilly
-ms.author: eamono
-manager: nirb
 ms.date: 07/18/2017
-ms.topic: article
+ms.topic: reference
 ms.devlang: nodejs
 ms.service: Automation
+manager: nirb
 ---
-
 # Azure Automation Modules for JavaScript
 
 ## Overview
@@ -31,3 +28,4 @@ npm install @azure/arm-automation
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-automation)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

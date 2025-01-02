@@ -4,52 +4,74 @@ uid: '@azure/keyvault-keys.CreateKeyOptions'
 package: '@azure/keyvault-keys'
 summary: |-
   An interface representing the optional parameters that can be
-  passed to <xref:createKey>
+  passed to <xref:@azure/keyvault-keys.KeyClient.createKey>
 fullName: CreateKeyOptions
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
-  - name: abortSignal
-    uid: '@azure/keyvault-keys.CreateKeyOptions.abortSignal'
+  - name: curve
+    uid: '@azure/keyvault-keys.CreateKeyOptions.curve'
     package: '@azure/keyvault-keys'
-    summary: The signal which can be used to abort requests.
-    fullName: abortSignal
+    summary: |-
+      Elliptic curve name. For valid values, see KeyCurveName.
+      Possible values include: 'P-256', 'P-384', 'P-521', 'P-256K'
+    fullName: curve
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'abortSignal?: AbortSignalLike'
+      content: 'curve?: string'
       return:
-        type: AbortSignalLike
         description: ''
+        type: string
   - name: enabled
     uid: '@azure/keyvault-keys.CreateKeyOptions.enabled'
     package: '@azure/keyvault-keys'
     summary: Determines whether the object is enabled.
     fullName: enabled
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'enabled?: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: expiresOn
     uid: '@azure/keyvault-keys.CreateKeyOptions.expiresOn'
     package: '@azure/keyvault-keys'
     summary: Expiry date in UTC.
     fullName: expiresOn
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'expiresOn?: Date'
       return:
-        type: Date
         description: ''
+        type: Date
+  - name: exportable
+    uid: '@azure/keyvault-keys.CreateKeyOptions.exportable'
+    package: '@azure/keyvault-keys'
+    summary: Indicates whether the private key can be exported.
+    fullName: exportable
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'exportable?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: hsm
+    uid: '@azure/keyvault-keys.CreateKeyOptions.hsm'
+    package: '@azure/keyvault-keys'
+    summary: Whether to import as a hardware key (HSM) or software key.
+    fullName: hsm
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'hsm?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: keyOps
     uid: '@azure/keyvault-keys.CreateKeyOptions.keyOps'
     package: '@azure/keyvault-keys'
@@ -58,76 +80,129 @@ properties:
       information on possible key operations, see KeyOperation.
     fullName: keyOps
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'keyOps?: KeyOperation[]'
+      content: 'keyOps?: string[]'
       return:
-        type: '<xref uid="@azure/keyvault-keys.KeyOperation" />[]'
         description: ''
+        type: string[]
   - name: keySize
     uid: '@azure/keyvault-keys.CreateKeyOptions.keySize'
     package: '@azure/keyvault-keys'
-    summary: Size of the key
+    summary: 'The key size in bits. For example: 2048, 3072, or 4096 for RSA.'
     fullName: keySize
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'keySize?: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: notBefore
     uid: '@azure/keyvault-keys.CreateKeyOptions.notBefore'
     package: '@azure/keyvault-keys'
     summary: Not before date in UTC.
     fullName: notBefore
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'notBefore?: Date'
       return:
-        type: Date
         description: ''
-  - name: requestOptions
-    uid: '@azure/keyvault-keys.CreateKeyOptions.requestOptions'
+        type: Date
+  - name: releasePolicy
+    uid: '@azure/keyvault-keys.CreateKeyOptions.releasePolicy'
     package: '@azure/keyvault-keys'
-    summary: Options used when creating and sending HTTP requests for this operation.
-    fullName: requestOptions
+    summary: >-
+      A [KeyReleasePolicy](xref:@azure/keyvault-keys.KeyReleasePolicy) object
+      specifying the rules under which the key can be exported.
+    fullName: releasePolicy
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'requestOptions?: OperationRequestOptions'
+      content: 'releasePolicy?: KeyReleasePolicy'
       return:
-        type: OperationRequestOptions
         description: ''
+        type: <xref uid="@azure/keyvault-keys.KeyReleasePolicy" />
   - name: tags
     uid: '@azure/keyvault-keys.CreateKeyOptions.tags'
     package: '@azure/keyvault-keys'
     summary: Application specific metadata in the form of key-value pairs.
     fullName: tags
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'tags?: [key: string]: string'
+      content: 'tags?: {[propertyName: string]: string}'
       return:
-        type: '[key: string]\: string'
         description: ''
+        type: '{[propertyName: string]: string}'
+inheritedProperties:
+  - name: abortSignal
+    uid: '@azure/keyvault-keys.CreateKeyOptions.abortSignal'
+    package: '@azure/keyvault-keys'
+    summary: The signal which can be used to abort requests.
+    fullName: abortSignal
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'abortSignal?: AbortSignalLike'
+      return:
+        description: ''
+        type: <xref uid="@azure/abort-controller.AbortSignalLike" />
+    inheritanceDescription: <b>Inherited From</b> coreClient.OperationOptions.abortSignal
+  - name: onResponse
+    uid: '@azure/keyvault-keys.CreateKeyOptions.onResponse'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      A function to be called each time a response is received from the server
+      while performing the requested operation.
+      May be called multiple times.
+    fullName: onResponse
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'onResponse?: RawResponseCallback'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-client.RawResponseCallback" />
+    inheritanceDescription: <b>Inherited From</b> coreClient.OperationOptions.onResponse
+  - name: requestOptions
+    uid: '@azure/keyvault-keys.CreateKeyOptions.requestOptions'
+    package: '@azure/keyvault-keys'
+    summary: Options used when creating and sending HTTP requests for this operation.
+    fullName: requestOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'requestOptions?: OperationRequestOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-client.OperationRequestOptions" />
+    inheritanceDescription: <b>Inherited From</b> coreClient.OperationOptions.requestOptions
+  - name: serializerOptions
+    uid: '@azure/keyvault-keys.CreateKeyOptions.serializerOptions'
+    package: '@azure/keyvault-keys'
+    summary: Options to override serialization/de-serialization behavior.
+    fullName: serializerOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'serializerOptions?: SerializerOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-client.SerializerOptions" />
+    inheritanceDescription: <b>Inherited From</b> coreClient.OperationOptions.serializerOptions
   - name: tracingOptions
     uid: '@azure/keyvault-keys.CreateKeyOptions.tracingOptions'
     package: '@azure/keyvault-keys'
     summary: Options used when tracing is enabled.
     fullName: tracingOptions
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'tracingOptions?: OperationTracingOptions'
       return:
-        type: OperationTracingOptions
         description: ''
-extends: OperationOptions
+        type: <xref uid="@azure/core-tracing.OperationTracingOptions" />
+    inheritanceDescription: <b>Inherited From</b> coreClient.OperationOptions.tracingOptions
+extends: <xref uid="@azure/core-client.OperationOptions" />

@@ -9,7 +9,6 @@ summary: >-
   the accept date time header.
 fullName: ListSettingsOptions
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -21,35 +20,18 @@ properties:
       specified time.
     fullName: acceptDateTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'acceptDateTime?: Date'
       return:
+        description: ''
         type: Date
-        description: ''
-  - name: fields
-    uid: '@azure/app-configuration.ListSettingsOptions.fields'
-    package: '@azure/app-configuration'
-    summary: Which fields to return for each ConfigurationSetting
-    fullName: fields
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        fields?: "isReadOnly" | "lastModified" | "contentType" | "value" |
-        "tags" | "key" | "label" | "etag"[]
-      return:
-        type: >-
-          "isReadOnly" | "lastModified" | "contentType" | "value" | "tags" |
-          "key" | "label" | "etag"[]
-        description: ''
   - name: keyFilter
     uid: '@azure/app-configuration.ListSettingsOptions.keyFilter'
     package: '@azure/app-configuration'
-    summary: >
+    summary: >-
       Filters for keys. There are two types of matching:
+
 
       1. Exact matching. Up to 5 key names are allowed, separated by commas
       (',')
@@ -67,37 +49,76 @@ properties:
       to be specified: * or \\ or ,
     fullName: keyFilter
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'keyFilter?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: labelFilter
     uid: '@azure/app-configuration.ListSettingsOptions.labelFilter'
     package: '@azure/app-configuration'
-    summary: |
+    summary: >-
       Filters for labels. There are two types of matching:
+
+
       1. Exact matching. Up to 5 labels are allowed, separated by commas (',')
+
       2. Wildcard matching. A single wildcard expression can be specified.
 
-         | Value        | Matches                                           |
-         |--------------|---------------------------------------------------|
-         | omitted or * | Matches any key                                   |
-         | %00          | Matches any key without a label                   |
-         | prod         | Matches a key with label named prod               |
-         | prod*        | Matches key with label names that start with prod |
-
+         | Value        | Matches                                              |
+         |--------------|------------------------------------------------------|
+         | omitted or * | Matches any key                                      |
+         | \0           | Matches any key without a label (URL encoded as %00) |
+         | prod         | Matches a key with label named prod                  |
+         | prod*        | Matches key with label names that start with prod    |
       These characters are reserved and must be prefixed with backslash in order
+
       to be specified: * or \\ or ,
+
+
+      Reference:
+      https://learn.microsoft.com/azure/azure-app-configuration/rest-api-key-value
     fullName: labelFilter
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'labelFilter?: string'
       return:
-        type: string
         description: ''
+        type: string
+  - name: tagsFilter
+    uid: '@azure/app-configuration.ListSettingsOptions.tagsFilter'
+    package: '@azure/app-configuration'
+    summary: >-
+      A filter used to query by tags. Syntax reference:
+      https://aka.ms/azconfig/docs/keyvaluefiltering
+    fullName: tagsFilter
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'tagsFilter?: string[]'
+      return:
+        description: ''
+        type: string[]
+inheritedProperties:
+  - name: fields
+    uid: '@azure/app-configuration.ListSettingsOptions.fields'
+    package: '@azure/app-configuration'
+    summary: Which fields to return for each ConfigurationSetting
+    fullName: fields
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        fields?: ("value" | "contentType" | "tags" | "isReadOnly" |
+        "lastModified" | (keyof ConfigurationSettingId))[]
+      return:
+        description: ''
+        type: >-
+          ("value" | "contentType" | "tags" | "isReadOnly" | "lastModified" |
+          (keyof ConfigurationSettingId))[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [OptionalFields.fields](xref:@azure/app-configuration.OptionalFields.fields)
 extends: <xref uid="@azure/app-configuration.OptionalFields" />

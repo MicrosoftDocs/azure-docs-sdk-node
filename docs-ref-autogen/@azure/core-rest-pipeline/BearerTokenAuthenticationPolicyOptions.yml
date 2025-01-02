@@ -5,10 +5,32 @@ package: '@azure/core-rest-pipeline'
 summary: Options to configure the bearerTokenAuthenticationPolicy
 fullName: BearerTokenAuthenticationPolicyOptions
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
+  - name: challengeCallbacks
+    uid: >-
+      @azure/core-rest-pipeline.BearerTokenAuthenticationPolicyOptions.challengeCallbacks
+    package: '@azure/core-rest-pipeline'
+    summary: >-
+      Allows for the processing of [Continuous Access
+      Evaluation](https://docs.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation)
+      challenges.
+
+      If provided, it must contain at least the `authorizeRequestOnChallenge`
+      method.
+
+      If provided, after a request is sent, if it has a challenge, it can be
+      processed to re-send the original request with the relevant challenge
+      information.
+    fullName: challengeCallbacks
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'challengeCallbacks?: ChallengeCallbacks'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.ChallengeCallbacks" />
   - name: credential
     uid: >-
       @azure/core-rest-pipeline.BearerTokenAuthenticationPolicyOptions.credential
@@ -16,23 +38,33 @@ properties:
     summary: The TokenCredential implementation that can supply the bearer token.
     fullName: credential
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'credential: TokenCredential'
+      content: 'credential?: TokenCredential'
       return:
-        type: TokenCredential
         description: ''
+        type: <xref uid="@azure/core-auth.TokenCredential" />
+  - name: logger
+    uid: '@azure/core-rest-pipeline.BearerTokenAuthenticationPolicyOptions.logger'
+    package: '@azure/core-rest-pipeline'
+    summary: A logger can be sent for debugging purposes.
+    fullName: logger
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'logger?: AzureLogger'
+      return:
+        description: ''
+        type: <xref uid="@azure/logger.AzureLogger" />
   - name: scopes
     uid: '@azure/core-rest-pipeline.BearerTokenAuthenticationPolicyOptions.scopes'
     package: '@azure/core-rest-pipeline'
     summary: The scopes for which the bearer token applies.
     fullName: scopes
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'scopes: string | string[]'
       return:
-        type: 'string | string[]'
         description: ''
+        type: string | string[]

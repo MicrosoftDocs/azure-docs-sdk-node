@@ -5,33 +5,28 @@ package: '@azure/event-processor-host'
 summary: ''
 fullName: LeaseManager
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
   - name: leaseDuration
     uid: '@azure/event-processor-host.LeaseManager.leaseDuration'
     package: '@azure/event-processor-host'
-    summary: >-
-      {number} leaseDuration Duration of a lease **in seconds** before it
-      expires
-
+    summary: |-
+      Duration of a lease **in seconds** before it expires
       unless renewed.
     fullName: leaseDuration
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'leaseDuration: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: leaseRenewInterval
     uid: '@azure/event-processor-host.LeaseManager.leaseRenewInterval'
     package: '@azure/event-processor-host'
     summary: >-
-      {number} leaseRenewInterval The sleep interval **in seconds** between
-      scans.
+      The sleep interval **in seconds** between scans.
 
 
       Allows a lease manager implementation to specify to PartitionManager how
@@ -47,19 +42,19 @@ properties:
       expiration.
     fullName: leaseRenewInterval
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'leaseRenewInterval: number'
       return:
-        type: number
         description: ''
+        type: number
 methods:
   - name: acquireLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.acquireLease'
     package: '@azure/event-processor-host'
-    summary: >
+    summary: >-
       Acquire the lease on the desired partition for this EventProcessorHost.
+
 
       Note that it is legal to acquire a lease that is already owned by another
       host.
@@ -86,10 +81,9 @@ methods:
       for example, the underlying store throwing an access exception, which is
       an error.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function acquireLease(lease: CompleteLease)'
+      content: 'function acquireLease(lease: CompleteLease): Promise<boolean>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
@@ -97,9 +91,9 @@ methods:
             Lease info for the desired partition as previously obtained from
             `getLease()`.
       return:
-        type: Promise&lt;boolean&gt;
         description: Promise<boolean> `true` if acquired successfully; `false` otherwise.
-  - name: 'createAllLeasesIfNotExists(string[])'
+        type: Promise&lt;boolean&gt;
+  - name: createAllLeasesIfNotExists(string[])
     uid: '@azure/event-processor-host.LeaseManager.createAllLeasesIfNotExists'
     package: '@azure/event-processor-host'
     summary: >-
@@ -108,29 +102,29 @@ methods:
 
       if it does exist in the store already.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createAllLeasesIfNotExists(partitionIds: string[])'
+      content: >-
+        function createAllLeasesIfNotExists(partitionIds: string[]):
+        Promise<void>
       parameters:
         - id: partitionIds
-          type: 'string[]'
+          type: string[]
           description: ids of partitions to create lease info for
       return:
+        description: Promise<void> undefined on success, rejects on error.
         type: Promise&lt;void&gt;
-        description: 'Promise<void> undefined on success, rejects on error.'
   - name: createLeaseStoreIfNotExists()
     uid: '@azure/event-processor-host.LeaseManager.createLeaseStoreIfNotExists'
     package: '@azure/event-processor-host'
     summary: Create the lease store if it doesn't exist. Do nothing if it does exist.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function createLeaseStoreIfNotExists()
+      content: 'function createLeaseStoreIfNotExists(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void>  resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: deleteLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.deleteLease'
     package: '@azure/event-processor-host'
@@ -140,10 +134,9 @@ methods:
 
       the given partition, that is treated as success.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deleteLease(lease: CompleteLease)'
+      content: 'function deleteLease(lease: CompleteLease): Promise<void>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
@@ -151,20 +144,19 @@ methods:
             Lease info for the desired partition as previously obtained from
             `getLease()`.
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: deleteLeaseStore()
     uid: '@azure/event-processor-host.LeaseManager.deleteLeaseStore'
     package: '@azure/event-processor-host'
     summary: Delete lease store.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function deleteLeaseStore()
+      content: 'function deleteLeaseStore(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: getAllLeases()
     uid: '@azure/event-processor-host.LeaseManager.getAllLeases'
     package: '@azure/event-processor-host'
@@ -181,13 +173,12 @@ methods:
       faster to obtain only the information required for a BaseLease, we heavily
       recommend doing that.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function getAllLeases()
+      content: 'function getAllLeases(): Promise<BaseLease[]>'
       return:
-        type: 'Promise&lt;<xref uid="@azure/event-processor-host.BaseLease" />[]&gt;'
-        description: 'Promise<BaseLease[]>'
+        description: Promise<BaseLease[]>
+        type: Promise&lt;<xref uid="@azure/event-processor-host.BaseLease" />[]&gt;
   - name: getLease(string)
     uid: '@azure/event-processor-host.LeaseManager.getLease'
     package: '@azure/event-processor-host'
@@ -197,46 +188,46 @@ methods:
 
       created in the store for the specified partition.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getLease(partitionId: string)'
+      content: >-
+        function getLease(partitionId: string): Promise<undefined |
+        CompleteLease>
       parameters:
         - id: partitionId
           type: string
           description: Partition id to get the lease for.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/event-processor-host.CompleteLease" /> |
-          undefined&gt;
         description: Promise<Lease | undefined>
+        type: >-
+          Promise&lt;undefined | <xref
+          uid="@azure/event-processor-host.CompleteLease" />&gt;
   - name: leaseStoreExists()
     uid: '@azure/event-processor-host.LeaseManager.leaseStoreExists'
     package: '@azure/event-processor-host'
     summary: Does the lease store exist?
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function leaseStoreExists()
+      content: 'function leaseStoreExists(): Promise<boolean>'
       return:
+        description: Promise<boolean> `true` if it exists, `false` if it does not exist.
         type: Promise&lt;boolean&gt;
-        description: 'Promise<boolean> `true` if it exists, `false` if it does not exist.'
   - name: releaseLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.releaseLease'
     package: '@azure/event-processor-host'
-    summary: >
+    summary: >-
       Give up a lease currently held by this host.
+
 
       If the lease has been stolen, or expired, releasing it is unnecessary, and
       will fail if
 
       attempted.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function releaseLease(lease: CompleteLease)'
+      content: 'function releaseLease(lease: CompleteLease): Promise<void>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
@@ -244,13 +235,14 @@ methods:
             Lease info for the desired partition as previously obtained from
             `getLease()`.
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: renewLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.renewLease'
     package: '@azure/event-processor-host'
-    summary: >
+    summary: >-
       Renew a lease currently held by this host.
+
 
       If the lease has been taken by another host instance (either stolen or
       after expiration)
@@ -266,22 +258,22 @@ methods:
 
       renewLease should return false.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function renewLease(lease: CompleteLease)'
+      content: 'function renewLease(lease: CompleteLease): Promise<boolean>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
           description: lease to be renewed.
       return:
-        type: Promise&lt;boolean&gt;
         description: Promise<boolean> `true` if renewed successfully; `false` otherwise.
+        type: Promise&lt;boolean&gt;
   - name: updateLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.updateLease'
     package: '@azure/event-processor-host'
-    summary: >
+    summary: >-
       Update the store with the information in the provided lease.
+
 
       It is necessary to currently hold a lease in order to update it. If the
       lease has been stolen,
@@ -292,14 +284,13 @@ methods:
       lease before performing the update to avoid lease expiration during the
       process.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function updateLease(lease: CompleteLease)'
+      content: 'function updateLease(lease: CompleteLease): Promise<boolean>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
           description: New lease information to be stored.
       return:
-        type: Promise&lt;boolean&gt;
         description: Promise<boolean> `true` if updated successfully; `false` otherwise.
+        type: Promise&lt;boolean&gt;

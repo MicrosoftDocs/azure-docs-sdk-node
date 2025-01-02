@@ -1,17 +1,12 @@
 ---
 title: Azure CDN modules for JavaScript
 description: Reference for Azure CDN modules for JavaScript
-author: dksimpson
-ms.author: v-deasim
-manager: v-laurab
 ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: nodejs
-ms.service: CDN
+ms.service: azure-cdn
+manager: v-laurab
 ---
-
 # Azure CDN modules for JavaScript
 
 ## Overview
@@ -33,3 +28,4 @@ npm install @azure/arm-cdn
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-cdn)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

@@ -5,16 +5,724 @@ package: azure-iothub
 summary: ''
 fullName: ServiceReceiver
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
+inheritedMethods:
+  - name: 'addListener<K>(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.addListener
+    package: azure-iothub
+    summary: Alias for `emitter.on(eventName, listener)`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addListener<K>(eventName: string | symbol, listener: (args:
+        any[]) => void): ServiceReceiver
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.addListener
+  - name: emit<K>(string | symbol, AnyRest)
+    uid: azure-iothub.Client.ServiceReceiver.emit
+    package: azure-iothub
+    summary: >-
+      Synchronously calls each of the listeners registered for the event named
+      `eventName`, in the order they were registered, passing the supplied
+      arguments
+
+      to each.
+
+
+      Returns `true` if the event had listeners, `false` otherwise.
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      const myEmitter = new EventEmitter();
+
+
+      // First listener
+
+      myEmitter.on('event', function firstListener() {
+        console.log('Helloooo! first listener');
+      });
+
+      // Second listener
+
+      myEmitter.on('event', function secondListener(arg1, arg2) {
+        console.log(`event with parameters ${arg1}, ${arg2} in second listener`);
+      });
+
+      // Third listener
+
+      myEmitter.on('event', function thirdListener(...args) {
+        const parameters = args.join(', ');
+        console.log(`event with parameters ${parameters} in third listener`);
+      });
+
+
+      console.log(myEmitter.listeners('event'));
+
+
+      myEmitter.emit('event', 1, 2, 3, 4, 5);
+
+
+      // Prints:
+
+      // [
+
+      //   [Function: firstListener],
+
+      //   [Function: secondListener],
+
+      //   [Function: thirdListener]
+
+      // ]
+
+      // Helloooo! first listener
+
+      // event with parameters 1, 2 in second listener
+
+      // event with parameters 1, 2, 3, 4, 5 in third listener
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function emit<K>(eventName: string | symbol, args: AnyRest): boolean'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: args
+          type: AnyRest
+          description: ''
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: <b>Inherited From</b> Receiver.emit
+  - name: eventNames()
+    uid: azure-iothub.Client.ServiceReceiver.eventNames
+    package: azure-iothub
+    summary: |-
+      Returns an array listing the events for which the emitter has registered
+      listeners. The values in the array are strings or `Symbol`s.
+
+      ```js
+      import { EventEmitter } from 'node:events';
+
+      const myEE = new EventEmitter();
+      myEE.on('foo', () => {});
+      myEE.on('bar', () => {});
+
+      const sym = Symbol('symbol');
+      myEE.on(sym, () => {});
+
+      console.log(myEE.eventNames());
+      // Prints: [ 'foo', 'bar', Symbol(symbol) ]
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function eventNames(): (string | symbol)[]'
+      return:
+        description: ''
+        type: (string | symbol)[]
+    inheritanceDescription: <b>Inherited From</b> Receiver.eventNames
+  - name: getMaxListeners()
+    uid: azure-iothub.Client.ServiceReceiver.getMaxListeners
+    package: azure-iothub
+    summary: >-
+      Returns the current max listener value for the `EventEmitter` which is
+      either
+
+      set by `emitter.setMaxListeners(n)` or defaults to
+      <xref:EventEmitter.defaultMaxListeners>.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getMaxListeners(): number'
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> Receiver.getMaxListeners
+  - name: listenerCount<K>(string | symbol, Function)
+    uid: azure-iothub.Client.ServiceReceiver.listenerCount
+    package: azure-iothub
+    summary: >-
+      Returns the number of listeners listening for the event named `eventName`.
+
+      If `listener` is provided, it will return how many times the listener is
+      found
+
+      in the list of the listeners of the event.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listenerCount<K>(eventName: string | symbol, listener?:
+        Function): number
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event being listened for
+        - id: listener
+          type: Function
+          description: The event handler function
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> Receiver.listenerCount
+  - name: listeners<K>(string | symbol)
+    uid: azure-iothub.Client.ServiceReceiver.listeners
+    package: azure-iothub
+    summary: |-
+      Returns a copy of the array of listeners for the event named `eventName`.
+
+      ```js
+      server.on('connection', (stream) => {
+        console.log('someone connected!');
+      });
+      console.log(util.inspect(server.listeners('connection')));
+      // Prints: [ [Function] ]
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function listeners<K>(eventName: string | symbol): Function[]'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> Receiver.listeners
+  - name: 'off<K>(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.off
+    package: azure-iothub
+    summary: Alias for `emitter.removeListener()`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function off<K>(eventName: string | symbol, listener: (args: any[]) =>
+        void): ServiceReceiver
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.off
+  - name: 'on("errorReceived", (err: Error) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.on_1
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on(type: "errorReceived", func: (err: Error) => void):
+        ServiceReceiver
+      parameters:
+        - id: type
+          type: '"errorReceived"'
+          description: ''
+        - id: func
+          type: '(err: Error) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.on
+  - name: 'on("message", (msg: Message) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.on
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on(type: "message", func: (msg: Message) => void):
+        ServiceReceiver
+      parameters:
+        - id: type
+          type: '"message"'
+          description: ''
+        - id: func
+          type: '(msg: Message) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.on
+  - name: on(string, Function)
+    uid: azure-iothub.Client.ServiceReceiver.on_2
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function on(type: string, func: Function): ServiceReceiver'
+      parameters:
+        - id: type
+          type: string
+          description: ''
+        - id: func
+          type: Function
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.on
+  - name: 'once<K>(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.once
+    package: azure-iothub
+    summary: >-
+      Adds a **one-time** `listener` function for the event named `eventName`.
+      The
+
+      next time `eventName` is triggered, this listener is removed and then
+      invoked.
+
+
+      ```js
+
+      server.once('connection', (stream) => {
+        console.log('Ah, we have our first user!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+
+
+      By default, event listeners are invoked in the order they are added. The
+      `emitter.prependOnceListener()` method can be used as an alternative to
+      add the
+
+      event listener to the beginning of the listeners array.
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      const myEE = new EventEmitter();
+
+      myEE.once('foo', () => console.log('a'));
+
+      myEE.prependOnceListener('foo', () => console.log('b'));
+
+      myEE.emit('foo');
+
+      // Prints:
+
+      //   b
+
+      //   a
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function once<K>(eventName: string | symbol, listener: (args: any[]) =>
+        void): ServiceReceiver
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: The callback function
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.once
+  - name: 'prependListener<K>(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.prependListener
+    package: azure-iothub
+    summary: >-
+      Adds the `listener` function to the _beginning_ of the listeners array for
+      the
+
+      event named `eventName`. No checks are made to see if the `listener` has
+
+      already been added. Multiple calls passing the same combination of
+      `eventName`
+
+      and `listener` will result in the `listener` being added, and called,
+      multiple times.
+
+
+      ```js
+
+      server.prependListener('connection', (stream) => {
+        console.log('someone connected!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependListener<K>(eventName: string | symbol, listener: (args:
+        any[]) => void): ServiceReceiver
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: The callback function
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.prependListener
+  - name: 'prependOnceListener<K>(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.prependOnceListener
+    package: azure-iothub
+    summary: >-
+      Adds a **one-time**`listener` function for the event named `eventName` to
+      the _beginning_ of the listeners array. The next time `eventName` is
+      triggered, this
+
+      listener is removed, and then invoked.
+
+
+      ```js
+
+      server.prependOnceListener('connection', (stream) => {
+        console.log('Ah, we have our first user!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependOnceListener<K>(eventName: string | symbol, listener:
+        (args: any[]) => void): ServiceReceiver
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: The callback function
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.prependOnceListener
+  - name: rawListeners<K>(string | symbol)
+    uid: azure-iothub.Client.ServiceReceiver.rawListeners
+    package: azure-iothub
+    summary: |-
+      Returns a copy of the array of listeners for the event named `eventName`,
+      including any wrappers (such as those created by `.once()`).
+
+      ```js
+      import { EventEmitter } from 'node:events';
+      const emitter = new EventEmitter();
+      emitter.once('log', () => console.log('log once'));
+
+      // Returns a new Array with a function `onceWrapper` which has a property
+      // `listener` which contains the original listener bound above
+      const listeners = emitter.rawListeners('log');
+      const logFnWrapper = listeners[0];
+
+      // Logs "log once" to the console and does not unbind the `once` event
+      logFnWrapper.listener();
+
+      // Logs "log once" to the console and removes the listener
+      logFnWrapper();
+
+      emitter.on('log', () => console.log('log persistently'));
+      // Will return a new Array with a single function bound by `.on()` above
+      const newListeners = emitter.rawListeners('log');
+
+      // Logs "log persistently" twice
+      newListeners[0]();
+      emitter.emit('log');
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function rawListeners<K>(eventName: string | symbol): Function[]'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> Receiver.rawListeners
+  - name: removeAllListeners(string | symbol)
+    uid: azure-iothub.Client.ServiceReceiver.removeAllListeners
+    package: azure-iothub
+    summary: |-
+      Removes all listeners, or those of the specified `eventName`.
+
+      It is bad practice to remove listeners added elsewhere in the code,
+      particularly when the `EventEmitter` instance was created by some other
+      component or module (e.g. sockets or file streams).
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function removeAllListeners(eventName?: string | symbol):
+        ServiceReceiver
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.removeAllListeners
+  - name: 'removeListener<K>(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.ServiceReceiver.removeListener
+    package: azure-iothub
+    summary: >-
+      Removes the specified `listener` from the listener array for the event
+      named `eventName`.
+
+
+      ```js
+
+      const callback = (stream) => {
+        console.log('someone connected!');
+      };
+
+      server.on('connection', callback);
+
+      // ...
+
+      server.removeListener('connection', callback);
+
+      ```
+
+
+      `removeListener()` will remove, at most, one instance of a listener from
+      the
+
+      listener array. If any single listener has been added multiple times to
+      the
+
+      listener array for the specified `eventName`, then `removeListener()` must
+      be
+
+      called multiple times to remove each instance.
+
+
+      Once an event is emitted, all listeners attached to it at the
+
+      time of emitting are called in order. This implies that any
+      `removeListener()` or `removeAllListeners()` calls _after_ emitting and
+      _before_ the last listener finishes execution
+
+      will not remove them from`emit()` in progress. Subsequent events behave as
+      expected.
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      class MyEmitter extends EventEmitter {}
+
+      const myEmitter = new MyEmitter();
+
+
+      const callbackA = () => {
+        console.log('A');
+        myEmitter.removeListener('event', callbackB);
+      };
+
+
+      const callbackB = () => {
+        console.log('B');
+      };
+
+
+      myEmitter.on('event', callbackA);
+
+
+      myEmitter.on('event', callbackB);
+
+
+      // callbackA removes listener callbackB but it will still be called.
+
+      // Internal listener array at time of emit [callbackA, callbackB]
+
+      myEmitter.emit('event');
+
+      // Prints:
+
+      //   A
+
+      //   B
+
+
+      // callbackB is now removed.
+
+      // Internal listener array [callbackA]
+
+      myEmitter.emit('event');
+
+      // Prints:
+
+      //   A
+
+      ```
+
+
+      Because listeners are managed using an internal array, calling this will
+
+      change the position indices of any listener registered _after_ the
+      listener
+
+      being removed. This will not impact the order in which listeners are
+      called,
+
+      but it means that any copies of the listener array as returned by
+
+      the `emitter.listeners()` method will need to be recreated.
+
+
+      When a single function has been added as a handler multiple times for a
+      single
+
+      event (as in the example below), `removeListener()` will remove the most
+
+      recently added instance. In the example the `once('ping')` listener is
+      removed:
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      const ee = new EventEmitter();
+
+
+      function pong() {
+        console.log('pong');
+      }
+
+
+      ee.on('ping', pong);
+
+      ee.once('ping', pong);
+
+      ee.removeListener('ping', pong);
+
+
+      ee.emit('ping');
+
+      ee.emit('ping');
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function removeListener<K>(eventName: string | symbol, listener: (args:
+        any[]) => void): ServiceReceiver
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.removeListener
+  - name: setMaxListeners(number)
+    uid: azure-iothub.Client.ServiceReceiver.setMaxListeners
+    package: azure-iothub
+    summary: >-
+      By default `EventEmitter`s will print a warning if more than `10`
+      listeners are
+
+      added for a particular event. This is a useful default that helps finding
+
+      memory leaks. The `emitter.setMaxListeners()` method allows the limit to
+      be
+
+      modified for this specific `EventEmitter` instance. The value can be set
+      to `Infinity` (or `0`) to indicate an unlimited number of listeners.
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function setMaxListeners(n: number): ServiceReceiver'
+      parameters:
+        - id: 'n'
+          type: number
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+    inheritanceDescription: <b>Inherited From</b> Receiver.setMaxListeners
+  - name: '[captureRejectionSymbol]<K>(Error, string | symbol, AnyRest)'
+    uid: azure-iothub.Client.ServiceReceiver.[captureRejectionSymbol]
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function [captureRejectionSymbol]<K>(error: Error, event: string |
+        symbol, args: AnyRest)
+      parameters:
+        - id: error
+          type: Error
+          description: ''
+        - id: event
+          type: string | symbol
+          description: ''
+        - id: args
+          type: AnyRest
+          description: ''
+    inheritanceDescription: <b>Inherited From</b> Receiver.__@captureRejectionSymbol@118
 methods:
-  - name: 'abandon(Message, Callback<MessageAbandoned>)'
+  - name: abandon(Message, Callback<MessageAbandoned>)
     uid: azure-iothub.Client.ServiceReceiver.abandon
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function abandon(message: Message, done?: Callback<MessageAbandoned>)'
@@ -25,33 +733,11 @@ methods:
         - id: done
           type: Callback&lt;MessageAbandoned&gt;
           description: ''
-  - name: 'addListener(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.addListener
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function addListener(event: string | symbol, listener: (args: any[]) =>
-        void)
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'complete(Message, Callback<MessageCompleted>)'
+  - name: complete(Message, Callback<MessageCompleted>)
     uid: azure-iothub.Client.ServiceReceiver.complete
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function complete(message: Message, done?: Callback<MessageCompleted>)'
@@ -62,240 +748,11 @@ methods:
         - id: done
           type: Callback&lt;MessageCompleted&gt;
           description: ''
-  - name: 'emit(string | symbol, any[])'
-    uid: azure-iothub.Client.ServiceReceiver.emit
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: string | symbol, args: any[])'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: args
-          type: 'any[]'
-          description: ''
-      return:
-        type: boolean
-        description: ''
-  - name: eventNames()
-    uid: azure-iothub.Client.ServiceReceiver.eventNames
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function eventNames()
-      return:
-        type: Array&lt;string | symbol&gt;
-        description: ''
-  - name: getMaxListeners()
-    uid: azure-iothub.Client.ServiceReceiver.getMaxListeners
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getMaxListeners()
-      return:
-        type: number
-        description: ''
-  - name: listenerCount(string | symbol)
-    uid: azure-iothub.Client.ServiceReceiver.listenerCount
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function listenerCount(event: string | symbol)'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-      return:
-        type: number
-        description: ''
-  - name: listeners(string | symbol)
-    uid: azure-iothub.Client.ServiceReceiver.listeners
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function listeners(event: string | symbol)'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-      return:
-        type: 'Function[]'
-        description: ''
-  - name: 'off(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.off
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function off(event: string | symbol, listener: (args: any[]) => void)'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'on("errorReceived", (err: Error) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.on_1
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function on(type: "errorReceived", func: (err: Error) => void)'
-      parameters:
-        - id: type
-          type: '"errorReceived"'
-          description: ''
-        - id: func
-          type: '(err: Error) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'on("message", (msg: Message) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.on
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function on(type: "message", func: (msg: Message) => void)'
-      parameters:
-        - id: type
-          type: '"message"'
-          description: ''
-        - id: func
-          type: '(msg: Message) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'on(string, Function)'
-    uid: azure-iothub.Client.ServiceReceiver.on_2
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function on(type: string, func: Function)'
-      parameters:
-        - id: type
-          type: string
-          description: ''
-        - id: func
-          type: Function
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'once(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.once
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function once(event: string | symbol, listener: (args: any[]) => void)'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'prependListener(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.prependListener
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependListener(event: string | symbol, listener: (args: any[])
-        => void)
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.prependOnceListener
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependOnceListener(event: string | symbol, listener: (args:
-        any[]) => void)
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: rawListeners(string | symbol)
-    uid: azure-iothub.Client.ServiceReceiver.rawListeners
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function rawListeners(event: string | symbol)'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-      return:
-        type: 'Function[]'
-        description: ''
-  - name: 'reject(Message, Callback<MessageRejected>)'
+  - name: reject(Message, Callback<MessageRejected>)
     uid: azure-iothub.Client.ServiceReceiver.reject
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function reject(message: Message, done?: Callback<MessageRejected>)'
@@ -306,57 +763,4 @@ methods:
         - id: done
           type: Callback&lt;MessageRejected&gt;
           description: ''
-  - name: removeAllListeners(string | symbol)
-    uid: azure-iothub.Client.ServiceReceiver.removeAllListeners
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function removeAllListeners(event?: string | symbol)'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'removeListener(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.ServiceReceiver.removeListener
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function removeListener(event: string | symbol, listener: (args: any[])
-        => void)
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: setMaxListeners(number)
-    uid: azure-iothub.Client.ServiceReceiver.setMaxListeners
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function setMaxListeners(n: number)'
-      parameters:
-        - id: 'n'
-          type: number
-          description: ''
-      return:
-        type: this
-        description: ''
 extends: Receiver

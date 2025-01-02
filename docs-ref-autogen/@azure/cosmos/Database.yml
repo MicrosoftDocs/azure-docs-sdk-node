@@ -2,23 +2,39 @@
 name: Database
 uid: '@azure/cosmos.Database'
 package: '@azure/cosmos'
-summary: Operations for reading or deleting an existing database.
+summary: >-
+  Operations for reading or deleting an existing database.
+
+
+  See [Databases](xref:@azure/cosmos.Databases) for creating new databases, and
+  reading/querying all databases; use `client.databases`.
+
+
+  Note: all these operations make calls against a fixed budget.
+
+  You should design your system such that these calls scale sublinearly with
+  your application.
+
+  For instance, do not call `database.read()` before every single `item.read()`
+  call, to ensure the database exists;
+
+  do this once on application start up.
 fullName: Database
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'Database(CosmosClient, string, ClientContext)'
+  - name: Database(CosmosClient, string, ClientContext)
     uid: '@azure/cosmos.Database.constructor'
     package: '@azure/cosmos'
-    summary: >
-      Returns a new <xref:Database> instance.
+    summary: >-
+      Returns a new [Database](xref:@azure/cosmos.Database) instance.
 
-      Note: the intention is to get this object from <xref:CosmosClient> via
-      `client.database(id)`, not to instantiate it yourself.
+
+      Note: the intention is to get this object from
+      [CosmosClient](xref:@azure/cosmos.CosmosClient) via `client.database(id)`,
+      not to instantiate it yourself.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -41,127 +57,149 @@ properties:
     summary: ''
     fullName: client
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'client: CosmosClient'
       return:
-        type: <xref uid="@azure/cosmos.CosmosClient" />
         description: ''
+        type: <xref uid="@azure/cosmos.CosmosClient" />
   - name: containers
     uid: '@azure/cosmos.Database.containers'
     package: '@azure/cosmos'
-    summary: >
+    summary: >+
       Used for creating new containers, or querying/reading all containers.
 
+
       Use `.database(id)` to read, replace, or delete a specific, existing
-      <xref:Database> by id.
+      [Database](xref:@azure/cosmos.Database) by id.
+
+
+      **Example**
+
+
+      Create a new container
+
+      ```typescript
+
+      const {body: containerDefinition, container} = await client.database("<db
+      id>").containers.create({id: "<container id>"});
+
+      ```
+
     fullName: containers
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'containers: Containers'
       return:
-        type: <xref uid="@azure/cosmos.Containers" />
         description: ''
+        type: <xref uid="@azure/cosmos.Containers" />
   - name: id
     uid: '@azure/cosmos.Database.id'
     package: '@azure/cosmos'
     summary: ''
     fullName: id
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'id: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: url
     uid: '@azure/cosmos.Database.url'
     package: '@azure/cosmos'
     summary: Returns a reference URL to the resource. Used for linking in Permissions.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: string url
       return:
-        type: string
         description: ''
+        type: string
   - name: users
     uid: '@azure/cosmos.Database.users'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Used for creating new users, or querying/reading all users.
 
+
       Use `.user(id)` to read, replace, or delete a specific, existing
-      <xref:User> by id.
+      [User](xref:@azure/cosmos.User) by id.
     fullName: users
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'users: Users'
       return:
-        type: <xref uid="@azure/cosmos.Users" />
         description: ''
+        type: <xref uid="@azure/cosmos.Users" />
 methods:
   - name: container(string)
     uid: '@azure/cosmos.Database.container'
     package: '@azure/cosmos'
-    summary: >
-      Used to read, replace, or delete a specific, existing <xref:Database> by
-      id.
+    summary: >+
+      Used to read, replace, or delete a specific, existing
+      [Database](xref:@azure/cosmos.Database) by id.
+
 
       Use `.containers` creating new containers, or querying/reading all
       containers.
+
+
+      **Example**
+
+
+      Delete a container
+
+      ```typescript
+
+      await client.database("<db id>").container("<container id>").delete();
+
+      ```
+
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function container(id: string)'
+      content: 'function container(id: string): Container'
       parameters:
         - id: id
           type: string
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.Container" />
         description: ''
+        type: <xref uid="@azure/cosmos.Container" />
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.Database.delete'
     package: '@azure/cosmos'
     summary: Delete the given Database.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(options?: RequestOptions)'
+      content: 'function delete(options?: RequestOptions): Promise<DatabaseResponse>'
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.DatabaseResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.DatabaseResponse" />&gt;
   - name: read(RequestOptions)
     uid: '@azure/cosmos.Database.read'
     package: '@azure/cosmos'
     summary: Read the definition of the given Database.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function read(options?: RequestOptions)'
+      content: 'function read(options?: RequestOptions): Promise<DatabaseResponse>'
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.DatabaseResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.DatabaseResponse" />&gt;
   - name: readOffer(RequestOptions)
     uid: '@azure/cosmos.Database.readOffer'
     package: '@azure/cosmos'
@@ -169,32 +207,33 @@ methods:
       Gets offer on database. If none exists, returns an OfferResponse with
       undefined.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function readOffer(options?: RequestOptions)'
+      content: 'function readOffer(options?: RequestOptions): Promise<OfferResponse>'
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.OfferResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.OfferResponse" />&gt;
   - name: user(string)
     uid: '@azure/cosmos.Database.user'
     package: '@azure/cosmos'
-    summary: |
-      Used to read, replace, or delete a specific, existing <xref:User> by id.
+    summary: >-
+      Used to read, replace, or delete a specific, existing
+      [User](xref:@azure/cosmos.User) by id.
+
+
       Use `.users` for creating new users, or querying/reading all users.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function user(id: string)'
+      content: 'function user(id: string): User'
       parameters:
         - id: id
           type: string
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.User" />
         description: ''
+        type: <xref uid="@azure/cosmos.User" />

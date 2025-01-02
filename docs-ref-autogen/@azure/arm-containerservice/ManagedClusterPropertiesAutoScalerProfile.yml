@@ -5,7 +5,6 @@ package: '@azure/arm-containerservice'
 summary: Parameters to be applied to the cluster-autoscaler when enabled
 fullName: ManagedClusterPropertiesAutoScalerProfile
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -13,237 +12,289 @@ properties:
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.balanceSimilarNodeGroups
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: Valid values are 'true' and 'false'
     fullName: balanceSimilarNodeGroups
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'balanceSimilarNodeGroups?: undefined | string'
+      content: 'balanceSimilarNodeGroups?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+  - name: daemonsetEvictionForEmptyNodes
+    uid: >-
+      @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.daemonsetEvictionForEmptyNodes
+    package: '@azure/arm-containerservice'
+    summary: >-
+      If set to true, all daemonset pods on empty nodes will be evicted before
+      deletion of the node. If the daemonset pod cannot be evicted another node
+      will be chosen for scaling. If set to false, the node will be deleted
+      without ensuring that daemonset pods are deleted or evicted.
+    fullName: daemonsetEvictionForEmptyNodes
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'daemonsetEvictionForEmptyNodes?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: daemonsetEvictionForOccupiedNodes
+    uid: >-
+      @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.daemonsetEvictionForOccupiedNodes
+    package: '@azure/arm-containerservice'
+    summary: >-
+      If set to true, all daemonset pods on occupied nodes will be evicted
+      before deletion of the node. If the daemonset pod cannot be evicted
+      another node will be chosen for scaling. If set to false, the node will be
+      deleted without ensuring that daemonset pods are deleted or evicted.
+    fullName: daemonsetEvictionForOccupiedNodes
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'daemonsetEvictionForOccupiedNodes?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: expander
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.expander
     package: '@azure/arm-containerservice'
-    summary: 'Possible values include: ''least-waste'', ''most-pods'', ''priority'', ''random'''
+    summary: >-
+      If not specified, the default is 'random'. See
+      [expanders](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#what-are-expanders)
+      for more information.
     fullName: expander
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'expander?: Expander'
+      content: 'expander?: string'
       return:
-        type: <xref uid="@azure/arm-containerservice.Expander" />
         description: ''
+        type: string
+  - name: ignoreDaemonsetsUtilization
+    uid: >-
+      @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.ignoreDaemonsetsUtilization
+    package: '@azure/arm-containerservice'
+    summary: >-
+      If set to true, the resources used by daemonset will be taken into account
+      when making scaling down decisions.
+    fullName: ignoreDaemonsetsUtilization
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'ignoreDaemonsetsUtilization?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: maxEmptyBulkDelete
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.maxEmptyBulkDelete
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: The default is 10.
     fullName: maxEmptyBulkDelete
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'maxEmptyBulkDelete?: undefined | string'
+      content: 'maxEmptyBulkDelete?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: maxGracefulTerminationSec
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.maxGracefulTerminationSec
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: The default is 600.
     fullName: maxGracefulTerminationSec
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'maxGracefulTerminationSec?: undefined | string'
+      content: 'maxGracefulTerminationSec?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: maxNodeProvisionTime
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.maxNodeProvisionTime
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: >-
+      The default is '15m'. Values must be an integer followed by an 'm'. No
+      unit of time other than minutes (m) is supported.
     fullName: maxNodeProvisionTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'maxNodeProvisionTime?: undefined | string'
+      content: 'maxNodeProvisionTime?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: maxTotalUnreadyPercentage
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.maxTotalUnreadyPercentage
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: The default is 45. The maximum is 100 and the minimum is 0.
     fullName: maxTotalUnreadyPercentage
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'maxTotalUnreadyPercentage?: undefined | string'
+      content: 'maxTotalUnreadyPercentage?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: newPodScaleUpDelay
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.newPodScaleUpDelay
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: >-
+      For scenarios like burst/batch scale where you don't want CA to act before
+      the kubernetes scheduler could schedule all the pods, you can tell CA to
+      ignore unscheduled pods before they're a certain age. The default is '0s'.
+      Values must be an integer followed by a unit ('s' for seconds, 'm' for
+      minutes, 'h' for hours, etc).
     fullName: newPodScaleUpDelay
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'newPodScaleUpDelay?: undefined | string'
+      content: 'newPodScaleUpDelay?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: okTotalUnreadyCount
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.okTotalUnreadyCount
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: This must be an integer. The default is 3.
     fullName: okTotalUnreadyCount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'okTotalUnreadyCount?: undefined | string'
+      content: 'okTotalUnreadyCount?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: scaleDownDelayAfterAdd
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.scaleDownDelayAfterAdd
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: >-
+      The default is '10m'. Values must be an integer followed by an 'm'. No
+      unit of time other than minutes (m) is supported.
     fullName: scaleDownDelayAfterAdd
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'scaleDownDelayAfterAdd?: undefined | string'
+      content: 'scaleDownDelayAfterAdd?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: scaleDownDelayAfterDelete
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.scaleDownDelayAfterDelete
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: >-
+      The default is the scan-interval. Values must be an integer followed by an
+      'm'. No unit of time other than minutes (m) is supported.
     fullName: scaleDownDelayAfterDelete
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'scaleDownDelayAfterDelete?: undefined | string'
+      content: 'scaleDownDelayAfterDelete?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: scaleDownDelayAfterFailure
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.scaleDownDelayAfterFailure
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: >-
+      The default is '3m'. Values must be an integer followed by an 'm'. No unit
+      of time other than minutes (m) is supported.
     fullName: scaleDownDelayAfterFailure
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'scaleDownDelayAfterFailure?: undefined | string'
+      content: 'scaleDownDelayAfterFailure?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: scaleDownUnneededTime
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.scaleDownUnneededTime
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: >-
+      The default is '10m'. Values must be an integer followed by an 'm'. No
+      unit of time other than minutes (m) is supported.
     fullName: scaleDownUnneededTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'scaleDownUnneededTime?: undefined | string'
+      content: 'scaleDownUnneededTime?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: scaleDownUnreadyTime
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.scaleDownUnreadyTime
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: >-
+      The default is '20m'. Values must be an integer followed by an 'm'. No
+      unit of time other than minutes (m) is supported.
     fullName: scaleDownUnreadyTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'scaleDownUnreadyTime?: undefined | string'
+      content: 'scaleDownUnreadyTime?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: scaleDownUtilizationThreshold
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.scaleDownUtilizationThreshold
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: The default is '0.5'.
     fullName: scaleDownUtilizationThreshold
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'scaleDownUtilizationThreshold?: undefined | string'
+      content: 'scaleDownUtilizationThreshold?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: scanInterval
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.scanInterval
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: The default is '10'. Values must be an integer number of seconds.
     fullName: scanInterval
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'scanInterval?: undefined | string'
+      content: 'scanInterval?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: skipNodesWithLocalStorage
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.skipNodesWithLocalStorage
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: The default is true.
     fullName: skipNodesWithLocalStorage
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'skipNodesWithLocalStorage?: undefined | string'
+      content: 'skipNodesWithLocalStorage?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: skipNodesWithSystemPods
     uid: >-
       @azure/arm-containerservice.ManagedClusterPropertiesAutoScalerProfile.skipNodesWithSystemPods
     package: '@azure/arm-containerservice'
-    summary: ''
+    summary: The default is true.
     fullName: skipNodesWithSystemPods
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'skipNodesWithSystemPods?: undefined | string'
+      content: 'skipNodesWithSystemPods?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string

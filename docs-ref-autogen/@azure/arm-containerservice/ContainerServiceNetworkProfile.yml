@@ -5,46 +5,54 @@ package: '@azure/arm-containerservice'
 summary: Profile of network configuration.
 fullName: ContainerServiceNetworkProfile
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
+  - name: advancedNetworking
+    uid: >-
+      @azure/arm-containerservice.ContainerServiceNetworkProfile.advancedNetworking
+    package: '@azure/arm-containerservice'
+    summary: >-
+      Advanced Networking profile for enabling observability and security
+      feature suite on a cluster. For more information see
+      aka.ms/aksadvancednetworking.
+    fullName: advancedNetworking
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'advancedNetworking?: AdvancedNetworking'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-containerservice.AdvancedNetworking" />
   - name: dnsServiceIP
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.dnsServiceIP'
     package: '@azure/arm-containerservice'
     summary: >-
       An IP address assigned to the Kubernetes DNS service. It must be within
-      the Kubernetes service
-
-      address range specified in serviceCidr. Default value: '10.0.0.10'.
+      the Kubernetes service address range specified in serviceCidr.
     fullName: dnsServiceIP
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'dnsServiceIP?: undefined | string'
+      content: 'dnsServiceIP?: string'
       return:
-        type: undefined | string
         description: ''
-  - name: dockerBridgeCidr
-    uid: >-
-      @azure/arm-containerservice.ContainerServiceNetworkProfile.dockerBridgeCidr
+        type: string
+  - name: ipFamilies
+    uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.ipFamilies'
     package: '@azure/arm-containerservice'
     summary: >-
-      A CIDR notation IP range assigned to the Docker bridge network. It must
-      not overlap with any
-
-      Subnet IP ranges or the Kubernetes service address range. Default value:
-      '172.17.0.1/16'.
-    fullName: dockerBridgeCidr
+      IP families are used to determine single-stack or dual-stack clusters. For
+      single-stack, the expected value is IPv4. For dual-stack, the expected
+      values are IPv4 and IPv6.
+    fullName: ipFamilies
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'dockerBridgeCidr?: undefined | string'
+      content: 'ipFamilies?: string[]'
       return:
-        type: undefined | string
         description: ''
+        type: string[]
   - name: loadBalancerProfile
     uid: >-
       @azure/arm-containerservice.ContainerServiceNetworkProfile.loadBalancerProfile
@@ -52,129 +60,175 @@ properties:
     summary: Profile of the cluster load balancer.
     fullName: loadBalancerProfile
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'loadBalancerProfile?: ManagedClusterLoadBalancerProfile'
       return:
+        description: ''
         type: >-
           <xref
           uid="@azure/arm-containerservice.ManagedClusterLoadBalancerProfile" />
-        description: ''
   - name: loadBalancerSku
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.loadBalancerSku'
     package: '@azure/arm-containerservice'
     summary: >-
-      The load balancer sku for the managed cluster. Possible values include:
-      'standard', 'basic'
+      The default is 'standard'. See [Azure Load Balancer
+      SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for more
+      information about the differences between load balancer SKUs.
     fullName: loadBalancerSku
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'loadBalancerSku?: LoadBalancerSku'
+      content: 'loadBalancerSku?: string'
       return:
-        type: <xref uid="@azure/arm-containerservice.LoadBalancerSku" />
         description: ''
+        type: string
+  - name: natGatewayProfile
+    uid: >-
+      @azure/arm-containerservice.ContainerServiceNetworkProfile.natGatewayProfile
+    package: '@azure/arm-containerservice'
+    summary: Profile of the cluster NAT gateway.
+    fullName: natGatewayProfile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'natGatewayProfile?: ManagedClusterNATGatewayProfile'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-containerservice.ManagedClusterNATGatewayProfile" />
+  - name: networkDataplane
+    uid: >-
+      @azure/arm-containerservice.ContainerServiceNetworkProfile.networkDataplane
+    package: '@azure/arm-containerservice'
+    summary: Network dataplane used in the Kubernetes cluster.
+    fullName: networkDataplane
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'networkDataplane?: string'
+      return:
+        description: ''
+        type: string
   - name: networkMode
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.networkMode'
     package: '@azure/arm-containerservice'
-    summary: >-
-      Network mode used for building Kubernetes network. Possible values
-      include: 'transparent',
-
-      'bridge'
+    summary: This cannot be specified if networkPlugin is anything other than 'azure'.
     fullName: networkMode
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'networkMode?: NetworkMode'
+      content: 'networkMode?: string'
       return:
-        type: <xref uid="@azure/arm-containerservice.NetworkMode" />
         description: ''
+        type: string
   - name: networkPlugin
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.networkPlugin'
     package: '@azure/arm-containerservice'
-    summary: >-
-      Network plugin used for building Kubernetes network. Possible values
-      include: 'azure',
-
-      'kubenet'. Default value: 'kubenet'.
+    summary: Network plugin used for building the Kubernetes network.
     fullName: networkPlugin
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'networkPlugin?: NetworkPlugin'
+      content: 'networkPlugin?: string'
       return:
-        type: <xref uid="@azure/arm-containerservice.NetworkPlugin" />
         description: ''
+        type: string
+  - name: networkPluginMode
+    uid: >-
+      @azure/arm-containerservice.ContainerServiceNetworkProfile.networkPluginMode
+    package: '@azure/arm-containerservice'
+    summary: The mode the network plugin should use.
+    fullName: networkPluginMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'networkPluginMode?: string'
+      return:
+        description: ''
+        type: string
   - name: networkPolicy
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.networkPolicy'
     package: '@azure/arm-containerservice'
-    summary: >-
-      Network policy used for building Kubernetes network. Possible values
-      include: 'calico',
-
-      'azure'
+    summary: Network policy used for building the Kubernetes network.
     fullName: networkPolicy
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'networkPolicy?: NetworkPolicy'
+      content: 'networkPolicy?: string'
       return:
-        type: <xref uid="@azure/arm-containerservice.NetworkPolicy" />
         description: ''
+        type: string
   - name: outboundType
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.outboundType'
     package: '@azure/arm-containerservice'
     summary: >-
-      The outbound (egress) routing method. Possible values include:
-      'loadBalancer',
-
-      'userDefinedRouting'. Default value: 'loadBalancer'.
+      This can only be set at cluster creation time and cannot be changed later.
+      For more information see [egress outbound
+      type](https://docs.microsoft.com/azure/aks/egress-outboundtype).
     fullName: outboundType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'outboundType?: OutboundType'
+      content: 'outboundType?: string'
       return:
-        type: <xref uid="@azure/arm-containerservice.OutboundType" />
         description: ''
+        type: string
   - name: podCidr
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.podCidr'
     package: '@azure/arm-containerservice'
     summary: >-
       A CIDR notation IP range from which to assign pod IPs when kubenet is
-      used. Default value:
-
-      '10.244.0.0/16'.
+      used.
     fullName: podCidr
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'podCidr?: undefined | string'
+      content: 'podCidr?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+  - name: podCidrs
+    uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.podCidrs'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for
+      each IP family (IPv4/IPv6), is expected for dual-stack networking.
+    fullName: podCidrs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'podCidrs?: string[]'
+      return:
+        description: ''
+        type: string[]
   - name: serviceCidr
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.serviceCidr'
     package: '@azure/arm-containerservice'
     summary: >-
       A CIDR notation IP range from which to assign service cluster IPs. It must
-      not overlap with
-
-      any Subnet IP ranges. Default value: '10.0.0.0/16'.
+      not overlap with any Subnet IP ranges.
     fullName: serviceCidr
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'serviceCidr?: undefined | string'
+      content: 'serviceCidr?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+  - name: serviceCidrs
+    uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.serviceCidrs'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      One IPv4 CIDR is expected for single-stack networking. Two CIDRs, one for
+      each IP family (IPv4/IPv6), is expected for dual-stack networking. They
+      must not overlap with any Subnet IP ranges.
+    fullName: serviceCidrs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'serviceCidrs?: string[]'
+      return:
+        description: ''
+        type: string[]

@@ -1,17 +1,13 @@
 ---
 title: Azure Metrics Advisor client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/ai-metrics-advisor, 
-author: maggiepint
-ms.author: magpint
-ms.date: 02/09/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+keywords: Azure, javascript, SDK, API, @azure/ai-metrics-advisor,
+ms.date: 06/08/2021
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: applied-ai-services
+ms.subservice: metrics-advisor
 ---
-
-# Azure Metrics Advisor client library for JavaScript - Version 1.0.0-beta.3 
+# Azure Metrics Advisor client library for JavaScript - version 1.0.0-beta.4 
 
 
 Metrics Advisor is a part of Azure Cognitive Services that uses AI perform data monitoring and anomaly detection in time series data. The service automates the process of applying models to your data, and provides a set of APIs web-based workspace for data ingestion, anomaly detection, and diagnostics - without needing to know machine learning. Use Metrics Advisor to:
@@ -21,11 +17,11 @@ Metrics Advisor is a part of Azure Cognitive Services that uses AI perform data 
 - Configure and fine-tune the anomaly detection model used on your data
 - Diagnose anomalies and help with root cause analysis.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-metrics-advisor_1.0.0-beta.3/sdk/metricsadvisor/ai-metrics-advisor/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-metrics-advisor_1.0.0-beta.4/sdk/metricsadvisor/ai-metrics-advisor/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-metrics-advisor) |
-[API reference documentation](https://aka.ms/azsdk/js/metricsadvisor/docs) |
+[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/ai-metrics-advisor) |
 [Product documentation](https://docs.microsoft.com/azure/cognitive-services/metrics-advisor/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.3/sdk/metricsadvisor/ai-metrics-advisor/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.4/sdk/metricsadvisor/ai-metrics-advisor/samples)
 
 ## Getting started
 
@@ -91,6 +87,7 @@ const credential = new MetricsAdvisorKeyCredential("<subscription Key>", "<API k
 const client = new MetricsAdvisorClient("<endpoint>", credential);
 const adminClient = new MetricsAdvisorAdministrationClient("<endpoint>", credential);
 ```
+
 #### Using Azure Service Directory
 
 API key authorization is used in most of the examples, but you can also authenticate the client with Azure Active Directory using the Azure Identity library. To use the DefaultAzureCredential provider shown below or other credential providers provided with the Azure SDK, please install the @azure/identity package:
@@ -99,7 +96,7 @@ API key authorization is used in most of the examples, but you can also authenti
 npm install @azure/identity
 ```
 
-To authenticate using a service principal, you will also need to register an AAD application and grant access to Form Recognizer by assigning the "Cognitive Services User" role to your service principal (note: other roles such as "Owner" will not grant the necessary permissions, only "Cognitive Services User" will suffice to run the examples and the sample code).
+To authenticate using a service principal, you will also need to register an AAD application and grant access to Metrics Advisor by assigning the "Cognitive Services User" role to your service principal (note: other roles such as "Owner" will not grant the necessary permissions, only "Cognitive Services User" will suffice to run the examples and the sample code).
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 We also support Authentication by Azure Active Directoty Credential. You will need the Azure Tenant ID, Azure Client ID and Azure Client Secret as environment variables.
@@ -204,7 +201,8 @@ async function createDataFeed(adminClient, sqlServerConnectionString, sqlServerQ
       dataSourceParameter: {
         connectionString: sqlServerConnectionString,
         query: sqlServerQuery
-      }
+      },
+      authenticationType: "Basic"
     },
     granularity: {
       granularityType: "Daily"
@@ -485,25 +483,27 @@ async function queryAnomaliesByAlert(client, alert) {
 
 ## Troubleshooting
 
-### Enable logs
+### Logging
 
-You can set the following environment variable to see debug logs when using this library.
+Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-- Getting debug logs from the Azure MetricsAdvisor client library
+```javascript
+import { setLogLevel } from "@azure/logger";
 
-```bash
-export DEBUG=azure*
+setLogLevel("info");
 ```
+
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.4/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.3/sdk/metricsadvisor/ai-metrics-advisor/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.4/sdk/metricsadvisor/ai-metrics-advisor/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-metrics-advisor_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test \
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-metrics-advisor_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test \
 the code.
 
 ## Related projects
@@ -516,8 +516,8 @@ the code.
 [azure_sub]: https://azure.microsoft.com/free/
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.3/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.4/sdk/identity/identity
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-metrics-advisor_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
 [metrics_advisor_glossary]: https://docs.microsoft.com/azure/cognitive-services/metrics-advisor/glossary
 

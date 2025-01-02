@@ -1,24 +1,20 @@
 ---
 title: Azure Key Vault Key client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/keyvault-keys, 
-author: maggiepint
-ms.author: magpint
-ms.date: 08/12/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+keywords: Azure, javascript, SDK, API, @azure/keyvault-keys, keyvault
+ms.date: 10/17/2024
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: keyvault
 ---
-
-# Azure Key Vault Key client library for JavaScript - Version 4.1.0 
+# Azure Key Vault Key client library for JavaScript - version 4.9.0 
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
-If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?](https://docs.microsoft.com/azure/key-vault/key-vault-overview)
+If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?][keyvault]
 
-Azure Key Vault Key management allows you to create and control 
-encryption keys that encrypt your data.
+Azure Key Vault Managed HSM is a fully-managed, highly-available, single-tenant, standards-compliant cloud service that enables you to safeguard cryptographic keys for your cloud applications using FIPS 140-2 Level 3 validated HSMs. If you would like to know more about Azure Key Vault Managed HSM, you may want to review: [What is Azure Key Vault Managed HSM?][managedhsm]
+
+The Azure Key Vault key library client supports RSA keys, Elliptic Curve (EC) keys, as well as Symmetric (oct) keys when running against a managed HSM, each with corresponding support in hardware security modules (HSM). It offers operations to create, retrieve, update, delete, purge, backup, restore, and list the keys and its versions.
 
 Use the client library for Azure Key Vault Keys in your Node.js application to:
 
@@ -37,16 +33,27 @@ Using the cryptography client available in this library you also have access to:
 - Wrapping keys
 - Unwrapping keys
 
-> Note: This package cannot be used in the browser due to Azure Key Vault service limitations.
+> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document][cors] for guidance.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-keys) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-keys) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-keys) | [Product documentation](https://azure.microsoft.com/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-keys/samples)
+Key links:
+
+- [Source code][package-gh]
+- [Package (npm)][package-npm]
+- [API Reference Documentation][docs]
+- [Product documentation][docs-service]
+- [Samples][samples]
 
 ## Getting started
 
-**Prerequisites**: You must have an [Azure subscription](https://azure.microsoft.com/free/) and a
-[Key Vault resource](https://docs.microsoft.com/azure/key-vault/quick-create-portal) to use this package.
+### Currently supported environments
 
-If you are using this package in a Node.js application, then use Node.js 8.x or higher.
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
+
+### Prerequisites
+
+- An [Azure subscription](https://azure.microsoft.com/free/)
+- An existing [Azure Key Vault][azure_keyvault]. If you need to create a key vault, you can do so in the Azure Portal by following the steps in [this document][azure_keyvault_portal]. Alternatively, use the Azure CLI by following [these steps][azure_keyvault_cli].
+- If using Managed HSM, an existing [Azure Key Vault Managed HSM][azure_keyvault_mhsm]. If you need to create a Managed HSM, you can do so using the Azure CLI by following the steps in [this document][azure_keyvault_mhsm_cli].
 
 ### Install the package
 
@@ -56,7 +63,7 @@ Install the Azure Key Vault Key client library using npm
 
 ### Install the identity library
 
-Key Vault clients authenticate using the Azure identity library. Install it as well using npm
+Azure Key Vault clients authenticate using the Azure identity library. Install it as well using npm
 
 `npm install @azure/identity`
 
@@ -68,47 +75,7 @@ TypeScript users need to have Node type definitions installed:
 npm install @types/node
 ```
 
-You also need to enable `compilerOptions.allowSyntheticDefaultImports` in your tsconfig.json. Note that if you have enabled `compilerOptions.esModuleInterop`, `allowSyntheticDefaultImports` is enabled by default. See [TypeScript's compiler options handbook](https://www.typescriptlang.org/docs/handbook/compiler-options.html) for more information.
-
-### Configuring your Key Vault
-
-Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to create/get client secret credentials.
-
-- Create a service principal and configure its access to Azure resources:
-  ```Bash
-  az ad sp create-for-rbac -n <your-application-name> --skip-assignment
-  ```
-  Output:
-  ```json
-  {
-    "appId": "generated-app-ID",
-    "displayName": "dummy-app-name",
-    "name": "http://dummy-app-name",
-    "password": "random-password",
-    "tenant": "tenant-ID"
-  }
-  ```
-- Use the above returned credentials information to set **AZURE_CLIENT_ID**(appId), **AZURE_CLIENT_SECRET**(password) and **AZURE_TENANT_ID**(tenant) environment variables. The following example shows a way to do this in Bash:
-
-  ```Bash
-    export AZURE_CLIENT_ID="generated-app-ID"
-    export AZURE_CLIENT_SECRET="random-password"
-    export AZURE_TENANT_ID="tenant-ID"
-  ```
-
-- Grant the above mentioned application authorization to perform key operations on the keyvault:
-
-  ```Bash
-  az keyvault set-policy --name <your-key-vault-name> --spn $AZURE_CLIENT_ID --key-permissions backup create decrypt delete encrypt get import list purge recover restore sign unwrapKey update verify wrapKey
-  ```
-
-  > --secret-permissions:
-  > Accepted values: backup, create, decrypt, delete, encrypt, get, import, list, purge, recover, restore, sign, unwrapKey, update, verify, wrapKey
-
-- Use the above mentioned Key Vault name to retrieve details of your Vault which also contains your Key Vault URL:
-  ```Bash
-  az keyvault show --name <your-key-vault-name>
-  ```
+You also need to enable `compilerOptions.allowSyntheticDefaultImports` in your tsconfig.json. Note that if you have enabled `compilerOptions.esModuleInterop`, `allowSyntheticDefaultImports` is enabled by default. See [TypeScript's compiler options handbook][tscompileroptions] for more information.
 
 ## Key concepts
 
@@ -123,7 +90,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
   query.
 - **Soft delete** allows Key Vaults to support deletion and purging as two
   separate steps, so deleted keys are not immediately lost. This only happens if the Key Vault
-  has [soft-delete](https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete)
+  has [soft-delete][softdelete]
   enabled.
 - A **Key backup** can be generated from any created key. These backups come as
   binary data, and can only be used to regenerate a previously deleted key.
@@ -135,7 +102,11 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.9.0/sdk/identity/identity/README.md) provides more details and samples to get you started.
+
+In order to interact with the Azure Key Vault service, you will need to create an instance of the `KeyClient` class, a **vault url** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][default_azure_credential], which is appropriate for most scenarios, including local development and production environments. Additionally, we recommend using a [managed identity][managed_identity] for authentication in production environments.
+
+You can find more information on different ways of authenticating and their corresponding credential types in the [Azure Identity documentation][azure_identity].
 
 Here's a quick example. First, import `DefaultAzureCredential` and `KeyClient`:
 
@@ -144,21 +115,17 @@ const { DefaultAzureCredential } = require("@azure/identity");
 const { KeyClient } = require("@azure/keyvault-keys");
 ```
 
-Once these are imported, we can next connect to the Key Vault service. To do this, we'll need to copy some settings from the key vault we are connecting to into our environment variables. Once they are in our environment, we can access them with the following code:
+Once these are imported, we can next connect to the Key Vault service:
 
-```typescript
+```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
 const { KeyClient } = require("@azure/keyvault-keys");
 
-// DefaultAzureCredential expects the following three environment variables:
-// * AZURE_TENANT_ID: The tenant ID in Azure Active Directory
-// * AZURE_CLIENT_ID: The application (client) ID registered in the AAD tenant
-// * AZURE_CLIENT_SECRET: The client secret for the registered application
 const credential = new DefaultAzureCredential();
 
 // Build the URL to reach your key vault
 const vaultName = "<YOUR KEYVAULT NAME>";
-const url = `https://${vaultName}.vault.azure.net`;
+const url = `https://${vaultName}.vault.azure.net`; // or `https://${vaultName}.managedhsm.azure.net` for managed HSM.
 
 // Lastly, create our keys client and connect to the service
 const client = new KeyClient(url, credential);
@@ -166,9 +133,9 @@ const client = new KeyClient(url, credential);
 
 ## Specifying the Azure Key Vault service API version
 
-By default, this package uses the latest Azure Key Vault service version which is `7.1`. The only other version that is supported is `7.0`. You can change the service version being used by setting the option `serviceVersion` in the client constructor as shown below:
+By default, this package uses the latest Azure Key Vault service version which is `7.2`. You can change the service version being used by setting the option `serviceVersion` in the client constructor as shown below:
 
-```typescript
+```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
 const { KeyClient } = require("@azure/keyvault-keys");
 
@@ -179,7 +146,7 @@ const url = `https://${vaultName}.vault.azure.net`;
 
 // Change the Azure Key Vault service API version being used via the `serviceVersion` option
 const client = new KeyClient(url, credential, {
-  serviceVersion: "7.0"
+  serviceVersion: "7.0", // Or 7.1
 });
 ```
 
@@ -196,8 +163,7 @@ tasks using Azure Key Vault Keys. The scenarios that are covered here consist of
 
 ### Creating a key
 
-`createKey` creates a Key to be stored in the Azure Key Vault. If a key with
-the same name already exists, then a new version of the key is created.
+`createKey` creates a Key to be stored in the Azure Key Vault. If a key with the same name already exists, then a new version of the key is created.
 
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
@@ -220,13 +186,7 @@ async function main() {
 main();
 ```
 
-The second parameter sent to `createKey` is the type of the key. Keys can
-either be of either one of the following types:
-
-- `EC` for a key generated using Elliptic Curve cryptography.
-- `EC-HSM` for a key generated with Elliptic Curve cryptography with Hardware Security Modules.
-- `RSA` for Rivest, Shamir, and Adelman cryptography.
-- `RSA-HSM` for Rivest, Shamir, and Adelman cryptography with Hardware Security Modules.
+The second parameter sent to `createKey` is the type of the key. The type of keys that are supported will depend on the SKU and whether you are using an Azure Key Vault or an Azure Managed HSM. For an up-to-date list of supported key types please refer to [About keys][aboutkeys]
 
 ### Getting a key
 
@@ -237,7 +197,7 @@ parameters.
 
 `getKey` retrieves a key previous stores in the Key Vault.
 
-```javascript
+```typescript
 const { DefaultAzureCredential } = require("@azure/identity");
 const { KeyClient } = require("@azure/keyvault-keys");
 
@@ -288,7 +248,7 @@ const keyName = "MyKeyName";
 
 async function main() {
   const result = await client.createKey(keyName, "RSA", {
-    enabled: false
+    enabled: false,
   });
   console.log("result: ", result);
 }
@@ -318,7 +278,7 @@ const keyName = "MyKeyName";
 async function main() {
   const result = await client.createKey(keyName, "RSA");
   await client.updateKeyProperties(keyName, result.properties.version, {
-    enabled: false
+    enabled: false,
   });
 }
 
@@ -352,12 +312,12 @@ async function main() {
 main();
 ```
 
-If [soft-delete](https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete)
+If [soft-delete][softdelete]
 is enabled for the Key Vault, this operation will only label the key as a
-_deleted_ key. A deleted key can't be updated. They can only be either
+_deleted_ key. A deleted key can't be updated. They can only be
 read, recovered or purged.
 
-```javascript
+```typescript
 const { DefaultAzureCredential } = require("@azure/identity");
 const { KeyClient } = require("@azure/keyvault-keys");
 
@@ -371,7 +331,7 @@ const client = new KeyClient(url, credential);
 const keyName = "MyKeyName";
 
 async function main() {
-  const poller = await client.beginDeleteKey(keyName)
+  const poller = await client.beginDeleteKey(keyName);
 
   // You can use the deleted key immediately:
   const deletedKey = poller.getResult();
@@ -385,7 +345,7 @@ async function main() {
   // Deleted keys can also be recovered or purged:
 
   // recoverDeletedKey also returns a poller, just like beginDeleteKey.
-  const recoverPoller = await client.beginRecoverDeletedKey(keyName)
+  const recoverPoller = await client.beginRecoverDeletedKey(keyName);
   await recoverPoller.pollUntilDone();
 
   // And here is how to purge a deleted key
@@ -401,7 +361,7 @@ Operation according to our guidelines:
 https://azure.github.io/azure-sdk/typescript_design.html#ts-lro
 
 The received poller will allow you to get the deleted key by calling to `poller.getResult()`.
-You can also wait until the deletion finishes, either by running individual service
+You can also wait until the deletion finishes either by running individual service
 calls until the key is deleted, or by waiting until the process is done:
 
 ```typescript
@@ -436,7 +396,7 @@ Another way to wait until the key is fully deleted is to do individual calls, as
 ```typescript
 const { DefaultAzureCredential } = require("@azure/identity");
 const { KeyClient } = require("@azure/keyvault-keys");
-const { delay } = require("@azure/core-http");
+const { delay } = require("@azure/core-util");
 
 const credential = new DefaultAzureCredential();
 
@@ -461,10 +421,48 @@ async function main() {
 main();
 ```
 
+### Configuring Automatic Key Rotation
+
+Using the KeyClient, you can configure automatic key rotation for a key by specifying the rotation policy.
+In addition, KeyClient provides a method to rotate a key on-demand by creating a new version of the given key.
+
+```javascript
+const { DefaultAzureCredential } = require("@azure/identity");
+const { KeyClient } = require("@azure/keyvault-keys");
+
+const url = `https://<YOUR KEYVAULT NAME>.vault.azure.net`;
+const client = new KeyClient(url, new DefaultAzureCredential());
+
+async function main() {
+  const keyName = "MyKeyName";
+
+  // Set the key's automated rotation policy to rotate the key 30 days before expiry.
+  const policy = await client.updateKeyRotationPolicy(keyName, {
+    lifetimeActions: [
+      {
+        action: "Rotate",
+        timeBeforeExpiry: "P30D",
+      },
+    ],
+    // You may also specify the duration after which any newly rotated key will expire.
+    // In this case, any new key versions will expire after 90 days.
+    expiresIn: "P90D",
+  });
+
+  // You can get the current key rotation policy of a given key by calling the getKeyRotationPolicy method.
+  const currentPolicy = await client.getKeyRotationPolicy(keyName);
+
+  // Finally, you can rotate a key on-demand by creating a new version of the given key.
+  const rotatedKey = await client.rotateKey(keyName);
+}
+
+main();
+```
+
 ### Iterating lists of keys
 
 Using the KeyClient, you can retrieve and iterate through all of the
-keys in a Key Vault, as well as through all of the deleted keys and the
+keys in an Azure Key Vault, as well as through all of the deleted keys and the
 versions of a specific key. The following API methods are available:
 
 - `listPropertiesOfKeys` will list all of your non-deleted keys by their names, only
@@ -538,6 +536,8 @@ async function main() {
     }
   }
 }
+
+main();
 ```
 
 ## Cryptography
@@ -548,7 +548,7 @@ connect to Azure Key Vault with the provided set of credentials. Once
 connected, `CryptographyClient` can encrypt, decrypt, sign, verify, wrap keys,
 and unwrap keys.
 
-We can next connect to the key vault service just as we do with the KeyClient.
+We can next connect to the key vault service just as we do with the `KeyClient`.
 We'll need to copy some settings from the key vault we are
 connecting to into our environment variables. Once they are in our environment,
 we can access them with the following code:
@@ -568,14 +568,16 @@ async function main() {
   // Create or retrieve a key from the keyvault
   let myKey = await keysClient.createKey("MyKey", "RSA");
 
-// Lastly, create our cryptography client and connect to the service
-// This example uses the URL that is part of the key we created (called key ID)
-const cryptographyClient = new CryptographyClient(myKey.id, credential);
+  // Lastly, create our cryptography client and connect to the service
+  const cryptographyClient = new CryptographyClient(myKey, credential);
+}
+
+main();
 ```
 
 ### Encrypt
 
-`encrypt` will encrypt a message. The following algorithms are currently supported: "RSA-OAEP", "RSA-OAEP-256", and "RSA1_5".
+`encrypt` will encrypt a message.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -592,7 +594,10 @@ async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
   const cryptographyClient = new CryptographyClient(myKey.id, credential);
 
-  const encryptResult = await cryptographyClient.encrypt("RSA1_5", Buffer.from("My Message"));
+  const encryptResult = await cryptographyClient.encrypt({
+    algorithm: "RSA1_5",
+    plaintext: Buffer.from("My Message"),
+  });
   console.log("encrypt result: ", encryptResult.result);
 }
 
@@ -601,7 +606,7 @@ main();
 
 ### Decrypt
 
-`decrypt` will decrypt an encrypted message. The following algorithms are currently supported: "RSA-OAEP", "RSA-OAEP-256", and "RSA1_5".
+`decrypt` will decrypt an encrypted message.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -618,10 +623,16 @@ async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
   const cryptographyClient = new CryptographyClient(myKey.id, credential);
 
-  const encryptResult = await cryptographyClient.encrypt("RSA1_5", Buffer.from("My Message"));
+  const encryptResult = await cryptographyClient.encrypt({
+    algorithm: "RSA1_5",
+    plaintext: Buffer.from("My Message"),
+  });
   console.log("encrypt result: ", encryptResult.result);
 
-  const decryptResult = await cryptographyClient.decrypt("RSA1_5", encryptResult.result);
+  const decryptResult = await cryptographyClient.decrypt({
+    algorithm: "RSA1_5",
+    ciphertext: encryptResult.result,
+  });
   console.log("decrypt result: ", decryptResult.result.toString());
 }
 
@@ -630,7 +641,7 @@ main();
 
 ### Sign
 
-`sign` will cryptographically sign the digest (hash) of a message with a signature. The following algorithms are currently supported: "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "ES256","ES256K", "ES384", and "ES512".
+`sign` will cryptographically sign the digest (hash) of a message with a signature.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -646,10 +657,10 @@ const keysClient = new KeyClient(url, credential);
 
 async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
-  const cryptographyClient = new CryptographyClient(myKey.id, credential);
+  const cryptographyClient = new CryptographyClient(myKey, credential);
 
   const signatureValue = "MySignature";
-  let hash = crypto.createHash("sha256");
+  let hash = createHash("sha256");
 
   let digest = hash.update(signatureValue).digest();
   console.log("digest: ", digest);
@@ -663,7 +674,7 @@ main();
 
 ### Sign Data
 
-`signData` will cryptographically sign a message with a signature. The following algorithms are currently supported: "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "ES256","ES256K", "ES384", and "ES512".
+`signData` will cryptographically sign a message with a signature.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -678,7 +689,7 @@ const keysClient = new KeyClient(url, credential);
 
 async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
-  const cryptographyClient = new CryptographyClient(myKey.id, credential);
+  const cryptographyClient = new CryptographyClient(myKey, credential);
 
   const signResult = await cryptographyClient.signData("RS256", Buffer.from("My Message"));
   console.log("sign result: ", signResult.result);
@@ -689,11 +700,12 @@ main();
 
 ### Verify
 
-`verify` will cryptographically verify that the signed digest was signed with the given signature. The following algorithms are currently supported: "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "ES256","ES256K", "ES384", and "ES512".
+`verify` will cryptographically verify that the signed digest was signed with the given signature.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
 import { KeyClient, CryptographyClient } from "@azure/keyvault-keys";
+import { createHash } from "crypto";
 
 const credential = new DefaultAzureCredential();
 
@@ -704,7 +716,7 @@ const keysClient = new KeyClient(url, credential);
 
 async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
-  const cryptographyClient = new CryptographyClient(myKey.id, credential);
+  const cryptographyClient = new CryptographyClient(myKey, credential);
 
   const hash = createHash("sha256");
   hash.update("My Message");
@@ -722,7 +734,7 @@ main();
 
 ### Verify Data
 
-`verifyData` will cryptographically verify that the signed message was signed with the given signature. The following algorithms are currently supported: "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "ES256","ES256K", "ES384", and "ES512".
+`verifyData` will cryptographically verify that the signed message was signed with the given signature.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -737,11 +749,11 @@ const keysClient = new KeyClient(url, credential);
 
 async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
-  const cryptographyClient = new CryptographyClient(myKey.id, credential);
+  const cryptographyClient = new CryptographyClient(myKey, credential);
 
   const buffer = Buffer.from("My Message");
 
-  const signResult = await cryptographyClient.sign("RS256", buffer);
+  const signResult = await cryptographyClient.signData("RS256", buffer);
   console.log("sign result: ", signResult.result);
 
   const verifyResult = await cryptographyClient.verifyData("RS256", buffer, signResult.result);
@@ -753,7 +765,7 @@ main();
 
 ### Wrap Key
 
-`wrapKey` will wrap a key with an encryption layer. The following algorithms are currently supported: "RSA-OAEP", "RSA-OAEP-256", and "RSA1_5".
+`wrapKey` will wrap a key with an encryption layer.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -768,7 +780,7 @@ const keysClient = new KeyClient(url, credential);
 
 async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
-  const cryptographyClient = new CryptographyClient(myKey.id, credential);
+  const cryptographyClient = new CryptographyClient(myKey, credential);
 
   const wrapResult = await cryptographyClient.wrapKey("RSA-OAEP", Buffer.from("My Key"));
   console.log("wrap result:", wrapResult.result);
@@ -779,7 +791,7 @@ main();
 
 ### Unwrap Key
 
-`unwrapKey` will unwrap a wrapped key. The following algorithms are currently supported: "RSA-OAEP", "RSA-OAEP-256", and "RSA1_5".
+`unwrapKey` will unwrap a wrapped key.
 
 ```javascript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -794,7 +806,7 @@ const keysClient = new KeyClient(url, credential);
 
 async function main() {
   let myKey = await keysClient.createKey("MyKey", "RSA");
-  const cryptographyClient = new CryptographyClient(myKey.id, credential);
+  const cryptographyClient = new CryptographyClient(myKey, credential);
 
   const wrapResult = await cryptographyClient.wrapKey("RSA-OAEP", Buffer.from("My Key"));
   console.log("wrap result:", wrapResult.result);
@@ -808,10 +820,12 @@ main();
 
 ## Troubleshooting
 
+See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.9.0/sdk/keyvault/keyvault-keys/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
+
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
 ```javascript
-import { setLogLevel } from "@azure/logger";
+const { setLogLevel } = require("@azure/logger");
 
 setLogLevel("info");
 ```
@@ -820,12 +834,33 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Keys Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-keys/samples/javascript)
-- [KeyVault Keys Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-keys/samples/typescript)
-- [KeyVault Keys Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-keys/test/)
+- [Key Vault Keys Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.9.0/sdk/keyvault/keyvault-keys/samples/v4/javascript)
+- [Key Vault Keys Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.9.0/sdk/keyvault/keyvault-keys/samples/v4/typescript)
+- [Key Vault Keys Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.9.0/sdk/keyvault/keyvault-keys/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.9.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+
+[aboutkeys]: /azure/key-vault/keys/about-keys
+[keyvault]: /azure/key-vault/key-vault-overview
+[managedhsm]: /azure/key-vault/managed-hsm/overview
+[cors]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.9.0/samples/cors/ts/README.md
+[package-gh]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.9.0/sdk/keyvault/keyvault-keys
+[package-npm]: https://www.npmjs.com/package/@azure/keyvault-keys
+[docs]: /javascript/api/@azure/keyvault-keys
+[docs-service]: https://azure.microsoft.com/services/key-vault/
+[samples]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.9.0/sdk/keyvault/keyvault-keys/samples
+[tscompileroptions]: https://www.typescriptlang.org/docs/handbook/compiler-options.html
+[softdelete]: /azure/key-vault/key-vault-ovw-soft-delete
+[azure_keyvault]: /azure/key-vault/general/overview
+[azure_keyvault_cli]: /azure/key-vault/general/quick-create-cli
+[azure_keyvault_portal]: /azure/key-vault/general/quick-create-portal
+[azure_keyvault_mhsm]: /azure/key-vault/managed-hsm/overview
+[azure_keyvault_mhsm_cli]: /azure/key-vault/managed-hsm/quick-create-cli
+[default_azure_credential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest
+[managed_identity]: /azure/active-directory/managed-identities-azure-resources/overview
+[azure_identity]: https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
+

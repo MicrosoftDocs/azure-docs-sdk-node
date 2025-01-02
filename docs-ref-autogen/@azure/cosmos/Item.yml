@@ -2,10 +2,14 @@
 name: Item
 uid: '@azure/cosmos.Item'
 package: '@azure/cosmos'
-summary: Used to perform operations on a specific item.
+summary: >-
+  Used to perform operations on a specific item.
+
+
+  See [Items](xref:@azure/cosmos.Items) for operations on all items; see
+  `container.items`.
 fullName: Item
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 properties:
@@ -15,68 +19,92 @@ properties:
     summary: ''
     fullName: container
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'container: Container'
       return:
-        type: <xref uid="@azure/cosmos.Container" />
         description: ''
+        type: <xref uid="@azure/cosmos.Container" />
   - name: id
     uid: '@azure/cosmos.Item.id'
     package: '@azure/cosmos'
     summary: ''
     fullName: id
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'id: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: url
     uid: '@azure/cosmos.Item.url'
     package: '@azure/cosmos'
     summary: Returns a reference URL to the resource. Used for linking in Permissions.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: string url
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: delete<T>(RequestOptions)
     uid: '@azure/cosmos.Item.delete'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Delete the item.
+
 
       Any provided type, T, is not necessarily enforced by the SDK.
 
       You may get more or less properties and it's up to your logic to enforce
       it.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete<T>(options?: RequestOptions)'
+      content: 'function delete<T>(options?: RequestOptions): Promise<ItemResponse<T>>'
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
-          description: |
-            Additional options for the request
+          description: Additional options for the request
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
+  - name: patch<T>(PatchRequestBody, RequestOptions)
+    uid: '@azure/cosmos.Item.patch'
+    package: '@azure/cosmos'
+    summary: >-
+      Perform a JSONPatch on the item.
+
+
+      Any provided type, T, is not necessarily enforced by the SDK.
+
+      You may get more or less properties and it's up to your logic to enforce
+      it.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function patch<T>(body: PatchRequestBody, options?: RequestOptions):
+        Promise<ItemResponse<T>>
+      parameters:
+        - id: body
+          type: <xref uid="@azure/cosmos.PatchRequestBody" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/cosmos.RequestOptions" />
+          description: Additional options for the request
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
   - name: read<T>(RequestOptions)
     uid: '@azure/cosmos.Item.read'
     package: '@azure/cosmos'
-    summary: >
+    summary: >+
       Read the item's definition.
+
 
       Any provided type, T, is not necessarily enforced by the SDK.
 
@@ -91,52 +119,74 @@ methods:
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
+
+
+      **Example**
+
+
+      Using custom type for response
+
+      ```typescript
+
+      interface TodoItem {
+        title: string;
+        done: bool;
+        id: string;
+      }
+
+
+      let item: TodoItem;
+
+      ({body: item} = await item.read<TodoItem>());
+
+      ```
+
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function read<T>(options?: RequestOptions)'
+      content: 'function read<T>(options?: RequestOptions): Promise<ItemResponse<T>>'
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
-          description: |
-            Additional options for the request
+          description: Additional options for the request
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
         description: ''
-  - name: 'replace(ItemDefinition, RequestOptions)'
+        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
+  - name: replace(ItemDefinition, RequestOptions)
     uid: '@azure/cosmos.Item.replace'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Replace the item's definition.
+
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function replace(body: ItemDefinition, options?: RequestOptions)'
+      content: >-
+        function replace(body: ItemDefinition, options?: RequestOptions):
+        Promise<ItemResponse<ItemDefinition>>
       parameters:
         - id: body
           type: <xref uid="@azure/cosmos.ItemDefinition" />
           description: >-
-            The definition to replace the existing <xref:Item>'s definition
-            with.
+            The definition to replace the existing
+            [Item](xref:@azure/cosmos.Item)'s definition with.
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
-          description: |
-            Additional options for the request
+          description: Additional options for the request
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;<xref
           uid="@azure/cosmos.ItemDefinition" />&gt;&gt;
-        description: ''
-  - name: 'replace<T>(T, RequestOptions)'
+  - name: replace<T>(T, RequestOptions)
     uid: '@azure/cosmos.Item.replace_1'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Replace the item's definition.
+
 
       Any provided type, T, is not necessarily enforced by the SDK.
 
@@ -147,20 +197,20 @@ methods:
       There is no set schema for JSON items. They may contain any number of
       custom properties.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function replace<T>(body: T, options?: RequestOptions)'
+      content: >-
+        function replace<T>(body: T, options?: RequestOptions):
+        Promise<ItemResponse<T>>
       parameters:
         - id: body
           type: T
           description: >-
-            The definition to replace the existing <xref:Item>'s definition
-            with.
+            The definition to replace the existing
+            [Item](xref:@azure/cosmos.Item)'s definition with.
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
-          description: |
-            Additional options for the request
+          description: Additional options for the request
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;

@@ -3,9 +3,8 @@ name: SearchDocumentsPageResult
 uid: '@azure/search-documents.SearchDocumentsPageResult'
 package: '@azure/search-documents'
 summary: Response containing search page results from an index.
-fullName: SearchDocumentsPageResult<T>
+fullName: SearchDocumentsPageResult<TModel, TFields>
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -17,13 +16,53 @@ properties:
       enforces pagination.
     fullName: continuationToken
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'continuationToken?: string'
       return:
-        type: string
         description: ''
+        type: string
+  - name: results
+    uid: '@azure/search-documents.SearchDocumentsPageResult.results'
+    package: '@azure/search-documents'
+    summary: >-
+      The sequence of results returned by the query.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    fullName: results
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'results: SearchResult<TModel, TFields>[]'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/search-documents.SearchResult" />&lt;TModel,
+          TFields&gt;[]
+inheritedProperties:
+  - name: answers
+    uid: '@azure/search-documents.SearchDocumentsPageResult.answers'
+    package: '@azure/search-documents'
+    summary: >-
+      The answers query results for the search operation; null if the answers
+      query parameter was
+
+      not specified or set to 'none'.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: answers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'answers?: QueryAnswerResult[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.QueryAnswerResult" />[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SearchDocumentsResultBase.answers](xref:@azure/search-documents.SearchDocumentsResultBase.answers)
   - name: count
     uid: '@azure/search-documents.SearchDocumentsPageResult.count'
     package: '@azure/search-documents'
@@ -43,13 +82,15 @@ properties:
       the server.**
     fullName: count
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'count?: number'
       return:
-        type: number
         description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SearchDocumentsResultBase.count](xref:@azure/search-documents.SearchDocumentsResultBase.count)
   - name: coverage
     uid: '@azure/search-documents.SearchDocumentsPageResult.coverage'
     package: '@azure/search-documents'
@@ -63,13 +104,15 @@ properties:
       the server.**
     fullName: coverage
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'coverage?: number'
       return:
-        type: number
         description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SearchDocumentsResultBase.coverage](xref:@azure/search-documents.SearchDocumentsResultBase.coverage)
   - name: facets
     uid: '@azure/search-documents.SearchDocumentsPageResult.facets'
     package: '@azure/search-documents'
@@ -84,28 +127,56 @@ properties:
       the server.**
     fullName: facets
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'facets?: [key: string]: function'
+      content: 'facets?: {[propertyName: string]: FacetResult[]}'
       return:
-        type: '[key: string]\: function'
         description: ''
-  - name: results
-    uid: '@azure/search-documents.SearchDocumentsPageResult.results'
+        type: >-
+          {[propertyName: string]: <xref
+          uid="@azure/search-documents.FacetResult" />[]}
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SearchDocumentsResultBase.facets](xref:@azure/search-documents.SearchDocumentsResultBase.facets)
+  - name: semanticErrorReason
+    uid: '@azure/search-documents.SearchDocumentsPageResult.semanticErrorReason'
     package: '@azure/search-documents'
     summary: >-
-      The sequence of results returned by the query.
+      Reason that a partial response was returned for a semantic search request.
 
-      **NOTE: This property will not be serialized. It can only be populated by
-      the server.**
-    fullName: results
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: semanticErrorReason
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'results: SearchResult<T>[]'
+      content: >-
+        semanticErrorReason?: "maxWaitExceeded" | "capacityOverloaded" |
+        "transient"
       return:
-        type: '<xref uid="@azure/search-documents.SearchResult" />&lt;T&gt;[]'
         description: ''
+        type: '"maxWaitExceeded" | "capacityOverloaded" | "transient"'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SearchDocumentsResultBase.semanticErrorReason](xref:@azure/search-documents.SearchDocumentsResultBase.semanticErrorReason)
+  - name: semanticSearchResultsType
+    uid: >-
+      @azure/search-documents.SearchDocumentsPageResult.semanticSearchResultsType
+    package: '@azure/search-documents'
+    summary: >-
+      Type of partial response that was returned for a semantic search request.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: semanticSearchResultsType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'semanticSearchResultsType?: "baseResults" | "rerankedResults"'
+      return:
+        description: ''
+        type: '"baseResults" | "rerankedResults"'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SearchDocumentsResultBase.semanticSearchResultsType](xref:@azure/search-documents.SearchDocumentsResultBase.semanticSearchResultsType)
 extends: <xref uid="@azure/search-documents.SearchDocumentsResultBase" />

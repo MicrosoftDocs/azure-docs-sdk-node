@@ -1,18 +1,13 @@
 ---
-title: Azure Service Bus client library for Javascript
-keywords: Azure, javascript, SDK, API, @azure/service-bus, 
-author: maggiepint
-ms.author: magpint
-ms.date: 11/05/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+title: Azure Service Bus client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/service-bus, service-bus-messaging
+ms.date: 05/07/2024
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: service-bus-messaging
 ---
+# Azure Service Bus client library for JavaScript - version 7.10.0-beta.1 
 
-# Azure Service Bus client library for Javascript - Version 7.0.0-preview.8 
- (Preview)
 
 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) is a highly-reliable cloud messaging service from Microsoft.
 
@@ -22,39 +17,37 @@ Use the client library `@azure/service-bus` in your application to
 - Receive messages from an Azure Service Bus Queue or Subscription
 - Create/Get/Delete/Update/List Queues/Topics/Subscriptions/Rules in an Azure Service Bus namespace.
 
-Resources for the v7.0.0-preview.8 of `@azure/service-bus`:
+Resources for `@azure/service-bus` version 7:
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0-preview.8/sdk/servicebus/service-bus) |
-[Package (npm)](https://www.npmjs.com/package/@azure/service-bus) |
-[API Reference Documentation][apiref] |
-[Product documentation](https://azure.microsoft.com/services/service-bus/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0-preview.8/sdk/servicebus/service-bus/samples)
+Key links:
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus)
+- [Package (npm)](https://www.npmjs.com/package/@azure/service-bus)
+- [API Reference Documentation][apiref]
+- [Product documentation](https://azure.microsoft.com/services/service-bus/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/samples)
+- [Troubleshooting Guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/TROUBLESHOOTING.md)
 
-> **NOTE**: This document has instructions, links and code snippets for the **preview** of the next version of the `@azure/service-bus` package
-> which has different APIs than the stable version. To use the stable version of the library use the below resources.
+**NOTE**: If you are using version 1.1.10 or lower and want to migrate to the latest version
+of this package please look at our [migration guide to move from Service Bus V1 to Service Bus V7][migrationguide]
 
-[Source code or Readme for v1.1.10](https://github.com/Azure/azure-sdk-for-js/tree/%40azure/service-bus_1.1.10/sdk/servicebus/service-bus) |
-[Package for v1.1.10 (npm)](https://www.npmjs.com/package/@azure/service-bus/v/1.1.10) |
-[API Reference Documentation for v1.1.10](https://docs.microsoft.com/javascript/api/%40azure/service-bus/?view=azure-node-latest) |
-[Samples for @azure/service-bus v1.1.x](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0-preview.8/sdk/servicebus/service-bus/samples-v1)
-
-We also provide a migration guide for users familiar with the stable package that would like to try the preview: [migration guide to move from Service Bus V1 to Service Bus V7 Preview][migrationguide]
-
-## Getting Started
+## Getting started
 
 ### Install the package
 
-Install the preview version for the Azure Service Bus client library using npm
+Install the latest version for the Azure Service Bus client library using npm.
 
-`npm install @azure/service-bus@next`
+`npm install @azure/service-bus`
+
+### Currently supported environments
+
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/) and a
-[Service Bus Namespace](https://docs.microsoft.com/azure/service-bus-messaging/) to use this package.
-If you are using this package in a Node.js application, then use Node.js 8.x or higher.
+- An [Azure subscription](https://azure.microsoft.com/free/)
+- A [Service Bus Namespace](/azure/service-bus-messaging/) 
 
-### Configure Typescript
+### Configure TypeScript
 
 TypeScript users need to have Node type definitions installed:
 
@@ -67,6 +60,95 @@ You also need to enable `compilerOptions.allowSyntheticDefaultImports` in your t
 ### JavaScript Bundle
 
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+
+In addition to what is described there, this library also needs additional polyfills for the following NodeJS core built-in modules in order to work properly in the browsers:
+
+- `buffer`
+- `os`
+- `path`
+- `process`
+
+#### Bundling with Webpack
+
+If you are using Webpack v5, you can install the following dev dependencies
+
+- `npm install --save-dev os-browserify path-browserify`
+
+then add the following into your webpack.config.js
+
+```diff
+ const path = require("path");
++const webpack = require("webpack");
+
+ module.exports = {
+   entry: "./src/index.ts",
+@@ -12,8 +13,21 @@ module.exports = {
+       },
+     ],
+   },
++  plugins: [
++    new webpack.ProvidePlugin({
++      process: "process/browser",
++    }),
++    new webpack.ProvidePlugin({
++      Buffer: ["buffer", "Buffer"],
++    }),
++  ],
+   resolve: {
+     extensions: [".ts", ".js"],
++    fallback: {
++      buffer: require.resolve("buffer/"),
++      os: require.resolve("os-browserify"),
++      path: require.resolve("path-browserify"),
++    },
+   },
+```
+
+#### Bundling with Rollup
+
+If you are using Rollup bundler, install the following dev dependencies
+
+- `npm install --save-dev @rollup/plugin-commonjs @rollup/plugin-inject @rollup/plugin-node-resolve`
+
+Then include the following in your rollup.config.js
+
+```diff
++import nodeResolve from "@rollup/plugin-node-resolve";
++import cjs from "@rollup/plugin-commonjs";
++import shim from "rollup-plugin-shim";
++import inject from "@rollup/plugin-inject";
+
+export default {
+  // other configs
+  plugins: [
++    shim({
++      fs: `export default {}`,
++      net: `export default {}`,
++      tls: `export default {}`,
++      path: `export default {}`,
++      dns: `export function resolve() { }`,
++    }),
++    nodeResolve({
++      mainFields: ["module", "browser"],
++      preferBuiltins: false,
++    }),
++    cjs(),
++    inject({
++      modules: {
++        Buffer: ["buffer", "Buffer"],
++        process: "process",
++      },
++      exclude: ["./**/package.json"],
++    }),
+  ]
+};
+```
+
+Please consult the documentation of your favorite bundler for more information on using polyfills.
+
+### React Native Support
+
+Similar to browsers, React Native does not support some JavaScript api used by this SDK library so you need to provide polyfills for them.  Please see the [Messaging React Native sample with Expo](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/samples/frameworks/react-native-expo/ts/messaging/README.md) for more details.
 
 ### Authenticate the client
 
@@ -81,7 +163,7 @@ the connection string from the Azure portal.
 ```javascript
 const { ServiceBusClient } = require("@azure/service-bus");
 
-const serviceBusClient = new ServiceBusClient(connectionString);
+const serviceBusClient = new ServiceBusClient("<connectionString>");
 ```
 
 More information about this constructor is available in the [API documentation][sbclient_constructor].
@@ -112,7 +194,7 @@ const serviceBusClient = new ServiceBusClient(fullyQualifiedNamespace, credentia
 
 More information about this constructor is available in the [API documentation][sbclient_tokencred_overload]
 
-### Key concepts
+## Key concepts
 
 Once you've initialized a `ServiceBusClient`, you can interact with these resources within a
 Service Bus Namespace:
@@ -131,17 +213,18 @@ To interact with these resources, one should be familiar with the following SDK 
 
 Please note that the Queues, Topics and Subscriptions should be created prior to using this library.
 
-### Examples
+## Examples
 
 The following sections provide code snippets that cover some of the common tasks using Azure Service Bus
 
 - [Send messages](#send-messages)
 - [Receive messages](#receive-messages)
 - [Settle a message](#settle-a-message)
+- [Dead letter queues](#dead-letter-queues)
 - [Send messages using Sessions](#send-messages-using-sessions)
 - [Receive messages from Sessions](#receive-messages-from-sessions)
 - [Manage resources of a service bus namespace](#manage-resources-of-a-service-bus-namespace)
-- [Additional samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0-preview.8/sdk/servicebus/service-bus/samples)
+- [Additional samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/samples)
 
 ### Send messages
 
@@ -254,10 +337,42 @@ for await (let message of receiver.getMessageIterator()) {
 
 ### Settle a message
 
-Once you receive a message you can call `complete()`, `abandon()`, `defer()` or `deadletter()` on it
-based on how you want to settle the message.
+Once you receive a message you can call [`completeMessage()`][receiver_complete], [`abandonMessage()`][receiver_abandon], [`deferMessage()`][receiver_defer] or [`deadLetterMessage()`][receiver_deadletter] on the receiver based on how you want to settle the message.
 
-To learn more, please read [Settling Received Messages](https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#settling-receive-operations)
+To learn more, please read [Settling Received Messages](/azure/service-bus-messaging/message-transfers-locks-settlement#settling-receive-operations)
+
+## Dead letter queues
+
+The dead letter queue is a **sub-queue**. Each queue or subscription has its own dead letter queue. Dead letter queues store
+messages that have been explicitly dead lettered (via [`receiver.deadLetterMessage()`][receiver_deadletter]), or messages that have exceeded
+their maximum delivery count.
+
+Creating a receiver for a dead letter sub-queue is similar to creating a receiver for a subscription or queue:
+
+```javascript
+// To receive from a queue's dead letter sub-queue
+const deadLetterReceiverForQueue = serviceBusClient.createReceiver("queue", {
+  subQueueType: "deadLetter"
+});
+
+// To receive from a subscription's dead letter sub-queue
+const deadLetterReceiverForSubscription = serviceBusClient.createReceiver("topic", "subscription", {
+  subQueueType: "deadLetter"
+});
+
+// Dead letter receivers work like any other receiver connected to a queue
+// ex:
+const messages = await deadLetterReceiverForQueue.receiveMessages(5);
+
+for (const message of messages) {
+  console.log(`Dead lettered message: ${message.body}`);
+}
+```
+
+Full samples demonstrating dead letter queues more thoroughly:
+
+- [Using receiver.deadLetterMessage() to explicitly send messages to the dead letter sub-queue](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/samples/v7/typescript/src/advanced/movingMessagesToDLQ.ts)
+- [Receiving messages from the dead letter sub-queue](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/samples/v7/typescript/src/advanced/processMessageFromDLQ.ts)
 
 ### Send messages using Sessions
 
@@ -291,7 +406,7 @@ which is handled by Service Bus. Conceptually, this is similar to how message
 locking works when using `peekLock` mode - when a message (or session) is
 locked your receiver has exclusive access to it.
 
-In order to open and lock a session, use an instance of `ServiceBusClient` to create a [SessionReceiver][sessionreceiver] using [createSessionReceiver][sbclient_createsessionreceiver].
+In order to open and lock a session, use an instance of `ServiceBusClient` to create a [SessionReceiver][sessionreceiver].
 
 There are two ways of choosing which session to open:
 
@@ -326,6 +441,8 @@ You can read more about how sessions work [here][docsms_messagesessions].
 
 - Supports authentication with a service bus connection string as well as with the AAD credentials from `@azure/identity` similar to the `ServiceBusClient`.
 
+Note: Service Bus doesn't support setting CORS rules for namespaces yet, hence `ServiceBusAdministrationClient` won't work in the browser without disabling web-security. For more info, refer [here](https://github.com/Azure/azure-sdk-for-js/issues/4983).
+
 ```js
 // Get the connection string from the portal
 // OR
@@ -344,15 +461,17 @@ console.log("Number of messages in the queue = ", queueRuntimeProperties.totalMe
 await serviceBusAdministrationClient.deleteQueue(queueName);
 ```
 
-- Sample for reference - [administrationClient.ts](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0-preview.8/sdk/servicebus/service-bus/samples/typescript/src/advanced/administrationClient.ts)
+- Sample for reference - [administrationClient.ts](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/samples/v7/typescript/src/advanced/administrationClient.ts)
 
 ## Troubleshooting
 
-## AMQP Dependencies
+Here's some initial steps to start diagnosing issues. For more information please refer to the [Service Bus Troubleshooting Guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/TROUBLESHOOTING.md).
+
+### AMQP Dependencies
 
 The Service Bus library depends on the [rhea-promise](https://github.com/amqp/rhea-promise) library for managing connections, sending and receiving messages over the [AMQP](https://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf) protocol.
 
-### Enable logs
+### Logging
 
 You can set the following environment variable to get the debug logs when using this library.
 
@@ -377,7 +496,7 @@ export DEBUG=azure*,rhea*,-rhea:raw,-rhea:message,-azure:core-amqp:datatransform
 - If you are interested only in **errors**, then you can set the `DEBUG` environment variable as follows:
 
 ```bash
-export DEBUG=azure:service-bus:error,azure-core-amqp:error,rhea-promise:error,rhea:events,rhea:frames,rhea:io,rhea:flow
+export DEBUG=azure:service-bus:error,azure:core-amqp:error,rhea-promise:error,rhea:events,rhea:frames,rhea:io,rhea:flow
 ```
 
 ### Logging to a file
@@ -398,39 +517,43 @@ export DEBUG=azure:service-bus:error,azure-core-amqp:error,rhea-promise:error,rh
     node your-test-script.js &> out.log
   ```
 
-## Next Steps
+## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0-preview.8/sdk/servicebus/service-bus/samples)
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/samples)
 directory for detailed examples on how to use this library to send and receive messages to/from
-[Service Bus Queues, Topics and Subscriptions](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview).
+[Service Bus Queues, Topics and Subscriptions](/azure/service-bus-messaging/service-bus-messaging-overview).
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.0-preview.8/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fservicebus%2Fservice-bus%2FREADME.png)
 
-[apiref]: https://aka.ms/azsdk/js/service-bus/docs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.0-preview.8/sdk/identity/identity/README.md
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0-preview.8/sdk/identity/identity#defaultazurecredential
-[sbclient]: https://docs.microsoft.com/javascript/api/%40azure/service-bus/servicebusclient?view=azure-node-preview
-[sbclient_constructor]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient?view=azure-node-preview#ServiceBusClient_string__ServiceBusClientOptions_
-[sbclient_tokencred_overload]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient?view=azure-node-preview#ServiceBusClient_string__TokenCredential__ServiceBusClientOptions_
-[sbclient_createsender]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient?view=azure-node-preview#createSender_string_
-[sbclient_createreceiver]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient?view=azure-node-preview#createReceiver_string__CreateReceiverOptions__peekLock___
-[sbclient_acceptsession]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient?view=azure-node-preview#acceptSession_string__string__AcceptSessionOptions__peekLock___
-[sender]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebussender?view=azure-node-preview
-[sender_sendmessages]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebussender?view=azure-node-preview#sendMessages_ServiceBusMessage___ServiceBusMessage_____ServiceBusMessageBatch__OperationOptionsBase_
-[receiver]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver?view=azure-node-preview
-[receiver_receivemessages]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver?view=azure-node-preview#receiveMessages_number__ReceiveMessagesOptions_
-[receiver_subscribe]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver?view=azure-node-preview#subscribe_MessageHandlers_ReceivedMessageT___SubscribeOptions_
-[receiver_getmessageiterator]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver?view=azure-node-preview#getMessageIterator_GetMessageIteratorOptions_
-[sessionreceiver]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebussessionreceiver?view=azure-node-preview
-[migrationguide]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.0-preview.8/sdk/servicebus/service-bus/migrationguide.md
-[docsms_messagesessions]: https://docs.microsoft.com/azure/service-bus-messaging/message-sessions
-[docsms_messagesessions_fifo]: https://docs.microsoft.com/azure/service-bus-messaging/message-sessions#first-in-first-out-fifo-pattern
-[queue_concept]: https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview#queues
-[topic_concept]: https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview#topics
-[subscription_concept]: https://docs.microsoft.com/azure/service-bus-messaging/service-bus-queues-topics-subscriptions#topics-and-subscriptions
-[service_bus_overview]: https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview
+[apiref]: /javascript/api/@azure/service-bus/
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.10.0-beta.1/sdk/identity/identity#defaultazurecredential
+[sbclient]: /javascript/api/@azure/service-bus/servicebusclient
+[sbclient_constructor]: /javascript/api/@azure/service-bus/servicebusclient#ServiceBusClient_string__ServiceBusClientOptions_
+[sbclient_tokencred_overload]: /javascript/api/@azure/service-bus/servicebusclient#ServiceBusClient_string__TokenCredential__ServiceBusClientOptions_
+[sbclient_createsender]: /javascript/api/@azure/service-bus/servicebusclient#createSender_string_
+[sbclient_createreceiver]: /javascript/api/@azure/service-bus/servicebusclient#createReceiver_string__CreateReceiverOptions__peekLock___
+[sbclient_acceptsession]: /javascript/api/@azure/service-bus/servicebusclient#acceptSession_string__string__AcceptSessionOptions__peekLock___
+[sender]: /javascript/api/@azure/service-bus/servicebussender
+[sender_sendmessages]: /javascript/api/@azure/service-bus/servicebussender#sendMessages_ServiceBusMessage___ServiceBusMessage_____ServiceBusMessageBatch__OperationOptionsBase_
+[receiver]: /javascript/api/@azure/service-bus/servicebusreceiver
+[receiver_receivemessages]: /javascript/api/@azure/service-bus/servicebusreceiver#receiveMessages_number__ReceiveMessagesOptions_
+[receiver_subscribe]: /javascript/api/@azure/service-bus/servicebusreceiver#subscribe_MessageHandlers_ReceivedMessageT___SubscribeOptions_
+[receiver_getmessageiterator]: /javascript/api/@azure/service-bus/servicebusreceiver#getMessageIterator_GetMessageIteratorOptions_
+[receiver_abandon]: /javascript/api/@azure/service-bus/servicebusreceiver#abandonMessage_ServiceBusReceivedMessage___key__string___any_
+[receiver_complete]: /javascript/api/@azure/service-bus/servicebusreceiver#completeMessage_ServiceBusReceivedMessage_
+[receiver_deadletter]: /javascript/api/@azure/service-bus/servicebusreceiver#deadLetterMessage_ServiceBusReceivedMessage__DeadLetterOptions____key__string___any_
+[receiver_defer]: /javascript/api/@azure/service-bus/servicebusreceiver#deferMessage_ServiceBusReceivedMessage___key__string___any_
+[sessionreceiver]: /javascript/api/@azure/service-bus/servicebussessionreceiver
+[migrationguide]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.10.0-beta.1/sdk/servicebus/service-bus/migrationguide.md
+[docsms_messagesessions]: /azure/service-bus-messaging/message-sessions
+[docsms_messagesessions_fifo]: /azure/service-bus-messaging/message-sessions#first-in-first-out-fifo-pattern
+[queue_concept]: /azure/service-bus-messaging/service-bus-messaging-overview#queues
+[topic_concept]: /azure/service-bus-messaging/service-bus-messaging-overview#topics
+[subscription_concept]: /azure/service-bus-messaging/service-bus-queues-topics-subscriptions#topics-and-subscriptions
+[service_bus_overview]: /azure/service-bus-messaging/service-bus-messaging-overview
 

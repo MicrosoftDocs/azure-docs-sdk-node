@@ -2,11 +2,17 @@
 name: MessagesDequeueResponse
 uid: '@azure/storage-queue.MessagesDequeueResponse'
 package: '@azure/storage-queue'
-summary: Contains response data for the dequeue operation.
+summary: ''
 fullName: MessagesDequeueResponse
 remarks: ''
-isPreview: false
 isDeprecated: false
-syntax: >-
-  type MessagesDequeueResponse = Array<DequeuedMessageItem> &
-  MessagesDequeueHeaders & { _response: Object }
+syntax: |
+  type MessagesDequeueResponse = {
+    dequeuedMessageItems: Models.DequeuedMessageItem[]
+  } & Models.MessagesDequeueHeaders & {
+      _response: HttpResponse & {
+        bodyAsText: string
+        parsedBody: Models.DequeuedMessageItem[]
+        parsedHeaders: Models.MessagesDequeueHeaders
+      }
+    }

@@ -1,0 +1,158 @@
+### YamlMime:TSType
+name: AsyncLockOptions
+uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions'
+package: '@azure/amqp-common'
+summary: ''
+fullName: AsyncLockOptions
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: domainReentrant
+    uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions.domainReentrant'
+    package: '@azure/amqp-common'
+    summary: |+
+      Make a lock reentrant in the same domain.
+
+      **Example**
+
+      ```ts
+      import AsyncLock = require('async-lock');
+      import * as domain from 'domain';
+
+      const lock = new AsyncLock({ domainReentrant: true });
+      const d = domain.create();
+      d.run(() => {
+          lock.acquire('key', () => {
+              // Enter lock
+              return lock.acquire('key', () => {
+                  // Enter same lock twice
+              });
+          });
+      });
+      ```
+
+    fullName: domainReentrant
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'domainReentrant?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: maxExecutionTime
+    uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions.maxExecutionTime'
+    package: '@azure/amqp-common'
+    summary: >-
+      Max amount of time allowed between acquiring the lock and completing
+      execution.
+    fullName: maxExecutionTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxExecutionTime?: number'
+      return:
+        description: ''
+        type: number
+  - name: maxOccupationTime
+    uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions.maxOccupationTime'
+    package: '@azure/amqp-common'
+    summary: >-
+      Max amount of time allowed between entering the queue and completing
+      execution.
+    fullName: maxOccupationTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxOccupationTime?: number'
+      return:
+        description: ''
+        type: number
+  - name: maxPending
+    uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions.maxPending'
+    package: '@azure/amqp-common'
+    summary: Max number of tasks allowed in the queue at a time.
+    fullName: maxPending
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxPending?: number'
+      return:
+        description: ''
+        type: number
+  - name: Promise
+    uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions.Promise'
+    package: '@azure/amqp-common'
+    summary: |+
+      Use your own promise library instead of the global `Promise` variable.
+
+      **Example**
+
+      ```ts
+      import AsyncLock = require('async-lock');
+      import Bluebird = require('bluebird');
+      import Q = require('q');
+
+      new AsyncLock({ Promise: Bluebird }); // Bluebird
+      new AsyncLock({ Promise: Q });        // Q
+      ```
+
+    fullName: Promise
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'Promise?: unknown'
+      return:
+        description: ''
+        type: unknown
+  - name: skipQueue
+    uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions.skipQueue'
+    package: '@azure/amqp-common'
+    summary: >+
+      Allows to enqueue a task in the front of the queue, skipping all enqueued
+      tasks.
+
+
+      **Example**
+
+
+      ```ts
+
+      import AsyncLock = require('async-lock');
+
+
+      const lock = new AsyncLock();
+
+      // Add a task to the front of the queue waiting for a given lock
+
+      lock.acquire(key, fn1, cb); // runs immediately
+
+      lock.acquire(key, fn2, cb); // added to queue
+
+      lock.acquire(key, priorityFn, cb, { skipQueue: true }); // jumps queue and
+      runs before fn2
+
+      ```
+
+    fullName: skipQueue
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'skipQueue?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: timeout
+    uid: '@azure/amqp-common.AsyncLock.AsyncLockOptions.timeout'
+    package: '@azure/amqp-common'
+    summary: >-
+      Max amount of time an item can remain in the queue before acquiring the
+      lock.
+    fullName: timeout
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'timeout?: number'
+      return:
+        description: ''
+        type: number

@@ -5,22 +5,84 @@ package: '@azure/search-documents'
 summary: >-
   Defines values for SearchFieldDataType.
 
-  Possible values include: 'Edm.String', 'Edm.Int32', 'Edm.Int64', 'Edm.Double',
-  'Edm.Boolean',
 
-  'Edm.DateTimeOffset', 'Edm.GeographyPoint', 'Collection(Edm.String)',
+  ### Known values supported by the service:
 
-  'Collection(Edm.Int32)', 'Collection(Edm.Int64)', 'Collection(Edm.Double)',
 
-  'Collection(Edm.Boolean)', 'Collection(Edm.DateTimeOffset)',
-  'Collection(Edm.GeographyPoint)'
+  **Edm.String**: Indicates that a field contains a string.
+
+
+  **Edm.Int32**: Indicates that a field contains a 32-bit signed integer.
+
+
+  **Edm.Int64**: Indicates that a field contains a 64-bit signed integer.
+
+
+  **Edm.Double**: Indicates that a field contains an IEEE double-precision
+  floating point number.
+
+
+  **Edm.Boolean**: Indicates that a field contains a Boolean value (true or
+  false).
+
+
+  **Edm.DateTimeOffset**: Indicates that a field contains a date/time value,
+  including timezone
+
+  information.
+
+
+  **Edm.GeographyPoint**: Indicates that a field contains a geo-location in
+  terms of longitude and
+
+  latitude.
+
+
+  **Edm.ComplexType**: Indicates that a field contains one or more complex
+  objects that in turn
+
+  have sub-fields of other types.
+
+
+  **Edm.Single**: Indicates that a field contains a single-precision floating
+  point number. This is
+
+  only valid when used as part of a collection type, i.e.
+  Collection(Edm.Single).
+
+
+  **Edm.Half**: Indicates that a field contains a half-precision floating point
+  number. This is
+
+  only valid when used as part of a collection type, i.e. Collection(Edm.Half).
+
+
+  **Edm.Int16**: Indicates that a field contains a 16-bit signed integer. This
+  is only valid when
+
+  used as part of a collection type, i.e. Collection(Edm.Int16).
+
+
+  **Edm.SByte**: Indicates that a field contains a 8-bit signed integer. This is
+  only valid when
+
+  used as part of a collection type, i.e. Collection(Edm.SByte).
+
+
+  **Edm.Byte**: Indicates that a field contains a 8-bit unsigned integer. This
+  is only valid when
+
+  used as part of a collection type, i.e. Collection(Edm.Byte).
 fullName: SearchFieldDataType
 remarks: ''
-isPreview: false
 isDeprecated: false
-syntax: >-
-  type SearchFieldDataType = "Edm.String" | "Edm.Int32" | "Edm.Int64" |
-  "Edm.Double" | "Edm.Boolean" | "Edm.DateTimeOffset" | "Edm.GeographyPoint" |
-  "Collection(Edm.String)" | "Collection(Edm.Int32)" | "Collection(Edm.Int64)" |
-  "Collection(Edm.Double)" | "Collection(Edm.Boolean)" |
-  "Collection(Edm.DateTimeOffset)" | "Collection(Edm.GeographyPoint)"
+syntax: |
+  type SearchFieldDataType = Exclude<
+    Object | Object,
+    | "Edm.ComplexType"
+    | "Edm.Byte"
+    | "Edm.Half"
+    | "Edm.Int16"
+    | "Edm.SByte"
+    | "Edm.Single"
+  >

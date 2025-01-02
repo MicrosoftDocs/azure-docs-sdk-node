@@ -396,6 +396,133 @@ methods:
           uid="@azure/storage-file-datalake.FileSystemGetPropertiesResponse"
           />&gt;
         description: ''
+  - name: listDeletedPaths(ListDeletedPathsOptions)
+    uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.listDeletedPaths'
+    package: '@azure/storage-file-datalake'
+    summary: >
+      Returns an async iterable iterator to list all the paths (directories and
+      files)
+
+      under the specified file system.
+
+      .byPage() returns an async iterable iterator to list the paths in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      // Get the fileSystemClient before you run these snippets,
+
+      // Can be obtained from
+      `serviceClient.getFileSystemClient("<your-filesystem-name>");`
+
+      let i = 1;
+
+      for await (const deletePath of fileSystemClient.listDeletedPaths()) {
+        console.log(`Path ${i++}: ${deletePath.name}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iter = fileSystemClient.listDeletedPaths();
+
+      let deletedPathItem = await iter.next();
+
+      while (!deletedPathItem.done) {
+        console.log(`Path ${i++}: ${deletedPathItem.value.name}`);
+        pathItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of fileSystemClient.listDeletedPaths().byPage({
+      maxPageSize: 20 })) {
+        for (const deletePath of response.pathItems) {
+          console.log(`Path ${i++}: ${deletePath.name}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = fileSystemClient.listDeletedPaths().byPage({ maxPageSize: 2
+      });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 path names
+
+      for (const path of response.pathItems) {
+        console.log(`Path ${i++}: ${path.name}}`);
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+
+      iterator = fileSystemClient.listDeletedPaths().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      response = (await iterator.next()).value;
+
+
+      // Prints 10 path names
+
+      for (const deletePath of response.deletedPathItems) {
+        console.log(`Path ${i++}: ${deletePath.name}`);
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listDeletedPaths(options?: ListDeletedPathsOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-file-datalake.ListDeletedPathsOptions" />
+          description: |
+            Optional. Options when listing deleted paths.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/storage-file-datalake.DeletedPath" />, <xref
+          uid="@azure/storage-file-datalake.FileSystemListDeletedPathsResponse"
+          />&gt;
+        description: ''
   - name: listPaths(ListPathsOptions)
     uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.listPaths'
     package: '@azure/storage-file-datalake'
@@ -605,6 +732,38 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-datalake.FileSystemSetMetadataResponse"
+          />&gt;
+        description: ''
+  - name: 'undeletePath(string, string, FileSystemUndeletePathOption)'
+    uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.undeletePath'
+    package: '@azure/storage-file-datalake'
+    summary: Restores a soft deleted path.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function undeletePath(deletedPath: string, deletionId: string, options?:
+        FileSystemUndeletePathOption)
+      parameters:
+        - id: deletedPath
+          type: string
+          description: |
+            Required.  The path of the deleted path.
+        - id: deletionId
+          type: string
+          description: |+
+            Required.  The deletion ID associated with the soft deleted path.
+
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.FileSystemUndeletePathOption" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-datalake.FileSystemUndeletePathResponse"
           />&gt;
         description: ''
 extends: <xref uid="@azure/storage-file-datalake.StorageClient" />

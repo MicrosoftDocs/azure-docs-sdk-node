@@ -1,0 +1,141 @@
+### YamlMime:TSPackage
+uid: '@azure/microsoft-playwright-testing'
+name: '@azure/microsoft-playwright-testing'
+summary: ''
+type: package
+interfaces:
+  - '@azure/microsoft-playwright-testing.MPTReporterConfig'
+typeAliases:
+  - '@azure/microsoft-playwright-testing.AuthenticationType'
+  - '@azure/microsoft-playwright-testing.BrowserConnectOptions'
+  - '@azure/microsoft-playwright-testing.ConnectOptions'
+  - '@azure/microsoft-playwright-testing.EndpointOptions'
+  - '@azure/microsoft-playwright-testing.OsType'
+  - '@azure/microsoft-playwright-testing.PlaywrightServiceAdditionalOptions'
+functions:
+  - name: >-
+      getConnectOptions(Omit<PlaywrightServiceAdditionalOptions,
+      "serviceAuthType">)
+    uid: '@azure/microsoft-playwright-testing.getConnectOptions'
+    package: '@azure/microsoft-playwright-testing'
+    summary: >+
+      Get connect options required to connect to Microsoft Playwright Testing's
+      cloud hosted browsers.
+
+
+      **Example**
+
+
+      ```
+
+      import playwright, { test, expect, BrowserType } from "@playwright/test";
+
+      import { getConnectOptions } from "@azure/microsoft-playwright-testing";
+
+
+      test('has title', async ({ browserName }) => {
+       const { wsEndpoint, options } = await getConnectOptions();
+       const browser = await (playwright[browserName] as BrowserType).connect(wsEndpoint, options);
+       const context = await browser.newContext();
+       const page = await context.newPage();
+
+       await page.goto('https://playwright.dev/');
+       await expect(page).toHaveTitle(/Playwright/);
+
+       await page.close();
+       await context.close();
+       await browser.close();
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getConnectOptions(options?:
+        Omit<PlaywrightServiceAdditionalOptions, "serviceAuthType">):
+        Promise<BrowserConnectOptions>
+      parameters:
+        - id: options
+          type: >-
+            Omit&lt;<xref
+            uid="@azure/microsoft-playwright-testing.PlaywrightServiceAdditionalOptions"
+            />, "serviceAuthType"&gt;
+          description: additional options for the service
+      return:
+        description: BrowserConnectOptions
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/microsoft-playwright-testing.BrowserConnectOptions" />&gt;
+  - name: >-
+      getServiceConfig(PlaywrightTestConfig<{}, {}>,
+      PlaywrightServiceAdditionalOptions)
+    uid: '@azure/microsoft-playwright-testing.getServiceConfig'
+    package: '@azure/microsoft-playwright-testing'
+    summary: >+
+      Generate playwright configuration integrated with Microsoft Playwright
+      Testing.
+
+
+      **Example**
+
+
+      ```
+
+      import { defineConfig } from "playwright/test";
+
+      import { getServiceConfig } from "@azure/microsoft-playwright-testing";
+
+      import playwrightConfig from "./playwright.config";
+
+
+      export default defineConfig(playwrightConfig,
+      getServiceConfig(playwrightConfig));
+
+      ```
+
+
+
+
+      **Example**
+
+
+      ```
+
+      import { defineConfig } from "playwright/test";
+
+      import { getServiceConfig, ServiceOS } from
+      "@azure/microsoft-playwright-testing";
+
+      import playwrightConfig from "./playwright.config";
+
+
+      export default defineConfig(playwrightConfig,
+      getServiceConfig(playwrightConfig, {
+       runId: "custom run id",
+       os: ServiceOS.WINDOWS
+      }));
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getServiceConfig(config: PlaywrightTestConfig<{}, {}>,
+        options?: PlaywrightServiceAdditionalOptions): PlaywrightTestConfig<{},
+        {}>
+      parameters:
+        - id: config
+          type: PlaywrightTestConfig&lt;{}, {}&gt;
+          description: base playwright configuration
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/microsoft-playwright-testing.PlaywrightServiceAdditionalOptions"
+            />
+          description: additional options for the service
+      return:
+        description: PlaywrightConfig
+        type: PlaywrightTestConfig&lt;{}, {}&gt;

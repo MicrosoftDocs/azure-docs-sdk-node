@@ -5,7 +5,6 @@ package: '@azure/synapse'
 summary: Class representing a SparkSession.
 fullName: SparkSession
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
@@ -14,46 +13,14 @@ constructors:
     package: '@azure/synapse'
     summary: Create a SparkSession.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new SparkSession(client: SynapseClientContext)'
       parameters:
         - id: client
           type: <xref uid="@azure/synapse.SynapseClientContext" />
-          description: |
-            Reference to the service client.
+          description: Reference to the service client.
 methods:
-  - name: >-
-      create(string, string, ExtendedLivySessionRequest,
-      Models.SparkSessionCreateOptionalParams)
-    uid: '@azure/synapse.SparkSession.create'
-    package: '@azure/synapse'
-    summary: Create new spark session.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function create(workspaceName: string, sparkPoolName: string,
-        livyRequest: ExtendedLivySessionRequest, options?:
-        Models.SparkSessionCreateOptionalParams)
-      parameters:
-        - id: workspaceName
-          type: string
-          description: The name of the workspace to execute operations on.
-        - id: sparkPoolName
-          type: string
-          description: Name of the spark pool. "ondemand" targets the ondemand pool.
-        - id: livyRequest
-          type: <xref uid="@azure/synapse.ExtendedLivySessionRequest" />
-          description: Livy compatible batch job request payload.
-        - id: options
-          type: <xref uid="Models.SparkSessionCreateOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.SparkSessionCreateResponse" />&gt;
-        description: Promise<Models.SparkSessionCreateResponse>
   - name: >-
       create(string, string, ExtendedLivySessionRequest,
       ServiceCallback<ExtendedLivySessionResponse>)
@@ -61,7 +28,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -76,14 +42,52 @@ methods:
           type: string
           description: Name of the spark pool. "ondemand" targets the ondemand pool.
         - id: livyRequest
-          type: <xref uid="@azure/synapse.ExtendedLivySessionRequest" />
+          type: >-
+            <xref uid="@azure/synapse.SynapseModels.ExtendedLivySessionRequest"
+            />
           description: Livy compatible batch job request payload.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.ExtendedLivySessionResponse" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.ExtendedLivySessionResponse"
+            />&gt;
+          description: The callback
+  - name: >-
+      create(string, string, ExtendedLivySessionRequest,
+      SparkSessionCreateOptionalParams)
+    uid: '@azure/synapse.SparkSession.create'
+    package: '@azure/synapse'
+    summary: Create new spark session.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(workspaceName: string, sparkPoolName: string,
+        livyRequest: ExtendedLivySessionRequest, options?:
+        SparkSessionCreateOptionalParams): Promise<SparkSessionCreateResponse>
+      parameters:
+        - id: workspaceName
+          type: string
+          description: The name of the workspace to execute operations on.
+        - id: sparkPoolName
+          type: string
+          description: Name of the spark pool. "ondemand" targets the ondemand pool.
+        - id: livyRequest
+          type: >-
+            <xref uid="@azure/synapse.SynapseModels.ExtendedLivySessionRequest"
+            />
+          description: Livy compatible batch job request payload.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/synapse.SynapseModels.SparkSessionCreateOptionalParams"
+            />
+          description: The optional parameters
+      return:
+        description: Promise<Models.SparkSessionCreateResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/synapse.SynapseModels.SparkSessionCreateResponse" />&gt;
   - name: >-
       create(string, string, ExtendedLivySessionRequest,
       SparkSessionCreateOptionalParams,
@@ -92,7 +96,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -108,31 +111,35 @@ methods:
           type: string
           description: Name of the spark pool. "ondemand" targets the ondemand pool.
         - id: livyRequest
-          type: <xref uid="@azure/synapse.ExtendedLivySessionRequest" />
+          type: >-
+            <xref uid="@azure/synapse.SynapseModels.ExtendedLivySessionRequest"
+            />
           description: Livy compatible batch job request payload.
         - id: options
-          type: <xref uid="@azure/synapse.SparkSessionCreateOptionalParams" />
+          type: >-
+            <xref
+            uid="@azure/synapse.SynapseModels.SparkSessionCreateOptionalParams"
+            />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.ExtendedLivySessionResponse" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.ExtendedLivySessionResponse"
+            />&gt;
+          description: The callback
   - name: >-
       createStatement(string, string, number, LivyStatementRequestBody,
-      msRest.RequestOptionsBase)
+      RequestOptionsBase)
     uid: '@azure/synapse.SparkSession.createStatement'
     package: '@azure/synapse'
     summary: Create statement within a spark session.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function createStatement(workspaceName: string, sparkPoolName: string,
         sessionId: number, livyRequest: LivyStatementRequestBody, options?:
-        msRest.RequestOptionsBase)
+        RequestOptionsBase): Promise<SparkSessionCreateStatementResponse>
       parameters:
         - id: workspaceName
           type: string
@@ -144,16 +151,17 @@ methods:
           type: number
           description: Identifier for the session.
         - id: livyRequest
-          type: <xref uid="@azure/synapse.LivyStatementRequestBody" />
+          type: <xref uid="@azure/synapse.SynapseModels.LivyStatementRequestBody" />
           description: Livy compatible batch job request payload.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: >-
-          Promise&lt;<xref uid="Models.SparkSessionCreateStatementResponse"
-          />&gt;
         description: Promise<Models.SparkSessionCreateStatementResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/synapse.SynapseModels.SparkSessionCreateStatementResponse"
+          />&gt;
   - name: >-
       createStatement(string, string, number, LivyStatementRequestBody,
       RequestOptionsBase, ServiceCallback<LivyStatementResponseBody>)
@@ -161,7 +169,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -180,17 +187,16 @@ methods:
           type: number
           description: Identifier for the session.
         - id: livyRequest
-          type: <xref uid="@azure/synapse.LivyStatementRequestBody" />
+          type: <xref uid="@azure/synapse.SynapseModels.LivyStatementRequestBody" />
           description: Livy compatible batch job request payload.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementResponseBody" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementResponseBody" />&gt;
+          description: The callback
   - name: >-
       createStatement(string, string, number, LivyStatementRequestBody,
       ServiceCallback<LivyStatementResponseBody>)
@@ -198,7 +204,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -216,25 +221,23 @@ methods:
           type: number
           description: Identifier for the session.
         - id: livyRequest
-          type: <xref uid="@azure/synapse.LivyStatementRequestBody" />
+          type: <xref uid="@azure/synapse.SynapseModels.LivyStatementRequestBody" />
           description: Livy compatible batch job request payload.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementResponseBody" />&gt;
-          description: |
-            The callback
-  - name: 'deleteMethod(string, string, number, msRest.RequestOptionsBase)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementResponseBody" />&gt;
+          description: The callback
+  - name: deleteMethod(string, string, number, RequestOptionsBase)
     uid: '@azure/synapse.SparkSession.deleteMethod'
     package: '@azure/synapse'
     summary: Cancels a running spark session.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteMethod(workspaceName: string, sparkPoolName: string,
-        sessionId: number, options?: msRest.RequestOptionsBase)
+        sessionId: number, options?: RequestOptionsBase): Promise<RestResponse>
       parameters:
         - id: workspaceName
           type: string
@@ -248,11 +251,11 @@ methods:
           type: number
           description: Identifier for the session.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: Promise&lt;RestResponse&gt;
         description: Promise<msRest.RestResponse>
+        type: Promise&lt;<xref uid="@azure/ms-rest-js.RestResponse" />&gt;
   - name: >-
       deleteMethod(string, string, number, RequestOptionsBase,
       ServiceCallback<void>)
@@ -260,7 +263,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -280,18 +282,16 @@ methods:
           type: number
           description: Identifier for the session.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
-          type: ServiceCallback&lt;void&gt;
-          description: |
-            The callback
-  - name: 'deleteMethod(string, string, number, ServiceCallback<void>)'
+          type: <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;void&gt;
+          description: The callback
+  - name: deleteMethod(string, string, number, ServiceCallback<void>)
     uid: '@azure/synapse.SparkSession.deleteMethod_1'
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -310,21 +310,19 @@ methods:
           type: number
           description: Identifier for the session.
         - id: callback
-          type: ServiceCallback&lt;void&gt;
-          description: |
-            The callback
-  - name: 'deleteStatement(string, string, number, number, msRest.RequestOptionsBase)'
+          type: <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;void&gt;
+          description: The callback
+  - name: deleteStatement(string, string, number, number, RequestOptionsBase)
     uid: '@azure/synapse.SparkSession.deleteStatement'
     package: '@azure/synapse'
     summary: Kill a statement within a session.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteStatement(workspaceName: string, sparkPoolName: string,
-        sessionId: number, statementId: number, options?:
-        msRest.RequestOptionsBase)
+        sessionId: number, statementId: number, options?: RequestOptionsBase):
+        Promise<SparkSessionDeleteStatementResponse>
       parameters:
         - id: workspaceName
           type: string
@@ -339,13 +337,14 @@ methods:
           type: number
           description: Identifier for the statement.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: >-
-          Promise&lt;<xref uid="Models.SparkSessionDeleteStatementResponse"
-          />&gt;
         description: Promise<Models.SparkSessionDeleteStatementResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/synapse.SynapseModels.SparkSessionDeleteStatementResponse"
+          />&gt;
   - name: >-
       deleteStatement(string, string, number, number, RequestOptionsBase,
       ServiceCallback<LivyStatementCancellationResponse>)
@@ -353,7 +352,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -374,14 +372,14 @@ methods:
           type: number
           description: Identifier for the statement.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementCancellationResponse" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementCancellationResponse"
+            />&gt;
+          description: The callback
   - name: >-
       deleteStatement(string, string, number, number,
       ServiceCallback<LivyStatementCancellationResponse>)
@@ -389,7 +387,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -411,43 +408,15 @@ methods:
           description: Identifier for the statement.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementCancellationResponse" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, number, Models.SparkSessionGetOptionalParams)'
-    uid: '@azure/synapse.SparkSession.get'
-    package: '@azure/synapse'
-    summary: Gets a single spark session.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(workspaceName: string, sparkPoolName: string, sessionId:
-        number, options?: Models.SparkSessionGetOptionalParams)
-      parameters:
-        - id: workspaceName
-          type: string
-          description: The name of the workspace to execute operations on.
-        - id: sparkPoolName
-          type: string
-          description: Name of the spark pool. "ondemand" targets the ondemand pool.
-        - id: sessionId
-          type: number
-          description: Identifier for the session.
-        - id: options
-          type: <xref uid="Models.SparkSessionGetOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.SparkSessionGetResponse" />&gt;
-        description: Promise<Models.SparkSessionGetResponse>
-  - name: 'get(string, string, number, ServiceCallback<ExtendedLivySessionResponse>)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementCancellationResponse"
+            />&gt;
+          description: The callback
+  - name: get(string, string, number, ServiceCallback<ExtendedLivySessionResponse>)
     uid: '@azure/synapse.SparkSession.get_1'
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -465,10 +434,41 @@ methods:
           description: Identifier for the session.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.ExtendedLivySessionResponse" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.ExtendedLivySessionResponse"
+            />&gt;
+          description: The callback
+  - name: get(string, string, number, SparkSessionGetOptionalParams)
+    uid: '@azure/synapse.SparkSession.get'
+    package: '@azure/synapse'
+    summary: Gets a single spark session.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function get(workspaceName: string, sparkPoolName: string, sessionId:
+        number, options?: SparkSessionGetOptionalParams):
+        Promise<SparkSessionGetResponse>
+      parameters:
+        - id: workspaceName
+          type: string
+          description: The name of the workspace to execute operations on.
+        - id: sparkPoolName
+          type: string
+          description: Name of the spark pool. "ondemand" targets the ondemand pool.
+        - id: sessionId
+          type: number
+          description: Identifier for the session.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/synapse.SynapseModels.SparkSessionGetOptionalParams" />
+          description: The optional parameters
+      return:
+        description: Promise<Models.SparkSessionGetResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/synapse.SynapseModels.SparkSessionGetResponse" />&gt;
   - name: >-
       get(string, string, number, SparkSessionGetOptionalParams,
       ServiceCallback<ExtendedLivySessionResponse>)
@@ -476,7 +476,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -494,26 +493,27 @@ methods:
           type: number
           description: Identifier for the session.
         - id: options
-          type: <xref uid="@azure/synapse.SparkSessionGetOptionalParams" />
+          type: >-
+            <xref
+            uid="@azure/synapse.SynapseModels.SparkSessionGetOptionalParams" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.ExtendedLivySessionResponse" />&gt;
-          description: |
-            The callback
-  - name: 'getStatement(string, string, number, number, msRest.RequestOptionsBase)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.ExtendedLivySessionResponse"
+            />&gt;
+          description: The callback
+  - name: getStatement(string, string, number, number, RequestOptionsBase)
     uid: '@azure/synapse.SparkSession.getStatement'
     package: '@azure/synapse'
     summary: Gets a single statement within a spark session.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getStatement(workspaceName: string, sparkPoolName: string,
-        sessionId: number, statementId: number, options?:
-        msRest.RequestOptionsBase)
+        sessionId: number, statementId: number, options?: RequestOptionsBase):
+        Promise<SparkSessionGetStatementResponse>
       parameters:
         - id: workspaceName
           type: string
@@ -528,11 +528,14 @@ methods:
           type: number
           description: Identifier for the statement.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: Promise&lt;<xref uid="Models.SparkSessionGetStatementResponse" />&gt;
         description: Promise<Models.SparkSessionGetStatementResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/synapse.SynapseModels.SparkSessionGetStatementResponse"
+          />&gt;
   - name: >-
       getStatement(string, string, number, number, RequestOptionsBase,
       ServiceCallback<LivyStatementResponseBody>)
@@ -540,7 +543,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -561,14 +563,13 @@ methods:
           type: number
           description: Identifier for the statement.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementResponseBody" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementResponseBody" />&gt;
+          description: The callback
   - name: >-
       getStatement(string, string, number, number,
       ServiceCallback<LivyStatementResponseBody>)
@@ -576,7 +577,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -598,40 +598,14 @@ methods:
           description: Identifier for the statement.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementResponseBody" />&gt;
-          description: |
-            The callback
-  - name: 'list(string, string, Models.SparkSessionListOptionalParams)'
-    uid: '@azure/synapse.SparkSession.list'
-    package: '@azure/synapse'
-    summary: List all spark sessions which are running under a particular spark pool.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(workspaceName: string, sparkPoolName: string, options?:
-        Models.SparkSessionListOptionalParams)
-      parameters:
-        - id: workspaceName
-          type: string
-          description: The name of the workspace to execute operations on.
-        - id: sparkPoolName
-          type: string
-          description: Name of the spark pool. "ondemand" targets the ondemand pool.
-        - id: options
-          type: <xref uid="Models.SparkSessionListOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.SparkSessionListResponse" />&gt;
-        description: Promise<Models.SparkSessionListResponse>
-  - name: 'list(string, string, ServiceCallback<ExtendedLivyListSessionResponse>)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementResponseBody" />&gt;
+          description: The callback
+  - name: list(string, string, ServiceCallback<ExtendedLivyListSessionResponse>)
     uid: '@azure/synapse.SparkSession.list_1'
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -646,10 +620,37 @@ methods:
           description: Name of the spark pool. "ondemand" targets the ondemand pool.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.ExtendedLivyListSessionResponse" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.ExtendedLivyListSessionResponse"
+            />&gt;
+          description: The callback
+  - name: list(string, string, SparkSessionListOptionalParams)
+    uid: '@azure/synapse.SparkSession.list'
+    package: '@azure/synapse'
+    summary: List all spark sessions which are running under a particular spark pool.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function list(workspaceName: string, sparkPoolName: string, options?:
+        SparkSessionListOptionalParams): Promise<SparkSessionListResponse>
+      parameters:
+        - id: workspaceName
+          type: string
+          description: The name of the workspace to execute operations on.
+        - id: sparkPoolName
+          type: string
+          description: Name of the spark pool. "ondemand" targets the ondemand pool.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/synapse.SynapseModels.SparkSessionListOptionalParams" />
+          description: The optional parameters
+      return:
+        description: Promise<Models.SparkSessionListResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/synapse.SynapseModels.SparkSessionListResponse" />&gt;
   - name: >-
       list(string, string, SparkSessionListOptionalParams,
       ServiceCallback<ExtendedLivyListSessionResponse>)
@@ -657,7 +658,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -672,25 +672,27 @@ methods:
           type: string
           description: Name of the spark pool. "ondemand" targets the ondemand pool.
         - id: options
-          type: <xref uid="@azure/synapse.SparkSessionListOptionalParams" />
+          type: >-
+            <xref
+            uid="@azure/synapse.SynapseModels.SparkSessionListOptionalParams" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.ExtendedLivyListSessionResponse" />&gt;
-          description: |
-            The callback
-  - name: 'listStatements(string, string, number, msRest.RequestOptionsBase)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.ExtendedLivyListSessionResponse"
+            />&gt;
+          description: The callback
+  - name: listStatements(string, string, number, RequestOptionsBase)
     uid: '@azure/synapse.SparkSession.listStatements'
     package: '@azure/synapse'
     summary: Gets a list of statements within a spark session.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listStatements(workspaceName: string, sparkPoolName: string,
-        sessionId: number, options?: msRest.RequestOptionsBase)
+        sessionId: number, options?: RequestOptionsBase):
+        Promise<SparkSessionListStatementsResponse>
       parameters:
         - id: workspaceName
           type: string
@@ -702,13 +704,14 @@ methods:
           type: number
           description: Identifier for the session.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: >-
-          Promise&lt;<xref uid="Models.SparkSessionListStatementsResponse"
-          />&gt;
         description: Promise<Models.SparkSessionListStatementsResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/synapse.SynapseModels.SparkSessionListStatementsResponse"
+          />&gt;
   - name: >-
       listStatements(string, string, number, RequestOptionsBase,
       ServiceCallback<LivyStatementsResponseBody>)
@@ -716,7 +719,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -734,14 +736,13 @@ methods:
           type: number
           description: Identifier for the session.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementsResponseBody" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementsResponseBody" />&gt;
+          description: The callback
   - name: >-
       listStatements(string, string, number,
       ServiceCallback<LivyStatementsResponseBody>)
@@ -749,7 +750,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -768,23 +768,21 @@ methods:
           description: Identifier for the session.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/synapse.LivyStatementsResponseBody" />&gt;
-          description: |
-            The callback
-  - name: 'resetTimeout(string, string, number, msRest.RequestOptionsBase)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/synapse.SynapseModels.LivyStatementsResponseBody" />&gt;
+          description: The callback
+  - name: resetTimeout(string, string, number, RequestOptionsBase)
     uid: '@azure/synapse.SparkSession.resetTimeout'
     package: '@azure/synapse'
     summary: >-
       Sends a keep alive call to the current session to reset the session
       timeout.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function resetTimeout(workspaceName: string, sparkPoolName: string,
-        sessionId: number, options?: msRest.RequestOptionsBase)
+        sessionId: number, options?: RequestOptionsBase): Promise<RestResponse>
       parameters:
         - id: workspaceName
           type: string
@@ -798,11 +796,11 @@ methods:
           type: number
           description: Identifier for the session.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: Promise&lt;RestResponse&gt;
         description: Promise<msRest.RestResponse>
+        type: Promise&lt;<xref uid="@azure/ms-rest-js.RestResponse" />&gt;
   - name: >-
       resetTimeout(string, string, number, RequestOptionsBase,
       ServiceCallback<void>)
@@ -810,7 +808,6 @@ methods:
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -830,18 +827,16 @@ methods:
           type: number
           description: Identifier for the session.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
-          type: ServiceCallback&lt;void&gt;
-          description: |
-            The callback
-  - name: 'resetTimeout(string, string, number, ServiceCallback<void>)'
+          type: <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;void&gt;
+          description: The callback
+  - name: resetTimeout(string, string, number, ServiceCallback<void>)
     uid: '@azure/synapse.SparkSession.resetTimeout_1'
     package: '@azure/synapse'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -860,6 +855,5 @@ methods:
           type: number
           description: Identifier for the session.
         - id: callback
-          type: ServiceCallback&lt;void&gt;
-          description: |
-            The callback
+          type: <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;void&gt;
+          description: The callback

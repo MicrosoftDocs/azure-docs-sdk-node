@@ -1,47 +1,51 @@
 ---
 title: Azure Text Analytics client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, 
-author: maggiepint
-ms.author: magpint
-ms.date: 08/18/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, textanalytics
+ms.date: 07/07/2021
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: cognitive-services
+ms.subservice: text-analytics
 ---
-
-# Azure Text Analytics client library for JavaScript - Version 5.0.1 
+# Azure Text Analytics client library for JavaScript - version 5.1.0 
 
 
 [Azure TextAnalytics](https://azure.microsoft.com/services/cognitive-services/text-analytics/) is a cloud-based service that provides advanced natural language processing over raw text, and includes six main functions:
 
-__Note:__ This SDK targets Azure Text Analytics service API version 3.0.
+**Note:** This SDK targets Azure Text Analytics service API version 3.1.0.
 
 - Language Detection
 - Sentiment Analysis
 - Key Phrase Extraction
 - Named Entity Recognition
+- Recognition of Personally Identifiable Information
 - Linked Entity Recognition
+- Healthcare Analysis
+- Support Multiple Actions Per Document
 
 Use the client library to:
 
 - Detect what language input text is written in.
 - Determine what customers think of your brand or topic by analyzing raw text for clues about positive or negative sentiment.
 - Automatically extract key phrases to quickly identify the main points.
-- Identify and categorize entities in your text as people, places, organizations, date/time, quantities, percentages, currencies, and more.
+- Identify and categorize entities in your text as people, places, organizations, date/time, quantities, percentages, currencies, healthcare specific, and more.
+- Perform multiple of the above tasks at once.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/textanalytics/ai-text-analytics/) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/ai-text-analytics) |
-[API reference documentation](https://aka.ms/azsdk/js/textanalytics/docs) |
-[Product documentation](https://docs.microsoft.com/azure/cognitive-services/text-analytics/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/textanalytics/ai-text-analytics/samples)
+Key links:
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0/sdk/textanalytics/ai-text-analytics/)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/ai-text-analytics)
+- [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/ai-text-analytics)
+- [Product documentation](https://docs.microsoft.com/azure/cognitive-services/text-analytics/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0/sdk/textanalytics/ai-text-analytics/samples)
 
 ## Getting started
 
 ### Currently supported environments
 
-- Node.js version 8.x.x or higher
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- Latest versions of Safari, Chrome, Edge, and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -56,8 +60,7 @@ az cognitiveservices account create --kind TextAnalytics --resource-group <your-
 
 ### Install the `@azure/ai-text-analytics` package
 
-Install the Azure Text Analytics client library for JavaScript - Version 5.0.1 
- with `npm`:
+Install the Azure Text Analytics client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure/ai-text-analytics
@@ -85,7 +88,7 @@ az cognitiveservices account keys list --resource-group <your-resource-group-nam
 
 Once you have an API key and endpoint, you can use the `AzureKeyCredential` class to authenticate the client as follows:
 
-```js
+```javascript
 const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
 
 const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<API key>"));
@@ -104,7 +107,7 @@ You will also need to [register a new AAD application][register_aad_app] and gra
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
-```js
+```javascript
 const { TextAnalyticsClient } = require("@azure/ai-text-analytics");
 const { DefaultAzureCredential } = require("@azure/identity");
 
@@ -115,7 +118,7 @@ const client = new TextAnalyticsClient("<endpoint>", new DefaultAzureCredential(
 
 ### TextAnalyticsClient
 
-`TextAnalyticsClient` is the primary interface for developers using the Text Analytics client library. It provides asynchronous methods to access a specific use of Text Analytics, such as language detection or key phrase extraction.
+`TextAnalyticsClient` is the primary interface for developers using the Text Analytics client library. Explore the methods on this client object to understand the different features of the Text Analytics service that you can access.
 
 ### Input
 
@@ -127,7 +130,7 @@ For example, each document can be passed as a string in an array, e.g.
 const documents = [
   "I hated the movie. It was so slow!",
   "The movie made it into my top ten favorites.",
-  "What a great movie!",
+  "What a great movie!"
 ];
 ```
 
@@ -137,11 +140,11 @@ or, if you wish to pass in a per-item document `id` or `language`/`countryHint`,
 const textDocumentInputs = [
   { id: "1", language: "en", text: "I hated the movie. It was so slow!" },
   { id: "2", language: "en", text: "The movie made it into my top ten favorites." },
-  { id: "3", language: "en", text: "What a great movie!" },
+  { id: "3", language: "en", text: "What a great movie!" }
 ];
 ```
 
-See [service limiations][data_limits] for the input, including document length limits, maximum batch size, and supported text encodings.
+See [service limitations][data_limits] for the input, including document length limits, maximum batch size, and supported text encodings.
 
 ### Return Value
 
@@ -200,7 +203,7 @@ const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<AP
 const documents = [
   "I did not like the restaurant. The food was too spicy.",
   "The restaurant was decorated beautifully. The atmosphere was unlike any other restaurant I've been to.",
-  "The food was yummy. :)",
+  "The food was yummy. :)"
 ];
 
 async function main() {
@@ -219,6 +222,8 @@ async function main() {
 main();
 ```
 
+To get more granular information about the opinions related to aspects of a product/service, also known as Aspect-based Sentiment Analysis in Natural Language Processing (NLP), see a sample on sentiment analysis with opinion mining [here][analyze_sentiment_opinion_mining_sample].
+
 ### Recognize Entities
 
 Recognize and categorize entities in text as people, places, organizations, dates/times, quantities, currencies, etc.
@@ -233,7 +238,7 @@ const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<AP
 const documents = [
   "Microsoft was founded by Bill Gates and Paul Allen.",
   "Redmond is a city in King County, Washington, United States, located 15 miles east of Seattle.",
-  "Jeff bought three dozen eggs because there was a 50% discount.",
+  "Jeff bought three dozen eggs because there was a 50% discount."
 ];
 
 async function main() {
@@ -254,6 +259,33 @@ async function main() {
 main();
 ```
 
+### Recognize PII Entities
+
+There is a separate endpoint and operation for recognizing Personally Identifiable Information (PII) in text such as Social Security Numbers, bank account information, credit card numbers, etc. Its usage is very similar to the standard entity recognition above:
+
+```javascript
+const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
+const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<API key>"));
+const documents = [
+  "The employee's SSN is 555-55-5555.",
+  "The employee's phone number is (555) 555-5555."
+];
+async function main() {
+  const results = await client.recognizePiiEntities(documents, "en");
+  for (const result of results) {
+    if (result.error === undefined) {
+      console.log(" -- Recognized PII entities for input", result.id, "--");
+      for (const entity of result.entities) {
+        console.log(entity.text, ":", entity.category, "(Score:", entity.confidenceScore, ")");
+      }
+    } else {
+      console.error("Encountered an error:", result.error);
+    }
+  }
+}
+main();
+```
+
 ### Recognize Linked Entities
 
 A "Linked" entity is one that exists in a knowledge base (such as Wikipedia). The `recognizeLinkedEntities` operation can disambiguate entities by determining which entry in a knowledge base they likely refer to (for example, in a piece of text, does the word "Mars" refer to the planet, or to the Roman god of war). Linked entities contain associated URLs to the knowledge base that provides the definition of the entity.
@@ -266,7 +298,7 @@ const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<AP
 const documents = [
   "Microsoft was founded by Bill Gates and Paul Allen.",
   "Easter Island, a Chilean territory, is a remote volcanic island in Polynesia.",
-  "I use Azure Functions to develop my product.",
+  "I use Azure Functions to develop my product."
 ];
 
 async function main() {
@@ -278,7 +310,13 @@ async function main() {
       for (const entity of result.entities) {
         console.log(entity.name, "(URL:", entity.url, ", Source:", entity.dataSource, ")");
         for (const match of entity.matches) {
-          console.log("  Occurrence:", "\"" + match.text + "\"", "(Score:", match.confidenceScore, ")");
+          console.log(
+            "  Occurrence:",
+            '"' + match.text + '"',
+            "(Score:",
+            match.confidenceScore,
+            ")"
+          );
         }
       }
     } else {
@@ -302,7 +340,7 @@ const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<AP
 const documents = [
   "Redmond is a city in King County, Washington, United States, located 15 miles east of Seattle.",
   "I need to take my cat to the veterinarian.",
-  "I will travel to South America in the summer.",
+  "I will travel to South America in the summer."
 ];
 
 async function main() {
@@ -364,33 +402,138 @@ async function main() {
 main();
 ```
 
-## Troubleshooting
+### Analyze Healthcare Entities
 
-### Enable logs
+Healthcare analysis identifies healthcare entities. For example, given input text "Prescribed 100mg ibuprofen, taken twice daily", the service returns "100mg" categorized as Dosage, "ibuprofen" as MedicationName, and "twice daily" as Frequency.
 
-You can set the following environment variable to get the debug logging output when using this library.
+```javascript
+const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
 
-- Getting debug logs from the Azure Text Analytics client library
+const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<API key>"));
 
-```bash
-export AZURE_LOG_LEVEL=verbose
+const documents = [
+  "Prescribed 100mg ibuprofen, taken twice daily.",
+  "Patient does not suffer from high blood pressure."
+];
+
+async function main() {
+  const poller = await client.beginAnalyzeHealthcareEntities(documents);
+  const results = await poller.pollUntilDone();
+
+  for await (const result of results) {
+    console.log(`- Document ${result.id}`);
+    if (!result.error) {
+      console.log("\tRecognized Entities:");
+      for (const entity of result.entities) {
+        console.log(`\t- Entity ${entity.text} of type ${entity.category}`);
+      }
+    } else console.error("\tError:", result.error);
+  }
+}
+
+main();
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/core/logger).
+### Analyze Actions
+
+Analyze actions enables the application of multiple analyses (named actions) at once.
+
+```javascript
+const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
+
+const client = new TextAnalyticsClient("<endpoint>", new AzureKeyCredential("<API key>"));
+
+const documents = [
+  "Microsoft was founded by Bill Gates and Paul Allen.",
+  "The employee's SSN is 555-55-5555.",
+  "Easter Island, a Chilean territory, is a remote volcanic island in Polynesia.",
+  "I use Azure Functions to develop my product."
+];
+
+async function main() {
+  const actions = {
+    recognizeEntitiesActions: [{ modelVersion: "latest" }],
+    recognizePiiEntitiesActions: [{ modelVersion: "latest" }],
+    extractKeyPhrasesActions: [{ modelVersion: "latest" }]
+  };
+  const poller = await client.beginAnalyzeActions(documents, actions);
+  const resultPages = await poller.pollUntilDone();
+  for await (const page of resultPages) {
+    const keyPhrasesAction = page.extractKeyPhrasesResults[0];
+    if (!keyPhrasesAction.error) {
+      for (const doc of keyPhrasesAction.results) {
+        console.log(`- Document ${doc.id}`);
+        if (!doc.error) {
+          console.log("\tKey phrases:");
+          for (const phrase of doc.keyPhrases) {
+            console.log(`\t- ${phrase}`);
+          }
+        } else {
+          console.error("\tError:", doc.error);
+        }
+      }
+    }
+
+    const entitiesAction = page.recognizeEntitiesResults[0];
+    if (!entitiesAction.error) {
+      for (const doc of entitiesAction.results) {
+        console.log(`- Document ${doc.id}`);
+        if (!doc.error) {
+          console.log("\tEntities:");
+          for (const entity of doc.entities) {
+            console.log(`\t- Entity ${entity.text} of type ${entity.category}`);
+          }
+        } else {
+          console.error("\tError:", doc.error);
+        }
+      }
+    }
+
+    const piiEntitiesAction = page.recognizePiiEntitiesResults[0];
+    if (!piiEntitiesAction.error) {
+      for (const doc of piiEntitiesAction.results) {
+        console.log(`- Document ${doc.id}`);
+        if (!doc.error) {
+          console.log("\tPii Entities:");
+          for (const entity of doc.entities) {
+            console.log(`\t- Entity ${entity.text} of type ${entity.category}`);
+          }
+        } else {
+          console.error("\tError:", doc.error);
+        }
+      }
+    }
+  }
+}
+
+main();
+```
+
+## Troubleshooting
+
+### Logging
+
+Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
+
+```javascript
+import { setLogLevel } from "@azure/logger";
+
+setLogLevel("info");
+```
+
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/textanalytics/ai-text-analytics/samples)
-directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0/sdk/textanalytics/ai-text-analytics/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
-- [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
+- [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Ftextanalytics%2Fai-text-analytics%2FREADME.png)
 
@@ -398,10 +541,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0/sdk/identity/identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0/sdk/identity/identity#defaultazurecredential
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0/sdk/textanalytics/ai-text-analytics/samples/v5/typescript/src/analyzeSentimentWithOpinionMining.ts
 

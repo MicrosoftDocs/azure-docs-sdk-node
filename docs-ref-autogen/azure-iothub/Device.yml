@@ -2,221 +2,205 @@
 name: Device
 uid: azure-iothub.Device
 package: azure-iothub
-summary: An interface representing Device.
+summary: >-
+  Creates a representation of a device for use with the [device identity
+  registry](xref:azure-iothub.Registry) APIs.
+
+
+  **This class is deprecated** because the [device identity
+  registry](xref:azure-iothub.Registry) can work directly with JSON objects
+
+  containing a partial description of the device, not necessarily the full
+  object. On top of that initially this class was shipped with a typo
+
+  on the `symmetricKey` property name (it was pascal-cased instead of
+  camel-cased). The SDK is keeping this class around in order not to break
+  existing code
+
+  but this will be removed in a future major version update and customers should
+  instead use plain JSON objects.
 fullName: Device
 remarks: ''
-isPreview: false
-isDeprecated: false
-type: interface
+isDeprecated: true
+customDeprecatedMessage: ''
+type: class
+constructors:
+  - name: Device(any)
+    uid: azure-iothub.Device.constructor
+    package: azure-iothub
+    summary: Instantiate a new <xref:azure-iothub.Device> object.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new Device(jsonData?: any)'
+      parameters:
+        - id: jsonData
+          type: any
+          description: >-
+            An optional JSON representation of the device, which will be mapped
+            to properties in the object. If no argument is provided, Device
+            properties will be assigned default values.
 properties:
   - name: authentication
     uid: azure-iothub.Device.authentication
     package: azure-iothub
-    summary: The authentication mechanism used by the device.
+    summary: Contains the symmetric keys used to authenticate this device.
     fullName: authentication
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'authentication?: AuthenticationMechanism'
+      content: 'authentication?: Authentication'
       return:
-        type: <xref uid="azure-iothub.AuthenticationMechanism" />
         description: ''
+        type: <xref uid="azure-iothub.Device.Authentication" />
   - name: capabilities
     uid: azure-iothub.Device.capabilities
     package: azure-iothub
-    summary: >-
-      The set of capabilities of the device. For example, if this device is an
-      edge device or not.
+    summary: Contains the capabilities of this device.
     fullName: capabilities
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'capabilities?: DeviceCapabilities'
+      content: 'capabilities?: Capabilities'
       return:
-        type: <xref uid="azure-iothub.DeviceCapabilities" />
         description: ''
+        type: <xref uid="azure-iothub.Device.Capabilities" />
   - name: cloudToDeviceMessageCount
     uid: azure-iothub.Device.cloudToDeviceMessageCount
     package: azure-iothub
-    summary: >-
-      The number of cloud-to-device messages currently queued to be sent to the
-      device.
+    summary: Number of c2d messages waiting to by delivered to the device.
     fullName: cloudToDeviceMessageCount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'cloudToDeviceMessageCount?: number'
+      content: 'cloudToDeviceMessageCount?: string'
       return:
-        type: number
         description: ''
+        type: string
   - name: connectionState
     uid: azure-iothub.Device.connectionState
     package: azure-iothub
     summary: >-
-      The state of the device. Possible values include: 'Disconnected',
-      'Connected'
+      Whether the device is 'connected' or 'disconnected'. It is not recommended
+      to use this property to determine if the device is actually connected
+      right now though,
+
+      since the device connection may have timed out and the IoT hub may not
+      have detected it, or if the device is using HTTPS to connect.
+
+      If you have a need to monitor device connections, the recommneded way is
+      to use the [operations
+      monitoring](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-operations-monitoring)
+      feature of your hub.
     fullName: connectionState
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'connectionState?: ConnectionState'
       return:
-        type: <xref uid="azure-iothub.ConnectionState" />
         description: ''
+        type: <xref uid="azure-iothub.Device.ConnectionState" />
   - name: connectionStateUpdatedTime
     uid: azure-iothub.Device.connectionStateUpdatedTime
     package: azure-iothub
-    summary: The date and time the connection state was last updated.
+    summary: Timestamp representing the last time `connectionState` changed.
     fullName: connectionStateUpdatedTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'connectionStateUpdatedTime?: Date'
+      content: 'connectionStateUpdatedTime?: string'
       return:
-        type: Date
         description: ''
+        type: string
   - name: deviceId
     uid: azure-iothub.Device.deviceId
     package: azure-iothub
-    summary: The unique identifier of the device.
+    summary: >-
+      Unique device identifier as it exists in the Azure IoT hub device
+      registry.
     fullName: deviceId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'deviceId?: string'
+      content: 'deviceId: string'
       return:
-        type: string
         description: ''
-  - name: deviceScope
-    uid: azure-iothub.Device.deviceScope
-    package: azure-iothub
-    summary: >-
-      The scope of the device. Auto generated and immutable for edge devices and
-      modifiable in leaf
-
-      devices to create child/parent relationship.
-    fullName: deviceScope
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'deviceScope?: string'
-      return:
         type: string
-        description: ''
   - name: etag
     uid: azure-iothub.Device.etag
     package: azure-iothub
-    summary: >-
-      The string representing a weak ETag for the device identity, as per
-      RFC7232.
+    summary: Weak entity tag assigned to this device identity description
     fullName: etag
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'etag?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: generationId
     uid: azure-iothub.Device.generationId
     package: azure-iothub
     summary: >-
-      The IoT Hub-generated, case-sensitive string up to 128 characters long.
-      This value is used to
-
-      distinguish devices with the same deviceId, when they have been deleted
-      and re-created.
+      Used to disambiguate devices that have been deleted/recreated with the
+      same `deviceId`
     fullName: generationId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'generationId?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: lastActivityTime
     uid: azure-iothub.Device.lastActivityTime
     package: azure-iothub
     summary: >-
-      The date and last time the device last connected, received, or sent a
-      message.
+      Timestamp representing the last time the device authenticated, sent a
+      message, or received a message.
     fullName: lastActivityTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'lastActivityTime?: Date'
+      content: 'lastActivityTime?: string'
       return:
-        type: Date
         description: ''
-  - name: parentScopes
-    uid: azure-iothub.Device.parentScopes
-    package: azure-iothub
-    summary: >-
-      The scopes of the upper level edge devices if applicable. Only available
-      for edge devices.
-    fullName: parentScopes
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'parentScopes?: string[]'
-      return:
-        type: 'string[]'
-        description: ''
+        type: string
   - name: status
     uid: azure-iothub.Device.status
     package: azure-iothub
     summary: >-
-      The status of the device. If the status disabled, a device cannot connect
-      to the service.
-
-      Possible values include: 'enabled', 'disabled'
+      'enabled' (device authorized to connect, can send/receive messages) or
+      'disabled'.
     fullName: status
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'status?: Status'
+      content: 'status?: DeviceStatus'
       return:
-        type: <xref uid="azure-iothub.Status" />
         description: ''
+        type: <xref uid="azure-iothub.Device.DeviceStatus" />
   - name: statusReason
     uid: azure-iothub.Device.statusReason
     package: azure-iothub
-    summary: >-
-      The 128 character-long string that stores the reason for the device
-      identity status. All UTF-8
-
-      characters are allowed.
+    summary: 128-character string set when the device is disabled.
     fullName: statusReason
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'statusReason?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: statusUpdatedTime
     uid: azure-iothub.Device.statusUpdatedTime
     package: azure-iothub
-    summary: The date and time when the status field was last updated.
+    summary: Timestamp representing the last time `status` changed.
     fullName: statusUpdatedTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'statusUpdatedTime?: Date'
+      content: 'statusUpdatedTime?: string'
       return:
-        type: Date
         description: ''
+        type: string

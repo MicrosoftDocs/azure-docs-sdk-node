@@ -1,0 +1,11 @@
+---
+title: Azure IoT Central SDK for JavaScript
+description: Reference for Azure IoT Central SDK for JavaScript
+ms.topic: reference
+ms.devlang: javascript
+ms.service: iotcentral
+---
+# Azure IoT Central SDK for JavaScript - latest
+## Packages - latest
+[!INCLUDE [packages](iot-central-index.md)]
+

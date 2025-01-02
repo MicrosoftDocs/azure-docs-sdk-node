@@ -1,0 +1,389 @@
+### YamlMime:TSType
+name: DurableClient
+uid: durable-functions.DurableClient
+package: durable-functions
+summary: |-
+  Client for starting, querying, terminating and raising events to
+  orchestration and entity instances.
+fullName: DurableClient
+remarks: ''
+isDeprecated: false
+type: class
+properties:
+  - name: taskHubName
+    uid: durable-functions.DurableClient.taskHubName
+    package: durable-functions
+    summary: |-
+      The name of the task hub configured on this orchestration client
+      instance.
+    fullName: taskHubName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'taskHubName: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: createCheckStatusResponse(undefined | HttpRequest, string)
+    uid: durable-functions.DurableClient.createCheckStatusResponse
+    package: durable-functions
+    summary: |-
+      Creates an HTTP response that is useful for checking the status of the
+      specified instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createCheckStatusResponse(request: undefined | HttpRequest,
+        instanceId: string): HttpResponse
+      parameters:
+        - id: request
+          type: undefined | <xref uid="@azure/functions.HttpRequest" />
+          description: |-
+            The HTTP request that triggered the current orchestration
+             instance.
+        - id: instanceId
+          type: string
+          description: The ID of the orchestration instance to check.
+      return:
+        description: |-
+          An HTTP 202 response with a Location header and a payload
+           containing instance management URLs.
+        type: <xref uid="@azure/functions.HttpResponse" />
+  - name: createHttpManagementPayload(string)
+    uid: durable-functions.DurableClient.createHttpManagementPayload
+    package: durable-functions
+    summary: >-
+      Creates an
+      [HttpManagementPayload](xref:durable-functions.HttpManagementPayload)
+      object that contains instance
+
+      management HTTP endpoints.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createHttpManagementPayload(instanceId: string):
+        HttpManagementPayload
+      parameters:
+        - id: instanceId
+          type: string
+          description: The ID of the orchestration instance to check.
+      return:
+        description: ''
+        type: <xref uid="durable-functions.HttpManagementPayload" />
+  - name: getStatus(string, GetStatusOptions)
+    uid: durable-functions.DurableClient.getStatus
+    package: durable-functions
+    summary: Gets the status of the specified orchestration instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getStatus(instanceId: string, options?: GetStatusOptions):
+        Promise<DurableOrchestrationStatus>
+      parameters:
+        - id: instanceId
+          type: string
+          description: The ID of the orchestration instance to query.
+        - id: options
+          type: <xref uid="durable-functions.GetStatusOptions" />
+          description: options object specifying extra configuration
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="durable-functions.DurableOrchestrationStatus"
+          />&gt;
+  - name: getStatusAll()
+    uid: durable-functions.DurableClient.getStatusAll
+    package: durable-functions
+    summary: Gets the status of all orchestration instances.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getStatusAll(): Promise<DurableOrchestrationStatus[]>'
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="durable-functions.DurableOrchestrationStatus"
+          />[]&gt;
+  - name: getStatusBy(OrchestrationFilter)
+    uid: durable-functions.DurableClient.getStatusBy
+    package: durable-functions
+    summary: |-
+      Gets the status of all orchestration instances that match the specified
+      conditions.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getStatusBy(filter: OrchestrationFilter):
+        Promise<DurableOrchestrationStatus[]>
+      parameters:
+        - id: filter
+          type: <xref uid="durable-functions.OrchestrationFilter" />
+          description: |-
+            the OrchestrationFilter object specifying which
+            orchestrations to retrieve.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="durable-functions.DurableOrchestrationStatus"
+          />[]&gt;
+  - name: purgeInstanceHistory(string)
+    uid: durable-functions.DurableClient.purgeInstanceHistory
+    package: durable-functions
+    summary: Purge the history for a specific orchestration instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function purgeInstanceHistory(instanceId: string):
+        Promise<PurgeHistoryResult>
+      parameters:
+        - id: instanceId
+          type: string
+          description: The ID of the orchestration instance to purge.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="durable-functions.PurgeHistoryResult" />&gt;
+  - name: purgeInstanceHistoryBy(OrchestrationFilter)
+    uid: durable-functions.DurableClient.purgeInstanceHistoryBy
+    package: durable-functions
+    summary: Purge the orchestration history for instances that match the conditions.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function purgeInstanceHistoryBy(filter: OrchestrationFilter):
+        Promise<PurgeHistoryResult>
+      parameters:
+        - id: filter
+          type: <xref uid="durable-functions.OrchestrationFilter" />
+          description: |-
+            the OrchestrationFilter object specifying which
+            orchestrations to purge.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="durable-functions.PurgeHistoryResult" />&gt;
+  - name: raiseEvent(string, string, unknown, TaskHubOptions)
+    uid: durable-functions.DurableClient.raiseEvent
+    package: durable-functions
+    summary: Sends an event notification message to a waiting orchestration instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function raiseEvent(instanceId: string, eventName: string, eventData:
+        unknown, options?: TaskHubOptions): Promise<void>
+      parameters:
+        - id: instanceId
+          type: string
+          description: |-
+            The ID of the orchestration instance that will handle
+             the event.
+        - id: eventName
+          type: string
+          description: The name of the event.
+        - id: eventData
+          type: unknown
+          description: The JSON-serializable data associated with the event.
+        - id: options
+          type: <xref uid="durable-functions.TaskHubOptions" />
+          description: |-
+            object providing TaskHubName of the orchestration instance and
+             the name of its associated connection string
+      return:
+        description: >-
+          A promise that resolves when the event notification message has
+           been enqueued.
+
+          In order to handle the event, the target orchestration instance must
+          be
+
+          waiting for an event named `eventName` using
+
+          <xref:durable-functions.DurableOrchestrationContext.waitForExternalEvent>.
+
+
+          If the specified instance is not found or not running, this operation
+
+          will have no effect.
+        type: Promise&lt;void&gt;
+  - name: readEntityState<T>(EntityId, TaskHubOptions)
+    uid: durable-functions.DurableClient.readEntityState
+    package: durable-functions
+    summary: |-
+      Tries to read the current state of an entity. Returns undefined if the
+      entity does not exist, or if the JSON-serialized state of the entity is
+      larger than 16KB.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function readEntityState<T>(entityId: EntityId, options?:
+        TaskHubOptions): Promise<EntityStateResponse<T>>
+      parameters:
+        - id: entityId
+          type: <xref uid="durable-functions.EntityId" />
+          description: The target entity.
+        - id: options
+          type: <xref uid="durable-functions.TaskHubOptions" />
+          description: |-
+            optional object providing the TaskHubName of the target entity
+             and the name of its associated connection string
+      return:
+        description: A response containing the current state of the entity.
+        type: >-
+          Promise&lt;<xref uid="durable-functions.EntityStateResponse"
+          />&lt;T&gt;&gt;
+  - name: rewind(string, string, TaskHubOptions)
+    uid: durable-functions.DurableClient.rewind
+    package: durable-functions
+    summary: Rewinds the specified failed orchestration instance with a reason.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function rewind(instanceId: string, reason: string, options?:
+        TaskHubOptions): Promise<void>
+      parameters:
+        - id: instanceId
+          type: string
+          description: The ID of the orchestration instance to rewind.
+        - id: reason
+          type: string
+          description: The reason for rewinding the orchestration instance.
+        - id: options
+          type: <xref uid="durable-functions.TaskHubOptions" />
+          description: |-
+            object providing TaskHubName of the orchestration instance and
+             the name of its associated connection string
+      return:
+        description: |-
+          A promise that resolves when the rewind message is enqueued.
+
+          This feature is currently in preview.
+        type: Promise&lt;void&gt;
+  - name: signalEntity(EntityId, string, unknown, TaskHubOptions)
+    uid: durable-functions.DurableClient.signalEntity
+    package: durable-functions
+    summary: Signals an entity to perform an operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function signalEntity(entityId: EntityId, operationName?: string,
+        operationContent?: unknown, options?: TaskHubOptions): Promise<void>
+      parameters:
+        - id: entityId
+          type: <xref uid="durable-functions.EntityId" />
+          description: The target entity.
+        - id: operationName
+          type: string
+          description: The name of the operation.
+        - id: operationContent
+          type: unknown
+          description: The content for the operation.
+        - id: options
+          type: <xref uid="durable-functions.TaskHubOptions" />
+          description: |-
+            object providing TaskHubName of the entity instance and
+             the name of its associated connection string
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: startNew(string, StartNewOptions)
+    uid: durable-functions.DurableClient.startNew
+    package: durable-functions
+    summary: |-
+      Starts a new instance of the specified orchestrator function.
+
+      If an orchestration instance with the specified ID already exists, the
+      existing instance will be silently replaced by this new instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startNew(orchestratorFunctionName: string, options?:
+        StartNewOptions): Promise<string>
+      parameters:
+        - id: orchestratorFunctionName
+          type: string
+          description: |-
+            The name of the orchestrator function to
+             start.
+        - id: options
+          type: <xref uid="durable-functions.StartNewOptions" />
+          description: >-
+            optional object to control the scheduled orchestrator (e.g provide
+            input, instanceID)
+      return:
+        description: The ID of the new orchestration instance.
+        type: Promise&lt;string&gt;
+  - name: terminate(string, string)
+    uid: durable-functions.DurableClient.terminate
+    package: durable-functions
+    summary: Terminates a running orchestration instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function terminate(instanceId: string, reason: string): Promise<void>'
+      parameters:
+        - id: instanceId
+          type: string
+          description: The ID of the orchestration instance to terminate.
+        - id: reason
+          type: string
+          description: The reason for terminating the orchestration instance.
+      return:
+        description: |-
+          A promise that resolves when the terminate message is enqueued.
+
+          Terminating an orchestration instance has no effect on any in-flight
+          activity function executions or sub-orchestrations that were started
+          by the current orchestration instance.
+        type: Promise&lt;void&gt;
+  - name: >-
+      waitForCompletionOrCreateCheckStatusResponse(HttpRequest, string,
+      WaitForCompletionOptions)
+    uid: >-
+      durable-functions.DurableClient.waitForCompletionOrCreateCheckStatusResponse
+    package: durable-functions
+    summary: >-
+      Creates an HTTP response which either contains a payload of management
+
+      URLs for a non-completed instance or contains the payload containing
+
+      the output of the completed orchestration.
+
+
+      If the orchestration does not complete within the specified timeout,
+
+      then the HTTP response will be identical to that of
+      createCheckStatusResponse().
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function waitForCompletionOrCreateCheckStatusResponse(request:
+        HttpRequest, instanceId: string, waitOptions?:
+        WaitForCompletionOptions): Promise<HttpResponse>
+      parameters:
+        - id: request
+          type: <xref uid="@azure/functions.HttpRequest" />
+          description: The HTTP request that triggered the current function.
+        - id: instanceId
+          type: string
+          description: The unique ID of the instance to check.
+        - id: waitOptions
+          type: <xref uid="durable-functions.WaitForCompletionOptions" />
+          description: >-
+            options object specifying the timeouts for how long
+
+            to wait for output from the durable function and how often to check
+            for output.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/functions.HttpResponse" />&gt;

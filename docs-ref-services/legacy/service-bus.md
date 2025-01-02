@@ -1,17 +1,12 @@
 ---
 title: Azure Service Bus Modules for JavaScript
 description: Reference for Azure Service Bus Modules for JavaScript
-author: spelluru
-ms.author: spelluru
-manager: timlt
 ms.date: 03/04/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: nodejs
-ms.service: Service Bus
+ms.service: service-bus
+manager: timlt
 ---
-
 # Azure Service Bus Modules for JavaScript
 
 Azure Service Bus is an asynchronous messaging cloud platform that enables you to send data between decoupled systems.
@@ -39,3 +34,4 @@ npm install @azure/service-bus
 See the documentation for this package [here](https://docs.microsoft.com/javascript/api/@azure/service-bus/?view=azure-node-latest).
 
 For more code samples that use the @azure/service-bus package, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript&products=azure-service-bus).
+

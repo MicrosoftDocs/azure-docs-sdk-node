@@ -1,17 +1,11 @@
 ---
-title: Azure Redis Cache modules for JavaScript
-description: Reference for Azure Redis Cache modules for JavaScript
-author: wesmc7777
-ms.author: wesmc
-manager: cfowler
-ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Redis Cache
+title: Azure Redis Cache SDK for JavaScript
+description: Reference for Azure Redis Cache SDK for JavaScript
+ms.date: 06/15/2022
+ms.topic: reference
+ms.devlang: javascript
+ms.service: cache
 ---
-
 # Azure Redis Cache modules for JavaScript
 
 Azure Redis Cache is based on the popular open source Redis project. It gives you access to a secure, dedicated Redis instance, managed by Microsoft and accessible from your Azure apps.
@@ -68,3 +62,4 @@ npm install @azure/arm-rediscache
 * [How to use Azure Redis Cache with JavaScript](https://docs.microsoft.com/azure/redis-cache/cache-nodejs-get-started)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

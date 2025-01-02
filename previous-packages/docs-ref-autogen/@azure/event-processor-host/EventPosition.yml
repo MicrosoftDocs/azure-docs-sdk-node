@@ -1,0 +1,258 @@
+### YamlMime:TSType
+name: EventPosition
+uid: '@azure/event-processor-host.EventPosition'
+package: '@azure/event-processor-host'
+summary: |-
+  Represents options can be set during the creation of a event hub receiver.
+  Defines a position of an @link~EventData in the event hub partition.
+fullName: EventPosition
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: EventPosition(EventPositionOptions)
+    uid: '@azure/event-processor-host.EventPosition.constructor'
+    package: '@azure/event-processor-host'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new EventPosition(options?: EventPositionOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/event-hubs.EventPositionOptions" />
+          description: ''
+properties:
+  - name: customFilter
+    uid: '@azure/event-processor-host.EventPosition.customFilter'
+    package: '@azure/event-processor-host'
+    summary: The custom filter expression that needs to be set on the receiver.
+    fullName: customFilter
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'customFilter?: string'
+      return:
+        description: ''
+        type: string
+  - name: endOfStream
+    uid: '@azure/event-processor-host.EventPosition.endOfStream'
+    package: '@azure/event-processor-host'
+    summary: 'The offset from which events would be received: `"@latest"`.'
+    fullName: endOfStream
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static endOfStream: string'
+      return:
+        description: ''
+        type: string
+  - name: enqueuedTime
+    uid: '@azure/event-processor-host.EventPosition.enqueuedTime'
+    package: '@azure/event-processor-host'
+    summary: |-
+      The enqueued time of the event at the position. It can be undefined
+      if the position is just created from a sequence number or an offset.
+    fullName: enqueuedTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enqueuedTime?: number | Date'
+      return:
+        description: ''
+        type: number | Date
+  - name: isInclusive
+    uid: '@azure/event-processor-host.EventPosition.isInclusive'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Indicates if the current event at the specified offset is
+
+      included or not. It is only applicable if offset is set. Default value:
+      false.
+    fullName: isInclusive
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isInclusive: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: offset
+    uid: '@azure/event-processor-host.EventPosition.offset'
+    package: '@azure/event-processor-host'
+    summary: >-
+      The offset of the event at the position. It can be undefined
+
+      if the position is just created from a sequence number or an enqueued
+      time.
+    fullName: offset
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'offset?: string'
+      return:
+        description: ''
+        type: string
+  - name: sequenceNumber
+    uid: '@azure/event-processor-host.EventPosition.sequenceNumber'
+    package: '@azure/event-processor-host'
+    summary: |-
+      The sequence number of the event at the position. It can be undefined
+      if the position is just created from an enqueued time or an offset.
+    fullName: sequenceNumber
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sequenceNumber?: number'
+      return:
+        description: ''
+        type: number
+  - name: startOfStream
+    uid: '@azure/event-processor-host.EventPosition.startOfStream'
+    package: '@azure/event-processor-host'
+    summary: 'The offset from which events would be received: `"-1"`.'
+    fullName: startOfStream
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static startOfStream: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: fromEnd()
+    uid: '@azure/event-processor-host.EventPosition.fromEnd'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Returns the position for the end of a stream. Provide this position in
+      receiver creation to
+
+      start receiving from the next available event in the partition after the
+      receiver is created.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static function fromEnd(): EventPosition'
+      return:
+        description: EventPosition
+        type: <xref uid="@azure/event-processor-host.EventPosition" />
+  - name: fromEnqueuedTime(number | Date)
+    uid: '@azure/event-processor-host.EventPosition.fromEnqueuedTime'
+    package: '@azure/event-processor-host'
+    summary: Creates a position at the given enqueued time.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromEnqueuedTime(enqueuedTime: number | Date):
+        EventPosition
+      parameters:
+        - id: enqueuedTime
+          type: number | Date
+          description: >-
+            The enqueue time. This value represents the actual time of enqueuing
+            the message.
+      return:
+        description: EventPosition
+        type: <xref uid="@azure/event-processor-host.EventPosition" />
+  - name: fromOffset(string, boolean)
+    uid: '@azure/event-processor-host.EventPosition.fromOffset'
+    package: '@azure/event-processor-host'
+    summary: Creates a position at the given offset.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromOffset(offset: string, isInclusive?: boolean):
+        EventPosition
+      parameters:
+        - id: offset
+          type: string
+          description: >-
+            The offset of the data relative to the Event Hub partition stream.
+
+            The offset is a marker or identifier for an event within the Event
+            Hubs stream.
+
+            The identifier is unique within a partition of the Event Hubs
+            stream.
+        - id: isInclusive
+          type: boolean
+          description: |-
+            If true, the specified event is included;
+            otherwise the next event is returned. Default: false.
+      return:
+        description: EventPosition
+        type: <xref uid="@azure/event-processor-host.EventPosition" />
+  - name: fromSequenceNumber(number, boolean)
+    uid: '@azure/event-processor-host.EventPosition.fromSequenceNumber'
+    package: '@azure/event-processor-host'
+    summary: Creates a position at the given sequence number.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromSequenceNumber(sequenceNumber: number, isInclusive?:
+        boolean): EventPosition
+      parameters:
+        - id: sequenceNumber
+          type: number
+          description: >-
+            The logical sequence number of the event within the partition stream
+            of the Event Hub.
+        - id: isInclusive
+          type: boolean
+          description: |-
+            If true, the specified event is included;
+            otherwise the next event is returned. Default false.
+      return:
+        description: EventPosition
+        type: <xref uid="@azure/event-processor-host.EventPosition" />
+  - name: fromStart()
+    uid: '@azure/event-processor-host.EventPosition.fromStart'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Returns the position for the start of a stream. Provide this position in
+      receiver creation to
+
+      start receiving from the first available event in the partition.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static function fromStart(): EventPosition'
+      return:
+        description: EventPosition
+        type: <xref uid="@azure/event-processor-host.EventPosition" />
+  - name: getExpression()
+    uid: '@azure/event-processor-host.EventPosition.getExpression'
+    package: '@azure/event-processor-host'
+    summary: Gets the expression (filter clause) that needs to be set on the source.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getExpression(): string'
+      return:
+        description: filterExpression
+        type: string
+  - name: withCustomFilter(string)
+    uid: '@azure/event-processor-host.EventPosition.withCustomFilter'
+    package: '@azure/event-processor-host'
+    summary: Creates a position based on the given custom filter.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static function withCustomFilter(customFilter: string): EventPosition'
+      parameters:
+        - id: customFilter
+          type: string
+          description: >-
+            The cutom filter expression that needs to be applied on the
+            receiver. This should be used
+
+            only when one of the other methods `fromOffset()`,
+            `fromSequenceNumber()`, `fromEnqueuedTime()` is not applicable for
+
+            your scenario.
+      return:
+        description: ''
+        type: <xref uid="@azure/event-processor-host.EventPosition" />

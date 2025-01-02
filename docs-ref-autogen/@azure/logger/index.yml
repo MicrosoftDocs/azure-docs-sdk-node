@@ -3,41 +3,58 @@ uid: '@azure/logger'
 name: '@azure/logger'
 summary: ''
 type: package
-interfaces:
-  - '@azure/logger.AzureLogger'
-  - '@azure/logger.Debugger'
-typeAliases:
-  - '@azure/logger.AzureClientLogger'
-  - '@azure/logger.AzureLogLevel'
 functions:
+  - name: AzureLogger(any[])
+    uid: '@azure/logger.AzureLogger'
+    package: '@azure/logger'
+    summary: >-
+      The AzureLogger provides a mechanism for overriding where logs are output
+      to.
+
+      By default, logs are sent to stderr.
+
+      Override the `log` method to redirect logs to another location.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function AzureLogger(args: any[])'
+      parameters:
+        - id: args
+          type: any[]
+          description: ''
   - name: getLogLevel()
     uid: '@azure/logger.getLogLevel'
     package: '@azure/logger'
     summary: Retrieves the currently specified log level.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function getLogLevel()
+      content: 'function getLogLevel(): AzureLogLevel | undefined'
       return:
-        type: <xref uid="@azure/logger.AzureLogLevel" /> | undefined
         description: ''
+        type: <xref uid="@azure/logger.AzureLogLevel" /> | undefined
   - name: setLogLevel(AzureLogLevel)
     uid: '@azure/logger.setLogLevel'
     package: '@azure/logger'
-    summary: Immediately enables logging at the specified log level.
+    summary: >-
+      Immediately enables logging at the specified log level. If no level is
+      specified, logging is disabled.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function setLogLevel(level?: AzureLogLevel)'
       parameters:
         - id: level
           type: <xref uid="@azure/logger.AzureLogLevel" />
-          description: |
+          description: |-
             The log level to enable for logging.
             Options from most verbose to least verbose are:
             - verbose
             - info
             - warning
             - error
+interfaces:
+  - '@azure/logger.Debugger'
+typeAliases:
+  - '@azure/logger.AzureClientLogger'
+  - '@azure/logger.AzureLogLevel'

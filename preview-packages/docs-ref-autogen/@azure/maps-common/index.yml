@@ -1,0 +1,116 @@
+### YamlMime:TSPackage
+uid: '@azure/maps-common'
+name: '@azure/maps-common'
+summary: ''
+type: package
+interfaces:
+  - '@azure/maps-common.BoundingBox'
+  - '@azure/maps-common.GeoJsonFeature'
+  - '@azure/maps-common.GeoJsonFeatureCollection'
+  - '@azure/maps-common.GeoJsonGeometryCollection'
+  - '@azure/maps-common.GeoJsonLineString'
+  - '@azure/maps-common.GeoJsonMultiLineString'
+  - '@azure/maps-common.GeoJsonMultiPoint'
+  - '@azure/maps-common.GeoJsonMultiPolygon'
+  - '@azure/maps-common.GeoJsonObject'
+  - '@azure/maps-common.GeoJsonPoint'
+  - '@azure/maps-common.GeoJsonPolygon'
+typeAliases:
+  - '@azure/maps-common.BBox'
+  - '@azure/maps-common.BBox2D'
+  - '@azure/maps-common.BBox3D'
+  - '@azure/maps-common.GeoJsonGeometry'
+  - '@azure/maps-common.GeoJsonType'
+  - '@azure/maps-common.GeometryType'
+  - '@azure/maps-common.LatLon'
+  - '@azure/maps-common.Position'
+  - '@azure/maps-common.Position2D'
+  - '@azure/maps-common.Position3D'
+functions:
+  - name: createAzureMapsKeyCredentialPolicy(KeyCredential)
+    uid: '@azure/maps-common.createAzureMapsKeyCredentialPolicy'
+    package: '@azure/maps-common'
+    summary: |-
+      Create an HTTP pipeline policy to authenticate a request
+      using an `AzureKeyCredential` for Azure Maps
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createAzureMapsKeyCredentialPolicy(azureKeyCredential:
+        KeyCredential): PipelinePolicy
+      parameters:
+        - id: azureKeyCredential
+          type: <xref uid="@azure/core-auth.KeyCredential" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: createMapsClientIdPolicy(string)
+    uid: '@azure/maps-common.createMapsClientIdPolicy'
+    package: '@azure/maps-common'
+    summary: |-
+      Create an HTTP pipeline policy to add x-ms-client-id header
+      for `TokenCredential` based authentication for Azure Maps
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function createMapsClientIdPolicy(mapsClientId: string): PipelinePolicy'
+      parameters:
+        - id: mapsClientId
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: >-
+      createSendPollRequest<TOptions, TClient>({ client: TClient, options:
+      TOptions, spec: OperationSpec })
+    uid: '@azure/maps-common.createSendPollRequest'
+    package: '@azure/maps-common'
+    summary: >-
+      Helper function to create a method that can be passed to sendPollRequest
+      in createHttpPoller.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createSendPollRequest<TOptions, TClient>(settings: { client:
+        TClient, options: TOptions, spec: OperationSpec }): (path: string) =>
+        Promise<LroResponse<unknown>>
+      parameters:
+        - id: settings
+          type: '{ client: TClient, options: TOptions, spec: OperationSpec }'
+          description: >-
+            The settings of the poll request, including client, options and the
+            spec
+      return:
+        description: >-
+          A callback that accept the path as input and return the promise of Lro
+          response.
+        type: '(path: string) =&gt; Promise&lt;LroResponse&lt;unknown&gt;&gt;'
+  - name: >-
+      getRawResponse<TOptions, TResponse>((options: TOptions) =>
+      Promise<TResponse>, TOptions)
+    uid: '@azure/maps-common.getRawResponse'
+    package: '@azure/maps-common'
+    summary: Extract several fields of the response to the rawResponse
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getRawResponse<TOptions, TResponse>(getResponse: (options:
+        TOptions) => Promise<TResponse>, options: TOptions):
+        Promise<LroResponse<TResponse>>
+      parameters:
+        - id: getResponse
+          type: '(options: TOptions) =&gt; Promise&lt;TResponse&gt;'
+          description: A async function that actually call the backend API.
+        - id: options
+          type: TOptions
+          description: The options for the getResponse callback
+      return:
+        description: A promise for the API call.
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.LroResponse"
+          />&lt;TResponse&gt;&gt;

@@ -5,57 +5,93 @@ package: '@azure/arm-resourcegraph'
 summary: ''
 fullName: ResourceGraphClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
   - name: >-
-      ResourceGraphClient(ServiceClientCredentials,
-      Models.ResourceGraphClientOptions)
+      ResourceGraphClient(ServiceClientCredentials | TokenCredential,
+      ResourceGraphClientOptions)
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.constructor'
     package: '@azure/arm-resourcegraph'
     summary: Initializes a new instance of the ResourceGraphClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        new ResourceGraphClient(credentials: ServiceClientCredentials, options?:
-        Models.ResourceGraphClientOptions)
+        new ResourceGraphClient(credentials: ServiceClientCredentials |
+        TokenCredential, options?: ResourceGraphClientOptions)
       parameters:
         - id: credentials
-          type: ServiceClientCredentials
-          description: Credentials needed for the client to connect to Azure.
+          type: >-
+            <xref uid="@azure/ms-rest-js.ServiceClientCredentials" /> | <xref
+            uid="@azure/core-auth.TokenCredential" />
+          description: >-
+            Credentials needed for the client to connect to Azure. Credentials
+
+            implementing the TokenCredential interface from the @azure/identity
+            package are recommended. For
+
+            more information about these credentials, see
+
+            https://www.npmjs.com/package/@azure/identity. Credentials
+            implementing the
+
+            ServiceClientCredentials interface from the older packages
+            @azure/ms-rest-nodeauth and
+
+            @azure/ms-rest-browserauth are also supported.
         - id: options
-          type: <xref uid="Models.ResourceGraphClientOptions" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceGraphClientOptions"
+            />
+          description: The parameter options
 properties:
+  - name: operations
+    uid: '@azure/arm-resourcegraph.ResourceGraphClient.operations'
+    package: '@azure/arm-resourcegraph'
+    summary: ''
+    fullName: operations
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'operations: Operations'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-resourcegraph.Operations" />
+inheritedProperties:
   - name: acceptLanguage
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.acceptLanguage'
     package: '@azure/arm-resourcegraph'
     summary: ''
     fullName: acceptLanguage
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'acceptLanguage: string'
       return:
-        type: string
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.acceptLanguage](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.acceptLanguage)
   - name: credentials
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.credentials'
     package: '@azure/arm-resourcegraph'
     summary: ''
     fullName: credentials
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'credentials: ServiceClientCredentials'
+      content: 'credentials: ServiceClientCredentials | TokenCredential'
       return:
-        type: ServiceClientCredentials
         description: ''
+        type: >-
+          <xref uid="@azure/ms-rest-js.ServiceClientCredentials" /> | <xref
+          uid="@azure/core-auth.TokenCredential" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.credentials](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.credentials)
   - name: longRunningOperationRetryTimeout
     uid: >-
       @azure/arm-resourcegraph.ResourceGraphClient.longRunningOperationRetryTimeout
@@ -65,27 +101,16 @@ properties:
       30.
     fullName: longRunningOperationRetryTimeout
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'longRunningOperationRetryTimeout?: undefined | number'
+      content: 'longRunningOperationRetryTimeout?: number'
       return:
-        type: undefined | number
         description: ''
-  - name: operations
-    uid: '@azure/arm-resourcegraph.ResourceGraphClient.operations'
-    package: '@azure/arm-resourcegraph'
-    summary: ''
-    fullName: operations
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'operations: Operations'
-      return:
-        type: <xref uid="@azure/arm-resourcegraph.Operations" />
-        description: ''
-methods:
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.longRunningOperationRetryTimeout](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.longRunningOperationRetryTimeout)
+inheritedMethods:
   - name: >-
       beginLongRunningRequest(RequestPrepareOptions | WebResource,
       RequestOptionsBase)
@@ -99,51 +124,198 @@ methods:
 
       LRO is finished.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginLongRunningRequest(request: RequestPrepareOptions |
-        WebResource, options?: RequestOptionsBase)
+        WebResource, options?: RequestOptionsBase): Promise<LROPoller>
       parameters:
         - id: request
-          type: RequestPrepareOptions | WebResource
+          type: >-
+            <xref uid="@azure/ms-rest-js.RequestPrepareOptions" /> | <xref
+            uid="@azure/ms-rest-js.WebResource" />
           description: The request object
         - id: options
-          type: RequestOptionsBase
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: Additional options to be sent while making the request
       return:
-        type: Promise&lt;LROPoller&gt;
         description: |-
           The HttpLongRunningOperationResponse
           that provides methods for interacting with the LRO.
+        type: Promise&lt;<xref uid="@azure/ms-rest-azure-js.LROPoller" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.beginLongRunningRequest](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.beginLongRunningRequest)
+  - name: restoreLROPoller(LROPollState)
+    uid: '@azure/arm-resourcegraph.ResourceGraphClient.restoreLROPoller'
+    package: '@azure/arm-resourcegraph'
+    summary: >-
+      Restore an LROPoller from the provided LROPollState. This method can be
+      used to recreate an
+
+      LROPoller on a different process or machine.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function restoreLROPoller(lroPollState: LROPollState): LROPoller'
+      parameters:
+        - id: lroPollState
+          type: <xref uid="@azure/ms-rest-azure-js.LROPollState" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/ms-rest-azure-js.LROPoller" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.restoreLROPoller](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.restoreLROPoller)
+  - name: >-
+      sendLongRunningRequest(RequestPrepareOptions | WebResource,
+      RequestOptionsBase)
+    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendLongRunningRequest'
+    package: '@azure/arm-resourcegraph'
+    summary: >-
+      Provides a mechanism to make a request that will poll and provide the
+      final result.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendLongRunningRequest(request: RequestPrepareOptions |
+        WebResource, options?: RequestOptionsBase):
+        Promise<HttpOperationResponse>
+      parameters:
+        - id: request
+          type: >-
+            <xref uid="@azure/ms-rest-js.RequestPrepareOptions" /> | <xref
+            uid="@azure/ms-rest-js.WebResource" />
+          description: The request object
+        - id: options
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: Additional options to be sent while making the request
+      return:
+        description: >-
+          The HttpOperationResponse containing the final polling request,
+          response and the responseBody.
+        type: Promise&lt;<xref uid="@azure/ms-rest-js.HttpOperationResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.sendLongRunningRequest](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.sendLongRunningRequest)
+  - name: sendLRORequest(OperationArguments, OperationSpec, RequestOptionsBase)
+    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendLRORequest'
+    package: '@azure/arm-resourcegraph'
+    summary: >-
+      Send the initial request of a LRO (long running operation) and get back an
+
+      LROPoller that provides methods for polling the LRO and checking if the
+      LRO is finished.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendLRORequest(operationArguments: OperationArguments,
+        operationSpec: OperationSpec, options?: RequestOptionsBase):
+        Promise<LROPoller>
+      parameters:
+        - id: operationArguments
+          type: <xref uid="@azure/ms-rest-js.OperationArguments" />
+          description: The arguments to the operation.
+        - id: operationSpec
+          type: <xref uid="@azure/ms-rest-js.OperationSpec" />
+          description: The specification for the operation.
+        - id: options
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: Additional options to be sent while making the request.
+      return:
+        description: >-
+          The LROPoller object that provides methods for interacting with the
+          LRO.
+        type: Promise&lt;<xref uid="@azure/ms-rest-azure-js.LROPoller" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.sendLRORequest](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.sendLRORequest)
+  - name: >-
+      sendOperationRequest(OperationArguments, OperationSpec,
+      ServiceCallback<any>)
+    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendOperationRequest'
+    package: '@azure/arm-resourcegraph'
+    summary: Send an HTTP request that is populated using the provided OperationSpec.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendOperationRequest(operationArguments: OperationArguments,
+        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
+        Promise<RestResponse>
+      parameters:
+        - id: operationArguments
+          type: <xref uid="@azure/ms-rest-js.OperationArguments" />
+          description: >-
+            The arguments that the HTTP request's templated values will be
+            populated from.
+        - id: operationSpec
+          type: <xref uid="@azure/ms-rest-js.OperationSpec" />
+          description: The OperationSpec to use to populate the httpRequest.
+        - id: callback
+          type: <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;any&gt;
+          description: The callback to call when the response is received.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/ms-rest-js.RestResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.sendOperationRequest](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.sendOperationRequest)
+  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendRequest'
+    package: '@azure/arm-resourcegraph'
+    summary: Send the provided httpRequest.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
+        Promise<HttpOperationResponse>
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@azure/ms-rest-js.RequestPrepareOptions" /> | <xref
+            uid="@azure/ms-rest-js.WebResourceLike" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/ms-rest-js.HttpOperationResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ResourceGraphClientContext.sendRequest](xref:@azure/arm-resourcegraph.ResourceGraphClientContext.sendRequest)
+methods:
   - name: >-
       resourceChangeDetails(ResourceChangeDetailsRequestParameters,
-      msRest.RequestOptionsBase)
+      RequestOptionsBase)
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.resourceChangeDetails'
     package: '@azure/arm-resourcegraph'
     summary: Get resource change details.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function resourceChangeDetails(parameters:
-        ResourceChangeDetailsRequestParameters, options?:
-        msRest.RequestOptionsBase)
+        ResourceChangeDetailsRequestParameters, options?: RequestOptionsBase):
+        Promise<ResourceChangeDetailsResponse>
       parameters:
         - id: parameters
           type: >-
             <xref
-            uid="@azure/arm-resourcegraph.ResourceChangeDetailsRequestParameters"
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeDetailsRequestParameters"
             />
           description: The parameters for this request for resource change details.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: Promise&lt;<xref uid="Models.ResourceChangeDetailsResponse" />&gt;
         description: Promise<Models.ResourceChangeDetailsResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeDetailsResponse"
+          />&gt;
   - name: >-
       resourceChangeDetails(ResourceChangeDetailsRequestParameters,
       RequestOptionsBase, ServiceCallback<ResourceChangeData[]>)
@@ -151,7 +323,6 @@ methods:
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -162,18 +333,18 @@ methods:
         - id: parameters
           type: >-
             <xref
-            uid="@azure/arm-resourcegraph.ResourceChangeDetailsRequestParameters"
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeDetailsRequestParameters"
             />
           description: The parameters for this request for resource change details.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcegraph.ResourceChangeData" />[]&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeData"
+            />[]&gt;
+          description: The callback
   - name: >-
       resourceChangeDetails(ResourceChangeDetailsRequestParameters,
       ServiceCallback<ResourceChangeData[]>)
@@ -181,7 +352,6 @@ methods:
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -192,40 +362,41 @@ methods:
         - id: parameters
           type: >-
             <xref
-            uid="@azure/arm-resourcegraph.ResourceChangeDetailsRequestParameters"
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeDetailsRequestParameters"
             />
           description: The parameters for this request for resource change details.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcegraph.ResourceChangeData" />[]&gt;
-          description: |
-            The callback
-  - name: >-
-      resourceChanges(ResourceChangesRequestParameters,
-      msRest.RequestOptionsBase)
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeData"
+            />[]&gt;
+          description: The callback
+  - name: resourceChanges(ResourceChangesRequestParameters, RequestOptionsBase)
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.resourceChanges'
     package: '@azure/arm-resourcegraph'
     summary: List changes to a resource for a given time interval.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function resourceChanges(parameters: ResourceChangesRequestParameters,
-        options?: msRest.RequestOptionsBase)
+        options?: RequestOptionsBase): Promise<ResourceChangesResponse>
       parameters:
         - id: parameters
           type: >-
             <xref
-            uid="@azure/arm-resourcegraph.ResourceChangesRequestParameters" />
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangesRequestParameters"
+            />
           description: the parameters for this request for changes.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: Promise&lt;<xref uid="Models.ResourceChangesResponse" />&gt;
         description: Promise<Models.ResourceChangesResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangesResponse"
+          />&gt;
   - name: >-
       resourceChanges(ResourceChangesRequestParameters, RequestOptionsBase,
       ServiceCallback<ResourceChangeList>)
@@ -233,7 +404,6 @@ methods:
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -244,17 +414,18 @@ methods:
         - id: parameters
           type: >-
             <xref
-            uid="@azure/arm-resourcegraph.ResourceChangesRequestParameters" />
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangesRequestParameters"
+            />
           description: the parameters for this request for changes.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcegraph.ResourceChangeList" />&gt;
-          description: |
-            The callback
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeList"
+            />&gt;
+          description: The callback
   - name: >-
       resourceChanges(ResourceChangesRequestParameters,
       ServiceCallback<ResourceChangeList>)
@@ -262,7 +433,6 @@ methods:
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -272,37 +442,42 @@ methods:
         - id: parameters
           type: >-
             <xref
-            uid="@azure/arm-resourcegraph.ResourceChangesRequestParameters" />
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangesRequestParameters"
+            />
           description: the parameters for this request for changes.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcegraph.ResourceChangeList" />&gt;
-          description: |
-            The callback
-  - name: 'resources(QueryRequest, msRest.RequestOptionsBase)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourceChangeList"
+            />&gt;
+          description: The callback
+  - name: resources(QueryRequest, RequestOptionsBase)
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.resources'
     package: '@azure/arm-resourcegraph'
     summary: >-
       Queries the resources managed by Azure Resource Manager for scopes
       specified in the request.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function resources(query: QueryRequest, options?:
-        msRest.RequestOptionsBase)
+        function resources(query: QueryRequest, options?: RequestOptionsBase):
+        Promise<ResourcesResponse>
       parameters:
         - id: query
-          type: <xref uid="@azure/arm-resourcegraph.QueryRequest" />
+          type: >-
+            <xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.QueryRequest" />
           description: Request specifying query and its options.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: Promise&lt;<xref uid="Models.ResourcesResponse" />&gt;
         description: Promise<Models.ResourcesResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourcesResponse"
+          />&gt;
   - name: >-
       resources(QueryRequest, RequestOptionsBase,
       ServiceCallback<QueryResponse>)
@@ -310,7 +485,6 @@ methods:
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -318,23 +492,24 @@ methods:
         callback: ServiceCallback<QueryResponse>)
       parameters:
         - id: query
-          type: <xref uid="@azure/arm-resourcegraph.QueryRequest" />
+          type: >-
+            <xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.QueryRequest" />
           description: Request specifying query and its options.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcegraph.QueryResponse" />&gt;
-          description: |
-            The callback
-  - name: 'resources(QueryRequest, ServiceCallback<QueryResponse>)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.QueryResponse"
+            />&gt;
+          description: The callback
+  - name: resources(QueryRequest, ServiceCallback<QueryResponse>)
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.resources_1'
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -342,35 +517,42 @@ methods:
         ServiceCallback<QueryResponse>)
       parameters:
         - id: query
-          type: <xref uid="@azure/arm-resourcegraph.QueryRequest" />
+          type: >-
+            <xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.QueryRequest" />
           description: Request specifying query and its options.
         - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcegraph.QueryResponse" />&gt;
-          description: |
-            The callback
-  - name: 'resourcesHistory(ResourcesHistoryRequest, msRest.RequestOptionsBase)'
+            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.QueryResponse"
+            />&gt;
+          description: The callback
+  - name: resourcesHistory(ResourcesHistoryRequest, RequestOptionsBase)
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.resourcesHistory'
     package: '@azure/arm-resourcegraph'
     summary: List all snapshots of a resource for a given time interval.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function resourcesHistory(request: ResourcesHistoryRequest, options?:
-        msRest.RequestOptionsBase)
+        RequestOptionsBase): Promise<ResourcesHistoryResponse>
       parameters:
         - id: request
-          type: <xref uid="@azure/arm-resourcegraph.ResourcesHistoryRequest" />
+          type: >-
+            <xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourcesHistoryRequest"
+            />
           description: ''
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
+          description: The optional parameters
       return:
-        type: Promise&lt;<xref uid="Models.ResourcesHistoryResponse" />&gt;
         description: Promise<Models.ResourcesHistoryResponse>
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourcesHistoryResponse"
+          />&gt;
   - name: >-
       resourcesHistory(ResourcesHistoryRequest, RequestOptionsBase,
       ServiceCallback<any>)
@@ -378,7 +560,6 @@ methods:
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -386,21 +567,22 @@ methods:
         RequestOptionsBase, callback: ServiceCallback<any>)
       parameters:
         - id: request
-          type: <xref uid="@azure/arm-resourcegraph.ResourcesHistoryRequest" />
+          type: >-
+            <xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourcesHistoryRequest"
+            />
           description: ''
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
           description: The optional parameters
         - id: callback
-          type: ServiceCallback&lt;any&gt;
-          description: |
-            The callback
-  - name: 'resourcesHistory(ResourcesHistoryRequest, ServiceCallback<any>)'
+          type: <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;any&gt;
+          description: The callback
+  - name: resourcesHistory(ResourcesHistoryRequest, ServiceCallback<any>)
     uid: '@azure/arm-resourcegraph.ResourceGraphClient.resourcesHistory_1'
     package: '@azure/arm-resourcegraph'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -408,132 +590,12 @@ methods:
         ServiceCallback<any>)
       parameters:
         - id: request
-          type: <xref uid="@azure/arm-resourcegraph.ResourcesHistoryRequest" />
+          type: >-
+            <xref
+            uid="@azure/arm-resourcegraph.ResourceGraphModels.ResourcesHistoryRequest"
+            />
           description: ''
         - id: callback
-          type: ServiceCallback&lt;any&gt;
-          description: |
-            The callback
-  - name: restoreLROPoller(LROPollState)
-    uid: '@azure/arm-resourcegraph.ResourceGraphClient.restoreLROPoller'
-    package: '@azure/arm-resourcegraph'
-    summary: >-
-      Restore an LROPoller from the provided LROPollState. This method can be
-      used to recreate an
-
-      LROPoller on a different process or machine.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function restoreLROPoller(lroPollState: LROPollState)'
-      parameters:
-        - id: lroPollState
-          type: LROPollState
-          description: ''
-      return:
-        type: LROPoller
-        description: ''
-  - name: >-
-      sendLongRunningRequest(RequestPrepareOptions | WebResource,
-      RequestOptionsBase)
-    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendLongRunningRequest'
-    package: '@azure/arm-resourcegraph'
-    summary: >-
-      Provides a mechanism to make a request that will poll and provide the
-      final result.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendLongRunningRequest(request: RequestPrepareOptions |
-        WebResource, options?: RequestOptionsBase)
-      parameters:
-        - id: request
-          type: RequestPrepareOptions | WebResource
-          description: The request object
-        - id: options
-          type: RequestOptionsBase
-          description: ''
-      return:
-        type: Promise&lt;HttpOperationResponse&gt;
-        description: >-
-          The HttpOperationResponse containing the final polling request,
-          response and the responseBody.
-  - name: 'sendLRORequest(OperationArguments, OperationSpec, RequestOptionsBase)'
-    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendLRORequest'
-    package: '@azure/arm-resourcegraph'
-    summary: >-
-      Send the initial request of a LRO (long running operation) and get back an
-
-      LROPoller that provides methods for polling the LRO and checking if the
-      LRO is finished.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendLRORequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, options?: RequestOptionsBase)
-      parameters:
-        - id: operationArguments
-          type: OperationArguments
-          description: The arguments to the operation.
-        - id: operationSpec
-          type: OperationSpec
-          description: The specification for the operation.
-        - id: options
-          type: RequestOptionsBase
-          description: Additional options to be sent while making the request.
-      return:
-        type: Promise&lt;LROPoller&gt;
-        description: >-
-          The LROPoller object that provides methods for interacting with the
-          LRO.
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
-    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendOperationRequest'
-    package: '@azure/arm-resourcegraph'
-    summary: Send an HTTP request that is populated using the provided OperationSpec.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>)
-      parameters:
-        - id: operationArguments
-          type: OperationArguments
-          description: >-
-            The arguments that the HTTP request's templated values will be
-            populated from.
-        - id: operationSpec
-          type: OperationSpec
-          description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: ServiceCallback&lt;any&gt;
-          description: |
-            The callback to call when the response is received.
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: ''
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
-    uid: '@azure/arm-resourcegraph.ResourceGraphClient.sendRequest'
-    package: '@azure/arm-resourcegraph'
-    summary: Send the provided httpRequest.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function sendRequest(options: RequestPrepareOptions | WebResourceLike)'
-      parameters:
-        - id: options
-          type: RequestPrepareOptions | WebResourceLike
-          description: ''
-      return:
-        type: Promise&lt;HttpOperationResponse&gt;
-        description: ''
+          type: <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;any&gt;
+          description: The callback
 extends: <xref uid="@azure/arm-resourcegraph.ResourceGraphClientContext" />

@@ -1,17 +1,13 @@
 ---
-title: 
-keywords: Azure, javascript, SDK, API, @azure/logger, 
-author: maggiepint
-ms.author: magpint
-ms.date: 03/05/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+title: Azure Logger client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/logger, core
+ms.date: 08/02/2024
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: core
 ---
+# Azure Logger client library for JavaScript - version 1.1.4 
 
-# Azure Logger library for JavaScript
 
 The `@azure/logger` package can be used to enable logging in the Azure SDKs for JavaScript.
 
@@ -51,6 +47,50 @@ will be emitted.
 For example, setting the log level to `warning` will cause all logs that have the log
 level `warning` or `error` to be emitted.
 
+
+**NOTE**: When logging requests and responses, we sanitize these objects to make sure things like `Authorization` headers that contain secrets are not logged. 
+
+Request and response bodies are never logged. Headers are redacted by default, unless present in the following list or explicitly allowed by the client SDK:
+- "x-ms-client-request-id",
+- "x-ms-return-client-request-id",
+- "x-ms-useragent",
+- "x-ms-correlation-request-id",
+- "x-ms-request-id",
+- "client-request-id",
+- "ms-cv",
+- "return-client-request-id",
+- "traceparent", 
+- "Access-Control-Allow-Credentials",
+- "Access-Control-Allow-Headers",
+- "Access-Control-Allow-Methods",
+- "Access-Control-Allow-Origin",
+- "Access-Control-Expose-Headers",
+- "Access-Control-Max-Age",
+- "Access-Control-Request-Headers",
+- "Access-Control-Request-Method",
+- "Origin",
+- "Accept",
+- "Accept-Encoding",
+- "Cache-Control",
+- "Connection",
+- "Content-Length",
+- "Content-Type",
+- "Date",
+- "ETag",
+- "Expires",
+- "If-Match",
+- "If-Modified-Since",
+- "If-None-Match",
+- "If-Unmodified-Since",
+- "Last-Modified",
+- "Pragma",
+- "Request-Id",
+- "Retry-After",
+- "Server",
+- "Transfer-Encoding",
+- "User-Agent",
+- "WWW-Authenticate",
+
 ## Examples
 
 ### Example 1 - basic usage
@@ -86,9 +126,17 @@ Using `AzureLogger`, it is possible to redirect the logging output from the Azur
 overriding the `AzureLogger.log` method. This may be useful if you want to redirect logs to
 a location other than stderr.
 
+## Next steps
+
+You can build and run the tests locally by executing `rushx test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
+
+## Troubleshooting
+
+If you run into issues while using this library, please feel free to [file an issue](https://github.com/Azure/azure-sdk-for-js/issues/new).
+
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/logger_1.0.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/logger_1.1.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Flogger%2FREADME.png)
 

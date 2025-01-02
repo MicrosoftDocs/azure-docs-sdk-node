@@ -1,0 +1,11 @@
+---
+title: Azure Fabric SDK for JavaScript
+description: Reference for Azure Fabric SDK for JavaScript
+ms.date: 01/01/2025
+ms.topic: reference
+ms.devlang: javascript
+ms.service: fabric
+---
+# Azure Fabric SDK for JavaScript - latest
+## Packages - latest
+[!INCLUDE [packages](fabric-index.md)]

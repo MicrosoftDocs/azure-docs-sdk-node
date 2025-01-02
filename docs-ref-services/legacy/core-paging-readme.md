@@ -1,17 +1,12 @@
 ---
 title: Azure Core Paging client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/core-paging, 
-author: maggiepint
-ms.author: magpint
+keywords: Azure, javascript, SDK, API, @azure/core-paging,
 ms.date: 09/30/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
-
-# Azure Core Paging client library for JavaScript - Version 1.1.3 
+# Azure Core Paging client library for JavaScript - version 1.1.3 
 
 
 This library provides core types for paging async iterable iterators.

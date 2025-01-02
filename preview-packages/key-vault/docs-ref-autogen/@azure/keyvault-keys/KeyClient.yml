@@ -285,7 +285,7 @@ methods:
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
         description: ''
-  - name: 'createKey(string, KeyType, CreateKeyOptions)'
+  - name: 'createKey(string, KeyType_2, CreateKeyOptions)'
     uid: '@azure/keyvault-keys.KeyClient.createKey'
     package: '@azure/keyvault-keys'
     summary: >-
@@ -316,14 +316,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createKey(name: string, keyType: KeyType, options?:
+        function createKey(name: string, keyType: KeyType_2, options?:
         CreateKeyOptions)
       parameters:
         - id: name
           type: string
           description: The name of the key.
         - id: keyType
-          type: <xref uid="@azure/keyvault-keys.KeyType" />
+          type: <xref uid="@azure/keyvault-keys.KeyType_2" />
           description: >-
             The type of the key. One of the following: 'EC', 'EC-HSM', 'RSA',
             'RSA-HSM', 'oct'.
@@ -414,6 +414,36 @@ methods:
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
         description: ''
+  - name: 'getCryptographyClient(string, GetCryptographyClientOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.getCryptographyClient'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Gets a <xref:CryptographyClient> for the given key.
+      Example usage:
+      ```ts
+      let client = new KeyClient(url, credentials);
+      // get a cryptography client for a given key
+      let cryptographyClient = client.getCryptographyClient("MyKey");
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getCryptographyClient(keyName: string, options?:
+        GetCryptographyClientOptions)
+      parameters:
+        - id: keyName
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.GetCryptographyClientOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/keyvault-keys.CryptographyClient" />
+        description: >-
+          - A {@link CryptographyClient} using the same options, credentials,
+          and http client as this {@link KeyClient}
   - name: 'getDeletedKey(string, GetDeletedKeyOptions)'
     uid: '@azure/keyvault-keys.KeyClient.getDeletedKey'
     package: '@azure/keyvault-keys'
@@ -486,7 +516,68 @@ methods:
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
         description: ''
-  - name: 'importKey(string, JsonWebKey, ImportKeyOptions)'
+  - name: 'getKeyRotationPolicy(string, GetKeyRotationPolicyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.getKeyRotationPolicy'
+    package: '@azure/keyvault-keys'
+    summary: |
+      Gets the rotation policy of a Key Vault Key.
+      Example usage:
+      ```ts
+      let client = new KeyClient(vaultUrl, credentials);
+      await client.updateKeyRotationPolicy("MyKey", myPolicy);
+      let result = await client.getKeyRotationPolicy("myKey");
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getKeyRotationPolicy(name: string, options?:
+        GetKeyRotationPolicyOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.GetKeyRotationPolicyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyRotationPolicy" />&gt;
+        description: ''
+  - name: 'getRandomBytes(number, GetRandomBytesOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.getRandomBytes'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Gets the requested number of bytes containing random values from a managed
+      HSM.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(vaultUrl, credentials);
+
+      let { bytes } = await client.getRandomBytes(10);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getRandomBytes(count: number, options?: GetRandomBytesOptions)'
+      parameters:
+        - id: count
+          type: number
+          description: The number of bytes to generate between 1 and 128 inclusive.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.GetRandomBytesOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.RandomBytes" />&gt;
+        description: ''
+  - name: 'importKey(string, JsonWebKey_2, ImportKeyOptions)'
     uid: '@azure/keyvault-keys.KeyClient.importKey'
     package: '@azure/keyvault-keys'
     summary: >-
@@ -519,14 +610,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function importKey(name: string, key: JsonWebKey, options?:
+        function importKey(name: string, key: JsonWebKey_2, options?:
         ImportKeyOptions)
       parameters:
         - id: name
           type: string
           description: Name for the imported key.
         - id: key
-          type: <xref uid="@azure/keyvault-keys.JsonWebKey" />
+          type: <xref uid="@azure/keyvault-keys.JsonWebKey_2" />
           description: The JSON web key.
         - id: options
           type: <xref uid="@azure/keyvault-keys.ImportKeyOptions" />
@@ -699,6 +790,46 @@ methods:
       return:
         type: Promise&lt;void&gt;
         description: ''
+  - name: 'releaseKey(string, string, ReleaseKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.releaseKey'
+    package: '@azure/keyvault-keys'
+    summary: >
+      Releases a key from a managed HSM.
+
+      The release key operation is applicable to all key types. The operation
+      requires the key to be marked exportable and the keys/release permission.
+
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(vaultUrl, credentials);
+
+      let result = await client.releaseKey("myKey", target)
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function releaseKey(name: string, target: string, options?:
+        ReleaseKeyOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: target
+          type: string
+          description: The attestation assertion for the target of the key release.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.ReleaseKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.ReleaseKeyResult" />&gt;
+        description: ''
   - name: 'restoreKeyBackup(Uint8Array, RestoreKeyBackupOptions)'
     uid: '@azure/keyvault-keys.KeyClient.restoreKeyBackup'
     package: '@azure/keyvault-keys'
@@ -741,6 +872,38 @@ methods:
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
         description: ''
+  - name: 'rotateKey(string, RotateKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.rotateKey'
+    package: '@azure/keyvault-keys'
+    summary: >
+      Rotates the key based on the key policy by generating a new version of the
+      key. This operation requires the keys/rotate permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(vaultUrl, credentials);
+
+      let key = await client.rotateKey("MyKey");
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function rotateKey(name: string, options?: RotateKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key to rotate.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.RotateKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
   - name: 'updateKeyProperties(string, string, UpdateKeyPropertiesOptions)'
     uid: '@azure/keyvault-keys.KeyClient.updateKeyProperties'
     package: '@azure/keyvault-keys'
@@ -759,7 +922,7 @@ methods:
 
       let keyName = "MyKey";
 
-      let client = new KeyClient(url, credentials);
+      let client = new KeyClient(vaultUrl, credentials);
 
       let key = await client.getKey(keyName);
 
@@ -790,4 +953,84 @@ methods:
             The optional parameters.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'updateKeyProperties(string, UpdateKeyPropertiesOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.updateKeyProperties_1'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The updateKeyProperties method changes specified properties of the latest
+      version of an existing stored key. Properties that
+
+      are not specified in the request are left unchanged. The value of a key
+      itself cannot be
+
+      changed. This operation requires the keys/set permission.
+
+      Example usage:
+
+      ```ts
+
+      let keyName = "MyKey";
+
+      let client = new KeyClient(vaultUrl, credentials);
+
+      let key = await client.getKey(keyName);
+
+      let result = await client.updateKeyProperties(keyName, { enabled: false
+      });
+
+      ```
+
+      Updates the properties associated with a specified key in a given key
+      vault.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateKeyProperties(name: string, options?:
+        UpdateKeyPropertiesOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.UpdateKeyPropertiesOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: >-
+      updateKeyRotationPolicy(string, KeyRotationPolicyProperties,
+      UpdateKeyRotationPolicyOptions)
+    uid: '@azure/keyvault-keys.KeyClient.updateKeyRotationPolicy'
+    package: '@azure/keyvault-keys'
+    summary: |
+      Updates the rotation policy of a Key Vault Key.
+      Example usage:
+      ```ts
+      let client = new KeyClient(vaultUrl, credentials);
+      const setPolicy = await client.updateKeyRotationPolicy("MyKey", myPolicy);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateKeyRotationPolicy(name: string, policy:
+        KeyRotationPolicyProperties, options?: UpdateKeyRotationPolicyOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: policy
+          type: <xref uid="@azure/keyvault-keys.KeyRotationPolicyProperties" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.UpdateKeyRotationPolicyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyRotationPolicy" />&gt;
         description: ''

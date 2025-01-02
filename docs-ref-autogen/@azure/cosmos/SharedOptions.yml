@@ -7,26 +7,59 @@ summary: >-
   servers.=
 fullName: SharedOptions
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
   - name: abortSignal
     uid: '@azure/cosmos.SharedOptions.abortSignal'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       abortSignal to pass to all underlying network requests created by this
       method call. See
       https://developer.mozilla.org/en-US/docs/Web/API/AbortController
+
+
+      **Example**
+
+
+      Cancel a read request
+
+      ```typescript
+
+      const controller = new AbortController()
+
+      const {result: item} = await items.query('SELECT * from c', { abortSignal:
+      controller.signal});
+
+      controller.abort()
+
+      ```
+
     fullName: abortSignal
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'abortSignal?: AbortSignal'
       return:
-        type: AbortSignal
         description: ''
+        type: AbortSignal
+  - name: bypassIntegratedCache
+    uid: '@azure/cosmos.SharedOptions.bypassIntegratedCache'
+    package: '@azure/cosmos'
+    summary: >-
+      Sets if integrated cache should be bypassed or enabled for the request in
+      Azure CosmosDB service.
+
+
+      <p>Default value is false. By default integrated cache is enabled</p>
+    fullName: bypassIntegratedCache
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'bypassIntegratedCache?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: initialHeaders
     uid: '@azure/cosmos.SharedOptions.initialHeaders'
     package: '@azure/cosmos'
@@ -35,13 +68,59 @@ properties:
       Cosmos
     fullName: initialHeaders
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'initialHeaders?: CosmosHeaders'
       return:
-        type: <xref uid="@azure/cosmos.CosmosHeaders" />
         description: ''
+        type: <xref uid="@azure/cosmos.CosmosHeaders" />
+  - name: maxIntegratedCacheStalenessInMs
+    uid: '@azure/cosmos.SharedOptions.maxIntegratedCacheStalenessInMs'
+    package: '@azure/cosmos'
+    summary: >-
+      Sets the staleness value associated with the request in the Azure CosmosDB
+      service. For requests where the <xref:com.azure.cosmos.ConsistencyLevel>
+      is <xref:com.azure.cosmos.ConsistencyLevel%23EVENTUAL>  or
+      <xref:com.azure.cosmos.ConsistencyLevel%23SESSION>, responses from the
+
+      integrated cache are guaranteed to be no staler than value indicated by
+      this maxIntegratedCacheStaleness. When the
+
+      consistency level is not set, this property is ignored.
+
+
+      <p>Default value is null</p>
+
+
+      <p>Cache Staleness is supported in milliseconds granularity. Anything
+      smaller than milliseconds will be ignored.</p>
+    fullName: maxIntegratedCacheStalenessInMs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxIntegratedCacheStalenessInMs?: number'
+      return:
+        description: ''
+        type: number
+  - name: priorityLevel
+    uid: '@azure/cosmos.SharedOptions.priorityLevel'
+    package: '@azure/cosmos'
+    summary: >-
+      Priority Level (Low/High) for each request.
+
+      Low priority requests are always throttled before any high priority
+      requests.
+
+
+      <p>Default value is null. By default all requests are of High priority</p>
+    fullName: priorityLevel
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'priorityLevel?: PriorityLevel'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.PriorityLevel" />
   - name: sessionToken
     uid: '@azure/cosmos.SharedOptions.sessionToken'
     package: '@azure/cosmos'
@@ -50,10 +129,9 @@ properties:
       document container read requests.
     fullName: sessionToken
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'sessionToken?: string'
       return:
-        type: string
         description: ''
+        type: string

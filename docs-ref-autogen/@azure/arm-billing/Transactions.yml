@@ -2,29 +2,244 @@
 name: Transactions
 uid: '@azure/arm-billing.Transactions'
 package: '@azure/arm-billing'
-summary: Class representing a Transactions.
+summary: Interface representing a Transactions.
 fullName: Transactions
 remarks: ''
-isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: Transactions(BillingManagementClientContext)
-    uid: '@azure/arm-billing.Transactions.constructor'
+type: interface
+methods:
+  - name: >-
+      beginTransactionsDownloadByInvoice(string, string,
+      TransactionsTransactionsDownloadByInvoiceOptionalParams)
+    uid: '@azure/arm-billing.Transactions.beginTransactionsDownloadByInvoice'
     package: '@azure/arm-billing'
-    summary: Create a Transactions.
+    summary: >-
+      Gets a URL to download the transactions document for an invoice. The
+      operation is supported for
+
+      billing accounts with agreement type Enterprise Agreement.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'new Transactions(client: BillingManagementClientContext)'
+      content: >-
+        function beginTransactionsDownloadByInvoice(billingAccountName: string,
+        invoiceName: string, options?:
+        TransactionsTransactionsDownloadByInvoiceOptionalParams):
+        Promise<SimplePollerLike<OperationState<DocumentDownloadResult>,
+        DocumentDownloadResult>>
       parameters:
-        - id: client
-          type: <xref uid="@azure/arm-billing.BillingManagementClientContext" />
-          description: |
-            Reference to the service client.
-methods:
-  - name: 'listByInvoice(string, string, msRest.RequestOptionsBase)'
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: invoiceName
+          type: string
+          description: The ID that uniquely identifies an invoice.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-billing.TransactionsTransactionsDownloadByInvoiceOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
+          uid="@azure/arm-billing.DocumentDownloadResult" />&gt;, <xref
+          uid="@azure/arm-billing.DocumentDownloadResult" />&gt;&gt;
+  - name: >-
+      beginTransactionsDownloadByInvoiceAndWait(string, string,
+      TransactionsTransactionsDownloadByInvoiceOptionalParams)
+    uid: '@azure/arm-billing.Transactions.beginTransactionsDownloadByInvoiceAndWait'
+    package: '@azure/arm-billing'
+    summary: >-
+      Gets a URL to download the transactions document for an invoice. The
+      operation is supported for
+
+      billing accounts with agreement type Enterprise Agreement.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginTransactionsDownloadByInvoiceAndWait(billingAccountName:
+        string, invoiceName: string, options?:
+        TransactionsTransactionsDownloadByInvoiceOptionalParams):
+        Promise<DocumentDownloadResult>
+      parameters:
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: invoiceName
+          type: string
+          description: The ID that uniquely identifies an invoice.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-billing.TransactionsTransactionsDownloadByInvoiceOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-billing.DocumentDownloadResult"
+          />&gt;
+  - name: >-
+      getTransactionSummaryByInvoice(string, string,
+      TransactionsGetTransactionSummaryByInvoiceOptionalParams)
+    uid: '@azure/arm-billing.Transactions.getTransactionSummaryByInvoice'
+    package: '@azure/arm-billing'
+    summary: >-
+      Gets the transaction summary for an invoice. Transactions include
+      purchases, refunds and Azure usage
+
+      charges.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getTransactionSummaryByInvoice(billingAccountName: string,
+        invoiceName: string, options?:
+        TransactionsGetTransactionSummaryByInvoiceOptionalParams):
+        Promise<TransactionSummary>
+      parameters:
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: invoiceName
+          type: string
+          description: The ID that uniquely identifies an invoice.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-billing.TransactionsGetTransactionSummaryByInvoiceOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-billing.TransactionSummary" />&gt;
+  - name: >-
+      listByBillingProfile(string, string, Date, Date, string,
+      TransactionsListByBillingProfileOptionalParams)
+    uid: '@azure/arm-billing.Transactions.listByBillingProfile'
+    package: '@azure/arm-billing'
+    summary: >-
+      Lists the billed or unbilled transactions by billing profile name for
+      given start and end date.
+
+      Transactions include purchases, refunds and Azure usage charges. Unbilled
+      transactions are listed
+
+      under pending invoice Id and do not include tax. Tax is added to the
+      amount once an invoice is
+
+      generated.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByBillingProfile(billingAccountName: string,
+        billingProfileName: string, periodStartDate: Date, periodEndDate: Date,
+        typeParam: string, options?:
+        TransactionsListByBillingProfileOptionalParams):
+        PagedAsyncIterableIterator<Transaction, Transaction[], PageSettings>
+      parameters:
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: billingProfileName
+          type: string
+          description: The ID that uniquely identifies a billing profile.
+        - id: periodStartDate
+          type: Date
+          description: >-
+            The start date to fetch the transactions. The date should be
+            specified in
+                                   MM-DD-YYYY format.
+        - id: periodEndDate
+          type: Date
+          description: >-
+            The end date to fetch the transactions. The date should be specified
+            in
+                                 MM-DD-YYYY format.
+        - id: typeParam
+          type: string
+          description: The type of transaction.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-billing.TransactionsListByBillingProfileOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-billing.Transaction" />, <xref
+          uid="@azure/arm-billing.Transaction" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
+  - name: >-
+      listByCustomer(string, string, string, Date, Date, string,
+      TransactionsListByCustomerOptionalParams)
+    uid: '@azure/arm-billing.Transactions.listByCustomer'
+    package: '@azure/arm-billing'
+    summary: >-
+      Lists the billed or unbilled transactions by customer id for given start
+      date and end date.
+
+      Transactions include purchases, refunds and Azure usage charges. Unbilled
+      transactions are listed
+
+      under pending invoice Id and do not include tax. Tax is added to the
+      amount once an invoice is
+
+      generated.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByCustomer(billingAccountName: string, billingProfileName:
+        string, customerName: string, periodStartDate: Date, periodEndDate:
+        Date, typeParam: string, options?:
+        TransactionsListByCustomerOptionalParams):
+        PagedAsyncIterableIterator<Transaction, Transaction[], PageSettings>
+      parameters:
+        - id: billingAccountName
+          type: string
+          description: The ID that uniquely identifies a billing account.
+        - id: billingProfileName
+          type: string
+          description: The ID that uniquely identifies a billing profile.
+        - id: customerName
+          type: string
+          description: The ID that uniquely identifies a customer.
+        - id: periodStartDate
+          type: Date
+          description: >-
+            The start date to fetch the transactions. The date should be
+            specified in
+                                   MM-DD-YYYY format.
+        - id: periodEndDate
+          type: Date
+          description: >-
+            The end date to fetch the transactions. The date should be specified
+            in
+                                 MM-DD-YYYY format.
+        - id: typeParam
+          type: string
+          description: The type of transaction.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-billing.TransactionsListByCustomerOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-billing.Transaction" />, <xref
+          uid="@azure/arm-billing.Transaction" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
+  - name: listByInvoice(string, string, TransactionsListByInvoiceOptionalParams)
     uid: '@azure/arm-billing.Transactions.listByInvoice'
     package: '@azure/arm-billing'
     summary: >-
@@ -33,12 +248,12 @@ methods:
 
       charges.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listByInvoice(billingAccountName: string, invoiceName: string,
-        options?: msRest.RequestOptionsBase)
+        options?: TransactionsListByInvoiceOptionalParams):
+        PagedAsyncIterableIterator<Transaction, Transaction[], PageSettings>
       parameters:
         - id: billingAccountName
           type: string
@@ -47,136 +262,77 @@ methods:
           type: string
           description: The ID that uniquely identifies an invoice.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-billing.TransactionsListByInvoiceOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.TransactionsListByInvoiceResponse" />&gt;
-        description: Promise<Models.TransactionsListByInvoiceResponse>
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-billing.Transaction" />, <xref
+          uid="@azure/arm-billing.Transaction" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
   - name: >-
-      listByInvoice(string, string, RequestOptionsBase,
-      ServiceCallback<TransactionListResult>)
-    uid: '@azure/arm-billing.Transactions.listByInvoice_2'
-    package: '@azure/arm-billing'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByInvoice(billingAccountName: string, invoiceName: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<TransactionListResult>)
-      parameters:
-        - id: billingAccountName
-          type: string
-          description: The ID that uniquely identifies a billing account.
-        - id: invoiceName
-          type: string
-          description: The ID that uniquely identifies an invoice.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-billing.TransactionListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listByInvoice(string, string, ServiceCallback<TransactionListResult>)'
-    uid: '@azure/arm-billing.Transactions.listByInvoice_1'
-    package: '@azure/arm-billing'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByInvoice(billingAccountName: string, invoiceName: string,
-        callback: ServiceCallback<TransactionListResult>)
-      parameters:
-        - id: billingAccountName
-          type: string
-          description: The ID that uniquely identifies a billing account.
-        - id: invoiceName
-          type: string
-          description: The ID that uniquely identifies an invoice.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-billing.TransactionListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listByInvoiceNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-billing.Transactions.listByInvoiceNext'
+      listByInvoiceSection(string, string, string, Date, Date, string,
+      TransactionsListByInvoiceSectionOptionalParams)
+    uid: '@azure/arm-billing.Transactions.listByInvoiceSection'
     package: '@azure/arm-billing'
     summary: >-
-      Lists the transactions for an invoice. Transactions include purchases,
-      refunds and Azure usage
+      Lists the billed or unbilled transactions by invoice section name for
+      given start date and end date.
 
-      charges.
+      Transactions include purchases, refunds and Azure usage charges. Unbilled
+      transactions are listed
+
+      under pending invoice Id and do not include tax. Tax is added to the
+      amount once an invoice is
+
+      generated.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listByInvoiceNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
+        function listByInvoiceSection(billingAccountName: string,
+        billingProfileName: string, invoiceSectionName: string, periodStartDate:
+        Date, periodEndDate: Date, typeParam: string, options?:
+        TransactionsListByInvoiceSectionOptionalParams):
+        PagedAsyncIterableIterator<Transaction, Transaction[], PageSettings>
       parameters:
-        - id: nextPageLink
+        - id: billingAccountName
           type: string
-          description: The NextLink from the previous successful call to List operation.
+          description: The ID that uniquely identifies a billing account.
+        - id: billingProfileName
+          type: string
+          description: The ID that uniquely identifies a billing profile.
+        - id: invoiceSectionName
+          type: string
+          description: The ID that uniquely identifies an invoice section.
+        - id: periodStartDate
+          type: Date
+          description: >-
+            The start date to fetch the transactions. The date should be
+            specified in
+                                   MM-DD-YYYY format.
+        - id: periodEndDate
+          type: Date
+          description: >-
+            The end date to fetch the transactions. The date should be specified
+            in
+                                 MM-DD-YYYY format.
+        - id: typeParam
+          type: string
+          description: The type of transaction.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-billing.TransactionsListByInvoiceSectionOptionalParams"
+            />
+          description: The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.TransactionsListByInvoiceNextResponse"
-          />&gt;
-        description: Promise<Models.TransactionsListByInvoiceNextResponse>
-  - name: >-
-      listByInvoiceNext(string, RequestOptionsBase,
-      ServiceCallback<TransactionListResult>)
-    uid: '@azure/arm-billing.Transactions.listByInvoiceNext_2'
-    package: '@azure/arm-billing'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByInvoiceNext(nextPageLink: string, options:
-        RequestOptionsBase, callback: ServiceCallback<TransactionListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-billing.TransactionListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listByInvoiceNext(string, ServiceCallback<TransactionListResult>)'
-    uid: '@azure/arm-billing.Transactions.listByInvoiceNext_1'
-    package: '@azure/arm-billing'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByInvoiceNext(nextPageLink: string, callback:
-        ServiceCallback<TransactionListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-billing.TransactionListResult" />&gt;
-          description: |
-            The callback
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-billing.Transaction" />, <xref
+          uid="@azure/arm-billing.Transaction" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;

@@ -1,15 +1,12 @@
 ---
 title: Azure Storage Queue client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/storage-queue, 
-author: maggiepint
-ms.author: magpint
+keywords: Azure, javascript, SDK, API, @azure/storage-queue,
 ms.date: 11/11/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: javascript
+ms.service: storage
+ms.subservice: queues
 ---
-
 # Azure Storage SDK V10 for JavaScript - Queue
 
 - [![npm version](https://badge.fury.io/js/%40azure%2Fstorage-queue.svg)](https://badge.fury.io/js/%40azure%2Fstorage-queue)
@@ -252,3 +249,4 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+

@@ -5,70 +5,96 @@ package: '@azure/arm-recoveryservicesbackup'
 summary: AzureWorkload-specific restore.
 fullName: AzureWorkloadRestoreRequest
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
   - name: objectType
     uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.objectType'
     package: '@azure/arm-recoveryservicesbackup'
-    summary: Polymorphic Discriminator
+    summary: >-
+      Polymorphic discriminator, which specifies the different types this object
+      can be
     fullName: objectType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'objectType: "AzureWorkloadRestoreRequest"'
+      content: >-
+        objectType: "AzureWorkloadPointInTimeRestoreRequest" |
+        "AzureWorkloadRestoreRequest" | "AzureWorkloadSAPHanaRestoreRequest" |
+        "AzureWorkloadSAPHanaPointInTimeRestoreRequest" |
+        "AzureWorkloadSQLRestoreRequest" |
+        "AzureWorkloadSQLPointInTimeRestoreRequest" |
+        "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest" |
+        "AzureWorkloadSAPHanaRestoreWithRehydrateRequest" |
+        "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest" |
+        "AzureWorkloadSQLRestoreWithRehydrateRequest"
       return:
-        type: '"AzureWorkloadRestoreRequest"'
         description: ''
+        type: >-
+          "AzureWorkloadPointInTimeRestoreRequest" |
+          "AzureWorkloadRestoreRequest" | "AzureWorkloadSAPHanaRestoreRequest" |
+          "AzureWorkloadSAPHanaPointInTimeRestoreRequest" |
+          "AzureWorkloadSQLRestoreRequest" |
+          "AzureWorkloadSQLPointInTimeRestoreRequest" |
+          "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest" |
+          "AzureWorkloadSAPHanaRestoreWithRehydrateRequest" |
+          "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest" |
+          "AzureWorkloadSQLRestoreWithRehydrateRequest"
   - name: propertyBag
     uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.propertyBag'
     package: '@azure/arm-recoveryservicesbackup'
     summary: Workload specific property bag.
     fullName: propertyBag
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'propertyBag?: undefined | [key: string]: string'
+      content: 'propertyBag?: {[propertyName: string]: string}'
       return:
-        type: 'undefined | [key: string]: string'
         description: ''
+        type: '{[propertyName: string]: string}'
   - name: recoveryMode
     uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.recoveryMode'
     package: '@azure/arm-recoveryservicesbackup'
     summary: >-
       Defines whether the current recovery mode is file restore or database
-      restore. Possible values
-
-      include: 'Invalid', 'FileRecovery', 'WorkloadRecovery'
+      restore
     fullName: recoveryMode
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'recoveryMode?: RecoveryMode'
+      content: 'recoveryMode?: string'
       return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.RecoveryMode" />
         description: ''
+        type: string
   - name: recoveryType
     uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.recoveryType'
     package: '@azure/arm-recoveryservicesbackup'
-    summary: >-
-      Type of this recovery. Possible values include: 'Invalid',
-      'OriginalLocation',
-
-      'AlternateLocation', 'RestoreDisks', 'Offline'
+    summary: Type of this recovery.
     fullName: recoveryType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'recoveryType?: RecoveryType'
+      content: 'recoveryType?: string'
       return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.RecoveryType" />
         description: ''
+        type: string
+  - name: snapshotRestoreParameters
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.snapshotRestoreParameters
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: |-
+      Additional details for snapshot recovery
+      Currently used for snapshot for SAP Hana.
+    fullName: snapshotRestoreParameters
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'snapshotRestoreParameters?: SnapshotRestoreParameters'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-recoveryservicesbackup.SnapshotRestoreParameters" />
   - name: sourceResourceId
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.sourceResourceId
@@ -78,23 +104,87 @@ properties:
       being recovered.
     fullName: sourceResourceId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'sourceResourceId?: undefined | string'
+      content: 'sourceResourceId?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: targetInfo
     uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.targetInfo'
     package: '@azure/arm-recoveryservicesbackup'
     summary: Details of target database
     fullName: targetInfo
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'targetInfo?: TargetRestoreInfo'
       return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.TargetRestoreInfo" />
         description: ''
+        type: <xref uid="@azure/arm-recoveryservicesbackup.TargetRestoreInfo" />
+  - name: targetResourceGroupName
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.targetResourceGroupName
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: Defines the Resource group of the Target VM
+    fullName: targetResourceGroupName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetResourceGroupName?: string'
+      return:
+        description: ''
+        type: string
+  - name: targetVirtualMachineId
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.targetVirtualMachineId
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: >-
+      This is the complete ARM Id of the target VM
+
+      For e.g.
+      /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}
+    fullName: targetVirtualMachineId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetVirtualMachineId?: string'
+      return:
+        description: ''
+        type: string
+  - name: userAssignedManagedIdentityDetails
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.userAssignedManagedIdentityDetails
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: |-
+      User Assigned managed identity details
+      Currently used for snapshot.
+    fullName: userAssignedManagedIdentityDetails
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'userAssignedManagedIdentityDetails?: UserAssignedManagedIdentityDetails'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-recoveryservicesbackup.UserAssignedManagedIdentityDetails"
+          />
+inheritedProperties:
+  - name: resourceGuardOperationRequests
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadRestoreRequest.resourceGuardOperationRequests
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: ResourceGuardOperationRequests on which LAC check will be performed
+    fullName: resourceGuardOperationRequests
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'resourceGuardOperationRequests?: string[]'
+      return:
+        description: ''
+        type: string[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [RestoreRequest.resourceGuardOperationRequests](xref:@azure/arm-recoveryservicesbackup.RestoreRequest.resourceGuardOperationRequests)
+extends: <xref uid="@azure/arm-recoveryservicesbackup.RestoreRequest" />

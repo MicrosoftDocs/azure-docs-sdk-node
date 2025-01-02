@@ -7,16 +7,14 @@ summary: >-
   manipulate its files and directories.
 fullName: DirectoryURL
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'DirectoryURL(string, Pipeline)'
+  - name: DirectoryURL(string, Pipeline)
     uid: '@azure/storage-file.DirectoryURL.constructor'
     package: '@azure/storage-file'
     summary: Creates an instance of DirectoryURL.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new DirectoryURL(url: string, pipeline: Pipeline)'
@@ -37,43 +35,64 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
-  - name: pipeline
-    uid: '@azure/storage-file.DirectoryURL.pipeline'
-    package: '@azure/storage-file'
-    summary: Request policy pipeline.
-    fullName: pipeline
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'pipeline: Pipeline'
-      return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
-        description: ''
+inheritedProperties:
   - name: url
     uid: '@azure/storage-file.DirectoryURL.url'
     package: '@azure/storage-file'
     summary: URL string value.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
-methods:
-  - name: 'create(Aborter, IDirectoryCreateOptions)'
-    uid: '@azure/storage-file.DirectoryURL.create'
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [StorageURL.url](xref:@azure/storage-file.StorageURL.url)
+inheritedMethods:
+  - name: newPipeline(Credential, INewPipelineOptions)
+    uid: '@azure/storage-file.DirectoryURL.newPipeline'
     package: '@azure/storage-file'
-    summary: Creates a new directory under the specified share or parent directory.
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function create(aborter: Aborter, options?: IDirectoryCreateOptions)'
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions): Pipeline
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-file.Credential" />
+          description: Such as AnonymousCredential, SharedKeyCredential.
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-file.INewPipelineOptions" />
+          description: Optional. Options.
+      return:
+        description: A new Pipeline object.
+        type: <xref uid="@azure/storage-file.Pipeline" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [StorageURL.newPipeline](xref:@azure/storage-file.StorageURL.newPipeline)
+methods:
+  - name: create(Aborter, IDirectoryCreateOptions)
+    uid: '@azure/storage-file.DirectoryURL.create'
+    package: '@azure/storage-file'
+    summary: >-
+      Creates a new directory under the specified share or parent directory.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/create-directory
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(aborter: Aborter, options?: IDirectoryCreateOptions):
+        Promise<DirectoryCreateResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -85,8 +104,10 @@ methods:
           type: <xref uid="@azure/storage-file.IDirectoryCreateOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.DirectoryCreateResponse" />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectoryCreateResponse" />&gt;
   - name: delete(Aborter)
     uid: '@azure/storage-file.DirectoryURL.delete'
     package: '@azure/storage-file'
@@ -95,11 +116,14 @@ methods:
       empty before it can be
 
       deleted.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/delete-directory
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(aborter: Aborter)'
+      content: 'function delete(aborter: Aborter): Promise<DirectoryDeleteResponse>'
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -108,17 +132,25 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.DirectoryDeleteResponse" />&gt;
         description: ''
-  - name: 'forceCloseHandle(Aborter, string)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectoryDeleteResponse" />&gt;
+  - name: forceCloseHandle(Aborter, string)
     uid: '@azure/storage-file.DirectoryURL.forceCloseHandle'
     package: '@azure/storage-file'
-    summary: Force close a specific handle for a directory.
+    summary: >-
+      Force close a specific handle for a directory.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/force-close-handles
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function forceCloseHandle(aborter: Aborter, handleId: string)'
+      content: >-
+        function forceCloseHandle(aborter: Aborter, handleId: string):
+        Promise<DirectoryForceCloseHandlesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -132,23 +164,29 @@ methods:
             Specific handle ID, cannot be asterisk "*".
                                      Use forceCloseHandlesSegment() to close all handles.
       return:
-        type: >-
-          Promise&lt;<xref uid="Models.DirectoryForceCloseHandlesResponse"
-          />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectoryForceCloseHandlesResponse"
+          />&gt;
   - name: >-
-      forceCloseHandlesSegment(Aborter, undefined | string,
+      forceCloseHandlesSegment(Aborter, string,
       IDirectoryForceCloseHandlesSegmentOptions)
     uid: '@azure/storage-file.DirectoryURL.forceCloseHandlesSegment'
     package: '@azure/storage-file'
-    summary: Force close all handles for a directory.
+    summary: >-
+      Force close all handles for a directory.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/force-close-handles
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function forceCloseHandlesSegment(aborter: Aborter, marker?: undefined |
-        string, options?: IDirectoryForceCloseHandlesSegmentOptions)
+        function forceCloseHandlesSegment(aborter: Aborter, marker?: string,
+        options?: IDirectoryForceCloseHandlesSegmentOptions):
+        Promise<DirectoryForceCloseHandlesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -157,8 +195,14 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: marker
-          type: undefined | string
-          description: ''
+          type: string
+          description: >-
+            Optional. A string value that identifies the position of handles
+            that will
+                                     be closed with the next force close handles operation.
+                                     The operation returns a marker value within the response
+                                     body if there are more handles to close. The marker value
+                                     may then be used in a subsequent call to close the next set of handles.
         - id: options
           type: >-
             <xref
@@ -166,52 +210,51 @@ methods:
             />
           description: ''
       return:
-        type: >-
-          Promise&lt;<xref uid="Models.DirectoryForceCloseHandlesResponse"
-          />&gt;
         description: ''
-  - name: 'fromDirectoryURL(DirectoryURL, string)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectoryForceCloseHandlesResponse"
+          />&gt;
+  - name: fromDirectoryURL(DirectoryURL, string)
     uid: '@azure/storage-file.DirectoryURL.fromDirectoryURL'
     package: '@azure/storage-file'
     summary: Creates a DirectoryURL object from an existing DirectoryURL.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromDirectoryURL(directoryURL: DirectoryURL,
-        directoryName: string)
+        directoryName: string): DirectoryURL
       parameters:
         - id: directoryURL
           type: <xref uid="@azure/storage-file.DirectoryURL" />
           description: A DirectoryURL object
         - id: directoryName
           type: string
-          description: |
-            A subdirectory name
+          description: A subdirectory name
       return:
-        type: <xref uid="@azure/storage-file.DirectoryURL" />
         description: ''
-  - name: 'fromShareURL(ShareURL, string)'
+        type: <xref uid="@azure/storage-file.DirectoryURL" />
+  - name: fromShareURL(ShareURL, string)
     uid: '@azure/storage-file.DirectoryURL.fromShareURL'
     package: '@azure/storage-file'
     summary: Creates a DirectoryURL object from ShareURL.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromShareURL(shareURL: ShareURL, directoryName: string)'
+      content: >-
+        static function fromShareURL(shareURL: ShareURL, directoryName: string):
+        DirectoryURL
       parameters:
         - id: shareURL
           type: <xref uid="@azure/storage-file.ShareURL" />
           description: A ShareURL object
         - id: directoryName
           type: string
-          description: |
-            A directory name
+          description: A directory name
       return:
-        type: <xref uid="@azure/storage-file.DirectoryURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.DirectoryURL" />
   - name: getProperties(Aborter)
     uid: '@azure/storage-file.DirectoryURL.getProperties'
     package: '@azure/storage-file'
@@ -223,11 +266,16 @@ methods:
       the directory or any
 
       subdirectories.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-directory-properties
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(aborter: Aborter)'
+      content: >-
+        function getProperties(aborter: Aborter):
+        Promise<DirectoryGetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -236,10 +284,12 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.DirectoryGetPropertiesResponse" />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectoryGetPropertiesResponse" />&gt;
   - name: >-
-      listFilesAndDirectoriesSegment(Aborter, undefined | string,
+      listFilesAndDirectoriesSegment(Aborter, string,
       IDirectoryListFilesAndDirectoriesSegmentOptions)
     uid: '@azure/storage-file.DirectoryURL.listFilesAndDirectoriesSegment'
     package: '@azure/storage-file'
@@ -248,14 +298,17 @@ methods:
       directory. It lists the
 
       contents only for a single level of the directory hierarchy.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/list-directories-and-files
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listFilesAndDirectoriesSegment(aborter: Aborter, marker?:
-        undefined | string, options?:
-        IDirectoryListFilesAndDirectoriesSegmentOptions)
+        string, options?: IDirectoryListFilesAndDirectoriesSegmentOptions):
+        Promise<DirectoryListFilesAndDirectoriesSegmentResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -264,7 +317,7 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: marker
-          type: undefined | string
+          type: string
           description: ''
         - id: options
           type: >-
@@ -273,23 +326,25 @@ methods:
             />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
-          uid="Models.DirectoryListFilesAndDirectoriesSegmentResponse" />&gt;
-        description: ''
-  - name: >-
-      listHandlesSegment(Aborter, undefined | string,
-      IDirectoryListHandlesSegmentOptions)
+          uid="@azure/storage-file.Models.DirectoryListFilesAndDirectoriesSegmentResponse"
+          />&gt;
+  - name: listHandlesSegment(Aborter, string, IDirectoryListHandlesSegmentOptions)
     uid: '@azure/storage-file.DirectoryURL.listHandlesSegment'
     package: '@azure/storage-file'
-    summary: Lists handles for a directory.
+    summary: |-
+      Lists handles for a directory.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/list-handles
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listHandlesSegment(aborter: Aborter, marker?: undefined |
-        string, options?: IDirectoryListHandlesSegmentOptions)
+        function listHandlesSegment(aborter: Aborter, marker?: string, options?:
+        IDirectoryListHandlesSegmentOptions):
+        Promise<DirectoryListHandlesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -298,48 +353,39 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: marker
-          type: undefined | string
-          description: ''
+          type: string
+          description: >-
+            Optional. A string value that identifies the portion of the list to
+            be
+                                     returned with the next list handles operation. The operation returns a
+                                     marker value within the response body if the list returned was not complete.
+                                     The marker value may then be used in a subsequent call to request the next
+                                     set of list items.
         - id: options
           type: >-
             <xref uid="@azure/storage-file.IDirectoryListHandlesSegmentOptions"
             />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.DirectoryListHandlesResponse" />&gt;
         description: ''
-  - name: 'newPipeline(Credential, INewPipelineOptions)'
-    uid: '@azure/storage-file.DirectoryURL.newPipeline'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectoryListHandlesResponse" />&gt;
+  - name: setMetadata(Aborter, IMetadata)
+    uid: '@azure/storage-file.DirectoryURL.setMetadata'
     package: '@azure/storage-file'
     summary: >-
-      A static method used to create a new Pipeline object with Credential
-      provided.
+      Updates user defined metadata for the specified directory.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-directory-metadata
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/storage-file.Credential" />
-          description: 'Such as AnonymousCredential, SharedKeyCredential.'
-        - id: pipelineOptions
-          type: <xref uid="@azure/storage-file.INewPipelineOptions" />
-          description: ''
-      return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
-        description: A new Pipeline object.
-  - name: 'setMetadata(Aborter, IMetadata)'
-    uid: '@azure/storage-file.DirectoryURL.setMetadata'
-    package: '@azure/storage-file'
-    summary: Updates user defined metadata for the specified directory.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function setMetadata(aborter: Aborter, metadata?: IMetadata)'
+        function setMetadata(aborter: Aborter, metadata?: IMetadata):
+        Promise<DirectorySetMetadataResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -348,22 +394,30 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: metadata
-          type: <xref uid="@azure/storage-file.IMetadata" />
-          description: ''
+          type: IMetadata
+          description: >-
+            If no metadata provided, all existing directory metadata will be
+            removed
       return:
-        type: Promise&lt;<xref uid="Models.DirectorySetMetadataResponse" />&gt;
         description: ''
-  - name: 'setProperties(Aborter, IDirectoryProperties)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectorySetMetadataResponse" />&gt;
+  - name: setProperties(Aborter, IDirectoryProperties)
     uid: '@azure/storage-file.DirectoryURL.setProperties'
     package: '@azure/storage-file'
-    summary: Sets properties on the directory.
+    summary: >-
+      Sets properties on the directory.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-directory-properties
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(aborter: Aborter, properties?:
-        IDirectoryProperties)
+        IDirectoryProperties): Promise<DirectorySetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -375,8 +429,10 @@ methods:
           type: <xref uid="@azure/storage-file.IDirectoryProperties" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.DirectorySetPropertiesResponse" />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.DirectorySetPropertiesResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-file.DirectoryURL.withPipeline'
     package: '@azure/storage-file'
@@ -384,15 +440,14 @@ methods:
       Creates a new DirectoryURL object identical to the source but with the
       specified request policy pipeline.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): DirectoryURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-file.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.DirectoryURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.DirectoryURL" />
 extends: <xref uid="@azure/storage-file.StorageURL" />

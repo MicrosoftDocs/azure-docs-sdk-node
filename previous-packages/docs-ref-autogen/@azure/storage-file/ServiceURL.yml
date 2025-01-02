@@ -7,16 +7,14 @@ summary: |-
   to manipulate file shares.
 fullName: ServiceURL
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'ServiceURL(string, Pipeline)'
+  - name: ServiceURL(string, Pipeline)
     uid: '@azure/storage-file.ServiceURL.constructor'
     package: '@azure/storage-file'
     summary: Creates an instance of ServiceURL.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new ServiceURL(url: string, pipeline: Pipeline)'
@@ -32,33 +30,48 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
-  - name: pipeline
-    uid: '@azure/storage-file.ServiceURL.pipeline'
-    package: '@azure/storage-file'
-    summary: Request policy pipeline.
-    fullName: pipeline
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'pipeline: Pipeline'
-      return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
-        description: ''
+inheritedProperties:
   - name: url
     uid: '@azure/storage-file.ServiceURL.url'
     package: '@azure/storage-file'
     summary: URL string value.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [StorageURL.url](xref:@azure/storage-file.StorageURL.url)
+inheritedMethods:
+  - name: newPipeline(Credential, INewPipelineOptions)
+    uid: '@azure/storage-file.ServiceURL.newPipeline'
+    package: '@azure/storage-file'
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions): Pipeline
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-file.Credential" />
+          description: Such as AnonymousCredential, SharedKeyCredential.
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-file.INewPipelineOptions" />
+          description: Optional. Options.
+      return:
+        description: A new Pipeline object.
+        type: <xref uid="@azure/storage-file.Pipeline" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [StorageURL.newPipeline](xref:@azure/storage-file.StorageURL.newPipeline)
 methods:
   - name: getProperties(Aborter)
     uid: '@azure/storage-file.ServiceURL.getProperties'
@@ -68,11 +81,16 @@ methods:
       properties
 
       for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-file-service-properties}
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(aborter: Aborter)'
+      content: >-
+        function getProperties(aborter: Aborter):
+        Promise<ServiceGetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -81,11 +99,11 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.ServiceGetPropertiesResponse" />&gt;
         description: ''
-  - name: >-
-      listSharesSegment(Aborter, undefined | string,
-      IServiceListSharesSegmentOptions)
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.ServiceGetPropertiesResponse" />&gt;
+  - name: listSharesSegment(Aborter, string, IServiceListSharesSegmentOptions)
     uid: '@azure/storage-file.ServiceURL.listSharesSegment'
     package: '@azure/storage-file'
     summary: >-
@@ -94,12 +112,12 @@ methods:
 
       Analytics metrics and CORS (Cross-Origin Resource Sharing) rules.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listSharesSegment(aborter: Aborter, marker?: undefined |
-        string, options?: IServiceListSharesSegmentOptions)
+        function listSharesSegment(aborter: Aborter, marker?: string, options?:
+        IServiceListSharesSegmentOptions):
+        Promise<ServiceListSharesSegmentResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -108,38 +126,24 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: marker
-          type: undefined | string
-          description: ''
+          type: string
+          description: |-
+            A string value that identifies the portion of
+                                     the list to be returned with the next list operation. The operation
+                                     returns a marker value within the response body if the list returned was
+                                     not complete. The marker value may then be used in a subsequent call to
+                                     request the next set of list items. The marker value is opaque to the
+                                     client.
         - id: options
           type: <xref uid="@azure/storage-file.IServiceListSharesSegmentOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ServiceListSharesSegmentResponse" />&gt;
         description: ''
-  - name: 'newPipeline(Credential, INewPipelineOptions)'
-    uid: '@azure/storage-file.ServiceURL.newPipeline'
-    package: '@azure/storage-file'
-    summary: >-
-      A static method used to create a new Pipeline object with Credential
-      provided.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/storage-file.Credential" />
-          description: 'Such as AnonymousCredential, SharedKeyCredential.'
-        - id: pipelineOptions
-          type: <xref uid="@azure/storage-file.INewPipelineOptions" />
-          description: ''
-      return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
-        description: A new Pipeline object.
-  - name: 'setProperties(Aborter, StorageServiceProperties)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.ServiceListSharesSegmentResponse"
+          />&gt;
+  - name: setProperties(Aborter, StorageServiceProperties)
     uid: '@azure/storage-file.ServiceURL.setProperties'
     package: '@azure/storage-file'
     summary: >-
@@ -148,13 +152,16 @@ methods:
 
       for Storage Analytics, CORS (Cross-Origin Resource Sharing) rules and soft
       delete settings.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-service-properties}
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(aborter: Aborter, properties:
-        StorageServiceProperties)
+        StorageServiceProperties): Promise<ServiceSetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -163,11 +170,13 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: properties
-          type: <xref uid="@azure/storage-file.StorageServiceProperties" />
+          type: <xref uid="@azure/storage-file.Models.StorageServiceProperties" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ServiceSetPropertiesResponse" />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file.Models.ServiceSetPropertiesResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-file.ServiceURL.withPipeline'
     package: '@azure/storage-file'
@@ -175,15 +184,14 @@ methods:
       Creates a new ServiceURL object identical to the source but with the
       specified request policy pipeline.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): ServiceURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-file.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.ServiceURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.ServiceURL" />
 extends: <xref uid="@azure/storage-file.StorageURL" />

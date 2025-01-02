@@ -5,38 +5,9 @@ package: '@azure/arm-recoveryservicesbackup'
 summary: Azure VM workload-specific protectable item.
 fullName: AzureVmWorkloadProtectableItem
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
-  - name: backupManagementType
-    uid: >-
-      @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.backupManagementType
-    package: '@azure/arm-recoveryservicesbackup'
-    summary: Type of backup management to backup an item.
-    fullName: backupManagementType
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'backupManagementType?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-  - name: friendlyName
-    uid: >-
-      @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.friendlyName
-    package: '@azure/arm-recoveryservicesbackup'
-    summary: Friendly name of the backup item.
-    fullName: friendlyName
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'friendlyName?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
   - name: isAutoProtectable
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.isAutoProtectable
@@ -44,13 +15,12 @@ properties:
     summary: Indicates if protectable item is auto-protectable
     fullName: isAutoProtectable
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'isAutoProtectable?: undefined | false | true'
+      content: 'isAutoProtectable?: boolean'
       return:
-        type: undefined | false | true
         description: ''
+        type: boolean
   - name: isAutoProtected
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.isAutoProtected
@@ -58,13 +28,25 @@ properties:
     summary: Indicates if protectable item is auto-protected
     fullName: isAutoProtected
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'isAutoProtected?: undefined | false | true'
+      content: 'isAutoProtected?: boolean'
       return:
-        type: undefined | false | true
         description: ''
+        type: boolean
+  - name: isProtectable
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.isProtectable
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: Indicates if item is protectable
+    fullName: isProtectable
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isProtectable?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: parentName
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.parentName
@@ -72,13 +54,12 @@ properties:
     summary: Name for instance or AG
     fullName: parentName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'parentName?: undefined | string'
+      content: 'parentName?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: parentUniqueName
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.parentUniqueName
@@ -91,13 +72,12 @@ properties:
       or a SQL AG.
     fullName: parentUniqueName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'parentUniqueName?: undefined | string'
+      content: 'parentUniqueName?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: prebackupvalidation
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.prebackupvalidation
@@ -105,45 +85,34 @@ properties:
     summary: Pre-backup validation for protectable objects
     fullName: prebackupvalidation
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'prebackupvalidation?: PreBackupValidation'
       return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.PreBackupValidation" />
         description: ''
+        type: <xref uid="@azure/arm-recoveryservicesbackup.PreBackupValidation" />
   - name: protectableItemType
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.protectableItemType
     package: '@azure/arm-recoveryservicesbackup'
-    summary: Polymorphic Discriminator
+    summary: >-
+      Polymorphic discriminator, which specifies the different types this object
+      can be
     fullName: protectableItemType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'protectableItemType: "AzureVmWorkloadProtectableItem"'
+      content: >-
+        protectableItemType: "SAPAseSystem" | "SAPHanaDatabase" |
+        "SAPHanaSystem" | "SQLDataBase" | "SQLInstance" |
+        "AzureVmWorkloadProtectableItem" | "SAPHanaDBInstance" |
+        "HanaHSRContainer" | "SQLAvailabilityGroupContainer"
       return:
-        type: '"AzureVmWorkloadProtectableItem"'
         description: ''
-  - name: protectionState
-    uid: >-
-      @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.protectionState
-    package: '@azure/arm-recoveryservicesbackup'
-    summary: >-
-      State of the back up item. Possible values include: 'Invalid',
-      'NotProtected', 'Protecting',
-
-      'Protected', 'ProtectionFailed'
-    fullName: protectionState
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'protectionState?: ProtectionStatus'
-      return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.ProtectionStatus" />
-        description: ''
+        type: >-
+          "SAPAseSystem" | "SAPHanaDatabase" | "SAPHanaSystem" | "SQLDataBase" |
+          "SQLInstance" | "AzureVmWorkloadProtectableItem" | "SAPHanaDBInstance"
+          | "HanaHSRContainer" | "SQLAvailabilityGroupContainer"
   - name: serverName
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.serverName
@@ -151,41 +120,87 @@ properties:
     summary: Host/Cluster Name for instance or AG
     fullName: serverName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'serverName?: undefined | string'
+      content: 'serverName?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
   - name: subinquireditemcount
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.subinquireditemcount
     package: '@azure/arm-recoveryservicesbackup'
-    summary: 'For instance or AG, indicates number of DB''s present'
+    summary: For instance or AG, indicates number of DB's present
     fullName: subinquireditemcount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'subinquireditemcount?: undefined | number'
+      content: 'subinquireditemcount?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
   - name: subprotectableitemcount
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.subprotectableitemcount
     package: '@azure/arm-recoveryservicesbackup'
-    summary: 'For instance or AG, indicates number of DB''s to be protected'
+    summary: For instance or AG, indicates number of DB's to be protected
     fullName: subprotectableitemcount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'subprotectableitemcount?: undefined | number'
+      content: 'subprotectableitemcount?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
+inheritedProperties:
+  - name: backupManagementType
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.backupManagementType
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: Type of backup management to backup an item.
+    fullName: backupManagementType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'backupManagementType?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [WorkloadProtectableItem.backupManagementType](xref:@azure/arm-recoveryservicesbackup.WorkloadProtectableItem.backupManagementType)
+  - name: friendlyName
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.friendlyName
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: Friendly name of the backup item.
+    fullName: friendlyName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'friendlyName?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [WorkloadProtectableItem.friendlyName](xref:@azure/arm-recoveryservicesbackup.WorkloadProtectableItem.friendlyName)
+  - name: protectionState
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.protectionState
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: State of the back up item.
+    fullName: protectionState
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'protectionState?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [WorkloadProtectableItem.protectionState](xref:@azure/arm-recoveryservicesbackup.WorkloadProtectableItem.protectionState)
   - name: workloadType
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadProtectableItem.workloadType
@@ -193,10 +208,13 @@ properties:
     summary: Type of workload for the backup management
     fullName: workloadType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'workloadType?: undefined | string'
+      content: 'workloadType?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [WorkloadProtectableItem.workloadType](xref:@azure/arm-recoveryservicesbackup.WorkloadProtectableItem.workloadType)
+extends: <xref uid="@azure/arm-recoveryservicesbackup.WorkloadProtectableItem" />

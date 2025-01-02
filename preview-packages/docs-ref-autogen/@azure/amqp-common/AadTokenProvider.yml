@@ -13,30 +13,33 @@ summary: >-
    - MSITokenCredentials (MSIVmTokenCredentials)
 fullName: AadTokenProvider
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: AadTokenProvider(Object)
+  - name: >-
+      AadTokenProvider({ getToken() => Promise<{ accessToken: string,
+      expiresOn?: string | Date, tokenType: string }> })
     uid: '@azure/amqp-common.AadTokenProvider.constructor'
     package: '@azure/amqp-common'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'new AadTokenProvider(credentials: Object)'
+      content: >-
+        new AadTokenProvider(credentials: { getToken() => Promise<{ accessToken:
+        string, expiresOn?: string | Date, tokenType: string }> })
       parameters:
         - id: credentials
-          type: Object
+          type: >-
+            { getToken() =&gt; Promise&lt;{ accessToken: string, expiresOn?:
+            string | Date, tokenType: string }&gt; }
           description: ''
 properties:
   - name: tokenRenewalMarginInSeconds
     uid: '@azure/amqp-common.AadTokenProvider.tokenRenewalMarginInSeconds'
     package: '@azure/amqp-common'
     summary: >-
-      {number} tokenRenewalMarginInSeconds - The number of seconds within which
-      it is
+      The number of seconds within which it is
 
       good to renew the token. The constant is set to 270 seconds (4.5 minutes).
 
@@ -50,18 +53,17 @@ properties:
       https://github.com/AzureAD/azure-activedirectory-library-for-nodejs/blob/81ff31dd612cae6cd69a9a7452171b7af792be9f/lib/cache-driver.js#L329
     fullName: tokenRenewalMarginInSeconds
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'tokenRenewalMarginInSeconds: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: tokenValidTimeInSeconds
     uid: '@azure/amqp-common.AadTokenProvider.tokenValidTimeInSeconds'
     package: '@azure/amqp-common'
     summary: >-
-      {number} tokenValidTimeInSeconds - The number of seconds for which the
+      The number of seconds for which the
 
       token is valid. A constant set to 3599 seconds (~1 hour). Adal has a set
       valid time of
@@ -69,27 +71,29 @@ properties:
       1 hour (3600 seconds) when it refreshes the access token.
     fullName: tokenValidTimeInSeconds
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'tokenValidTimeInSeconds: number'
       return:
-        type: number
         description: ''
+        type: number
 methods:
-  - name: getToken(undefined | string)
+  - name: getToken(string)
     uid: '@azure/amqp-common.AadTokenProvider.getToken'
     package: '@azure/amqp-common'
     summary: Gets the jwt token for the specified audience
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getToken(audience?: undefined | string)'
+      content: 'function getToken(audience?: string): Promise<TokenInfo>'
       parameters:
         - id: audience
-          type: undefined | string
-          description: ''
+          type: string
+          description: >-
+            The audience for which the token is desired. If not
+
+            provided then the Endpoint from the connection string will be
+            applied.
       return:
-        type: Promise&lt;<xref uid="@azure/amqp-common.TokenInfo" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/amqp-common.TokenInfo" />&gt;

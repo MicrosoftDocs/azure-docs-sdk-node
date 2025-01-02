@@ -32,21 +32,31 @@ interfaces:
   - '@azure/keyvault-keys.DeletedKey'
   - '@azure/keyvault-keys.EncryptOptions'
   - '@azure/keyvault-keys.EncryptResult'
+  - '@azure/keyvault-keys.GetCryptographyClientOptions'
   - '@azure/keyvault-keys.GetDeletedKeyOptions'
   - '@azure/keyvault-keys.GetKeyOptions'
+  - '@azure/keyvault-keys.GetKeyRotationPolicyOptions'
+  - '@azure/keyvault-keys.GetRandomBytesOptions'
   - '@azure/keyvault-keys.ImportKeyOptions'
-  - '@azure/keyvault-keys.JsonWebKey'
+  - '@azure/keyvault-keys.JsonWebKey_2'
   - '@azure/keyvault-keys.KeyClientOptions'
-  - '@azure/keyvault-keys.KeyOperationsOptions'
   - '@azure/keyvault-keys.KeyPollerOptions'
   - '@azure/keyvault-keys.KeyProperties'
+  - '@azure/keyvault-keys.KeyReleasePolicy'
+  - '@azure/keyvault-keys.KeyRotationLifetimeAction'
+  - '@azure/keyvault-keys.KeyRotationPolicy'
+  - '@azure/keyvault-keys.KeyRotationPolicyProperties'
   - '@azure/keyvault-keys.KeyVaultKey'
-  - '@azure/keyvault-keys.KeyVaultKeyId'
+  - '@azure/keyvault-keys.KeyVaultKeyIdentifier'
   - '@azure/keyvault-keys.ListDeletedKeysOptions'
   - '@azure/keyvault-keys.ListPropertiesOfKeyVersionsOptions'
   - '@azure/keyvault-keys.ListPropertiesOfKeysOptions'
   - '@azure/keyvault-keys.PurgeDeletedKeyOptions'
+  - '@azure/keyvault-keys.RandomBytes'
+  - '@azure/keyvault-keys.ReleaseKeyOptions'
+  - '@azure/keyvault-keys.ReleaseKeyResult'
   - '@azure/keyvault-keys.RestoreKeyBackupOptions'
+  - '@azure/keyvault-keys.RotateKeyOptions'
   - '@azure/keyvault-keys.RsaDecryptParameters'
   - '@azure/keyvault-keys.RsaEncryptParameters'
   - '@azure/keyvault-keys.SignOptions'
@@ -54,6 +64,7 @@ interfaces:
   - '@azure/keyvault-keys.UnwrapKeyOptions'
   - '@azure/keyvault-keys.UnwrapResult'
   - '@azure/keyvault-keys.UpdateKeyPropertiesOptions'
+  - '@azure/keyvault-keys.UpdateKeyRotationPolicyOptions'
   - '@azure/keyvault-keys.VerifyDataOptions'
   - '@azure/keyvault-keys.VerifyOptions'
   - '@azure/keyvault-keys.VerifyResult'
@@ -67,8 +78,40 @@ typeAliases:
   - '@azure/keyvault-keys.EncryptParameters'
   - '@azure/keyvault-keys.EncryptionAlgorithm'
   - '@azure/keyvault-keys.KeyCurveName'
+  - '@azure/keyvault-keys.KeyExportEncryptionAlgorithm'
   - '@azure/keyvault-keys.KeyOperation'
-  - '@azure/keyvault-keys.KeyType'
+  - '@azure/keyvault-keys.KeyRotationPolicyAction'
+  - '@azure/keyvault-keys.KeyType_2'
   - '@azure/keyvault-keys.KeyWrapAlgorithm'
   - '@azure/keyvault-keys.RsaEncryptionAlgorithm'
   - '@azure/keyvault-keys.SignatureAlgorithm'
+functions:
+  - name: parseKeyVaultKeyIdentifier(string)
+    uid: '@azure/keyvault-keys.parseKeyVaultKeyIdentifier'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Parses the given Key Vault Key Id. An example is:
+        https://<keyvault-name>.vault.azure.net/keys/<key-name>/<unique-version-id>
+
+      On parsing the above Id, this function returns:
+      ```ts
+        {
+           sourceId: "https://<keyvault-name>.vault.azure.net/keys/<key-name>/<unique-version-id>",
+           vaultUrl: "https://<keyvault-name>.vault.azure.net",
+           version: "<unique-version-id>",
+           name: "<key-name>"
+        }
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function parseKeyVaultKeyIdentifier(id: string)'
+      parameters:
+        - id: id
+          type: string
+          description: |
+            The Id of the Key Vault Key.
+      return:
+        type: <xref uid="@azure/keyvault-keys.KeyVaultKeyIdentifier" />
+        description: ''

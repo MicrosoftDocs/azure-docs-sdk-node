@@ -1,17 +1,12 @@
 ---
 title: Azure Relay modules for JavaScript
 description: Reference for Azure Relay modules for JavaScript
-author: sethmanheim
-ms.author: sethm
-manager: timlt
 ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: nodejs
-ms.service: Relay
+ms.service: service-bus-relay
+manager: timlt
 ---
-
 # Azure Relay modules for JavaScript
 
 The Azure Relay service creates hybrid applications by enabling you to securely expose services that reside within a corporate enterprise network to the public cloud, without having to open a firewall connection, or require intrusive changes to a corporate network infrastructure. Relay supports a variety of different transport protocols and web services standards.
@@ -33,3 +28,4 @@ npm install @azure/arm-relay
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-relay)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

@@ -2,56 +2,68 @@
 name: DurableOrchestrationContext
 uid: durable-functions.DurableOrchestrationContext
 package: durable-functions
-summary: |-
-  Parameter data for orchestration bindings that can be used to schedule
-  function-based activities.
+summary: >-
+  Provides functionality for application code implementing an orchestration
+  operation.
 fullName: DurableOrchestrationContext
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 properties:
   - name: currentUtcDateTime
     uid: durable-functions.DurableOrchestrationContext.currentUtcDateTime
     package: durable-functions
-    summary: |
+    summary: |-
       Gets the current date/time in a way that is safe for use by orchestrator
       functions.
+
       This date/time value is derived from the orchestration history. It
       always returns the same value at specific points in the orchestrator
       function code, making it deterministic and safe for replay.
     fullName: currentUtcDateTime
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'currentUtcDateTime: Date'
       return:
-        type: Date
         description: ''
+        type: Date
+  - name: customStatus
+    uid: durable-functions.DurableOrchestrationContext.customStatus
+    package: durable-functions
+    summary: Custom status for the orchestration
+    fullName: customStatus
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'customStatus: unknown'
+      return:
+        description: ''
+        type: unknown
   - name: instanceId
     uid: durable-functions.DurableOrchestrationContext.instanceId
     package: durable-functions
-    summary: |
+    summary: |-
       The ID of the current orchestration instance.
+
       The instance ID is generated and fixed when the orchestrator function is
       scheduled. It can be either auto-generated, in which case it is
       formatted as a GUID, or it can be user-specified with any format.
     fullName: instanceId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'instanceId: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: isReplaying
     uid: durable-functions.DurableOrchestrationContext.isReplaying
     package: durable-functions
-    summary: |
+    summary: |-
       Gets a value indicating whether the orchestrator function is currently
       replaying itself.
+
       This property is useful when there is logic that needs to run only when
       the orchestrator function is _not_ replaying. For example, certain types
       of application logging may become too noisy when duplicated as part of
@@ -60,58 +72,58 @@ properties:
       when this value is `false`.
     fullName: isReplaying
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'isReplaying: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: parentInstanceId
     uid: durable-functions.DurableOrchestrationContext.parentInstanceId
     package: durable-functions
-    summary: |
+    summary: |-
       The ID of the parent orchestration of the current sub-orchestration
       instance. The value will be available only in sub-orchestrations.
+
       The parent instance ID is generated and fixed when the parent
       orchestrator function is scheduled. It can be either auto-generated, in
       which case it is formatted as a GUID, or it can be user-specified with
       any format.
     fullName: parentInstanceId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'parentInstanceId: string | undefined'
+      content: 'parentInstanceId: undefined | string'
       return:
-        type: string | undefined
         description: ''
+        type: undefined | string
   - name: Task
     uid: durable-functions.DurableOrchestrationContext.Task
     package: durable-functions
-    summary: |-
-      Just an entry point to reference the methods in [[ITaskMethods]].
-      Methods to handle collections of pending actions represented by [[Task]]
-      instances. For use in parallelization operations.
+    summary: >-
+      Entry point for methods to handle collections of
+
+      pending actions represented by
+      [Task](xref:durable-functions.DurableOrchestrationContext.Task) instances.
+
+      For use in parallelization operations.
     fullName: Task
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'Task: ITaskMethods'
+      content: 'Task: { all: (tasks: Task[]) => Task, any: (tasks: Task[]) => Task }'
       return:
-        type: <xref uid="durable-functions.ITaskMethods" />
         description: ''
+        type: '{ all: (tasks: Task[]) =&gt; Task, any: (tasks: Task[]) =&gt; Task }'
 methods:
-  - name: 'callActivity(string, unknown)'
+  - name: callActivity(string, unknown)
     uid: durable-functions.DurableOrchestrationContext.callActivity
     package: durable-functions
     summary: Schedules an activity function named `name` for execution.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function callActivity(name: string, input?: unknown)'
+      content: 'function callActivity(name: string, input?: unknown): Task'
       parameters:
         - id: name
           type: string
@@ -122,23 +134,22 @@ methods:
             The JSON-serializable input to pass to the activity
             function.
       return:
-        type: <xref uid="durable-functions.Task" />
         description: |-
           A Durable Task that completes when the called activity
           function completes or fails.
-  - name: 'callActivityWithRetry(string, RetryOptions, unknown)'
+        type: <xref uid="durable-functions.Task" />
+  - name: callActivityWithRetry(string, RetryOptions, unknown)
     uid: durable-functions.DurableOrchestrationContext.callActivityWithRetry
     package: durable-functions
     summary: |-
       Schedules an activity function named `name` for execution with
       retry options.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function callActivityWithRetry(name: string, retryOptions: RetryOptions,
-        input?: unknown)
+        input?: unknown): Task
       parameters:
         - id: name
           type: string
@@ -148,25 +159,24 @@ methods:
           description: The retry options for the activity function.
         - id: input
           type: unknown
-          description: |
+          description: |-
             The JSON-serializable input to pass to the activity
             function.
       return:
-        type: <xref uid="durable-functions.Task" />
         description: ''
-  - name: 'callEntity(EntityId, string, unknown)'
+        type: <xref uid="durable-functions.Task" />
+  - name: callEntity(EntityId, string, unknown)
     uid: durable-functions.DurableOrchestrationContext.callEntity
     package: durable-functions
     summary: |-
       Calls an operation on an entity, passing an argument, and waits for it
       to complete.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function callEntity(entityId: EntityId, operationName: string,
-        operationInput?: unknown)
+        operationInput?: unknown): Task
       parameters:
         - id: entityId
           type: <xref uid="durable-functions.EntityId" />
@@ -176,54 +186,35 @@ methods:
           description: The name of the operation.
         - id: operationInput
           type: unknown
-          description: |
-            The input for the operation.
+          description: The input for the operation.
       return:
-        type: <xref uid="durable-functions.Task" />
         description: ''
-  - name: >-
-      callHttp(string, string, string | object, [key: string]: string,
-      TokenSource)
+        type: <xref uid="durable-functions.Task" />
+  - name: callHttp(CallHttpOptions)
     uid: durable-functions.DurableOrchestrationContext.callHttp
     package: durable-functions
     summary: Schedules a durable HTTP call to the specified endpoint.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function callHttp(method: string, uri: string, content?: string |
-        object, headers?: [key: string]: string, tokenSource?: TokenSource)
+      content: 'function callHttp(options: CallHttpOptions): Task'
       parameters:
-        - id: method
-          type: string
-          description: ''
-        - id: uri
-          type: string
-          description: ''
-        - id: content
-          type: string | object
-          description: ''
-        - id: headers
-          type: '[key: string]\: string'
-          description: ''
-        - id: tokenSource
-          type: <xref uid="durable-functions.TokenSource" />
-          description: ''
+        - id: options
+          type: <xref uid="durable-functions.CallHttpOptions" />
+          description: The HTTP options object
       return:
-        type: <xref uid="durable-functions.Task" />
         description: ''
-  - name: 'callSubOrchestrator(string, unknown, string)'
+        type: <xref uid="durable-functions.Task" />
+  - name: callSubOrchestrator(string, unknown, string)
     uid: durable-functions.DurableOrchestrationContext.callSubOrchestrator
     package: durable-functions
     summary: Schedules an orchestration function named `name` for execution.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function callSubOrchestrator(name: string, input?: unknown, instanceId?:
-        string)
+        string): Task
       parameters:
         - id: name
           type: string
@@ -235,7 +226,7 @@ methods:
             function.
         - id: instanceId
           type: string
-          description: >
+          description: >-
             A unique ID to use for the sub-orchestration instance.
 
             If `instanceId` is not specified, the extension will generate an id
@@ -243,21 +234,20 @@ methods:
 
             the format `<calling orchestrator instance ID>:<#>`
       return:
-        type: <xref uid="durable-functions.Task" />
         description: ''
-  - name: 'callSubOrchestratorWithRetry(string, RetryOptions, unknown, string)'
+        type: <xref uid="durable-functions.Task" />
+  - name: callSubOrchestratorWithRetry(string, RetryOptions, unknown, string)
     uid: durable-functions.DurableOrchestrationContext.callSubOrchestratorWithRetry
     package: durable-functions
     summary: |-
       Schedules an orchestrator function named `name` for execution with retry
       options.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function callSubOrchestratorWithRetry(name: string, retryOptions:
-        RetryOptions, input?: unknown, instanceId?: string)
+        RetryOptions, input?: unknown, instanceId?: string): Task
       parameters:
         - id: name
           type: string
@@ -272,88 +262,84 @@ methods:
             function.
         - id: instanceId
           type: string
-          description: |
-            A unique ID to use for the sub-orchestration instance.
+          description: A unique ID to use for the sub-orchestration instance.
       return:
-        type: <xref uid="durable-functions.Task" />
         description: ''
+        type: <xref uid="durable-functions.Task" />
   - name: continueAsNew(unknown)
     uid: durable-functions.DurableOrchestrationContext.continueAsNew
     package: durable-functions
     summary: Restarts the orchestration by clearing its history.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function continueAsNew(input: unknown)'
       parameters:
         - id: input
           type: unknown
-          description: ''
-      return:
-        type: <xref uid="durable-functions.Task" />
-        description: ''
+          description: The JSON-serializable data to re-initialize the instance with.
   - name: createTimer(Date)
     uid: durable-functions.DurableOrchestrationContext.createTimer
     package: durable-functions
-    summary: |
+    summary: |-
       Creates a durable timer that expires at a specified time.
+
       All durable timers created using this method must either expire or be
-      cancelled using [[TimerTask]].[[cancel]] before the orchestrator
+      cancelled using `TimerTask.cancel()` before the orchestrator
       function completes. Otherwise, the underlying framework will keep the
       instance alive until the timer expires.
-
-      Timers currently cannot be scheduled further than 7 days into the
-      future.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createTimer(fireAt: Date)'
+      content: 'function createTimer(fireAt: Date): TimerTask'
       parameters:
         - id: fireAt
           type: Date
           description: The time at which the timer should expire.
       return:
-        type: <xref uid="durable-functions.TimerTask" />
         description: A TimerTask that completes when the durable timer expires.
-  - name: getInput()
+        type: <xref uid="durable-functions.TimerTask" />
+  - name: getInput<T>()
     uid: durable-functions.DurableOrchestrationContext.getInput
     package: durable-functions
     summary: |-
       Gets the input of the current orchestrator function as a deserialized
       value.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function getInput()
+      content: 'function getInput<T>(): T'
       return:
-        type: unknown
         description: ''
-  - name: newGuid()
+        type: T
+  - name: newGuid(string)
     uid: durable-functions.DurableOrchestrationContext.newGuid
     package: durable-functions
-    summary: |
+    summary: |-
       Creates a new GUID that is safe for replay within an orchestration or
       operation.
+
       The default implementation of this method creates a name-based UUID
       using the algorithm from RFC 4122 §4.3. The name input used to generate
       this value is a combination of the orchestration instance ID and an
       internally managed sequence number.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function newGuid()
+      content: 'function newGuid(input: string): string'
+      parameters:
+        - id: input
+          type: string
+          description: used to generate the unique GUID
       return:
-        type: string
         description: ''
+        type: string
   - name: setCustomStatus(unknown)
     uid: durable-functions.DurableOrchestrationContext.setCustomStatus
     package: durable-functions
-    summary: |
+    summary: |-
       Sets the JSON-serializable status of the current orchestrator function.
+
       The `customStatusObject` value is serialized to JSON and will be made
       available to the orchestration status query APIs. The serialized JSON
       value must not exceed 16 KB of UTF-16 encoded text.
@@ -361,33 +347,56 @@ methods:
       The serialized `customStatusObject` value will be made available to the
       aforementioned APIs after the next `yield` or `return` statement.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function setCustomStatus(customStatusObject: unknown)'
       parameters:
         - id: customStatusObject
           type: unknown
-          description: |
+          description: |-
             The JSON-serializable value to use as the
             orchestrator function's custom status.
+  - name: signalEntity(EntityId, string, unknown)
+    uid: durable-functions.DurableOrchestrationContext.signalEntity
+    package: durable-functions
+    summary: |-
+      Send a signal operation to a Durable Entity, passing an argument, without
+      waiting for a response. A fire-and-forget operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function signalEntity(entityId: EntityId, operationName: string,
+        operationInput?: unknown)
+      parameters:
+        - id: entityId
+          type: <xref uid="durable-functions.EntityId" />
+          description: ID of the target entity.
+        - id: operationName
+          type: string
+          description: The name of the operation.
+        - id: operationInput
+          type: unknown
+          description: (optional) input for the operation.
   - name: waitForExternalEvent(string)
     uid: durable-functions.DurableOrchestrationContext.waitForExternalEvent
     package: durable-functions
-    summary: |
+    summary: |-
       Waits asynchronously for an event to be raised with the name `name` and
       returns the event data.
+
       External clients can raise events to a waiting orchestration instance
-      using [[raiseEvent]].
+      using `raiseEvent()`.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function waitForExternalEvent(name: string)'
+      content: 'function waitForExternalEvent(name: string): Task'
       parameters:
         - id: name
           type: string
-          description: ''
+          description: The name of the external event to wait for.
       return:
+        description: |-
+          a Task that completes when an external event of
+           the specified name is received
         type: <xref uid="durable-functions.Task" />
-        description: ''

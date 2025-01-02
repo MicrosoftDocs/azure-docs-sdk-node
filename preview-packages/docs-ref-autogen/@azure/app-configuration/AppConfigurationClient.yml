@@ -5,16 +5,14 @@ package: '@azure/app-configuration'
 summary: Client for the Azure App Configuration service.
 fullName: AppConfigurationClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'AppConfigurationClient(string, AppConfigurationClientOptions)'
+  - name: AppConfigurationClient(string, AppConfigurationClientOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.constructor'
     package: '@azure/app-configuration'
     summary: Initializes a new instance of the AppConfigurationClient class.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -28,8 +26,7 @@ constructors:
           type: >-
             <xref uid="@azure/app-configuration.AppConfigurationClientOptions"
             />
-          description: |
-            Options for the AppConfigurationClient.
+          description: Options for the AppConfigurationClient.
   - name: >-
       AppConfigurationClient(string, TokenCredential,
       AppConfigurationClientOptions)
@@ -39,7 +36,6 @@ constructors:
       Initializes a new instance of the AppConfigurationClient class using
       a TokenCredential.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -52,20 +48,21 @@ constructors:
             The endpoint of the App Configuration service (ex:
             https://sample.azconfig.io).
         - id: tokenCredential
-          type: TokenCredential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
           description: >-
             An object that implements the `TokenCredential` interface used to
-            authenticate requests to the service. Use the \@azure/identity
+            authenticate requests to the service. Use the @azure/identity
             package to create a credential that suits your needs.
         - id: options
           type: >-
             <xref uid="@azure/app-configuration.AppConfigurationClientOptions"
             />
-          description: |
-            Options for the AppConfigurationClient.
+          description: Options for the AppConfigurationClient.
 methods:
   - name: >-
-      addConfigurationSetting(AddConfigurationSettingParam,
+      addConfigurationSetting(AddConfigurationSettingParam<string> |
+      AddConfigurationSettingParam<FeatureFlagValue> |
+      AddConfigurationSettingParam<SecretReferenceValue>,
       AddConfigurationSettingOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.addConfigurationSetting'
     package: '@azure/app-configuration'
@@ -73,6 +70,7 @@ methods:
       Add a setting into the Azure App Configuration service, failing if it
 
       already exists.
+
 
       Example usage:
 
@@ -83,27 +81,120 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function addConfigurationSetting(configurationSetting:
-        AddConfigurationSettingParam, options?: AddConfigurationSettingOptions)
+        AddConfigurationSettingParam<string> |
+        AddConfigurationSettingParam<FeatureFlagValue> |
+        AddConfigurationSettingParam<SecretReferenceValue>, options?:
+        AddConfigurationSettingOptions):
+        Promise<AddConfigurationSettingResponse>
       parameters:
         - id: configurationSetting
-          type: <xref uid="@azure/app-configuration.AddConfigurationSettingParam" />
+          type: >-
+            <xref uid="@azure/app-configuration.AddConfigurationSettingParam"
+            />&lt;string&gt; | <xref
+            uid="@azure/app-configuration.AddConfigurationSettingParam"
+            />&lt;<xref uid="@azure/app-configuration.FeatureFlagValue" />&gt; |
+            <xref uid="@azure/app-configuration.AddConfigurationSettingParam"
+            />&lt;<xref uid="@azure/app-configuration.SecretReferenceValue"
+            />&gt;
           description: A configuration setting.
         - id: options
           type: >-
             <xref uid="@azure/app-configuration.AddConfigurationSettingOptions"
             />
-          description: |
-            Optional parameters for the request.
+          description: Optional parameters for the request.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/app-configuration.AddConfigurationSettingResponse" />&gt;
+  - name: archiveSnapshot(string, UpdateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.archiveSnapshot'
+    package: '@azure/app-configuration'
+    summary: |-
+      Archive a ready snapshot
+
+      Example usage:
+      ```ts
+      const result = await client.archiveSnapshot({name: "MySnapshot"});
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function archiveSnapshot(name: string, options?: UpdateSnapshotOptions):
+        Promise<UpdateSnapshotResponse>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the snapshot.
+        - id: options
+          type: <xref uid="@azure/app-configuration.UpdateSnapshotOptions" />
+          description: Optional parameters for the request.
+      return:
         description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.UpdateSnapshotResponse"
+          />&gt;
+  - name: beginCreateSnapshot(SnapshotInfo, CreateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.beginCreateSnapshot'
+    package: '@azure/app-configuration'
+    summary: >-
+      Begins creating a snapshot for Azure App Configuration service, fails if
+      it
+
+      already exists.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateSnapshot(snapshot: SnapshotInfo, options?:
+        CreateSnapshotOptions):
+        Promise<SimplePollerLike<OperationState<CreateSnapshotResponse>,
+        CreateSnapshotResponse>>
+      parameters:
+        - id: snapshot
+          type: <xref uid="@azure/app-configuration.SnapshotInfo" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/app-configuration.CreateSnapshotOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
+          uid="@azure/app-configuration.CreateSnapshotResponse" />&gt;, <xref
+          uid="@azure/app-configuration.CreateSnapshotResponse" />&gt;&gt;
+  - name: beginCreateSnapshotAndWait(SnapshotInfo, CreateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.beginCreateSnapshotAndWait'
+    package: '@azure/app-configuration'
+    summary: >-
+      Begins creating a snapshot for Azure App Configuration service, waits
+      until it is done,
+
+      fails if it already exists.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateSnapshotAndWait(snapshot: SnapshotInfo, options?:
+        CreateSnapshotOptions): Promise<CreateSnapshotResponse>
+      parameters:
+        - id: snapshot
+          type: <xref uid="@azure/app-configuration.SnapshotInfo" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/app-configuration.CreateSnapshotOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.CreateSnapshotResponse"
+          />&gt;
   - name: >-
       deleteConfigurationSetting(ConfigurationSettingId,
       DeleteConfigurationSettingOptions)
@@ -111,6 +202,7 @@ methods:
     package: '@azure/app-configuration'
     summary: >-
       Delete a setting from the Azure App Configuration service
+
 
       Example usage:
 
@@ -121,12 +213,12 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function deleteConfigurationSetting(id: ConfigurationSettingId,
-        options?: DeleteConfigurationSettingOptions)
+        options?: DeleteConfigurationSettingOptions):
+        Promise<DeleteConfigurationSettingResponse>
       parameters:
         - id: id
           type: <xref uid="@azure/app-configuration.ConfigurationSettingId" />
@@ -135,14 +227,13 @@ methods:
           type: >-
             <xref
             uid="@azure/app-configuration.DeleteConfigurationSettingOptions" />
-          description: |
-            Optional parameters for the request (ex: etag, label)
+          description: 'Optional parameters for the request (ex: etag, label)'
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/app-configuration.DeleteConfigurationSettingResponse"
           />&gt;
-        description: ''
   - name: >-
       getConfigurationSetting(ConfigurationSettingId,
       GetConfigurationSettingOptions)
@@ -150,6 +241,7 @@ methods:
     package: '@azure/app-configuration'
     summary: >-
       Gets a setting from the Azure App Configuration service.
+
 
       Example code:
 
@@ -160,12 +252,12 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getConfigurationSetting(id: ConfigurationSettingId, options?:
-        GetConfigurationSettingOptions)
+        GetConfigurationSettingOptions):
+        Promise<GetConfigurationSettingResponse>
       parameters:
         - id: id
           type: <xref uid="@azure/app-configuration.ConfigurationSettingId" />
@@ -174,13 +266,40 @@ methods:
           type: >-
             <xref uid="@azure/app-configuration.GetConfigurationSettingOptions"
             />
-          description: |
-            Optional parameters for the request.
+          description: Optional parameters for the request.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/app-configuration.GetConfigurationSettingResponse" />&gt;
+  - name: getSnapshot(string, GetSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.getSnapshot'
+    package: '@azure/app-configuration'
+    summary: |-
+      Get a snapshot from Azure App Configuration service
+
+      Example usage:
+      ```ts
+      const result = await client.getSnapshot("MySnapshot");
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getSnapshot(name: string, options?: GetSnapshotOptions):
+        Promise<GetSnapshotResponse>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the snapshot.
+        - id: options
+          type: <xref uid="@azure/app-configuration.GetSnapshotOptions" />
+          description: Optional parameters for the request.
+      return:
         description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.GetSnapshotResponse"
+          />&gt;
   - name: listConfigurationSettings(ListConfigurationSettingsOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.listConfigurationSettings'
     package: '@azure/app-configuration'
@@ -188,6 +307,7 @@ methods:
       Lists settings from the Azure App Configuration service, optionally
 
       filtered by key names, labels and accept datetime.
+
 
       Example code:
 
@@ -198,53 +318,161 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listConfigurationSettings(options?:
-        ListConfigurationSettingsOptions)
+        ListConfigurationSettingsOptions):
+        PagedAsyncIterableIterator<ConfigurationSetting<string>,
+        ListConfigurationSettingPage, PageSettings>
       parameters:
         - id: options
           type: >-
             <xref
             uid="@azure/app-configuration.ListConfigurationSettingsOptions" />
-          description: |
-            Optional parameters for the request.
+          description: Optional parameters for the request.
       return:
-        type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/app-configuration.ConfigurationSetting" />, <xref
-          uid="@azure/app-configuration.ListConfigurationSettingPage" />&gt;
         description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/app-configuration.ConfigurationSetting" />&lt;string&gt;,
+          <xref uid="@azure/app-configuration.ListConfigurationSettingPage" />,
+          <xref uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: >-
+      listConfigurationSettingsForSnapshot(string,
+      ListConfigurationSettingsForSnapshotOptions)
+    uid: >-
+      @azure/app-configuration.AppConfigurationClient.listConfigurationSettingsForSnapshot
+    package: '@azure/app-configuration'
+    summary: >-
+      Lists settings from the Azure App Configuration service for snapshots
+      based on name, optionally
+
+      filtered by key names, labels and accept datetime.
+
+
+      Example code:
+
+      ```ts
+
+      const allSettingsWithLabel = client.listConfigurationSettingsForSnashots({
+      snapshotName: "MySnapshot" });
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listConfigurationSettingsForSnapshot(snapshotName: string,
+        options?: ListConfigurationSettingsForSnapshotOptions):
+        PagedAsyncIterableIterator<ConfigurationSetting<string>,
+        ListConfigurationSettingPage, PageSettings>
+      parameters:
+        - id: snapshotName
+          type: string
+          description: ''
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/app-configuration.ListConfigurationSettingsForSnapshotOptions"
+            />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/app-configuration.ConfigurationSetting" />&lt;string&gt;,
+          <xref uid="@azure/app-configuration.ListConfigurationSettingPage" />,
+          <xref uid="@azure/app-configuration.PageSettings" />&gt;
   - name: listRevisions(ListRevisionsOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.listRevisions'
     package: '@azure/app-configuration'
     summary: |-
       Lists revisions of a set of keys, optionally filtered by key names,
       labels and accept datetime.
+
       Example code:
       ```ts
       const revisionsIterator = client.listRevisions({ keys: ["MyKey"] });
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listRevisions(options?: ListRevisionsOptions)'
+      content: >-
+        function listRevisions(options?: ListRevisionsOptions):
+        PagedAsyncIterableIterator<ConfigurationSetting<string>,
+        ListRevisionsPage, PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/app-configuration.ListRevisionsOptions" />
-          description: |
-            Optional parameters for the request.
+          description: Optional parameters for the request.
       return:
-        type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/app-configuration.ConfigurationSetting" />, <xref
-          uid="@azure/app-configuration.ListRevisionsPage" />&gt;
         description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/app-configuration.ConfigurationSetting" />&lt;string&gt;,
+          <xref uid="@azure/app-configuration.ListRevisionsPage" />, <xref
+          uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: listSnapshots(ListSnapshotsOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.listSnapshots'
+    package: '@azure/app-configuration'
+    summary: |-
+      List all snapshots from Azure App Configuration service
+
+      Example usage:
+      ```ts
+      const result = await client.listSnapshots();
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listSnapshots(options?: ListSnapshotsOptions):
+        PagedAsyncIterableIterator<ConfigurationSnapshot, ListSnapshotsPage,
+        PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/app-configuration.ListSnapshotsOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/app-configuration.ConfigurationSnapshot" />, <xref
+          uid="@azure/app-configuration.ListSnapshotsPage" />, <xref
+          uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: recoverSnapshot(string, UpdateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.recoverSnapshot'
+    package: '@azure/app-configuration'
+    summary: |-
+      Recover an archived snapshot back to ready status
+
+      Example usage:
+      ```ts
+      const result = await client.recoverSnapshot("MySnapshot");
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function recoverSnapshot(name: string, options?: UpdateSnapshotOptions):
+        Promise<UpdateSnapshotResponse>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the snapshot.
+        - id: options
+          type: <xref uid="@azure/app-configuration.UpdateSnapshotOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.UpdateSnapshotResponse"
+          />&gt;
   - name: >-
-      setConfigurationSetting(SetConfigurationSettingParam,
+      setConfigurationSetting(SetConfigurationSettingParam<string> |
+      SetConfigurationSettingParam<FeatureFlagValue> |
+      SetConfigurationSettingParam<SecretReferenceValue>,
       SetConfigurationSettingOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.setConfigurationSetting'
     package: '@azure/app-configuration'
@@ -252,21 +480,31 @@ methods:
       Sets the value of a key in the Azure App Configuration service, allowing
       for an optional etag.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setConfigurationSetting(configurationSetting:
-        SetConfigurationSettingParam, options?: SetConfigurationSettingOptions)
+        SetConfigurationSettingParam<string> |
+        SetConfigurationSettingParam<FeatureFlagValue> |
+        SetConfigurationSettingParam<SecretReferenceValue>, options?:
+        SetConfigurationSettingOptions):
+        Promise<SetConfigurationSettingResponse>
       parameters:
         - id: configurationSetting
-          type: <xref uid="@azure/app-configuration.SetConfigurationSettingParam" />
+          type: >-
+            <xref uid="@azure/app-configuration.SetConfigurationSettingParam"
+            />&lt;string&gt; | <xref
+            uid="@azure/app-configuration.SetConfigurationSettingParam"
+            />&lt;<xref uid="@azure/app-configuration.FeatureFlagValue" />&gt; |
+            <xref uid="@azure/app-configuration.SetConfigurationSettingParam"
+            />&lt;<xref uid="@azure/app-configuration.SecretReferenceValue"
+            />&gt;
           description: A configuration value.
         - id: options
           type: >-
             <xref uid="@azure/app-configuration.SetConfigurationSettingOptions"
             />
-          description: >
+          description: >-
             Optional parameters for the request.
 
 
@@ -279,26 +517,24 @@ methods:
 
             ```
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/app-configuration.SetConfigurationSettingResponse" />&gt;
-        description: ''
-  - name: 'setReadOnly(ConfigurationSettingId, boolean, SetReadOnlyOptions)'
+  - name: setReadOnly(ConfigurationSettingId, boolean, SetReadOnlyOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.setReadOnly'
     package: '@azure/app-configuration'
     summary: Sets or clears a key's read-only status.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setReadOnly(id: ConfigurationSettingId, readOnly: boolean,
-        options?: SetReadOnlyOptions)
+        options?: SetReadOnlyOptions): Promise<SetReadOnlyResponse>
       parameters:
         - id: id
           type: <xref uid="@azure/app-configuration.ConfigurationSettingId" />
-          description: |
-            The id of the configuration setting to modify.
+          description: The id of the configuration setting to modify.
         - id: readOnly
           type: boolean
           description: ''
@@ -306,10 +542,10 @@ methods:
           type: <xref uid="@azure/app-configuration.SetReadOnlyOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/app-configuration.SetReadOnlyResponse"
           />&gt;
-        description: ''
   - name: updateSyncToken(string)
     uid: '@azure/app-configuration.AppConfigurationClient.updateSyncToken'
     package: '@azure/app-configuration'
@@ -317,12 +553,10 @@ methods:
       Adds an external synchronization token to ensure service requests receive
       up-to-date values.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'function updateSyncToken(syncToken: string)'
       parameters:
         - id: syncToken
           type: string
-          description: |
-            The synchronization token value.
+          description: The synchronization token value.

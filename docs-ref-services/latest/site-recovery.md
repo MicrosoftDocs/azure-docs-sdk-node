@@ -1,17 +1,12 @@
 ---
-title: Azure Site Recovery modules for JavaScript
-description: Reference for Azure Site Recovery modules for JavaScript
-author: rayne-wiselman
-ms.author: raynew
+title: Azure Site Recovery SDK for JavaScript
+description: Reference for Azure Site Recovery SDK for JavaScript
+ms.date: 03/30/2023
+ms.topic: reference
+ms.devlang: javascript
+ms.service: siterecovery
 manager: carmonm
-ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Site Recovery
 ---
-
 # Azure Site Recovery modules for JavaScript
 
 Site Recovery allows you to automate replication of Azure VMs between regions, on-premises virtual machines and physical servers to Azure, and on-premises machines to a secondary datacenter.
@@ -33,3 +28,4 @@ npm install @azure/arm-recoveryservices
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-recoveryservices)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

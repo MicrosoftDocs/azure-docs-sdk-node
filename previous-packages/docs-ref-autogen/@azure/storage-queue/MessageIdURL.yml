@@ -7,16 +7,14 @@ summary: >-
   allowing you to manipulate the message.
 fullName: MessageIdURL
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'MessageIdURL(string, Pipeline)'
+  - name: MessageIdURL(string, Pipeline)
     uid: '@azure/storage-queue.MessageIdURL.constructor'
     package: '@azure/storage-queue'
     summary: Creates an instance of MessageIdURL.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new MessageIdURL(url: string, pipeline: Pipeline)'
@@ -33,43 +31,64 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
-  - name: pipeline
-    uid: '@azure/storage-queue.MessageIdURL.pipeline'
-    package: '@azure/storage-queue'
-    summary: Request policy pipeline.
-    fullName: pipeline
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'pipeline: Pipeline'
-      return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
-        description: ''
+inheritedProperties:
   - name: url
     uid: '@azure/storage-queue.MessageIdURL.url'
     package: '@azure/storage-queue'
     summary: URL string value.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
-methods:
-  - name: 'delete(Aborter, string)'
-    uid: '@azure/storage-queue.MessageIdURL.delete'
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [StorageURL.url](xref:@azure/storage-queue.StorageURL.url)
+inheritedMethods:
+  - name: newPipeline(Credential, INewPipelineOptions)
+    uid: '@azure/storage-queue.MessageIdURL.newPipeline'
     package: '@azure/storage-queue'
-    summary: Delete permanently removes the specified message from its queue.
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(aborter: Aborter, popReceipt: string)'
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions): Pipeline
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-queue.Credential" />
+          description: Such as AnonymousCredential, SharedKeyCredential or TokenCredential.
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
+          description: Optional. Options.
+      return:
+        description: A new Pipeline object.
+        type: <xref uid="@azure/storage-queue.Pipeline" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [StorageURL.newPipeline](xref:@azure/storage-queue.StorageURL.newPipeline)
+methods:
+  - name: delete(Aborter, string)
+    uid: '@azure/storage-queue.MessageIdURL.delete'
+    package: '@azure/storage-queue'
+    summary: >-
+      Delete permanently removes the specified message from its queue.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/delete-message2
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function delete(aborter: Aborter, popReceipt: string):
+        Promise<MessageIdDeleteResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -83,54 +102,31 @@ methods:
             A valid pop receipt value returned from an earlier call to the
             dequeue messages or update message operation.
       return:
-        type: Promise&lt;<xref uid="Models.MessageIdDeleteResponse" />&gt;
         description: ''
-  - name: 'fromMessagesURL(MessagesURL, string)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-queue.Models.MessageIdDeleteResponse" />&gt;
+  - name: fromMessagesURL(MessagesURL, string)
     uid: '@azure/storage-queue.MessageIdURL.fromMessagesURL'
     package: '@azure/storage-queue'
     summary: Creates a MessageIdURL object from MessagesURL
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromMessagesURL(messagesURL: MessagesURL, messageId:
-        string)
+        string): MessageIdURL
       parameters:
         - id: messagesURL
           type: <xref uid="@azure/storage-queue.MessagesURL" />
           description: ''
         - id: messageId
           type: string
-          description: |+
-
-      return:
-        type: <xref uid="@azure/storage-queue.MessageIdURL" />
-        description: ''
-  - name: 'newPipeline(Credential, INewPipelineOptions)'
-    uid: '@azure/storage-queue.MessageIdURL.newPipeline'
-    package: '@azure/storage-queue'
-    summary: >-
-      A static method used to create a new Pipeline object with Credential
-      provided.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/storage-queue.Credential" />
-          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
-        - id: pipelineOptions
-          type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
-        description: A new Pipeline object.
-  - name: 'update(Aborter, string, number, string)'
+        description: ''
+        type: <xref uid="@azure/storage-queue.MessageIdURL" />
+  - name: update(Aborter, string, number, string)
     uid: '@azure/storage-queue.MessageIdURL.update'
     package: '@azure/storage-queue'
     summary: >-
@@ -141,13 +137,16 @@ methods:
 
       To include markup in the message, the contents of the message must either
       be XML-escaped or Base64-encode.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/update-message
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function update(aborter: Aborter, popReceipt: string, visibilityTimeout:
-        number, message: string)
+        number, message: string): Promise<MessageIdUpdateResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -172,8 +171,10 @@ methods:
           type: string
           description: Message to update.
       return:
-        type: Promise&lt;<xref uid="Models.MessageIdUpdateResponse" />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-queue.Models.MessageIdUpdateResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-queue.MessageIdURL.withPipeline'
     package: '@azure/storage-queue'
@@ -181,15 +182,14 @@ methods:
       Creates a new MessageIdURL object identical to the source but with the
       specified request policy pipeline.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): MessageIdURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-queue.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-queue.MessageIdURL" />
         description: ''
+        type: <xref uid="@azure/storage-queue.MessageIdURL" />
 extends: <xref uid="@azure/storage-queue.StorageURL" />

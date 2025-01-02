@@ -5,24 +5,19 @@ package: '@azure/amqp-common'
 summary: ''
 fullName: SasTokenProvider
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: >-
-      SasTokenProvider(string, string, string, undefined | number, undefined |
-      number)
+  - name: SasTokenProvider(string, string, string, number, number)
     uid: '@azure/amqp-common.SasTokenProvider.constructor'
     package: '@azure/amqp-common'
     summary: Initializes a new instance of SasTokenProvider
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         new SasTokenProvider(namespace: string, keyName: string, key: string,
-        tokenValidTimeInSeconds?: undefined | number,
-        tokenRenewalMarginInSeconds?: undefined | number)
+        tokenValidTimeInSeconds?: number, tokenRenewalMarginInSeconds?: number)
       parameters:
         - id: namespace
           type: string
@@ -32,121 +27,112 @@ constructors:
           description: The name of the EventHub/ServiceBus key.
         - id: key
           type: string
-          description: |
-            The secret value associated with the above EventHub/ServiceBus key
+          description: The secret value associated with the above EventHub/ServiceBus key
         - id: tokenValidTimeInSeconds
-          type: undefined | number
+          type: number
           description: ''
         - id: tokenRenewalMarginInSeconds
-          type: undefined | number
+          type: number
           description: ''
 properties:
   - name: key
     uid: '@azure/amqp-common.SasTokenProvider.key'
     package: '@azure/amqp-common'
-    summary: >-
-      {string} key - The secret value associated with the above
-      EventHub/ServiceBus key.
+    summary: The secret value associated with the above EventHub/ServiceBus key.
     fullName: key
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'key: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: keyName
     uid: '@azure/amqp-common.SasTokenProvider.keyName'
     package: '@azure/amqp-common'
-    summary: '{string} keyName - The name of the EventHub/ServiceBus key.'
+    summary: The name of the EventHub/ServiceBus key.
     fullName: keyName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'keyName: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: namespace
     uid: '@azure/amqp-common.SasTokenProvider.namespace'
     package: '@azure/amqp-common'
-    summary: '{string} namespace - The namespace of the EventHub/ServiceBus instance.'
+    summary: The namespace of the EventHub/ServiceBus instance.
     fullName: namespace
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'namespace: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: tokenRenewalMarginInSeconds
     uid: '@azure/amqp-common.SasTokenProvider.tokenRenewalMarginInSeconds'
     package: '@azure/amqp-common'
-    summary: >-
-      {number} tokenRenewalMarginInSeconds - The number of seconds within which
-      it
-
+    summary: |-
+      The number of seconds within which it
       is good to renew the token. Default = 900 seconds (15 minutes).
     fullName: tokenRenewalMarginInSeconds
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'tokenRenewalMarginInSeconds: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: tokenValidTimeInSeconds
     uid: '@azure/amqp-common.SasTokenProvider.tokenValidTimeInSeconds'
     package: '@azure/amqp-common'
-    summary: >-
-      {number} tokenValidTimeInSeconds - The number of seconds for which the
-      token
-
+    summary: |-
+      The number of seconds for which the token
       is valid. Default = 3600 seconds (1 hour).
     fullName: tokenValidTimeInSeconds
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'tokenValidTimeInSeconds: number'
       return:
-        type: number
         description: ''
+        type: number
 methods:
   - name: fromConnectionString(string)
     uid: '@azure/amqp-common.SasTokenProvider.fromConnectionString'
     package: '@azure/amqp-common'
     summary: Creates a token provider from the EventHub/ServiceBus connection string;
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromConnectionString(connectionString: string)'
+      content: >-
+        static function fromConnectionString(connectionString: string):
+        SasTokenProvider
       parameters:
         - id: connectionString
           type: string
-          description: |
-            The EventHub/ServiceBus connection string
+          description: The EventHub/ServiceBus connection string
       return:
-        type: <xref uid="@azure/amqp-common.SasTokenProvider" />
         description: ''
-  - name: getToken(undefined | string)
+        type: <xref uid="@azure/amqp-common.SasTokenProvider" />
+  - name: getToken(string)
     uid: '@azure/amqp-common.SasTokenProvider.getToken'
     package: '@azure/amqp-common'
     summary: Gets the sas token for the specified audience
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getToken(audience?: undefined | string)'
+      content: 'function getToken(audience?: string): Promise<TokenInfo>'
       parameters:
         - id: audience
-          type: undefined | string
-          description: ''
+          type: string
+          description: >-
+            The audience for which the token is desired. If not
+
+            provided then the Endpoint from the connection string will be
+            applied.
       return:
-        type: Promise&lt;<xref uid="@azure/amqp-common.TokenInfo" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/amqp-common.TokenInfo" />&gt;

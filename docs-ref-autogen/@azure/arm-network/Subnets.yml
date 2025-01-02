@@ -2,42 +2,26 @@
 name: Subnets
 uid: '@azure/arm-network.Subnets'
 package: '@azure/arm-network'
-summary: Class representing a Subnets.
+summary: Interface representing a Subnets.
 fullName: Subnets
 remarks: ''
-isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: Subnets(NetworkManagementClientContext)
-    uid: '@azure/arm-network.Subnets.constructor'
-    package: '@azure/arm-network'
-    summary: Create a Subnets.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new Subnets(client: NetworkManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-network.NetworkManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
   - name: >-
       beginCreateOrUpdate(string, string, string, Subnet,
-      msRest.RequestOptionsBase)
+      SubnetsCreateOrUpdateOptionalParams)
     uid: '@azure/arm-network.Subnets.beginCreateOrUpdate'
     package: '@azure/arm-network'
     summary: Creates or updates a subnet in the specified virtual network.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginCreateOrUpdate(resourceGroupName: string,
         virtualNetworkName: string, subnetName: string, subnetParameters:
-        Subnet, options?: msRest.RequestOptionsBase)
+        Subnet, options?: SubnetsCreateOrUpdateOptionalParams):
+        Promise<SimplePollerLike<OperationState<Subnet>, Subnet>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -52,23 +36,62 @@ methods:
           type: <xref uid="@azure/arm-network.Subnet" />
           description: Parameters supplied to the create or update subnet operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-network.SubnetsCreateOrUpdateOptionalParams"
+            />
+          description: The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'beginDeleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-network.Subnets.beginDeleteMethod'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
+          uid="@azure/arm-network.Subnet" />&gt;, <xref
+          uid="@azure/arm-network.Subnet" />&gt;&gt;
+  - name: >-
+      beginCreateOrUpdateAndWait(string, string, string, Subnet,
+      SubnetsCreateOrUpdateOptionalParams)
+    uid: '@azure/arm-network.Subnets.beginCreateOrUpdateAndWait'
     package: '@azure/arm-network'
-    summary: Deletes the specified subnet.
+    summary: Creates or updates a subnet in the specified virtual network.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginDeleteMethod(resourceGroupName: string,
-        virtualNetworkName: string, subnetName: string, options?:
-        msRest.RequestOptionsBase)
+        function beginCreateOrUpdateAndWait(resourceGroupName: string,
+        virtualNetworkName: string, subnetName: string, subnetParameters:
+        Subnet, options?: SubnetsCreateOrUpdateOptionalParams): Promise<Subnet>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: virtualNetworkName
+          type: string
+          description: The name of the virtual network.
+        - id: subnetName
+          type: string
+          description: The name of the subnet.
+        - id: subnetParameters
+          type: <xref uid="@azure/arm-network.Subnet" />
+          description: Parameters supplied to the create or update subnet operation.
+        - id: options
+          type: >-
+            <xref uid="@azure/arm-network.SubnetsCreateOrUpdateOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-network.Subnet" />&gt;
+  - name: beginDelete(string, string, string, SubnetsDeleteOptionalParams)
+    uid: '@azure/arm-network.Subnets.beginDelete'
+    package: '@azure/arm-network'
+    summary: Deletes the specified subnet.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDelete(resourceGroupName: string, virtualNetworkName:
+        string, subnetName: string, options?: SubnetsDeleteOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -80,26 +103,56 @@ methods:
           type: string
           description: The name of the subnet.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-network.SubnetsDeleteOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
+  - name: beginDeleteAndWait(string, string, string, SubnetsDeleteOptionalParams)
+    uid: '@azure/arm-network.Subnets.beginDeleteAndWait'
+    package: '@azure/arm-network'
+    summary: Deletes the specified subnet.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string,
+        virtualNetworkName: string, subnetName: string, options?:
+        SubnetsDeleteOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: virtualNetworkName
+          type: string
+          description: The name of the virtual network.
+        - id: subnetName
+          type: string
+          description: The name of the subnet.
+        - id: options
+          type: <xref uid="@azure/arm-network.SubnetsDeleteOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       beginPrepareNetworkPolicies(string, string, string,
-      PrepareNetworkPoliciesRequest, msRest.RequestOptionsBase)
+      PrepareNetworkPoliciesRequest,
+      SubnetsPrepareNetworkPoliciesOptionalParams)
     uid: '@azure/arm-network.Subnets.beginPrepareNetworkPolicies'
     package: '@azure/arm-network'
     summary: Prepares a subnet by applying network intent policies.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginPrepareNetworkPolicies(resourceGroupName: string,
         virtualNetworkName: string, subnetName: string,
         prepareNetworkPoliciesRequestParameters: PrepareNetworkPoliciesRequest,
-        options?: msRest.RequestOptionsBase)
+        options?: SubnetsPrepareNetworkPoliciesOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -114,28 +167,74 @@ methods:
           type: <xref uid="@azure/arm-network.PrepareNetworkPoliciesRequest" />
           description: |-
             Parameters supplied to prepare subnet by applying
-            network intent policies.
+                                                           network intent policies.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-network.SubnetsPrepareNetworkPoliciesOptionalParams"
+            />
+          description: The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
+  - name: >-
+      beginPrepareNetworkPoliciesAndWait(string, string, string,
+      PrepareNetworkPoliciesRequest,
+      SubnetsPrepareNetworkPoliciesOptionalParams)
+    uid: '@azure/arm-network.Subnets.beginPrepareNetworkPoliciesAndWait'
+    package: '@azure/arm-network'
+    summary: Prepares a subnet by applying network intent policies.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginPrepareNetworkPoliciesAndWait(resourceGroupName: string,
+        virtualNetworkName: string, subnetName: string,
+        prepareNetworkPoliciesRequestParameters: PrepareNetworkPoliciesRequest,
+        options?: SubnetsPrepareNetworkPoliciesOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: virtualNetworkName
+          type: string
+          description: The name of the virtual network.
+        - id: subnetName
+          type: string
+          description: The name of the subnet.
+        - id: prepareNetworkPoliciesRequestParameters
+          type: <xref uid="@azure/arm-network.PrepareNetworkPoliciesRequest" />
+          description: |-
+            Parameters supplied to prepare subnet by applying
+                                                           network intent policies.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-network.SubnetsPrepareNetworkPoliciesOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       beginUnprepareNetworkPolicies(string, string, string,
-      UnprepareNetworkPoliciesRequest, msRest.RequestOptionsBase)
+      UnprepareNetworkPoliciesRequest,
+      SubnetsUnprepareNetworkPoliciesOptionalParams)
     uid: '@azure/arm-network.Subnets.beginUnprepareNetworkPolicies'
     package: '@azure/arm-network'
     summary: Unprepares a subnet by removing network intent policies.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginUnprepareNetworkPolicies(resourceGroupName: string,
         virtualNetworkName: string, subnetName: string,
         unprepareNetworkPoliciesRequestParameters:
-        UnprepareNetworkPoliciesRequest, options?: msRest.RequestOptionsBase)
+        UnprepareNetworkPoliciesRequest, options?:
+        SubnetsUnprepareNetworkPoliciesOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -149,26 +248,35 @@ methods:
         - id: unprepareNetworkPoliciesRequestParameters
           type: <xref uid="@azure/arm-network.UnprepareNetworkPoliciesRequest" />
           description: |-
-            Parameters supplied to unprepare subnet to
-            remove network intent policies.
+            Parameters supplied to unprepare subnet to remove
+                                                             network intent policies.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-network.SubnetsUnprepareNetworkPoliciesOptionalParams"
+            />
+          description: The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'createOrUpdate(string, string, string, Subnet, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-network.Subnets.createOrUpdate'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
+  - name: >-
+      beginUnprepareNetworkPoliciesAndWait(string, string, string,
+      UnprepareNetworkPoliciesRequest,
+      SubnetsUnprepareNetworkPoliciesOptionalParams)
+    uid: '@azure/arm-network.Subnets.beginUnprepareNetworkPoliciesAndWait'
     package: '@azure/arm-network'
-    summary: Creates or updates a subnet in the specified virtual network.
+    summary: Unprepares a subnet by removing network intent policies.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdate(resourceGroupName: string, virtualNetworkName:
-        string, subnetName: string, subnetParameters: Subnet, options?:
-        msRest.RequestOptionsBase)
+        function beginUnprepareNetworkPoliciesAndWait(resourceGroupName: string,
+        virtualNetworkName: string, subnetName: string,
+        unprepareNetworkPoliciesRequestParameters:
+        UnprepareNetworkPoliciesRequest, options?:
+        SubnetsUnprepareNetworkPoliciesOptionalParams): Promise<void>
       parameters:
         - id: resourceGroupName
           type: string
@@ -179,108 +287,30 @@ methods:
         - id: subnetName
           type: string
           description: The name of the subnet.
-        - id: subnetParameters
-          type: <xref uid="@azure/arm-network.Subnet" />
-          description: Parameters supplied to the create or update subnet operation.
+        - id: unprepareNetworkPoliciesRequestParameters
+          type: <xref uid="@azure/arm-network.UnprepareNetworkPoliciesRequest" />
+          description: |-
+            Parameters supplied to unprepare subnet to remove
+                                                             network intent policies.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-network.SubnetsUnprepareNetworkPoliciesOptionalParams"
+            />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.SubnetsCreateOrUpdateResponse" />&gt;
-        description: Promise<Models.SubnetsCreateOrUpdateResponse>
-  - name: 'deleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-network.Subnets.deleteMethod'
-    package: '@azure/arm-network'
-    summary: Deletes the specified subnet.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, virtualNetworkName:
-        string, subnetName: string, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type: string
-          description: The name of the virtual network.
-        - id: subnetName
-          type: string
-          description: The name of the subnet.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
-  - name: 'get(string, string, string, Models.SubnetsGetOptionalParams)'
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: get(string, string, string, SubnetsGetOptionalParams)
     uid: '@azure/arm-network.Subnets.get'
     package: '@azure/arm-network'
     summary: Gets the specified subnet by virtual network and resource group.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function get(resourceGroupName: string, virtualNetworkName: string,
-        subnetName: string, options?: Models.SubnetsGetOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type: string
-          description: The name of the virtual network.
-        - id: subnetName
-          type: string
-          description: The name of the subnet.
-        - id: options
-          type: <xref uid="Models.SubnetsGetOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.SubnetsGetResponse" />&gt;
-        description: Promise<Models.SubnetsGetResponse>
-  - name: 'get(string, string, string, ServiceCallback<Subnet>)'
-    uid: '@azure/arm-network.Subnets.get_1'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, virtualNetworkName: string,
-        subnetName: string, callback: ServiceCallback<Subnet>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type: string
-          description: The name of the virtual network.
-        - id: subnetName
-          type: string
-          description: The name of the subnet.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-network.Subnet" />&gt;
-          description: |
-            The callback
-  - name: >-
-      get(string, string, string, SubnetsGetOptionalParams,
-      ServiceCallback<Subnet>)
-    uid: '@azure/arm-network.Subnets.get_2'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, virtualNetworkName: string,
-        subnetName: string, options: SubnetsGetOptionalParams, callback:
-        ServiceCallback<Subnet>)
+        subnetName: string, options?: SubnetsGetOptionalParams): Promise<Subnet>
       parameters:
         - id: resourceGroupName
           type: string
@@ -293,22 +323,21 @@ methods:
           description: The name of the subnet.
         - id: options
           type: <xref uid="@azure/arm-network.SubnetsGetOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-network.Subnet" />&gt;
-          description: |
-            The callback
-  - name: 'list(string, string, msRest.RequestOptionsBase)'
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-network.Subnet" />&gt;
+  - name: list(string, string, SubnetsListOptionalParams)
     uid: '@azure/arm-network.Subnets.list'
     package: '@azure/arm-network'
     summary: Gets all subnets in a virtual network.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function list(resourceGroupName: string, virtualNetworkName: string,
-        options?: msRest.RequestOptionsBase)
+        options?: SubnetsListOptionalParams): PagedAsyncIterableIterator<Subnet,
+        Subnet[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -317,200 +346,12 @@ methods:
           type: string
           description: The name of the virtual network.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-network.SubnetsListOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.SubnetsListResponse" />&gt;
-        description: Promise<Models.SubnetsListResponse>
-  - name: >-
-      list(string, string, RequestOptionsBase,
-      ServiceCallback<SubnetListResult>)
-    uid: '@azure/arm-network.Subnets.list_2'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, virtualNetworkName: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<SubnetListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type: string
-          description: The name of the virtual network.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-network.SubnetListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'list(string, string, ServiceCallback<SubnetListResult>)'
-    uid: '@azure/arm-network.Subnets.list_1'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, virtualNetworkName: string,
-        callback: ServiceCallback<SubnetListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type: string
-          description: The name of the virtual network.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-network.SubnetListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-network.Subnets.listNext'
-    package: '@azure/arm-network'
-    summary: Gets all subnets in a virtual network.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.SubnetsListNextResponse" />&gt;
-        description: Promise<Models.SubnetsListNextResponse>
-  - name: 'listNext(string, RequestOptionsBase, ServiceCallback<SubnetListResult>)'
-    uid: '@azure/arm-network.Subnets.listNext_2'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<SubnetListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-network.SubnetListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, ServiceCallback<SubnetListResult>)'
-    uid: '@azure/arm-network.Subnets.listNext_1'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, callback:
-        ServiceCallback<SubnetListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-network.SubnetListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      prepareNetworkPolicies(string, string, string,
-      PrepareNetworkPoliciesRequest, msRest.RequestOptionsBase)
-    uid: '@azure/arm-network.Subnets.prepareNetworkPolicies'
-    package: '@azure/arm-network'
-    summary: Prepares a subnet by applying network intent policies.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prepareNetworkPolicies(resourceGroupName: string,
-        virtualNetworkName: string, subnetName: string,
-        prepareNetworkPoliciesRequestParameters: PrepareNetworkPoliciesRequest,
-        options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type: string
-          description: The name of the virtual network.
-        - id: subnetName
-          type: string
-          description: The name of the subnet.
-        - id: prepareNetworkPoliciesRequestParameters
-          type: <xref uid="@azure/arm-network.PrepareNetworkPoliciesRequest" />
-          description: |-
-            Parameters supplied to prepare subnet by applying
-            network intent policies.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
-  - name: >-
-      unprepareNetworkPolicies(string, string, string,
-      UnprepareNetworkPoliciesRequest, msRest.RequestOptionsBase)
-    uid: '@azure/arm-network.Subnets.unprepareNetworkPolicies'
-    package: '@azure/arm-network'
-    summary: Unprepares a subnet by removing network intent policies.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function unprepareNetworkPolicies(resourceGroupName: string,
-        virtualNetworkName: string, subnetName: string,
-        unprepareNetworkPoliciesRequestParameters:
-        UnprepareNetworkPoliciesRequest, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type: string
-          description: The name of the virtual network.
-        - id: subnetName
-          type: string
-          description: The name of the subnet.
-        - id: unprepareNetworkPoliciesRequestParameters
-          type: <xref uid="@azure/arm-network.UnprepareNetworkPoliciesRequest" />
-          description: |-
-            Parameters supplied to unprepare subnet to
-            remove network intent policies.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-network.Subnet" />, <xref
+          uid="@azure/arm-network.Subnet" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;

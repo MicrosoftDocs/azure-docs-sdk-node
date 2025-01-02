@@ -1,22 +1,17 @@
 ---
 title: Azure Communication Chat client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-chat, 
-author: maggiepint
-ms.author: magpint
-ms.date: 03/10/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+keywords: Azure, javascript, SDK, API, @azure/communication-chat, communication
+ms.date: 06/24/2024
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: communication
 ---
-
-# Azure Communication Chat client library for JavaScript - Version 1.0.0-beta.5 
+# Azure Communication Chat client library for JavaScript - version 1.6.0-beta.3 
 
 
 Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.
 
-Read more about Azure Communication Services [here](https://docs.microsoft.com/azure/communication-services/overview)
+Read more about Azure Communication Services [here](/azure/communication-services/overview)
 
 ## Getting started
 
@@ -37,6 +32,19 @@ npm install @azure/communication-chat
 #### JavaScript Bundle
 
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+In `rollup.config.js`, add following customized name exports in `cjs` plugin.
+
+```JavaScript
+
+cjs({
+  namedExports: {
+    events: ["EventEmitter"],
+    "@azure/communication-signaling": ["CommunicationSignalingClient", "SignalingClient"],
+    "@opentelemetry/api": ["CanonicalCode", "SpanKind", "TraceFlags"]
+  }
+})
+
+```
 
 ## Key concepts
 
@@ -61,10 +69,10 @@ import { ChatClient } from '@azure/communication-chat';
 import { AzureCommunicationTokenCredential } from "@azure/communication-common";
 
 // Your unique Azure Communication service endpoint
-let endpointUrl = '<ENDPOINT>';
-let userAccessToken = '<USER_ACCESS_TOKEN>';
-let tokenCredential = new AzureCommunicationTokenCredential(userAccessToken);
-let chatClient = new ChatClient(endpointUrl, tokenCredential);
+const endpointUrl = '<ENDPOINT>';
+const userAccessToken = '<USER_ACCESS_TOKEN>';
+const tokenCredential = new AzureCommunicationTokenCredential(userAccessToken);
+const chatClient = new ChatClient(endpointUrl, tokenCredential);
 
 ```
 
@@ -75,28 +83,41 @@ Use the `createThread` method to create a chat thread.
 `createChatThreadRequest` is used to describe the thread request:
 
 - Use `topic` to give a thread topic;
+
+`createChatThreadOptions` is used to set the optional params to create the thread:
+
 - Use `participants` to list the chat participants to be added to the thread;
+- Use `idempotencyToken` to specify a repeatable request
 
 `createChatThreadResult` is the result returned from creating a thread. It contains a `chatThread` which is the thread that was created, as well as an `errors` property which will contain information about invalid participants if they failed to be added to the thread.
 
 ```Javascript
-let createChatThreadRequest =
-{
-    topic: 'Preparation for London conference',
-    participants:
-        [
-            {
-                id: { communicationUserId: '<USER_ID_FOR_JACK>' },
-                displayName: 'Jack'
-            },
-            {
-                id: { communicationUserId: '<USER_ID_FOR_GEETA>' },
-                displayName: 'Geeta'
-            }
-        ]
+const createChatThreadRequest = {
+  topic: "Hello, World!"
 };
-let createChatThreadResult = await chatClient.createChatThread(createChatThreadRequest);
-let threadId = createChatThreadResult.chatThread.id;
+const createChatThreadOptions = {
+  participants: [
+    {
+      id: { communicationUserId: '<USER_ID>' },
+      displayName: '<USER_DISPLAY_NAME>'
+    }
+  ]
+};
+const createChatThreadResult = await chatClient.createChatThread(
+  createChatThreadRequest,
+  createChatThreadOptions
+);
+const threadId = createChatThreadResult.chatThread.id;
+```
+
+### Create a ChatThreadClient
+
+The ChatThreadClient will allow you to perform operations specific to a chat thread, like update the chat thread topic, send a message, add participants to the chat thread, etc.
+
+You can initialize a new ChatThreadClient using the `getChatThreadClient` method of the ChatClient with an existing thread id:
+
+```Javascript
+const chatThreadClient = chatClient.getChatThreadClient(threadId);
 ```
 
 ### Send a message to the thread
@@ -115,17 +136,16 @@ Use `sendMessage` method to sends a message to a thread identified by threadId.
 `sendChatMessageResult` is the result returned from sending a message, it contains an ID, which is the unique ID of the message.
 
 ```JavaScript
-let sendMessageRequest =
+const sendMessageRequest =
 {
-    content: 'Hello Geeta! Can you share the deck for the conference?'
+  content: 'Hello Geeta! Can you share the deck for the conference?'
 };
-let sendMessageOptions =
-{
-    senderDisplayName : 'Jack',
-    type: 'text'
+const sendMessageOptions:SendMessageOptions = {
+  senderDisplayName: "Jack",
+  type: "text"
 };
-let sendChatMessageResult = await chatThreadClient.sendMessage(sendMessageRequest, sendMessageOptions);
-let messageId = sendChatMessageResult.id;
+const sendChatMessageResult = await chatThreadClient.sendMessage(sendMessageRequest, sendMessageOptions);
+const messageId = sendChatMessageResult.id;
 ```
 
 ### Receive messages from a thread
@@ -138,8 +158,8 @@ With real-time signaling, you can subscribe to listen for new incoming messages 
 await chatClient.startRealtimeNotifications();
 // subscribe to new notification
 chatClient.on("chatMessageReceived", (e) => {
-    console.log("Notification chatMessageReceived!");
-    // your code here
+  console.log("Notification chatMessageReceived!");
+  // your code here
 });
 
 ```
@@ -156,24 +176,21 @@ for await (const chatMessage of chatThreadClient.listMessages()) {
 
 Once a thread is created, you can then add and remove users from that thread. By adding users, you give them access to be able to send messages to the thread.
 You will need to start by getting a new access token and identity for that user. The user will need that access token in order to initialize their chat client.
-More information on tokens here: [Authenticate to Azure Communication Services](https://docs.microsoft.com/azure/communication-services/concepts/authentication?tabs=javascript)
+More information on tokens here: [Authenticate to Azure Communication Services](/azure/communication-services/concepts/authentication?tabs=javascript)
 
 ```JavaScript
-// Get a new token created for the user. The token response will contain a token and an identity for the user.
-let userTokenResponse = await myTokenFunction();
 
-let addChatParticipantsRequest =
+const addParticipantsRequest =
 {
-    participants: [
-        {
-            id: { communicationUserId: userTokenResponse.identity },
-            displayName: '<NAME>',
-            shareHistoryTime: '<TIME>'
-        }
-    ]
+  participants: [
+    {
+      id: { communicationUserId: '<NEW_PARTICIPANT_USER_ID>' },
+      displayName: 'Jane'
+    }
+  ]
 };
 
-await chatThreadClient.addParticipants(addChatParticipantsRequest);
+await chatThreadClient.addParticipants(addParticipantsRequest);
 
 ```
 
@@ -184,6 +201,25 @@ Similar to above, you can also remove users from a thread. In order to remove, y
 ```JavaScript
 
 await chatThreadClient.removeParticipant({ communicationUserId: '<MEMBER_ID>' });
+
+```
+
+### Subscribe to connection status of real time notifications
+Subscription to events `realTimeNotificationConnected` and `realTimeNotificationDisconnected` allows you to know when the connection to the call server is active.
+
+```JavaScript
+
+// subscribe to realTimeNotificationConnected event
+chatClient.on('realTimeNotificationConnected', () => {
+  console.log("Real time notification is now connected!");
+  // your code here
+});
+
+// subscribe to realTimeNotificationDisconnected event
+chatClient.on('realTimeNotificationDisconnected', () => {
+  console.log("Real time notification is now disconnected!");
+  // your code here
+});
 
 ```
 
@@ -201,10 +237,10 @@ In this quickstart you learned how to:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.6.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
 

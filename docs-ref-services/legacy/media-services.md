@@ -1,17 +1,12 @@
 ---
 title: Azure Media Services modules for JavaScript
 description: Reference for Azure Media Services modules for JavaScript
-author: Juliako
-ms.author: juliako
-manager: cfowler
 ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: nodejs
-ms.service: Media Services
+ms.service: media-services
+manager: cfowler
 ---
-
 # Azure Media Services modules for JavaScript
 
 Azure Media Services is an extensible cloud-based platform that enables developers to build scalable media management and delivery applications. Media Services is based on REST APIs that enable you to securely upload, store, encode, and package video or audio content for both on-demand and live streaming delivery to various clients (for example, TV, PC, and mobile devices).
@@ -36,3 +31,4 @@ npm install @azure/arm-mediaservices
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-mediaservices)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

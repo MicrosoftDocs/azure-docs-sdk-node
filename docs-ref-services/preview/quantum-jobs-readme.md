@@ -1,17 +1,12 @@
 ---
 title: Azure Quantum Jobs client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/quantum-jobs, 
-author: maggiepint
-ms.author: magpint
+keywords: Azure, javascript, SDK, API, @azure/quantum-jobs,
 ms.date: 02/05/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: azure-quantum
 ---
-
-## Azure Quantum Jobs client library for JavaScript - Version 1.0.0-beta.1 
+## Azure Quantum Jobs client library for JavaScript - version 1.0.0-beta.1 
 
 
 This package contains an isomorphic SDK for QuantumJobClient.

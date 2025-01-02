@@ -8,41 +8,257 @@ enums:
 classes:
   - '@azure/identity.AggregateAuthenticationError'
   - '@azure/identity.AuthenticationError'
+  - '@azure/identity.AuthenticationRequiredError'
   - '@azure/identity.AuthorizationCodeCredential'
   - '@azure/identity.AzureCliCredential'
+  - '@azure/identity.AzureDeveloperCliCredential'
+  - '@azure/identity.AzurePipelinesCredential'
+  - '@azure/identity.AzurePowerShellCredential'
   - '@azure/identity.ChainedTokenCredential'
+  - '@azure/identity.ClientAssertionCredential'
   - '@azure/identity.ClientCertificateCredential'
   - '@azure/identity.ClientSecretCredential'
-  - '@azure/identity.CredentialUnavailable'
+  - '@azure/identity.CredentialUnavailableError'
   - '@azure/identity.DefaultAzureCredential'
   - '@azure/identity.DeviceCodeCredential'
   - '@azure/identity.EnvironmentCredential'
   - '@azure/identity.InteractiveBrowserCredential'
   - '@azure/identity.ManagedIdentityCredential'
+  - '@azure/identity.OnBehalfOfCredential'
   - '@azure/identity.UsernamePasswordCredential'
   - '@azure/identity.VisualStudioCodeCredential'
+  - '@azure/identity.WorkloadIdentityCredential'
 interfaces:
+  - '@azure/identity.AccessToken'
   - '@azure/identity.AuthenticationRecord'
+  - '@azure/identity.AuthenticationRequiredErrorOptions'
+  - '@azure/identity.AuthorityValidationOptions'
+  - '@azure/identity.AuthorizationCodeCredentialOptions'
+  - '@azure/identity.AzureCliCredentialOptions'
+  - '@azure/identity.AzureDeveloperCliCredentialOptions'
+  - '@azure/identity.AzurePipelinesCredentialOptions'
+  - '@azure/identity.AzurePowerShellCredentialOptions'
+  - '@azure/identity.BrokerAuthOptions'
+  - '@azure/identity.BrokerDisabledOptions'
+  - '@azure/identity.BrokerEnabledOptions'
+  - '@azure/identity.BrowserCustomizationOptions'
+  - '@azure/identity.ClientAssertionCredentialOptions'
   - '@azure/identity.ClientCertificateCredentialOptions'
+  - '@azure/identity.ClientCertificatePEMCertificate'
+  - '@azure/identity.ClientCertificatePEMCertificatePath'
+  - '@azure/identity.ClientSecretCredentialOptions'
+  - '@azure/identity.CredentialPersistenceOptions'
+  - '@azure/identity.DefaultAzureCredentialClientIdOptions'
   - '@azure/identity.DefaultAzureCredentialOptions'
+  - '@azure/identity.DefaultAzureCredentialResourceIdOptions'
+  - '@azure/identity.DeviceCodeCredentialOptions'
   - '@azure/identity.DeviceCodeInfo'
+  - '@azure/identity.EnvironmentCredentialOptions'
   - '@azure/identity.ErrorResponse'
-  - '@azure/identity.InteractiveBrowserCredentialOptions'
+  - '@azure/identity.GetBearerTokenProviderOptions'
+  - '@azure/identity.GetTokenOptions'
+  - '@azure/identity.InteractiveBrowserCredentialInBrowserOptions'
+  - '@azure/identity.InteractiveBrowserCredentialNodeOptions'
+  - '@azure/identity.InteractiveCredentialOptions'
+  - '@azure/identity.ManagedIdentityCredentialClientIdOptions'
+  - '@azure/identity.ManagedIdentityCredentialObjectIdOptions'
+  - '@azure/identity.ManagedIdentityCredentialResourceIdOptions'
+  - '@azure/identity.MultiTenantTokenCredentialOptions'
+  - '@azure/identity.OnBehalfOfCredentialAssertionOptions'
+  - '@azure/identity.OnBehalfOfCredentialCertificateOptions'
+  - '@azure/identity.OnBehalfOfCredentialSecretOptions'
+  - '@azure/identity.TokenCachePersistenceOptions'
+  - '@azure/identity.TokenCredential'
   - '@azure/identity.TokenCredentialOptions'
+  - '@azure/identity.UsernamePasswordCredentialOptions'
   - '@azure/identity.VisualStudioCodeCredentialOptions'
+  - '@azure/identity.WorkloadIdentityCredentialOptions'
 typeAliases:
+  - '@azure/identity.BrokerOptions'
   - '@azure/identity.BrowserLoginStyle'
+  - '@azure/identity.ClientCertificateCredentialPEMConfiguration'
   - '@azure/identity.DeviceCodePromptCallback'
+  - '@azure/identity.IdentityPlugin'
+  - '@azure/identity.OnBehalfOfCredentialOptions'
 functions:
+  - name: deserializeAuthenticationRecord(string)
+    uid: '@azure/identity.deserializeAuthenticationRecord'
+    package: '@azure/identity'
+    summary: >-
+      Deserializes a previously serialized authentication record from a string
+      into an object.
+
+
+      The input string must contain the following properties:
+
+
+      - "authority"
+
+      - "homeAccountId"
+
+      - "clientId"
+
+      - "tenantId"
+
+      - "username"
+
+      - "version"
+
+
+      If the version we receive is unsupported, an error will be thrown.
+
+
+      At the moment, the only available version is: "1.0", which is always set
+      when the authentication record is serialized.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deserializeAuthenticationRecord(serializedRecord: string):
+        AuthenticationRecord
+      parameters:
+        - id: serializedRecord
+          type: string
+          description: Authentication record previously serialized into string.
+      return:
+        description: AuthenticationRecord.
+        type: <xref uid="@azure/identity.AuthenticationRecord" />
+  - name: >-
+      getBearerTokenProvider(TokenCredential, string | string[],
+      GetBearerTokenProviderOptions)
+    uid: '@azure/identity.getBearerTokenProvider'
+    package: '@azure/identity'
+    summary: >-
+      Returns a callback that provides a bearer token.
+
+      For example, the bearer token can be used to authenticate a request as
+      follows:
+
+      ```ts snippet:token_provider_example
+
+      import { DefaultAzureCredential, getBearerTokenProvider } from
+      "@azure/identity";
+
+      import { createPipelineRequest } from "@azure/core-rest-pipeline";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const scope = "https://cognitiveservices.azure.com/.default";
+
+      const getAccessToken = getBearerTokenProvider(credential, scope);
+
+      const token = await getAccessToken();
+
+      // usage
+
+      const request = createPipelineRequest({ url: "https://example.com" });
+
+      request.headers.set("Authorization", `Bearer ${token}`);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getBearerTokenProvider(credential: TokenCredential, scopes:
+        string | string[], options?: GetBearerTokenProviderOptions): () =>
+        Promise<string>
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/identity.TokenCredential" />
+          description: The credential used to authenticate the request.
+        - id: scopes
+          type: string | string[]
+          description: The scopes required for the bearer token.
+        - id: options
+          type: <xref uid="@azure/identity.GetBearerTokenProviderOptions" />
+          description: Options to configure the token provider.
+      return:
+        description: a callback that provides a bearer token.
+        type: () =&gt; Promise&lt;string&gt;
   - name: getDefaultAzureCredential()
     uid: '@azure/identity.getDefaultAzureCredential'
     package: '@azure/identity'
-    summary: 'Returns a new instance of the <xref:DefaultAzureCredential>.'
+    summary: >-
+      Returns a new instance of the
+      [DefaultAzureCredential](xref:@azure/identity.DefaultAzureCredential).
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function getDefaultAzureCredential()
+      content: 'function getDefaultAzureCredential(): TokenCredential'
       return:
-        type: TokenCredential
         description: ''
+        type: <xref uid="@azure/identity.TokenCredential" />
+  - name: serializeAuthenticationRecord(AuthenticationRecord)
+    uid: '@azure/identity.serializeAuthenticationRecord'
+    package: '@azure/identity'
+    summary: >-
+      Serializes an `AuthenticationRecord` into a string.
+
+
+      The output of a serialized authentication record will contain the
+      following properties:
+
+
+      - "authority"
+
+      - "homeAccountId"
+
+      - "clientId"
+
+      - "tenantId"
+
+      - "username"
+
+      - "version"
+
+
+      To later convert this string to a serialized `AuthenticationRecord`,
+      please use the exported function `deserializeAuthenticationRecord()`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function serializeAuthenticationRecord(record: AuthenticationRecord):
+        string
+      parameters:
+        - id: record
+          type: <xref uid="@azure/identity.AuthenticationRecord" />
+          description: ''
+      return:
+        description: ''
+        type: string
+  - name: useIdentityPlugin(IdentityPlugin)
+    uid: '@azure/identity.useIdentityPlugin'
+    package: '@azure/identity'
+    summary: |-
+      Extend Azure Identity with additional functionality. Pass a plugin from
+      a plugin package, such as:
+
+      - `@azure/identity-cache-persistence`: provides persistent token caching
+      - `@azure/identity-vscode`: provides the dependencies of
+        `VisualStudioCodeCredential` and enables it
+
+      Example:
+
+      ```ts snippet:consumer_example
+      import { useIdentityPlugin, DeviceCodeCredential } from "@azure/identity";
+
+      useIdentityPlugin(cachePersistencePlugin);
+      // The plugin has the capability to extend `DeviceCodeCredential` and to
+      // add middleware to the underlying credentials, such as persistence.
+      const credential = new DeviceCodeCredential({
+        tokenCachePersistenceOptions: {
+          enabled: true,
+        },
+      });
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function useIdentityPlugin(plugin: IdentityPlugin)'
+      parameters:
+        - id: plugin
+          type: <xref uid="@azure/identity.IdentityPlugin" />
+          description: the plugin to register

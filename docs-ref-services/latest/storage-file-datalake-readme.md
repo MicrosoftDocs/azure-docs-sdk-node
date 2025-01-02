@@ -1,17 +1,12 @@
 ---
 title: Azure Storage File Data Lake client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/storage-file-datalake, 
-author: maggiepint
-ms.author: magpint
-ms.date: 03/10/2021
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+keywords: Azure, javascript, SDK, API, @azure/storage-file-datalake, storage
+ms.date: 11/20/2024
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: storage
 ---
-
-# Azure Storage File Data Lake client library for JavaScript - Version 12.4.0 
+# Azure Storage File Data Lake client library for JavaScript - version 12.25.0 
 
 
 Azure Data Lake Storage (ADLS) includes all the capabilities required to make it easy for developers, data scientists, and analysts to store data of any size, shape, and speed, and do all types of processing and analytics across platforms and languages. It removes the complexities of ingesting and storing all of your data while making it faster to get up and running with batch, streaming, and interactive analytics.
@@ -23,16 +18,28 @@ Use the client libraries in this package to:
 - Create/List/Delete File Systems
 - Create/Read/List/Update/Delete Paths, Directories and Files
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.4.0/sdk/storage/storage-file-datalake) |
-[Package (npm)](https://www.npmjs.com/package/@azure/storage-file-datalake) |
-[API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/storage-file-datalake) |
-[Product documentation](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-introduction?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.4.0/sdk/storage/storage-file-datalake/samples) |
-[Azure Storage Data Lake REST APIs](https://docs.microsoft.com/rest/api/storageservices/data-lake-storage-gen2)
+key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake)
+- [Package (npm)](https://www.npmjs.com/package/@azure/storage-file-datalake)
+- [API Reference Documentation](/javascript/api/@azure/storage-file-datalake)
+- [Product documentation](/azure/storage/blobs/data-lake-storage-introduction?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/samples)
+- [Azure Storage Data Lake REST APIs](/rest/api/storageservices/data-lake-storage-gen2)
 
 ## Getting started
 
-**Prerequisites**: You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-quickstart-create-account?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json#create-an-account-using-the-azure-portal) to use this package. If you are using this package in a Node.js application, then Node.js version 8.0.0 or higher is required.
+### Currently supported environments
+
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
+- Latest versions of Safari, Chrome, Edge, and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/SUPPORT.md) for more details.
+
+### Prerequisites
+
+- An [Azure subscription](https://azure.microsoft.com/free/)
+- A [Storage Account](/azure/storage/common/storage-account-create)
 
 ### Install the package
 
@@ -52,29 +59,24 @@ Azure Storage supports several ways to authenticate. In order to interact with t
 
 #### Azure Active Directory
 
-The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.4.0/sdk/identity/identity/README.md) for more details and samples to get you started.
+The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/sdk/identity/identity/README.md) for more details and samples to get you started.
 
 ### Compatibility
 
 This library is compatible with Node.js and browsers, and validated against LTS Node.js versions (>=8.16.0) and latest versions of Chrome, Firefox and Edge.
 
-#### Compatible with IE11
+#### Web Workers
 
-You need polyfills to make this library work with IE11. The easiest way is to use [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill), or [polyfill service](https://polyfill.io/v2/docs/).
+This library requires certain DOM objects to be globally available when used in the browser, which web workers do not make available by default. You will need to polyfill these to make this library work in web workers.
 
-You can also load separate polyfills for missed ES feature(s).
-This library depends on following ES features which need external polyfills loaded.
+For more information please refer to our [documentation for using Azure SDK for JS in Web Workers](https://aka.ms/azsdk/js/web-workers)
 
-- `Promise`
-- `String.prototype.startsWith`
-- `String.prototype.endsWith`
-- `String.prototype.repeat`
-- `String.prototype.includes`
-- `Array.prototype.includes`
-- `Object.assign`
-- `Object.keys` (Overrides the IE11's `Object.keys` with a polyfill to enable the [ES6 behavior](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Notes))
-- `Symbol`
-- `Symbol.iterator`
+This library depends on following DOM APIs which need external polyfills loaded when used in web workers:
+
+- [`document`](https://developer.mozilla.org/docs/Web/API/Document)
+- [`DOMParser`](https://developer.mozilla.org/docs/Web/API/DOMParser)
+- [`Node`](https://developer.mozilla.org/docs/Web/API/Node)
+- [`XMLSerializer`](https://developer.mozilla.org/docs/Web/API/XMLSerializer)
 
 #### Differences between Node.js and browsers
 
@@ -105,7 +107,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ### CORS
 
-You need to set up [Cross-Origin Resource Sharing (CORS)](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
+You need to set up [Cross-Origin Resource Sharing (CORS)](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
 
 For example, you can create following CORS settings for debugging. But please customize the settings carefully according to your requirements in production environment.
 
@@ -192,17 +194,17 @@ The `DataLakeServiceClient` requires an URL to the data lake service and an acce
 
 > Notice. Azure Data Lake currently reuses blob related roles like "Storage Blob Data Owner" during following AAD OAuth authentication.
 
-Setup : Reference - Authorize access to blobs (data lake) and queues with Azure Active Directory from a client application - https://docs.microsoft.com/azure/storage/common/storage-auth-aad-app
+Setup : Reference - Authorize access to blobs (data lake) and queues with Azure Active Directory from a client application - /azure/storage/common/storage-auth-aad-app
 
 - Register a new AAD application and give permissions to access Azure Storage on behalf of the signed-in user.
 
-  - Register a new application in the Azure Active Directory(in the azure-portal) - https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app
+  - Register a new application in the Azure Active Directory(in the azure-portal) - /azure/active-directory/develop/quickstart-register-app
   - In the `API permissions` section, select `Add a permission` and choose `Microsoft APIs`.
   - Pick `Azure Storage` and select the checkbox next to `user_impersonation` and then click `Add permissions`. This would allow the application to access Azure Storage on behalf of the signed-in user.
 
 - Grant access to Azure Data Lake data with RBAC in the Azure Portal
 
-  - RBAC roles for blobs (data lake) and queues - https://docs.microsoft.com/azure/storage/common/storage-auth-aad-rbac-portal.
+  - RBAC roles for blobs (data lake) and queues - /azure/storage/common/storage-auth-aad-rbac-portal.
   - In the azure portal, go to your storage-account and assign **Storage Blob Data Contributor** role to the registered AAD application from `Access control (IAM)` tab (in the left-side-navbar of your storage account in the azure-portal).
 
 - Environment setup for the sample
@@ -223,7 +225,7 @@ const datalakeServiceClient = new DataLakeServiceClient(
 );
 ```
 
-See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.4.0/sdk/storage/storage-blob/samples/javascript/azureAdAuth.js) for a complete example using this method.
+See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
 
 [Note - Above steps are only for Node.js]
 
@@ -324,7 +326,7 @@ const datalakeServiceClient = new DataLakeServiceClient(
 
 async function main() {
   let i = 1;
-  let fileSystems = datalakeServiceClient.listFileSystems();
+  const fileSystems = datalakeServiceClient.listFileSystems();
   for await (const fileSystem of fileSystems) {
     console.log(`File system ${i++}: ${fileSystem.name}`);
   }
@@ -349,7 +351,7 @@ const datalakeServiceClient = new DataLakeServiceClient(
 
 async function main() {
   let i = 1;
-  let iter = datalakeServiceClient.listFileSystems();
+  const iter = datalakeServiceClient.listFileSystems();
   let fileSystemItem = await iter.next();
   while (!fileSystemItem.done) {
     console.log(`File System ${i++}: ${fileSystemItem.value.name}`);
@@ -469,7 +471,7 @@ async function main() {
   const fileSystemClient = datalakeServiceClient.getFileSystemClient(fileSystemName);
 
   let i = 1;
-  let paths = fileSystemClient.listPaths();
+  const paths = fileSystemClient.listPaths();
   for await (const path of paths) {
     console.log(`Path ${i++}: ${path.name}, is directory: ${path.isDirectory}`);
   }
@@ -529,7 +531,7 @@ main();
 const { DataLakeServiceClient } = require("@azure/storage-file-datalake");
 
 const account = "<account>";
-const sas="<sas token>"
+const sas = "<sas token>";
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net${sas}`
@@ -552,11 +554,11 @@ async function main() {
   );
 
   // [Browsers only] A helper method used to convert a browser Blob into string.
-  async function blobToString(blob: Blob): Promise<string> {
+  async function blobToString(blob) {
     const fileReader = new FileReader();
-    return new Promise<string>((resolve, reject) => {
-      fileReader.onloadend = (ev: any) => {
-        resolve(ev.target!.result);
+    return new Promise((resolve, reject) => {
+      fileReader.onloadend = (ev) => {
+        resolve(ev.target.result);
       };
       fileReader.onerror = reject;
       fileReader.readAsText(blob);
@@ -572,7 +574,7 @@ main();
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
 ```javascript
-import { setLogLevel } from "@azure/logger";
+const { setLogLevel } = require("@azure/logger");
 
 setLogLevel("info");
 ```
@@ -581,13 +583,13 @@ setLogLevel("info");
 
 More code samples:
 
-- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.4.0/sdk/storage/storage-file-datalake/samples/javascript)
-- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.4.0/sdk/storage/storage-file-datalake/samples/typescript)
-- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.4.0/sdk/storage/storage-file-datalake/test/)
+- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/samples/v12/javascript)
+- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/samples/v12/typescript)
+- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.4.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-blob%2FREADME.png)
 

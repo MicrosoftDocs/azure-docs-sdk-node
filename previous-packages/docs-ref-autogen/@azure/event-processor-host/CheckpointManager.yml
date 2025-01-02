@@ -5,7 +5,6 @@ package: '@azure/event-processor-host'
 summary: ''
 fullName: CheckpointManager
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 methods:
@@ -14,22 +13,22 @@ methods:
     package: '@azure/event-processor-host'
     summary: Does the checkpoint store exist?
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function checkpointStoreExists()
+      content: 'function checkpointStoreExists(): Promise<boolean>'
       return:
+        description: Promise<boolean> `true` if it exists, `false` if it does not exist.
         type: Promise&lt;boolean&gt;
-        description: 'Promise<boolean> `true` if it exists, `false` if it does not exist.'
-  - name: 'createAllCheckpointsIfNotExists(string[])'
+  - name: createAllCheckpointsIfNotExists(string[])
     uid: >-
       @azure/event-processor-host.CheckpointManager.createAllCheckpointsIfNotExists
     package: '@azure/event-processor-host'
-    summary: >
+    summary: >-
       Creates the checkpoint HOLDERs for the given partitions. Does nothing for
       any checkpoint
 
       HOLDERs that already exist.
+
 
       The semantics of this are complicated because it is possible to use the
       same store for both
@@ -48,17 +47,18 @@ methods:
 
       a checkpoint (storing an offset/sequence number pair in the structure).
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createAllCheckpointsIfNotExists(partitionIds: string[])'
+      content: >-
+        function createAllCheckpointsIfNotExists(partitionIds: string[]):
+        Promise<void>
       parameters:
         - id: partitionIds
-          type: 'string[]'
+          type: string[]
           description: List of partitions to create checkpoint HOLDERs for.
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: createCheckpointStoreIfNotExists()
     uid: >-
       @azure/event-processor-host.CheckpointManager.createCheckpointStoreIfNotExists
@@ -67,13 +67,12 @@ methods:
       Create the checkpoint store if it doesn't exist. Does nothing if it
       exists.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function createCheckpointStoreIfNotExists()
+      content: 'function createCheckpointStoreIfNotExists(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: deleteCheckpoint(string)
     uid: '@azure/event-processor-host.CheckpointManager.deleteCheckpoint'
     package: '@azure/event-processor-host'
@@ -87,29 +86,27 @@ methods:
       but not required; your implementation is free to do whichever is more
       convenient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deleteCheckpoint(partitionId: string)'
+      content: 'function deleteCheckpoint(partitionId: string): Promise<void>'
       parameters:
         - id: partitionId
           type: string
           description: The partitionId to delete the checkpoint from the store.
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: deleteCheckpointStore()
     uid: '@azure/event-processor-host.CheckpointManager.deleteCheckpointStore'
     package: '@azure/event-processor-host'
     summary: Deletes the checkpoint store.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function deleteCheckpointStore()
+      content: 'function deleteCheckpointStore(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: getCheckpoint(string)
     uid: '@azure/event-processor-host.CheckpointManager.getCheckpoint'
     package: '@azure/event-processor-host'
@@ -119,36 +116,36 @@ methods:
 
       checkpoint has been created for that partition.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getCheckpoint(partitionId: string)'
+      content: >-
+        function getCheckpoint(partitionId: string): Promise<undefined |
+        CheckpointInfo>
       parameters:
         - id: partitionId
           type: string
           description: The partitionId to get the checkpoint info for.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/event-processor-host.CheckpointInfo" /> |
-          undefined&gt;
         description: >-
           Promise<CheckpointInfo | undefined> Checkpoint
 
           info for the given partition, or undefined if none has been previously
           stored.
-  - name: 'updateCheckpoint(CompleteLease, CheckpointInfo)'
+        type: >-
+          Promise&lt;undefined | <xref
+          uid="@azure/event-processor-host.CheckpointInfo" />&gt;
+  - name: updateCheckpoint(CompleteLease, CheckpointInfo)
     uid: '@azure/event-processor-host.CheckpointManager.updateCheckpoint'
     package: '@azure/event-processor-host'
     summary: >-
       Update the checkpoint in the store with the offset/sequenceNumber in the
       provided checkpoint.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function updateCheckpoint(lease: CompleteLease, checkpoint:
-        CheckpointInfo)
+        CheckpointInfo): Promise<void>
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
@@ -157,5 +154,5 @@ methods:
           type: <xref uid="@azure/event-processor-host.CheckpointInfo" />
           description: offset/sequeceNumber to update the store with
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;

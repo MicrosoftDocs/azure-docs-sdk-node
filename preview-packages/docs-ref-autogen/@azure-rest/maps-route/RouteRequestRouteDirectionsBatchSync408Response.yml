@@ -1,0 +1,186 @@
+### YamlMime:TSType
+name: RouteRequestRouteDirectionsBatchSync408Response
+uid: '@azure-rest/maps-route.RouteRequestRouteDirectionsBatchSync408Response'
+package: '@azure-rest/maps-route'
+summary: >-
+  The `Post Route Directions Batch Sync` API is an HTTP `POST` request that
+  sends batches of queries to the [Get Route
+  Directions](/rest/api/maps/route/get-route-directions) API using a single
+  synchronous request. You can call `Route Directions Batch` API to run either
+  asynchronously (async) or synchronously (sync). The async API allows caller to
+  batch up to **700** queries and sync API up to **100** queries. To call the
+  `Post Route Directions Batch` API in a asynchronous request, see [Post Route
+  Directions Batch](/rest/api/maps/route/post-route-directions-batch).
+
+  ### Submit Synchronous Batch Request
+
+  The Synchronous API is recommended for lightweight batch requests. When the
+  service receives a request, it will respond as soon as the batch items are
+  calculated and there will be no possibility to retrieve the results later. The
+  Synchronous API will return a timeout error (a 408 response) if the request
+  takes longer than 60 seconds. The number of batch items is limited to **100**
+  for this API.
+
+  ```
+
+  POST
+  https://atlas.microsoft.com/route/directions/batch/sync/json?api-version=1.0&subscription-key={subscription-key}
+
+  ```
+
+  ### Batch Response Model
+
+  The returned data content is similar for async and sync requests. When
+  downloading the results of an async batch request, if the batch has finished
+  processing, the response body contains the batch response. This batch response
+  contains a `summary` component that indicates the `totalRequests` that were
+  part of the original batch request and `successfulRequests`i.e. queries which
+  were executed successfully. The batch response also includes a `batchItems`
+  array which contains a response for each and every query in the batch request.
+  The `batchItems` will contain the results in the exact same order the original
+  queries were sent in the batch request. Each item in `batchItems` contains
+  `statusCode` and `response` fields. Each `response` in `batchItems` is of one
+  of the following types:
+
+    - [`RouteDirections`](https://docs.microsoft.com/rest/api/maps/route/getroutedirections#routedirections) - If the query completed successfully.
+
+    - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.
+
+
+  Here's a sample Batch Response with 1 _successful_ and 1 _failed_ result:
+
+
+
+  ```json
+
+  {
+      "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+      },
+      "batchItems": [
+          {
+              "statusCode": 200,
+              "response": {
+                  "routes": [
+                      {
+                          "summary": {
+                              "lengthInMeters": 1758,
+                              "travelTimeInSeconds": 387,
+                              "trafficDelayInSeconds": 0,
+                              "departureTime": "2018-07-17T00:49:56+00:00",
+                              "arrivalTime": "2018-07-17T00:56:22+00:00"
+                          },
+                          "legs": [
+                              {
+                                  "summary": {
+                                      "lengthInMeters": 1758,
+                                      "travelTimeInSeconds": 387,
+                                      "trafficDelayInSeconds": 0,
+                                      "departureTime": "2018-07-17T00:49:56+00:00",
+                                      "arrivalTime": "2018-07-17T00:56:22+00:00"
+                                  },
+                                  "points": [
+                                      {
+                                          "latitude": 47.62094,
+                                          "longitude": -122.34892
+                                      },
+                                      {
+                                          "latitude": 47.62094,
+                                          "longitude": -122.3485
+                                      },
+                                      {
+                                          "latitude": 47.62095,
+                                          "longitude": -122.3476
+                                      }
+                                  ]
+                              }
+                          ],
+                          "sections": [
+                              {
+                                  "startPointIndex": 0,
+                                  "endPointIndex": 40,
+                                  "sectionType": "TRAVEL_MODE",
+                                  "travelMode": "bicycle"
+                              }
+                          ]
+                      }
+                  ]
+              }
+          },
+          {
+              "statusCode": 400,
+              "response":
+              {
+                  "error":
+                  {
+                      "code": "400 BadRequest",
+                      "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+                  }
+              }
+          }
+      ]
+  }
+
+  ```
+fullName: RouteRequestRouteDirectionsBatchSync408Response
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: body
+    uid: >-
+      @azure-rest/maps-route.RouteRequestRouteDirectionsBatchSync408Response.body
+    package: '@azure-rest/maps-route'
+    summary: ''
+    fullName: body
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'body: ErrorResponseOutput'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/maps-route.ErrorResponseOutput" />
+  - name: status
+    uid: >-
+      @azure-rest/maps-route.RouteRequestRouteDirectionsBatchSync408Response.status
+    package: '@azure-rest/maps-route'
+    summary: ''
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'status: "408"'
+      return:
+        description: ''
+        type: '"408"'
+inheritedProperties:
+  - name: headers
+    uid: >-
+      @azure-rest/maps-route.RouteRequestRouteDirectionsBatchSync408Response.headers
+    package: '@azure-rest/maps-route'
+    summary: The HTTP response headers.
+    fullName: headers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'headers: RawHttpHeaders'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RawHttpHeaders" />
+    inheritanceDescription: <b>Inherited From</b> HttpResponse.headers
+  - name: request
+    uid: >-
+      @azure-rest/maps-route.RouteRequestRouteDirectionsBatchSync408Response.request
+    package: '@azure-rest/maps-route'
+    summary: The request that generated this response.
+    fullName: request
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'request: PipelineRequest'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelineRequest" />
+    inheritanceDescription: <b>Inherited From</b> HttpResponse.request
+extends: <xref uid="@azure-rest/core-client.HttpResponse" />

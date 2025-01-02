@@ -2,19 +2,19 @@
 name: JobClient
 uid: azure-iothub.JobClient
 package: azure-iothub
-summary: >
+summary: >-
   Provides methods to create, update, monitor and cancel long-running jobs on an
   IoT Hub instance, as well as query existing jobs.
 
   The Jobs API in Azure IoT Hub allows to schedule direct method calls and twin
   updates on multiple devices.
 
+
   SDK users are expected to create <xref:azure-iothub.JobClient> instances using
   the factory methods <xref:azure-iothub.JobClient.fromConnectionString> and
   <xref:azure-iothub.JobClient.fromSharedAccessSignature>.
 fullName: JobClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 methods:
@@ -23,145 +23,172 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function cancelJob(jobId: string | number)'
+      content: 'function cancelJob(jobId: string | number): Promise<JobStatusResponse>'
       parameters:
         - id: jobId
           type: string | number
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
-  - name: 'cancelJob(string | number, TripleValueCallback<any, any>)'
+        type: Promise&lt;JobStatusResponse&gt;
+  - name: cancelJob(string | number, TripleValueCallback<any, any>)
     uid: azure-iothub.JobClient.cancelJob
     package: azure-iothub
     summary: Cancels an existing job.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function cancelJob(jobId: string | number, done:
+        function cancelJob(jobId: string | number, done?:
         TripleValueCallback<any, any>)
       parameters:
         - id: jobId
           type: string | number
           description: The identifier of an existing job.
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
-          description: ''
-  - name: 'createQuery(JobType, JobStatus, number)'
+          type: TripleValueCallback&lt;any, any&gt;
+          description: |-
+            The optional function to call when the operation is
+                                           complete. `done` will be called with three
+                                           arguments: an Error object (can be null), a
+                                           job object, and a transport-specific response
+                                           object useful for logging or debugging.
+  - name: createQuery(JobType, JobStatus, number)
     uid: azure-iothub.JobClient.createQuery
     package: azure-iothub
     summary: >-
       Creates a query that can be used to return pages of existing job based on
       type and status.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function createQuery(jobType?: JobType, jobStatus?: JobStatus,
-        pageSize?: number)
+        pageSize?: number): Query
       parameters:
         - id: jobType
-          type: <xref uid="azure-iothub.JobType" />
+          type: JobType
           description: The type that should be used to filter results.
         - id: jobStatus
-          type: <xref uid="azure-iothub.JobStatus" />
+          type: JobStatus
           description: The status that should be used to filter results.
         - id: pageSize
           type: number
-          description: |
-            The number of elements to return per page.
+          description: The number of elements to return per page.
       return:
-        type: <xref uid="azure-iothub.Query" />
         description: ''
+        type: Query
   - name: fromConnectionString(string)
     uid: azure-iothub.JobClient.fromConnectionString
     package: azure-iothub
     summary: Constructs a JobClient object from the given connection string.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromConnectionString(connectionString: string)'
+      content: >-
+        static function fromConnectionString(connectionString: string):
+        JobClient
       parameters:
         - id: connectionString
           type: string
-          description: |
+          description: |-
             A connection string which encapsulates the
                                                               appropriate (read and/or write) Registry
                                                               permissions.
       return:
-        type: <xref uid="azure-iothub.JobClient" />
         description: ''
+        type: <xref uid="azure-iothub.JobClient" />
   - name: fromSharedAccessSignature(string)
     uid: azure-iothub.JobClient.fromSharedAccessSignature
     package: azure-iothub
     summary: Constructs a JobClient object from the given shared access signature.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromSharedAccessSignature(sharedAccessSignature: string)'
+      content: >-
+        static function fromSharedAccessSignature(sharedAccessSignature:
+        string): JobClient
       parameters:
         - id: sharedAccessSignature
           type: string
-          description: |
+          description: |-
             A shared access signature which encapsulates
                                                          the appropriate (read and/or write) Registry
                                                          permissions.
       return:
-        type: <xref uid="azure-iothub.JobClient" />
         description: ''
+        type: <xref uid="azure-iothub.JobClient" />
+  - name: fromTokenCredential(string, TokenCredential)
+    uid: azure-iothub.JobClient.fromTokenCredential
+    package: azure-iothub
+    summary: Constructs a JobClient object from the given shared Azure TokenCredential.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromTokenCredential(hostName: string, tokenCredential:
+        TokenCredential): JobClient
+      parameters:
+        - id: hostName
+          type: string
+          description: Host name of the Azure service.
+        - id: tokenCredential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: |-
+            An Azure TokenCredential used to authenticate
+                                                         with the Azure  service
+      return:
+        description: ''
+        type: <xref uid="azure-iothub.JobClient" />
   - name: getJob(string | number)
     uid: azure-iothub.JobClient.getJob_1
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getJob(jobId: string | number)'
+      content: 'function getJob(jobId: string | number): Promise<JobStatusResponse>'
       parameters:
         - id: jobId
           type: string | number
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
-  - name: 'getJob(string | number, TripleValueCallback<any, any>)'
+        type: Promise&lt;JobStatusResponse&gt;
+  - name: getJob(string | number, TripleValueCallback<any, any>)
     uid: azure-iothub.JobClient.getJob
     package: azure-iothub
     summary: Requests information about an existing job.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getJob(jobId: string | number, done: TripleValueCallback<any,
+        function getJob(jobId: string | number, done?: TripleValueCallback<any,
         any>)
       parameters:
         - id: jobId
           type: string | number
           description: The identifier of an existing job.
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
-          description: ''
-  - name: 'scheduleDeviceMethod(string | number, string, DeviceMethodParams)'
+          type: TripleValueCallback&lt;any, any&gt;
+          description: |-
+            The optional function to call when the operation is
+                                           complete. `done` will be called with three
+                                           arguments: an Error object (can be null), a
+                                           job object, and a transport-specific response
+                                           object useful for logging or debugging.
+  - name: scheduleDeviceMethod(string | number, string, DeviceMethodParams)
     uid: azure-iothub.JobClient.scheduleDeviceMethod_5
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleDeviceMethod(jobId: string | number, queryCondition:
-        string, methodParams: DeviceMethodParams)
+        string, methodParams: DeviceMethodParams): Promise<JobStatusResponse>
       parameters:
         - id: jobId
           type: string | number
@@ -173,19 +200,19 @@ methods:
           type: <xref uid="azure-iothub.DeviceMethodParams" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
-  - name: 'scheduleDeviceMethod(string | number, string, DeviceMethodParams, Date)'
+        type: Promise&lt;JobStatusResponse&gt;
+  - name: scheduleDeviceMethod(string | number, string, DeviceMethodParams, Date)
     uid: azure-iothub.JobClient.scheduleDeviceMethod_4
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleDeviceMethod(jobId: string | number, queryCondition:
-        string, methodParams: DeviceMethodParams, jobStartTime: Date)
+        string, methodParams: DeviceMethodParams, jobStartTime: Date):
+        Promise<JobStatusResponse>
       parameters:
         - id: jobId
           type: string | number
@@ -200,8 +227,8 @@ methods:
           type: Date
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
+        type: Promise&lt;JobStatusResponse&gt;
   - name: >-
       scheduleDeviceMethod(string | number, string, DeviceMethodParams, Date,
       number)
@@ -209,13 +236,12 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleDeviceMethod(jobId: string | number, queryCondition:
         string, methodParams: DeviceMethodParams, jobStartTime: Date,
-        maxExecutionTimeInSeconds: number)
+        maxExecutionTimeInSeconds: number): Promise<JobStatusResponse>
       parameters:
         - id: jobId
           type: string | number
@@ -233,8 +259,8 @@ methods:
           type: number
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
+        type: Promise&lt;JobStatusResponse&gt;
   - name: >-
       scheduleDeviceMethod(string | number, string, DeviceMethodParams, Date,
       number, TripleValueCallback<any, any>)
@@ -242,13 +268,13 @@ methods:
     package: azure-iothub
     summary: Schedules a job that will execute a device method on a set of devices.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleDeviceMethod(jobId: string | number, queryCondition:
-        string, methodParams: DeviceMethodParams, jobStartTime: Date,
-        maxExecutionTimeInSeconds: number, done: TripleValueCallback<any, any>)
+        string, methodParams: DeviceMethodParams, jobStartTime?: Date,
+        maxExecutionTimeInSeconds?: number, done?: TripleValueCallback<any,
+        any>)
       parameters:
         - id: jobId
           type: string | number
@@ -268,13 +294,18 @@ methods:
                                                  - responseTimeoutInSeconds [optional] The number of seconds IoT Hub shall wait for the device
         - id: jobStartTime
           type: Date
-          description: ''
+          description: Time time at which the job should start
         - id: maxExecutionTimeInSeconds
           type: number
-          description: ''
+          description: The maximum time alloted for this job to run in seconds.
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
-          description: ''
+          type: TripleValueCallback&lt;any, any&gt;
+          description: |-
+            The optional function to call when the operation is
+                                                 complete. `done` will be called with three
+                                                 arguments: an Error object (can be null), a
+                                                 job object, and a transport-specific response
+                                                 object useful for logging or debugging.
   - name: >-
       scheduleDeviceMethod(string | number, string, DeviceMethodParams, Date,
       TripleValueCallback<any, any>)
@@ -282,7 +313,6 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -303,7 +333,7 @@ methods:
           type: Date
           description: ''
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
+          type: TripleValueCallback&lt;any, any&gt;
           description: ''
   - name: >-
       scheduleDeviceMethod(string | number, string, DeviceMethodParams,
@@ -312,7 +342,6 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -330,19 +359,18 @@ methods:
           type: <xref uid="azure-iothub.DeviceMethodParams" />
           description: ''
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
+          type: TripleValueCallback&lt;any, any&gt;
           description: ''
-  - name: 'scheduleTwinUpdate(string | number, string, any)'
+  - name: scheduleTwinUpdate(string | number, string, any)
     uid: azure-iothub.JobClient.scheduleTwinUpdate_5
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleTwinUpdate(jobId: string | number, queryCondition:
-        string, patch: any)
+        string, patch: any): Promise<JobStatusResponse>
       parameters:
         - id: jobId
           type: string | number
@@ -354,19 +382,18 @@ methods:
           type: any
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
-  - name: 'scheduleTwinUpdate(string | number, string, any, Date)'
+        type: Promise&lt;JobStatusResponse&gt;
+  - name: scheduleTwinUpdate(string | number, string, any, Date)
     uid: azure-iothub.JobClient.scheduleTwinUpdate_4
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleTwinUpdate(jobId: string | number, queryCondition:
-        string, patch: any, jobStartTime: Date)
+        string, patch: any, jobStartTime: Date): Promise<JobStatusResponse>
       parameters:
         - id: jobId
           type: string | number
@@ -381,20 +408,19 @@ methods:
           type: Date
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
-  - name: 'scheduleTwinUpdate(string | number, string, any, Date, number)'
+        type: Promise&lt;JobStatusResponse&gt;
+  - name: scheduleTwinUpdate(string | number, string, any, Date, number)
     uid: azure-iothub.JobClient.scheduleTwinUpdate_3
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleTwinUpdate(jobId: string | number, queryCondition:
         string, patch: any, jobStartTime: Date, maxExecutionTimeInSeconds?:
-        number)
+        number): Promise<JobStatusResponse>
       parameters:
         - id: jobId
           type: string | number
@@ -412,8 +438,8 @@ methods:
           type: number
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iothub.JobStatusResponse" />&gt;
         description: ''
+        type: Promise&lt;JobStatusResponse&gt;
   - name: >-
       scheduleTwinUpdate(string | number, string, any, Date, number,
       TripleValueCallback<any, any>)
@@ -423,13 +449,12 @@ methods:
       Schedule a job that will update a set of twins with the patch provided as
       a parameter.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function scheduleTwinUpdate(jobId: string | number, queryCondition:
-        string, patch: any, jobStartTime: Date, maxExecutionTimeInSeconds:
-        number, done: TripleValueCallback<any, any>)
+        string, patch: any, jobStartTime?: Date, maxExecutionTimeInSeconds?:
+        number, done?: TripleValueCallback<any, any>)
       parameters:
         - id: jobId
           type: string | number
@@ -444,13 +469,18 @@ methods:
           description: The twin patch that should be applied to the twins.
         - id: jobStartTime
           type: Date
-          description: ''
+          description: Time time at which the job should start
         - id: maxExecutionTimeInSeconds
           type: number
-          description: ''
+          description: The maximum time alloted for this job to run in seconds.
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
-          description: ''
+          type: TripleValueCallback&lt;any, any&gt;
+          description: |-
+            The optional function to call when the operation is
+                                                 complete. `done` will be called with three
+                                                 arguments: an Error object (can be null), a
+                                                 job object, and a transport-specific response
+                                                 object useful for logging or debugging.
   - name: >-
       scheduleTwinUpdate(string | number, string, any, Date,
       TripleValueCallback<any, any>)
@@ -458,7 +488,6 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -479,7 +508,7 @@ methods:
           type: Date
           description: ''
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
+          type: TripleValueCallback&lt;any, any&gt;
           description: ''
   - name: >-
       scheduleTwinUpdate(string | number, string, any, TripleValueCallback<any,
@@ -488,7 +517,6 @@ methods:
     package: azure-iothub
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -505,5 +533,5 @@ methods:
           type: any
           description: ''
         - id: done
-          type: 'TripleValueCallback&lt;any, any&gt;'
+          type: TripleValueCallback&lt;any, any&gt;
           description: ''

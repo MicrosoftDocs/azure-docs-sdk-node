@@ -2,19 +2,22 @@
 name: BlobChangeFeedClient
 uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient'
 package: '@azure/storage-blob-changefeed'
-summary: BlobChangeFeedClient.
+summary: >-
+  BlobChangeFeedClient.
+
+
+  See
+  https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed?tabs=azure-portal
 fullName: BlobChangeFeedClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'BlobChangeFeedClient(string, Pipeline)'
+  - name: BlobChangeFeedClient(string, Pipeline)
     uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.constructor_1'
     package: '@azure/storage-blob-changefeed'
     summary: Creates an instance of BlobChangeFeedClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new BlobChangeFeedClient(url: string, pipeline: Pipeline)'
@@ -26,24 +29,25 @@ constructors:
                                 "https://myaccount.blob.core.windows.net". You can append a SAS
                                 if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
         - id: pipeline
-          type: Pipeline
+          type: <xref uid="@azure/storage-blob.Pipeline" />
           description: |-
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
   - name: >-
       BlobChangeFeedClient(string, StorageSharedKeyCredential |
-      AnonymousCredential | TokenCredential, StoragePipelineOptions)
+      AnonymousCredential | TokenCredential, StoragePipelineOptions,
+      BlobChangeFeedClientOptions)
     uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.constructor'
     package: '@azure/storage-blob-changefeed'
     summary: Creates an instance of BlobChangeFeedClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         new BlobChangeFeedClient(url: string, credential?:
         StorageSharedKeyCredential | AnonymousCredential | TokenCredential,
-        options?: StoragePipelineOptions)
+        options?: StoragePipelineOptions, changeFeedClientOptions?:
+        BlobChangeFeedClientOptions)
       parameters:
         - id: url
           type: string
@@ -52,28 +56,77 @@ constructors:
                                 "https://myaccount.blob.core.windows.net". You can append a SAS
                                 if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
         - id: credential
-          type: StorageSharedKeyCredential | AnonymousCredential | TokenCredential
+          type: >-
+            <xref uid="@azure/storage-blob.StorageSharedKeyCredential" /> |
+            <xref uid="@azure/storage-blob.AnonymousCredential" /> | <xref
+            uid="@azure/core-auth.TokenCredential" />
           description: >-
             Such as AnonymousCredential, StorageSharedKeyCredential or any
-            credential from the @azure/identity package to authenticate requests
-            to the service. You can also provide an object that implements the
-            TokenCredential interface. If not specified, AnonymousCredential is
-            used.
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: options
-          type: StoragePipelineOptions
+          type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
+          description: >-
+            Optional. Options to configure the HTTP pipeline.
+
+
+            Example using DefaultAzureCredential from `@azure/identity`:
+
+
+            ```js
+
+            const account = "<storage account name>";
+
+
+            const defaultAzureCredential = new DefaultAzureCredential();
+
+
+            const blobChangeFeedClient = new BlobChangeFeedClient(
+              `https://${account}.blob.core.windows.net`,
+              defaultAzureCredential
+            );
+
+            ```
+
+
+            Example using an account name/key:
+
+
+            ```js
+
+            const account = "<storage account name>"
+
+            const sharedKeyCredential = new StorageSharedKeyCredential(account,
+            "<account key>");
+
+
+            const blobChangeFeedClient = new BlobChangeFeedClient(
+              `https://${account}.blob.core.windows.net`,
+              sharedKeyCredential
+            );
+
+            ```
+        - id: changeFeedClientOptions
+          type: >-
+            <xref
+            uid="@azure/storage-blob-changefeed.BlobChangeFeedClientOptions" />
           description: ''
 methods:
-  - name: 'fromConnectionString(string, StoragePipelineOptions)'
+  - name: >-
+      fromConnectionString(string, StoragePipelineOptions,
+      BlobChangeFeedClientOptions)
     uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.fromConnectionString'
     package: '@azure/storage-blob-changefeed'
     summary: Creates an instance of BlobChangeFeedClient from connection string.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromConnectionString(connectionString: string, options?:
-        StoragePipelineOptions)
+        StoragePipelineOptions, changeFeedClientOptions?:
+        BlobChangeFeedClientOptions): BlobChangeFeedClient
       parameters:
         - id: connectionString
           type: string
@@ -86,18 +139,24 @@ methods:
                                              SAS connection string example -
                                              `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
         - id: options
-          type: StoragePipelineOptions
+          type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
+          description: Optional. Options to configure the HTTP pipeline.
+        - id: changeFeedClientOptions
+          type: >-
+            <xref
+            uid="@azure/storage-blob-changefeed.BlobChangeFeedClientOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-blob-changefeed.BlobChangeFeedClient" />
         description: ''
+        type: <xref uid="@azure/storage-blob-changefeed.BlobChangeFeedClient" />
   - name: listChanges(BlobChangeFeedListChangesOptions)
     uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.listChanges'
     package: '@azure/storage-blob-changefeed'
-    summary: >
+    summary: >-
       Returns an async iterable iterator to list all the change feed events
 
       in the specified account.
+
 
       .byPage() returns an async iterable iterator to list the change feed
       events in pages.
@@ -197,20 +256,23 @@ methods:
 
       ```
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listChanges(options?: BlobChangeFeedListChangesOptions)'
+      content: >-
+        function listChanges(options?: BlobChangeFeedListChangesOptions):
+        PagedAsyncIterableIterator<BlobChangeFeedEvent, BlobChangeFeedEventPage,
+        PageSettings>
       parameters:
         - id: options
           type: >-
             <xref
             uid="@azure/storage-blob-changefeed.BlobChangeFeedListChangesOptions"
             />
-          description: ''
+          description: Options to list change feed events.
       return:
-        type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/storage-blob-changefeed.BlobChangeFeedEvent" />, <xref
-          uid="@azure/storage-blob-changefeed.BlobChangeFeedEventPage" />&gt;
         description: An asyncIterableIterator that supports paging.
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/storage-blob-changefeed.BlobChangeFeedEvent" />, <xref
+          uid="@azure/storage-blob-changefeed.BlobChangeFeedEventPage" />, <xref
+          uid="@azure/core-paging.PageSettings" />&gt;

@@ -7,7 +7,6 @@ summary: >-
   EventProcessorHost.
 fullName: EventProcessorHostOptions
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
@@ -15,40 +14,121 @@ properties:
     uid: '@azure/event-processor-host.EventProcessorHostOptions.checkpointManager'
     package: '@azure/event-processor-host'
     summary: |-
-      {CheckpointManager} [checkpointManager] A manager to manage checkpoints.
+      A manager to manage checkpoints.
       Default: **`AzureStorageCheckpointLeaseManager`**.
     fullName: checkpointManager
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'checkpointManager?: CheckpointManager'
       return:
-        type: <xref uid="@azure/event-processor-host.CheckpointManager" />
         description: ''
+        type: <xref uid="@azure/event-processor-host.CheckpointManager" />
+  - name: eventHubConnectionString
+    uid: >-
+      @azure/event-processor-host.EventProcessorHostOptions.eventHubConnectionString
+    package: '@azure/event-processor-host'
+    summary: >-
+      Connection string for the Event Hub to receive
+
+      from. Example:
+      "Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;
+
+      SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key".
+    fullName: eventHubConnectionString
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'eventHubConnectionString?: string'
+      return:
+        description: ''
+        type: string
+  - name: leaseManager
+    uid: '@azure/event-processor-host.EventProcessorHostOptions.leaseManager'
+    package: '@azure/event-processor-host'
+    summary: |-
+      A manager to manage leases. Default:
+      **`AzureStorageCheckpointLeaseManager`**.
+    fullName: leaseManager
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'leaseManager?: LeaseManager'
+      return:
+        description: ''
+        type: <xref uid="@azure/event-processor-host.LeaseManager" />
+  - name: storageConnectionString
+    uid: >-
+      @azure/event-processor-host.EventProcessorHostOptions.storageConnectionString
+    package: '@azure/event-processor-host'
+    summary: >-
+      Connection string to Azure Storage account used
+
+      for leases and checkpointing. Example
+      "DefaultEndpointsProtocol=https;AccountName=<account-name>;
+
+      AccountKey=<account-key>;EndpointSuffix=core.windows.net"
+    fullName: storageConnectionString
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'storageConnectionString?: string'
+      return:
+        description: ''
+        type: string
+  - name: storageContainerName
+    uid: '@azure/event-processor-host.EventProcessorHostOptions.storageContainerName'
+    package: '@azure/event-processor-host'
+    summary: |-
+      Azure Storage container name for use by built-in
+      lease and checkpoint manager.
+    fullName: storageContainerName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'storageContainerName?: string'
+      return:
+        description: ''
+        type: string
+  - name: tokenProvider
+    uid: '@azure/event-processor-host.EventProcessorHostOptions.tokenProvider'
+    package: '@azure/event-processor-host'
+    summary: >-
+      An instance of the token provider interface that
+
+      provides the token for authentication. Default value:
+      **`SasTokenProvider`**.
+    fullName: tokenProvider
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'tokenProvider?: TokenProvider'
+      return:
+        description: ''
+        type: <xref uid="@azure/amqp-common.TokenProvider" />
+inheritedProperties:
   - name: consumerGroup
     uid: '@azure/event-processor-host.EventProcessorHostOptions.consumerGroup'
     package: '@azure/event-processor-host'
-    summary: >-
-      {string} [consumerGroup] The name of the consumer group within the Event
-      Hub. Default
-
+    summary: |-
+      The name of the consumer group within the Event Hub. Default
       value: **`"$default"`**.
     fullName: consumerGroup
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'consumerGroup?: undefined | string'
+      content: 'consumerGroup?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.consumerGroup](xref:@azure/event-processor-host.FromConnectionStringOptions.consumerGroup)
   - name: dataTransformer
     uid: '@azure/event-processor-host.EventProcessorHostOptions.dataTransformer'
     package: '@azure/event-processor-host'
     summary: >-
-      {DataTransformer} [dataTransformer] The data transformer that will be used
-      to encode
+      The data transformer that will be used to encode
 
       and decode the sent and received messages respectively. If not provided
       then we will use the
@@ -59,57 +139,39 @@ properties:
       option needs to be used only for specialized scenarios.
     fullName: dataTransformer
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'dataTransformer?: DataTransformer'
       return:
-        type: DataTransformer
         description: ''
-  - name: eventHubConnectionString
-    uid: >-
-      @azure/event-processor-host.EventProcessorHostOptions.eventHubConnectionString
-    package: '@azure/event-processor-host'
-    summary: >-
-      {string} [eventHubConnectionString] Connection string for the Event Hub to
-      receive
-
-      from. Example:
-      "Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;
-
-      SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key".
-    fullName: eventHubConnectionString
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'eventHubConnectionString?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
+        type: <xref uid="@azure/event-processor-host.DataTransformer" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.dataTransformer](xref:@azure/event-processor-host.FromConnectionStringOptions.dataTransformer)
   - name: eventHubPath
     uid: '@azure/event-processor-host.EventProcessorHostOptions.eventHubPath'
     package: '@azure/event-processor-host'
     summary: >-
-      {string} [eventHubPath] The name of the EventHub. This is optional if the
+      The name of the EventHub. This is optional if the
 
       EventHub connection string contains EntityPath=hub-name else an Error will
       be thrown.
     fullName: eventHubPath
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'eventHubPath?: undefined | string'
+      content: 'eventHubPath?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.eventHubPath](xref:@azure/event-processor-host.FromConnectionStringOptions.eventHubPath)
   - name: fastScanInterval
     uid: '@azure/event-processor-host.EventProcessorHostOptions.fastScanInterval'
     package: '@azure/event-processor-host'
     summary: >-
-      {number} [fastScanInterval] There are two possible interval times between
-      scans for
+      There are two possible interval times between scans for
 
       available partitions, fast and slow. The fast (short) interval **`in
       seconds`** is used after
@@ -120,19 +182,20 @@ properties:
       Default: **`3` seconds**.
     fullName: fastScanInterval
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'fastScanInterval?: undefined | number'
+      content: 'fastScanInterval?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.fastScanInterval](xref:@azure/event-processor-host.FromConnectionStringOptions.fastScanInterval)
   - name: initialOffset
     uid: '@azure/event-processor-host.EventProcessorHostOptions.initialOffset'
     package: '@azure/event-processor-host'
     summary: >-
-      {EventPosition} initialOffset This is only used when then receiver is
-      being created
+      This is only used when then receiver is being created
 
       for the very first time and there is no checkpoint data in the blob. For
       this option to be
@@ -141,19 +204,20 @@ properties:
       previously.
     fullName: initialOffset
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'initialOffset?: EventPosition'
       return:
-        type: EventPosition
         description: ''
+        type: <xref uid="@azure/event-processor-host.EventPosition" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.initialOffset](xref:@azure/event-processor-host.FromConnectionStringOptions.initialOffset)
   - name: leaseDuration
     uid: '@azure/event-processor-host.EventProcessorHostOptions.leaseDuration'
     package: '@azure/event-processor-host'
     summary: >-
-      {number} [leaseDuration] Duration of a lease **`in seconds`** before it
-      expires
+      Duration of a lease **`in seconds`** before it expires
 
       unless renewed. Default: **`30` seconds**, Min Value: **`15` seconds**,
 
@@ -164,34 +228,20 @@ properties:
       this value will be ignored.
     fullName: leaseDuration
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'leaseDuration?: undefined | number'
+      content: 'leaseDuration?: number'
       return:
-        type: undefined | number
         description: ''
-  - name: leaseManager
-    uid: '@azure/event-processor-host.EventProcessorHostOptions.leaseManager'
-    package: '@azure/event-processor-host'
-    summary: |-
-      {LeaseManager} [LeaseManager] A manager to manage leases. Default:
-      **`AzureStorageCheckpointLeaseManager`**.
-    fullName: leaseManager
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'leaseManager?: LeaseManager'
-      return:
-        type: <xref uid="@azure/event-processor-host.LeaseManager" />
-        description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.leaseDuration](xref:@azure/event-processor-host.FromConnectionStringOptions.leaseDuration)
   - name: leaseRenewInterval
     uid: '@azure/event-processor-host.EventProcessorHostOptions.leaseRenewInterval'
     package: '@azure/event-processor-host'
     summary: >-
-      {number} [leaseRenewInterval] The sleep interval **`in seconds`** between
-      scans.
+      The sleep interval **`in seconds`** between scans.
 
       Default: **`10` seconds**.
 
@@ -213,19 +263,20 @@ properties:
       this value will be ignored.
     fullName: leaseRenewInterval
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'leaseRenewInterval?: undefined | number'
+      content: 'leaseRenewInterval?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.leaseRenewInterval](xref:@azure/event-processor-host.FromConnectionStringOptions.leaseRenewInterval)
   - name: onEphError
     uid: '@azure/event-processor-host.EventProcessorHostOptions.onEphError'
     package: '@azure/event-processor-host'
     summary: >-
-      {OnEphError} [onEphError] Error handler that can be provided to receive
-      notifcation
+      Error handler that can be provided to receive notifcation
 
       for general errors.
 
@@ -240,19 +291,20 @@ properties:
       partitions.
     fullName: onEphError
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'onEphError?: OnEphError'
       return:
-        type: <xref uid="@azure/event-processor-host.OnEphError" />
         description: ''
+        type: <xref uid="@azure/event-processor-host.OnEphError" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.onEphError](xref:@azure/event-processor-host.FromConnectionStringOptions.onEphError)
   - name: slowScanInterval
     uid: '@azure/event-processor-host.EventProcessorHostOptions.slowScanInterval'
     package: '@azure/event-processor-host'
     summary: >-
-      {number} [slowScanInterval] The slow (long) interval **`in seconds`** is
-      used
+      The slow (long) interval **`in seconds`** is used
 
       after a scan in which lease stealing did not occur, to reduce unnecessary
       scanning when
@@ -260,19 +312,20 @@ properties:
       the system is in steady state. Default: **`5` seconds**.
     fullName: slowScanInterval
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'slowScanInterval?: undefined | number'
+      content: 'slowScanInterval?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.slowScanInterval](xref:@azure/event-processor-host.FromConnectionStringOptions.slowScanInterval)
   - name: startupScanDelay
     uid: '@azure/event-processor-host.EventProcessorHostOptions.startupScanDelay'
     package: '@azure/event-processor-host'
     summary: >-
-      {number} [startupScanDelay] The delay time **`in seconds`** between the
-      first scan
+      The delay time **`in seconds`** between the first scan
 
       for available partitions and the second. This is part of a startup
       optimization which allows
@@ -286,109 +339,54 @@ properties:
       should own. Default: **`30` seconds**.
     fullName: startupScanDelay
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'startupScanDelay?: undefined | number'
+      content: 'startupScanDelay?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.startupScanDelay](xref:@azure/event-processor-host.FromConnectionStringOptions.startupScanDelay)
   - name: storageBlobPrefix
     uid: '@azure/event-processor-host.EventProcessorHostOptions.storageBlobPrefix'
     package: '@azure/event-processor-host'
-    summary: >-
-      {string} [storageBlobPrefix] Prefix used when naming blobs within the
-      storage
-
+    summary: |-
+      Prefix used when naming blobs within the storage
       container.
     fullName: storageBlobPrefix
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'storageBlobPrefix?: undefined | string'
+      content: 'storageBlobPrefix?: string'
       return:
-        type: undefined | string
         description: ''
-  - name: storageConnectionString
-    uid: >-
-      @azure/event-processor-host.EventProcessorHostOptions.storageConnectionString
-    package: '@azure/event-processor-host'
-    summary: >-
-      {string} [storageConnectionString] Connection string to Azure Storage
-      account used
-
-      for leases and checkpointing. Example
-      "DefaultEndpointsProtocol=https;AccountName=<account-name>;
-
-      AccountKey=<account-key>;EndpointSuffix=core.windows.net"
-    fullName: storageConnectionString
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'storageConnectionString?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-  - name: storageContainerName
-    uid: '@azure/event-processor-host.EventProcessorHostOptions.storageContainerName'
-    package: '@azure/event-processor-host'
-    summary: >-
-      {string} [storageContainerName] Azure Storage container name for use by
-      built-in
-
-      lease and checkpoint manager.
-    fullName: storageContainerName
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'storageContainerName?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-  - name: tokenProvider
-    uid: '@azure/event-processor-host.EventProcessorHostOptions.tokenProvider'
-    package: '@azure/event-processor-host'
-    summary: >-
-      {TokenProvider} [tokenProvider] An instance of the token provider
-      interface that
-
-      provides the token for authentication. Default value:
-      **`SasTokenProvider`**.
-    fullName: tokenProvider
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'tokenProvider?: TokenProvider'
-      return:
-        type: TokenProvider
-        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.storageBlobPrefix](xref:@azure/event-processor-host.FromConnectionStringOptions.storageBlobPrefix)
   - name: userAgent
     uid: '@azure/event-processor-host.EventProcessorHostOptions.userAgent'
     package: '@azure/event-processor-host'
-    summary: >-
-      {string} [userAgent] The user agent that needs to be appended to the built
-      in
-
+    summary: |-
+      The user agent that needs to be appended to the built in
       user agent string.
     fullName: userAgent
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'userAgent?: undefined | string'
+      content: 'userAgent?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.userAgent](xref:@azure/event-processor-host.FromConnectionStringOptions.userAgent)
   - name: webSocket
     uid: '@azure/event-processor-host.EventProcessorHostOptions.webSocket'
     package: '@azure/event-processor-host'
     summary: >-
-      The WebSocket constructor used to create an AMQP connection over a
-      WebSocket.
+      WebSocket constructor used to create an AMQP connection over a WebSocket.
 
       This option should be provided in the below scenarios
 
@@ -403,27 +401,29 @@ properties:
       instead of the built-in WebSocket in the browser.
     fullName: webSocket
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'webSocket?: WebSocketImpl'
       return:
-        type: WebSocketImpl
         description: ''
+        type: WebSocketImpl
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.webSocket](xref:@azure/event-processor-host.FromConnectionStringOptions.webSocket)
   - name: webSocketConstructorOptions
     uid: >-
       @azure/event-processor-host.EventProcessorHostOptions.webSocketConstructorOptions
     package: '@azure/event-processor-host'
-    summary: >-
-      {webSocketConstructorOptions} - Options to be passed to the WebSocket
-      constructor
+    summary: Options to be passed to the WebSocket constructor
     fullName: webSocketConstructorOptions
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'webSocketConstructorOptions?: any'
       return:
-        type: any
         description: ''
+        type: any
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [FromConnectionStringOptions.webSocketConstructorOptions](xref:@azure/event-processor-host.FromConnectionStringOptions.webSocketConstructorOptions)
 extends: <xref uid="@azure/event-processor-host.FromConnectionStringOptions" />

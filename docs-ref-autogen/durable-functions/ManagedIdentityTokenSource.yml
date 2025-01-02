@@ -2,12 +2,34 @@
 name: ManagedIdentityTokenSource
 uid: durable-functions.ManagedIdentityTokenSource
 package: durable-functions
-summary: >-
+summary: >+
   Token Source implementation for [Azure Managed
   Identities](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview).
+
+
+  **Example**
+
+
+  Get a list of Azure Subscriptions by calling the Azure Resource Manager HTTP
+  API.
+
+  ```javascript
+
+  const df = require("durable-functions");
+
+
+  df.app.orchestration(function* (context) {
+    return yield context.df.callHttp({
+        method: "GET",
+        url: "https://management.azure.com/subscriptions?api-version=2019-06-01",
+        tokenSource: df.ManagedIdentityTokenSource("https://management.core.windows.net"),
+    });
+  });
+
+  ```
+
 fullName: ManagedIdentityTokenSource
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
@@ -16,14 +38,13 @@ constructors:
     package: durable-functions
     summary: Returns a `ManagedIdentityTokenSource` object.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new ManagedIdentityTokenSource(resource: string)'
       parameters:
         - id: resource
           type: string
-          description: >
+          description: >-
             The Azure Active Directory resource identifier of the web API being
             invoked.
 properties:
@@ -38,10 +59,9 @@ properties:
       `https://graph.microsoft.com/`.
     fullName: resource
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'resource: string'
       return:
-        type: string
         description: ''
+        type: string

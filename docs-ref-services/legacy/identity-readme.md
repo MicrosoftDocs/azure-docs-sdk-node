@@ -1,17 +1,12 @@
 ---
 title: Azure Identity client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/identity, 
-author: maggiepint
-ms.author: magpint
+keywords: Azure, javascript, SDK, API, @azure/identity,
 ms.date: 11/11/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: identity
 ---
-
-## Azure Identity client library for JavaScript - Version 1.2.0 
+## Azure Identity client library for JavaScript - version 1.2.0 
 
 
 This library simplifies authentication against Azure Active Directory for Azure SDK libraries.

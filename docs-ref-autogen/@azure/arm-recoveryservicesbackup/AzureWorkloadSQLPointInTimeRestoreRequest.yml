@@ -5,10 +5,42 @@ package: '@azure/arm-recoveryservicesbackup'
 summary: AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
 fullName: AzureWorkloadSQLPointInTimeRestoreRequest
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
+  - name: objectType
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.objectType
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: >-
+      Polymorphic discriminator, which specifies the different types this object
+      can be
+    fullName: objectType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        objectType: "AzureWorkloadSQLPointInTimeRestoreRequest" |
+        "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest"
+      return:
+        description: ''
+        type: >-
+          "AzureWorkloadSQLPointInTimeRestoreRequest" |
+          "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest"
+  - name: pointInTime
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.pointInTime
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: PointInTime value
+    fullName: pointInTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pointInTime?: Date'
+      return:
+        description: ''
+        type: Date
+inheritedProperties:
   - name: alternateDirectoryPaths
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.alternateDirectoryPaths
@@ -16,15 +48,17 @@ properties:
     summary: Data directory details
     fullName: alternateDirectoryPaths
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'alternateDirectoryPaths?: SQLDataDirectoryMapping[]'
       return:
+        description: ''
         type: >-
           <xref uid="@azure/arm-recoveryservicesbackup.SQLDataDirectoryMapping"
           />[]
-        description: ''
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.alternateDirectoryPaths](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.alternateDirectoryPaths)
   - name: isNonRecoverable
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.isNonRecoverable
@@ -34,41 +68,15 @@ properties:
       operation is tried
     fullName: isNonRecoverable
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'isNonRecoverable?: undefined | false | true'
+      content: 'isNonRecoverable?: boolean'
       return:
-        type: undefined | false | true
         description: ''
-  - name: objectType
-    uid: >-
-      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.objectType
-    package: '@azure/arm-recoveryservicesbackup'
-    summary: Polymorphic Discriminator
-    fullName: objectType
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'objectType: "AzureWorkloadSQLPointInTimeRestoreRequest"'
-      return:
-        type: '"AzureWorkloadSQLPointInTimeRestoreRequest"'
-        description: ''
-  - name: pointInTime
-    uid: >-
-      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.pointInTime
-    package: '@azure/arm-recoveryservicesbackup'
-    summary: PointInTime value
-    fullName: pointInTime
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'pointInTime?: Date'
-      return:
-        type: Date
-        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.isNonRecoverable](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.isNonRecoverable)
   - name: propertyBag
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.propertyBag
@@ -76,49 +84,65 @@ properties:
     summary: Workload specific property bag.
     fullName: propertyBag
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'propertyBag?: undefined | [key: string]: string'
+      content: 'propertyBag?: {[propertyName: string]: string}'
       return:
-        type: 'undefined | [key: string]: string'
         description: ''
+        type: '{[propertyName: string]: string}'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.propertyBag](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.propertyBag)
   - name: recoveryMode
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.recoveryMode
     package: '@azure/arm-recoveryservicesbackup'
     summary: >-
       Defines whether the current recovery mode is file restore or database
-      restore. Possible values
-
-      include: 'Invalid', 'FileRecovery', 'WorkloadRecovery'
+      restore
     fullName: recoveryMode
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'recoveryMode?: RecoveryMode'
+      content: 'recoveryMode?: string'
       return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.RecoveryMode" />
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.recoveryMode](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.recoveryMode)
   - name: recoveryType
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.recoveryType
     package: '@azure/arm-recoveryservicesbackup'
-    summary: >-
-      Type of this recovery. Possible values include: 'Invalid',
-      'OriginalLocation',
-
-      'AlternateLocation', 'RestoreDisks', 'Offline'
+    summary: Type of this recovery.
     fullName: recoveryType
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'recoveryType?: RecoveryType'
+      content: 'recoveryType?: string'
       return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.RecoveryType" />
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.recoveryType](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.recoveryType)
+  - name: resourceGuardOperationRequests
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.resourceGuardOperationRequests
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: ResourceGuardOperationRequests on which LAC check will be performed
+    fullName: resourceGuardOperationRequests
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'resourceGuardOperationRequests?: string[]'
+      return:
+        description: ''
+        type: string[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.resourceGuardOperationRequests](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.resourceGuardOperationRequests)
   - name: shouldUseAlternateTargetLocation
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.shouldUseAlternateTargetLocation
@@ -128,13 +152,35 @@ properties:
       directory must be provided
     fullName: shouldUseAlternateTargetLocation
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'shouldUseAlternateTargetLocation?: undefined | false | true'
+      content: 'shouldUseAlternateTargetLocation?: boolean'
       return:
-        type: undefined | false | true
         description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.shouldUseAlternateTargetLocation](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.shouldUseAlternateTargetLocation)
+  - name: snapshotRestoreParameters
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.snapshotRestoreParameters
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: |-
+      Additional details for snapshot recovery
+      Currently used for snapshot for SAP Hana.
+    fullName: snapshotRestoreParameters
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'snapshotRestoreParameters?: SnapshotRestoreParameters'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-recoveryservicesbackup.SnapshotRestoreParameters" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.snapshotRestoreParameters](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.snapshotRestoreParameters)
   - name: sourceResourceId
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.sourceResourceId
@@ -144,13 +190,15 @@ properties:
       being recovered.
     fullName: sourceResourceId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'sourceResourceId?: undefined | string'
+      content: 'sourceResourceId?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.sourceResourceId](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.sourceResourceId)
   - name: targetInfo
     uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.targetInfo
@@ -158,10 +206,72 @@ properties:
     summary: Details of target database
     fullName: targetInfo
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'targetInfo?: TargetRestoreInfo'
       return:
-        type: <xref uid="@azure/arm-recoveryservicesbackup.TargetRestoreInfo" />
         description: ''
+        type: <xref uid="@azure/arm-recoveryservicesbackup.TargetRestoreInfo" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.targetInfo](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.targetInfo)
+  - name: targetResourceGroupName
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.targetResourceGroupName
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: Defines the Resource group of the Target VM
+    fullName: targetResourceGroupName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetResourceGroupName?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.targetResourceGroupName](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.targetResourceGroupName)
+  - name: targetVirtualMachineId
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.targetVirtualMachineId
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: >-
+      This is the complete ARM Id of the target VM
+
+      For e.g.
+      /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}
+    fullName: targetVirtualMachineId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetVirtualMachineId?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.targetVirtualMachineId](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.targetVirtualMachineId)
+  - name: userAssignedManagedIdentityDetails
+    uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLPointInTimeRestoreRequest.userAssignedManagedIdentityDetails
+    package: '@azure/arm-recoveryservicesbackup'
+    summary: |-
+      User Assigned managed identity details
+      Currently used for snapshot.
+    fullName: userAssignedManagedIdentityDetails
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'userAssignedManagedIdentityDetails?: UserAssignedManagedIdentityDetails'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-recoveryservicesbackup.UserAssignedManagedIdentityDetails"
+          />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AzureWorkloadSQLRestoreRequest.userAssignedManagedIdentityDetails](xref:@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.userAssignedManagedIdentityDetails)
+extends: >-
+  <xref uid="@azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest"
+  />

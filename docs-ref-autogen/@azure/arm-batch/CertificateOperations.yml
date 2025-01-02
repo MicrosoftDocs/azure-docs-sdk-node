@@ -2,43 +2,72 @@
 name: CertificateOperations
 uid: '@azure/arm-batch.CertificateOperations'
 package: '@azure/arm-batch'
-summary: Class representing a CertificateOperations.
+summary: Interface representing a CertificateOperations.
 fullName: CertificateOperations
 remarks: ''
-isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: CertificateOperations(BatchManagementClientContext)
-    uid: '@azure/arm-batch.CertificateOperations.constructor'
-    package: '@azure/arm-batch'
-    summary: Create a CertificateOperations.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new CertificateOperations(client: BatchManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-batch.BatchManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
+  - name: beginDelete(string, string, string, CertificateDeleteOptionalParams)
+    uid: '@azure/arm-batch.CertificateOperations.beginDelete'
+    package: '@azure/arm-batch'
+    summary: >-
+      Warning: This operation is deprecated and will be removed after February,
+      2024. Please use the
+
+      [Azure KeyVault
+
+      Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide)
+      instead.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDelete(resourceGroupName: string, accountName: string,
+        certificateName: string, options?: CertificateDeleteOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group that contains the Batch account.
+        - id: accountName
+          type: string
+          description: The name of the Batch account.
+        - id: certificateName
+          type: string
+          description: >-
+            The identifier for the certificate. This must be made up of
+            algorithm and
+                                   thumbprint separated by a dash, and must match the certificate data in the request. For example
+                                   SHA1-a3d1c5.
+        - id: options
+          type: <xref uid="@azure/arm-batch.CertificateDeleteOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
   - name: >-
-      beginCreate(string, string, string, CertificateCreateOrUpdateParameters,
-      Models.CertificateBeginCreateOptionalParams)
-    uid: '@azure/arm-batch.CertificateOperations.beginCreate'
+      beginDeleteAndWait(string, string, string,
+      CertificateDeleteOptionalParams)
+    uid: '@azure/arm-batch.CertificateOperations.beginDeleteAndWait'
     package: '@azure/arm-batch'
-    summary: Creates a new certificate inside the specified account.
+    summary: >-
+      Warning: This operation is deprecated and will be removed after February,
+      2024. Please use the
+
+      [Azure KeyVault
+
+      Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide)
+      instead.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginCreate(resourceGroupName: string, accountName: string,
-        certificateName: string, parameters:
-        CertificateCreateOrUpdateParameters, options?:
-        Models.CertificateBeginCreateOptionalParams)
+        function beginDeleteAndWait(resourceGroupName: string, accountName:
+        string, certificateName: string, options?:
+        CertificateDeleteOptionalParams): Promise<void>
       parameters:
         - id: resourceGroupName
           type: string
@@ -51,81 +80,53 @@ methods:
           description: >-
             The identifier for the certificate. This must be made up of
             algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: parameters
-          type: <xref uid="@azure/arm-batch.CertificateCreateOrUpdateParameters" />
-          description: Additional parameters for certificate creation.
+                                   thumbprint separated by a dash, and must match the certificate data in the request. For example
+                                   SHA1-a3d1c5.
         - id: options
-          type: <xref uid="Models.CertificateBeginCreateOptionalParams" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.CertificateDeleteOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'beginDeleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-batch.CertificateOperations.beginDeleteMethod'
-    package: '@azure/arm-batch'
-    summary: Deletes the specified certificate.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginDeleteMethod(resourceGroupName: string, accountName:
-        string, certificateName: string, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'cancelDeletion(string, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: >-
+      cancelDeletion(string, string, string,
+      CertificateCancelDeletionOptionalParams)
     uid: '@azure/arm-batch.CertificateOperations.cancelDeletion'
     package: '@azure/arm-batch'
     summary: >-
       If you try to delete a certificate that is being used by a pool or compute
-      node, the status of
+      node, the status of the
 
-      the certificate changes to deleteFailed. If you decide that you want to
-      continue using the
+      certificate changes to deleteFailed. If you decide that you want to
+      continue using the certificate,
 
-      certificate, you can use this operation to set the status of the
-      certificate back to active. If
+      you can use this operation to set the status of the certificate back to
+      active. If you intend to
 
-      you intend to delete the certificate, you do not need to run this
-      operation after the deletion
+      delete the certificate, you do not need to run this operation after the
+      deletion failed. You must
 
-      failed. You must make sure that the certificate is not being used by any
-      resources, and then you
+      make sure that the certificate is not being used by any resources, and
+      then you can try again to
 
-      can try again to delete the certificate.
+      delete the certificate.
+
+
+      Warning: This operation is deprecated and will be removed after February,
+      2024. Please use the
+
+      [Azure KeyVault
+
+      Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide)
+      instead.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function cancelDeletion(resourceGroupName: string, accountName: string,
-        certificateName: string, options?: msRest.RequestOptionsBase)
+        certificateName: string, options?:
+        CertificateCancelDeletionOptionalParams):
+        Promise<CertificateCancelDeletionResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -138,102 +139,39 @@ methods:
           description: >-
             The identifier for the certificate. This must be made up of
             algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
+                                   thumbprint separated by a dash, and must match the certificate data in the request. For example
+                                   SHA1-a3d1c5.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-batch.CertificateCancelDeletionOptionalParams"
+            />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.CertificateCancelDeletionResponse" />&gt;
-        description: Promise<Models.CertificateCancelDeletionResponse>
-  - name: >-
-      cancelDeletion(string, string, string, RequestOptionsBase,
-      ServiceCallback<Certificate>)
-    uid: '@azure/arm-batch.CertificateOperations.cancelDeletion_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function cancelDeletion(resourceGroupName: string, accountName: string,
-        certificateName: string, options: RequestOptionsBase, callback:
-        ServiceCallback<Certificate>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Certificate" />&gt;
-          description: |
-            The callback
-  - name: 'cancelDeletion(string, string, string, ServiceCallback<Certificate>)'
-    uid: '@azure/arm-batch.CertificateOperations.cancelDeletion_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function cancelDeletion(resourceGroupName: string, accountName: string,
-        certificateName: string, callback: ServiceCallback<Certificate>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Certificate" />&gt;
-          description: |
-            The callback
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-batch.CertificateCancelDeletionResponse" />&gt;
   - name: >-
       create(string, string, string, CertificateCreateOrUpdateParameters,
-      Models.CertificateCreateOptionalParams)
+      CertificateCreateOptionalParams)
     uid: '@azure/arm-batch.CertificateOperations.create'
     package: '@azure/arm-batch'
-    summary: Creates a new certificate inside the specified account.
+    summary: >-
+      Warning: This operation is deprecated and will be removed after February,
+      2024. Please use the
+
+      [Azure KeyVault
+
+      Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide)
+      instead.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
         certificateName: string, parameters:
         CertificateCreateOrUpdateParameters, options?:
-        Models.CertificateCreateOptionalParams)
+        CertificateCreateOptionalParams): Promise<CertificateCreateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -246,65 +184,37 @@ methods:
           description: >-
             The identifier for the certificate. This must be made up of
             algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
+                                   thumbprint separated by a dash, and must match the certificate data in the request. For example
+                                   SHA1-a3d1c5.
         - id: parameters
           type: <xref uid="@azure/arm-batch.CertificateCreateOrUpdateParameters" />
           description: Additional parameters for certificate creation.
         - id: options
-          type: <xref uid="Models.CertificateCreateOptionalParams" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.CertificateCreateOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.CertificateCreateResponse" />&gt;
-        description: Promise<Models.CertificateCreateResponse>
-  - name: 'deleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-batch.CertificateOperations.deleteMethod'
-    package: '@azure/arm-batch'
-    summary: Deletes the specified certificate.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, accountName: string,
-        certificateName: string, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.CertificateDeleteResponse" />&gt;
-        description: Promise<Models.CertificateDeleteResponse>
-  - name: 'get(string, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-batch.CertificateCreateResponse"
+          />&gt;
+  - name: get(string, string, string, CertificateGetOptionalParams)
     uid: '@azure/arm-batch.CertificateOperations.get'
     package: '@azure/arm-batch'
-    summary: Gets information about the specified certificate.
+    summary: >-
+      Warning: This operation is deprecated and will be removed after February,
+      2024. Please use the
+
+      [Azure KeyVault
+
+      Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide)
+      instead.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string,
-        certificateName: string, options?: msRest.RequestOptionsBase)
+        certificateName: string, options?: CertificateGetOptionalParams):
+        Promise<CertificateGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -317,102 +227,34 @@ methods:
           description: >-
             The identifier for the certificate. This must be made up of
             algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
+                                   thumbprint separated by a dash, and must match the certificate data in the request. For example
+                                   SHA1-a3d1c5.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.CertificateGetOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.CertificateGetResponse" />&gt;
-        description: Promise<Models.CertificateGetResponse>
-  - name: >-
-      get(string, string, string, RequestOptionsBase,
-      ServiceCallback<Certificate>)
-    uid: '@azure/arm-batch.CertificateOperations.get_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, accountName: string,
-        certificateName: string, options: RequestOptionsBase, callback:
-        ServiceCallback<Certificate>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Certificate" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, string, ServiceCallback<Certificate>)'
-    uid: '@azure/arm-batch.CertificateOperations.get_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, accountName: string,
-        certificateName: string, callback: ServiceCallback<Certificate>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Certificate" />&gt;
-          description: |
-            The callback
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-batch.CertificateGetResponse" />&gt;
   - name: >-
       listByBatchAccount(string, string,
-      CertificateListByBatchAccountOptionalParams,
-      ServiceCallback<ListCertificatesResult>)
-    uid: '@azure/arm-batch.CertificateOperations.listByBatchAccount_2'
+      CertificateListByBatchAccountOptionalParams)
+    uid: '@azure/arm-batch.CertificateOperations.listByBatchAccount'
     package: '@azure/arm-batch'
-    summary: ''
+    summary: >-
+      Warning: This operation is deprecated and will be removed after February,
+      2024. Please use the
+
+      [Azure KeyVault
+
+      Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide)
+      instead.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listByBatchAccount(resourceGroupName: string, accountName:
-        string, options: CertificateListByBatchAccountOptionalParams, callback:
-        ServiceCallback<ListCertificatesResult>)
+        string, options?: CertificateListByBatchAccountOptionalParams):
+        PagedAsyncIterableIterator<Certificate, Certificate[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -425,194 +267,35 @@ methods:
             <xref
             uid="@azure/arm-batch.CertificateListByBatchAccountOptionalParams"
             />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-batch.ListCertificatesResult" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listByBatchAccount(string, string,
-      Models.CertificateListByBatchAccountOptionalParams)
-    uid: '@azure/arm-batch.CertificateOperations.listByBatchAccount'
-    package: '@azure/arm-batch'
-    summary: Lists all of the certificates in the specified account.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccount(resourceGroupName: string, accountName:
-        string, options?: Models.CertificateListByBatchAccountOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: options
-          type: <xref uid="Models.CertificateListByBatchAccountOptionalParams" />
-          description: ''
+          description: The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.CertificateListByBatchAccountResponse"
-          />&gt;
-        description: Promise<Models.CertificateListByBatchAccountResponse>
-  - name: >-
-      listByBatchAccount(string, string,
-      ServiceCallback<ListCertificatesResult>)
-    uid: '@azure/arm-batch.CertificateOperations.listByBatchAccount_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccount(resourceGroupName: string, accountName:
-        string, callback: ServiceCallback<ListCertificatesResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-batch.ListCertificatesResult" />&gt;
-          description: |
-            The callback
-  - name: 'listByBatchAccountNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-batch.CertificateOperations.listByBatchAccountNext'
-    package: '@azure/arm-batch'
-    summary: Lists all of the certificates in the specified account.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccountNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="Models.CertificateListByBatchAccountNextResponse" />&gt;
-        description: Promise<Models.CertificateListByBatchAccountNextResponse>
-  - name: >-
-      listByBatchAccountNext(string, RequestOptionsBase,
-      ServiceCallback<ListCertificatesResult>)
-    uid: '@azure/arm-batch.CertificateOperations.listByBatchAccountNext_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccountNext(nextPageLink: string, options:
-        RequestOptionsBase, callback: ServiceCallback<ListCertificatesResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-batch.ListCertificatesResult" />&gt;
-          description: |
-            The callback
-  - name: 'listByBatchAccountNext(string, ServiceCallback<ListCertificatesResult>)'
-    uid: '@azure/arm-batch.CertificateOperations.listByBatchAccountNext_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccountNext(nextPageLink: string, callback:
-        ServiceCallback<ListCertificatesResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-batch.ListCertificatesResult" />&gt;
-          description: |
-            The callback
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-batch.Certificate" />, <xref
+          uid="@azure/arm-batch.Certificate" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
   - name: >-
       update(string, string, string, CertificateCreateOrUpdateParameters,
-      CertificateUpdateOptionalParams, ServiceCallback<Certificate>)
-    uid: '@azure/arm-batch.CertificateOperations.update_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, accountName: string,
-        certificateName: string, parameters:
-        CertificateCreateOrUpdateParameters, options:
-        CertificateUpdateOptionalParams, callback: ServiceCallback<Certificate>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: parameters
-          type: <xref uid="@azure/arm-batch.CertificateCreateOrUpdateParameters" />
-          description: Certificate entity to update.
-        - id: options
-          type: <xref uid="@azure/arm-batch.CertificateUpdateOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Certificate" />&gt;
-          description: |
-            The callback
-  - name: >-
-      update(string, string, string, CertificateCreateOrUpdateParameters,
-      Models.CertificateUpdateOptionalParams)
+      CertificateUpdateOptionalParams)
     uid: '@azure/arm-batch.CertificateOperations.update'
     package: '@azure/arm-batch'
-    summary: Updates the properties of an existing certificate.
+    summary: >-
+      Warning: This operation is deprecated and will be removed after February,
+      2024. Please use the
+
+      [Azure KeyVault
+
+      Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide)
+      instead.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function update(resourceGroupName: string, accountName: string,
         certificateName: string, parameters:
         CertificateCreateOrUpdateParameters, options?:
-        Models.CertificateUpdateOptionalParams)
+        CertificateUpdateOptionalParams): Promise<CertificateUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -625,56 +308,16 @@ methods:
           description: >-
             The identifier for the certificate. This must be made up of
             algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
+                                   thumbprint separated by a dash, and must match the certificate data in the request. For example
+                                   SHA1-a3d1c5.
         - id: parameters
           type: <xref uid="@azure/arm-batch.CertificateCreateOrUpdateParameters" />
           description: Certificate entity to update.
         - id: options
-          type: <xref uid="Models.CertificateUpdateOptionalParams" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.CertificateUpdateOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.CertificateUpdateResponse" />&gt;
-        description: Promise<Models.CertificateUpdateResponse>
-  - name: >-
-      update(string, string, string, CertificateCreateOrUpdateParameters,
-      ServiceCallback<Certificate>)
-    uid: '@azure/arm-batch.CertificateOperations.update_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, accountName: string,
-        certificateName: string, parameters:
-        CertificateCreateOrUpdateParameters, callback:
-        ServiceCallback<Certificate>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: certificateName
-          type: string
-          description: >-
-            The identifier for the certificate. This must be made up of
-            algorithm and
-
-            thumbprint separated by a dash, and must match the certificate data
-            in the request. For example
-
-            SHA1-a3d1c5.
-        - id: parameters
-          type: <xref uid="@azure/arm-batch.CertificateCreateOrUpdateParameters" />
-          description: Certificate entity to update.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Certificate" />&gt;
-          description: |
-            The callback
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-batch.CertificateUpdateResponse"
+          />&gt;

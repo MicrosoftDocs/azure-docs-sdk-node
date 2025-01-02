@@ -1,17 +1,11 @@
 ---
-title: Azure Logic Apps modules for JavaScript
-description: Reference for Azure Logic Apps modules for JavaScript
-author: ecfan
-ms.author: estfan
-manager: cfowler
-ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Logic Apps
+title: Azure Logic Apps SDK for JavaScript
+description: Reference for Azure Logic Apps SDK for JavaScript
+ms.date: 06/15/2022
+ms.topic: reference
+ms.devlang: javascript
+ms.service: logicapps
 ---
-
 # Azure Logic Apps modules for JavaScript
 
 Logic Apps provide a way to simplify and implement scalable integrations and workflows in the cloud. It provides a visual designer to model and automate your process as a series of steps known as a workflow. There are many connectors across the cloud and on-premises to quickly integrate across services and protocols. A logic app begins with a trigger (like 'When an account is added to Dynamics CRM') and after firing can begin many combinations of actions, conversions, and condition logic.
@@ -41,3 +35,4 @@ npm install @azure/arm-logic
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-logic)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+

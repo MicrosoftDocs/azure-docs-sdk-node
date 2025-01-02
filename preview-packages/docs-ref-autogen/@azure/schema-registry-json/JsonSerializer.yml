@@ -1,0 +1,82 @@
+### YamlMime:TSType
+name: JsonSerializer
+uid: '@azure/schema-registry-json.JsonSerializer'
+package: '@azure/schema-registry-json'
+summary: |-
+  Json serializer that obtains schemas from a schema registry and does not
+  pack schemas into its payloads.
+fullName: JsonSerializer<MessageT>
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: JsonSerializer<MessageT>(SchemaRegistry, JsonSerializerOptions<MessageT>)
+    uid: '@azure/schema-registry-json.JsonSerializer.constructor'
+    package: '@azure/schema-registry-json'
+    summary: Creates a new serializer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new JsonSerializer(client: SchemaRegistry, options?:
+        JsonSerializerOptions<MessageT>)
+      parameters:
+        - id: client
+          type: <xref uid="@azure/schema-registry.SchemaRegistry" />
+          description: |-
+            Schema Registry where schemas are registered and obtained.
+                            Usually this is a SchemaRegistryClient instance.
+        - id: options
+          type: >-
+            <xref uid="@azure/schema-registry-json.JsonSerializerOptions"
+            />&lt;MessageT&gt;
+          description: ''
+methods:
+  - name: deserialize(MessageT, DeserializeOptions)
+    uid: '@azure/schema-registry-json.JsonSerializer.deserialize'
+    package: '@azure/schema-registry-json'
+    summary: >-
+      Deserializes the payload of the message using the schema ID in the content
+      type
+
+      field if no schema was provided.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deserialize(message: MessageT, options?: DeserializeOptions):
+        Promise<unknown>
+      parameters:
+        - id: message
+          type: MessageT
+          description: The message with the payload to be deserialized.
+        - id: options
+          type: <xref uid="@azure/schema-registry-json.DeserializeOptions" />
+          description: ''
+      return:
+        description: The deserialized value.
+        type: Promise&lt;unknown&gt;
+  - name: serialize(unknown, string)
+    uid: '@azure/schema-registry-json.JsonSerializer.serialize'
+    package: '@azure/schema-registry-json'
+    summary: >-
+      serializes the value parameter according to the input schema and creates a
+      message
+
+      with the serialized data.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function serialize(value: unknown, schema: string): Promise<MessageT>'
+      parameters:
+        - id: value
+          type: unknown
+          description: The value to serialize.
+        - id: schema
+          type: string
+          description: The Json schema to use.
+      return:
+        description: |-
+          A new message with the serialized value. The structure of message is
+          constrolled by the message factory option.
+        type: Promise&lt;MessageT&gt;

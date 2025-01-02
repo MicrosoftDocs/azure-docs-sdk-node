@@ -5,44 +5,43 @@ package: '@azure/cosmos'
 summary: The feed options and query methods.
 fullName: FeedOptions
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
-  - name: abortSignal
-    uid: '@azure/cosmos.FeedOptions.abortSignal'
-    package: '@azure/cosmos'
-    summary: >-
-      abortSignal to pass to all underlying network requests created by this
-      method call. See
-      https://developer.mozilla.org/en-US/docs/Web/API/AbortController
-    fullName: abortSignal
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'abortSignal?: AbortSignal'
-      return:
-        type: AbortSignal
-        description: ''
   - name: accessCondition
     uid: '@azure/cosmos.FeedOptions.accessCondition'
     package: '@azure/cosmos'
     summary: Conditions Associated with the request.
     fullName: accessCondition
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'accessCondition?: Object'
+      content: 'accessCondition?: { condition: string, type: string }'
       return:
-        type: Object
         description: ''
+        type: '{ condition: string, type: string }'
+  - name: allowUnboundedNonStreamingQueries
+    uid: '@azure/cosmos.FeedOptions.allowUnboundedNonStreamingQueries'
+    package: '@azure/cosmos'
+    summary: >-
+      Valid only for non streaming order by query.
+
+      Default: false; When set to true, it allows queries to bypass the default
+      behavior that blocks nonStreaming queries without top or limit clauses.
+    fullName: allowUnboundedNonStreamingQueries
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'allowUnboundedNonStreamingQueries?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: bufferItems
     uid: '@azure/cosmos.FeedOptions.bufferItems'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Enable buffering additional items during queries. Default: false
+
 
       This will buffer an additional page at a time (multiplied by
       maxDegreeOfParallelism) from the server in the background.
@@ -60,46 +59,44 @@ properties:
       (as some pages will be fetched more than once).
     fullName: bufferItems
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'bufferItems?: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: continuation
     uid: '@azure/cosmos.FeedOptions.continuation'
     package: '@azure/cosmos'
     summary: 'Opaque token for continuing the enumeration. Default: undefined'
     fullName: continuation
     remarks: ''
-    isPreview: false
     isDeprecated: true
     customDeprecatedMessage: Use continuationToken instead.
     syntax:
       content: 'continuation?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: continuationToken
     uid: '@azure/cosmos.FeedOptions.continuationToken'
     package: '@azure/cosmos'
     summary: 'Opaque token for continuing the enumeration. Default: undefined'
     fullName: continuationToken
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'continuationToken?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: continuationTokenLimitInKB
     uid: '@azure/cosmos.FeedOptions.continuationTokenLimitInKB'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Limits the size of the continuation token in the response. Default:
       undefined
+
 
       Continuation Tokens contain optional data that can be removed from the
       serialization before writing it out to a header.
@@ -111,36 +108,52 @@ properties:
       backend optimize query execution."
     fullName: continuationTokenLimitInKB
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'continuationTokenLimitInKB?: number'
       return:
-        type: number
         description: ''
+        type: number
+  - name: disableNonStreamingOrderByQuery
+    uid: '@azure/cosmos.FeedOptions.disableNonStreamingOrderByQuery'
+    package: '@azure/cosmos'
+    summary: >-
+      Disable the nonStreamingOrderBy query feature in supported query features.
+
+      Default: false. Set to true to avoid error from an old gateway that
+      doesn't support this feature.
+    fullName: disableNonStreamingOrderByQuery
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'disableNonStreamingOrderByQuery?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: enableScanInQuery
     uid: '@azure/cosmos.FeedOptions.enableScanInQuery'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Allow scan on the queries which couldn't be served as indexing was opted
       out on the requested paths. Default: false
+
 
       In general, it is best to avoid using this setting. Scans are relatively
       expensive and take a long time to serve.
     fullName: enableScanInQuery
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'enableScanInQuery?: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: forceQueryPlan
     uid: '@azure/cosmos.FeedOptions.forceQueryPlan'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       This setting forces the query to use a query plan. Default: false
+
 
       Note: this will disable continuation token support, even for single
       partition queries.
@@ -162,28 +175,12 @@ properties:
       cross-partition or aggregate queries.
     fullName: forceQueryPlan
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'forceQueryPlan?: boolean'
       return:
+        description: ''
         type: boolean
-        description: ''
-  - name: initialHeaders
-    uid: '@azure/cosmos.FeedOptions.initialHeaders'
-    package: '@azure/cosmos'
-    summary: >-
-      (Advanced use case) Initial headers to start with when sending requests to
-      Cosmos
-    fullName: initialHeaders
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'initialHeaders?: CosmosHeaders'
-      return:
-        type: <xref uid="@azure/cosmos.CosmosHeaders" />
-        description: ''
   - name: maxDegreeOfParallelism
     uid: '@azure/cosmos.FeedOptions.maxDegreeOfParallelism'
     package: '@azure/cosmos'
@@ -197,19 +194,19 @@ properties:
       concurrent operations to run. Default: 0 (no parallelism)
     fullName: maxDegreeOfParallelism
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'maxDegreeOfParallelism?: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: maxItemCount
     uid: '@azure/cosmos.FeedOptions.maxItemCount'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Max number of items to be returned in the enumeration operation. Default:
       undefined (server will defined payload)
+
 
       Expirimenting with this value can usually result in the biggest
       performance changes to the query.
@@ -225,18 +222,18 @@ properties:
       can start doing work after the first 100, set `maxItemCount` to 100.)
     fullName: maxItemCount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'maxItemCount?: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: partitionKey
     uid: '@azure/cosmos.FeedOptions.partitionKey'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Limits the query to a specific partition key. Default: undefined
+
        Scoping a query to a single partition can be accomplished two ways:
 
       `container.items.query('SELECT * from c', { partitionKey: "foo"
@@ -252,18 +249,30 @@ properties:
       user specified query.
     fullName: partitionKey
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'partitionKey?: any'
+      content: 'partitionKey?: PartitionKey'
       return:
-        type: any
         description: ''
+        type: <xref uid="@azure/cosmos.PartitionKey" />
+  - name: populateIndexMetrics
+    uid: '@azure/cosmos.FeedOptions.populateIndexMetrics'
+    package: '@azure/cosmos'
+    summary: 'Enable returning index metrics in response headers. Default: false'
+    fullName: populateIndexMetrics
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'populateIndexMetrics?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: populateQueryMetrics
     uid: '@azure/cosmos.FeedOptions.populateQueryMetrics'
     package: '@azure/cosmos'
-    summary: >
+    summary: >-
       Enable returning query metrics in response headers. Default: false
+
 
       Used for debugging slow or expensive queries. Also increases response size
       and if you're using a low max header size in Node.js,
@@ -271,13 +280,172 @@ properties:
       you can run into issues faster.
     fullName: populateQueryMetrics
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'populateQueryMetrics?: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
+  - name: useIncrementalFeed
+    uid: '@azure/cosmos.FeedOptions.useIncrementalFeed'
+    package: '@azure/cosmos'
+    summary: >-
+      Note: consider using changeFeed instead.
+
+
+      Indicates a change feed request. Must be set to "Incremental feed", or
+      omitted otherwise. Default: false
+    fullName: useIncrementalFeed
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'useIncrementalFeed?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: vectorSearchBufferSize
+    uid: '@azure/cosmos.FeedOptions.vectorSearchBufferSize'
+    package: '@azure/cosmos'
+    summary: >-
+      Specifies a custom maximum buffer size for storing final results for
+      nonStreamingOrderBy queries.
+
+      This value is ignored if the query includes top/offset+limit clauses.
+    fullName: vectorSearchBufferSize
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vectorSearchBufferSize?: number'
+      return:
+        description: ''
+        type: number
+inheritedProperties:
+  - name: abortSignal
+    uid: '@azure/cosmos.FeedOptions.abortSignal'
+    package: '@azure/cosmos'
+    summary: >+
+      abortSignal to pass to all underlying network requests created by this
+      method call. See
+      https://developer.mozilla.org/en-US/docs/Web/API/AbortController
+
+
+      **Example**
+
+
+      Cancel a read request
+
+      ```typescript
+
+      const controller = new AbortController()
+
+      const {result: item} = await items.query('SELECT * from c', { abortSignal:
+      controller.signal});
+
+      controller.abort()
+
+      ```
+
+    fullName: abortSignal
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'abortSignal?: AbortSignal'
+      return:
+        description: ''
+        type: AbortSignal
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SharedOptions.abortSignal](xref:@azure/cosmos.SharedOptions.abortSignal)
+  - name: bypassIntegratedCache
+    uid: '@azure/cosmos.FeedOptions.bypassIntegratedCache'
+    package: '@azure/cosmos'
+    summary: >-
+      Sets if integrated cache should be bypassed or enabled for the request in
+      Azure CosmosDB service.
+
+
+      <p>Default value is false. By default integrated cache is enabled</p>
+    fullName: bypassIntegratedCache
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'bypassIntegratedCache?: boolean'
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SharedOptions.bypassIntegratedCache](xref:@azure/cosmos.SharedOptions.bypassIntegratedCache)
+  - name: initialHeaders
+    uid: '@azure/cosmos.FeedOptions.initialHeaders'
+    package: '@azure/cosmos'
+    summary: >-
+      (Advanced use case) Initial headers to start with when sending requests to
+      Cosmos
+    fullName: initialHeaders
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'initialHeaders?: CosmosHeaders'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.CosmosHeaders" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SharedOptions.initialHeaders](xref:@azure/cosmos.SharedOptions.initialHeaders)
+  - name: maxIntegratedCacheStalenessInMs
+    uid: '@azure/cosmos.FeedOptions.maxIntegratedCacheStalenessInMs'
+    package: '@azure/cosmos'
+    summary: >-
+      Sets the staleness value associated with the request in the Azure CosmosDB
+      service. For requests where the <xref:com.azure.cosmos.ConsistencyLevel>
+      is <xref:com.azure.cosmos.ConsistencyLevel%23EVENTUAL>  or
+      <xref:com.azure.cosmos.ConsistencyLevel%23SESSION>, responses from the
+
+      integrated cache are guaranteed to be no staler than value indicated by
+      this maxIntegratedCacheStaleness. When the
+
+      consistency level is not set, this property is ignored.
+
+
+      <p>Default value is null</p>
+
+
+      <p>Cache Staleness is supported in milliseconds granularity. Anything
+      smaller than milliseconds will be ignored.</p>
+    fullName: maxIntegratedCacheStalenessInMs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxIntegratedCacheStalenessInMs?: number'
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SharedOptions.maxIntegratedCacheStalenessInMs](xref:@azure/cosmos.SharedOptions.maxIntegratedCacheStalenessInMs)
+  - name: priorityLevel
+    uid: '@azure/cosmos.FeedOptions.priorityLevel'
+    package: '@azure/cosmos'
+    summary: >-
+      Priority Level (Low/High) for each request.
+
+      Low priority requests are always throttled before any high priority
+      requests.
+
+
+      <p>Default value is null. By default all requests are of High priority</p>
+    fullName: priorityLevel
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'priorityLevel?: PriorityLevel'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.PriorityLevel" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SharedOptions.priorityLevel](xref:@azure/cosmos.SharedOptions.priorityLevel)
   - name: sessionToken
     uid: '@azure/cosmos.FeedOptions.sessionToken'
     package: '@azure/cosmos'
@@ -286,28 +454,13 @@ properties:
       document container read requests.
     fullName: sessionToken
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'sessionToken?: string'
       return:
+        description: ''
         type: string
-        description: ''
-  - name: useIncrementalFeed
-    uid: '@azure/cosmos.FeedOptions.useIncrementalFeed'
-    package: '@azure/cosmos'
-    summary: >
-      Note: consider using changeFeed instead.
-
-      Indicates a change feed request. Must be set to "Incremental feed", or
-      omitted otherwise. Default: false
-    fullName: useIncrementalFeed
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'useIncrementalFeed?: boolean'
-      return:
-        type: boolean
-        description: ''
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [SharedOptions.sessionToken](xref:@azure/cosmos.SharedOptions.sessionToken)
 extends: <xref uid="@azure/cosmos.SharedOptions" />

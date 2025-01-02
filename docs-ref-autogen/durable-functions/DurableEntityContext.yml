@@ -2,14 +2,11 @@
 name: DurableEntityContext
 uid: durable-functions.DurableEntityContext
 package: durable-functions
-summary: |-
-  Provides functionality for application code implementing an entity
-  operation.
-fullName: DurableEntityContext
+summary: Provides functionality for application code implementing an entity operation.
+fullName: DurableEntityContext<TState>
 remarks: ''
-isPreview: false
 isDeprecated: false
-type: class
+type: interface
 properties:
   - name: entityId
     uid: durable-functions.DurableEntityContext.entityId
@@ -17,39 +14,36 @@ properties:
     summary: Gets the id of the currently executing entity.
     fullName: entityId
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'entityId: EntityId'
       return:
-        type: <xref uid="durable-functions.EntityId" />
         description: ''
+        type: <xref uid="durable-functions.EntityId" />
   - name: entityKey
     uid: durable-functions.DurableEntityContext.entityKey
     package: durable-functions
     summary: Gets the key of the currently executing entity.
     fullName: entityKey
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'entityKey: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: entityName
     uid: durable-functions.DurableEntityContext.entityName
     package: durable-functions
     summary: Gets the name of the currently executing entity.
     fullName: entityName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'entityName: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: isNewlyConstructed
     uid: durable-functions.DurableEntityContext.isNewlyConstructed
     package: durable-functions
@@ -58,110 +52,102 @@ properties:
       this operation being called.
     fullName: isNewlyConstructed
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'isNewlyConstructed: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: operationName
     uid: durable-functions.DurableEntityContext.operationName
     package: durable-functions
-    summary: |
+    summary: |-
       Gets the name of the operation that was called.
+
       An operation invocation on an entity includes an operation name, which
       states what operation to perform, and optionally an operation input.
     fullName: operationName
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'operationName: string | undefined'
+      content: 'operationName: undefined | string'
       return:
-        type: string | undefined
         description: ''
+        type: undefined | string
 methods:
   - name: destructOnExit()
     uid: durable-functions.DurableEntityContext.destructOnExit
     package: durable-functions
     summary: Deletes this entity after this operation completes.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: function destructOnExit()
-  - name: getInput()
+  - name: getInput<TInput>()
     uid: durable-functions.DurableEntityContext.getInput
     package: durable-functions
-    summary: |
+    summary: |-
       Gets the input for this operation.
+
       An operation invocation on an entity includes an operation name, which
       states what operation to perform, and optionally an operation input.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: function getInput()
+      content: 'function getInput<TInput>(): undefined | TInput'
       return:
-        type: unknown | undefined
-        description: 'The operation input, or undefined if none.'
-  - name: getState(() => unknown)
+        description: The operation input, or undefined if none.
+        type: undefined | TInput
+  - name: getState(() => TState)
     uid: durable-functions.DurableEntityContext.getState
     package: durable-functions
-    summary: 'Gets the current state of this entity, for reading and/or writing.'
+    summary: Gets the current state of this entity, for reading and/or writing.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getState(initializer?: () => unknown)'
+      content: 'function getState(initializer?: () => TState): undefined | TState'
       parameters:
         - id: initializer
-          type: () =&gt; unknown
+          type: () =&gt; TState
           description: |-
             Provides an initial value to use for the state,
             instead of TState's default.
       return:
-        type: unknown | undefined
         description: >-
           The current state of this entity, or undefined if none has been set
           yet.
-  - name: return(unknown)
+        type: undefined | TState
+  - name: return<TResult>(TResult)
     uid: durable-functions.DurableEntityContext.return
     package: durable-functions
     summary: Returns the given result to the caller of this operation.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function return(result: unknown)'
+      content: 'function return<TResult>(result: TResult)'
       parameters:
         - id: result
-          type: unknown
-          description: |
-            The result to return.
-  - name: setState(unknown)
+          type: TResult
+          description: The result to return.
+  - name: setState(TState)
     uid: durable-functions.DurableEntityContext.setState
     package: durable-functions
     summary: Sets the current state of this entity.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setState(state: unknown)'
+      content: 'function setState(state: TState)'
       parameters:
         - id: state
-          type: unknown
-          description: |
-            The state of the entity.
-  - name: 'signalEntity(EntityId, string, unknown)'
+          type: TState
+          description: The state of the entity.
+  - name: signalEntity(EntityId, string, unknown)
     uid: durable-functions.DurableEntityContext.signalEntity
     package: durable-functions
     summary: |-
       Signals an entity to perform an operation, without waiting for a
       response. Any result or exception is ignored (fire and forget).
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -176,5 +162,4 @@ methods:
           description: The name of the operation.
         - id: operationInput
           type: unknown
-          description: |
-            The operation input.
+          description: The operation input.

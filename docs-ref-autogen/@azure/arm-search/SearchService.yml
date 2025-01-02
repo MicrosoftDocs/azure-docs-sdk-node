@@ -2,180 +2,366 @@
 name: SearchService
 uid: '@azure/arm-search.SearchService'
 package: '@azure/arm-search'
-summary: ''
+summary: Describes an Azure Cognitive Search service and its current state.
 fullName: SearchService
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: interface
 properties:
+  - name: authOptions
+    uid: '@azure/arm-search.SearchService.authOptions'
+    package: '@azure/arm-search'
+    summary: >-
+      Defines the options for how the data plane API of a search service
+      authenticates requests. This cannot be set if 'disableLocalAuth' is set to
+      true.
+    fullName: authOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'authOptions?: DataPlaneAuthOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-search.DataPlaneAuthOptions" />
+  - name: disableLocalAuth
+    uid: '@azure/arm-search.SearchService.disableLocalAuth'
+    package: '@azure/arm-search'
+    summary: >-
+      When set to true, calls to the search service will not be permitted to
+      utilize API keys for authentication. This cannot be set to true if
+      'dataPlaneAuthOptions' are defined.
+    fullName: disableLocalAuth
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'disableLocalAuth?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: encryptionWithCmk
+    uid: '@azure/arm-search.SearchService.encryptionWithCmk'
+    package: '@azure/arm-search'
+    summary: >-
+      Specifies any policy regarding encryption of resources (such as indexes)
+      using customer manager keys within a search service.
+    fullName: encryptionWithCmk
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'encryptionWithCmk?: EncryptionWithCmk'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-search.EncryptionWithCmk" />
   - name: hostingMode
     uid: '@azure/arm-search.SearchService.hostingMode'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      Applicable only for the standard3 SKU. You can set this property to enable
+      up to 3 high density partitions that allow up to 1000 indexes, which is
+      much higher than the maximum indexes allowed for any other SKU. For the
+      standard3 SKU, the value is either 'default' or 'highDensity'. For all
+      other SKUs, this value must be 'default'.
     fullName: hostingMode
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'hostingMode?: HostingMode'
       return:
+        description: ''
         type: <xref uid="@azure/arm-search.HostingMode" />
-        description: ''
-  - name: id
-    uid: '@azure/arm-search.SearchService.id'
-    package: '@azure/arm-search'
-    summary: ''
-    fullName: id
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'id?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
   - name: identity
     uid: '@azure/arm-search.SearchService.identity'
     package: '@azure/arm-search'
-    summary: ''
+    summary: The identity of the resource.
     fullName: identity
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'identity?: Identity'
       return:
+        description: ''
         type: <xref uid="@azure/arm-search.Identity" />
-        description: ''
-  - name: location
-    uid: '@azure/arm-search.SearchService.location'
+  - name: networkRuleSet
+    uid: '@azure/arm-search.SearchService.networkRuleSet'
     package: '@azure/arm-search'
-    summary: ''
-    fullName: location
+    summary: >-
+      Network specific rules that determine how the Azure Cognitive Search
+      service may be reached.
+    fullName: networkRuleSet
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'location?: undefined | string'
+      content: 'networkRuleSet?: NetworkRuleSet'
       return:
-        type: undefined | string
         description: ''
-  - name: name
-    uid: '@azure/arm-search.SearchService.name'
-    package: '@azure/arm-search'
-    summary: ''
-    fullName: name
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'name?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
+        type: <xref uid="@azure/arm-search.NetworkRuleSet" />
   - name: partitionCount
     uid: '@azure/arm-search.SearchService.partitionCount'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      The number of partitions in the search service; if specified, it can be 1,
+      2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs.
+      For 'standard3' services with hostingMode set to 'highDensity', the
+      allowed values are between 1 and 3.
     fullName: partitionCount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'partitionCount?: undefined | number'
+      content: 'partitionCount?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
+  - name: privateEndpointConnections
+    uid: '@azure/arm-search.SearchService.privateEndpointConnections'
+    package: '@azure/arm-search'
+    summary: >-
+      The list of private endpoint connections to the Azure Cognitive Search
+      service.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: privateEndpointConnections
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'privateEndpointConnections?: PrivateEndpointConnection[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-search.PrivateEndpointConnection" />[]
   - name: provisioningState
     uid: '@azure/arm-search.SearchService.provisioningState'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      The state of the last provisioning operation performed on the search
+      service. Provisioning is an intermediate state that occurs while service
+      capacity is being established. After capacity is set up, provisioningState
+      changes to either 'succeeded' or 'failed'. Client applications can poll
+      provisioning status (the recommended polling interval is from 30 seconds
+      to one minute) by using the Get Search Service operation to see when an
+      operation is completed. If you are using the free service, this value
+      tends to come back as 'succeeded' directly in the call to Create search
+      service. This is because the free service uses capacity that is already
+      set up.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
     fullName: provisioningState
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'provisioningState?: ProvisioningState'
       return:
-        type: <xref uid="@azure/arm-search.ProvisioningState" />
         description: ''
+        type: <xref uid="@azure/arm-search.ProvisioningState" />
+  - name: publicNetworkAccess
+    uid: '@azure/arm-search.SearchService.publicNetworkAccess'
+    package: '@azure/arm-search'
+    summary: >-
+      This value can be set to 'enabled' to avoid breaking changes on existing
+      customer resources and templates. If set to 'disabled', traffic over
+      public interface is not allowed, and private endpoint connections would be
+      the exclusive access method.
+    fullName: publicNetworkAccess
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'publicNetworkAccess?: PublicNetworkAccess'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-search.PublicNetworkAccess" />
   - name: replicaCount
     uid: '@azure/arm-search.SearchService.replicaCount'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      The number of replicas in the search service. If specified, it must be a
+      value between 1 and 12 inclusive for standard SKUs or between 1 and 3
+      inclusive for basic SKU.
     fullName: replicaCount
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'replicaCount?: undefined | number'
+      content: 'replicaCount?: number'
       return:
-        type: undefined | number
         description: ''
+        type: number
+  - name: semanticSearch
+    uid: '@azure/arm-search.SearchService.semanticSearch'
+    package: '@azure/arm-search'
+    summary: >-
+      Sets options that control the availability of semantic search. This
+      configuration is only possible for certain Azure Cognitive Search SKUs in
+      certain locations.
+    fullName: semanticSearch
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'semanticSearch?: string'
+      return:
+        description: ''
+        type: string
+  - name: sharedPrivateLinkResources
+    uid: '@azure/arm-search.SearchService.sharedPrivateLinkResources'
+    package: '@azure/arm-search'
+    summary: >-
+      The list of shared private link resources managed by the Azure Cognitive
+      Search service.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: sharedPrivateLinkResources
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sharedPrivateLinkResources?: SharedPrivateLinkResource[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-search.SharedPrivateLinkResource" />[]
   - name: sku
     uid: '@azure/arm-search.SearchService.sku'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      The SKU of the Search Service, which determines price tier and capacity
+      limits. This property is required when creating a new Search Service.
     fullName: sku
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'sku?: Sku'
       return:
-        type: <xref uid="@azure/arm-search.Sku" />
         description: ''
+        type: <xref uid="@azure/arm-search.Sku" />
   - name: status
     uid: '@azure/arm-search.SearchService.status'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      The status of the search service. Possible values include: 'running': The
+      search service is running and no provisioning operations are underway.
+      'provisioning': The search service is being provisioned or scaled up or
+      down. 'deleting': The search service is being deleted. 'degraded': The
+      search service is degraded. This can occur when the underlying search
+      units are not healthy. The search service is most likely operational, but
+      performance might be slow and some requests might be dropped. 'disabled':
+      The search service is disabled. In this state, the service will reject all
+      API requests. 'error': The search service is in an error state. If your
+      service is in the degraded, disabled, or error states, it means the Azure
+      Cognitive Search team is actively investigating the underlying issue.
+      Dedicated services in these states are still chargeable based on the
+      number of search units provisioned.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
     fullName: status
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'status?: SearchServiceStatus'
       return:
-        type: <xref uid="@azure/arm-search.SearchServiceStatus" />
         description: ''
+        type: <xref uid="@azure/arm-search.SearchServiceStatus" />
   - name: statusDetails
     uid: '@azure/arm-search.SearchService.statusDetails'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      The details of the search service status.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
     fullName: statusDetails
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'statusDetails?: undefined | string'
+      content: 'statusDetails?: string'
       return:
-        type: undefined | string
         description: ''
+        type: string
+inheritedProperties:
+  - name: id
+    uid: '@azure/arm-search.SearchService.id'
+    package: '@azure/arm-search'
+    summary: >-
+      Fully qualified resource ID for the resource. Ex -
+      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'id?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.id](xref:@azure/arm-search.TrackedResource.id)
+  - name: location
+    uid: '@azure/arm-search.SearchService.location'
+    package: '@azure/arm-search'
+    summary: The geo-location where the resource lives
+    fullName: location
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'location: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.location](xref:@azure/arm-search.TrackedResource.location)
+  - name: name
+    uid: '@azure/arm-search.SearchService.name'
+    package: '@azure/arm-search'
+    summary: >-
+      The name of the resource
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'name?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.name](xref:@azure/arm-search.TrackedResource.name)
   - name: tags
     uid: '@azure/arm-search.SearchService.tags'
     package: '@azure/arm-search'
-    summary: ''
+    summary: Resource tags.
     fullName: tags
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'tags?: undefined | [key: string]: string'
+      content: 'tags?: {[propertyName: string]: string}'
       return:
-        type: 'undefined | [key: string]: string'
         description: ''
+        type: '{[propertyName: string]: string}'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.tags](xref:@azure/arm-search.TrackedResource.tags)
   - name: type
     uid: '@azure/arm-search.SearchService.type'
     package: '@azure/arm-search'
-    summary: ''
+    summary: >-
+      The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+      "Microsoft.Storage/storageAccounts"
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
     fullName: type
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'type?: undefined | string'
+      content: 'type?: string'
       return:
-        type: undefined | string
         description: ''
-extends: <xref uid="@azure/arm-search.Resource" />
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.type](xref:@azure/arm-search.TrackedResource.type)
+extends: <xref uid="@azure/arm-search.TrackedResource" />

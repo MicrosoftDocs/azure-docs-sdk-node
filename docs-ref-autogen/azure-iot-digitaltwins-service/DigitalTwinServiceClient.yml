@@ -5,7 +5,6 @@ package: azure-iot-digitaltwins-service
 summary: ''
 fullName: DigitalTwinServiceClient
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
@@ -16,7 +15,6 @@ constructors:
       Constructor which also creates an instance of the Protocol Layer Client
       used by the DigitalTwinServiceClient.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new DigitalTwinServiceClient(creds: IoTHubTokenCredentials)'
@@ -32,10 +30,11 @@ methods:
     package: azure-iot-digitaltwins-service
     summary: Retrieve the Digital Twin of a given device.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getDigitalTwin(digitalTwinId: string)'
+      content: >-
+        function getDigitalTwin(digitalTwinId: string):
+        Promise<DigitalTwinResponse>
       parameters:
         - id: digitalTwinId
           type: string
@@ -43,12 +42,10 @@ methods:
             The digital twin Id of the given device or module.
                                                         Format of digitalTwinId is DeviceId[~ModuleId]. ModuleId is optional.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="azure-iot-digitaltwins-service.DigitalTwinResponse" />&gt;
         description: >-
           DigitalTwinResponse                The return object containing the
           Digital Twin plus the HttpResponse.
+        type: Promise&lt;DigitalTwinResponse&gt;
   - name: >-
       getDigitalTwin(string, TripleValueCallback<DigitalTwin,
       HttpOperationResponse>)
@@ -56,7 +53,6 @@ methods:
     package: azure-iot-digitaltwins-service
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -68,9 +64,8 @@ methods:
           description: ''
         - id: callback
           type: >-
-            TripleValueCallback&lt;<xref
-            uid="azure-iot-digitaltwins-service.DigitalTwin" />,
-            HttpOperationResponse&gt;
+            TripleValueCallback&lt;DigitalTwin, <xref
+            uid="@azure/ms-rest-js.HttpOperationResponse" />&gt;
           description: ''
   - name: >-
       invokeCommand(string, string, string,
@@ -81,13 +76,13 @@ methods:
       Invoke a command on an component of a particular device and get the result
       of it.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function invokeCommand(digitalTwinId: string, commandName: string,
         argument: string, options?:
-        DigitalTwinInvokeRootLevelCommandOptionalParams)
+        DigitalTwinInvokeRootLevelCommandOptionalParams):
+        Promise<DigitalTwinInvokeRootLevelCommandResponse>
       parameters:
         - id: digitalTwinId
           type: string
@@ -99,23 +94,17 @@ methods:
           type: string
           description: The argument of a command.
         - id: options
-          type: >-
-            <xref
-            uid="azure-iot-digitaltwins-service.DigitalTwinInvokeRootLevelCommandOptionalParams"
-            />
+          type: DigitalTwinInvokeRootLevelCommandOptionalParams
           description: >-
             The optional parameter to set options including
             connectionTimeoutInSeconds and responseTimeoutInSeconds.
                                                                                The responseTimeoutInSeconds must be within [5; 300]
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="azure-iot-digitaltwins-service.DigitalTwinInvokeRootLevelCommandResponse"
-          />&gt;
         description: >-
           DigitalTwinInvokeRootLevelCommandResponse                 The result
           of the invoked command containing the result, status code, request ID
           and the parsed HttpResponse.
+        type: Promise&lt;DigitalTwinInvokeRootLevelCommandResponse&gt;
   - name: >-
       invokeComponentCommand(string, string, string, string,
       DigitalTwinInvokeComponentCommandOptionalParams)
@@ -126,13 +115,13 @@ methods:
       Invoke a command on an component of a particular device and get the result
       of it.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function invokeComponentCommand(digitalTwinId: string, componentName:
         string, commandName: string, argument: string, options?:
-        DigitalTwinInvokeComponentCommandOptionalParams)
+        DigitalTwinInvokeComponentCommandOptionalParams):
+        Promise<DigitalTwinInvokeComponentCommandResponse>
       parameters:
         - id: digitalTwinId
           type: string
@@ -147,23 +136,17 @@ methods:
           type: string
           description: The argument of a command.
         - id: options
-          type: >-
-            <xref
-            uid="azure-iot-digitaltwins-service.DigitalTwinInvokeComponentCommandOptionalParams"
-            />
+          type: DigitalTwinInvokeComponentCommandOptionalParams
           description: >-
             The optional parameter to set options including
             connectionTimeoutInSeconds and responseTimeoutInSeconds.
                                                                                The responseTimeoutInSeconds must be within [5; 300]
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="azure-iot-digitaltwins-service.DigitalTwinInvokeComponentCommandResponse"
-          />&gt;
         description: >-
           DigitalTwinInvokeComponentCommandResponse                 The result
           of the invoked command containing the result, status code, request ID
           and the parsed HttpResponse.
+        type: Promise&lt;DigitalTwinInvokeComponentCommandResponse&gt;
   - name: >-
       updateDigitalTwin(string, any[], string | TripleValueCallback<void,
       HttpOperationResponse>, TripleValueCallback<void, HttpOperationResponse>)
@@ -172,7 +155,6 @@ methods:
     package: azure-iot-digitaltwins-service
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
@@ -185,37 +167,38 @@ methods:
           type: string
           description: ''
         - id: patch
-          type: 'any[]'
+          type: any[]
           description: ''
         - id: eTagOrCallback
-          type: 'string | TripleValueCallback&lt;void, HttpOperationResponse&gt;'
+          type: >-
+            string | TripleValueCallback&lt;void, <xref
+            uid="@azure/ms-rest-js.HttpOperationResponse" />&gt;
           description: ''
         - id: callback
-          type: 'TripleValueCallback&lt;void, HttpOperationResponse&gt;'
+          type: >-
+            TripleValueCallback&lt;void, <xref
+            uid="@azure/ms-rest-js.HttpOperationResponse" />&gt;
           description: ''
-  - name: 'updateDigitalTwin(string, any[], undefined | string)'
+  - name: updateDigitalTwin(string, any[], string)
     uid: azure-iot-digitaltwins-service.DigitalTwinServiceClient.updateDigitalTwin
     package: azure-iot-digitaltwins-service
     summary: Update the Digital Twin of a given device using a patch object.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function updateDigitalTwin(digitalTwinId: string, patch: any[], eTag?:
-        undefined | string)
+        string): Promise<DigitalTwinUpdateResponse>
       parameters:
         - id: digitalTwinId
           type: string
           description: The digital twin Id of the given device.
         - id: patch
-          type: 'any[]'
+          type: any[]
           description: The patch objet contains the update part of a Digital Twin.
         - id: eTag
-          type: undefined | string
+          type: string
           description: The eTag for identifying the patch.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="azure-iot-digitaltwins-service.DigitalTwinUpdateResponse" />&gt;
         description: DigitalTwinUpdateResponse                 The HTTPesponse.
+        type: Promise&lt;DigitalTwinUpdateResponse&gt;

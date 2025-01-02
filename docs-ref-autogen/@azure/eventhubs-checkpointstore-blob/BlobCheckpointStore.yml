@@ -7,7 +7,6 @@ summary: >-
   checkpoint data.
 fullName: BlobCheckpointStore
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
@@ -16,16 +15,15 @@ constructors:
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: ''
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new BlobCheckpointStore(containerClient: ContainerClient)'
       parameters:
         - id: containerClient
-          type: ContainerClient
+          type: <xref uid="@azure/storage-blob.ContainerClient" />
           description: ''
 methods:
-  - name: 'claimOwnership(PartitionOwnership[])'
+  - name: claimOwnership(PartitionOwnership[])
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.claimOwnership'
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: >-
@@ -34,67 +32,30 @@ methods:
 
       successfully claimed.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function claimOwnership(partitionOwnership: PartitionOwnership[])'
+      content: >-
+        function claimOwnership(partitionOwnership: PartitionOwnership[]):
+        Promise<PartitionOwnership[]>
       parameters:
         - id: partitionOwnership
-          type: 'PartitionOwnership[]'
+          type: <xref uid="@azure/event-hubs.PartitionOwnership" />[]
           description: The list of partition ownership this instance is claiming to own.
       return:
-        type: 'Promise&lt;PartitionOwnership[]&gt;'
         description: A list partitions this instance successfully claimed ownership.
-  - name: 'listCheckpoints(string, string, string)'
+        type: Promise&lt;<xref uid="@azure/event-hubs.PartitionOwnership" />[]&gt;
+  - name: listCheckpoints(string, string, string)
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.listCheckpoints'
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: >-
       Lists all the checkpoints in a data store for a given namespace, eventhub
       and consumer group.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listCheckpoints(fullyQualifiedNamespace: string, eventHubName:
-        string, consumerGroup: string)
-      parameters:
-        - id: fullyQualifiedNamespace
-          type: string
-          description: >-
-            The fully qualified Event Hubs namespace. This is likely to be
-            similar to
-
-            <yournamespace>.servicebus.windows.net.
-        - id: eventHubName
-          type: string
-          description: The event hub name.
-        - id: consumerGroup
-          type: string
-          description: |
-            The consumer group name.
-      return:
-        type: 'Promise&lt;Checkpoint[]&gt;'
-        description: ''
-  - name: 'listOwnership(string, string, string)'
-    uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.listOwnership'
-    package: '@azure/eventhubs-checkpointstore-blob'
-    summary: >-
-      Get the list of all existing partition ownership from the underlying data
-      store. May return empty
-
-      results if there are is no existing ownership information.
-
-      Partition Ownership contains the information on which
-      `EventHubConsumerClient` subscribe call is currently processing the
-      partition.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listOwnership(fullyQualifiedNamespace: string, eventHubName:
-        string, consumerGroup: string)
+        string, consumerGroup: string): Promise<Checkpoint[]>
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -110,23 +71,57 @@ methods:
           type: string
           description: The consumer group name.
       return:
-        type: 'Promise&lt;PartitionOwnership[]&gt;'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/event-hubs.Checkpoint" />[]&gt;
+  - name: listOwnership(string, string, string)
+    uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.listOwnership'
+    package: '@azure/eventhubs-checkpointstore-blob'
+    summary: >-
+      Get the list of all existing partition ownership from the underlying data
+      store. May return empty
+
+      results if there are is no existing ownership information.
+
+      Partition Ownership contains the information on which
+      `EventHubConsumerClient` subscribe call is currently processing the
+      partition.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listOwnership(fullyQualifiedNamespace: string, eventHubName:
+        string, consumerGroup: string): Promise<PartitionOwnership[]>
+      parameters:
+        - id: fullyQualifiedNamespace
+          type: string
+          description: >-
+            The fully qualified Event Hubs namespace. This is likely to be
+            similar to
+
+            <yournamespace>.servicebus.windows.net.
+        - id: eventHubName
+          type: string
+          description: The event hub name.
+        - id: consumerGroup
+          type: string
+          description: The consumer group name.
+      return:
         description: >-
           Partition ownership details of all the partitions that have had an
           owner.
+        type: Promise&lt;<xref uid="@azure/event-hubs.PartitionOwnership" />[]&gt;
   - name: updateCheckpoint(Checkpoint)
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.updateCheckpoint'
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: Updates the checkpoint in the data store for a partition.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function updateCheckpoint(checkpoint: Checkpoint)'
+      content: 'function updateCheckpoint(checkpoint: Checkpoint): Promise<void>'
       parameters:
         - id: checkpoint
-          type: Checkpoint
+          type: <xref uid="@azure/event-hubs.Checkpoint" />
           description: The checkpoint.
       return:
-        type: Promise&lt;void&gt;
         description: The new etag on successful update.
+        type: Promise&lt;void&gt;

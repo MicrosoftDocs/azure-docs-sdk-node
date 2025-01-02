@@ -5,11 +5,10 @@ package: '@azure/storage-blob'
 summary: AppendBlobURL defines a set of operations applicable to append blobs.
 fullName: AppendBlobURL
 remarks: ''
-isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'AppendBlobURL(string, Pipeline)'
+  - name: AppendBlobURL(string, Pipeline)
     uid: '@azure/storage-blob.AppendBlobURL.constructor'
     package: '@azure/storage-blob'
     summary: >-
@@ -23,7 +22,6 @@ constructors:
 
       If a blob name includes ? or %, blob name must be encoded in the URL.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'new AppendBlobURL(url: string, pipeline: Pipeline)'
@@ -44,48 +42,37 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
+inheritedProperties:
   - name: credential
     uid: '@azure/storage-blob.AppendBlobURL.credential'
     package: '@azure/storage-blob'
     summary: Credential used for authentication and authorization.
     fullName: credential
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'credential: Credential'
       return:
+        description: ''
         type: <xref uid="@azure/storage-blob.Credential" />
-        description: ''
-  - name: pipeline
-    uid: '@azure/storage-blob.AppendBlobURL.pipeline'
-    package: '@azure/storage-blob'
-    summary: Request policy pipeline.
-    fullName: pipeline
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'pipeline: Pipeline'
-      return:
-        type: <xref uid="@azure/storage-blob.Pipeline" />
-        description: ''
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.credential](xref:@azure/storage-blob.BlobURL.credential)
   - name: url
     uid: '@azure/storage-blob.AppendBlobURL.url'
     package: '@azure/storage-blob'
     summary: Encoded URL string value.
     fullName: url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
-methods:
-  - name: 'abortCopyFromURL(Aborter, string, IBlobAbortCopyFromURLOptions)'
+        type: string
+    inheritanceDescription: <b>Inherited From</b> [BlobURL.url](xref:@azure/storage-blob.BlobURL.url)
+inheritedMethods:
+  - name: abortCopyFromURL(Aborter, string, IBlobAbortCopyFromURLOptions)
     uid: '@azure/storage-blob.AppendBlobURL.abortCopyFromURL'
     package: '@azure/storage-blob'
     summary: >-
@@ -93,13 +80,16 @@ methods:
       destination blob with zero
 
       length and full metadata. Version 2012-02-12 and newer.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/abort-copy-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function abortCopyFromURL(aborter: Aborter, copyId: string, options?:
-        IBlobAbortCopyFromURLOptions)
+        IBlobAbortCopyFromURLOptions): Promise<BlobAbortCopyFromURLResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -114,22 +104,29 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobAbortCopyFromURLOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobAbortCopyFromURLResponse" />&gt;
         description: ''
-  - name: 'acquireLease(Aborter, string, number, IBlobAcquireLeaseOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobAbortCopyFromURLResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.abortCopyFromURL](xref:@azure/storage-blob.BlobURL.abortCopyFromURL)
+  - name: acquireLease(Aborter, string, number, IBlobAcquireLeaseOptions)
     uid: '@azure/storage-blob.AppendBlobURL.acquireLease'
     package: '@azure/storage-blob'
     summary: |-
       Establishes and manages a lock on a blob for write and delete operations.
       The lock duration can be 15 to 60 seconds, or can be infinite.
       In versions prior to 2012-02-12, the lock duration is 60 seconds.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function acquireLease(aborter: Aborter, proposedLeaseId: string,
-        duration: number, options?: IBlobAcquireLeaseOptions)
+        duration: number, options?: IBlobAcquireLeaseOptions):
+        Promise<BlobAcquireLeaseResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -142,107 +139,32 @@ methods:
           description: Can be specified in any valid GUID string format
         - id: duration
           type: number
-          description: 'The lock duration can be 15 to 60 seconds, or can be infinite'
+          description: The lock duration can be 15 to 60 seconds, or can be infinite
         - id: options
           type: <xref uid="@azure/storage-blob.IBlobAcquireLeaseOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobAcquireLeaseResponse" />&gt;
         description: ''
-  - name: >-
-      appendBlock(Aborter, HttpRequestBody, number,
-      IAppendBlobAppendBlockOptions)
-    uid: '@azure/storage-blob.AppendBlobURL.appendBlock'
-    package: '@azure/storage-blob'
-    summary: Commits a new block of data to the end of the existing append blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function appendBlock(aborter: Aborter, body: HttpRequestBody,
-        contentLength: number, options?: IAppendBlobAppendBlockOptions)
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-blob.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: body
-          type: HttpRequestBody
-          description: ''
-        - id: contentLength
-          type: number
-          description: Length of the body in bytes
-        - id: options
-          type: <xref uid="@azure/storage-blob.IAppendBlobAppendBlockOptions" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.AppendBlobAppendBlockResponse" />&gt;
-        description: ''
-  - name: >-
-      appendBlockFromURL(Aborter, string, number, number,
-      IAppendBlobAppendBlockFromURLOptions)
-    uid: '@azure/storage-blob.AppendBlobURL.appendBlockFromURL'
-    package: '@azure/storage-blob'
-    summary: >-
-      The Append Block operation commits a new block of data to the end of an
-      existing append blob
-
-      where the contents are read from a source url.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function appendBlockFromURL(aborter: Aborter, sourceURL: string,
-        sourceOffset: number, count: number, options?:
-        IAppendBlobAppendBlockFromURLOptions)
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-blob.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: sourceURL
-          type: string
-          description: |2-
-
-                            The url to the blob that will be the source of the copy. A source blob in the same storage account can
-                            be authenticated via Shared Key. However, if the source is a blob in another account, the source blob
-                            must either be public or must be authenticated via a shared access signature. If the source blob is
-                            public, no authentication is required to perform the operation.
-        - id: sourceOffset
-          type: number
-          description: Offset in source to be appended
-        - id: count
-          type: number
-          description: Number of bytes to be appended as a block
-        - id: options
-          type: >-
-            <xref uid="@azure/storage-blob.IAppendBlobAppendBlockFromURLOptions"
-            />
-          description: ''
-      return:
         type: >-
-          Promise&lt;<xref uid="Models.AppendBlobAppendBlockFromUrlResponse"
-          />&gt;
-        description: ''
-  - name: 'breakLease(Aborter, undefined | number, IBlobBreakLeaseOptions)'
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobAcquireLeaseResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.acquireLease](xref:@azure/storage-blob.BlobURL.acquireLease)
+  - name: breakLease(Aborter, number, IBlobBreakLeaseOptions)
     uid: '@azure/storage-blob.AppendBlobURL.breakLease'
     package: '@azure/storage-blob'
     summary: |-
       To end the lease but ensure that another client cannot acquire a new lease
       until the current lease period has expired.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function breakLease(aborter: Aborter, breakPeriod?: undefined | number,
-        options?: IBlobBreakLeaseOptions)
+        function breakLease(aborter: Aborter, breakPeriod?: number, options?:
+        IBlobBreakLeaseOptions): Promise<BlobBreakLeaseResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -251,25 +173,33 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: breakPeriod
-          type: undefined | number
+          type: number
           description: ''
         - id: options
           type: <xref uid="@azure/storage-blob.IBlobBreakLeaseOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobBreakLeaseResponse" />&gt;
         description: ''
-  - name: 'changeLease(Aborter, string, string, IBlobChangeLeaseOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobBreakLeaseResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.breakLease](xref:@azure/storage-blob.BlobURL.breakLease)
+  - name: changeLease(Aborter, string, string, IBlobChangeLeaseOptions)
     uid: '@azure/storage-blob.AppendBlobURL.changeLease'
     package: '@azure/storage-blob'
-    summary: To change the ID of an existing lease.
+    summary: |-
+      To change the ID of an existing lease.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function changeLease(aborter: Aborter, leaseId: string, proposedLeaseId:
-        string, options?: IBlobChangeLeaseOptions)
+        string, options?: IBlobChangeLeaseOptions):
+        Promise<BlobChangeLeaseResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -287,43 +217,28 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobChangeLeaseOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobChangeLeaseResponse" />&gt;
         description: ''
-  - name: 'create(Aborter, IAppendBlobCreateOptions)'
-    uid: '@azure/storage-blob.AppendBlobURL.create'
-    package: '@azure/storage-blob'
-    summary: >-
-      Creates a 0-length append blob. Call AppendBlock to append data to an
-      append blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function create(aborter: Aborter, options?: IAppendBlobCreateOptions)'
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-blob.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: options
-          type: <xref uid="@azure/storage-blob.IAppendBlobCreateOptions" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.AppendBlobCreateResponse" />&gt;
-        description: ''
-  - name: 'createSnapshot(Aborter, IBlobCreateSnapshotOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobChangeLeaseResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.changeLease](xref:@azure/storage-blob.BlobURL.changeLease)
+  - name: createSnapshot(Aborter, IBlobCreateSnapshotOptions)
     uid: '@azure/storage-blob.AppendBlobURL.createSnapshot'
     package: '@azure/storage-blob'
-    summary: Creates a read-only snapshot of a blob.
+    summary: >-
+      Creates a read-only snapshot of a blob.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/snapshot-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function createSnapshot(aborter: Aborter, options?:
-        IBlobCreateSnapshotOptions)
+        IBlobCreateSnapshotOptions): Promise<BlobCreateSnapshotResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -335,9 +250,14 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobCreateSnapshotOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobCreateSnapshotResponse" />&gt;
         description: ''
-  - name: 'delete(Aborter, IBlobDeleteOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobCreateSnapshotResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.createSnapshot](xref:@azure/storage-blob.BlobURL.createSnapshot)
+  - name: delete(Aborter, IBlobDeleteOptions)
     uid: '@azure/storage-blob.AppendBlobURL.delete'
     package: '@azure/storage-blob'
     summary: >-
@@ -350,11 +270,15 @@ methods:
       all of its snapshots. You can delete both at the same time with the Delete
 
       Blob operation.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(aborter: Aborter, options?: IBlobDeleteOptions)'
+      content: >-
+        function delete(aborter: Aborter, options?: IBlobDeleteOptions):
+        Promise<BlobDeleteResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -366,27 +290,35 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobDeleteOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobDeleteResponse" />&gt;
         description: ''
-  - name: 'download(Aborter, number, undefined | number, IBlobDownloadOptions)'
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.Models.BlobDeleteResponse"
+          />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.delete](xref:@azure/storage-blob.BlobURL.delete)
+  - name: download(Aborter, number, number, IBlobDownloadOptions)
     uid: '@azure/storage-blob.AppendBlobURL.download'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Reads or downloads a blob from the system, including its metadata and
       properties.
 
       You can also call Get Blob to read a snapshot.
 
+
       * In Node.js, data returns in a Readable stream readableStreamBody
 
       * In browsers, data returns in a promise blobBody
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function download(aborter: Aborter, offset: number, count?: undefined |
-        number, options?: IBlobDownloadOptions)
+        function download(aborter: Aborter, offset: number, count?: number,
+        options?: IBlobDownloadOptions): Promise<BlobDownloadResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -396,54 +328,24 @@ methods:
                                      goto documents of Aborter for more examples about request cancellation
         - id: offset
           type: number
-          description: 'From which position of the blob to download, >= 0'
+          description: From which position of the blob to download, >= 0
         - id: count
-          type: undefined | number
-          description: ''
+          type: number
+          description: >-
+            How much data to be downloaded, > 0. Will download to the end when
+            undefined
         - id: options
           type: <xref uid="@azure/storage-blob.IBlobDownloadOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobDownloadResponse" />&gt;
         description: ''
-  - name: fromBlobURL(BlobURL)
-    uid: '@azure/storage-blob.AppendBlobURL.fromBlobURL'
-    package: '@azure/storage-blob'
-    summary: Creates a AppendBlobURL object from BlobURL instance.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'static function fromBlobURL(blobURL: BlobURL)'
-      parameters:
-        - id: blobURL
-          type: <xref uid="@azure/storage-blob.BlobURL" />
-          description: ''
-      return:
-        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
-        description: ''
-  - name: 'fromContainerURL(ContainerURL, string)'
-    uid: '@azure/storage-blob.AppendBlobURL.fromContainerURL'
-    package: '@azure/storage-blob'
-    summary: Creates a AppendBlobURL object from ContainerURL instance.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function fromContainerURL(containerURL: ContainerURL, blobName:
-        string)
-      parameters:
-        - id: containerURL
-          type: <xref uid="@azure/storage-blob.ContainerURL" />
-          description: A ContainerURL object
-        - id: blobName
-          type: string
-          description: An append blob name
-      return:
-        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
-        description: ''
-  - name: 'getProperties(Aborter, IBlobGetPropertiesOptions)'
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.Models.BlobDownloadResponse"
+          />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.download](xref:@azure/storage-blob.BlobURL.download)
+  - name: getProperties(Aborter, IBlobGetPropertiesOptions)
     uid: '@azure/storage-blob.AppendBlobURL.getProperties'
     package: '@azure/storage-blob'
     summary: >-
@@ -451,13 +353,16 @@ methods:
       properties
 
       for the blob. It does not return the content of the blob.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-properties
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getProperties(aborter: Aborter, options?:
-        IBlobGetPropertiesOptions)
+        IBlobGetPropertiesOptions): Promise<BlobGetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -469,32 +374,39 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobGetPropertiesOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobGetPropertiesResponse" />&gt;
         description: ''
-  - name: 'newPipeline(Credential, INewPipelineOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobGetPropertiesResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.getProperties](xref:@azure/storage-blob.BlobURL.getProperties)
+  - name: newPipeline(Credential, INewPipelineOptions)
     uid: '@azure/storage-blob.AppendBlobURL.newPipeline'
     package: '@azure/storage-blob'
     summary: >-
       A static method used to create a new Pipeline object with Credential
       provided.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
+        INewPipelineOptions): Pipeline
       parameters:
         - id: credential
           type: <xref uid="@azure/storage-blob.Credential" />
-          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
+          description: Such as AnonymousCredential, SharedKeyCredential or TokenCredential.
         - id: pipelineOptions
           type: <xref uid="@azure/storage-blob.INewPipelineOptions" />
-          description: ''
+          description: Optional. Options.
       return:
-        type: <xref uid="@azure/storage-blob.Pipeline" />
         description: A new Pipeline object.
-  - name: 'releaseLease(Aborter, string, IBlobReleaseLeaseOptions)'
+        type: <xref uid="@azure/storage-blob.Pipeline" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.newPipeline](xref:@azure/storage-blob.BlobURL.newPipeline)
+  - name: releaseLease(Aborter, string, IBlobReleaseLeaseOptions)
     uid: '@azure/storage-blob.AppendBlobURL.releaseLease'
     package: '@azure/storage-blob'
     summary: >-
@@ -502,13 +414,15 @@ methods:
       immediately
 
       acquire a lease against the blob.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function releaseLease(aborter: Aborter, leaseId: string, options?:
-        IBlobReleaseLeaseOptions)
+        IBlobReleaseLeaseOptions): Promise<BlobReleaseLeaseResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -523,19 +437,26 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobReleaseLeaseOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobReleaseLeaseResponse" />&gt;
         description: ''
-  - name: 'renewLease(Aborter, string, IBlobRenewLeaseOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobReleaseLeaseResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.releaseLease](xref:@azure/storage-blob.BlobURL.releaseLease)
+  - name: renewLease(Aborter, string, IBlobRenewLeaseOptions)
     uid: '@azure/storage-blob.AppendBlobURL.renewLease'
     package: '@azure/storage-blob'
-    summary: To renew an existing lease.
+    summary: |-
+      To renew an existing lease.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function renewLease(aborter: Aborter, leaseId: string, options?:
-        IBlobRenewLeaseOptions)
+        IBlobRenewLeaseOptions): Promise<BlobRenewLeaseResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -550,27 +471,35 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobRenewLeaseOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobRenewLeaseResponse" />&gt;
         description: ''
-  - name: >-
-      setHTTPHeaders(Aborter, Models.BlobHTTPHeaders,
-      IBlobSetHTTPHeadersOptions)
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobRenewLeaseResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.renewLease](xref:@azure/storage-blob.BlobURL.renewLease)
+  - name: setHTTPHeaders(Aborter, BlobHTTPHeaders, IBlobSetHTTPHeadersOptions)
     uid: '@azure/storage-blob.AppendBlobURL.setHTTPHeaders'
     package: '@azure/storage-blob'
     summary: >-
       Sets system properties on the blob.
 
+
       If no value provided, or no value provided for the specificed blob HTTP
       headers,
 
       these blob HTTP headers without a value will be cleared.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-properties
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setHTTPHeaders(aborter: Aborter, blobHTTPHeaders?:
-        Models.BlobHTTPHeaders, options?: IBlobSetHTTPHeadersOptions)
+        BlobHTTPHeaders, options?: IBlobSetHTTPHeadersOptions):
+        Promise<BlobSetHTTPHeadersResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -579,31 +508,43 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: blobHTTPHeaders
-          type: <xref uid="Models.BlobHTTPHeaders" />
-          description: ''
+          type: <xref uid="@azure/storage-blob.Models.BlobHTTPHeaders" />
+          description: |-
+            If no value provided, or no value provided for
+                                                              the specificed blob HTTP headers, these blob HTTP
+                                                              headers without a value will be cleared.
         - id: options
           type: <xref uid="@azure/storage-blob.IBlobSetHTTPHeadersOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobSetHTTPHeadersResponse" />&gt;
         description: ''
-  - name: 'setMetadata(Aborter, IMetadata, IBlobSetMetadataOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobSetHTTPHeadersResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.setHTTPHeaders](xref:@azure/storage-blob.BlobURL.setHTTPHeaders)
+  - name: setMetadata(Aborter, IMetadata, IBlobSetMetadataOptions)
     uid: '@azure/storage-blob.AppendBlobURL.setMetadata'
     package: '@azure/storage-blob'
     summary: >-
       Sets user-defined metadata for the specified blob as one or more
       name-value pairs.
 
+
       If no option provided, or no metadata defined in the parameter, the blob
 
       metadata will be removed.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setMetadata(aborter: Aborter, metadata?: IMetadata, options?:
-        IBlobSetMetadataOptions)
+        IBlobSetMetadataOptions): Promise<BlobSetMetadataResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -612,17 +553,22 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: metadata
-          type: <xref uid="@azure/storage-blob.IMetadata" />
-          description: ''
+          type: IMetadata
+          description: |-
+            Replace existing metadata with this value.
+                                          If no value provided the existing metadata will be removed.
         - id: options
           type: <xref uid="@azure/storage-blob.IBlobSetMetadataOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobSetMetadataResponse" />&gt;
         description: ''
-  - name: >-
-      setTier(Aborter, BlockBlobTier | PremiumPageBlobTier | string,
-      IBlobSetTierOptions)
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobSetMetadataResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.setMetadata](xref:@azure/storage-blob.BlobURL.setMetadata)
+  - name: setTier(Aborter, string, IBlobSetTierOptions)
     uid: '@azure/storage-blob.AppendBlobURL.setTier'
     package: '@azure/storage-blob'
     summary: >-
@@ -638,13 +584,16 @@ methods:
       and bandwidth of the blob. A block blob's tier determines Hot/Cool/Archive
 
       storage type. This operation does not update the blob's ETag.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-tier
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function setTier(aborter: Aborter, tier: BlockBlobTier |
-        PremiumPageBlobTier | string, options?: IBlobSetTierOptions)
+        function setTier(aborter: Aborter, tier: string, options?:
+        IBlobSetTierOptions): Promise<BlobSetTierResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -653,17 +602,20 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
         - id: tier
-          type: >-
-            <xref uid="@azure/storage-blob.BlockBlobTier" /> | <xref
-            uid="@azure/storage-blob.PremiumPageBlobTier" /> | string
+          type: string
           description: ''
         - id: options
           type: <xref uid="@azure/storage-blob.IBlobSetTierOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobSetTierResponse" />&gt;
         description: ''
-  - name: 'startCopyFromURL(Aborter, string, IBlobStartCopyFromURLOptions)'
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.Models.BlobSetTierResponse"
+          />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.setTier](xref:@azure/storage-blob.BlobURL.setTier)
+  - name: startCopyFromURL(Aborter, string, IBlobStartCopyFromURLOptions)
     uid: '@azure/storage-blob.AppendBlobURL.startCopyFromURL'
     package: '@azure/storage-blob'
     summary: >-
@@ -683,13 +635,16 @@ methods:
       Blob
 
       operation to copy from another storage account.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function startCopyFromURL(aborter: Aborter, copySource: string,
-        options?: IBlobStartCopyFromURLOptions)
+        options?: IBlobStartCopyFromURLOptions):
+        Promise<BlobStartCopyFromURLResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -704,9 +659,14 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobStartCopyFromURLOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobStartCopyFromURLResponse" />&gt;
         description: ''
-  - name: 'syncCopyFromURL(Aborter, string, IBlobSyncCopyFromURLOptions)'
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobStartCopyFromURLResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.startCopyFromURL](xref:@azure/storage-blob.BlobURL.startCopyFromURL)
+  - name: syncCopyFromURL(Aborter, string, IBlobSyncCopyFromURLOptions)
     uid: '@azure/storage-blob.AppendBlobURL.syncCopyFromURL'
     package: '@azure/storage-blob'
     summary: >-
@@ -714,13 +674,16 @@ methods:
       resource to a new blob. It will not
 
       return a response until the copy is complete.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob-from-url
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function syncCopyFromURL(aborter: Aborter, copySource: string, options?:
-        IBlobSyncCopyFromURLOptions)
+        IBlobSyncCopyFromURLOptions): Promise<BlobCopyFromURLResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -737,8 +700,13 @@ methods:
           type: <xref uid="@azure/storage-blob.IBlobSyncCopyFromURLOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.BlobCopyFromURLResponse" />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.BlobCopyFromURLResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.syncCopyFromURL](xref:@azure/storage-blob.BlobURL.syncCopyFromURL)
   - name: undelete(Aborter)
     uid: '@azure/storage-blob.AppendBlobURL.undelete'
     package: '@azure/storage-blob'
@@ -749,11 +717,14 @@ methods:
       2017-07-29
 
       or later.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/undelete-blob
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function undelete(aborter: Aborter)'
+      content: 'function undelete(aborter: Aborter): Promise<BlobUndeleteResponse>'
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -762,8 +733,170 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.BlobUndeleteResponse" />&gt;
         description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.Models.BlobUndeleteResponse"
+          />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BlobURL.undelete](xref:@azure/storage-blob.BlobURL.undelete)
+methods:
+  - name: >-
+      appendBlock(Aborter, HttpRequestBody, number,
+      IAppendBlobAppendBlockOptions)
+    uid: '@azure/storage-blob.AppendBlobURL.appendBlock'
+    package: '@azure/storage-blob'
+    summary: |-
+      Commits a new block of data to the end of the existing append blob.
+
+      See https://docs.microsoft.com/rest/api/storageservices/append-block
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function appendBlock(aborter: Aborter, body: HttpRequestBody,
+        contentLength: number, options?: IAppendBlobAppendBlockOptions):
+        Promise<AppendBlobAppendBlockResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: body
+          type: <xref uid="@azure/storage-blob.HttpRequestBody" />
+          description: ''
+        - id: contentLength
+          type: number
+          description: Length of the body in bytes
+        - id: options
+          type: <xref uid="@azure/storage-blob.IAppendBlobAppendBlockOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.AppendBlobAppendBlockResponse" />&gt;
+  - name: >-
+      appendBlockFromURL(Aborter, string, number, number,
+      IAppendBlobAppendBlockFromURLOptions)
+    uid: '@azure/storage-blob.AppendBlobURL.appendBlockFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      The Append Block operation commits a new block of data to the end of an
+      existing append blob
+
+      where the contents are read from a source url.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/append-block-from-url
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function appendBlockFromURL(aborter: Aborter, sourceURL: string,
+        sourceOffset: number, count: number, options?:
+        IAppendBlobAppendBlockFromURLOptions):
+        Promise<AppendBlobAppendBlockFromUrlResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: sourceURL
+          type: string
+          description: >-
+            The url to the blob that will be the source of the copy. A source
+            blob in the same storage account can
+                            be authenticated via Shared Key. However, if the source is a blob in another account, the source blob
+                            must either be public or must be authenticated via a shared access signature. If the source blob is
+                            public, no authentication is required to perform the operation.
+        - id: sourceOffset
+          type: number
+          description: Offset in source to be appended
+        - id: count
+          type: number
+          description: Number of bytes to be appended as a block
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.IAppendBlobAppendBlockFromURLOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.AppendBlobAppendBlockFromUrlResponse"
+          />&gt;
+  - name: create(Aborter, IAppendBlobCreateOptions)
+    uid: '@azure/storage-blob.AppendBlobURL.create'
+    package: '@azure/storage-blob'
+    summary: >-
+      Creates a 0-length append blob. Call AppendBlock to append data to an
+      append blob.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-blob
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(aborter: Aborter, options?: IAppendBlobCreateOptions):
+        Promise<AppendBlobCreateResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: options
+          type: <xref uid="@azure/storage-blob.IAppendBlobCreateOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.Models.AppendBlobCreateResponse" />&gt;
+  - name: fromBlobURL(BlobURL)
+    uid: '@azure/storage-blob.AppendBlobURL.fromBlobURL'
+    package: '@azure/storage-blob'
+    summary: Creates a AppendBlobURL object from BlobURL instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static function fromBlobURL(blobURL: BlobURL): AppendBlobURL'
+      parameters:
+        - id: blobURL
+          type: <xref uid="@azure/storage-blob.BlobURL" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
+  - name: fromContainerURL(ContainerURL, string)
+    uid: '@azure/storage-blob.AppendBlobURL.fromContainerURL'
+    package: '@azure/storage-blob'
+    summary: Creates a AppendBlobURL object from ContainerURL instance.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromContainerURL(containerURL: ContainerURL, blobName:
+        string): AppendBlobURL
+      parameters:
+        - id: containerURL
+          type: <xref uid="@azure/storage-blob.ContainerURL" />
+          description: A ContainerURL object
+        - id: blobName
+          type: string
+          description: An append blob name
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-blob.AppendBlobURL.withPipeline'
     package: '@azure/storage-blob'
@@ -771,17 +904,16 @@ methods:
       Creates a new AppendBlobURL object identical to the source but with the
       specified request policy pipeline.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): AppendBlobURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-blob.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
         description: ''
+        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
   - name: withSnapshot(string)
     uid: '@azure/storage-blob.AppendBlobURL.withSnapshot'
     package: '@azure/storage-blob'
@@ -790,15 +922,14 @@ methods:
       specified snapshot timestamp.
       Provide "" will remove the snapshot and return a URL to the base blob.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withSnapshot(snapshot: string)'
+      content: 'function withSnapshot(snapshot: string): AppendBlobURL'
       parameters:
         - id: snapshot
           type: string
           description: ''
       return:
-        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
         description: ''
+        type: <xref uid="@azure/storage-blob.AppendBlobURL" />
 extends: <xref uid="@azure/storage-blob.BlobURL" />

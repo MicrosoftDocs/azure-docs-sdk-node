@@ -2,177 +2,97 @@
 name: Location
 uid: '@azure/arm-batch.Location'
 package: '@azure/arm-batch'
-summary: Class representing a Location.
+summary: Interface representing a Location.
 fullName: Location
 remarks: ''
-isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: Location(BatchManagementClientContext)
-    uid: '@azure/arm-batch.Location.constructor'
-    package: '@azure/arm-batch'
-    summary: Create a Location.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new Location(client: BatchManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-batch.BatchManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
-  - name: 'checkNameAvailability(string, string, msRest.RequestOptionsBase)'
+  - name: >-
+      checkNameAvailability(string, CheckNameAvailabilityParameters,
+      LocationCheckNameAvailabilityOptionalParams)
     uid: '@azure/arm-batch.Location.checkNameAvailability'
     package: '@azure/arm-batch'
     summary: >-
       Checks whether the Batch account name is available in the specified
       region.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function checkNameAvailability(locationName: string, name: string,
-        options?: msRest.RequestOptionsBase)
+        function checkNameAvailability(locationName: string, parameters:
+        CheckNameAvailabilityParameters, options?:
+        LocationCheckNameAvailabilityOptionalParams):
+        Promise<CheckNameAvailabilityResult>
       parameters:
         - id: locationName
           type: string
           description: The desired region for the name check.
-        - id: name
-          type: string
-          description: The name to check for availability
+        - id: parameters
+          type: <xref uid="@azure/arm-batch.CheckNameAvailabilityParameters" />
+          description: Properties needed to check the availability of a name.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-batch.LocationCheckNameAvailabilityOptionalParams"
+            />
+          description: The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.LocationCheckNameAvailabilityResponse"
+          Promise&lt;<xref uid="@azure/arm-batch.CheckNameAvailabilityResult"
           />&gt;
-        description: Promise<Models.LocationCheckNameAvailabilityResponse>
-  - name: >-
-      checkNameAvailability(string, string, RequestOptionsBase,
-      ServiceCallback<CheckNameAvailabilityResult>)
-    uid: '@azure/arm-batch.Location.checkNameAvailability_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkNameAvailability(locationName: string, name: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<CheckNameAvailabilityResult>)
-      parameters:
-        - id: locationName
-          type: string
-          description: The desired region for the name check.
-        - id: name
-          type: string
-          description: The name to check for availability
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-batch.CheckNameAvailabilityResult" />&gt;
-          description: |
-            The callback
-  - name: >-
-      checkNameAvailability(string, string,
-      ServiceCallback<CheckNameAvailabilityResult>)
-    uid: '@azure/arm-batch.Location.checkNameAvailability_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkNameAvailability(locationName: string, name: string,
-        callback: ServiceCallback<CheckNameAvailabilityResult>)
-      parameters:
-        - id: locationName
-          type: string
-          description: The desired region for the name check.
-        - id: name
-          type: string
-          description: The name to check for availability
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-batch.CheckNameAvailabilityResult" />&gt;
-          description: |
-            The callback
-  - name: 'getQuotas(string, msRest.RequestOptionsBase)'
+  - name: getQuotas(string, LocationGetQuotasOptionalParams)
     uid: '@azure/arm-batch.Location.getQuotas'
     package: '@azure/arm-batch'
     summary: >-
       Gets the Batch service quotas for the specified subscription at the given
       location.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getQuotas(locationName: string, options?:
-        msRest.RequestOptionsBase)
+        LocationGetQuotasOptionalParams): Promise<BatchLocationQuota>
       parameters:
         - id: locationName
           type: string
           description: The region for which to retrieve Batch service quotas.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.LocationGetQuotasOptionalParams" />
+          description: The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.LocationGetQuotasResponse" />&gt;
-        description: Promise<Models.LocationGetQuotasResponse>
-  - name: 'getQuotas(string, RequestOptionsBase, ServiceCallback<BatchLocationQuota>)'
-    uid: '@azure/arm-batch.Location.getQuotas_2'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-batch.BatchLocationQuota" />&gt;
+  - name: >-
+      listSupportedVirtualMachineSkus(string,
+      LocationListSupportedVirtualMachineSkusOptionalParams)
+    uid: '@azure/arm-batch.Location.listSupportedVirtualMachineSkus'
     package: '@azure/arm-batch'
-    summary: ''
+    summary: >-
+      Gets the list of Batch supported Virtual Machine VM sizes available at the
+      given location.
     remarks: ''
-    isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getQuotas(locationName: string, options: RequestOptionsBase,
-        callback: ServiceCallback<BatchLocationQuota>)
+        function listSupportedVirtualMachineSkus(locationName: string, options?:
+        LocationListSupportedVirtualMachineSkusOptionalParams):
+        PagedAsyncIterableIterator<SupportedSku, SupportedSku[], PageSettings>
       parameters:
         - id: locationName
           type: string
-          description: The region for which to retrieve Batch service quotas.
+          description: The region for which to retrieve Batch service supported SKUs.
         - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
           type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-batch.BatchLocationQuota"
-            />&gt;
-          description: |
-            The callback
-  - name: 'getQuotas(string, ServiceCallback<BatchLocationQuota>)'
-    uid: '@azure/arm-batch.Location.getQuotas_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getQuotas(locationName: string, callback:
-        ServiceCallback<BatchLocationQuota>)
-      parameters:
-        - id: locationName
-          type: string
-          description: The region for which to retrieve Batch service quotas.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-batch.BatchLocationQuota"
-            />&gt;
-          description: |
-            The callback
+            <xref
+            uid="@azure/arm-batch.LocationListSupportedVirtualMachineSkusOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-batch.SupportedSku" />, <xref
+          uid="@azure/arm-batch.SupportedSku" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;

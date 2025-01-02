@@ -1,17 +1,12 @@
 ---
 title: Azure Communication Administration client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-administration, 
-author: maggiepint
-ms.author: magpint
+keywords: Azure, javascript, SDK, API, @azure/communication-administration,
 ms.date: 11/16/2020
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: javascript
-ms.service: 
+ms.service: azure-communication-services
 ---
-
-# Azure Communication Administration client library for JavaScript - Version 1.0.0-beta.3 
+# Azure Communication Administration client library for JavaScript - version 1.0.0-beta.3 
 
 
 The administration library is used for managing users and tokens for Azure Communication Services. This library also provides capabilities for phone number administration.

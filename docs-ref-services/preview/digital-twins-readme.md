@@ -1,15 +1,12 @@
 ---
 title: Azure Azure Digital Twins client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/digital-twins, 
-author: maggiepint
-ms.author: magpint
+keywords: Azure, javascript, SDK, API, @azure/digital-twins,
 ms.date: 09/08/2020
-ms.topic: article
+ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
 ---
-
-# Azure Azure Digital Twins client library for JavaScript - Version 1.0.0-preview.1 
+# Azure Azure Digital Twins client library for JavaScript - version 1.0.0-preview.1 
 
 
 This package contains an isomorphic SDK for Azure Digital Twins API to provide access to the Azure Digital Twins service for managing twins, models, relationships, etc.

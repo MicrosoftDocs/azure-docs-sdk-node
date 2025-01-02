@@ -1,17 +1,11 @@
 ---
-title: Azure Analysis Services modules for JavaScript
-description: Reference for Azure Analysis Services modules for JavaScript
-author: Minewiskan
-ms.author: owend
-manager: kfile
-ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Analysis Services
+title: Azure Analysis Services SDK for JavaScript
+description: Reference for Azure Analysis Services SDK for JavaScript
+ms.date: 01/01/2025
+ms.topic: reference
+ms.devlang: javascript
+ms.service: analysisservices
 ---
-
 # Azure Analysis Services modules for JavaScript
 
 ## Overview

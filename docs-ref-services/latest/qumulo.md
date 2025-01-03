@@ -1,7 +1,7 @@
 ---
 title: Azure Qumulo SDK for JavaScript
 description: Reference for Azure Qumulo SDK for JavaScript
-ms.date: 01/02/2025
+ms.date: 01/03/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: qumulo

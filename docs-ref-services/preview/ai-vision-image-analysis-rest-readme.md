@@ -1,12 +1,12 @@
 ---
 title: Azure AI Vision Image Analysis client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-vision-image-analysis, vision
-ms.date: 07/19/2024
+ms.date: 01/03/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: vision
 ---
-# Azure AI Vision Image Analysis client library for JavaScript - version 1.0.0-beta.3 
+# Azure AI Vision Image Analysis client library for JavaScript - version 1.0.0-alpha.20250103.1 
 
 
 The Image Analysis service provides AI algorithms for processing images and returning information about their content. In a single service call, you can extract one or more visual features from the image simultaneously, including getting a caption for the image, extracting text shown in the image (OCR) and detecting objects. For more information on the service and the supported visual features, see [Image Analysis overview][image_analysis_overview], and the [Concepts][image_analysis_concepts] page.
@@ -22,7 +22,7 @@ Use the Image Analysis client library to:
 | [Vision Studio][vision_studio]
 | [API reference documentation](https://aka.ms/azsdk/image-analysis/ref-docs/js)
 | [Package (npm)](https://aka.ms/azsdk/image-analysis/package/npm)
-| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.3/sdk/vision/ai-vision-image-analysis-rest/src)
+| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-alpha.20250103.1/sdk/vision/ai-vision-image-analysis-rest/src)
 
 ## Getting started
 
@@ -31,7 +31,7 @@ Use the Image Analysis client library to:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-beta.3/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-alpha.20250103.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -59,8 +59,8 @@ To use this client library in the browser, first, you need to use a bundler. For
 
 Once you've initialized an `ImageAnalysisClient`, you need to select one or more visual features to analyze. The options are specified by the enum class `VisualFeatures`. The following features are supported:
 
-1. `VisualFeatures.Caption`: ([Examples](#analyze-an-image-from-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.3/sdk/vision/ai-vision-image-analysis-rest/samples)) Generate a human-readable sentence that describes the content of an image.
-1. `VisualFeatures.Read`: ([Examples](#extract-text-from-an-image-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.3/sdk/vision/ai-vision-image-analysis-rest/samples)) Also known as Optical Character Recognition (OCR). Extract printed or handwritten text from images.
+1. `VisualFeatures.Caption`: ([Examples](#analyze-an-image-from-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-alpha.20250103.1/sdk/vision/ai-vision-image-analysis-rest/samples)) Generate a human-readable sentence that describes the content of an image.
+1. `VisualFeatures.Read`: ([Examples](#extract-text-from-an-image-url) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-alpha.20250103.1/sdk/vision/ai-vision-image-analysis-rest/samples)) Also known as Optical Character Recognition (OCR). Extract printed or handwritten text from images.
 1. `VisualFeatures.DenseCaptions`: Dense Captions provides more details by generating one-sentence captions for up to 10 different regions in the image, including one for the whole image.
 1. `VisualFeatures.Tags`: Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in images.
 1. `VisualFeatures.Objects`: Object detection. This is similar to tagging, but focused on detecting physical objects in the image and returning their location.
@@ -106,8 +106,14 @@ const client = new ImageAnalysisClient(endpoint, credential);
 
 #### Create ImageAnalysisClient with a Microsoft Entra ID Credential
 
-Client subscription key authentication is used in most of the examples in this getting started guide, but you can also authenticate with Microsoft Entra ID (formerly Azure Active Directory) using the [Azure Identity library][azure_identity]. To use the [DefaultAzureCredential][azure_identity_dac] provider shown below,
-or other credential providers provided with the Azure SDK, please install the Azure.Identity package:
+**Prerequisites for Entra ID Authentication**:
+- The role `Cognitive Services User` assigned to you. Role assignment can be done via the "Access Control (IAM)" tab of your Computer Vision resource in the Azure portal.
+- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) installed.
+- You are logged into your Azure account by running `az login`.
+
+Also note that if you have multiple Azure subscriptions, the subscription that contains your Computer Vision resource must be your default subscription. Run `az account list --output table` to list all your subscriptions and see which one is the default. Run `az account set --subscription "Your Subscription ID or Name"` to change your default subscription.
+
+Client subscription key authentication is used in most of the examples in this getting started guide, but you can also authenticate with Microsoft Entra ID (formerly Azure Active Directory) using the [Azure Identity library][azure_identity]. To use the [DefaultAzureCredential][azure_identity_dac] provider shown below, or other credential providers provided with the Azure SDK, please install the @azure/identity package:
 
 ```
 npm install @azure/identity
@@ -213,15 +219,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-alpha.20250103.1/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-beta.3/sdk/vision/ai-vision-image-analysis-rest/samples) directory for detailed examples that demonstrate how to use the client libraries.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-image-analysis_1.0.0-alpha.20250103.1/sdk/vision/ai-vision-image-analysis-rest/samples) directory for detailed examples that demonstrate how to use the client libraries.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-image-analysis_1.0.0-alpha.20250103.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -230,4 +236,5 @@ If you'd like to contribute to this library, please read the [contributing guide
 [image_analysis_overview]: https://learn.microsoft.com/azure/ai-services/computer-vision/overview-image-analysis?tabs=4-0
 [image_analysis_concepts]: https://learn.microsoft.com/azure/ai-services/computer-vision/concept-tag-images-40
 [vision_studio]: https://aka.ms/vision-studio/image-analysis
-
+[azure_identity]: https://learn.microsoft.com/javascript/api/overview/azure/identity-readme
+[azure_identity_dac]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential

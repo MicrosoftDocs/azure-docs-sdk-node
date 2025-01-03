@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/functions-authentication-events, entra
-ms.date: 11/03/2022
+ms.date: 01/03/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: entra

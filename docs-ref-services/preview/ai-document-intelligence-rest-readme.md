@@ -1,48 +1,44 @@
 ---
 title: Azure DocumentIntelligence (formerly FormRecognizer) REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-document-intelligence, documentintelligence
-ms.date: 08/21/2024
+ms.date: 01/03/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: documentintelligence
 ---
-# Azure DocumentIntelligence (formerly FormRecognizer) REST client library for JavaScript - version 1.0.0-beta.3 
+# Azure DocumentIntelligence (formerly FormRecognizer) REST client library for JavaScript - version 1.0.0-alpha.20241230.1 
 
 
 Extracts content, layout, and structured data from documents.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-beta.3/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/documentation/rest-clients.md) to use this library**
 
-> NOTE: Form Recognizer has been rebranded to Document Intelligence. Please check the [Migration Guide from `@azure/ai-form-recognizer` to `@azure-rest/ai-document-intelligence`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/documentintelligence/ai-document-intelligence-rest/MIGRATION-FR_v4-DI_v1.md).
+> NOTE: Form Recognizer has been rebranded to Document Intelligence. Please check the [Migration Guide from `@azure/ai-form-recognizer` to `@azure-rest/ai-document-intelligence`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/documentintelligence/ai-document-intelligence-rest/MIGRATION-FR_v4-DI_v1.md).
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/documentintelligence/ai-document-intelligence-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/documentintelligence/ai-document-intelligence-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-document-intelligence)
 - [API reference documentation](/javascript/api/@azure-rest/ai-document-intelligence?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/documentintelligence/ai-document-intelligence-rest/samples)
-- [Changelog](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/documentintelligence/ai-document-intelligence-rest/CHANGELOG.md)
-- [Migration Guide from Form Recognizer](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/documentintelligence/ai-document-intelligence-rest/MIGRATION-FR_v4-DI_v1.md)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/documentintelligence/ai-document-intelligence-rest/samples)
+- [Changelog](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/documentintelligence/ai-document-intelligence-rest/CHANGELOG.md)
+- [Migration Guide from Form Recognizer](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/documentintelligence/ai-document-intelligence-rest/MIGRATION-FR_v4-DI_v1.md)
 
-> This version of the client library defaults to the `"2024-07-31-preview"` version of the service.
+> This version of the client library defaults to the `"2024-11-30"` version of the service.
 
 This table shows the relationship between SDK versions and supported API versions of the service:
 
 | SDK version  | Supported API version of service |
 | ------------ | -------------------------------- |
-| 1.0.0-beta.3 | 2024-07-31-preview               |
-| 1.0.0-beta.2 | 2024-02-29-preview               |
-| 1.0.0-beta.1 | 2023-10-31-preview               |
+| 1.0.0        | 2024-11-30                       |
 
-> Please rely on the older `@azure/ai-form-recognizer` library through the older service API versions for retired models, such as `"prebuilt-businessCard"` and `"prebuilt-document"`. For more information, see [Changelog](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/documentintelligence/ai-document-intelligence-rest/CHANGELOG.md).
+> Please rely on the older `@azure/ai-form-recognizer` library through the older service API versions for retired models, such as `"prebuilt-businessCard"` and `"prebuilt-document"`. For more information, see [Changelog](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/documentintelligence/ai-document-intelligence-rest/CHANGELOG.md).
 
 The below table describes the relationship of each client and its supported API version(s):
 
 | Service API version | Supported clients                                            | Package                                                       |
 | ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------- |
-| 2024-07-31-preview  | DocumentIntelligenceClient                                   | `@azure-rest/ai-document-intelligence` version `1.0.0-beta.3` |
-| 2024-02-29-preview  | DocumentIntelligenceClient                                   | `@azure-rest/ai-document-intelligence` version `1.0.0-beta.2` |
-| 2023-10-31-preview  | DocumentIntelligenceClient                                   | `@azure-rest/ai-document-intelligence` version `1.0.0-beta.1` |
+| 2024-11-30          | DocumentIntelligenceClient                                   | `@azure-rest/ai-document-intelligence` version `1.0.0`        |
 | 2023-07-31          | DocumentAnalysisClient and DocumentModelAdministrationClient | `@azure/ai-form-recognizer` version `^5.0.0`                  |
 | 2022-08-01          | DocumentAnalysisClient and DocumentModelAdministrationClient | `@azure/ai-form-recognizer` version `^4.0.0`                  |
 
@@ -66,14 +62,14 @@ npm install @azure-rest/ai-document-intelligence
 
 ### Create and authenticate a `DocumentIntelligenceClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -86,7 +82,7 @@ import DocumentIntelligence from "@azure-rest/ai-document-intelligence";
 
 const client = DocumentIntelligence(
   process.env["DOCUMENT_INTELLIGENCE_ENDPOINT"],
-  new DefaultAzureCredential(),
+  new DefaultAzureCredential()
 );
 ```
 
@@ -148,7 +144,7 @@ import {
 if (isUnexpected(initialResponse)) {
   throw initialResponse.body.error;
 }
-const poller = await getLongRunningPoller(client, initialResponse);
+const poller = getLongRunningPoller(client, initialResponse);
 const result = (await poller.pollUntilDone()).body as AnalyzeResultOperationOutput;
 console.log(result);
 // {
@@ -163,6 +159,42 @@ console.log(result);
 //     contentFormat: 'text'
 //   }
 // }
+```
+
+## Batch analysis
+
+```ts
+import { parseResultIdFromResponse, isUnexpected } from "@azure-rest/ai-document-intelligence";
+
+// 1. Analyze a batch of documents
+const initialResponse = await client
+  .path("/documentModels/{modelId}:analyzeBatch", "prebuilt-layout")
+  .post({
+    contentType: "application/json",
+    body: {
+      azureBlobSource: {
+        containerUrl: batchTrainingFilesContainerUrl(),
+      },
+      resultContainerUrl: batchTrainingFilesResultContainerUrl(),
+      resultPrefix: "result",
+    },
+  });
+
+if (isUnexpected(initialResponse)) {
+  throw initialResponse.body.error;
+}
+const resultId = parseResultIdFromResponse(initialResponse);
+console.log("resultId: ", resultId);
+
+// (Optional) You can poll for the batch analysis result but be aware that a job may take unexpectedly long time, and polling could incur additional costs.
+// const poller = getLongRunningPoller(client, initialResponse);
+// await poller.pollUntilDone();
+
+// 2. At a later time, you can retrieve the operation result using the resultId
+const output = await client
+  .path("/documentModels/{modelId}/analyzeResults/{resultId}", "prebuilt-layout", resultId)
+  .get();
+console.log(output);
 ```
 
 ### Markdown content format
@@ -255,7 +287,7 @@ const initialResponse = await client.path("/documentClassifiers:build").post({
 if (isUnexpected(initialResponse)) {
   throw initialResponse.body.error;
 }
-const poller = await getLongRunningPoller(client, initialResponse);
+const poller = getLongRunningPoller(client, initialResponse);
 const response = (await poller.pollUntilDone())
   .body as DocumentClassifierBuildOperationDetailsOutput;
 console.log(response);
@@ -274,6 +306,98 @@ console.log(response);
 //    },
 //    apiVersion: '2023-10-31-preview'
 //  }
+```
+
+## Get the generated PDF output from document analysis
+
+```ts
+const filePath = path.join(ASSET_PATH, "layout-pageobject.pdf");
+
+const base64Source = await fs.readFile(filePath, { encoding: "base64" });
+
+const initialResponse = await client
+  .path("/documentModels/{modelId}:analyze", "prebuilt-read")
+  .post({
+    contentType: "application/json",
+    body: {
+      base64Source,
+    },
+    queryParameters: { output: ["pdf"] },
+  });
+
+if (isUnexpected(initialResponse)) {
+  throw initialResponse.body.error;
+}
+
+const poller = getLongRunningPoller(client, initialResponse);
+
+await poller.pollUntilDone();
+
+const output = await client
+  .path(
+    "/documentModels/{modelId}/analyzeResults/{resultId}/pdf",
+    "prebuilt-read",
+    parseResultIdFromResponse(initialResponse)
+  )
+  .get()
+  .asNodeStream(); // output.body would be NodeJS.ReadableStream
+
+if (output.status !== "200" || !output.body) {
+  throw new Error("The response was unexpected, expected NodeJS.ReadableStream in the body.");
+}
+
+const pdfData = await streamToUint8Array(output.body);
+fs.promises.writeFile(`./output.pdf`, pdfData);
+// Or you can consume the NodeJS.ReadableStream directly
+```
+
+## Get the generated cropped image of specified figure from document analysis
+
+```ts
+const filePath = path.join(ASSET_PATH, "layout-pageobject.pdf");
+
+const base64Source = fs.readFileSync(filePath, { encoding: "base64" });
+
+const initialResponse = await client
+  .path("/documentModels/{modelId}:analyze", "prebuilt-layout")
+  .post({
+    contentType: "application/json",
+    body: {
+      base64Source,
+    },
+    queryParameters: { output: ["figures"] },
+  });
+
+if (isUnexpected(initialResponse)) {
+  throw initialResponse.body.error;
+}
+
+const poller = getLongRunningPoller(client, initialResponse, { ...testPollingOptions });
+
+const result = (await poller.pollUntilDone()).body as AnalyzeResultOperationOutput;
+const figures = result.analyzeResult?.figures;
+assert.isArray(figures);
+assert.isNotEmpty(figures?.[0]);
+const figureId = figures?.[0].id || "";
+assert.isDefined(figureId);
+
+const output = await client
+  .path(
+    "/documentModels/{modelId}/analyzeResults/{resultId}/figures/{figureId}",
+    "prebuilt-layout",
+    parseResultIdFromResponse(initialResponse),
+    figureId
+  )
+  .get()
+  .asNodeStream(); // output.body would be NodeJS.ReadableStream
+
+if (output.status !== "200" || !output.body) {
+  throw new Error("The response was unexpected, expected NodeJS.ReadableStream in the body.");
+}
+
+const imageData = await streamToUint8Array(output.body);
+fs.promises.writeFile(`./figures/${figureId}.png`, imageData);
+// Or you can consume the NodeJS.ReadableStream directly
 ```
 
 ## Get Info
@@ -314,5 +438,5 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-intelligence_1.0.0-alpha.20241230.1/sdk/core/logger).
 

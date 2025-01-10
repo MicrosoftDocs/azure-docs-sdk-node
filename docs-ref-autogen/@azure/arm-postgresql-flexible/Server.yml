@@ -169,7 +169,9 @@ properties:
   - name: network
     uid: '@azure/arm-postgresql-flexible.Server.network'
     package: '@azure/arm-postgresql-flexible'
-    summary: Network properties of a server.
+    summary: >-
+      Network properties of a server. This Network property is required to be
+      passed only in case you want the server to be Private access server.
     fullName: network
     remarks: ''
     isDeprecated: false
@@ -184,7 +186,7 @@ properties:
     summary: >-
       Restore point creation time (ISO8601 format), specifying the time to
       restore from. It's required when 'createMode' is 'PointInTimeRestore' or
-      'GeoRestore'.
+      'GeoRestore' or 'ReviveDropped'.
     fullName: pointInTimeUTC
     remarks: ''
     isDeprecated: false
@@ -193,10 +195,47 @@ properties:
       return:
         description: ''
         type: Date
+  - name: privateEndpointConnections
+    uid: '@azure/arm-postgresql-flexible.Server.privateEndpointConnections'
+    package: '@azure/arm-postgresql-flexible'
+    summary: >-
+      List of private endpoint connections associated with the specified
+      resource.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: privateEndpointConnections
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'privateEndpointConnections?: PrivateEndpointConnection[]'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-postgresql-flexible.PrivateEndpointConnection"
+          />[]
+  - name: replica
+    uid: '@azure/arm-postgresql-flexible.Server.replica'
+    package: '@azure/arm-postgresql-flexible'
+    summary: >-
+      Replica properties of a server. These Replica properties are required to
+      be passed only in case you want to Promote a server.
+    fullName: replica
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'replica?: Replica'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-postgresql-flexible.Replica" />
   - name: replicaCapacity
     uid: '@azure/arm-postgresql-flexible.Server.replicaCapacity'
     package: '@azure/arm-postgresql-flexible'
-    summary: Replicas allowed for a server.
+    summary: >-
+      Replicas allowed for a server.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
     fullName: replicaCapacity
     remarks: ''
     isDeprecated: false
@@ -234,7 +273,8 @@ properties:
     package: '@azure/arm-postgresql-flexible'
     summary: >-
       The source server resource ID to restore from. It's required when
-      'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica'.
+      'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica' or
+      'ReviveDropped'. This property is returned only for Replica server
     fullName: sourceServerResourceId
     remarks: ''
     isDeprecated: false
@@ -267,7 +307,7 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'storage?: Storage_2'
+      content: 'storage?: Storage'
       return:
         description: ''
         type: <xref uid="@azure/arm-postgresql-flexible.Storage" />
@@ -288,8 +328,8 @@ inheritedProperties:
     uid: '@azure/arm-postgresql-flexible.Server.id'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      Fully qualified resource ID for the resource. Ex -
-      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+      Fully qualified resource ID for the resource. E.g.
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.

@@ -23,7 +23,7 @@ methods:
         function beginTriggerResourceGroupEvaluation(subscriptionId: string,
         resourceGroupName: string, options?:
         PolicyStatesTriggerResourceGroupEvaluationOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: subscriptionId
           type: string
@@ -40,8 +40,8 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;void&gt;, void&gt;&gt;
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
   - name: >-
       beginTriggerResourceGroupEvaluationAndWait(string, string,
       PolicyStatesTriggerResourceGroupEvaluationOptionalParams)
@@ -88,7 +88,7 @@ methods:
       content: >-
         function beginTriggerSubscriptionEvaluation(subscriptionId: string,
         options?: PolicyStatesTriggerSubscriptionEvaluationOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: subscriptionId
           type: string
@@ -102,8 +102,8 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;void&gt;, void&gt;&gt;
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
   - name: >-
       beginTriggerSubscriptionEvaluationAndWait(string,
       PolicyStatesTriggerSubscriptionEvaluationOptionalParams)
@@ -465,7 +465,7 @@ methods:
           uid="@azure/arm-policyinsights.PolicyState" />[], <xref
           uid="@azure/core-paging.PageSettings" />&gt;
   - name: >-
-      summarizeForManagementGroup(string,
+      summarizeForManagementGroup(string, string,
       PolicyStatesSummarizeForManagementGroupOptionalParams)
     uid: '@azure/arm-policyinsights.PolicyStates.summarizeForManagementGroup'
     package: '@azure/arm-policyinsights'
@@ -474,10 +474,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForManagementGroup(managementGroupName: string,
-        options?: PolicyStatesSummarizeForManagementGroupOptionalParams):
+        function summarizeForManagementGroup(policyStatesSummaryResource:
+        string, managementGroupName: string, options?:
+        PolicyStatesSummarizeForManagementGroupOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: managementGroupName
           type: string
           description: Management group name.
@@ -493,7 +500,7 @@ methods:
           Promise&lt;<xref uid="@azure/arm-policyinsights.SummarizeResults"
           />&gt;
   - name: >-
-      summarizeForPolicyDefinition(string, string,
+      summarizeForPolicyDefinition(string, string, string,
       PolicyStatesSummarizeForPolicyDefinitionOptionalParams)
     uid: '@azure/arm-policyinsights.PolicyStates.summarizeForPolicyDefinition'
     package: '@azure/arm-policyinsights'
@@ -502,11 +509,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForPolicyDefinition(subscriptionId: string,
-        policyDefinitionName: string, options?:
+        function summarizeForPolicyDefinition(policyStatesSummaryResource:
+        string, subscriptionId: string, policyDefinitionName: string, options?:
         PolicyStatesSummarizeForPolicyDefinitionOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: subscriptionId
           type: string
           description: Microsoft Azure subscription ID.
@@ -525,7 +538,7 @@ methods:
           Promise&lt;<xref uid="@azure/arm-policyinsights.SummarizeResults"
           />&gt;
   - name: >-
-      summarizeForPolicySetDefinition(string, string,
+      summarizeForPolicySetDefinition(string, string, string,
       PolicyStatesSummarizeForPolicySetDefinitionOptionalParams)
     uid: '@azure/arm-policyinsights.PolicyStates.summarizeForPolicySetDefinition'
     package: '@azure/arm-policyinsights'
@@ -534,11 +547,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForPolicySetDefinition(subscriptionId: string,
-        policySetDefinitionName: string, options?:
-        PolicyStatesSummarizeForPolicySetDefinitionOptionalParams):
+        function summarizeForPolicySetDefinition(policyStatesSummaryResource:
+        string, subscriptionId: string, policySetDefinitionName: string,
+        options?: PolicyStatesSummarizeForPolicySetDefinitionOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: subscriptionId
           type: string
           description: Microsoft Azure subscription ID.
@@ -557,7 +576,7 @@ methods:
           Promise&lt;<xref uid="@azure/arm-policyinsights.SummarizeResults"
           />&gt;
   - name: >-
-      summarizeForResource(string,
+      summarizeForResource(string, string,
       PolicyStatesSummarizeForResourceOptionalParams)
     uid: '@azure/arm-policyinsights.PolicyStates.summarizeForResource'
     package: '@azure/arm-policyinsights'
@@ -566,10 +585,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForResource(resourceId: string, options?:
+        function summarizeForResource(policyStatesSummaryResource: string,
+        resourceId: string, options?:
         PolicyStatesSummarizeForResourceOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: resourceId
           type: string
           description: Resource ID.
@@ -585,7 +611,7 @@ methods:
           Promise&lt;<xref uid="@azure/arm-policyinsights.SummarizeResults"
           />&gt;
   - name: >-
-      summarizeForResourceGroup(string, string,
+      summarizeForResourceGroup(string, string, string,
       PolicyStatesSummarizeForResourceGroupOptionalParams)
     uid: '@azure/arm-policyinsights.PolicyStates.summarizeForResourceGroup'
     package: '@azure/arm-policyinsights'
@@ -594,11 +620,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForResourceGroup(subscriptionId: string,
-        resourceGroupName: string, options?:
+        function summarizeForResourceGroup(policyStatesSummaryResource: string,
+        subscriptionId: string, resourceGroupName: string, options?:
         PolicyStatesSummarizeForResourceGroupOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: subscriptionId
           type: string
           description: Microsoft Azure subscription ID.
@@ -618,6 +650,7 @@ methods:
           />&gt;
   - name: >-
       summarizeForResourceGroupLevelPolicyAssignment(string, string, string,
+      string,
       PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentOptionalParams)
     uid: >-
       @azure/arm-policyinsights.PolicyStates.summarizeForResourceGroupLevelPolicyAssignment
@@ -627,12 +660,19 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForResourceGroupLevelPolicyAssignment(subscriptionId:
-        string, resourceGroupName: string, policyAssignmentName: string,
-        options?:
+        function
+        summarizeForResourceGroupLevelPolicyAssignment(policyStatesSummaryResource:
+        string, subscriptionId: string, resourceGroupName: string,
+        policyAssignmentName: string, options?:
         PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: subscriptionId
           type: string
           description: Microsoft Azure subscription ID.
@@ -654,7 +694,7 @@ methods:
           Promise&lt;<xref uid="@azure/arm-policyinsights.SummarizeResults"
           />&gt;
   - name: >-
-      summarizeForSubscription(string,
+      summarizeForSubscription(string, string,
       PolicyStatesSummarizeForSubscriptionOptionalParams)
     uid: '@azure/arm-policyinsights.PolicyStates.summarizeForSubscription'
     package: '@azure/arm-policyinsights'
@@ -663,10 +703,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForSubscription(subscriptionId: string, options?:
+        function summarizeForSubscription(policyStatesSummaryResource: string,
+        subscriptionId: string, options?:
         PolicyStatesSummarizeForSubscriptionOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: subscriptionId
           type: string
           description: Microsoft Azure subscription ID.
@@ -682,7 +729,7 @@ methods:
           Promise&lt;<xref uid="@azure/arm-policyinsights.SummarizeResults"
           />&gt;
   - name: >-
-      summarizeForSubscriptionLevelPolicyAssignment(string, string,
+      summarizeForSubscriptionLevelPolicyAssignment(string, string, string,
       PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentOptionalParams)
     uid: >-
       @azure/arm-policyinsights.PolicyStates.summarizeForSubscriptionLevelPolicyAssignment
@@ -692,11 +739,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function summarizeForSubscriptionLevelPolicyAssignment(subscriptionId:
-        string, policyAssignmentName: string, options?:
+        function
+        summarizeForSubscriptionLevelPolicyAssignment(policyStatesSummaryResource:
+        string, subscriptionId: string, policyAssignmentName: string, options?:
         PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentOptionalParams):
         Promise<SummarizeResults>
       parameters:
+        - id: policyStatesSummaryResource
+          type: string
+          description: |-
+            The virtual resource under PolicyStates resource type for
+                                               summarize action. In a given time range, 'latest' represents the latest policy state(s) and is the
+                                               only allowed value.
         - id: subscriptionId
           type: string
           description: Microsoft Azure subscription ID.

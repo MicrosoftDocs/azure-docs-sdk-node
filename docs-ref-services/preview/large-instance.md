@@ -1,7 +1,7 @@
 ---
 title: Azure Large Instance SDK for JavaScript
 description: Reference for Azure Large Instance SDK for JavaScript
-ms.date: 01/15/2025
+ms.date: 01/16/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: largeinstance

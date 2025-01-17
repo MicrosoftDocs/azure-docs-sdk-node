@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-databricks, databricks
-ms.date: 11/29/2022
+ms.date: 01/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: databricks
@@ -10,11 +10,11 @@ ms.service: databricks
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for AzureDatabricksManagement client.
 
-The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace resources.
+The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.0-beta.4/sdk/databricks/arm-databricks) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.1-alpha.20250117.1/sdk/databricks/arm-databricks) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-databricks) |
-[API reference documentation](/javascript/api/@azure/arm-databricks?view=azure-node-preview) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-databricks) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -24,7 +24,7 @@ The Microsoft Azure management APIs allow end users to operate on Azure Databric
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-databricks_3.0.0-beta.4/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-databricks_3.0.1-alpha.20250117.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ npm install @azure/arm-databricks
 To create a client object to access the AzureDatabricksManagement API, you will need the `endpoint` of your AzureDatabricksManagement resource and a `credential`. The AzureDatabricksManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your AzureDatabricksManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-databricks_3.0.0-beta.4/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-databricks_3.0.1-alpha.20250117.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -54,7 +54,7 @@ npm install @azure/identity
 You will also need to **register a new AAD application and grant access to AzureDatabricksManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
-For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
+For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
 const { AzureDatabricksManagementClient } = require("@azure/arm-databricks");
@@ -72,8 +72,8 @@ const client = new AzureDatabricksManagementClient(new DefaultAzureCredential(),
 // const client = new AzureDatabricksManagementClient(credential, subscriptionId);
 ```
 
-
 ### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
@@ -93,7 +93,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.0-beta.4/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.1-alpha.20250117.1/sdk/core/logger).
 
 ## Next steps
 
@@ -101,7 +101,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-databricks_3.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-databricks_3.0.1-alpha.20250117.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -109,10 +109,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fdatabricks%2Farm-databricks%2FREADME.png)
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.0-beta.4/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.0-beta.4/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.1-alpha.20250117.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-databricks_3.0.1-alpha.20250117.1/sdk/identity/identity#defaultazurecredential
 

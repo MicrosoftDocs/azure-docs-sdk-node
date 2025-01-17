@@ -1,12 +1,12 @@
 ---
 title: Azure Communication SMS client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-sms, communication
-ms.date: 12/19/2024
+ms.date: 01/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication SMS client library for JavaScript - version 1.2.0-beta.3 
+# Azure Communication SMS client library for JavaScript - version 1.2.0-alpha.20250117.1 
 
 
 Azure Communication SMS services gives developers the ability to send SMS messages from a phone number that can be purchased through Communication Services.
@@ -117,6 +117,60 @@ for (const sendResult of sendResults) {
 }
 ```
 
+## Check if a list of recipients is in the Opt Out list
+To check if the recipients are in the Opt Out list, call the `check` function from the `SmsClient.optOuts` with a list of recipient phone numbers.
+
+```typescript
+  const optOutCheckResults = await client.optOuts.check(
+    "<from-phone-number>", // Your E.164 formatted phone number used to send SMS
+    ["<to-phone-number-1>", "<to-phone-number-2>"], // E.164 formatted recipient phone numbers
+  );
+
+  for (const optOutCheckResult of optOutCheckResults) {
+    if (optOutCheckResult.httpStatusCode === 200) {
+      console.log("Success: ", optOutCheckResult);
+    } else {
+      console.error("Something went wrong when trying to send opt out check request: ", optOutCheckResult);
+    }
+  }
+```
+
+## Add a list of recipients to Opt Out list
+To add the list of recipients to Opt Out list, call the `add` function from the `SmsClient.pptOuts` with a list of recipient phone numbers.
+
+```typescript
+  const optOutAddResults = await client.optOuts.add(
+    "<from-phone-number>", // Your E.164 formatted phone number used to send SMS
+    ["<to-phone-number-1>", "<to-phone-number-2>"], // E.164 formatted recipient phone numbers
+  );
+
+  for (const optOutAddResult of optOutAddResults) {
+    if (optOutAddResult.httpStatusCode === 200) {
+      console.log("Success: ", optOutAddResult);
+    } else {
+      console.error("Something went wrong when trying to send opt out add request: ", optOutAddResult);
+    }
+  }
+```
+
+## Remove a list of recipients from Opt Out list
+To remove the list of recipients to Opt Out list, call the `remove` function from the `SmsClient.optOuts.` with a list of recipient phone numbers.
+
+```typescript
+  const optOutRemoveResults = await client.optOuts.remove(
+    "<from-phone-number>", // Your E.164 formatted phone number used to send SMS
+    ["<to-phone-number-1>", "<to-phone-number-2>"], // E.164 formatted recipient phone numbers
+  );
+
+  for (const optOutRemoveResult of optOutRemoveResults) {
+    if (optOutRemoveResult.httpStatusCode === 200) {
+      console.log("Success: ", optOutRemoveResult);
+    } else {
+      console.error("Something went wrong when trying to send opt out remove request: ", optOutRemoveResult);
+    }
+  }
+```
+
 ## Troubleshooting
 
 SMS operations will throw an exception if the request to the server fails.
@@ -144,13 +198,13 @@ try {
 
 ## Next steps
 
-- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.3/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
+- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-alpha.20250117.1/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
 - [Read more about SMS in Azure Communication Services][next_steps]
 - For a basic guide on how to configure Delivery Reporting for your SMS messages please refer to the [Handle SMS Events quickstart][handle_sms_events].
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-alpha.20250117.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -160,11 +214,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.3/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.3/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-alpha.20250117.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-alpha.20250117.1/sdk/identity/identity
 [get_phone_number_az_portal]: https://learn.microsoft.com/azure/communication-services/quickstarts/telephony/get-phone-number?pivots=platform-azp
-[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.3/sdk/communication/communication-phone-numbers
-[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.3/sdk/communication/communication-phone-numbers/README.md
+[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-alpha.20250117.1/sdk/communication/communication-phone-numbers
+[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-alpha.20250117.1/sdk/communication/communication-phone-numbers/README.md
 [handle_sms_events]: https://learn.microsoft.com/azure/communication-services/quickstarts/telephony-sms/handle-sms-events
 [next_steps]: https://learn.microsoft.com/azure/communication-services/quickstarts/telephony-sms/send?pivots=programming-language-javascript
 

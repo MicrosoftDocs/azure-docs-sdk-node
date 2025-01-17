@@ -1,7 +1,7 @@
 ---
 title: Azure Oracle Database SDK for JavaScript
 description: Reference for Azure Oracle Database SDK for JavaScript
-ms.date: 01/16/2025
+ms.date: 01/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: oracledatabase

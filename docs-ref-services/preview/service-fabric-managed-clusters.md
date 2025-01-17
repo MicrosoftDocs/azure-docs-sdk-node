@@ -1,7 +1,7 @@
 ---
 title: Azure Service Fabric Managed Clusters SDK for JavaScript
 description: Reference for Azure Service Fabric Managed Clusters SDK for JavaScript
-ms.date: 01/16/2025
+ms.date: 01/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: servicefabricmanagedclusters

@@ -1701,15 +1701,14 @@ interfaces:
   - '@azure-rest/arm-network.ExpressRoutePortsUpdateTagsQueryParam'
   - '@azure-rest/arm-network.ExpressRoutePortsUpdateTagsQueryParamProperties'
   - '@azure-rest/arm-network.ExpressRouteProviderPort'
+  - '@azure-rest/arm-network.ExpressRouteProviderPort200Response'
+  - '@azure-rest/arm-network.ExpressRouteProviderPortDefaultResponse'
   - '@azure-rest/arm-network.ExpressRouteProviderPortListResultOutput'
   - '@azure-rest/arm-network.ExpressRouteProviderPortOutput'
   - '@azure-rest/arm-network.ExpressRouteProviderPortProperties'
   - '@azure-rest/arm-network.ExpressRouteProviderPortPropertiesOutput'
-  - '@azure-rest/arm-network.ExpressRouteProviderPortsGet'
-  - '@azure-rest/arm-network.ExpressRouteProviderPortsGet200Response'
-  - '@azure-rest/arm-network.ExpressRouteProviderPortsGetDefaultResponse'
-  - '@azure-rest/arm-network.ExpressRouteProviderPortsGetQueryParam'
-  - '@azure-rest/arm-network.ExpressRouteProviderPortsGetQueryParamProperties'
+  - '@azure-rest/arm-network.ExpressRouteProviderPortQueryParam'
+  - '@azure-rest/arm-network.ExpressRouteProviderPortQueryParamProperties'
   - '@azure-rest/arm-network.ExpressRouteProviderPortsLocationList'
   - '@azure-rest/arm-network.ExpressRouteProviderPortsLocationList200Response'
   - '@azure-rest/arm-network.ExpressRouteProviderPortsLocationListDefaultResponse'
@@ -2854,6 +2853,7 @@ interfaces:
   - '@azure-rest/arm-network.NetworkInterfacesUpdateTagsMediaTypesParam'
   - '@azure-rest/arm-network.NetworkInterfacesUpdateTagsQueryParam'
   - '@azure-rest/arm-network.NetworkInterfacesUpdateTagsQueryParamProperties'
+  - '@azure-rest/arm-network.NetworkManagementClientOptions'
   - '@azure-rest/arm-network.NetworkManager'
   - '@azure-rest/arm-network.NetworkManagerCommit'
   - '@azure-rest/arm-network.NetworkManagerCommitOutput'
@@ -3388,6 +3388,8 @@ interfaces:
   - '@azure-rest/arm-network.PacketCapturesStopDefaultResponse'
   - '@azure-rest/arm-network.PacketCapturesStopQueryParam'
   - '@azure-rest/arm-network.PacketCapturesStopQueryParamProperties'
+  - '@azure-rest/arm-network.PageSettings'
+  - '@azure-rest/arm-network.PagedAsyncIterableIterator'
   - '@azure-rest/arm-network.PagingOptions'
   - '@azure-rest/arm-network.Parameter'
   - '@azure-rest/arm-network.ParameterOutput'
@@ -4294,6 +4296,7 @@ interfaces:
   - '@azure-rest/arm-network.SignaturesOverridesOutput'
   - '@azure-rest/arm-network.SignaturesOverridesProperties'
   - '@azure-rest/arm-network.SignaturesOverridesPropertiesOutput'
+  - '@azure-rest/arm-network.SimplePollerLike'
   - '@azure-rest/arm-network.SingleQueryResultOutput'
   - '@azure-rest/arm-network.Sku'
   - '@azure-rest/arm-network.SkuOutput'
@@ -5883,7 +5886,7 @@ typeAliases:
   - '@azure-rest/arm-network.ExpressRoutePortsLocationsGetParameters'
   - '@azure-rest/arm-network.ExpressRoutePortsLocationsListParameters'
   - '@azure-rest/arm-network.ExpressRoutePortsUpdateTagsParameters'
-  - '@azure-rest/arm-network.ExpressRouteProviderPortsGetParameters'
+  - '@azure-rest/arm-network.ExpressRouteProviderPortParameters'
   - '@azure-rest/arm-network.ExpressRouteProviderPortsLocationListParameters'
   - '@azure-rest/arm-network.ExpressRouteServiceProvidersListParameters'
   - '@azure-rest/arm-network.FirewallPoliciesCreateOrUpdateParameters'
@@ -6406,29 +6409,31 @@ typeAliases:
   - '@azure-rest/arm-network.WebCategoriesGetParameters'
   - '@azure-rest/arm-network.WebCategoriesListBySubscriptionParameters'
 functions:
-  - name: default(TokenCredential, ClientOptions)
+  - name: default(TokenCredential, NetworkManagementClientOptions)
     uid: '@azure-rest/arm-network.default'
     package: '@azure-rest/arm-network'
-    summary: Initialize a new instance of the class NetworkManagementClient class.
+    summary: Initialize a new instance of `NetworkManagementClient`
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function default(credentials: TokenCredential, options?: ClientOptions):
-        NetworkManagementClient
+        function default(credentials: TokenCredential, options?:
+        NetworkManagementClientOptions): NetworkManagementClient
       parameters:
         - id: credentials
           type: <xref uid="@azure/core-auth.TokenCredential" />
-          description: 'type: TokenCredential'
+          description: uniquely identify client credential
         - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: ''
+          type: >-
+            <xref uid="@azure-rest/arm-network.NetworkManagementClientOptions"
+            />
+          description: the parameter for all optional parameters
       return:
         description: ''
         type: <xref uid="@azure-rest/arm-network.NetworkManagementClient" />
   - name: >-
-      getLongRunningPoller<TResult>(Client, TResult, LroEngineOptions<TResult,
-      PollOperationState<TResult>>)
+      getLongRunningPoller<TResult>(Client, TResult,
+      CreateHttpPollerOptions<TResult, OperationState<TResult>>)
     uid: '@azure-rest/arm-network.getLongRunningPoller'
     package: '@azure-rest/arm-network'
     summary: >-
@@ -6439,9 +6444,9 @@ functions:
     syntax:
       content: >-
         function getLongRunningPoller<TResult>(client: Client, initialResponse:
-        TResult, options?: LroEngineOptions<TResult,
-        PollOperationState<TResult>>): PollerLike<PollOperationState<TResult>,
-        TResult>
+        TResult, options?: CreateHttpPollerOptions<TResult,
+        OperationState<TResult>>):
+        Promise<SimplePollerLike<OperationState<TResult>, TResult>>
       parameters:
         - id: client
           type: <xref uid="@azure-rest/core-client.Client" />
@@ -6451,17 +6456,17 @@ functions:
           description: The initial response.
         - id: options
           type: >-
-            <xref uid="@azure/core-lro.LroEngineOptions" />&lt;TResult, <xref
-            uid="@azure/core-lro.PollOperationState" />&lt;TResult&gt;&gt;
+            <xref uid="@azure/core-lro.CreateHttpPollerOptions" />&lt;TResult,
+            <xref uid="@azure/core-lro.OperationState" />&lt;TResult&gt;&gt;
           description: Options to set a resume state or custom polling interval.
       return:
         description: >-
           - A poller object to poll for operation state updates and eventually
           get the final response.
         type: >-
-          <xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;TResult&gt;,
-          TResult&gt;
+          Promise&lt;<xref uid="@azure-rest/arm-network.SimplePollerLike"
+          />&lt;<xref uid="@azure/core-lro.OperationState" />&lt;TResult&gt;,
+          TResult&gt;&gt;
   - name: >-
       isUnexpected(ApplicationGatewaysDelete200Response |
       ApplicationGatewaysDelete202Response |
@@ -7912,9 +7917,33 @@ functions:
         description: ''
         type: response
   - name: >-
+      isUnexpected(ExpressRouteProviderPort200Response |
+      ExpressRouteProviderPortDefaultResponse)
+    uid: '@azure-rest/arm-network.isUnexpected_56'
+    package: '@azure-rest/arm-network'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isUnexpected(response: ExpressRouteProviderPort200Response |
+        ExpressRouteProviderPortDefaultResponse): response
+      parameters:
+        - id: response
+          type: >-
+            <xref
+            uid="@azure-rest/arm-network.ExpressRouteProviderPort200Response" />
+            | <xref
+            uid="@azure-rest/arm-network.ExpressRouteProviderPortDefaultResponse"
+            />
+          description: ''
+      return:
+        description: ''
+        type: response
+  - name: >-
       isUnexpected(ListActiveConnectivityConfigurations200Response |
       ListActiveConnectivityConfigurationsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_56'
+    uid: '@azure-rest/arm-network.isUnexpected_57'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -7939,7 +7968,7 @@ functions:
   - name: >-
       isUnexpected(ListActiveSecurityAdminRules200Response |
       ListActiveSecurityAdminRulesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_57'
+    uid: '@azure-rest/arm-network.isUnexpected_58'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -7963,7 +7992,7 @@ functions:
   - name: >-
       isUnexpected(ListNetworkManagerEffectiveConnectivityConfigurations200Response
       | ListNetworkManagerEffectiveConnectivityConfigurationsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_58'
+    uid: '@azure-rest/arm-network.isUnexpected_59'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -7989,7 +8018,7 @@ functions:
   - name: >-
       isUnexpected(ListNetworkManagerEffectiveSecurityAdminRules200Response |
       ListNetworkManagerEffectiveSecurityAdminRulesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_59'
+    uid: '@azure-rest/arm-network.isUnexpected_60'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8014,7 +8043,7 @@ functions:
   - name: >-
       isUnexpected(SupportedSecurityProviders200Response |
       SupportedSecurityProvidersDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_60'
+    uid: '@azure-rest/arm-network.isUnexpected_61'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8039,7 +8068,7 @@ functions:
       isUnexpected(Generatevirtualwanvpnserverconfigurationvpnprofile200Response
       | Generatevirtualwanvpnserverconfigurationvpnprofile202Response |
       GeneratevirtualwanvpnserverconfigurationvpnprofileDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_61'
+    uid: '@azure-rest/arm-network.isUnexpected_62'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8069,7 +8098,7 @@ functions:
       isUnexpected(NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfaces200Response
       |
       NetworkInterfacesListCloudServiceRoleInstanceNetworkInterfacesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_62'
+    uid: '@azure-rest/arm-network.isUnexpected_63'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8096,7 +8125,7 @@ functions:
   - name: >-
       isUnexpected(NetworkInterfacesListCloudServiceNetworkInterfaces200Response
       | NetworkInterfacesListCloudServiceNetworkInterfacesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_63'
+    uid: '@azure-rest/arm-network.isUnexpected_64'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8122,7 +8151,7 @@ functions:
   - name: >-
       isUnexpected(NetworkInterfacesGetCloudServiceNetworkInterface200Response |
       NetworkInterfacesGetCloudServiceNetworkInterfaceDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_64'
+    uid: '@azure-rest/arm-network.isUnexpected_65'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8149,7 +8178,7 @@ functions:
       isUnexpected(NetworkInterfacesDelete200Response |
       NetworkInterfacesDelete202Response | NetworkInterfacesDelete204Response |
       NetworkInterfacesDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_65'
+    uid: '@azure-rest/arm-network.isUnexpected_66'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8178,7 +8207,7 @@ functions:
   - name: >-
       isUnexpected(NetworkInterfacesGet200Response |
       NetworkInterfacesGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_66'
+    uid: '@azure-rest/arm-network.isUnexpected_67'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8201,7 +8230,7 @@ functions:
       isUnexpected(NetworkInterfacesCreateOrUpdate200Response |
       NetworkInterfacesCreateOrUpdate201Response |
       NetworkInterfacesCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_67'
+    uid: '@azure-rest/arm-network.isUnexpected_68'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8229,7 +8258,7 @@ functions:
   - name: >-
       isUnexpected(NetworkInterfacesUpdateTags200Response |
       NetworkInterfacesUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_68'
+    uid: '@azure-rest/arm-network.isUnexpected_69'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8253,7 +8282,7 @@ functions:
   - name: >-
       isUnexpected(NetworkInterfacesListAll200Response |
       NetworkInterfacesListAllDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_69'
+    uid: '@azure-rest/arm-network.isUnexpected_70'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8277,7 +8306,7 @@ functions:
   - name: >-
       isUnexpected(NetworkInterfacesList200Response |
       NetworkInterfacesListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_70'
+    uid: '@azure-rest/arm-network.isUnexpected_71'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8301,7 +8330,7 @@ functions:
       isUnexpected(NetworkInterfacesGetEffectiveRouteTable200Response |
       NetworkInterfacesGetEffectiveRouteTable202Response |
       NetworkInterfacesGetEffectiveRouteTableDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_71'
+    uid: '@azure-rest/arm-network.isUnexpected_72'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8330,7 +8359,7 @@ functions:
       isUnexpected(NetworkInterfacesListEffectiveNetworkSecurityGroups200Response
       | NetworkInterfacesListEffectiveNetworkSecurityGroups202Response |
       NetworkInterfacesListEffectiveNetworkSecurityGroupsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_72'
+    uid: '@azure-rest/arm-network.isUnexpected_73'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8360,7 +8389,7 @@ functions:
       isUnexpected(NetworkInterfacesListVirtualMachineScaleSetVMNetworkInterfaces200Response
       |
       NetworkInterfacesListVirtualMachineScaleSetVMNetworkInterfacesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_73'
+    uid: '@azure-rest/arm-network.isUnexpected_74'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8388,7 +8417,7 @@ functions:
       isUnexpected(NetworkInterfacesListVirtualMachineScaleSetNetworkInterfaces200Response
       |
       NetworkInterfacesListVirtualMachineScaleSetNetworkInterfacesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_74'
+    uid: '@azure-rest/arm-network.isUnexpected_75'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8416,7 +8445,7 @@ functions:
       isUnexpected(NetworkInterfacesGetVirtualMachineScaleSetNetworkInterface200Response
       |
       NetworkInterfacesGetVirtualMachineScaleSetNetworkInterfaceDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_75'
+    uid: '@azure-rest/arm-network.isUnexpected_76'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8443,7 +8472,7 @@ functions:
       isUnexpected(NetworkInterfacesListVirtualMachineScaleSetIpConfigurations200Response
       |
       NetworkInterfacesListVirtualMachineScaleSetIpConfigurationsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_76'
+    uid: '@azure-rest/arm-network.isUnexpected_77'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8470,7 +8499,7 @@ functions:
       isUnexpected(NetworkInterfacesGetVirtualMachineScaleSetIpConfiguration200Response
       |
       NetworkInterfacesGetVirtualMachineScaleSetIpConfigurationDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_77'
+    uid: '@azure-rest/arm-network.isUnexpected_78'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8496,7 +8525,7 @@ functions:
   - name: >-
       isUnexpected(PublicIPAddressesListCloudServicePublicIPAddresses200Response
       | PublicIPAddressesListCloudServicePublicIPAddressesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_78'
+    uid: '@azure-rest/arm-network.isUnexpected_79'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8523,7 +8552,7 @@ functions:
       isUnexpected(PublicIPAddressesListCloudServiceRoleInstancePublicIPAddresses200Response
       |
       PublicIPAddressesListCloudServiceRoleInstancePublicIPAddressesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_79'
+    uid: '@azure-rest/arm-network.isUnexpected_80'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8550,7 +8579,7 @@ functions:
   - name: >-
       isUnexpected(PublicIPAddressesGetCloudServicePublicIPAddress200Response |
       PublicIPAddressesGetCloudServicePublicIPAddressDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_80'
+    uid: '@azure-rest/arm-network.isUnexpected_81'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8577,7 +8606,7 @@ functions:
       isUnexpected(PublicIPAddressesDelete200Response |
       PublicIPAddressesDelete202Response | PublicIPAddressesDelete204Response |
       PublicIPAddressesDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_81'
+    uid: '@azure-rest/arm-network.isUnexpected_82'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8606,7 +8635,7 @@ functions:
   - name: >-
       isUnexpected(PublicIPAddressesGet200Response |
       PublicIPAddressesGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_82'
+    uid: '@azure-rest/arm-network.isUnexpected_83'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8629,7 +8658,7 @@ functions:
       isUnexpected(PublicIPAddressesCreateOrUpdate200Response |
       PublicIPAddressesCreateOrUpdate201Response |
       PublicIPAddressesCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_83'
+    uid: '@azure-rest/arm-network.isUnexpected_84'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8657,7 +8686,7 @@ functions:
   - name: >-
       isUnexpected(PublicIPAddressesUpdateTags200Response |
       PublicIPAddressesUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_84'
+    uid: '@azure-rest/arm-network.isUnexpected_85'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8681,7 +8710,7 @@ functions:
   - name: >-
       isUnexpected(PublicIPAddressesListAll200Response |
       PublicIPAddressesListAllDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_85'
+    uid: '@azure-rest/arm-network.isUnexpected_86'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8705,7 +8734,7 @@ functions:
   - name: >-
       isUnexpected(PublicIPAddressesList200Response |
       PublicIPAddressesListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_86'
+    uid: '@azure-rest/arm-network.isUnexpected_87'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8729,7 +8758,7 @@ functions:
       isUnexpected(PublicIPAddressesDdosProtectionStatus200Response |
       PublicIPAddressesDdosProtectionStatus202Response |
       PublicIPAddressesDdosProtectionStatusDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_87'
+    uid: '@azure-rest/arm-network.isUnexpected_88'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8758,7 +8787,7 @@ functions:
       isUnexpected(PublicIPAddressesListVirtualMachineScaleSetPublicIPAddresses200Response
       |
       PublicIPAddressesListVirtualMachineScaleSetPublicIPAddressesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_88'
+    uid: '@azure-rest/arm-network.isUnexpected_89'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8786,7 +8815,7 @@ functions:
       isUnexpected(PublicIPAddressesListVirtualMachineScaleSetVMPublicIPAddresses200Response
       |
       PublicIPAddressesListVirtualMachineScaleSetVMPublicIPAddressesDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_89'
+    uid: '@azure-rest/arm-network.isUnexpected_90'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8814,7 +8843,7 @@ functions:
       isUnexpected(PublicIPAddressesGetVirtualMachineScaleSetPublicIPAddress200Response
       |
       PublicIPAddressesGetVirtualMachineScaleSetPublicIPAddressDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_90'
+    uid: '@azure-rest/arm-network.isUnexpected_91'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8841,7 +8870,7 @@ functions:
       isUnexpected(CustomIPPrefixesDelete200Response |
       CustomIPPrefixesDelete202Response | CustomIPPrefixesDelete204Response |
       CustomIPPrefixesDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_91'
+    uid: '@azure-rest/arm-network.isUnexpected_92'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8870,7 +8899,7 @@ functions:
   - name: >-
       isUnexpected(CustomIPPrefixesGet200Response |
       CustomIPPrefixesGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_92'
+    uid: '@azure-rest/arm-network.isUnexpected_93'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8893,7 +8922,7 @@ functions:
       isUnexpected(CustomIPPrefixesCreateOrUpdate200Response |
       CustomIPPrefixesCreateOrUpdate201Response |
       CustomIPPrefixesCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_93'
+    uid: '@azure-rest/arm-network.isUnexpected_94'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8921,7 +8950,7 @@ functions:
   - name: >-
       isUnexpected(CustomIPPrefixesUpdateTags200Response |
       CustomIPPrefixesUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_94'
+    uid: '@azure-rest/arm-network.isUnexpected_95'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8945,7 +8974,7 @@ functions:
   - name: >-
       isUnexpected(CustomIPPrefixesListAll200Response |
       CustomIPPrefixesListAllDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_95'
+    uid: '@azure-rest/arm-network.isUnexpected_96'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8969,7 +8998,7 @@ functions:
   - name: >-
       isUnexpected(CustomIPPrefixesList200Response |
       CustomIPPrefixesListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_96'
+    uid: '@azure-rest/arm-network.isUnexpected_97'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -8992,7 +9021,7 @@ functions:
       isUnexpected(DdosCustomPoliciesDelete200Response |
       DdosCustomPoliciesDelete202Response | DdosCustomPoliciesDelete204Response
       | DdosCustomPoliciesDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_97'
+    uid: '@azure-rest/arm-network.isUnexpected_98'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9022,7 +9051,7 @@ functions:
   - name: >-
       isUnexpected(DdosCustomPoliciesGet200Response |
       DdosCustomPoliciesGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_98'
+    uid: '@azure-rest/arm-network.isUnexpected_99'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9046,7 +9075,7 @@ functions:
       isUnexpected(DdosCustomPoliciesCreateOrUpdate200Response |
       DdosCustomPoliciesCreateOrUpdate201Response |
       DdosCustomPoliciesCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_99'
+    uid: '@azure-rest/arm-network.isUnexpected_100'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9074,7 +9103,7 @@ functions:
   - name: >-
       isUnexpected(DdosCustomPoliciesUpdateTags200Response |
       DdosCustomPoliciesUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_100'
+    uid: '@azure-rest/arm-network.isUnexpected_101'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9100,7 +9129,7 @@ functions:
       DdosProtectionPlansDelete202Response |
       DdosProtectionPlansDelete204Response |
       DdosProtectionPlansDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_101'
+    uid: '@azure-rest/arm-network.isUnexpected_102'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9130,7 +9159,7 @@ functions:
   - name: >-
       isUnexpected(DdosProtectionPlansGet200Response |
       DdosProtectionPlansGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_102'
+    uid: '@azure-rest/arm-network.isUnexpected_103'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9155,7 +9184,7 @@ functions:
       isUnexpected(DdosProtectionPlansCreateOrUpdate200Response |
       DdosProtectionPlansCreateOrUpdate201Response |
       DdosProtectionPlansCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_103'
+    uid: '@azure-rest/arm-network.isUnexpected_104'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9183,7 +9212,7 @@ functions:
   - name: >-
       isUnexpected(DdosProtectionPlansUpdateTags200Response |
       DdosProtectionPlansUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_104'
+    uid: '@azure-rest/arm-network.isUnexpected_105'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9207,7 +9236,7 @@ functions:
   - name: >-
       isUnexpected(DdosProtectionPlansList200Response |
       DdosProtectionPlansListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_105'
+    uid: '@azure-rest/arm-network.isUnexpected_106'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9231,7 +9260,7 @@ functions:
   - name: >-
       isUnexpected(DdosProtectionPlansListByResourceGroup200Response |
       DdosProtectionPlansListByResourceGroupDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_106'
+    uid: '@azure-rest/arm-network.isUnexpected_107'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9257,7 +9286,7 @@ functions:
       isUnexpected(DscpConfigurationCreateOrUpdate200Response |
       DscpConfigurationCreateOrUpdate201Response |
       DscpConfigurationCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_107'
+    uid: '@azure-rest/arm-network.isUnexpected_108'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9286,7 +9315,7 @@ functions:
       isUnexpected(DscpConfigurationDelete200Response |
       DscpConfigurationDelete202Response | DscpConfigurationDelete204Response |
       DscpConfigurationDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_108'
+    uid: '@azure-rest/arm-network.isUnexpected_109'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9315,7 +9344,7 @@ functions:
   - name: >-
       isUnexpected(DscpConfigurationGet200Response |
       DscpConfigurationGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_109'
+    uid: '@azure-rest/arm-network.isUnexpected_110'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9337,7 +9366,7 @@ functions:
   - name: >-
       isUnexpected(DscpConfigurationList200Response |
       DscpConfigurationListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_110'
+    uid: '@azure-rest/arm-network.isUnexpected_111'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9360,7 +9389,7 @@ functions:
   - name: >-
       isUnexpected(DscpConfigurationListAll200Response |
       DscpConfigurationListAllDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_111'
+    uid: '@azure-rest/arm-network.isUnexpected_112'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9384,7 +9413,7 @@ functions:
   - name: >-
       isUnexpected(AvailableEndpointServicesList200Response |
       AvailableEndpointServicesListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_112'
+    uid: '@azure-rest/arm-network.isUnexpected_113'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9410,7 +9439,7 @@ functions:
       ExpressRouteCircuitAuthorizationsDelete202Response |
       ExpressRouteCircuitAuthorizationsDelete204Response |
       ExpressRouteCircuitAuthorizationsDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_113'
+    uid: '@azure-rest/arm-network.isUnexpected_114'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9441,7 +9470,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitAuthorizationsGet200Response |
       ExpressRouteCircuitAuthorizationsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_114'
+    uid: '@azure-rest/arm-network.isUnexpected_115'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9467,7 +9496,7 @@ functions:
       isUnexpected(ExpressRouteCircuitAuthorizationsCreateOrUpdate200Response |
       ExpressRouteCircuitAuthorizationsCreateOrUpdate201Response |
       ExpressRouteCircuitAuthorizationsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_115'
+    uid: '@azure-rest/arm-network.isUnexpected_116'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9496,7 +9525,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitAuthorizationsList200Response |
       ExpressRouteCircuitAuthorizationsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_116'
+    uid: '@azure-rest/arm-network.isUnexpected_117'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9523,7 +9552,7 @@ functions:
       ExpressRouteCircuitPeeringsDelete202Response |
       ExpressRouteCircuitPeeringsDelete204Response |
       ExpressRouteCircuitPeeringsDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_117'
+    uid: '@azure-rest/arm-network.isUnexpected_118'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9554,7 +9583,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitPeeringsGet200Response |
       ExpressRouteCircuitPeeringsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_118'
+    uid: '@azure-rest/arm-network.isUnexpected_119'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9580,7 +9609,7 @@ functions:
       isUnexpected(ExpressRouteCircuitPeeringsCreateOrUpdate200Response |
       ExpressRouteCircuitPeeringsCreateOrUpdate201Response |
       ExpressRouteCircuitPeeringsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_119'
+    uid: '@azure-rest/arm-network.isUnexpected_120'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9608,7 +9637,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitPeeringsList200Response |
       ExpressRouteCircuitPeeringsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_120'
+    uid: '@azure-rest/arm-network.isUnexpected_121'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9635,7 +9664,7 @@ functions:
       ExpressRouteCircuitConnectionsDelete202Response |
       ExpressRouteCircuitConnectionsDelete204Response |
       ExpressRouteCircuitConnectionsDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_121'
+    uid: '@azure-rest/arm-network.isUnexpected_122'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9666,7 +9695,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitConnectionsGet200Response |
       ExpressRouteCircuitConnectionsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_122'
+    uid: '@azure-rest/arm-network.isUnexpected_123'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9692,7 +9721,7 @@ functions:
       isUnexpected(ExpressRouteCircuitConnectionsCreateOrUpdate200Response |
       ExpressRouteCircuitConnectionsCreateOrUpdate201Response |
       ExpressRouteCircuitConnectionsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_123'
+    uid: '@azure-rest/arm-network.isUnexpected_124'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9720,7 +9749,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitConnectionsList200Response |
       ExpressRouteCircuitConnectionsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_124'
+    uid: '@azure-rest/arm-network.isUnexpected_125'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9745,7 +9774,7 @@ functions:
   - name: >-
       isUnexpected(PeerExpressRouteCircuitConnectionsGet200Response |
       PeerExpressRouteCircuitConnectionsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_125'
+    uid: '@azure-rest/arm-network.isUnexpected_126'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9770,7 +9799,7 @@ functions:
   - name: >-
       isUnexpected(PeerExpressRouteCircuitConnectionsList200Response |
       PeerExpressRouteCircuitConnectionsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_126'
+    uid: '@azure-rest/arm-network.isUnexpected_127'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9797,7 +9826,7 @@ functions:
       ExpressRouteCircuitsDelete202Response |
       ExpressRouteCircuitsDelete204Response |
       ExpressRouteCircuitsDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_127'
+    uid: '@azure-rest/arm-network.isUnexpected_128'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9827,7 +9856,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitsGet200Response |
       ExpressRouteCircuitsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_128'
+    uid: '@azure-rest/arm-network.isUnexpected_129'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9852,7 +9881,7 @@ functions:
       isUnexpected(ExpressRouteCircuitsCreateOrUpdate200Response |
       ExpressRouteCircuitsCreateOrUpdate201Response |
       ExpressRouteCircuitsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_129'
+    uid: '@azure-rest/arm-network.isUnexpected_130'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9880,7 +9909,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitsUpdateTags200Response |
       ExpressRouteCircuitsUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_130'
+    uid: '@azure-rest/arm-network.isUnexpected_131'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9906,7 +9935,7 @@ functions:
       isUnexpected(ExpressRouteCircuitsListArpTable200Response |
       ExpressRouteCircuitsListArpTable202Response |
       ExpressRouteCircuitsListArpTableDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_131'
+    uid: '@azure-rest/arm-network.isUnexpected_132'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9935,7 +9964,7 @@ functions:
       isUnexpected(ExpressRouteCircuitsListRoutesTable200Response |
       ExpressRouteCircuitsListRoutesTable202Response |
       ExpressRouteCircuitsListRoutesTableDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_132'
+    uid: '@azure-rest/arm-network.isUnexpected_133'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9964,7 +9993,7 @@ functions:
       isUnexpected(ExpressRouteCircuitsListRoutesTableSummary200Response |
       ExpressRouteCircuitsListRoutesTableSummary202Response |
       ExpressRouteCircuitsListRoutesTableSummaryDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_133'
+    uid: '@azure-rest/arm-network.isUnexpected_134'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -9992,7 +10021,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitsGetStats200Response |
       ExpressRouteCircuitsGetStatsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_134'
+    uid: '@azure-rest/arm-network.isUnexpected_135'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10016,7 +10045,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitsGetPeeringStats200Response |
       ExpressRouteCircuitsGetPeeringStatsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_135'
+    uid: '@azure-rest/arm-network.isUnexpected_136'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10041,7 +10070,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitsList200Response |
       ExpressRouteCircuitsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_136'
+    uid: '@azure-rest/arm-network.isUnexpected_137'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10065,7 +10094,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCircuitsListAll200Response |
       ExpressRouteCircuitsListAllDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_137'
+    uid: '@azure-rest/arm-network.isUnexpected_138'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10089,7 +10118,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteServiceProvidersList200Response |
       ExpressRouteServiceProvidersListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_138'
+    uid: '@azure-rest/arm-network.isUnexpected_139'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10114,7 +10143,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCrossConnectionsList200Response |
       ExpressRouteCrossConnectionsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_139'
+    uid: '@azure-rest/arm-network.isUnexpected_140'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10139,7 +10168,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCrossConnectionsListByResourceGroup200Response |
       ExpressRouteCrossConnectionsListByResourceGroupDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_140'
+    uid: '@azure-rest/arm-network.isUnexpected_141'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10165,7 +10194,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCrossConnectionsGet200Response |
       ExpressRouteCrossConnectionsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_141'
+    uid: '@azure-rest/arm-network.isUnexpected_142'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10190,7 +10219,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCrossConnectionsCreateOrUpdate200Response |
       ExpressRouteCrossConnectionsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_142'
+    uid: '@azure-rest/arm-network.isUnexpected_143'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10215,7 +10244,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCrossConnectionsUpdateTags200Response |
       ExpressRouteCrossConnectionsUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_143'
+    uid: '@azure-rest/arm-network.isUnexpected_144'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10241,7 +10270,7 @@ functions:
       isUnexpected(ExpressRouteCrossConnectionsListArpTable200Response |
       ExpressRouteCrossConnectionsListArpTable202Response |
       ExpressRouteCrossConnectionsListArpTableDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_144'
+    uid: '@azure-rest/arm-network.isUnexpected_145'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10270,7 +10299,7 @@ functions:
       isUnexpected(ExpressRouteCrossConnectionsListRoutesTableSummary200Response
       | ExpressRouteCrossConnectionsListRoutesTableSummary202Response |
       ExpressRouteCrossConnectionsListRoutesTableSummaryDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_145'
+    uid: '@azure-rest/arm-network.isUnexpected_146'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10300,7 +10329,7 @@ functions:
       isUnexpected(ExpressRouteCrossConnectionsListRoutesTable200Response |
       ExpressRouteCrossConnectionsListRoutesTable202Response |
       ExpressRouteCrossConnectionsListRoutesTableDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_146'
+    uid: '@azure-rest/arm-network.isUnexpected_147'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10328,7 +10357,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCrossConnectionPeeringsList200Response |
       ExpressRouteCrossConnectionPeeringsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_147'
+    uid: '@azure-rest/arm-network.isUnexpected_148'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10355,7 +10384,7 @@ functions:
       ExpressRouteCrossConnectionPeeringsDelete202Response |
       ExpressRouteCrossConnectionPeeringsDelete204Response |
       ExpressRouteCrossConnectionPeeringsDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_148'
+    uid: '@azure-rest/arm-network.isUnexpected_149'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10386,7 +10415,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteCrossConnectionPeeringsGet200Response |
       ExpressRouteCrossConnectionPeeringsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_149'
+    uid: '@azure-rest/arm-network.isUnexpected_150'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10412,7 +10441,7 @@ functions:
       isUnexpected(ExpressRouteCrossConnectionPeeringsCreateOrUpdate200Response
       | ExpressRouteCrossConnectionPeeringsCreateOrUpdate201Response |
       ExpressRouteCrossConnectionPeeringsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_150'
+    uid: '@azure-rest/arm-network.isUnexpected_151'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10441,7 +10470,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortsLocationsList200Response |
       ExpressRoutePortsLocationsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_151'
+    uid: '@azure-rest/arm-network.isUnexpected_152'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10466,7 +10495,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortsLocationsGet200Response |
       ExpressRoutePortsLocationsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_152'
+    uid: '@azure-rest/arm-network.isUnexpected_153'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10491,7 +10520,7 @@ functions:
       isUnexpected(ExpressRoutePortsDelete200Response |
       ExpressRoutePortsDelete202Response | ExpressRoutePortsDelete204Response |
       ExpressRoutePortsDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_153'
+    uid: '@azure-rest/arm-network.isUnexpected_154'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10520,7 +10549,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortsGet200Response |
       ExpressRoutePortsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_154'
+    uid: '@azure-rest/arm-network.isUnexpected_155'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10543,7 +10572,7 @@ functions:
       isUnexpected(ExpressRoutePortsCreateOrUpdate200Response |
       ExpressRoutePortsCreateOrUpdate201Response |
       ExpressRoutePortsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_155'
+    uid: '@azure-rest/arm-network.isUnexpected_156'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10571,7 +10600,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortsUpdateTags200Response |
       ExpressRoutePortsUpdateTagsDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_156'
+    uid: '@azure-rest/arm-network.isUnexpected_157'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10595,7 +10624,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortsListByResourceGroup200Response |
       ExpressRoutePortsListByResourceGroupDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_157'
+    uid: '@azure-rest/arm-network.isUnexpected_158'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10620,7 +10649,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortsList200Response |
       ExpressRoutePortsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_158'
+    uid: '@azure-rest/arm-network.isUnexpected_159'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10643,7 +10672,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortsGenerateLOA200Response |
       ExpressRoutePortsGenerateLOADefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_159'
+    uid: '@azure-rest/arm-network.isUnexpected_160'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10667,7 +10696,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteLinksGet200Response |
       ExpressRouteLinksGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_160'
+    uid: '@azure-rest/arm-network.isUnexpected_161'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10689,7 +10718,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteLinksList200Response |
       ExpressRouteLinksListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_161'
+    uid: '@azure-rest/arm-network.isUnexpected_162'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10714,7 +10743,7 @@ functions:
       ExpressRoutePortAuthorizationsDelete202Response |
       ExpressRoutePortAuthorizationsDelete204Response |
       ExpressRoutePortAuthorizationsDeleteDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_162'
+    uid: '@azure-rest/arm-network.isUnexpected_163'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10745,7 +10774,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortAuthorizationsGet200Response |
       ExpressRoutePortAuthorizationsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_163'
+    uid: '@azure-rest/arm-network.isUnexpected_164'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10771,7 +10800,7 @@ functions:
       isUnexpected(ExpressRoutePortAuthorizationsCreateOrUpdate200Response |
       ExpressRoutePortAuthorizationsCreateOrUpdate201Response |
       ExpressRoutePortAuthorizationsCreateOrUpdateDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_164'
+    uid: '@azure-rest/arm-network.isUnexpected_165'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10799,7 +10828,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRoutePortAuthorizationsList200Response |
       ExpressRoutePortAuthorizationsListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_165'
+    uid: '@azure-rest/arm-network.isUnexpected_166'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10824,7 +10853,7 @@ functions:
   - name: >-
       isUnexpected(ExpressRouteProviderPortsLocationList200Response |
       ExpressRouteProviderPortsLocationListDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_166'
+    uid: '@azure-rest/arm-network.isUnexpected_167'
     package: '@azure-rest/arm-network'
     summary: ''
     remarks: ''
@@ -10841,30 +10870,6 @@ functions:
             uid="@azure-rest/arm-network.ExpressRouteProviderPortsLocationList200Response"
             /> | <xref
             uid="@azure-rest/arm-network.ExpressRouteProviderPortsLocationListDefaultResponse"
-            />
-          description: ''
-      return:
-        description: ''
-        type: response
-  - name: >-
-      isUnexpected(ExpressRouteProviderPortsGet200Response |
-      ExpressRouteProviderPortsGetDefaultResponse)
-    uid: '@azure-rest/arm-network.isUnexpected_167'
-    package: '@azure-rest/arm-network'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function isUnexpected(response: ExpressRouteProviderPortsGet200Response
-        | ExpressRouteProviderPortsGetDefaultResponse): response
-      parameters:
-        - id: response
-          type: >-
-            <xref
-            uid="@azure-rest/arm-network.ExpressRouteProviderPortsGet200Response"
-            /> | <xref
-            uid="@azure-rest/arm-network.ExpressRouteProviderPortsGetDefaultResponse"
             />
           description: ''
       return:
@@ -22397,5 +22402,6 @@ functions:
       return:
         description: '- PagedAsyncIterableIterator to iterate the elements'
         type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure-rest/arm-network.PaginateReturn" />&lt;TResponse&gt;&gt;
+          <xref uid="@azure-rest/arm-network.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure-rest/arm-network.PaginateReturn"
+          />&lt;TResponse&gt;&gt;

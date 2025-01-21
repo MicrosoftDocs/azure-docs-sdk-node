@@ -1,12 +1,12 @@
 ---
 title: Azure Event Grid client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/eventgrid, azure-event-grid
-ms.date: 12/02/2024
+ms.date: 01/21/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-event-grid
 ---
-# Azure Event Grid client library for JavaScript - version 5.9.0 
+# Azure Event Grid client library for JavaScript - version 5.10.0 
 
 
 [Azure Event Grid](https://azure.microsoft.com/services/event-grid/) is a cloud-based service that provides reliable event delivery at massive scale.
@@ -19,11 +19,11 @@ Use the client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.9.0/sdk/eventgrid/eventgrid/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.10.0/sdk/eventgrid/eventgrid/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/eventgrid)
-- [API reference documentation](/javascript/api/@azure/eventgrid/)
-- [Product documentation](/azure/event-grid/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.9.0/sdk/eventgrid/eventgrid/samples)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/eventgrid/)
+- [Product documentation](https://learn.microsoft.com/azure/event-grid/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.10.0/sdk/eventgrid/eventgrid/samples)
 
 ## Getting started
 
@@ -32,7 +32,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.9.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.10.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -87,7 +87,7 @@ const { EventGridPublisherClient, AzureKeyCredential } = require("@azure/eventgr
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "<endpoint schema>",
-  new AzureKeyCredential("<Access Key>")
+  new AzureKeyCredential("<Access Key>"),
 );
 ```
 
@@ -101,7 +101,7 @@ const { EventGridPublisherClient, AzureSASCredential } = require("@azure/eventgr
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "<endpoint schema>",
-  new AzureSASCredential("<SAS Token>")
+  new AzureSASCredential("<SAS Token>"),
 );
 ```
 
@@ -114,7 +114,7 @@ const { generateSharedAccessSignature, AzureKeyCredential } = require("@azure/ev
 const token = generateSharedAccessSignature(
   "<endpoint>",
   new AzureKeyCredential("<API key>"),
-  new Date("2020-01-01T00:00:00")
+  new Date("2020-01-01T00:00:00"),
 );
 ```
 
@@ -124,7 +124,7 @@ Azure EventGrid provides integration with Azure Active Directory (Azure AD) for 
 
 To send events to a topic or domain with a `TokenCredential`, the authenticated identity should have the "EventGrid Data Sender" role assigned.
 
-With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments. To learn more about Azure Active Directory, see the [`@azure/identity` README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.9.0/sdk/identity/identity/README.md).
+With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments. To learn more about Azure Active Directory, see the [`@azure/identity` README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.10.0/sdk/identity/identity/README.md).
 
 For example, use can use `DefaultAzureCredential` to construct a client which will authenticate using Azure Active Directory:
 
@@ -135,7 +135,7 @@ const { DefaultAzureCredential } = require("@azure/identity");
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "<endpoint schema>",
-  new DefaultAzureCredential()
+  new DefaultAzureCredential(),
 );
 ```
 
@@ -155,7 +155,7 @@ If your topic is configured to use the Event Grid Schema, set "EventGrid" as the
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "EventGrid",
-  new AzureKeyCredential("<API Key>")
+  new AzureKeyCredential("<API Key>"),
 );
 ```
 
@@ -165,7 +165,7 @@ If your topic is configured to use the Cloud Event Schema, set "CloudEvent" as t
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "CloudEvent",
-  new AzureKeyCredential("<API Key>")
+  new AzureKeyCredential("<API Key>"),
 );
 ```
 
@@ -175,7 +175,7 @@ If your topic is configured to use a Custom Event Schema, set "Custom" as the sc
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "Custom",
-  new AzureKeyCredential("<API Key>")
+  new AzureKeyCredential("<API Key>"),
 );
 ```
 
@@ -218,7 +218,7 @@ const { EventGridPublisherClient, AzureKeyCredential } = require("@azure/eventgr
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "EventGrid",
-  new AzureKeyCredential("<API key>")
+  new AzureKeyCredential("<API key>"),
 );
 
 await client.send([
@@ -243,7 +243,7 @@ const { EventGridPublisherClient, AzureKeyCredential } = require("@azure/eventgr
 const client = new EventGridPublisherClient(
   "<endpoint>",
   "EventGrid",
-  new AzureKeyCredential("<API key>")
+  new AzureKeyCredential("<API key>"),
 );
 
 await client.send([
@@ -307,17 +307,17 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable the logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.9.0/sdk/core/logger).
+For more detailed instructions on how to enable the logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.10.0/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.9.0/sdk/eventgrid/eventgrid/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.10.0/sdk/eventgrid/eventgrid/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.9.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_5.10.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -325,11 +325,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Feventgrid%2Feventgrid%2FREADME.png)
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
-[event_grid]: /azure/event-grid
+[event_grid]: https://learn.microsoft.com/azure/event-grid
 [azure_portal]: https://portal.azure.com
-[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.9.0/sdk/core/core-tracing
+[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_5.10.0/sdk/core/core-tracing
 [cloud-events-distributed-tracing-spec]: https://github.com/cloudevents/spec/blob/v1.0.1/extensions/distributed-tracing.md
-[eventgrid-on-kubernetes-using-azure-arc]: /azure/event-grid/kubernetes/
+[eventgrid-on-kubernetes-using-azure-arc]: https://learn.microsoft.com/azure/event-grid/kubernetes/
 

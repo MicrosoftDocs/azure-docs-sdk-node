@@ -332,12 +332,12 @@ await jobRouterClient.closeJob(jobId, assignmentId, { dispositionCode: "Resolved
 ## Next steps
 
 Take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-job-router_1.0.0-alpha.20250122.2/sdk/communication/)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-job-router_1.0.0-alpha.20250122.7/sdk/communication/)
 directory for additional detailed examples of using this SDK.
 
 ## Contributing
 
-If you'd like to contribute to this SDK, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-job-router_1.0.0-alpha.20250122.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this SDK, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-job-router_1.0.0-alpha.20250122.7/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

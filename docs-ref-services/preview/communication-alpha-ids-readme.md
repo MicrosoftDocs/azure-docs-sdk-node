@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Alpha IDs client library for JavaScript - version 1.0.0-alpha.20250122.2 
+# Azure Communication Alpha IDs client library for JavaScript - version 1.0.0-alpha.20250122.7 
 
 
 The Alpha IDs library provides capabilities for Alpha IDs administration.
@@ -111,7 +111,7 @@ Please take a look at the samples directory for detailed examples on how to use 
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.7/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -121,9 +121,9 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.2/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.2/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.2/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.7/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.7/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-alpha-ids_1.0.0-alpha.20250122.7/sdk/identity/identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-alpha-ids%2FREADME.png)
 

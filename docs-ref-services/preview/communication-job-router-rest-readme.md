@@ -6,19 +6,19 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Services Job Router REST client library for JavaScript - version 1.1.0-alpha.20250122.2 
+# Azure Communication Services Job Router REST client library for JavaScript - version 1.1.0-alpha.20250122.7 
 
 
 This package contains a JavaScript SDK for Azure Communication Services Job Router.
 Read more about Azure Communication Services [here](https://learn.microsoft.com/azure/communication-services/overview)
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/sdk/communication/communication-job-router-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/sdk/communication/communication-job-router-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/communication-job-router)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/sdk/communication/communication-job-router-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/sdk/communication/communication-job-router-rest/samples)
 
 ## Getting started
 
@@ -44,14 +44,14 @@ npm install @azure-rest/communication-job-router
 
 ### Create and authenticate an `AzureCommunicationRoutingServiceClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -410,5 +410,5 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-job-router_1.1.0-alpha.20250122.7/sdk/core/logger).
 

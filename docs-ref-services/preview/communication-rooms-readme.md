@@ -6,16 +6,16 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure RoomsApi client library for JavaScript - version 1.1.1-alpha.20250122.2 
+# Azure RoomsApi client library for JavaScript - version 1.1.1-alpha.20250122.7 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure RoomsApi client.
 
 Communication Rooms Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.2/sdk/communication/communication-rooms) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.7/sdk/communication/communication-rooms) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/communication-rooms) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.2/sdk/communication/communication-rooms/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.7/sdk/communication/communication-rooms/samples)
 
 ## Getting started
 
@@ -229,15 +229,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.7/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.2/sdk/communication/communication-rooms/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.7/sdk/communication/communication-rooms/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-rooms_1.1.1-alpha.20250122.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-rooms_1.1.1-alpha.20250122.7/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -249,7 +249,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.2/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.7/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1-alpha.20250122.7/sdk/identity/identity#defaultazurecredential
 [communication_identity]: https://github.com/Azure/azure-sdk-for-js/edit/main/sdk/communication/communication-identity
 

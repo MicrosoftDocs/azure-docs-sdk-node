@@ -1,7 +1,7 @@
 ---
 title: Azure Health Data AI Services SDK for JavaScript
 description: Reference for Azure Health Data AI Services SDK for JavaScript
-ms.date: 01/22/2025
+ms.date: 01/23/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: healthdataaiservices

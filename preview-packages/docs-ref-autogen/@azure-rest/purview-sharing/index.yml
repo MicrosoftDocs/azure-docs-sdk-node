@@ -31,11 +31,14 @@ interfaces:
   - '@azure-rest/purview-sharing.InPlaceSentShareProperties'
   - '@azure-rest/purview-sharing.InPlaceSentSharePropertiesOutput'
   - '@azure-rest/purview-sharing.OperationResponseOutput'
+  - '@azure-rest/purview-sharing.PageSettings'
+  - '@azure-rest/purview-sharing.PagedAsyncIterableIterator'
   - '@azure-rest/purview-sharing.PagingOptions'
   - '@azure-rest/purview-sharing.ProxyResource'
   - '@azure-rest/purview-sharing.ProxyResourceOutput'
   - '@azure-rest/purview-sharing.PurviewShareErrorInfoOutput'
   - '@azure-rest/purview-sharing.PurviewShareErrorOutput'
+  - '@azure-rest/purview-sharing.PurviewSharingClientOptions'
   - '@azure-rest/purview-sharing.ReceivedShareListOutput'
   - '@azure-rest/purview-sharing.ReceivedShareOutputParent'
   - '@azure-rest/purview-sharing.ReceivedShareParent'
@@ -173,6 +176,18 @@ interfaces:
   - '@azure-rest/purview-sharing.ServiceInvitationOutput'
   - '@azure-rest/purview-sharing.ServiceInvitationProperties'
   - '@azure-rest/purview-sharing.ServiceInvitationPropertiesOutput'
+  - '@azure-rest/purview-sharing.ShareResource'
+  - '@azure-rest/purview-sharing.ShareResourceListOutput'
+  - '@azure-rest/purview-sharing.ShareResourceOutput'
+  - '@azure-rest/purview-sharing.ShareResourcesGetAllShareResources'
+  - '@azure-rest/purview-sharing.ShareResourcesGetAllShareResources200Response'
+  - '@azure-rest/purview-sharing.ShareResourcesGetAllShareResourcesDefaultHeaders'
+  - >-
+    @azure-rest/purview-sharing.ShareResourcesGetAllShareResourcesDefaultResponse
+  - '@azure-rest/purview-sharing.ShareResourcesGetAllShareResourcesQueryParam'
+  - >-
+    @azure-rest/purview-sharing.ShareResourcesGetAllShareResourcesQueryParamProperties
+  - '@azure-rest/purview-sharing.SimplePollerLike'
   - '@azure-rest/purview-sharing.SinkOutputParent'
   - '@azure-rest/purview-sharing.SinkParent'
   - '@azure-rest/purview-sharing.StorageAccountPath'
@@ -221,10 +236,11 @@ typeAliases:
   - '@azure-rest/purview-sharing.SentSharesGetSentShareParameters'
   - >-
     @azure-rest/purview-sharing.SentSharesNotifyUserSentShareInvitationParameters
+  - '@azure-rest/purview-sharing.ShareResourcesGetAllShareResourcesParameters'
   - '@azure-rest/purview-sharing.Sink'
   - '@azure-rest/purview-sharing.SinkOutput'
 functions:
-  - name: default(string, TokenCredential, ClientOptions)
+  - name: default(string, TokenCredential, PurviewSharingClientOptions)
     uid: '@azure-rest/purview-sharing.default'
     package: '@azure-rest/purview-sharing'
     summary: Initialize a new instance of `PurviewSharingClient`
@@ -233,19 +249,21 @@ functions:
     syntax:
       content: >-
         function default(endpoint: string, credentials: TokenCredential,
-        options?: ClientOptions): PurviewSharingClient
+        options?: PurviewSharingClientOptions): PurviewSharingClient
       parameters:
         - id: endpoint
           type: string
           description: >-
-            type: string, The sharing endpoint of your purview account. Example:
+            The sharing endpoint of your purview account. Example:
             https://{accountName}.purview.azure.com/share
         - id: credentials
           type: <xref uid="@azure/core-auth.TokenCredential" />
-          description: 'type: TokenCredential, uniquely identify client credential'
+          description: uniquely identify client credential
         - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: 'type: ClientOptions, the parameter for all optional parameters'
+          type: >-
+            <xref uid="@azure-rest/purview-sharing.PurviewSharingClientOptions"
+            />
+          description: the parameter for all optional parameters
       return:
         description: ''
         type: <xref uid="@azure-rest/purview-sharing.PurviewSharingClient" />
@@ -282,8 +300,8 @@ functions:
           - A poller object to poll for operation state updates and eventually
           get the final response.
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
-          uid="@azure/core-lro.OperationState" />&lt;TResult&gt;,
+          Promise&lt;<xref uid="@azure-rest/purview-sharing.SimplePollerLike"
+          />&lt;<xref uid="@azure/core-lro.OperationState" />&lt;TResult&gt;,
           TResult&gt;&gt;
   - name: >-
       isUnexpected(ReceivedSharesGetReceivedShare200Response |
@@ -688,6 +706,31 @@ functions:
       return:
         description: ''
         type: response
+  - name: >-
+      isUnexpected(ShareResourcesGetAllShareResources200Response |
+      ShareResourcesGetAllShareResourcesDefaultResponse)
+    uid: '@azure-rest/purview-sharing.isUnexpected_16'
+    package: '@azure-rest/purview-sharing'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isUnexpected(response:
+        ShareResourcesGetAllShareResources200Response |
+        ShareResourcesGetAllShareResourcesDefaultResponse): response
+      parameters:
+        - id: response
+          type: >-
+            <xref
+            uid="@azure-rest/purview-sharing.ShareResourcesGetAllShareResources200Response"
+            /> | <xref
+            uid="@azure-rest/purview-sharing.ShareResourcesGetAllShareResourcesDefaultResponse"
+            />
+          description: ''
+      return:
+        description: ''
+        type: response
   - name: paginate<TResponse>(Client, TResponse, PagingOptions<TResponse>)
     uid: '@azure-rest/purview-sharing.paginate'
     package: '@azure-rest/purview-sharing'
@@ -718,6 +761,6 @@ functions:
       return:
         description: '- PagedAsyncIterableIterator to iterate the elements'
         type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure-rest/purview-sharing.PaginateReturn"
+          <xref uid="@azure-rest/purview-sharing.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure-rest/purview-sharing.PaginateReturn"
           />&lt;TResponse&gt;&gt;

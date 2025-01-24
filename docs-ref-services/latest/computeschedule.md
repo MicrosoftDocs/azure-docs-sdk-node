@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: computeschedule
 ---
-# Azure Computeschedule SDK for JavaScript - preview
-## Packages - preview
+# Azure Computeschedule SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](computeschedule-index.md)]

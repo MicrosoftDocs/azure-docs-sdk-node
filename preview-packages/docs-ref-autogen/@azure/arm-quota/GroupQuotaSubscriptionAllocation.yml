@@ -9,85 +9,29 @@ isDeprecated: false
 type: interface
 methods:
   - name: >-
-      get(string, string, string, string,
-      GroupQuotaSubscriptionAllocationGetOptionalParams)
-    uid: '@azure/arm-quota.GroupQuotaSubscriptionAllocation.get'
-    package: '@azure/arm-quota'
-    summary: >-
-      Gets Quota allocated to a subscription for the specific Resource Provider,
-      Location, ResourceName.
-
-      This will include the GroupQuota and total quota allocated to the
-      subscription. Only the Group quota
-
-      allocated to the subscription can be allocated back to the MG Group Quota.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(managementGroupId: string, groupQuotaName: string,
-        resourceName: string, filter: string, options?:
-        GroupQuotaSubscriptionAllocationGetOptionalParams):
-        Promise<SubscriptionQuotaAllocations>
-      parameters:
-        - id: managementGroupId
-          type: string
-          description: Management Group Id.
-        - id: groupQuotaName
-          type: string
-          description: >-
-            The GroupQuota name. The name should be unique for the provided
-            context
-                                  tenantId/MgId.
-        - id: resourceName
-          type: string
-          description: Resource name.
-        - id: filter
-          type: string
-          description: |-
-            | Field | Supported operators
-                          |---------------------|------------------------
-
-                           location eq {location}
-                           Example: $filter=location eq eastus
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/arm-quota.GroupQuotaSubscriptionAllocationGetOptionalParams"
-            />
-          description: The options parameters.
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/arm-quota.SubscriptionQuotaAllocations"
-          />&gt;
-  - name: >-
-      list(string, string, string,
+      list(string, string, string, string,
       GroupQuotaSubscriptionAllocationListOptionalParams)
     uid: '@azure/arm-quota.GroupQuotaSubscriptionAllocation.list'
     package: '@azure/arm-quota'
     summary: >-
-      Gets all the quota allocated to a subscription for the specific Resource
-      Provider, Location. This
+      Gets all the quota allocated to a subscription for the specified resource
+      provider and location for
 
-      will include the GroupQuota and total quota allocated to the subscription.
-      Only the Group quota
+      resource names passed in $filter=resourceName eq {SKU}. This will include
+      the GroupQuota and total
 
-      allocated to the subscription can be allocated back to the MG Group Quota.
-      Use the $filter parameter
+      quota allocated to the subscription. Only the Group quota allocated to the
+      subscription can be
 
-      to filter out the specific resource based on the
-      ResourceProvider/Location. $filter is a required
-
-      parameter.
+      allocated back to the MG Group Quota.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function list(managementGroupId: string, groupQuotaName: string, filter:
-        string, options?: GroupQuotaSubscriptionAllocationListOptionalParams):
-        PagedAsyncIterableIterator<SubscriptionQuotaAllocations,
-        SubscriptionQuotaAllocations[], PageSettings>
+        function list(managementGroupId: string, groupQuotaName: string,
+        resourceProviderName: string, location: string, options?:
+        GroupQuotaSubscriptionAllocationListOptionalParams):
+        Promise<SubscriptionQuotaAllocationsList>
       parameters:
         - id: managementGroupId
           type: string
@@ -98,14 +42,15 @@ methods:
             The GroupQuota name. The name should be unique for the provided
             context
                                   tenantId/MgId.
-        - id: filter
+        - id: resourceProviderName
           type: string
-          description: |-
-            | Field | Supported operators
-                          |---------------------|------------------------
-
-                           location eq {location}
-                           Example: $filter=location eq eastus
+          description: >-
+            The resource provider name, such as - Microsoft.Compute. Currently
+            only
+                                        Microsoft.Compute resource provider supports this API.
+        - id: location
+          type: string
+          description: The name of the Azure region.
         - id: options
           type: >-
             <xref
@@ -115,7 +60,5 @@ methods:
       return:
         description: ''
         type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure/arm-quota.SubscriptionQuotaAllocations" />, <xref
-          uid="@azure/arm-quota.SubscriptionQuotaAllocations" />[], <xref
-          uid="@azure/core-paging.PageSettings" />&gt;
+          Promise&lt;<xref
+          uid="@azure/arm-quota.SubscriptionQuotaAllocationsList" />&gt;

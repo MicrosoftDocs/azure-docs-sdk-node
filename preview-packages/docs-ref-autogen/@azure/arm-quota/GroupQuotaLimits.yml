@@ -8,77 +8,21 @@ remarks: ''
 isDeprecated: false
 type: interface
 methods:
-  - name: >-
-      get(string, string, string, string, string,
-      GroupQuotaLimitsGetOptionalParams)
-    uid: '@azure/arm-quota.GroupQuotaLimits.get'
-    package: '@azure/arm-quota'
-    summary: >-
-      Gets the GroupQuotaLimits for the specific resource for a specific
-      resource based on the
-
-      resourceProviders, resourceName and $filter passed.
-
-      The $filter=location eq {location} is required to location specific
-      resources groupQuota.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(managementGroupId: string, groupQuotaName: string,
-        resourceProviderName: string, resourceName: string, filter: string,
-        options?: GroupQuotaLimitsGetOptionalParams): Promise<GroupQuotaLimit>
-      parameters:
-        - id: managementGroupId
-          type: string
-          description: Management Group Id.
-        - id: groupQuotaName
-          type: string
-          description: >-
-            The GroupQuota name. The name should be unique for the provided
-            context
-                                  tenantId/MgId.
-        - id: resourceProviderName
-          type: string
-          description: >-
-            The resource provider name, such as - Microsoft.Compute. Currently
-            only
-                                        Microsoft.Compute resource provider supports this API.
-        - id: resourceName
-          type: string
-          description: Resource name.
-        - id: filter
-          type: string
-          description: |-
-            | Field | Supported operators
-                          |---------------------|------------------------
-
-                           location eq {location}
-                           Example: $filter=location eq eastus
-        - id: options
-          type: <xref uid="@azure/arm-quota.GroupQuotaLimitsGetOptionalParams" />
-          description: The options parameters.
-      return:
-        description: ''
-        type: Promise&lt;<xref uid="@azure/arm-quota.GroupQuotaLimit" />&gt;
   - name: list(string, string, string, string, GroupQuotaLimitsListOptionalParams)
     uid: '@azure/arm-quota.GroupQuotaLimits.list'
     package: '@azure/arm-quota'
     summary: >-
-      Gets the GroupQuotaLimits for the all resource for a specific 
-      resourceProvider and $filter passed.
+      Gets the GroupQuotaLimits for the specified resource provider and location
+      for resource names passed
 
-      The $filter=location eq {location} is required to location specific
-      resources groupQuota.
+      in $filter=resourceName eq {SKU}.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function list(managementGroupId: string, groupQuotaName: string,
-        resourceProviderName: string, filter: string, options?:
-        GroupQuotaLimitsListOptionalParams):
-        PagedAsyncIterableIterator<GroupQuotaLimit, GroupQuotaLimit[],
-        PageSettings>
+        resourceProviderName: string, location: string, options?:
+        GroupQuotaLimitsListOptionalParams): Promise<GroupQuotaLimitList>
       parameters:
         - id: managementGroupId
           type: string
@@ -95,21 +39,12 @@ methods:
             The resource provider name, such as - Microsoft.Compute. Currently
             only
                                         Microsoft.Compute resource provider supports this API.
-        - id: filter
+        - id: location
           type: string
-          description: |-
-            | Field | Supported operators
-                          |---------------------|------------------------
-
-                           location eq {location}
-                           Example: $filter=location eq eastus
+          description: The name of the Azure region.
         - id: options
           type: <xref uid="@azure/arm-quota.GroupQuotaLimitsListOptionalParams" />
           description: The options parameters.
       return:
         description: ''
-        type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure/arm-quota.GroupQuotaLimit" />, <xref
-          uid="@azure/arm-quota.GroupQuotaLimit" />[], <xref
-          uid="@azure/core-paging.PageSettings" />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-quota.GroupQuotaLimitList" />&gt;

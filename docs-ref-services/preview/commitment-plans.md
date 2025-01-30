@@ -1,7 +1,7 @@
 ---
 title: Azure Commitment Plans SDK for JavaScript
 description: Reference for Azure Commitment Plans SDK for JavaScript
-ms.date: 01/29/2025
+ms.date: 01/30/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: commitmentplans

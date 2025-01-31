@@ -1,17 +1,17 @@
 ---
 title: Azure Key Vault Certificates client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-certificates, keyvault
-ms.date: 11/09/2023
+ms.date: 01/31/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: keyvault
 ---
-# Azure Key Vault Certificates client library for JavaScript - version 4.8.0-beta.1 
+# Azure Key Vault Certificates client library for JavaScript - version 4.9.1-alpha.20250130.1 
 
 
 Azure Key Vault is a cloud service that provides secure storage and automated management of certificates used throughout a cloud application. Multiple certificates, and multiple versions of the same certificate, can be kept in the Azure Key Vault. Each certificate in the vault has a policy associated with it which controls the issuance and lifetime of the certificate, along with actions to be taken as certificates near expiry.
 
-If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?](/azure/key-vault/key-vault-overview)
+If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?](https://learn.microsoft.com/azure/key-vault/key-vault-overview)
 
 Use the client library for Azure Key Vault Certificates in your Node.js application to:
 
@@ -23,15 +23,15 @@ Use the client library for Azure Key Vault Certificates in your Node.js applicat
 - Get all certificates.
 - Get all deleted certificates.
 
-> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/samples/cors/ts/README.md) for guidance.
+> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/samples/cors/ts/README.md) for guidance.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-certificates_4.8.0-beta.1/sdk/keyvault/keyvault-certificates)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/sdk/keyvault/keyvault-certificates)
 - [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-certificates)
-- [API Reference Documentation](/javascript/api/@azure/keyvault-certificates)
+- [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/keyvault-certificates)
 - [Product documentation](https://azure.microsoft.com/services/key-vault/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/sdk/keyvault/keyvault-certificates/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/sdk/keyvault/keyvault-certificates/samples)
 
 ## Getting started
 
@@ -68,7 +68,7 @@ You also need to enable `compilerOptions.allowSyntheticDefaultImports` in your t
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 In order to interact with the Azure Key Vault service, you will need to create an instance of the [`CertificateClient`](#creating-and-setting-a-certificate) class, a **vault url** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][default_azure_credential], which is appropriate for most scenarios, including local development and production environments. Additionally, we recommend using a [managed identity][managed_identity] for authentication in production environments.
 
@@ -110,7 +110,7 @@ const client = new CertificateClient(url, credential);
   query.
 - **Soft delete** allows Key Vaults to support deletion and purging as two
   separate steps, so deleted certificates are not immediately lost. This only happens if the Key Vault
-  has [soft-delete](/azure/key-vault/key-vault-ovw-soft-delete)
+  has [soft-delete](https://learn.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete)
   enabled.
 - A **Certificate backup** can be generated from any created certificate. These backups come as
   binary data, and can only be used to regenerate a previously deleted certificate.
@@ -264,7 +264,7 @@ Another way to wait until the certificate is signed is to do individual calls, a
 ```typescript
 const { DefaultAzureCredential } = require("@azure/identity");
 const { CertificateClient } = require("@azure/keyvault-certificates");
-const { delay } = require("@azure/core-http");
+const { delay } = require("@azure/core-util");
 
 const credential = new DefaultAzureCredential();
 
@@ -320,11 +320,11 @@ async function main() {
   console.log(`Latest version of the certificate ${certificateName}: `, latestCertificate);
   const specificCertificate = await client.getCertificateVersion(
     certificateName,
-    latestCertificate.properties.version
+    latestCertificate.properties.version,
   );
   console.log(
     `The certificate ${certificateName} at the version ${latestCertificate.properties.version}: `,
-    specificCertificate
+    specificCertificate,
   );
 }
 
@@ -512,7 +512,7 @@ main();
 The `beginDeleteCertificate` method sets a certificate up for deletion. This process will
 happen in the background as soon as the necessary resources are available.
 
-If [soft-delete](/azure/key-vault/key-vault-ovw-soft-delete)
+If [soft-delete](https://learn.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete)
 is enabled for the Key Vault, this operation will only label the certificate as a
 _deleted_ certificate. A deleted certificate can't be updated. They can only be either
 read, recovered or purged.
@@ -595,7 +595,7 @@ async function main() {
     console.log("Deleted certificate: ", deletedCertificate);
   }
   for await (let certificateProperties of client.listPropertiesOfCertificateVersions(
-    certificateName
+    certificateName,
   )) {
     console.log("Certificate properties: ", certificateProperties);
   }
@@ -652,27 +652,27 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/sdk/keyvault/keyvault-certificates/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
+See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/sdk/keyvault/keyvault-certificates/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
 
 ## Next steps
 
 You can find more code samples through the following links:
 
-- [Key Vault Certificates Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/sdk/keyvault/keyvault-certificates/samples/v4/javascript)
-- [Key Vault Certificates Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/sdk/keyvault/keyvault-certificates/samples/v4/typescript)
-- [Key Vault Certificates Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/sdk/keyvault/keyvault-certificates/test/)
+- [Key Vault Certificates Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/sdk/keyvault/keyvault-certificates/samples/v4/javascript)
+- [Key Vault Certificates Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/sdk/keyvault/keyvault-certificates/samples/v4/typescript)
+- [Key Vault Certificates Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/sdk/keyvault/keyvault-certificates/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.8.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.9.1-alpha.20250130.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-[azure_keyvault]: /azure/key-vault/general/overview
-[azure_keyvault_cli]: /azure/key-vault/general/quick-create-cli
-[azure_keyvault_portal]: /azure/key-vault/general/quick-create-portal
-[default_azure_credential]: /java/api/overview/azure/identity-readme?view=azure-java-stable#defaultazurecredential
-[managed_identity]: /azure/active-directory/managed-identities-azure-resources/overview
-[azure_identity]: /java/api/overview/azure/identity-readme?view=azure-java-stable
-[composition-of-a-certificate]: /azure/key-vault/certificates/about-certificates#composition-of-a-certificate
+[azure_keyvault]: https://learn.microsoft.com/azure/key-vault/general/overview
+[azure_keyvault_cli]: https://learn.microsoft.com/azure/key-vault/general/quick-create-cli
+[azure_keyvault_portal]: https://learn.microsoft.com/azure/key-vault/general/quick-create-portal
+[default_azure_credential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest
+[managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview
+[azure_identity]: https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest
+[composition-of-a-certificate]: https://learn.microsoft.com/azure/key-vault/certificates/about-certificates#composition-of-a-certificate
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-certificates%2FREADME.png)
 

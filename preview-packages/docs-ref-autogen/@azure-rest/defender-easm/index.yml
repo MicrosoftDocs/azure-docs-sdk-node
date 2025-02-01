@@ -60,6 +60,7 @@ interfaces:
   - '@azure-rest/defender-easm.DiscoTemplateOutput'
   - '@azure-rest/defender-easm.DomainAssetOutput'
   - '@azure-rest/defender-easm.DomainAssetResourceOutput'
+  - '@azure-rest/defender-easm.EasmClientOptions'
   - '@azure-rest/defender-easm.ErrorDetailOutput'
   - '@azure-rest/defender-easm.GetAssetResource'
   - '@azure-rest/defender-easm.GetAssetResource200Response'
@@ -169,6 +170,14 @@ interfaces:
   - '@azure-rest/defender-easm.PageAssetOutput'
   - '@azure-rest/defender-easm.PageAssetResourceOutput'
   - '@azure-rest/defender-easm.PageCauseOutput'
+  - '@azure-rest/defender-easm.PageSettings'
+  - '@azure-rest/defender-easm.PagedAssetResourceOutput'
+  - '@azure-rest/defender-easm.PagedAsyncIterableIterator'
+  - '@azure-rest/defender-easm.PagedDataConnectionOutput'
+  - '@azure-rest/defender-easm.PagedDiscoGroupOutput'
+  - '@azure-rest/defender-easm.PagedDiscoTemplateOutput'
+  - '@azure-rest/defender-easm.PagedSavedFilterOutput'
+  - '@azure-rest/defender-easm.PagedTaskOutput'
   - '@azure-rest/defender-easm.PagingOptions'
   - '@azure-rest/defender-easm.PortOutput'
   - '@azure-rest/defender-easm.ReportAssetSnapshotRequest'
@@ -216,14 +225,26 @@ interfaces:
   - '@azure-rest/defender-easm.WebComponentOutput'
 typeAliases:
   - '@azure-rest/defender-easm.AssetResourceOutput'
+  - '@azure-rest/defender-easm.AssetStateOutput'
+  - '@azure-rest/defender-easm.AssetUpdateState'
+  - '@azure-rest/defender-easm.AssetUpdateStateOutput'
+  - '@azure-rest/defender-easm.AssetUpdateTransfers'
+  - '@azure-rest/defender-easm.AuditTrailItemKindOutput'
   - '@azure-rest/defender-easm.CancelTaskParameters'
   - '@azure-rest/defender-easm.CreateOrReplaceDataConnectionParameters'
   - '@azure-rest/defender-easm.CreateOrReplaceDiscoGroupParameters'
   - '@azure-rest/defender-easm.CreateOrReplaceSavedFilterParameters'
+  - '@azure-rest/defender-easm.DataConnectionContent'
+  - '@azure-rest/defender-easm.DataConnectionContentOutput'
   - '@azure-rest/defender-easm.DataConnectionData'
+  - '@azure-rest/defender-easm.DataConnectionFrequency'
+  - '@azure-rest/defender-easm.DataConnectionFrequencyOutput'
   - '@azure-rest/defender-easm.DataConnectionOutput'
   - '@azure-rest/defender-easm.DeleteDataConnectionParameters'
   - '@azure-rest/defender-easm.DeleteSavedFilterParameters'
+  - '@azure-rest/defender-easm.DiscoRunStateOutput'
+  - '@azure-rest/defender-easm.DiscoSourceKind'
+  - '@azure-rest/defender-easm.DiscoSourceKindOutput'
   - '@azure-rest/defender-easm.EasmClient'
   - '@azure-rest/defender-easm.GetArrayType'
   - '@azure-rest/defender-easm.GetAssetResourceParameters'
@@ -243,19 +264,19 @@ typeAliases:
   - '@azure-rest/defender-easm.ListRunsParameters'
   - '@azure-rest/defender-easm.ListSavedFilterParameters'
   - '@azure-rest/defender-easm.ListTaskParameters'
-  - '@azure-rest/defender-easm.PagedAssetResourceOutput'
-  - '@azure-rest/defender-easm.PagedDataConnectionOutput'
-  - '@azure-rest/defender-easm.PagedDiscoGroupOutput'
-  - '@azure-rest/defender-easm.PagedDiscoTemplateOutput'
-  - '@azure-rest/defender-easm.PagedSavedFilterOutput'
-  - '@azure-rest/defender-easm.PagedTaskOutput'
+  - '@azure-rest/defender-easm.ObservedPortStateValueOutput'
+  - '@azure-rest/defender-easm.PageAssetRedirectTypeOutput'
   - '@azure-rest/defender-easm.PaginateReturn'
+  - '@azure-rest/defender-easm.ReportBillableAssetBreakdownKindOutput'
   - '@azure-rest/defender-easm.RunDiscoGroupParameters'
+  - '@azure-rest/defender-easm.SslCertAssetValidationTypeOutput'
+  - '@azure-rest/defender-easm.TaskPhaseOutput'
+  - '@azure-rest/defender-easm.TaskStateOutput'
   - '@azure-rest/defender-easm.UpdateAssetsParameters'
   - '@azure-rest/defender-easm.ValidateDataConnectionParameters'
   - '@azure-rest/defender-easm.ValidateDiscoGroupParameters'
 functions:
-  - name: default(string, string, string, string, TokenCredential, ClientOptions)
+  - name: default(string, TokenCredential, EasmClientOptions)
     uid: '@azure-rest/defender-easm.default'
     package: '@azure-rest/defender-easm'
     summary: Initialize a new instance of `EasmClient`
@@ -263,29 +284,19 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function default(endpoint: string, subscriptionId: string,
-        resourceGroupName: string, workspaceName: string, credentials:
-        TokenCredential, options?: ClientOptions): EasmClient
+        function default(endpointParam: string, credentials: TokenCredential,
+        options?: EasmClientOptions): EasmClient
       parameters:
-        - id: endpoint
+        - id: endpointParam
           type: string
           description: >-
             The endpoint hosting the requested resource. For example,
-            https://{region}.easm.defender.microsoft.com
-        - id: subscriptionId
-          type: string
-          description: The ID of the target subscription.
-        - id: resourceGroupName
-          type: string
-          description: The name of the Resource Group.
-        - id: workspaceName
-          type: string
-          description: The name of the Workspace.
+            https://{region}.easm.defender.microsoft.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/workspaces/{workspaceName}
         - id: credentials
           type: <xref uid="@azure/core-auth.TokenCredential" />
           description: uniquely identify client credential
         - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          type: <xref uid="@azure-rest/defender-easm.EasmClientOptions" />
           description: the parameter for all optional parameters
       return:
         description: ''
@@ -868,5 +879,6 @@ functions:
       return:
         description: '- PagedAsyncIterableIterator to iterate the elements'
         type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure-rest/defender-easm.PaginateReturn" />&lt;TResponse&gt;&gt;
+          <xref uid="@azure-rest/defender-easm.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure-rest/defender-easm.PaginateReturn"
+          />&lt;TResponse&gt;&gt;

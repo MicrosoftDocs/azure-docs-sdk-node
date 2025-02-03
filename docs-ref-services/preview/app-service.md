@@ -1,7 +1,7 @@
 ---
 title: Azure App Service SDK for JavaScript
 description: Reference for Azure App Service SDK for JavaScript
-ms.date: 01/31/2025
+ms.date: 02/03/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appservice

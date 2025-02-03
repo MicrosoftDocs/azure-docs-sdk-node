@@ -9,7 +9,7 @@ ms.service: azure
 # Azure Mixed Reality Authentication client library for JavaScript - version 1.0.0-beta.1 
 
 
-Mixed Reality services, like Azure Spatial Anchors, Azure Remote Rendering, and others, use the Mixed Reality security
+Mixed Reality services, like Azure Remote Rendering, use the Mixed Reality security
 token service (STS) for authentication. This package supports exchanging Mixed Reality account credentials for an access
 token from the STS that can be used to access Mixed Reality services.
 
@@ -18,8 +18,6 @@ Key links:
 - [Package (NPM)](https://www.npmjs.com/package/@azure/mixed-reality-authentication) |
 - [API reference documentation](https://aka.ms/azsdk/js/mixed-reality-authentication/docs) |
 - [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/mixed-reality-authentication_1.0.0-beta.1/sdk/mixedreality/mixed-reality-authentication/samples)
-
-![Mixed Reality service authentication diagram](https://docs.microsoft.com/azure/spatial-anchors/concepts/media/spatial-anchors-authentication-overview.png)
 
 ## Getting started
 
@@ -32,7 +30,6 @@ Key links:
 - An [Azure subscription][azure_sub].
 - You must have an account with an [Azure Mixed Reality service](https://azure.microsoft.com/topic/mixed-reality/):
   - [Azure Remote Rendering](https://docs.microsoft.com/azure/remote-rendering/)
-  - [Azure Spatial Anchors](https://docs.microsoft.com/azure/spatial-anchors/)
 - Familiarity with the authentication and credential concepts from the [Azure Identity library][azure_identity].
 
 ### Install the `@azure/mixed-reality-authentication` package
@@ -60,8 +57,6 @@ Mixed Reality services support a few different forms of authentication:
   - Otherwise, we recommend that you obtain Azure AD tokens from a web service that supports your app. We recommend this
     method for production applications because it allows you to avoid embedding the credentials for access to a Mixed
     Reality service in your client application.
-
-See [here](https://docs.microsoft.com/azure/spatial-anchors/concepts/authentication) for detailed instructions and information.
 
 #### Using account key authentication
 
@@ -146,8 +141,7 @@ const client = new MixedRealityStsClient(
 const token = await client.getToken();
 ```
 
-See the authentication examples [above](#authenticate-the-client) or [Azure Identity][azure_identity] for more complex
-authentication scenarios.
+See [Azure Identity][azure_identity] for more complex authentication scenarios.
 
 #### Using the access token in a Mixed Reality client library
 
@@ -213,7 +207,6 @@ build and test the code.
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/mixed-reality-authentication_1.0.0-beta.1/sdk/identity/identity
-[register_aad_app]: https://docs.microsoft.com/azure/spatial-anchors/concepts/authentication
 [defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/mixed-reality-authentication_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%mixedreality%2Fmixed-reality-authentication%2FREADME.png)

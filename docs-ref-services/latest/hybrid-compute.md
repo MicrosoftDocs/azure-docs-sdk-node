@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Compute SDK for JavaScript
 description: Reference for Azure Hybrid Compute SDK for JavaScript
-ms.date: 02/04/2025
+ms.date: 02/05/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hybridcompute

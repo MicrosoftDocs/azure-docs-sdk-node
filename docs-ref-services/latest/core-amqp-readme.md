@@ -1,16 +1,16 @@
 ---
 title: Azure Core AMQP client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-amqp, core
-ms.date: 01/09/2025
+ms.date: 02/06/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Core AMQP client library for JavaScript - version 4.3.4 
+# Azure Core AMQP client library for JavaScript - version 4.3.5 
 
 
 The `@azure/core-amqp` package provides common functionality for **Azure** JavaScript
-libraries that use the [AMQP protocol](/azure/service-bus-messaging/service-bus-amqp-protocol-guide)
+libraries that use the [AMQP protocol](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-amqp-protocol-guide)
 like the ones for Azure Service Bus and Azure Event Hubs.
 
 ## Getting started
@@ -28,14 +28,14 @@ npm install @azure/core-amqp
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.4/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.5/SUPPORT.md) for more details.
 
 ## Key concepts
 
 Some of the key features of Azure Core AMQP library are:
 
-- [Claims based Authorization](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#claims-based-authorization)
-- Request-Response link for [sending request and receiving response over AMQP](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#amqp-management)
+- [Claims based Authorization](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-amqp-protocol-guide#claims-based-authorization)
+- Request-Response link for [sending request and receiving response over AMQP](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-amqp-protocol-guide#amqp-management)
 - Error translation of AMQP error codes along with errors specific to Azure Service Bus and Azure Event Hubs.
 - RetryPolicy for retrying a given operation if a retryable error was encountered.
 
@@ -124,11 +124,9 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.3.5/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fcore-amqp%2FREADME.png)
 

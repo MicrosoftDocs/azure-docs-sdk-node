@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/core-http-compat, core
-ms.date: 04/11/2024
+ms.date: 02/06/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core

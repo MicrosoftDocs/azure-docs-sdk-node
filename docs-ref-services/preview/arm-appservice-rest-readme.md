@@ -1,29 +1,29 @@
 ---
 title: Azure WebSitemManagement REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/arm-appservice, appservice
-ms.date: 06/13/2022
+ms.date: 02/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appservice
 ---
-# Azure WebSitemManagement REST client library for JavaScript - version 1.0.0-beta.1 
+# Azure WebSitemManagement REST client library for JavaScript - version 1.0.0-beta.2 
 
 
 App Service Client
 
-**If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-appservice_1.0.0-beta.1/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api**
+**If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-appservice_1.0.0-beta.2/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.1/sdk/appservice/arm-appservice-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.2/sdk/appservice/arm-appservice-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/arm-appservice)
-- [API reference documentation](/javascript/api/@azure-rest/arm-appservice)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/arm-appservice)
 
 ## Getting started
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -39,14 +39,14 @@ npm install @azure-rest/arm-appservice
 
 ### Create and authenticate a `WebSiteManagementClient`
 
-To use an [Azure Active Directory (AAD) token credential](/azure/databricks/dev-tools/api/latest/aad/app-aad-token),
+To use an [Azure Active Directory (AAD) token credential](https://learn.microsoft.com/azure/databricks/dev-tools/api/latest/aad/app-aad-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.2/sdk/identity/identity#credentials) library.
 
-To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) 
+To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client:
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -54,10 +54,23 @@ AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 
 Use the returned token credential to authenticate the client:
 
-```typescript
+```ts snippet:ReadmeSampleCreateClient_Node
 import WebSiteManagementClient from "@azure-rest/arm-appservice";
 import { DefaultAzureCredential } from "@azure/identity";
-const credential = new DefaultAzureCredential();
+
+const client = WebSiteManagementClient(new DefaultAzureCredential());
+```
+
+For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
+
+```ts snippet:ReadmeSampleCreateClient_Browser
+import { InteractiveBrowserCredential } from "@azure/identity";
+import WebSiteManagementClient from "@azure-rest/arm-appservice";
+
+const credential = new InteractiveBrowserCredential({
+  tenantId: "<YOUR_TENANT_ID>",
+  clientId: "<YOUR_CLIENT_ID>",
+});
 const client = WebSiteManagementClient(credential);
 ```
 
@@ -67,26 +80,25 @@ The following section shows you how to initialize and authenticate your client, 
 
 ### List All App Service Plans
 
-```typescript
-import WebSiteManagementClient, { paginate }  from "@azure-rest/arm-appservice";
+```ts snippet:ListAppServicePlans
 import { DefaultAzureCredential } from "@azure/identity";
+import WebSiteManagementClient, { paginate } from "@azure-rest/arm-appservice";
 
-async function listAppServicePlans() {
-  const subscriptionId = process.env.SUBSCRIPTION_ID as string;
-  const credential = new DefaultAzureCredential();
-  const client = WebSiteManagementClient(credential);
-  const result = [];
-  const initialResposne = await client
-    .path("/subscriptions/{subscriptionId}/providers/Microsoft.Web/serverfarms", subscriptionId)
-    .get();
-  const res = paginate(client, initialResposne);
-  for await (let item of res) {
-    result.push(item);
-  }
-  console.log(result);
+const subscriptionId = process.env.SUBSCRIPTION_ID as string;
+const credential = new DefaultAzureCredential();
+const client = WebSiteManagementClient(credential);
+
+const result = [];
+const initialResposne = await client
+  .path("/subscriptions/{subscriptionId}/providers/Microsoft.Web/serverfarms", subscriptionId)
+  .get();
+const res = paginate(client, initialResposne);
+
+for await (const item of res) {
+  result.push(item);
 }
 
-listAppServicePlans().catch(console.error);
+console.log(result);
 ```
 
 ## Troubleshooting
@@ -95,11 +107,11 @@ listAppServicePlans().catch(console.error);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts snippet:SetLogLevel
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-appservice_1.0.0-beta.2/sdk/core/logger).
 

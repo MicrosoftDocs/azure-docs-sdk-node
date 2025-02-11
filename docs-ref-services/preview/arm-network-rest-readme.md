@@ -1,30 +1,30 @@
 ---
 title: Azure NetworkManagement REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/arm-network, network
-ms.date: 09/29/2022
+ms.date: 02/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: network
 ---
-# Azure NetworkManagement REST client library for JavaScript - version 1.0.0-beta.1 
+# Azure NetworkManagement REST client library for JavaScript - version 1.0.0-beta.2 
 
 
 Network Management Rest Client
 
-**If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-network_1.0.0-beta.1/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api**
+**If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-network_1.0.0-beta.2/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.1/sdk/network/arm-network-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.2/sdk/network/arm-network-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/arm-network)
-- [API reference documentation](/javascript/api/@azure-rest/arm-network?view=azure-node-preview)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/arm-network?view=azure-node-preview)
 - [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -40,14 +40,14 @@ npm install @azure-rest/arm-network
 
 ### Create and authenticate a `NetworkManagementClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-network_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-network_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.2/sdk/identity/identity#credentials) library.
 
-To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) 
+To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -65,12 +65,13 @@ const client = NetworkManagementClient(credential);
 ## Examples
 
 The following section shows you how to initialize and authenticate your client, then list all of your Virtual Networks within a resource group.
+
 ### List virtual networks within a resource group
 
 ```typescript
 import createNetworkManagementClient, {
   VirtualNetworksListParameters,
-  paginate
+  paginate,
 } from "@azure-rest/arm-network";
 import { DefaultAzureCredential } from "@azure/identity";
 import * as dotenv from "dotenv";
@@ -81,13 +82,13 @@ async function listVirtualNetworksInResourceGroup() {
   const subscriptionId = "";
   const resourceGroupName = "rg1";
   const options: VirtualNetworksListParameters = {
-    queryParameters: { "api-version": "2022-05-01" }
+    queryParameters: { "api-version": "2022-05-01" },
   };
   const initialResponse = await client
     .path(
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks",
       subscriptionId,
-      resourceGroupName
+      resourceGroupName,
     )
     .get(options);
   const pageData = paginate(client, initialResponse);
@@ -113,5 +114,5 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-network_1.0.0-beta.2/sdk/core/logger).
 

@@ -1,30 +1,30 @@
 ---
 title: Azure ContainerService client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/arm-containerservice, containerservice
-ms.date: 07/15/2022
+ms.date: 02/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: containerservice
 ---
-# Azure ContainerService client library for JavaScript - version 1.0.0-beta.1 
+# Azure ContainerService client library for JavaScript - version 1.0.0-beta.2 
 
 
 Container Service Client
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-containerservice_1.0.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-containerservice_1.0.0-beta.2/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.1/sdk/containerservice/arm-containerservice-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.2/sdk/containerservice/arm-containerservice-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/arm-containerservice)
-- [API reference documentation](/javascript/api/@azure-rest/arm-containerservice?view=azure-node-preview)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/arm-containerservice?view=azure-node-preview)
 - [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -40,14 +40,14 @@ npm install @azure-rest/arm-containerservice
 
 ### Create and authenticate a `ContainerServiceClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-containerservice_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-containerservice_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.2/sdk/identity/identity#credentials) library.
 
-To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) 
+To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -59,27 +59,29 @@ The following section shows you how to initialize and authenticate your client, 
 
 ### List All Managed Clusters
 
-```typescript
-import ContainerServiceManagementClient, { paginate } from "@azure-rest/arm-containerservice";
+```ts snippet:SampleReadmeListManagedClusters
 import { DefaultAzureCredential } from "@azure/identity";
+import ContainerServiceClient, { isUnexpected, paginate } from "@azure-rest/arm-containerservice";
 
-async function listManagedClusters() {
-  const subscriptionId = process.env.SUBSCRIPTION_ID as string;
-  const credential = new DefaultAzureCredential();
-  const client = ContainerServiceManagementClient(credential);
-  const initialResponse = await client.path(
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const credential = new DefaultAzureCredential();
+const client = ContainerServiceClient(credential);
+
+const initialResponse = await client
+  .path(
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedClusters",
-    subscriptionId
-  ).get();
-  const result = paginate(client, initialResponse);
-  const resArray = new Array();
-  for await (let item of result) {
-    resArray.push(item);
-  }
-  console.log(resArray);
+    subscriptionId,
+  )
+  .get();
+
+if (isUnexpected(initialResponse)) {
+  throw initialResponse;
 }
 
-listManagedClusters().catch(console.error);
+const result = paginate(client, initialResponse);
+for await (const item of result) {
+  console.log(`Managed Cluster: ${item.name}`);
+}
 ```
 
 ## Troubleshooting
@@ -88,11 +90,11 @@ listManagedClusters().catch(console.error);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts snippet:SetLogLevel
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-containerservice_1.0.0-beta.2/sdk/core/logger).
 

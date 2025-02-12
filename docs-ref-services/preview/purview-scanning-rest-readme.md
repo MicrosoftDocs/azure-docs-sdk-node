@@ -1,12 +1,12 @@
 ---
 title: Azure Purview Scanning Rest-Level client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-scanning, purview
-ms.date: 10/15/2021
+ms.date: 02/12/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: purview
 ---
-# Azure Purview Scanning Rest-Level client library for JavaScript - version 1.0.0-beta.2 
+# Azure Purview Scanning Rest-Level client library for JavaScript - version 1.0.0-beta.3 
 
 
 Azure Purview Scanning is a fully managed cloud service whose users can scan your data into your data estate (also known as your **catalog**). Scanning is a process by which the catalog connects directly to a data source on a user-specified schedule.
@@ -28,7 +28,7 @@ Key links:
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -68,7 +68,7 @@ Use the returned token credential to authenticate the client:
 import PurviewScanning from "@azure-rest/purview-scanning";
 import { DefaultAzureCredential } from "@azure/identity";
 const client = PurviewScanning(
-  "https://<my-account-name>.scan.purview.azure.com",
+  "https://<my-account-name>.purview.azure.com",
   new DefaultAzureCredential()
 );
 ```
@@ -88,26 +88,25 @@ The following section shows you how to initialize and authenticate your client, 
 ### List All Data Sources
 
 ```typescript
-import PurviewScanning, { paginate, DataSource } from "@azure-rest/purview-scanning";
-import { PagedAsyncIterableIterator, PageSettings } from "@azure/core-paging";
+import PurviewScanning, { paginate, DataSourceOutput, PagedAsyncIterableIterator, PageSettings, isUnexpected } from "@azure-rest/purview-scanning";
 import { DefaultAzureCredential } from "@azure/identity";
 
-async function main() {
+async function main(): Promise<void> {
   console.log("== List dataSources ==");
   const client = PurviewScanning(
-    "https://<my-account-name>.scan.purview.azure.com",
+    "https://<my-account-name>.purview.azure.com",
     new DefaultAzureCredential()
   );
 
   const dataSources = await client.path("/datasources").get();
-  if (dataSources.status !== "200") {
+  if (isUnexpected(dataSources)) {
     throw dataSources.body.error;
   }
-  const iter = paginate(client, dataSources)
+  const iter = paginate(client, dataSources);
 
-  const items: DataSource[] = [];
+  const items: DataSourceOutput[] = [];
 
-  for await (const item of <PagedAsyncIterableIterator<DataSource, (DataSource)[], PageSettings>>iter) {
+  for await (const item of <PagedAsyncIterableIterator<DataSourceOutput, (DataSourceOutput)[], PageSettings>>iter) {
     items.push(item);
   }
 
@@ -123,38 +122,38 @@ main().catch(console.error);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.3/sdk/core/logger).
 
 ## Next steps
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-scanning_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-scanning_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fpurview%2Fpurview-scanning-rest%2FREADME.png)
+
 
 <!-- LINKS -->
 
 [scanning_product_documentation]: https://azure.microsoft.com/services/purview/
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-scanning_1.0.0-beta.2/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.2/sdk/purview/purview-scanning-rest
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-scanning_1.0.0-beta.3/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.3/sdk/purview/purview-scanning-rest
 [scanning_npm]: https://www.npmjs.com/package/@azure-rest/purview-scanning
 [scanning_ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
-[purview_resource]: https://docs.microsoft.com/azure/purview/create-catalog-portal
-[authenticate_with_token]: https://docs.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.2/sdk/identity/identity#credentials
+[purview_resource]: https://learn.microsoft.com/azure/purview/create-catalog-portal
+[authenticate_with_token]: https://learn.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.3/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[enable_aad]: https://docs.microsoft.com/azure/purview/create-catalog-portal#add-a-security-principal-to-a-data-plane-role
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[enable_aad]: https://learn.microsoft.com/azure/purview/create-catalog-portal#add-a-security-principal-to-a-data-plane-role
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-scanning_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
 

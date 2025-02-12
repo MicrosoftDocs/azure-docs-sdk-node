@@ -1,22 +1,24 @@
 ---
 title: Azure ServiceNetworkingManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-servicenetworking, servicenetworking
-ms.date: 11/24/2023
+ms.date: 02/12/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: servicenetworking
 ---
-# Azure ServiceNetworkingManagement client library for JavaScript - version 1.0.0 
+# Azure ServiceNetworkingManagement client library for JavaScript - version 2.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ServiceNetworkingManagement client.
 
 Traffic Controller Provider management API.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_1.0.0/sdk/servicenetworking/arm-servicenetworking) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-servicenetworking) |
-[API reference documentation](/javascript/api/@azure/arm-servicenetworking) |
-[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_2.0.0/sdk/servicenetworking/arm-servicenetworking)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-servicenetworking)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-servicenetworking?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_2.0.0/sdk/servicenetworking/arm-servicenetworking/samples)
 
 ## Getting started
 
@@ -25,7 +27,7 @@ Traffic Controller Provider management API.
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicenetworking_1.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicenetworking_2.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +46,7 @@ npm install @azure/arm-servicenetworking
 To create a client object to access the Azure ServiceNetworkingManagement API, you will need the `endpoint` of your Azure ServiceNetworkingManagement resource and a `credential`. The Azure ServiceNetworkingManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure ServiceNetworkingManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicenetworking_1.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicenetworking_2.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -52,27 +54,33 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure ServiceNetworkingManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
-Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
+You will also need to **register a new AAD application and grant access to Azure ServiceNetworking** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 
-For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
+For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
-```javascript
-const { ServiceNetworkingManagementClient } = require("@azure/arm-servicenetworking");
-const { DefaultAzureCredential } = require("@azure/identity");
-// For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
+Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
+
+```ts snippet:ReadmeSampleCreateClient_Node
+import { ServiceNetworkingManagementClient } from "../src/index.js";
+import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new ServiceNetworkingManagementClient(new DefaultAzureCredential(), subscriptionId);
-
-// For client-side applications running in the browser, use this code instead:
-// const credential = new InteractiveBrowserCredential({
-//   tenantId: "<YOUR_TENANT_ID>",
-//   clientId: "<YOUR_CLIENT_ID>"
-// });
-// const client = new ServiceNetworkingManagementClient(credential, subscriptionId);
 ```
 
+For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
+
+```ts snippet:ReadmeSampleCreateClient_Browser
+import { InteractiveBrowserCredential } from "@azure/identity";
+import { ServiceNetworkingManagementClient } from "../src/index.js";
+
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const credential = new InteractiveBrowserCredential({
+  tenantId: "<YOUR_TENANT_ID>",
+  clientId: "<YOUR_CLIENT_ID>",
+});
+const client = new ServiceNetworkingManagementClient(credential, subscriptionId);
+```
 
 ### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
@@ -81,7 +89,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ### ServiceNetworkingManagementClient
 
-`ServiceNetworkingManagementClient` is the primary interface for developers using the Azure ServiceNetworkingManagement client library. Explore the methods on this client object to understand the different features of the Azure ServiceNetworkingManagement service that you can access.
+`ServiceNetworkingManagementClient` is the primary interface for developers using the Azure ServiceNetworking client library. Explore the methods on this client object to understand the different features of the Azure ServiceNetworking service that you can access.
 
 ## Troubleshooting
 
@@ -89,31 +97,28 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
-const { setLogLevel } = require("@azure/logger");
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
+
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_2.0.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_2.0.0/sdk/servicenetworking/arm-servicenetworking/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicenetworking_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicenetworking_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fservicenetworking%2Farm-servicenetworking%2FREADME.png)
-
-[azure_cli]: /cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_1.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_1.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_2.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicenetworking_2.0.0/sdk/identity/identity#defaultazurecredential
 

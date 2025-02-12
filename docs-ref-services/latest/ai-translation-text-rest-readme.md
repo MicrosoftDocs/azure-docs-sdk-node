@@ -1,12 +1,12 @@
 ---
 title: Azure TextTranslation REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-translation-text, translation
-ms.date: 06/03/2024
+ms.date: 02/12/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: translation
 ---
-# Azure TextTranslation REST client library for JavaScript - version 1.0.0 
+# Azure TextTranslation REST client library for JavaScript - version 1.0.1 
 
 
 Text translation is a cloud-based REST API feature of the Translator service that uses neural
@@ -27,13 +27,13 @@ Dictionary lookup. Returns equivalent words for the source term in the target la
 
 Dictionary example Returns grammatical structure and context examples for the source term and target term pair.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-translation-text_1.0.0/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-translation-text_1.0.1/documentation/rest-clients.md) to use this library**
 
 Key links:
 
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-translation-text)
 - [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_1.0.0/sdk/translation/ai-translation-text-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_1.0.1/sdk/translation/ai-translation-text-rest/samples)
 
 ## Getting started
 
@@ -119,7 +119,7 @@ if (languages.transliteration) {
   for (const key in languages.transliteration) {
     const transliterationLanguage = languages.transliteration[key];
     console.log(
-      `${key} -- name: ${transliterationLanguage.name} (${transliterationLanguage.nativeName})`
+      `${key} -- name: ${transliterationLanguage.name} (${transliterationLanguage.nativeName})`,
     );
   }
 }
@@ -129,7 +129,7 @@ if (languages.dictionary) {
   for (const key in languages.dictionary) {
     const dictionaryLanguage = languages.dictionary[key];
     console.log(
-      `${key} -- name: ${dictionaryLanguage.name} (${dictionaryLanguage.nativeName}), supported target languages count: ${dictionaryLanguage.translations.length}`
+      `${key} -- name: ${dictionaryLanguage.name} (${dictionaryLanguage.nativeName}), supported target languages count: ${dictionaryLanguage.translations.length}`,
     );
   }
 }
@@ -159,7 +159,7 @@ if (isUnexpected(translateResponse)) {
 const translations = translateResponse.body;
 for (const translation of translations) {
   console.log(
-    `Text was translated to: '${translation?.translations[0]?.to}' and the result is: '${translation?.translations[0]?.text}'.`
+    `Text was translated to: '${translation?.translations[0]?.to}' and the result is: '${translation?.translations[0]?.text}'.`,
   );
 }
 ```
@@ -189,7 +189,7 @@ if (isUnexpected(transliterateResponse)) {
 const translations = transliterateResponse.body;
 for (const transliteration of translations) {
   console.log(
-    `Input text was transliterated to '${transliteration?.script}' script. Transliterated text: '${transliteration?.text}'.`
+    `Input text was transliterated to '${transliteration?.script}' script. Transliterated text: '${transliteration?.text}'.`,
   );
 }
 ```
@@ -245,10 +245,10 @@ if (isUnexpected(dictionaryResponse)) {
 const dictionaryEntries = dictionaryResponse.body;
 for (const dictionaryEntry of dictionaryEntries) {
   console.log(
-    `For the given input ${dictionaryEntry?.translations?.length} entries were found in the dictionary.`
+    `For the given input ${dictionaryEntry?.translations?.length} entries were found in the dictionary.`,
   );
   console.log(
-    `First entry: '${dictionaryEntry?.translations[0]?.displayTarget}', confidence: ${dictionaryEntry?.translations[0]?.confidence}.`
+    `First entry: '${dictionaryEntry?.translations[0]?.displayTarget}', confidence: ${dictionaryEntry?.translations[0]?.confidence}.`,
   );
 }
 ```
@@ -277,11 +277,11 @@ if (isUnexpected(dictionaryResponse)) {
 const dictionaryExamples = dictionaryResponse.body;
 for (const dictionaryExample of dictionaryExamples) {
   console.log(
-    `For the given input ${dictionaryExample?.examples?.length} examples were found in the dictionary.`
+    `For the given input ${dictionaryExample?.examples?.length} examples were found in the dictionary.`,
   );
   const firstExample = dictionaryExample?.examples[0];
   console.log(
-    `Example: '${firstExample.targetPrefix + firstExample.targetTerm + firstExample.targetSuffix}'.`
+    `Example: '${firstExample.targetPrefix + firstExample.targetTerm + firstExample.targetSuffix}'.`,
   );
 }
 ```
@@ -300,15 +300,15 @@ You can find the different error codes returned by the service in the [Service D
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts
 const { setLogLevel } = require("@azure/logger");
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_1.0.1/sdk/core/logger).
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_portal]: https://portal.azure.com
 [translator_resource_create]: https://learn.microsoft.com/azure/cognitive-services/Translator/create-translator-resource
 [translator_auth]: https://learn.microsoft.com/azure/cognitive-services/translator/reference/v3-0-reference#authentication

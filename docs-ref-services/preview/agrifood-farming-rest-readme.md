@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure-rest/agrifood-farming, agrifood
-ms.date: 02/23/2023
+ms.date: 02/12/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: agrifood
@@ -29,7 +29,7 @@ Key links:
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -61,13 +61,13 @@ AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 
 Use the returned token credential to authenticate the client:
 
-```typescript
+```ts snippet:CreateFarmBeatsClient
 import FarmBeats from "@azure-rest/agrifood-farming";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const client = FarmBeats(
   "https://<farmbeats resource name>.farmbeats.azure.net",
-  new DefaultAzureCredential()
+  new DefaultAzureCredential(),
 );
 ```
 
@@ -103,17 +103,17 @@ Fam operations includes details pertaining to tilling, planting, application of 
 Once you have authenticated and created the client object as shown in the [Authenticate the client](#create-and-authenticate-a-farmbeats-rest-client)
 section, you can create a party within the Data Manager for Agriculture resource like this:
 
-```typescript
+```ts snippet:CreateParty
 import FarmBeats, { isUnexpected } from "@azure-rest/agrifood-farming";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const client = FarmBeats(
   "https://<farmbeats resource name>.farmbeats.azure.net",
-  new DefaultAzureCredential()
+  new DefaultAzureCredential(),
 );
 
 const partyId = "test_party";
-const result = await farmbeatsClient.path("/parties/{partyId}", partyId).patch({
+const result = await client.path("/parties/{partyId}", partyId).patch({
   body: {
     name: "Contoso Party",
     description: "Your custom party description here",
@@ -134,22 +134,22 @@ console.log(`Created Party: ${party.name}`);
 
 ### List Parties
 
-```typescript
-import FarmBeats, { isUnexpected } from "@azure-rest/agrifood-farming";
+```ts snippet:ListParties
+import FarmBeats, { isUnexpected, paginate } from "@azure-rest/agrifood-farming";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const client = FarmBeats(
   "https://<farmbeats resource name>.farmbeats.azure.net",
-  new DefaultAzureCredential()
+  new DefaultAzureCredential(),
 );
 
-const response = await farmbeatsClient.path("/parties").get();
+const response = await client.path("/parties").get();
 
 if (isUnexpected(response)) {
   throw response.body.error;
 }
 
-const parties = paginate(farmbeatsClient, response);
+const parties = paginate(client, response);
 
 // Log each party id
 for await (const party of parties) {
@@ -168,41 +168,39 @@ For additional samples, please refer to the [samples folder][samples_folder]
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts snippet:SetLogLevel
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.3/sdk/core/logger).
 
 ## Next steps
 
 ### Additional documentation
 
-For more extensive documentation on the FarmBeats, see the [FarmBeats documentation][product_docs] on docs.microsoft.com.
+For more extensive documentation on the FarmBeats, see the [FarmBeats documentation][product_docs] on learn.microsoft.com.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fagrifood%2Fagrifood-farming-rest%2FREADME.png)
-
-[product_documentation]: /azure/industry/agriculture/overview-azure-farmbeats
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-beta.2/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/agrifood/agrifood-farming-rest
+[product_documentation]: https://learn.microsoft.com/azure/industry/agriculture/overview-azure-farmbeats
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/agrifood-farming_1.0.0-beta.3/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.3/sdk/agrifood/agrifood-farming-rest
 [npm]: https://www.npmjs.com/org/azure-rest
 [ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
-[farmbeats_resource]: /azure/industry/agriculture/install-azure-farmbeats
-[authenticate_with_token]: /azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/identity/identity#credentials
+[farmbeats_resource]: https://learn.microsoft.com/azure/industry/agriculture/install-azure-farmbeats
+[authenticate_with_token]: https://learn.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.3/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/agrifood-farming_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
 [install_farmbeats]: https://aka.ms/FarmBeatsInstallDocumentationPaaS
 [farm_hierarchy]: https://aka.ms/FarmBeatsFarmHierarchyDocs
 [scenes]: https://aka.ms/FarmBeatsSatellitePaaSDocumentation

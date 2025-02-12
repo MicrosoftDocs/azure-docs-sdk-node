@@ -442,6 +442,7 @@ interfaces:
   - '@azure-rest/arm-compute.CommunityGalleryInfo'
   - '@azure-rest/arm-compute.CommunityGalleryInfoOutput'
   - '@azure-rest/arm-compute.CommunityGalleryOutput'
+  - '@azure-rest/arm-compute.ComputeManagementClientOptions'
   - '@azure-rest/arm-compute.ComputeOperationListResultOutput'
   - '@azure-rest/arm-compute.ComputeOperationValueDisplayOutput'
   - '@azure-rest/arm-compute.ComputeOperationValueOutput'
@@ -1181,6 +1182,8 @@ interfaces:
   - '@azure-rest/arm-compute.OperationsListQueryParamProperties'
   - '@azure-rest/arm-compute.OrchestrationServiceStateInput'
   - '@azure-rest/arm-compute.OrchestrationServiceSummaryOutput'
+  - '@azure-rest/arm-compute.PageSettings'
+  - '@azure-rest/arm-compute.PagedAsyncIterableIterator'
   - '@azure-rest/arm-compute.PagingOptions'
   - '@azure-rest/arm-compute.PatchInstallationDetailOutput'
   - '@azure-rest/arm-compute.PatchSettings'
@@ -1456,6 +1459,7 @@ interfaces:
   - '@azure-rest/arm-compute.SharingStatusOutput'
   - '@azure-rest/arm-compute.SharingUpdate'
   - '@azure-rest/arm-compute.SharingUpdateOutput'
+  - '@azure-rest/arm-compute.SimplePollerLike'
   - '@azure-rest/arm-compute.Sku'
   - '@azure-rest/arm-compute.SkuOutput'
   - '@azure-rest/arm-compute.Snapshot'
@@ -2944,29 +2948,31 @@ typeAliases:
   - '@azure-rest/arm-compute.VirtualMachinesStartParameters'
   - '@azure-rest/arm-compute.VirtualMachinesUpdateParameters'
 functions:
-  - name: default(TokenCredential, ClientOptions)
+  - name: default(TokenCredential, ComputeManagementClientOptions)
     uid: '@azure-rest/arm-compute.default'
     package: '@azure-rest/arm-compute'
-    summary: Initialize a new instance of the class ComputeManagementClient class.
+    summary: Initialize a new instance of `ComputeManagementClient`
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function default(credentials: TokenCredential, options?: ClientOptions):
-        ComputeManagementClient
+        function default(credentials: TokenCredential, options?:
+        ComputeManagementClientOptions): ComputeManagementClient
       parameters:
         - id: credentials
           type: <xref uid="@azure/core-auth.TokenCredential" />
-          description: 'type: TokenCredential'
+          description: uniquely identify client credential
         - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: ''
+          type: >-
+            <xref uid="@azure-rest/arm-compute.ComputeManagementClientOptions"
+            />
+          description: the parameter for all optional parameters
       return:
         description: ''
         type: <xref uid="@azure-rest/arm-compute.ComputeManagementClient" />
   - name: >-
-      getLongRunningPoller<TResult>(Client, TResult, LroEngineOptions<TResult,
-      PollOperationState<TResult>>)
+      getLongRunningPoller<TResult>(Client, TResult,
+      CreateHttpPollerOptions<TResult, OperationState<TResult>>)
     uid: '@azure-rest/arm-compute.getLongRunningPoller'
     package: '@azure-rest/arm-compute'
     summary: >-
@@ -2977,9 +2983,9 @@ functions:
     syntax:
       content: >-
         function getLongRunningPoller<TResult>(client: Client, initialResponse:
-        TResult, options?: LroEngineOptions<TResult,
-        PollOperationState<TResult>>): PollerLike<PollOperationState<TResult>,
-        TResult>
+        TResult, options?: CreateHttpPollerOptions<TResult,
+        OperationState<TResult>>):
+        Promise<SimplePollerLike<OperationState<TResult>, TResult>>
       parameters:
         - id: client
           type: <xref uid="@azure-rest/core-client.Client" />
@@ -2989,17 +2995,17 @@ functions:
           description: The initial response.
         - id: options
           type: >-
-            <xref uid="@azure/core-lro.LroEngineOptions" />&lt;TResult, <xref
-            uid="@azure/core-lro.PollOperationState" />&lt;TResult&gt;&gt;
+            <xref uid="@azure/core-lro.CreateHttpPollerOptions" />&lt;TResult,
+            <xref uid="@azure/core-lro.OperationState" />&lt;TResult&gt;&gt;
           description: Options to set a resume state or custom polling interval.
       return:
         description: >-
           - A poller object to poll for operation state updates and eventually
           get the final response.
         type: >-
-          <xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;TResult&gt;,
-          TResult&gt;
+          Promise&lt;<xref uid="@azure-rest/arm-compute.SimplePollerLike"
+          />&lt;<xref uid="@azure/core-lro.OperationState" />&lt;TResult&gt;,
+          TResult&gt;&gt;
   - name: isUnexpected(OperationsList200Response | OperationsListDefaultResponse)
     uid: '@azure-rest/arm-compute.isUnexpected'
     package: '@azure-rest/arm-compute'
@@ -9702,5 +9708,6 @@ functions:
       return:
         description: '- PagedAsyncIterableIterator to iterate the elements'
         type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure-rest/arm-compute.PaginateReturn" />&lt;TResponse&gt;&gt;
+          <xref uid="@azure-rest/arm-compute.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure-rest/arm-compute.PaginateReturn"
+          />&lt;TResponse&gt;&gt;

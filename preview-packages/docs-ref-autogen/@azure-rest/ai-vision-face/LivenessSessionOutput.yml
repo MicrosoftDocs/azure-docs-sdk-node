@@ -8,107 +8,73 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: authTokenTimeToLiveInSeconds
-    uid: >-
-      @azure-rest/ai-vision-face.LivenessSessionOutput.authTokenTimeToLiveInSeconds
+  - name: authToken
+    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.authToken'
     package: '@azure-rest/ai-vision-face'
     summary: >-
-      Seconds the session should last for. Range is 60 to 86400 seconds. Default
-      value is 600.
-    fullName: authTokenTimeToLiveInSeconds
+      Bearer token to provide authentication for the Vision SDK running on a
+      client application. This Bearer token has limited permissions to perform
+      only the required action and expires after the TTL time. It is also
+      auditable.
+    fullName: authToken
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'authTokenTimeToLiveInSeconds?: number'
-      return:
-        description: ''
-        type: number
-  - name: createdDateTime
-    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.createdDateTime'
-    package: '@azure-rest/ai-vision-face'
-    summary: DateTime when this session was created.
-    fullName: createdDateTime
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'createdDateTime: string'
+      content: 'authToken: string'
       return:
         description: ''
         type: string
-  - name: deviceCorrelationId
-    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.deviceCorrelationId'
+  - name: modelVersion
+    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.modelVersion'
     package: '@azure-rest/ai-vision-face'
     summary: >-
-      Unique Guid per each end-user device. This is to provide rate limiting and
-      anti-hammering. If 'deviceCorrelationIdSetInClient' is true in this
-      request, this 'deviceCorrelationId' must be null.
-    fullName: deviceCorrelationId
+      The model version used for liveness classification. This is an optional
+      parameter, and if this is not specified, then the latest supported model
+      version will be chosen
+
+
+      Possible values: "2024-11-15"
+    fullName: modelVersion
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'deviceCorrelationId?: string'
+      content: 'modelVersion?: string'
       return:
         description: ''
         type: string
-  - name: id
-    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.id'
+  - name: results
+    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.results'
+    package: '@azure-rest/ai-vision-face'
+    summary: The results of the liveness session.
+    fullName: results
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'results: LivenessSessionResultsOutput'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/ai-vision-face.LivenessSessionResultsOutput" />
+  - name: sessionId
+    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.sessionId'
     package: '@azure-rest/ai-vision-face'
     summary: The unique ID to reference this session.
-    fullName: id
+    fullName: sessionId
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'id: string'
-      return:
-        description: ''
-        type: string
-  - name: result
-    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.result'
-    package: '@azure-rest/ai-vision-face'
-    summary: >-
-      The latest session audit result only populated if status ==
-      'ResultAvailable'.
-    fullName: result
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'result?: LivenessSessionAuditEntryOutput'
-      return:
-        description: ''
-        type: >-
-          <xref uid="@azure-rest/ai-vision-face.LivenessSessionAuditEntryOutput"
-          />
-  - name: sessionExpired
-    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.sessionExpired'
-    package: '@azure-rest/ai-vision-face'
-    summary: Whether or not the session is expired.
-    fullName: sessionExpired
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'sessionExpired: boolean'
-      return:
-        description: ''
-        type: boolean
-  - name: sessionStartDateTime
-    uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.sessionStartDateTime'
-    package: '@azure-rest/ai-vision-face'
-    summary: DateTime when this session was started by the client.
-    fullName: sessionStartDateTime
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'sessionStartDateTime?: string'
+      content: 'sessionId: string'
       return:
         description: ''
         type: string
   - name: status
     uid: '@azure-rest/ai-vision-face.LivenessSessionOutput.status'
     package: '@azure-rest/ai-vision-face'
-    summary: |-
+    summary: >-
       The current status of the session.
 
-      Possible values: "NotStarted", "Started", "ResultAvailable"
+
+      Possible values: "NotStarted", "Running", "Succeeded", "Failed",
+      "Canceled"
     fullName: status
     remarks: ''
     isDeprecated: false

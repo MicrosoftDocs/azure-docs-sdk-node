@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-client, web-pubsub
-ms.date: 04/24/2024
+ms.date: 02/12/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
@@ -73,7 +73,7 @@ Note that a client can only receive messages from groups that it has joined and 
 // ...continues the code snippet from above
 
 // Specifies the group to join
-let groupName = "group1";
+const groupName = "group1";
 
 // Registers a listener for the event 'group-message' early before joining a group to not miss messages
 client.on("group-message", (e) => {
@@ -144,7 +144,7 @@ const serviceClient = new WebPubSubServiceClient("<web-pubsub-connectionstring>"
 
 // Note that the token allows the client to join and send messages to any groups. It is specified with the "roles" option.
 app.get('/negotiate', async (req, res) => {
-  let token = await serviceClient.getClientAccessToken({roles: ["webpubsub.joinLeaveGroup", "webpubsub.sendToGroup"] });
+  const token = await serviceClient.getClientAccessToken({roles: ["webpubsub.joinLeaveGroup", "webpubsub.sendToGroup"] });
   res.json({
     url: token.url
   });
@@ -160,14 +160,14 @@ const { WebPubSubClient } = require("@azure/web-pubsub-client")
 
 const client = new WebPubSubClient({
   getClientAccessUrl: async () => {
-    let value = await (await fetch(`/negotiate`)).json();
+    const value = await (await fetch(`/negotiate`)).json();
     return value.url;
   }
 });
 
 await client.start();
 ```
-_To see the full code of this sample, please refer to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.1/sdk/web-pubsub/web-pubsub-client/samples-browser)._
+_To see the full code of this sample, please refer to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.2/sdk/web-pubsub/web-pubsub-client/samples-browser)._
 
 ---
 ### A client consumes messages from the application server or joined groups
@@ -266,7 +266,7 @@ Each of the Web PubSub clients is safe to cache and be used as a singleton for t
 ---
 ## JavaScript Bundle
 
-To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.1/documentation/Bundling.md).
+To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.2/documentation/Bundling.md).
 
 ---
 
@@ -280,7 +280,7 @@ To use this client library in the browser, first, you need to use a bundler. For
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.2/sdk/core/logger).
 
 - ### Live Trace
 
@@ -296,7 +296,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 ---
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 
 [azure_sub]: https://azure.microsoft.com/free/

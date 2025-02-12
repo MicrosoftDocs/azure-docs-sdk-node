@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: networkanalytics
 ---
-# Azure Network Analytics SDK for JavaScript - preview
-## Packages - preview
+# Azure Network Analytics SDK for JavaScript - legacy
+## Packages - legacy
 [!INCLUDE [packages](network-analytics-index.md)]

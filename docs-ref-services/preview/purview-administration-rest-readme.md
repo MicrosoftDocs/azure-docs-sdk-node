@@ -1,12 +1,12 @@
 ---
 title: Azure Purview Administration REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-administration, purview
-ms.date: 10/15/2021
+ms.date: 02/12/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: purview
 ---
-# Azure Purview Administration REST client library for JavaScript - version 1.0.0-beta.1 
+# Azure Purview Administration REST client library for JavaScript - version 1.0.0-beta.2 
 
 
 Azure Purview data plane administration. It supports data plane operations. It can manage account, collections, keys, resource set rule, metadata policy, metadata roles.
@@ -26,7 +26,7 @@ Key links:
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -36,12 +36,12 @@ Key links:
 
 Follow [these][purview_resource] instructions to create your Purview resource
 
-### Install the `@azure-rest/purview-account` package
+### Install the `@azure-rest/purview-administration` package
 
-Install the Azure Purview Account client library for JavaScript with `npm`:
+Install the Azure Purview Administration client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure-rest/purview-account
+npm install @azure-rest/purview-administration
 ```
 
 ### Create and authenticate a `PurviewAccount`
@@ -70,12 +70,12 @@ import {
 import { DefaultAzureCredential } from "@azure/identity";
 const accountClient = PurviewAccountClient(
   "https://<my-account-name>.purview.azure.com",
-  new DefaultAzureCredential()
+  new DefaultAzureCredential(),
 );
 
 const metadataClient = PurviewAccountClient(
   "https://<my-account-name>.purview.azure.com",
-  new DefaultAzureCredential()
+  new DefaultAzureCredential(),
 );
 ```
 
@@ -122,36 +122,36 @@ main().catch(console.error);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-administration_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-administration_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fpurview%2Fpurview-account-rest%2FREADME.png)
+
 
 [account_product_documentation]: https://azure.microsoft.com/services/purview/
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-administration_1.0.0-beta.1/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.1/sdk/purview/purview-catalog-rest
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-administration_1.0.0-beta.2/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/purview/purview-catalog-rest
 [account_npm]: https://www.npmjs.com/org/azure-rest
 [account_ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
-[purview_resource]: https://docs.microsoft.com/azure/purview/create-catalog-portal
-[authenticate_with_token]: https://docs.microsoft.com/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.1/sdk/identity/identity#credentials
+[purview_resource]: https://learn.microsoft.com/azure/purview/create-catalog-portal
+[authenticate_with_token]: https://learn.microsoft.com/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[enable_aad]: https://docs.microsoft.com/azure/purview/create-catalog-portal#add-a-security-principal-to-a-data-plane-role
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[enable_aad]: https://learn.microsoft.com/azure/purview/create-catalog-portal#add-a-security-principal-to-a-data-plane-role
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

@@ -1,12 +1,12 @@
 ---
 title: Azure Device Update for IoT Hub Rest Client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/iot-device-update, deviceupdate
-ms.date: 09/09/2022
+ms.date: 02/13/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: deviceupdate
 ---
-# Azure Device Update for IoT Hub Rest Client library for JavaScript - version 1.0.0 
+# Azure Device Update for IoT Hub Rest Client library for JavaScript - version 1.1.0 
 
 
 The library provides access to the Device Update for IoT Hub service that enables customers to publish updates for their IoT devices to the cloud, and then deploy these updates to their devices (approve updates to groups of devices managed and provisioned in IoT Hub).
@@ -14,6 +14,7 @@ The library provides access to the Device Update for IoT Hub service that enable
 **Please rely heavily on the [service's documentation][device_update_product_documentation] and our [REST client docs][rest_client] to use this library**
 
 Key links:
+
 - [Source code][source_code]
 - [Package (NPM)][npm]
 - [API reference documentation][ref_docs]
@@ -23,7 +24,7 @@ Key links:
 
 ### Currently supported environments
 
-- Node.js version 14.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
 ### Prerequisites
 
@@ -56,13 +57,12 @@ AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 
 Use the returned token credential to authenticate the client:
 
-```typescript
+```ts snippet:ReadmeSampleCreateClient_Node
 import DeviceUpdate from "@azure-rest/iot-device-update";
 import { DefaultAzureCredential } from "@azure/identity";
-const client = DeviceUpdate(
-  "https://<my-instance-id>.api.adu.microsoft.com",
-  new DefaultAzureCredential()
-);
+
+const endpoint = "https://<my-instance-id>.api.adu.microsoft.com";
+const client = DeviceUpdate(endpoint, new DefaultAzureCredential());
 ```
 
 ## Key concepts
@@ -77,22 +77,17 @@ The following section shows you how to initialize and authenticate your client, 
 
 - [Get All Devices](#get-all-devices "Get All Devices")
 
-```typescript
+```ts snippet:ReadmeSampleGetAllDevices
 import DeviceUpdate from "@azure-rest/iot-device-update";
 import { DefaultAzureCredential } from "@azure/identity";
 
-async function main() {
-  console.log("== List devices ==");
-  const client = DeviceUpdate(endpoint, new DefaultAzureCredential());
+const endpoint = "https://<my-instance-id>.api.adu.microsoft.com";
+const client = DeviceUpdate(endpoint, new DefaultAzureCredential());
 
-  const result = await client
-    .path("/deviceupdate/{instanceId}/management/devices", instanceId)
-    .get();
+const instanceId = "<my-instance-id>";
+const result = await client.path("/deviceupdate/{instanceId}/management/devices", instanceId).get();
 
-  console.log(result);
-}
-
-main().catch(console.error);
+console.log(result);
 ```
 
 ## Troubleshooting
@@ -101,34 +96,34 @@ main().catch(console.error);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts snippet:SetLogLevel
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.1.0/sdk/core/logger).
 
 ## Next steps
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fdeviceupdate%2Fiot-device-update%2FREADME.png)
 
-[device_update_product_documentation]: /azure/iot-hub-device-update/
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.0.0/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0/sdk/deviceupdate/iot-device-update-rest
+
+[device_update_product_documentation]: https://learn.microsoft.com/azure/iot-hub-device-update/
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.1.0/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.1.0/sdk/deviceupdate/iot-device-update-rest
 [npm]: https://www.npmjs.com/org/azure-rest
 [ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
-[authenticate_with_token]: /azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0/sdk/identity/identity#credentials
+[authenticate_with_token]: https://learn.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.1.0/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.1.0/sdk/identity/identity#defaultazurecredential
 

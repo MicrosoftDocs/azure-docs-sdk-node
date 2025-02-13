@@ -49,7 +49,10 @@ interfaces:
   - '@azure-rest/purview-workflow.ListWorkflows200Response'
   - '@azure-rest/purview-workflow.ListWorkflowsDefaultResponse'
   - '@azure-rest/purview-workflow.Operation'
+  - '@azure-rest/purview-workflow.PageSettings'
+  - '@azure-rest/purview-workflow.PagedAsyncIterableIterator'
   - '@azure-rest/purview-workflow.PagingOptions'
+  - '@azure-rest/purview-workflow.PurviewWorkflowClientOptions'
   - '@azure-rest/purview-workflow.ReassignCommand'
   - '@azure-rest/purview-workflow.ReassignCommandReassignmentsItem'
   - '@azure-rest/purview-workflow.ReassignWorkflowTask'
@@ -119,7 +122,7 @@ typeAliases:
   - '@azure-rest/purview-workflow.UpdateTaskStatusParameters'
   - '@azure-rest/purview-workflow.WorkflowTaskOutput'
 functions:
-  - name: default(string, TokenCredential, ClientOptions)
+  - name: default(string, TokenCredential, PurviewWorkflowClientOptions)
     uid: '@azure-rest/purview-workflow.default'
     package: '@azure-rest/purview-workflow'
     summary: Initialize a new instance of `PurviewWorkflowClient`
@@ -128,19 +131,21 @@ functions:
     syntax:
       content: >-
         function default(endpoint: string, credentials: TokenCredential,
-        options?: ClientOptions): PurviewWorkflowClient
+        options?: PurviewWorkflowClientOptions): PurviewWorkflowClient
       parameters:
         - id: endpoint
           type: string
           description: >-
-            type: string, The account endpoint of your Purview account. Example:
+            The account endpoint of your Purview account. Example:
             https://{accountName}.purview.azure.com/
         - id: credentials
           type: <xref uid="@azure/core-auth.TokenCredential" />
-          description: 'type: TokenCredential, uniquely identify client credential'
+          description: uniquely identify client credential
         - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: 'type: ClientOptions, the parameter for all optional parameters'
+          type: >-
+            <xref
+            uid="@azure-rest/purview-workflow.PurviewWorkflowClientOptions" />
+          description: the parameter for all optional parameters
       return:
         description: ''
         type: <xref uid="@azure-rest/purview-workflow.PurviewWorkflowClient" />
@@ -488,6 +493,6 @@ functions:
       return:
         description: '- PagedAsyncIterableIterator to iterate the elements'
         type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure-rest/purview-workflow.PaginateReturn"
+          <xref uid="@azure-rest/purview-workflow.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure-rest/purview-workflow.PaginateReturn"
           />&lt;TResponse&gt;&gt;

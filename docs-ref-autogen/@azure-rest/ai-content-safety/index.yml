@@ -17,7 +17,6 @@ interfaces:
   - '@azure-rest/ai-content-safety.AnalyzeImageDefaultHeaders'
   - '@azure-rest/ai-content-safety.AnalyzeImageDefaultResponse'
   - '@azure-rest/ai-content-safety.AnalyzeImageOptions'
-  - '@azure-rest/ai-content-safety.AnalyzeImageOptionsOutput'
   - '@azure-rest/ai-content-safety.AnalyzeImageResultOutput'
   - '@azure-rest/ai-content-safety.AnalyzeText'
   - '@azure-rest/ai-content-safety.AnalyzeText200Response'
@@ -25,8 +24,8 @@ interfaces:
   - '@azure-rest/ai-content-safety.AnalyzeTextDefaultHeaders'
   - '@azure-rest/ai-content-safety.AnalyzeTextDefaultResponse'
   - '@azure-rest/ai-content-safety.AnalyzeTextOptions'
-  - '@azure-rest/ai-content-safety.AnalyzeTextOptionsOutput'
   - '@azure-rest/ai-content-safety.AnalyzeTextResultOutput'
+  - '@azure-rest/ai-content-safety.ContentSafetyClientOptions'
   - '@azure-rest/ai-content-safety.CreateOrUpdateTextBlocklist200Response'
   - '@azure-rest/ai-content-safety.CreateOrUpdateTextBlocklist201Response'
   - '@azure-rest/ai-content-safety.CreateOrUpdateTextBlocklistBodyParam'
@@ -46,7 +45,6 @@ interfaces:
   - '@azure-rest/ai-content-safety.GetTextBlocklistItemDefaultResponse'
   - '@azure-rest/ai-content-safety.ImageCategoriesAnalysisOutput'
   - '@azure-rest/ai-content-safety.ImageData'
-  - '@azure-rest/ai-content-safety.ImageDataOutput'
   - '@azure-rest/ai-content-safety.ListTextBlocklistItems'
   - '@azure-rest/ai-content-safety.ListTextBlocklistItems200Response'
   - '@azure-rest/ai-content-safety.ListTextBlocklistItemsDefaultHeaders'
@@ -57,6 +55,10 @@ interfaces:
   - '@azure-rest/ai-content-safety.ListTextBlocklists200Response'
   - '@azure-rest/ai-content-safety.ListTextBlocklistsDefaultHeaders'
   - '@azure-rest/ai-content-safety.ListTextBlocklistsDefaultResponse'
+  - '@azure-rest/ai-content-safety.PageSettings'
+  - '@azure-rest/ai-content-safety.PagedAsyncIterableIterator'
+  - '@azure-rest/ai-content-safety.PagedTextBlocklistItemOutput'
+  - '@azure-rest/ai-content-safety.PagedTextBlocklistOutput'
   - '@azure-rest/ai-content-safety.PagingOptions'
   - '@azure-rest/ai-content-safety.RemoveBlocklistItems'
   - '@azure-rest/ai-content-safety.RemoveBlocklistItems204Response'
@@ -73,7 +75,9 @@ interfaces:
   - '@azure-rest/ai-content-safety.TextCategoriesAnalysisOutput'
 typeAliases:
   - '@azure-rest/ai-content-safety.AddOrUpdateBlocklistItemsParameters'
+  - '@azure-rest/ai-content-safety.AnalyzeImageOutputType'
   - '@azure-rest/ai-content-safety.AnalyzeImageParameters'
+  - '@azure-rest/ai-content-safety.AnalyzeTextOutputType'
   - '@azure-rest/ai-content-safety.AnalyzeTextParameters'
   - '@azure-rest/ai-content-safety.ContentSafetyClient'
   - '@azure-rest/ai-content-safety.CreateOrUpdateTextBlocklistParameters'
@@ -82,15 +86,19 @@ typeAliases:
   - '@azure-rest/ai-content-safety.GetPage'
   - '@azure-rest/ai-content-safety.GetTextBlocklistItemParameters'
   - '@azure-rest/ai-content-safety.GetTextBlocklistParameters'
+  - '@azure-rest/ai-content-safety.ImageCategory'
+  - '@azure-rest/ai-content-safety.ImageCategoryOutput'
   - '@azure-rest/ai-content-safety.ListTextBlocklistItemsParameters'
   - '@azure-rest/ai-content-safety.ListTextBlocklistsParameters'
-  - '@azure-rest/ai-content-safety.PagedTextBlocklistItemOutput'
-  - '@azure-rest/ai-content-safety.PagedTextBlocklistOutput'
   - '@azure-rest/ai-content-safety.PaginateReturn'
   - '@azure-rest/ai-content-safety.RemoveBlocklistItemsParameters'
   - '@azure-rest/ai-content-safety.TextBlocklistResourceMergeAndPatch'
+  - '@azure-rest/ai-content-safety.TextCategory'
+  - '@azure-rest/ai-content-safety.TextCategoryOutput'
 functions:
-  - name: default(string, TokenCredential | KeyCredential, ClientOptions)
+  - name: >-
+      default(string, TokenCredential | KeyCredential,
+      ContentSafetyClientOptions)
     uid: '@azure-rest/ai-content-safety.default'
     package: '@azure-rest/ai-content-safety'
     summary: Initialize a new instance of `ContentSafetyClient`
@@ -98,10 +106,11 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function default(endpoint: string, credentials: TokenCredential |
-        KeyCredential, options?: ClientOptions): ContentSafetyClient
+        function default(endpointParam: string, credentials: TokenCredential |
+        KeyCredential, options?: ContentSafetyClientOptions):
+        ContentSafetyClient
       parameters:
-        - id: endpoint
+        - id: endpointParam
           type: string
           description: >-
             Supported Cognitive Services endpoints (protocol and hostname, for
@@ -114,33 +123,15 @@ functions:
             uid="@azure/core-auth.KeyCredential" />
           description: uniquely identify client credential
         - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          type: >-
+            <xref uid="@azure-rest/ai-content-safety.ContentSafetyClientOptions"
+            />
           description: the parameter for all optional parameters
       return:
         description: ''
         type: <xref uid="@azure-rest/ai-content-safety.ContentSafetyClient" />
-  - name: isUnexpected(AnalyzeText200Response | AnalyzeTextDefaultResponse)
-    uid: '@azure-rest/ai-content-safety.isUnexpected'
-    package: '@azure-rest/ai-content-safety'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function isUnexpected(response: AnalyzeText200Response |
-        AnalyzeTextDefaultResponse): response
-      parameters:
-        - id: response
-          type: >-
-            <xref uid="@azure-rest/ai-content-safety.AnalyzeText200Response" />
-            | <xref
-            uid="@azure-rest/ai-content-safety.AnalyzeTextDefaultResponse" />
-          description: ''
-      return:
-        description: ''
-        type: response
   - name: isUnexpected(AnalyzeImage200Response | AnalyzeImageDefaultResponse)
-    uid: '@azure-rest/ai-content-safety.isUnexpected_1'
+    uid: '@azure-rest/ai-content-safety.isUnexpected'
     package: '@azure-rest/ai-content-safety'
     summary: ''
     remarks: ''
@@ -155,6 +146,26 @@ functions:
             <xref uid="@azure-rest/ai-content-safety.AnalyzeImage200Response" />
             | <xref
             uid="@azure-rest/ai-content-safety.AnalyzeImageDefaultResponse" />
+          description: ''
+      return:
+        description: ''
+        type: response
+  - name: isUnexpected(AnalyzeText200Response | AnalyzeTextDefaultResponse)
+    uid: '@azure-rest/ai-content-safety.isUnexpected_1'
+    package: '@azure-rest/ai-content-safety'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isUnexpected(response: AnalyzeText200Response |
+        AnalyzeTextDefaultResponse): response
+      parameters:
+        - id: response
+          type: >-
+            <xref uid="@azure-rest/ai-content-safety.AnalyzeText200Response" />
+            | <xref
+            uid="@azure-rest/ai-content-safety.AnalyzeTextDefaultResponse" />
           description: ''
       return:
         description: ''
@@ -385,6 +396,6 @@ functions:
       return:
         description: '- PagedAsyncIterableIterator to iterate the elements'
         type: >-
-          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
-          uid="@azure-rest/ai-content-safety.PaginateReturn"
+          <xref uid="@azure-rest/ai-content-safety.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure-rest/ai-content-safety.PaginateReturn"
           />&lt;TResponse&gt;&gt;

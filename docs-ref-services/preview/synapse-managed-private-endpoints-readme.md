@@ -1,12 +1,12 @@
 ---
 title: Azure Synapse Managed Private Endpoints client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/synapse-managed-private-endpoints, synapseanalytics
-ms.date: 09/08/2021
+keywords: Azure, javascript, SDK, API, @azure/synapse-managed-private-endpoints, synapse-analytics
+ms.date: 02/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: synapse-analytics
 ---
-## Azure Synapse Managed Private Endpoints client library for JavaScript - version 1.0.0-beta.4 
+## Azure Synapse Managed Private Endpoints client library for JavaScript - version 1.0.0-alpha.20250217.1 
 
 
 This package contains an isomorphic SDK for Managed Private Endpoints.
@@ -21,10 +21,10 @@ npm install @azure/synapse-managed-private-endpoints
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-managed-private-endpoints_1.0.0-beta.4/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ## Key concepts
 
@@ -37,12 +37,12 @@ import { DefaultAzureCredential } from "@azure/identity";
 export async function main(): Promise<void> {
   const credential = new DefaultAzureCredential();
 
-  let client = new ManagedPrivateEndpointsClient(
+  const client = new ManagedPrivateEndpointsClient(
     credential,
     "https://mysynapse.dev.azuresynapse.net"
   );
-  let list = await client.managedPrivateEndpoints.list("myvnet");
-  for await (let item of list) {
+  const list = await client.managedPrivateEndpoints.list("myvnet");
+  for await (const item of list) {
     console.log("item:", item);
   }
 }
@@ -52,13 +52,13 @@ export async function main(): Promise<void> {
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcdn%2Farm-cdn%2FREADME.png)
+
 
 ## Troubleshooting
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
@@ -70,7 +70,5 @@ In the future, you'll find additional code samples here.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-managed-private-endpoints_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 

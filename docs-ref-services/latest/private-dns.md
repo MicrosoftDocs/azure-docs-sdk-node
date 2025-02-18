@@ -1,7 +1,7 @@
 ---
 title: Azure Private DNS SDK for JavaScript
 description: Reference for Azure Private DNS SDK for JavaScript
-ms.date: 02/17/2025
+ms.date: 02/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: privatedns

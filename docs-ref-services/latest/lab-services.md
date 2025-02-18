@@ -1,7 +1,7 @@
 ---
 title: Azure Lab Services SDK for JavaScript
 description: Reference for Azure Lab Services SDK for JavaScript
-ms.date: 02/17/2025
+ms.date: 02/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: lab-services

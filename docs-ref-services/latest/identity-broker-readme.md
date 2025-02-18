@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/identity-broker, entra-id
-ms.date: 10/17/2024
+ms.date: 02/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: entra-id
@@ -12,7 +12,7 @@ This package provides a plugin to the Azure Identity library for JavaScript ([`@
 
 An authentication broker is an application that runs on a user’s machine that manages the authentication handshakes and token maintenance for connected accounts. Currently, only the Windows authentication broker, Web Account Manager (WAM), is supported.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-broker_1.1.0/sdk/identity/identity-broker) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.1.0/sdk/identity/identity-broker/samples) | [API reference documentation](https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-identity-broker/1.0.0-beta.1/index.html) | [Microsoft Entra ID documentation] (https://learn.microsoft.com/entra/identity/)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-broker_1.2.0/sdk/identity/identity-broker) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/sdk/identity/identity-broker/samples) | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/identity-broker-readme?view=azure-node-latest) | [Microsoft Entra ID documentation] (https://learn.microsoft.com/entra/identity/)
 
 ## Getting started
 
@@ -42,7 +42,7 @@ Azure Identity plugins for JavaScript support stable (even numbered) versions of
 
 ## Key concepts
 
-If this is your first time using `@azure/identity` or Microsoft Entra ID, we recommend that you read [Using `@azure/identity` with Microsoft Entra ID](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.1.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
+If this is your first time using `@azure/identity` or Microsoft Entra ID, we recommend that you read [Using `@azure/identity` with Microsoft Entra ID](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
 
 ### Parent window handles
 
@@ -69,6 +69,7 @@ import { useIdentityPlugin, InteractiveBrowserCredential } from "@azure/identity
 import { nativeBrokerPlugin } from "@azure/identity-broker";
 
 useIdentityPlugin(nativeBrokerPlugin);
+
 const credential = new InteractiveBrowserCredential({
   brokerOptions: {
     enabled: true,
@@ -88,19 +89,22 @@ import { useIdentityPlugin, InteractiveBrowserCredential } from "@azure/identity
 import { nativeBrokerPlugin } from "@azure/identity-broker";
 
 useIdentityPlugin(nativeBrokerPlugin);
+
 const credential = new InteractiveBrowserCredential({
   brokerOptions: {
     enabled: true,
     parentWindowHandle: new Uint8Array(0), // This should be a handle to the parent window
   },
 });
+
 // We'll use the Microsoft Graph scope as an example
 const scope = "https://graph.microsoft.com/.default";
+
 // Print out part of the access token
 console.log((await credential.getToken(scope)).token.substring(0, 10), "...");
 ```
 
-For a complete example of using an Electron app for retrieving a window handle, see [this sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.1.0/sdk/identity/identity-broker/samples/v1/typescript/src/index.ts).
+For a complete example of using an Electron app for retrieving a window handle, see [this sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/sdk/identity/identity-broker/samples/v1/typescript/src/index.ts).
 
 ### Use the default account for sign-in
 
@@ -111,6 +115,7 @@ import { useIdentityPlugin, InteractiveBrowserCredential } from "@azure/identity
 import { nativeBrokerPlugin } from "@azure/identity-broker";
 
 useIdentityPlugin(nativeBrokerPlugin);
+
 const credential = new InteractiveBrowserCredential({
   brokerOptions: {
     enabled: true,
@@ -118,15 +123,17 @@ const credential = new InteractiveBrowserCredential({
     parentWindowHandle: new Uint8Array(0), // This should be a handle to the parent window
   },
 });
+
 // We'll use the Microsoft Graph scope as an example
 const scope = "https://graph.microsoft.com/.default";
+
 // Print out part of the access token
 console.log((await credential.getToken(scope)).token.substr(0, 10), "...");
 ```
 
 ## Troubleshooting
 
-See the Azure Identity [troubleshooting guide][https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.1.0/sdk/identity/identity/TROUBLESHOOTING.md] for details on how to diagnose various failure scenarios.
+See the Azure Identity [troubleshooting guide][https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/sdk/identity/identity/TROUBLESHOOTING.md] for details on how to diagnose various failure scenarios.
 
 ### Logging
 
@@ -146,7 +153,5 @@ If you encounter bugs or have suggestions, please [open an issue](https://github
 
 ## Contributing
 
-If you'd like to contribute to this library, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fidentity%2Fidentity%2FREADME.png)
+If you'd like to contribute to this library, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

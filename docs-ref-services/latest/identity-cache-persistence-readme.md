@@ -1,25 +1,18 @@
 ---
 title: 
-keywords: Azure, javascript, SDK, API, @azure/identity-cache-persistence, identity
-ms.date: 10/16/2021
+keywords: Azure, javascript, SDK, API, @azure/identity-cache-persistence, entra-id
+ms.date: 02/18/2025
 ms.topic: reference
 ms.devlang: javascript
-ms.service: identity
+ms.service: entra-id
 ---
-## Azure Identity Plugin for Token Cache Persistence
+# Azure Identity Plugin for Token Cache Persistence
 
 This package provides a plugin to the Azure Identity library for JavaScript ([`@azure/identity`](https://npmjs.com/package/@azure/identity)) that enables persistent token caching. Token cache persistence allows the built-in token cache to persist across sessions using a secure storage system provided by the local operating system.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-cache-persistence_1.0.0/sdk/identity/identity-cache-persistence) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.0.0/sdk/identity/identity-cache-persistence/samples-dev)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-cache-persistence_1.2.0/sdk/identity/identity-cache-persistence) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.2.0/sdk/identity/identity-cache-persistence/samples-dev)
 
 ## Getting started
-
-```javascript
-import { useIdentityPlugin } from "@azure/identity";
-import { cachePersistencePlugin } from "@azure/identity-cache-persistence";
-
-useIdentityPlugin(cachePersistencePlugin);
-```
 
 ### Prerequisites
 
@@ -40,13 +33,13 @@ Azure Identity plugins for JavaScript support stable (even numbered) versions of
 
 ## Key concepts
 
-If this is your first time using `@azure/identity` or the Microsoft identity platform (Azure Active Directory), we recommend that you read [Using `@azure/identity` with Microsoft Identity Platform](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.0.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
+If this is your first time using `@azure/identity` or Microsoft Entra ID, we recommend that you read [Using `@azure/identity` with Microsoft Entra ID](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.2.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
 
 ### Azure Identity Plugins
 
 As of `@azure/identity` version 2.0.0, the Identity client library for JavaScript includes a plugin API. This package (`@azure/identity-cache-persistence`) exports a plugin object that you must pass as an argument to the top-level `useIdentityPlugin` function from the `@azure/identity` package. Enable token cache persistence in your program as follows:
 
-```javascript
+```ts snippet:getting_started
 import { useIdentityPlugin } from "@azure/identity";
 import { cachePersistencePlugin } from "@azure/identity-cache-persistence";
 
@@ -59,30 +52,20 @@ After calling `useIdentityPlugin`, the persistent token cache plugin is register
 
 Once the plugin is registered, you can enable token cache persistence by passing `tokenCachePersistenceOptions` with an `enabled` property set to `true` to a credential constructor. In the following example, we use the `DeviceCodeCredential`, since persistent caching of its tokens allows you to skip the interactive device-code authentication flow if a cached token is available.
 
-```javascript
-import { useIdentityPlugin, DeviceCodeCredential } from "@azure/identity";
-import { cachePersistencePlugin } from "@azure/identity-cache-persistence";
+```ts snippet:device_code_credential_example
+import { DeviceCodeCredential } from "@azure/identity";
 
-useIdentityPlugin(cachePersistencePlugin);
-
-async function main() {
-  const credential = new DeviceCodeCredential({
-    tokenCachePersistenceOptions: {
-      enabled: true
-    }
-  });
-
-  // We'll use the Microsoft Graph scope as an example
-  const scope = "https://graph.microsoft.com/.default";
-
-  // Print out part of the access token
-  console.log((await credential.getToken(scope)).token.substr(0, 10), "...");
-}
-
-main().catch((error) => {
-  console.error("An error occurred:", error);
-  process.exit(1);
+const credential = new DeviceCodeCredential({
+  tokenCachePersistenceOptions: {
+    enabled: true,
+  },
 });
+
+// We'll use the Microsoft Graph scope as an example
+const scope = "https://graph.microsoft.com/.default";
+
+// Print out part of the access token
+console.log((await credential.getToken(scope)).token.substring(0, 10), "...");
 ```
 
 ## Troubleshooting
@@ -91,7 +74,7 @@ main().catch((error) => {
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts snippet:logging
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
@@ -105,7 +88,5 @@ If you encounter bugs or have suggestions, please [open an issue](https://github
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fidentity%2Fidentity%2FREADME.png)
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

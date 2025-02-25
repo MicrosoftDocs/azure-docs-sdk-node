@@ -613,5 +613,5 @@ directory for detailed examples of how to use this library to send and receive e
 
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/event-hubs_5.12.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Feventhub%2Fevent-hubs%2FREADME.png)
+
 

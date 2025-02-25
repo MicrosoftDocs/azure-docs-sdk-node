@@ -879,5 +879,5 @@ If you'd like to contribute to this library, please read the [contributing guide
 [createkeyvault]: https://docs.microsoft.com/azure/key-vault/quick-create-portal
 [softdelete]: https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
+
 

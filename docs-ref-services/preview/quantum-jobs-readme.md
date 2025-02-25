@@ -215,5 +215,5 @@ All Quantum Jobs service operations will throw a RequestFailedException on failu
 [style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fappconfiguration%2Fapp-configuration%2FREADME.png)
+
 

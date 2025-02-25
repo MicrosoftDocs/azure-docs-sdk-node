@@ -257,5 +257,5 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-administration%2FREADME.png)
+
 

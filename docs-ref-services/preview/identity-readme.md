@@ -396,5 +396,5 @@ To contribute to this library, read the [contributing guide](https://github.com/
 [azure_identity_broker_readme]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity_4.5.0-beta.3/sdk/identity/identity-broker
 [authority_hosts]: https://learn.microsoft.com/javascript/api/@azure/identity/azureauthorityhosts
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fidentity%2Fidentity%2FREADME.png)
+
 

@@ -515,5 +515,5 @@ If you'd like to contribute to this library, please read the [contributing guide
 [managed_identity]: /azure/active-directory/managed-identities-azure-resources/overview
 [azure_identity]: /java/api/overview/azure/identity-readme?view=azure-java-stable
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-secrets%2FREADME.png)
+
 

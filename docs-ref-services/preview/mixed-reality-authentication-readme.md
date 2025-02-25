@@ -209,5 +209,5 @@ build and test the code.
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/mixed-reality-authentication_1.0.0-beta.1/sdk/identity/identity
 [defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/mixed-reality-authentication_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%mixedreality%2Fmixed-reality-authentication%2FREADME.png)
+
 

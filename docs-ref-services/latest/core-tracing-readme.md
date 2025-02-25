@@ -42,5 +42,5 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [@azure/opentelemetry-instrumentation-azure-sdk]: https://www.npmjs.com/package/@azure/opentelemetry-instrumentation-azure-sdk
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fcore-tracing%2FREADME.png)
+
 

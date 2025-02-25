@@ -177,7 +177,7 @@ setLogLevel("info");
 
 For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.4/sdk/core/logger).
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fmaps%2Fmaps-geolocation-rest%2FREADME.png)
+
 
 [source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.4/sdk/maps/maps-geolocation-rest
 [npm_package]: https://www.npmjs.com/package/@azure-rest/maps-geolocation

@@ -202,5 +202,5 @@ Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tr
 directory for detailed examples on how to use this library to send and receive events to/from
 [Event Hubs](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-about).
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/eventhub/event-hubs/README.png)
+
 

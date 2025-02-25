@@ -894,7 +894,7 @@ For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blo
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 - [Azure Monitor][azure_monitor_overview]
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fmonitor%2Fmonitor-query%2FREADME.png)
+
 
 [azure_monitor_create_using_portal]: /azure/azure-monitor/logs/quick-create-workspace
 [azure_monitor_overview]: /azure/azure-monitor/overview

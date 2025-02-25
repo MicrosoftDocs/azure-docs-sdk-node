@@ -137,5 +137,5 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azaccountext]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fidentity%2Fidentity%2FREADME.png)
+
 

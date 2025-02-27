@@ -1,7 +1,7 @@
 ---
 title: Azure Health Deidentification SDK for JavaScript
 description: Reference for Azure Health Deidentification SDK for JavaScript
-ms.date: 02/26/2025
+ms.date: 02/27/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: healthdeidentification

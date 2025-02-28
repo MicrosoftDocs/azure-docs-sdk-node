@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: deviceregistry
 ---
-# Azure Device Registry SDK for JavaScript - preview
-## Packages - preview
+# Azure Device Registry SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](device-registry-index.md)]

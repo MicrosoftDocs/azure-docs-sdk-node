@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-express, web-pubsub
-ms.date: 07/03/2023
+ms.date: 02/28/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
@@ -10,13 +10,13 @@ ms.service: web-pubsub
 
 [Azure Web PubSub service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe pattern. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from server or submitting HTTP requests can also use Azure Web PubSub service.
 
-When a WebSocket connection connects, the Web PubSub service transforms the connection lifecycle and messages into [events in CloudEvents format](/azure/azure-web-pubsub/concept-service-internals#workflow). This library provides an express middleware to handle events representing the WebSocket connection's lifecycle and messages, as shown in below diagram:
+When a WebSocket connection connects, the Web PubSub service transforms the connection lifecycle and messages into [events in CloudEvents format](https://learn.microsoft.com/azure/azure-web-pubsub/concept-service-internals#workflow). This library provides an express middleware to handle events representing the WebSocket connection's lifecycle and messages, as shown in below diagram:
 
 ![cloudevents](https://user-images.githubusercontent.com/668244/140321213-6442b3b8-72ee-4c28-aec1-127f9ea8f5d9.png)
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.5/sdk/web-pubsub/web-pubsub-express) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.6/sdk/web-pubsub/web-pubsub-express) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub-express) |
 [API reference documentation](https://aka.ms/awps/sdk/js) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -42,10 +42,10 @@ npm install @azure/web-pubsub-express
 
 ### 2. Create a `WebPubSubEventHandler`
 
-```js
-const express = require("express");
+```ts snippet:ReadmeSampleCreateClient
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
 
-const { WebPubSubEventHandler } = require("@azure/web-pubsub-express");
 const handler = new WebPubSubEventHandler("chat");
 
 const app = express();
@@ -53,7 +53,7 @@ const app = express();
 app.use(handler.getMiddleware());
 
 app.listen(3000, () =>
-  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`)
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
 );
 ```
 
@@ -87,18 +87,18 @@ Event handler contains the logic to handle the client events. Event handler need
 
 ### Handle the `connect` request and assign `<userId>`
 
-```js
-const express = require("express");
+```ts snippet:ReadmeSampleConnect
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
 
-const { WebPubSubEventHandler } = require("@azure/web-pubsub-express");
 const handler = new WebPubSubEventHandler("chat", {
   handleConnect: (req, res) => {
     // auth the connection and set the userId of the connection
     res.success({
-      userId: "<userId>"
+      userId: "<userId>",
     });
   },
-  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"]
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
 });
 
 const app = express();
@@ -106,21 +106,191 @@ const app = express();
 app.use(handler.getMiddleware());
 
 app.listen(3000, () =>
-  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`)
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `connect` request and reject the connection if auth failed
+
+```ts snippet:ReadmeSampleConnectAndReject
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  handleConnect: (req, res) => {
+    // auth the connection and reject the connection if auth failed
+    res.fail(401, "Unauthorized");
+    // the following method is also a valid approach
+    // res.failWith({ code: 401, detail: "Unauthorized" });
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `connected` request
+
+```ts snippet:ReadmeSampleConnected
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  onConnected: (connectedRequest) => {
+    // Your onConnected logic goes here
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `onDisconnected` request
+
+```ts snippet:ReadmeSampleDisconnected
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  onDisconnected: (disconnectedRequest) => {
+    // Your onDisconnected logic goes here
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `connect` request for mqtt and assign `<userId>` and `<mqtt>` properties
+
+```ts snippet:ReadmeSampleConnectMqtt
+import { WebPubSubEventHandler, MqttConnectRequest } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  handleConnect: (req, res) => {
+    if (req.context.clientProtocol === "mqtt") {
+      // return mqtt response when request is of MQTT kind
+      // get connect request as mqtt request and print it
+      const mqttRequest = req as MqttConnectRequest;
+      console.log(mqttRequest);
+
+      // auth the connection and return mqtt response
+      res.success({
+        userId: "user1",
+        mqtt: { userProperties: [{ name: "a", value: "b" }] },
+      });
+    } else {
+      res.success({
+        userId: "user1",
+      });
+    }
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `connect` request for mqtt and reject the connection if auth failed
+
+```ts snippet:ReadmeSampleConnectMqttAndReject
+import { WebPubSubEventHandler, MqttConnectRequest } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  handleConnect: (req, res) => {
+    // auth the connection and reject the connection if auth failed
+    if (req.context.clientProtocol === "mqtt") {
+      // return mqtt error response when request is of MQTT kind
+      // get connect request as mqtt request and print it
+      const mqttRequest = req as MqttConnectRequest;
+      console.log(mqttRequest);
+
+      // auth the connection and return mqtt failure response
+      res.fail(401, "Not Authorized");
+
+      // Or use below method for more fine-grained control over the MQTT return code
+      // res.failWith({ mqtt: { code: MqttV500ConnectReasonCode.NotAuthorized } });
+    } else res.success();
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `onDisconnected` for mqtt request
+
+```ts snippet:ReadmeSampleDisconnectedMqtt
+import { WebPubSubEventHandler, MqttDisconnectedRequest } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  onDisconnected: (disconnectedRequest) => {
+    if (disconnectedRequest.context.clientProtocol === "mqtt") {
+      // get disconnect request as mqtt request and print it
+      const mqttRequest = disconnectedRequest as MqttDisconnectedRequest;
+      console.log(mqttRequest.mqtt);
+      // Your onDisconnected logic goes here
+    } else {
+      console.log(disconnectedRequest);
+      // Your onDisconnected logic goes here
+    }
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
 );
 ```
 
 ### Only allow specified endpoints
 
-```js
-const express = require("express");
+```ts snippet:ReadmeSampleAllowedEndpoints
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
 
-const { WebPubSubEventHandler } = require("@azure/web-pubsub-express");
 const handler = new WebPubSubEventHandler("chat", {
   allowedEndpoints: [
     "https://<yourAllowedService1>.webpubsub.azure.com",
-    "https://<yourAllowedService2>.webpubsub.azure.com"
-  ]
+    "https://<yourAllowedService2>.webpubsub.azure.com",
+  ],
 });
 
 const app = express();
@@ -128,18 +298,18 @@ const app = express();
 app.use(handler.getMiddleware());
 
 app.listen(3000, () =>
-  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`)
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
 );
 ```
 
 ### Set custom event handler path
 
-```js
-const express = require("express");
+```ts snippet:ReadmeSampleCustomPath
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
 
-const { WebPubSubEventHandler } = require("@azure/web-pubsub-express");
 const handler = new WebPubSubEventHandler("chat", {
-  path: "customPath1"
+  path: "/customPath1",
 });
 
 const app = express();
@@ -148,16 +318,15 @@ app.use(handler.getMiddleware());
 
 app.listen(3000, () =>
   // Azure WebPubSub Upstream ready at http://localhost:3000/customPath1
-  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`)
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
 );
 ```
 
 ### Set and read connection state
 
-```js
-const express = require("express");
-
-const { WebPubSubEventHandler } = require("@azure/web-pubsub-express");
+```ts snippet:ReadmeSampleState
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
 
 const handler = new WebPubSubEventHandler("chat", {
   handleConnect(req, res) {
@@ -166,12 +335,12 @@ const handler = new WebPubSubEventHandler("chat", {
     res.success();
   },
   handleUserEvent(req, res) {
-    var calledTime = req.context.states.calledTime++;
+    const calledTime = req.context.states.calledTime++;
     console.log(calledTime);
     // You can also set the state here
     res.setState("calledTime", calledTime);
     res.success();
-  }
+  },
 });
 
 const app = express();
@@ -179,7 +348,7 @@ const app = express();
 app.use(handler.getMiddleware());
 
 app.listen(3000, () =>
-  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`)
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
 );
 ```
 
@@ -187,15 +356,21 @@ app.listen(3000, () =>
 
 ### Enable logs
 
-You can set the following environment variable to get the debug logs when using this library.
-
-- Getting debug logs from the SignalR client library
+Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`.
 
 ```bash
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.0.5/sdk/core/logger).
+Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
+
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
+
+setLogLevel("info");
+```
+
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.0.6/sdk/core/logger).
 
 ### Live Trace
 
@@ -209,7 +384,7 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.5/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.6/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

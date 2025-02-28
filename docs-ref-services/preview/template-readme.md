@@ -1,12 +1,12 @@
 ---
 title: Azure Template client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/template, template
-ms.date: 11/23/2024
+ms.date: 02/28/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: template
 ---
-# Azure Template client library for JavaScript - version 1.0.13-beta.1 
+# Azure Template client library for JavaScript - version 1.0.13-beta.4605389 
 
 
 <!-- NOTE: This README file is a template. Read through it and replace the instructions (keeping an eye out for package names like "@azure/template") with the ones that pertain to your package. For a complete example based on the real Azure App Configuration SDK, see README-TEMPLATE.md in this directory. -->
@@ -20,7 +20,7 @@ This project is used as a template package for the Azure SDK for JavaScript. It 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.13-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.13-beta.4605389/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -48,11 +48,11 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 NOTE: if your service supports CORS natively please provide instructions for enabling CORS at the service level (similar to the sample below), otherwise replace this section with guidance such as:
 
-Due to Azure template service CORS limitation this library cannot be used to make direct calls to the template service from a browser. Please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.13-beta.1/samples/cors/ts/README.md) for guidance.
+Due to Azure template service CORS limitation this library cannot be used to make direct calls to the template service from a browser. Please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.13-beta.4605389/samples/cors/ts/README.md) for guidance.
 
 -->
 
-You need to set up [Cross-Origin Resource Sharing (CORS)](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
+You need to set up [Cross-Origin Resource Sharing (CORS)](https://learn.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
 
 For example, you can create the following CORS settings for debugging. But please customize the settings carefully according to your requirements in a production environment.
 
@@ -106,15 +106,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("verbose");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.13-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.13-beta.4605389/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.13-beta.1/sdk/template/template/samples) directory for detailed examples that demonstrate how to use the client libraries.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/template_1.0.13-beta.4605389/sdk/template/template/samples) directory for detailed examples that demonstrate how to use the client libraries.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.13-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/template_1.0.13-beta.4605389/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -122,6 +122,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 

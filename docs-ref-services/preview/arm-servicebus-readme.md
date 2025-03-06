@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-service-bus
 ---
-# Azure ServiceBusManagement client library for JavaScript - version 6.2.0-alpha.20250305.1 
+# Azure ServiceBusManagement client library for JavaScript - version 6.2.0-alpha.20250306.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ServiceBusManagement client.

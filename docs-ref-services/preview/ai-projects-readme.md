@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-projects, ai
-ms.date: 12/20/2024
+ms.date: 03/06/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Projects client library for JavaScript - version 1.0.0-beta.2 
+# Azure AI Projects client library for JavaScript - version 1.0.0-alpha.20250306.1 
 
 
 Use the AI Projects client library (in preview) to:
@@ -78,7 +78,7 @@ Use the AI Projects client library (in preview) to:
 ### Install the package
 
 ```bash
-npm install @azure/ai-projects
+npm install @azure/ai-projects @azure/identity
 ```
 
 ## Key concepts
@@ -449,7 +449,7 @@ const agent = await client.agents.createAgent("gpt-4-1106-preview", {
 });
 console.log(`Created agent, agent ID: ${agent.id}`);
 
-const thread = client.agents.createThread();
+const thread = await client.agents.createThread();
 console.log(`Created thread, thread ID: ${thread.id}`);
 
 const message = await client.agents.createMessage(thread.id, {
@@ -488,7 +488,16 @@ To have the SDK poll on your behalf, use the `createThreadAndRun` method.
 Here is an example:
 
 ```javascript
-const run = await client.agents.createThreadAndRun(thread.id, agent.id);
+const run = await client.agents.createThreadAndRun(agent.id, {
+  thread: {
+    messages: [
+      {
+        role: "user",
+        content: "hello, world!"
+      }
+    ]
+  }
+});
 ```
 
 With streaming, polling also need not be considered.
@@ -539,6 +548,12 @@ To retrieve messages from agents, use the following example:
 
 ```javascript
 const messages = await client.agents.listMessages(thread.id);
+while (messages.hasMore) {
+  const nextMessages = await client.agents.listMessages(currentRun.threadId, { after: messages.lastId });
+  messages.data = messages.data.concat(nextMessages.data);
+  messages.hasMore = nextMessages.hasMore;
+  messages.lastId = nextMessages.lastId;
+}
 
 // The messages are following in the reverse order,
 // we will iterate them and output only text contents.
@@ -687,7 +702,7 @@ To report issues with the client library, or request additional features, please
 
 <!-- ## Next steps
 
-Have a look at the [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.2/sdk/ai/ai-projects/samples) folder, containing fully runnable code. -->
+Have a look at the [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples) folder, containing fully runnable code. -->
 
 ## Contributing
 
@@ -708,12 +723,12 @@ additional questions or comments.
 
 <!-- LINKS -->
 
-<!-- [samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.2/sdk/ai/ai-projects/samples -->
+<!-- [samples]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples -->
 
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [entra_id]: https://learn.microsoft.com/azure/ai-services/authentication?tabs=powershell#authenticate-with-microsoft-entra-id
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [azure_sub]: https://azure.microsoft.com/free/
 [evaluators]: https://learn.microsoft.com/azure/ai-studio/how-to/develop/evaluate-sdk
 [evaluator_library]: https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-generative-ai-app#view-and-manage-the-evaluators-in-the-evaluator-library

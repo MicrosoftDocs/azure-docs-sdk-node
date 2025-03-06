@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure StorageManagement client library for JavaScript - version 18.4.0-alpha.20250305.1 
+# Azure StorageManagement client library for JavaScript - version 18.4.0-alpha.20250306.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorageManagement client.

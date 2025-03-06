@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: trafficmanager
 ---
-# Azure TrafficManagerManagement client library for JavaScript - version 6.1.1-alpha.20250305.1 
+# Azure TrafficManagerManagement client library for JavaScript - version 6.1.1-alpha.20250306.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure TrafficManagerManagement client.

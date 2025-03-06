@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storsimple1200series
 ---
-# Azure StorSimpleManagement client library for JavaScript - version 2.1.1-alpha.20250305.1 
+# Azure StorSimpleManagement client library for JavaScript - version 2.1.1-alpha.20250306.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorSimpleManagement client.

@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: synapse-analytics
 ---
-# Azure SynapseManagement client library for JavaScript - version 9.0.0-alpha.20250305.1 
+# Azure SynapseManagement client library for JavaScript - version 9.0.0-alpha.20250306.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SynapseManagement client.

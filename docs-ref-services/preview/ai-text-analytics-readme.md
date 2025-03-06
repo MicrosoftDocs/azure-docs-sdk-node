@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: textanalytics
 ---
-# Azure Text Analytics client library for JavaScript - version 5.1.1-alpha.20250305.1 
+# Azure Text Analytics client library for JavaScript - version 5.1.1-alpha.20250306.1 
 
 
 [Azure Text Analytics](https://azure.microsoft.com/services/cognitive-services/text-analytics/) is a cloud-based service that provides advanced natural language processing over raw text, and includes six main functions:

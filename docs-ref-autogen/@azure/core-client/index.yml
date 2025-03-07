@@ -56,13 +56,13 @@ functions:
       support CAE challenges:
 
       [Continuous Access
-      Evaluation](https://docs.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation).
+      Evaluation](https://learn.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation).
 
 
       Call the `bearerTokenAuthenticationPolicy` with the following options:
 
 
-      ```ts
+      ```ts snippet:AuthorizeRequestOnClaimChallenge
 
       import { bearerTokenAuthenticationPolicy } from
       "@azure/core-rest-pipeline";
@@ -70,8 +70,11 @@ functions:
       import { authorizeRequestOnClaimChallenge } from "@azure/core-client";
 
 
-      const bearerTokenAuthenticationPolicy = bearerTokenAuthenticationPolicy({
-        authorizeRequestOnChallenge: authorizeRequestOnClaimChallenge
+      const policy = bearerTokenAuthenticationPolicy({
+        challengeCallbacks: {
+          authorizeRequestOnChallenge: authorizeRequestOnClaimChallenge,
+        },
+        scopes: ["https://service/.default"],
       });
 
       ```
@@ -120,7 +123,7 @@ functions:
       Defines a callback to handle auth challenge for Storage APIs.
 
       This implements the bearer challenge process described here:
-      https://docs.microsoft.com/rest/api/storageservices/authorize-with-azure-active-directory#bearer-challenge
+      https://learn.microsoft.com/rest/api/storageservices/authorize-with-azure-active-directory#bearer-challenge
 
       Handling has specific features for storage that departs to the general AAD
       challenge docs.

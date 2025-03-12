@@ -84,13 +84,29 @@ functions:
   - name: createPathQuery((PolygonalPath | CircularPath)[])
     uid: '@azure-rest/maps-render.createPathQuery'
     package: '@azure-rest/maps-render'
-    summary: |+
+    summary: >+
       Create a path query string for _get map static image_ request.
+
 
       **Example**
 
-      ```ts
-      const circularPath = {
+
+      ```ts snippet:ReadmeSampleCreatePathQuery
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import MapsRender, { CircularPath, PolygonalPath, createPathQuery } from
+      "@azure-rest/maps-render";
+
+      import { createWriteStream } from "node:fs";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = MapsRender(credential, "<maps-account-client-id>");
+
+
+      const circularPath: CircularPath = {
         center: [52.4559, 13.228],
         radiusInMeters: 10000,
         options: {
@@ -100,7 +116,8 @@ functions:
         },
       };
 
-      const linearPath = {
+
+      const linearPath: PolygonalPath = {
         coordinates: [
           [52.577, 13.35],
           [52.6, 13.2988],
@@ -113,30 +130,47 @@ functions:
         },
       };
 
-      const polygonPath = {
-       coordinates: [
-         [52.577, 13.35],
-         [52.6, 13.2988],
-         [52.32, 13.2988],
-         [52.577, 13.35],
-       ],
-       options: {
-         lineColor: "000000",
-         lineOpacity: 0.9,
-         lineWidthInPixels: 2,
-         fillColor: "FFFFFF",
-         fillOpacity: 0.8,
-       },
+
+      const polygonPath: PolygonalPath = {
+        coordinates: [
+          [52.577, 13.35],
+          [52.6, 13.2988],
+          [52.32, 13.2988],
+          [52.577, 13.35],
+        ],
+        options: {
+          lineColor: "000000",
+          lineOpacity: 0.9,
+          lineWidthInPixels: 2,
+          fillColor: "FFFFFF",
+          fillOpacity: 0.8,
+        },
       };
 
+
       const path = createPathQuery([circularPath, linearPath, polygonPath]);
+
       // Send the request
-      const response = await client.path("/map/static/{format}", "png").get({
-       queryParameters: {
-         bbox: [13.228,52.4559,13.5794,52.629],
-         path: path
-       }
-      });
+
+      const response = await client
+        .path("/map/static")
+        .get({
+          queryParameters: {
+            bbox: [13.228, 52.4559, 13.5794, 52.629],
+            path,
+          },
+        })
+        .asNodeStream();
+
+      // Handle the error.
+
+      if (!response.body) {
+        throw Error("No response body");
+      }
+
+
+      response.body.pipe(createWriteStream("path.png"));
+
       ```
 
     remarks: ''
@@ -161,36 +195,69 @@ functions:
   - name: createPinsQuery(PinSet[])
     uid: '@azure-rest/maps-render.createPinsQuery'
     package: '@azure-rest/maps-render'
-    summary: |+
+    summary: >+
       Create a pin query string for _get map static image_
+
 
       **Example**
 
-      ```ts
 
-      const pins = {
-       pins: [
-         { coordinate: [52.577, 13.35], label: "Label start" },
-         { coordinate: [52.6, 13.2988], label: "Label end" },
-       ],
-       pinImage: "<image source url || default || none>"
-       options: {
-         scale: 0.9,
-         pinColor: "FF0000",
-         labelColor: "0000FF",
-         labelSizeInPixels: 18,
-       }
-      );
-      const res = await client
-       .path("/map/static/{format}", "png")
-       .get({
-         queryParameters: {
-           bbox: [13.228, 52.4559, 13.5794, 52.62],
-           zoom: 10,
-           pins: pins,
-         },
-         skipUrlEncoding: true,
-       })
+      ```ts snippet:ReadmeSampleCreatePinsQuery
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import MapsRender, { PinSet, createPinsQuery } from
+      "@azure-rest/maps-render";
+
+      import { createWriteStream } from "node:fs";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = MapsRender(credential, "<maps-account-client-id>");
+
+
+      const pins: PinSet[] = [
+        {
+          pins: [
+            { coordinate: [52.577, 13.35], label: "Label start" },
+            { coordinate: [52.6, 13.2988], label: "Label end" },
+          ],
+          pinImage: "default",
+          options: {
+            scale: 0.9,
+            pinColor: "FF0000",
+            labelColor: "0000FF",
+            labelSizeInPixels: 18,
+          },
+        },
+      ];
+
+
+      const path = createPinsQuery(pins);
+
+
+      const response = await client
+        .path("/map/static")
+        .get({
+          queryParameters: {
+            bbox: [13.228, 52.4559, 13.5794, 52.62],
+            zoom: 10,
+            path,
+          },
+          skipUrlEncoding: true,
+        })
+        .asNodeStream();
+
+      // Handle the error.
+
+      if (!response.body) {
+        throw Error("No response body");
+      }
+
+
+      response.body.pipe(createWriteStream("pin.png"));
+
       ```
 
     remarks: ''
@@ -212,8 +279,9 @@ functions:
 
       **Example**
 
-      ```ts
-      import MapsRender from "@azure-rest/maps-Render";
+      ```ts snippet:ReadmeSampleCreateClient_SubscriptionKey
+      import { AzureKeyCredential } from "@azure/core-auth";
+      import MapsRender from "@azure-rest/maps-render";
 
       const credential = new AzureKeyCredential("<subscription-key>");
       const client = MapsRender(credential);
@@ -248,11 +316,11 @@ functions:
       **Example**
 
 
-      ```ts
-
-      import MapsRenderClient from "@azure-rest/maps-render";
+      ```ts snippet:ReadmeSampleCreateClient_TokenCredential
 
       import { DefaultAzureCredential } from "@azure/identity";
+
+      import MapsRender from "@azure-rest/maps-render";
 
 
       const credential = new DefaultAzureCredential();
@@ -293,11 +361,11 @@ functions:
       **Example**
 
 
-      ```ts
-
-      import MapsRender from "@azure-rest/maps-render";
+      ```ts snippet:ReadmeSampleCreateClient_SASToken
 
       import { AzureSASCredential } from "@azure/core-auth";
+
+      import MapsRender from "@azure-rest/maps-render";
 
 
       const credential = new AzureSASCredential("<SAS Token>");
@@ -536,7 +604,7 @@ functions:
       return:
         description: ''
         type: response
-  - name: positionToTileXY(LatLon, number, "512" | "256")
+  - name: positionToTileXY(LatLon, number, "256" | "512")
     uid: '@azure-rest/maps-render.positionToTileXY'
     package: '@azure-rest/maps-render'
     summary: >+
@@ -550,17 +618,48 @@ functions:
       **Example**
 
 
-      ```ts
+      ```ts snippet:ReadmeSampleRequestMapTiles
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import MapsRender, { positionToTileXY } from "@azure-rest/maps-render";
+
+      import { createWriteStream } from "node:fs";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = MapsRender(credential, "<maps-account-client-id>");
+
 
       const zoom = 6;
+
+      // Use the helper function `positionToTileXY` to get the tile index from
+      the coordinate.
 
       const { x, y } = positionToTileXY([47.61559, -122.33817], 6, "256");
 
       const response = await client
         .path("/map/tile")
         .get({
-          queryParameters: { tilesetId: "microsoft.base.road", zoom, x, y },
+          queryParameters: {
+            tilesetId: "microsoft.base.road",
+            zoom,
+            x,
+            y,
+          },
         })
+        .asNodeStream();
+
+      // Handle the error.
+
+      if (!response.body) {
+        throw Error("No response body");
+      }
+
+
+      response.body.pipe(createWriteStream("tile.png"));
+
       ```
 
     remarks: ''
@@ -568,7 +667,7 @@ functions:
     syntax:
       content: >-
         function positionToTileXY(position: LatLon, zoom: number, tileSize:
-        "512" | "256"): { x: number, y: number }
+        "256" | "512"): { x: number, y: number }
       parameters:
         - id: position
           type: <xref uid="@azure/maps-common.LatLon" />
@@ -577,7 +676,7 @@ functions:
           type: number
           description: Zoom level.
         - id: tileSize
-          type: '"512" | "256"'
+          type: '"256" | "512"'
           description: The size of the tiles in the tile pyramid.
       return:
         description: Tile XY coordinates.

@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Call Automation client library for JavaScript - version 1.4.0-alpha.20250317.1 
+# Azure Communication Call Automation client library for JavaScript - version 1.4.0-alpha.20250317.3 
 
 
 This package contains a JavaScript SDK for Azure Communication Call Automation. Call Automation provides developers the ability to build server-based, intelligent call workflows, and call recording for voice and PSTN channels.

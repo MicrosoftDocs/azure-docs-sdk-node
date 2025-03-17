@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure CommunicationMessages REST client library for JavaScript - version 2.1.0-alpha.20250317.1 
+# Azure CommunicationMessages REST client library for JavaScript - version 2.1.0-alpha.20250317.3 
 
 
 This package contains a JavaScript SDK for Azure Communication Messages Services.

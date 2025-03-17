@@ -1,7 +1,7 @@
 ---
 title: Azure Cost Management SDK for JavaScript
 description: Reference for Azure Cost Management SDK for JavaScript
-ms.date: 03/14/2025
+ms.date: 03/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: costmanagement

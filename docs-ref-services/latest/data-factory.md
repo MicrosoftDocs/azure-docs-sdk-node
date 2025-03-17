@@ -1,7 +1,7 @@
 ---
 title: Azure Data Factory SDK for JavaScript
 description: Reference for Azure Data Factory SDK for JavaScript
-ms.date: 03/14/2025
+ms.date: 03/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: datafactory

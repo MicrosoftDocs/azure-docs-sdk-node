@@ -1,0 +1,73 @@
+### YamlMime:TSType
+name: EncryptionKeyResolver
+uid: '@azure/cosmos.EncryptionKeyResolver'
+package: '@azure/cosmos'
+summary: |-
+  Provides an interface for key resolver for different key providers.
+  All resolvers should implement this interface.
+fullName: EncryptionKeyResolver
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: encryptionKeyResolverName
+    uid: '@azure/cosmos.EncryptionKeyResolver.encryptionKeyResolverName'
+    package: '@azure/cosmos'
+    summary: |-
+      name of the resolver to use for client side encryption.
+      Currently only AzureKeyVault implementation is supported.
+    fullName: encryptionKeyResolverName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'encryptionKeyResolverName: string'
+      return:
+        description: ''
+        type: string
+methods:
+  - name: unwrapKey(string, string, Uint8Array)
+    uid: '@azure/cosmos.EncryptionKeyResolver.unwrapKey'
+    package: '@azure/cosmos'
+    summary: Unwraps the input wrapped key using the key encryption key.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function unwrapKey(encryptionKeyId: string, algorithm: string,
+        wrappedKey: Uint8Array): Promise<Uint8Array>
+      parameters:
+        - id: encryptionKeyId
+          type: string
+          description: Identifier of the customer managed key to be used for unwrapping.
+        - id: algorithm
+          type: string
+          description: Algorithm to be used for unwrapping.
+        - id: wrappedKey
+          type: Uint8Array
+          description: wrapped Data Encryption key.
+      return:
+        description: Unwrapped Key.
+        type: Promise&lt;Uint8Array&gt;
+  - name: wrapKey(string, string, Uint8Array)
+    uid: '@azure/cosmos.EncryptionKeyResolver.wrapKey'
+    package: '@azure/cosmos'
+    summary: Wraps the input key using the key encryption key.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function wrapKey(encryptionKeyId: string, algorithm: string,
+        unwrappedKey: Uint8Array): Promise<Uint8Array>
+      parameters:
+        - id: encryptionKeyId
+          type: string
+          description: Identifier of the customer managed key to be used for wrapping.
+        - id: algorithm
+          type: string
+          description: Algorithm to be used for wrapping.
+        - id: unwrappedKey
+          type: Uint8Array
+          description: ''
+      return:
+        description: Wrapped key.
+        type: Promise&lt;Uint8Array&gt;

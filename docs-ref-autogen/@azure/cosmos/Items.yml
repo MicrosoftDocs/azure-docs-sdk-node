@@ -147,7 +147,8 @@ methods:
     package: '@azure/cosmos'
     summary: Create a `ChangeFeedIterator` to iterate over pages of changes
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function changeFeed(changeFeedOptions?: ChangeFeedOptions):
@@ -176,7 +177,8 @@ methods:
       ```
 
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function changeFeed(partitionKey: PartitionKey, changeFeedOptions?:
@@ -196,7 +198,8 @@ methods:
     package: '@azure/cosmos'
     summary: Create a `ChangeFeedIterator` to iterate over pages of changes
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function changeFeed<T>(changeFeedOptions?: ChangeFeedOptions):
@@ -213,7 +216,8 @@ methods:
     package: '@azure/cosmos'
     summary: Create a `ChangeFeedIterator` to iterate over pages of changes
     remarks: ''
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function changeFeed<T>(partitionKey: PartitionKey, changeFeedOptions?:
@@ -283,6 +287,56 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/cosmos.ChangeFeedPullModelIterator" />&lt;T&gt;
+  - name: getEncryptionQueryIterator(EncryptionQueryBuilder, FeedOptions)
+    uid: '@azure/cosmos.Items.getEncryptionQueryIterator'
+    package: '@azure/cosmos'
+    summary: >+
+      Queries all items in an encrypted container.
+
+
+      **Example**
+
+
+      Read all items to array.
+
+      ```typescript
+
+      const queryBuilder = new EncryptionQueryBuilder("SELECT firstname FROM
+      Families f WHERE f.lastName = @lastName");
+
+      queryBuilder.addStringParameter("@lastName", "Hendricks", "/lastname");
+
+      const queryIterator = await items.getEncryptionQueryIterator<{firstName:
+      string}>(queryBuilder);
+
+      const {result: items} = await queryIterator.fetchAll();
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getEncryptionQueryIterator(queryBuilder:
+        EncryptionQueryBuilder, options?: FeedOptions):
+        Promise<QueryIterator<ItemDefinition>>
+      parameters:
+        - id: queryBuilder
+          type: <xref uid="@azure/cosmos.EncryptionQueryBuilder" />
+          description: >-
+            Query configuration for the operation. See
+            [SqlQuerySpec](xref:@azure/cosmos.SqlQuerySpec) for more info on how
+            to build a query on encrypted properties.
+        - id: options
+          type: <xref uid="@azure/cosmos.FeedOptions" />
+          description: >-
+            Used for modifying the request (for instance, specifying the
+            partition key).
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/cosmos.QueryIterator" />&lt;<xref
+          uid="@azure/cosmos.ItemDefinition" />&gt;&gt;
   - name: query(string | SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Items.query'
     package: '@azure/cosmos'
@@ -454,7 +508,7 @@ methods:
     summary: Create a `ChangeFeedIterator` to iterate over pages of changes
     remarks: ''
     isDeprecated: true
-    customDeprecatedMessage: Use `changeFeed` instead.
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function readChangeFeed(changeFeedOptions?: ChangeFeedOptions):
@@ -484,7 +538,7 @@ methods:
 
     remarks: ''
     isDeprecated: true
-    customDeprecatedMessage: Use `changeFeed` instead.
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function readChangeFeed(partitionKey: PartitionKey, changeFeedOptions?:
@@ -505,7 +559,7 @@ methods:
     summary: Create a `ChangeFeedIterator` to iterate over pages of changes
     remarks: ''
     isDeprecated: true
-    customDeprecatedMessage: Use `changeFeed` instead.
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function readChangeFeed<T>(changeFeedOptions?: ChangeFeedOptions):
@@ -523,7 +577,7 @@ methods:
     summary: Create a `ChangeFeedIterator` to iterate over pages of changes
     remarks: ''
     isDeprecated: true
-    customDeprecatedMessage: Use `changeFeed` instead.
+    customDeprecatedMessage: Use `getChangeFeedIterator` instead.
     syntax:
       content: >-
         function readChangeFeed<T>(partitionKey: PartitionKey,

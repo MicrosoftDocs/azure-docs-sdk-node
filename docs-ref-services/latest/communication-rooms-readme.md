@@ -1,21 +1,21 @@
 ---
 title: Azure RoomsApi client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-rooms, communication
-ms.date: 12/05/2024
+ms.date: 03/19/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure RoomsApi client library for JavaScript - version 1.1.1 
+# Azure RoomsApi client library for JavaScript - version 1.2.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure RoomsApi client.
 
 Communication Rooms Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/communication/communication-rooms) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.2.0/sdk/communication/communication-rooms) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/communication-rooms) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/communication/communication-rooms/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.2.0/sdk/communication/communication-rooms/samples)
 
 ## Getting started
 
@@ -53,17 +53,17 @@ You can get a key and/or connection string from your Communication Services reso
 
 ### Create `KeyCredential` with `AzureKeyCredential` before initializing the client
 
-```typescript
+```ts snippet:ReadmeSampleCreateClient_KeyCredential
 import { AzureKeyCredential } from "@azure/core-auth";
 import { RoomsClient } from "@azure/communication-rooms";
 
-const credential = new AzureKeyCredential(KEY);
-const client = new RoomsClient(ENDPOINT, credential);
+const credential = new AzureKeyCredential("<key-from-resource>");
+const client = new RoomsClient("<endpoint-from-resource>", credential);
 ```
 
 ### Using a connection string
 
-```typescript
+```ReadmeSampleCreateClient_ConnectionString
 import { RoomsClient } from "@azure/communication-rooms";
 
 const connectionString = `endpoint=ENDPOINT;accessKey=KEY`;
@@ -72,12 +72,12 @@ const client = new RoomsClient(connectionString);
 
 ### Using a `TokenCredential`
 
-```typescript
+```ts snippet:ReadmeSampleCreateClient_TokenCredential
 import { DefaultAzureCredential } from "@azure/identity";
 import { RoomsClient } from "@azure/communication-rooms";
 
 const credential = new DefaultAzureCredential();
-const client = new RoomsClient(ENDPOINT, credential);
+const client = new RoomsClient("<endpoint-from-resource>", credential);
 ```
 
 If you use a key to initialize the client you will also need to provide the appropriate endpoint. You can get this endpoint from your Communication Services resource in [Azure Portal][azure_portal].
@@ -90,17 +90,20 @@ To create a room, call the `createRoom` method. All settings are optional.
 
 If `validFrom` is not provided, it is defaulted to the current datetime. If `validUntil` is not provided, the default is `validFrom + 180 days`.
 
-When defining `participants`, if `role` is not specified, then it will be `attendee` by default.
+When defining `participants`, if `role` is not specified, then it will be `attendee` by default. Starting in 1.2.0 release, participants may have `collaborator` as a supported role. 
 
 Starting in 1.1.0 release, `PstnDialOutEnabled` property is added to enable or disable PSTN Dial-Out feature in a room. The `PstnDialOutEnabled` is an optional property. If `PstnDialOutEnabled` is not provided, then the default for `PstnDialOutEnabled` is false.
 
-```typescript
-// create users with CommunicationIdentityClient
-const identityClient = new CommunicationIdentityClient(connectionString);
-const user1 = await identityClient.createUserAndToken(["voip"]);
+```ts snippet:ReadmeSampleCreateRoom
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient, CreateRoomOptions } from "@azure/communication-rooms";
+import { CommunicationIdentityClient } from "@azure/communication-identity";
 
-// create RoomsClient
-const roomsClient: RoomsClient = new RoomsClient(CONNECTION_STRING);
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
+const identityClient = new CommunicationIdentityClient("<endpoint-from-resource>", credential);
+const { user } = await identityClient.createUserAndToken(["voip"]);
 
 const validFrom = new Date(Date.now());
 const validForDays = 10;
@@ -115,14 +118,14 @@ const createRoomOptions: CreateRoomOptions = {
   pstnDialOutEnabled,
   participants: [
     {
-      id: user1.user,
+      id: user,
       role: "Attendee",
     },
   ],
 };
 
 // create room
-const room = await roomsClient.createRoom(createRoomOptions);
+const room = await client.createRoom(createRoomOptions);
 ```
 
 [Find CommunicationIdentityClient here](https://github.com/Azure/azure-sdk-for-js/edit/main/sdk/communication/communication-identity)
@@ -133,10 +136,18 @@ To update the `validFrom` and `validUntil` settings of a room use the `updateRoo
 
 Starting in 1.1.0 release, `PstnDialOutEnabled` property is added to enable or disable PSTN Dial-Out feature in a room.
 
-```typescript
-validForDays = 60;
+```ts snippet:ReadmeSampleUpdateRoom
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient, UpdateRoomOptions } from "@azure/communication-rooms";
+
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
+const validFrom = new Date();
+const validForDays = 60;
+const validUntil = new Date(validFrom.getTime());
 validUntil.setDate(validFrom.getDate() + validForDays);
-pstnDialOutEnabled = false;
+const pstnDialOutEnabled = false;
 
 const updateRoomOptions: UpdateRoomOptions = {
   validFrom,
@@ -145,24 +156,36 @@ const updateRoomOptions: UpdateRoomOptions = {
 };
 
 // update the room using the room id from the creation operation
-const updatedRoom = await roomsClient.updateRoom(room.id, updateRoomOptions);
+const updatedRoom = await client.updateRoom("<room-id>", updateRoomOptions);
 ```
 
 ### Get a room
 
 To get a room use the `getRoom` method.
 
-```typescript
+```ts snippet:ReadmeSampleGetRoom
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient } from "@azure/communication-rooms";
+
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
 const roomId = "ROOM_ID";
-room = await roomsClient.getRoom(roomId);
+const room = await client.getRoom(roomId);
 ```
 
 ### List rooms
 
 List all rooms using the `listRooms` method.
 
-```typescript
-const roomsList = await roomsClient.listRooms();
+```ts snippet:ReadmeSampleListRooms
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient } from "@azure/communication-rooms";
+
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
+const roomsList = client.listRooms();
 for await (const currentRoom of roomsList) {
   // access room data
   console.log(`The room id is ${currentRoom.id}.`);
@@ -173,37 +196,65 @@ for await (const currentRoom of roomsList) {
 
 To add new participants, or update existing participants, use the `addOrUpdateParticipants` method.
 
-```typescript
-const user2 = await identityClient.createUserAndToken(["voip"]);
+```ts snippet:ReadmeSampleAddOrUpdateParticipants
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient, RoomParticipantPatch } from "@azure/communication-rooms";
+import { CommunicationIdentityClient } from "@azure/communication-identity";
+
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
+const identityClient = new CommunicationIdentityClient("<endpoint-from-resource>", credential);
+const { user: user1 } = await identityClient.createUserAndToken(["voip"]);
+
+// Create a new user to add to the room
+const { user: user2 } = await identityClient.createUserAndToken(["voip"]);
 const updateParticipantsList: RoomParticipantPatch[] = [
   {
-    id: user1.user,
+    id: user1,
     role: "Presenter",
   },
   {
-    id: user2.user,
+    id: user2,
   },
 ];
 
 // run addOrUpdate operation
-await roomsClient.addOrUpdateParticipants(room.id, updateParticipantsList);
+await client.addOrUpdateParticipants("<room-id>", updateParticipantsList);
 ```
 
 ### Remove participants
 
 To remove participants call the `removeParticipants` method.
 
-```typescript
-const participantsToRemove = [user1.user, user2.user];
-await roomsClient.removeParticipants(room.id, participantsToRemove);
+```ts snippet:ReadmeSampleRemoveParticipants
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient } from "@azure/communication-rooms";
+import { CommunicationIdentityClient } from "@azure/communication-identity";
+
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
+const identityClient = new CommunicationIdentityClient("<endpoint-from-resource>", credential);
+const { user: user1 } = await identityClient.createUserAndToken(["voip"]);
+const { user: user2 } = await identityClient.createUserAndToken(["voip"]);
+
+const participantsToRemove = [user1, user2];
+await client.removeParticipants("<room-id>", participantsToRemove);
 ```
 
 ### Get participants in a room
 
 To list all the participants in a room call the `listParticipants` method.
 
-```typescript
-const participantsList = await roomsClient.listParticipants(room.id);
+```ts snippet:ReadmeSampleListParticipants
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient } from "@azure/communication-rooms";
+
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
+const participantsList = client.listParticipants("<room-id>");
 for await (const participant of participantsList) {
   // access participant data
   console.log(`The participant's role is ${participant.role}.`);
@@ -214,8 +265,14 @@ for await (const participant of participantsList) {
 
 Use the `deleteRoom` method to delete a room.
 
-```typescript
-await roomsClient.deleteRoom(room.id);
+```ts snippet:ReadmeSampleDeleteRoom
+import { DefaultAzureCredential } from "@azure/identity";
+import { RoomsClient } from "@azure/communication-rooms";
+
+const credential = new DefaultAzureCredential();
+const client = new RoomsClient("<endpoint-from-resource>", credential);
+
+await client.deleteRoom("<room-id>");
 ```
 
 ## Troubleshooting
@@ -224,20 +281,21 @@ await roomsClient.deleteRoom(room.id);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
-const { setLogLevel } = require("@azure/logger");
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
+
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.2.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/communication/communication-rooms/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.2.0/sdk/communication/communication-rooms/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-rooms_1.1.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-rooms_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -245,11 +303,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.1.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.2.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-rooms_1.2.0/sdk/identity/identity#defaultazurecredential
 [communication_identity]: https://github.com/Azure/azure-sdk-for-js/edit/main/sdk/communication/communication-identity
 

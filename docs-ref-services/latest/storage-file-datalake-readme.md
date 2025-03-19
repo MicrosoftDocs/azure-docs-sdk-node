@@ -1,12 +1,12 @@
 ---
 title: Azure Storage File Data Lake client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-file-datalake, storage
-ms.date: 11/20/2024
+ms.date: 03/19/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage File Data Lake client library for JavaScript - version 12.25.0 
+# Azure Storage File Data Lake client library for JavaScript - version 12.26.0 
 
 
 Azure Data Lake Storage (ADLS) includes all the capabilities required to make it easy for developers, data scientists, and analysts to store data of any size, shape, and speed, and do all types of processing and analytics across platforms and languages. It removes the complexities of ingesting and storing all of your data while making it faster to get up and running with batch, streaming, and interactive analytics.
@@ -20,12 +20,12 @@ Use the client libraries in this package to:
 
 key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.26.0/sdk/storage/storage-file-datalake)
 - [Package (npm)](https://www.npmjs.com/package/@azure/storage-file-datalake)
-- [API Reference Documentation](/javascript/api/@azure/storage-file-datalake)
-- [Product documentation](/azure/storage/blobs/data-lake-storage-introduction?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/samples)
-- [Azure Storage Data Lake REST APIs](/rest/api/storageservices/data-lake-storage-gen2)
+- [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/storage-file-datalake)
+- [Product documentation](https://learn.microsoft.com/azure/storage/blobs/data-lake-storage-introduction?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.26.0/sdk/storage/storage-file-datalake/samples)
+- [Azure Storage Data Lake REST APIs](https://learn.microsoft.com/rest/api/storageservices/data-lake-storage-gen2)
 
 ## Getting started
 
@@ -34,12 +34,12 @@ key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.26.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
 - An [Azure subscription](https://azure.microsoft.com/free/)
-- A [Storage Account](/azure/storage/common/storage-account-create)
+- A [Storage Account](https://learn.microsoft.com/azure/storage/common/storage-account-create)
 
 ### Install the package
 
@@ -59,7 +59,7 @@ Azure Storage supports several ways to authenticate. In order to interact with t
 
 #### Azure Active Directory
 
-The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/sdk/identity/identity/README.md) for more details and samples to get you started.
+The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.26.0/sdk/identity/identity/README.md) for more details and samples to get you started.
 
 ### Compatibility
 
@@ -107,7 +107,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ### CORS
 
-You need to set up [Cross-Origin Resource Sharing (CORS)](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
+You need to set up [Cross-Origin Resource Sharing (CORS)](https://learn.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
 
 For example, you can create following CORS settings for debugging. But please customize the settings carefully according to your requirements in production environment.
 
@@ -180,7 +180,7 @@ Alternatively, selectively import only the types you need:
 ```javascript
 const {
   DataLakeServiceClient,
-  StorageSharedKeyCredential
+  StorageSharedKeyCredential,
 } = require("@azure/storage-file-datalake");
 ```
 
@@ -194,17 +194,17 @@ The `DataLakeServiceClient` requires an URL to the data lake service and an acce
 
 > Notice. Azure Data Lake currently reuses blob related roles like "Storage Blob Data Owner" during following AAD OAuth authentication.
 
-Setup : Reference - Authorize access to blobs (data lake) and queues with Azure Active Directory from a client application - /azure/storage/common/storage-auth-aad-app
+Setup : Reference - Authorize access to blobs (data lake) and queues with Azure Active Directory from a client application - https://learn.microsoft.com/azure/storage/common/storage-auth-aad-app
 
 - Register a new AAD application and give permissions to access Azure Storage on behalf of the signed-in user.
 
-  - Register a new application in the Azure Active Directory(in the azure-portal) - /azure/active-directory/develop/quickstart-register-app
+  - Register a new application in the Azure Active Directory(in the azure-portal) - https://learn.microsoft.com/azure/active-directory/develop/quickstart-register-app
   - In the `API permissions` section, select `Add a permission` and choose `Microsoft APIs`.
   - Pick `Azure Storage` and select the checkbox next to `user_impersonation` and then click `Add permissions`. This would allow the application to access Azure Storage on behalf of the signed-in user.
 
 - Grant access to Azure Data Lake data with RBAC in the Azure Portal
 
-  - RBAC roles for blobs (data lake) and queues - /azure/storage/common/storage-auth-aad-rbac-portal.
+  - RBAC roles for blobs (data lake) and queues - https://learn.microsoft.com/azure/storage/common/storage-auth-aad-rbac-portal.
   - In the azure portal, go to your storage-account and assign **Storage Blob Data Contributor** role to the registered AAD application from `Access control (IAM)` tab (in the left-side-navbar of your storage account in the azure-portal).
 
 - Environment setup for the sample
@@ -221,11 +221,11 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 ```
 
-See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
+See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.26.0/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
 
 [Note - Above steps are only for Node.js]
 
@@ -250,7 +250,7 @@ Alternatively, you instantiate a `DataLakeServiceClient` with a `StorageSharedKe
 ```javascript
 const {
   DataLakeServiceClient,
-  StorageSharedKeyCredential
+  StorageSharedKeyCredential,
 } = require("@azure/storage-file-datalake");
 
 // Enter your storage account name and shared key
@@ -262,7 +262,7 @@ const accountKey = "<accountkey>";
 const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  sharedKeyCredential
+  sharedKeyCredential,
 );
 ```
 
@@ -276,7 +276,7 @@ const { DataLakeServiceClient } = require("@azure/storage-file-datalake");
 const account = "<account name>";
 const sas = "<service Shared Access Signature Token>";
 const serviceClientWithSAS = new DataLakeServiceClient(
-  `https://${account}.dfs.core.windows.net${sas}`
+  `https://${account}.dfs.core.windows.net${sas}`,
 );
 ```
 
@@ -293,7 +293,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 async function main() {
@@ -321,7 +321,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 async function main() {
@@ -346,7 +346,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 async function main() {
@@ -373,7 +373,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 async function main() {
@@ -403,7 +403,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 const fileSystemName = "<file system name>";
@@ -429,7 +429,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 const fileSystemName = "<file system name>";
@@ -462,7 +462,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 const fileSystemName = "<file system name>";
@@ -491,7 +491,7 @@ const defaultAzureCredential = new DefaultAzureCredential();
 
 const datalakeServiceClient = new DataLakeServiceClient(
   `https://${account}.dfs.core.windows.net`,
-  defaultAzureCredential
+  defaultAzureCredential,
 );
 
 const fileSystemName = "<file system name>";
@@ -512,7 +512,7 @@ async function main() {
     return new Promise((resolve, reject) => {
       const chunks = [];
       readableStream.on("data", (data) => {
-        chunks.push(data instanceof Buffer ? data : Buffer.from(data));
+        chunks.push(typeof data === "string" ? Buffer.from(data) : data);
       });
       readableStream.on("end", () => {
         resolve(Buffer.concat(chunks));
@@ -534,11 +534,11 @@ const account = "<account>";
 const sas = "<sas token>";
 
 const datalakeServiceClient = new DataLakeServiceClient(
-  `https://${account}.dfs.core.windows.net${sas}`
+  `https://${account}.dfs.core.windows.net${sas}`,
 );
 
 const fileSystemName = "<file system name>";
-const fileName = "<file name>"
+const fileName = "<file name>";
 
 async function main() {
   const fileSystemClient = datalakeServiceClient.getFileSystemClient(fileSystemName);
@@ -548,10 +548,7 @@ async function main() {
   // In browsers, get downloaded data by accessing downloadResponse.contentAsBlob
   const downloadResponse = await fileClient.read();
   const downloaded = await blobToString(await downloadResponse.contentAsBlob);
-  console.log(
-    "Downloaded file content",
-    downloaded
-  );
+  console.log("Downloaded file content", downloaded);
 
   // [Browsers only] A helper method used to convert a browser Blob into string.
   async function blobToString(blob) {
@@ -583,13 +580,11 @@ setLogLevel("info");
 
 More code samples:
 
-- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/samples/v12/javascript)
-- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/samples/v12/typescript)
-- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.25.0/sdk/storage/storage-file-datalake/test/)
+- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.26.0/sdk/storage/storage-file-datalake/samples/v12/javascript)
+- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.26.0/sdk/storage/storage-file-datalake/samples/v12/typescript)
+- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.26.0/sdk/storage/storage-file-datalake/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.25.0/CONTRIBUTING.md) to learn more about how to build and test the code.
-
-
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.26.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

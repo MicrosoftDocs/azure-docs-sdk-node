@@ -1,7 +1,7 @@
 ---
 title: Azure Elastic SDK for JavaScript
 description: Reference for Azure Elastic SDK for JavaScript
-ms.date: 03/18/2025
+ms.date: 03/19/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: elastic

@@ -23,33 +23,6 @@ fullName: Database
 remarks: ''
 isDeprecated: false
 type: class
-constructors:
-  - name: Database(CosmosClient, string, ClientContext)
-    uid: '@azure/cosmos.Database.constructor'
-    package: '@azure/cosmos'
-    summary: >-
-      Returns a new [Database](xref:@azure/cosmos.Database) instance.
-
-
-      Note: the intention is to get this object from
-      [CosmosClient](xref:@azure/cosmos.CosmosClient) via `client.database(id)`,
-      not to instantiate it yourself.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        new Database(client: CosmosClient, id: string, clientContext:
-        ClientContext)
-      parameters:
-        - id: client
-          type: <xref uid="@azure/cosmos.CosmosClient" />
-          description: ''
-        - id: id
-          type: string
-          description: ''
-        - id: clientContext
-          type: ClientContext
-          description: ''
 properties:
   - name: client
     uid: '@azure/cosmos.Database.client'
@@ -170,6 +143,37 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/cosmos.Container" />
+  - name: >-
+      createClientEncryptionKey(string, AEAD_AES_256_CBC_HMAC_SHA256,
+      EncryptionKeyWrapMetadata)
+    uid: '@azure/cosmos.Database.createClientEncryptionKey'
+    package: '@azure/cosmos'
+    summary: Create Encryption key for database account
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createClientEncryptionKey(clientEncryptionKeyId: string,
+        encryptionAlgorithm: AEAD_AES_256_CBC_HMAC_SHA256, keyWrapMetadata:
+        EncryptionKeyWrapMetadata): Promise<ClientEncryptionKeyResponse>
+      parameters:
+        - id: clientEncryptionKeyId
+          type: string
+          description: ''
+        - id: encryptionAlgorithm
+          type: >-
+            <xref
+            uid="@azure/cosmos.EncryptionAlgorithm.AEAD_AES_256_CBC_HMAC_SHA256"
+            />
+          description: ''
+        - id: keyWrapMetadata
+          type: <xref uid="@azure/cosmos.EncryptionKeyWrapMetadata" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/cosmos.ClientEncryptionKeyResponse"
+          />&gt;
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.Database.delete'
     package: '@azure/cosmos'
@@ -200,6 +204,25 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/cosmos.DatabaseResponse" />&gt;
+  - name: readClientEncryptionKey(string)
+    uid: '@azure/cosmos.Database.readClientEncryptionKey'
+    package: '@azure/cosmos'
+    summary: Read Encryption key for database account
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function readClientEncryptionKey(clientEncryptionKeyId: string):
+        Promise<ClientEncryptionKeyResponse>
+      parameters:
+        - id: clientEncryptionKeyId
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/cosmos.ClientEncryptionKeyResponse"
+          />&gt;
   - name: readOffer(RequestOptions)
     uid: '@azure/cosmos.Database.readOffer'
     package: '@azure/cosmos'
@@ -217,6 +240,29 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/cosmos.OfferResponse" />&gt;
+  - name: rewrapClientEncryptionKey(string, EncryptionKeyWrapMetadata)
+    uid: '@azure/cosmos.Database.rewrapClientEncryptionKey'
+    package: '@azure/cosmos'
+    summary: rewraps a client encryption key with new key encryption key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function rewrapClientEncryptionKey(clientEncryptionKeyId: string,
+        newKeyWrapMetadata: EncryptionKeyWrapMetadata):
+        Promise<ClientEncryptionKeyResponse>
+      parameters:
+        - id: clientEncryptionKeyId
+          type: string
+          description: ''
+        - id: newKeyWrapMetadata
+          type: <xref uid="@azure/cosmos.EncryptionKeyWrapMetadata" />
+          description: new encryption key wrap metadata
+      return:
+        description: rewrapped client encryption key with new customer managed key
+        type: >-
+          Promise&lt;<xref uid="@azure/cosmos.ClientEncryptionKeyResponse"
+          />&gt;
   - name: user(string)
     uid: '@azure/cosmos.Database.user'
     package: '@azure/cosmos'

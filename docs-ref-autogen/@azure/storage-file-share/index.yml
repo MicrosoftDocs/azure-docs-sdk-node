@@ -74,6 +74,8 @@ interfaces:
   - '@azure/storage-file-share.FileAndDirectorySetPropertiesCommonOptions'
   - '@azure/storage-file-share.FileClearRangeOptions'
   - '@azure/storage-file-share.FileCloseHandlesHeaders'
+  - '@azure/storage-file-share.FileCreateHardLinkHeaders'
+  - '@azure/storage-file-share.FileCreateHardLinkOptions'
   - '@azure/storage-file-share.FileCreateHeaders'
   - '@azure/storage-file-share.FileCreateOptions'
   - '@azure/storage-file-share.FileDeleteHeaders'
@@ -97,6 +99,7 @@ interfaces:
   - '@azure/storage-file-share.FileListHandlesOptions'
   - '@azure/storage-file-share.FileListHandlesSegmentOptions'
   - '@azure/storage-file-share.FileParallelUploadOptions'
+  - '@azure/storage-file-share.FilePosixProperties'
   - '@azure/storage-file-share.FileProperties'
   - '@azure/storage-file-share.FileProperty'
   - '@azure/storage-file-share.FileRenameHeaders'
@@ -132,8 +135,10 @@ interfaces:
   - '@azure/storage-file-share.ListSharesResponseModel'
   - '@azure/storage-file-share.Metadata'
   - '@azure/storage-file-share.Metrics'
+  - '@azure/storage-file-share.NfsFileMode'
   - '@azure/storage-file-share.PipelineLike'
   - '@azure/storage-file-share.PipelineOptions'
+  - '@azure/storage-file-share.PosixRolePermissions'
   - '@azure/storage-file-share.Range'
   - '@azure/storage-file-share.RangeModel'
   - '@azure/storage-file-share.RequestPolicyFactory'
@@ -212,6 +217,7 @@ typeAliases:
   - '@azure/storage-file-share.DirectorySetPropertiesResponse'
   - '@azure/storage-file-share.FileAbortCopyResponse'
   - '@azure/storage-file-share.FileAttributesPreserveType'
+  - '@azure/storage-file-share.FileCreateHardLinkResponse'
   - '@azure/storage-file-share.FileCreateResponse'
   - '@azure/storage-file-share.FileDeleteResponse'
   - '@azure/storage-file-share.FileDownloadResponseModel'
@@ -236,6 +242,9 @@ typeAliases:
   - '@azure/storage-file-share.LeaseStateType'
   - '@azure/storage-file-share.LeaseStatusType'
   - '@azure/storage-file-share.ListSharesIncludeType'
+  - '@azure/storage-file-share.ModeCopyMode'
+  - '@azure/storage-file-share.NfsFileType'
+  - '@azure/storage-file-share.OwnerCopyMode'
   - '@azure/storage-file-share.PermissionCopyModeType'
   - '@azure/storage-file-share.RawFileDownloadResponse'
   - '@azure/storage-file-share.ServiceGetPropertiesResponse'
@@ -283,7 +292,7 @@ functions:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-an-account-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-an-account-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -403,3 +412,71 @@ functions:
       return:
         description: A new Pipeline object.
         type: <xref uid="@azure/storage-file-share.Pipeline" />
+  - name: parseOctalFileMode(string)
+    uid: '@azure/storage-file-share.parseOctalFileMode'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Parse 4-digit octal string representation of a File Mode to a
+      [NfsFileMode](xref:@azure/storage-file-share.NfsFileMode) structure.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function parseOctalFileMode(input?: string): NfsFileMode | undefined'
+      parameters:
+        - id: input
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-file-share.NfsFileMode" /> | undefined
+  - name: parseSymbolicFileMode(string)
+    uid: '@azure/storage-file-share.parseSymbolicFileMode'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Parse a 9-character symbolic string representation of a File Mode to a
+      [NfsFileMode](xref:@azure/storage-file-share.NfsFileMode) structure.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function parseSymbolicFileMode(input?: string): NfsFileMode | undefined'
+      parameters:
+        - id: input
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-file-share.NfsFileMode" /> | undefined
+  - name: toOctalFileMode(NfsFileMode)
+    uid: '@azure/storage-file-share.toOctalFileMode'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Convert [NfsFileMode](xref:@azure/storage-file-share.NfsFileMode)
+      structure to a 4-digit octal string represenation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function toOctalFileMode(input?: NfsFileMode): string | undefined'
+      parameters:
+        - id: input
+          type: <xref uid="@azure/storage-file-share.NfsFileMode" />
+          description: ''
+      return:
+        description: ''
+        type: string | undefined
+  - name: toSymbolicFileMode(NfsFileMode)
+    uid: '@azure/storage-file-share.toSymbolicFileMode'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Convert a [NfsFileMode](xref:@azure/storage-file-share.NfsFileMode) to a
+      string in symbolic notation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function toSymbolicFileMode(input?: NfsFileMode): string | undefined'
+      parameters:
+        - id: input
+          type: <xref uid="@azure/storage-file-share.NfsFileMode" />
+          description: ''
+      return:
+        description: ''
+        type: string | undefined

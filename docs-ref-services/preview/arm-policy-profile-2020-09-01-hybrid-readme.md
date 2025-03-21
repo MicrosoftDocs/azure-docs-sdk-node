@@ -1,21 +1,21 @@
 ---
 title: Azure Policy client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-policy, policy
+keywords: Azure, javascript, SDK, API, @azure/arm-policy-profile-2020-09-01-hybrid, policy
 ms.date: 03/21/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: policy
 ---
-# Azure Policy client library for JavaScript - version 5.2.0-alpha.20250321.1 
+# Azure Policy client library for JavaScript - version 2.1.1-alpha.20250321.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Policy client.
 
 To manage and control access to your resources, you can define customized policies and assign them at a scope.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/policy/arm-policy) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-policy) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-policy) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/policy/arm-policy-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-policy-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-policy-profile-2020-09-01-hybrid) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-policy` package
+### Install the `@azure/arm-policy-profile-2020-09-01-hybrid` package
 
 Install the Azure Policy client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-policy
+npm install @azure/arm-policy-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `PolicyClient`
@@ -60,7 +60,7 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { PolicyClient } from "@azure/arm-policy";
+import { PolicyClient } from "@azure/arm-policy-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -71,7 +71,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { PolicyClient } from "@azure/arm-policy";
+import { PolicyClient } from "@azure/arm-policy-profile-2020-09-01-hybrid";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({

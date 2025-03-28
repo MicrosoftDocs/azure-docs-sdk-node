@@ -1,12 +1,12 @@
 ---
 title: Azure VectorDb client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-pineconevectordb, pineconevectordb
-ms.date: 02/08/2025
+ms.date: 03/28/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: pineconevectordb
 ---
-# Azure VectorDb client library for JavaScript - version 1.0.0-beta.1 
+# Azure VectorDb client library for JavaScript - version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure VectorDb client.
@@ -15,10 +15,10 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.1/sdk/pineconevectordb/arm-pineconevectordb)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.2/sdk/pineconevectordb/arm-pineconevectordb)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/arm-pineconevectordb)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-pineconevectordb?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.1/sdk/pineconevectordb/arm-pineconevectordb/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.2/sdk/pineconevectordb/arm-pineconevectordb/samples)
 
 ## Getting started
 
@@ -27,7 +27,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-pineconevectordb_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-pineconevectordb_1.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ npm install @azure/arm-pineconevectordb
 To create a client object to access the Azure VectorDb API, you will need the `endpoint` of your Azure VectorDb resource and a `credential`. The Azure VectorDb client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure VectorDb resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-pineconevectordb_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-pineconevectordb_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -61,7 +61,7 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { VectorDbClient } from "../src/index.js";
+import { VectorDbClient } from "@azure/arm-pineconevectordb";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -72,15 +72,15 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { VectorDbClient } from "../src/index.js";
+import { VectorDbClient } from "@azure/arm-pineconevectordb";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
-  clientId: "<YOUR_CLIENT_ID>",
-});
+  clientId: "<YOUR_CLIENT_ID>"
+ });
 const client = new VectorDbClient(credential, subscriptionId);
 ```
+
 
 ### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
@@ -103,15 +103,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.1/sdk/pineconevectordb/arm-pineconevectordb/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.2/sdk/pineconevectordb/arm-pineconevectordb/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-pineconevectordb_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-pineconevectordb_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -119,6 +119,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-pineconevectordb_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

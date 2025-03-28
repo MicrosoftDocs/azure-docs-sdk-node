@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: entra-id
 ---
-# Azure Identity client library for JavaScript - version 4.8.1-alpha.20250327.1 
+# Azure Identity client library for JavaScript - version 4.8.1-alpha.20250328.1 
 
 
 The Azure Identity library provides [Microsoft Entra ID](https://learn.microsoft.com/entra/fundamentals/whatis) ([formerly Azure Active Directory](https://learn.microsoft.com/entra/fundamentals/new-name)) token authentication through a set of convenient [TokenCredential](https://learn.microsoft.com/javascript/api/@azure/core-auth/tokencredential) implementations.

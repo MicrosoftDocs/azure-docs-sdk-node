@@ -1,7 +1,7 @@
 ---
 title: Azure unknown SDK for JavaScript
 description: Reference for Azure unknown SDK for JavaScript
-ms.date: 03/27/2025
+ms.date: 03/28/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: unknown

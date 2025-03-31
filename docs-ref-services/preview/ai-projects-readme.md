@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-projects, ai
-ms.date: 03/21/2025
+ms.date: 03/31/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Projects client library for JavaScript - version 1.0.0-beta.3 
+# Azure AI Projects client library for JavaScript - version 1.0.0-beta.4 
 
 
 Use the AI Projects client library (in preview) to:
@@ -18,7 +18,7 @@ Use the AI Projects client library (in preview) to:
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
 
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.3/sdk/ai/ai-projects/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-projects)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-preview)
 
@@ -42,6 +42,7 @@ Use the AI Projects client library (in preview) to:
       - [Bing grounding](#create-agent-with-bing-grounding)
       - [Azure AI Search](#create-agent-with-azure-ai-search)
       - [Function call](#create-agent-with-function-call)
+      - [Fabric Data](#create-an-agent-with-fabric)
     - [Create thread](#create-thread) with
       - [Tool resource](#create-thread-with-tool-resource)
     - [Create message](#create-message) with:
@@ -104,7 +105,7 @@ const client = AIProjectsClient.fromConnectionString(
 
 Your Azure AI Foundry project has a "Management center". When you enter it, you will see a tab named "Connected resources" under your project. The `.connections` operations on the client allow you to enumerate the connections and get connection properties. Connection properties include the resource URL and authentication credentials, among other things.
 
-Below are code examples of the connection operations. Full samples can be found under the "connections" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.3/sdk/ai/ai-projects/samples).
+Below are code examples of the connection operations. Full samples can be found under the "connections" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples).
 
 #### Get properties of all connections
 
@@ -146,7 +147,7 @@ console.log(connection);
 
 ### Agents (Preview)
 
-Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the "agents" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.3/sdk/ai/ai-projects/samples) for additional Agent samples.
+Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the "agents" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples) for additional Agent samples.
 
 Agents are actively being developed. A sign-up form for private preview is coming soon.
 
@@ -387,6 +388,30 @@ const agent = await client.agents.createAgent("gpt-4o", {
 console.log(`Created agent, agent ID: ${agent.id}`);
 ```
 
+#### Create an Agent with Fabric
+
+To enable your Agent to answer queries using Fabric data, use `FabricTool` along with a connection to the Fabric resource.
+
+Here is an example:
+
+```ts snippet:createAgentWithFabric
+import { ToolUtility } from "@azure/ai-projects";
+
+const fabricConnection = await client.connections.getConnection(
+  process.env["FABRIC_CONNECTION_NAME"] || "<connection-name>",
+);
+const connectionId = fabricConnection.id;
+// Initialize agent Microsoft Fabric tool with the connection id
+const fabricTool = ToolUtility.createFabricTool(connectionId);
+// Create agent with the Microsoft Fabric tool and process assistant run
+const agent = await client.agents.createAgent("gpt-4o", {
+  name: "my-agent",
+  instructions: "You are a helpful agent",
+  tools: [fabricTool.definition],
+});
+console.log(`Created agent, agent ID : ${agent.id}`);
+```
+
 #### Create Thread
 
 For each session or conversation, a thread is required. Here is an example:
@@ -471,7 +496,6 @@ const agent = await client.agents.createAgent("gpt-4-1106-preview", {
   tools: [codeInterpreterTool.definition],
 });
 console.log(`Created agent, agent ID: ${agent.id}`);
-
 const thread = await client.agents.createThread();
 console.log(`Created thread, thread ID: ${thread.id}`);
 const message = await client.agents.createMessage(thread.id, {
@@ -508,7 +532,7 @@ To have the SDK poll on your behalf, use the `createThreadAndRun` method.
 
 Here is an example:
 
-```javascript
+```ts snippet:createThreadAndRun
 const run = await client.agents.createThreadAndRun(agent.id, {
   thread: {
     messages: [
@@ -588,7 +612,6 @@ while (messages.hasMore) {
   messages.hasMore = nextMessages.hasMore;
   messages.lastId = nextMessages.lastId;
 }
-
 // The messages are following in the reverse order,
 // we will iterate them and output only text contents.
 for (const dataPoint of messages.data.reverse()) {
@@ -750,7 +773,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.3/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
 
 ## Contributing
 
@@ -774,7 +797,7 @@ additional questions or comments.
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [entra_id]: https://learn.microsoft.com/azure/ai-services/authentication?tabs=powershell#authenticate-with-microsoft-entra-id
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
 [azure_sub]: https://azure.microsoft.com/free/
 [evaluators]: https://learn.microsoft.com/azure/ai-studio/how-to/develop/evaluate-sdk
 [evaluator_library]: https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-generative-ai-app#view-and-manage-the-evaluators-in-the-evaluator-library

@@ -1,12 +1,12 @@
 ---
 title: Azure Storage Blob Change Feed client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-blob-changefeed, storage
-ms.date: 06/17/2022
+ms.date: 04/04/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage Blob Change Feed client library for JavaScript - version 12.0.0-preview.4 
+# Azure Storage Blob Change Feed client library for JavaScript - version 12.0.0-alpha.20250403.1 
 
 
 > Server Version: 2019-12-12 or later.
@@ -22,25 +22,25 @@ Use the client libraries in this package to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/storage-blob-changefeed)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob-changefeed)
 - [Package (npm)](https://www.npmjs.com/package/@azure/storage-blob-changefeed/)
-- [API Reference Documentation](/javascript/api/@azure/storage-blob-changefeed)
-- [Product documentation](/azure/storage/blobs/storage-blob-change-feed)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/storage-blob-changefeed/samples)
+- [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/storage-blob-changefeed)
+- [Product documentation](https://learn.microsoft.com/azure/storage/blobs/storage-blob-change-feed)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob-changefeed/samples)
 
 ## Getting started
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob-changefeed_12.0.0-preview.4/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
 - An [Azure subscription](https://azure.microsoft.com/free/)
-- A [Storage Account](/azure/storage/blobs/storage-quickstart-blobs-portal)
+- A [Storage Account](https://learn.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal)
 
 ### Install the package
 
@@ -52,7 +52,7 @@ npm install @azure/storage-blob-changefeed
 
 ### Authenticate the client
 
-This library uses an authenticated `BlobServiceClient` to initialize. Refer to [storage-blob](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/storage-blob#authenticate-the-client) for how to authenticate a `BlobServiceClient`.
+This library uses an authenticated `BlobServiceClient` to initialize. Refer to [storage-blob](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob#authenticate-the-client) for how to authenticate a `BlobServiceClient`.
 
 ### Compatibility
 
@@ -74,7 +74,7 @@ This library offers a client you can use to fetch the change events.
 
 ### Initialize the change feed client
 
-The `BlobChangeFeedClient` requires almost the same parameters as `BlobServiceClient` to initialize. Refer to [storage-blob](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/storage-blob#create-the-blob-service-client) for how to create the blob service client. Here is an example using `StorageSharedKeyCredential`.
+The `BlobChangeFeedClient` requires almost the same parameters as `BlobServiceClient` to initialize. Refer to [storage-blob](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob#create-the-blob-service-client) for how to create the blob service client. Here is an example using `StorageSharedKeyCredential`.
 
 ```javascript
 const { StorageSharedKeyCredential } = require("@azure/storage-blob");
@@ -89,7 +89,7 @@ const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
 const changeFeedClient = new BlobChangeFeedClient(
   // When using AnonymousCredential, following url should include a valid SAS or support public access
   `https://${account}.blob.core.windows.net`,
-  sharedKeyCredential
+  sharedKeyCredential,
 );
 ```
 
@@ -125,10 +125,7 @@ for await (const eventPage of changeFeedClient.listChanges().byPage()) {
 const { BlobChangeFeedEvent } = require("@azure/storage-blob-changefeed");
 
 let changeFeedEvents = [];
-const firstPage = await changeFeedClient
-  .listChanges()
-  .byPage({ maxPageSize: 10 })
-  .next();
+const firstPage = await changeFeedClient.listChanges().byPage({ maxPageSize: 10 }).next();
 for (const event of firstPage.value.events) {
   changeFeedEvents.push(event);
 }
@@ -176,15 +173,13 @@ setLogLevel("info");
 
 More code samples:
 
-- [Blob Storage Change Feed Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/storage-blob-changefeed/samples/v12-beta/javascript)
-- [Blob Storage Change Feed Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/storage-blob-changefeed/samples/v12-beta/typescript)
-- [Blob Storage Change Feed Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/storage-blob-changefeed/test/)
+- [Blob Storage Change Feed Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob-changefeed/samples/v12-beta/javascript)
+- [Blob Storage Change Feed Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob-changefeed/samples/v12-beta/typescript)
+- [Blob Storage Change Feed Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob-changefeed/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob-changefeed_12.0.0-preview.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob-changefeed_12.0.0-preview.4/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
-
-
+Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 

@@ -1,7 +1,7 @@
 ---
 title: Azure Chaos SDK for JavaScript
 description: Reference for Azure Chaos SDK for JavaScript
-ms.date: 04/04/2025
+ms.date: 04/07/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: chaos

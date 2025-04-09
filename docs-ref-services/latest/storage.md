@@ -4,7 +4,7 @@ description: Reference for Azure Storage SDK for JavaScript
 ms.date: 04/08/2025
 ms.topic: reference
 ms.devlang: javascript
-ms.service: storage
+ms.service: azure-storage
 ---
 # Azure Storage Library for JavaScript
 
@@ -49,7 +49,7 @@ Examples for using this module in Node.js as well as browser applications can be
 
 This section details known issues for the Azure Storage client libraries for JavaScript.
 
-### InvalidHeaderValue error message when using beta version of SDK
+### InvalidHeaderValue error message when using beta or generally available version of SDK
 
 In rare scenarios, applications that have upgraded to the latest beta or generally available version of the SDK can receive an `InvalidHeaderValue` error message. This issue can occur when using any of the Storage libraries. The error message looks similar to the following sample:
 

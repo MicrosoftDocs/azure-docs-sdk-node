@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, communication
-ms.date: 03/28/2025
+ms.date: 04/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Common client library for JavaScript - version 2.3.2-beta.1 
+# Azure Communication Common client library for JavaScript - version 2.3.2-alpha.20250411.1 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -182,7 +182,7 @@ setLogLevel("info");
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.3.2-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

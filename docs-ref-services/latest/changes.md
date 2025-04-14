@@ -1,7 +1,7 @@
 ---
 title: Azure Changes SDK for JavaScript
 description: Reference for Azure Changes SDK for JavaScript
-ms.date: 04/11/2025
+ms.date: 04/14/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: changes

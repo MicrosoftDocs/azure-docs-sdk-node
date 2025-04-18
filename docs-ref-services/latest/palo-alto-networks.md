@@ -1,7 +1,7 @@
 ---
 title: Azure Palo Alto Networks SDK for JavaScript
 description: Reference for Azure Palo Alto Networks SDK for JavaScript
-ms.date: 04/17/2025
+ms.date: 04/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: paloaltonetworks

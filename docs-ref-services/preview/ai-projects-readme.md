@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-projects, ai
-ms.date: 03/31/2025
+ms.date: 04/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Projects client library for JavaScript - version 1.0.0-beta.4 
+# Azure AI Projects client library for JavaScript - version 1.0.0-alpha.20250417.2 
 
 
 Use the AI Projects client library (in preview) to:
@@ -18,7 +18,7 @@ Use the AI Projects client library (in preview) to:
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
 
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-projects)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-preview)
 
@@ -105,7 +105,7 @@ const client = AIProjectsClient.fromConnectionString(
 
 Your Azure AI Foundry project has a "Management center". When you enter it, you will see a tab named "Connected resources" under your project. The `.connections` operations on the client allow you to enumerate the connections and get connection properties. Connection properties include the resource URL and authentication credentials, among other things.
 
-Below are code examples of the connection operations. Full samples can be found under the "connections" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples).
+Below are code examples of the connection operations. Full samples can be found under the "connections" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples).
 
 #### Get properties of all connections
 
@@ -147,7 +147,7 @@ console.log(connection);
 
 ### Agents (Preview)
 
-Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the "agents" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples) for additional Agent samples.
+Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the "agents" folder in the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples) for additional Agent samples.
 
 Agents are actively being developed. A sign-up form for private preview is coming soon.
 
@@ -601,7 +601,7 @@ for await (const eventMessage of streamEventMessages) {
 To retrieve messages from agents, use the following example:
 
 ```ts snippet:listMessages
-import { MessageContentOutput, isOutputOfType, MessageTextContentOutput } from "../src/index.js";
+import { MessageContentOutput, isOutputOfType, MessageTextContentOutput } from "@azure/ai-projects";
 
 const messages = await client.agents.listMessages(thread.id);
 while (messages.hasMore) {
@@ -636,7 +636,7 @@ import {
   isOutputOfType,
   MessageTextContentOutput,
   MessageImageFileContentOutput,
-} from "../src/index.js";
+} from "@azure/ai-projects";
 
 const messages = await client.agents.listMessages(thread.id);
 // Get most recent message from the assistant
@@ -773,7 +773,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
 
 ## Contributing
 
@@ -797,7 +797,7 @@ additional questions or comments.
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [entra_id]: https://learn.microsoft.com/azure/ai-services/authentication?tabs=powershell#authenticate-with-microsoft-entra-id
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [azure_sub]: https://azure.microsoft.com/free/
 [evaluators]: https://learn.microsoft.com/azure/ai-studio/how-to/develop/evaluate-sdk
 [evaluator_library]: https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-generative-ai-app#view-and-manage-the-evaluators-in-the-evaluator-library

@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 04/12/2025
+ms.date: 04/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -24,7 +24,7 @@ ms.service: monitor
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.10.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.11.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -89,8 +89,6 @@ const options: AzureMonitorOpenTelemetryOptions = {
   resource: resource,
   logRecordProcessors: [],
   spanProcessors: [],
-  enableTraceBasedSamplingForLogs: false,
-  enablePerformanceCounters: true,
 };
 useAzureMonitor(options);
 ```
@@ -103,7 +101,7 @@ useAzureMonitor(options);
   </tr>
   <tr>
     <td><code>azureMonitorExporterOptions</code></td>
-    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.10.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
+    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.11.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
     <td></td>
   </tr>
   <tr>
@@ -216,7 +214,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-pg)
 - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis)
 - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis-4)
-- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.10.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.11.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 
@@ -399,10 +397,7 @@ You might use the following ways to filter out telemetry before it leaves your a
     ```ts snippet:ReadmeSampleExcludeUrl
     import { HttpInstrumentationConfig } from "@opentelemetry/instrumentation-http";
     import { IncomingMessage, RequestOptions } from "node:http";
-    import {
-      AzureMonitorOpenTelemetryOptions,
-      useAzureMonitor,
-    } from "@azure/monitor-opentelemetry";
+    import { AzureMonitorOpenTelemetryOptions, useAzureMonitor } from "@azure/monitor-opentelemetry";
 
     const httpInstrumentationConfig: HttpInstrumentationConfig = {
       enabled: true,
@@ -435,25 +430,25 @@ You might use the following ways to filter out telemetry before it leaves your a
     Use the add [custom property example](#add-a-custom-property-to-a-trace), but replace the following lines of code:
 
       ```ts snippet:ReadmeSampleCustomProcessor
-        import { SpanProcessor, ReadableSpan } from "@opentelemetry/sdk-trace-base";
-        import { Span, Context, SpanKind, TraceFlags } from "@opentelemetry/api";
+      import { SpanProcessor, ReadableSpan } from "@opentelemetry/sdk-trace-base";
+      import { Span, Context, SpanKind, TraceFlags } from "@opentelemetry/api";
 
-        class SpanEnrichingProcessor implements SpanProcessor {
-          async forceFlush(): Promise<void> {
-            // Force flush code here
-          }
-          onStart(_span: Span, _parentContext: Context): void {
-            // Normal code here
-          }
-          async shutdown(): Promise<void> {
-            // Shutdown code here
-          }
-          onEnd(span: ReadableSpan): void {
-            if (span.kind === SpanKind.INTERNAL) {
-              span.spanContext().traceFlags = TraceFlags.NONE;
-            }
+      class SpanEnrichingProcessor implements SpanProcessor {
+        async forceFlush(): Promise<void> {
+          // Force flush code here
+        }
+        onStart(_span: Span, _parentContext: Context): void {
+          // Normal code here
+        }
+        async shutdown(): Promise<void> {
+          // Shutdown code here
+        }
+        onEnd(span: ReadableSpan): void {
+          if (span.kind === SpanKind.INTERNAL) {
+            span.spanContext().traceFlags = TraceFlags.NONE;
           }
         }
+      }
       ```
 
 ## Custom telemetry
@@ -550,7 +545,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.10.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.11.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -564,5 +559,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.10.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.11.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

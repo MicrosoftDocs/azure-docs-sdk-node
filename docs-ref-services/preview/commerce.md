@@ -1,7 +1,7 @@
 ---
 title: Azure Commerce SDK for JavaScript
 description: Reference for Azure Commerce SDK for JavaScript
-ms.date: 04/22/2025
+ms.date: 04/23/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: commerce

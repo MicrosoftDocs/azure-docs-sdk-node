@@ -1,19 +1,19 @@
 ---
 title: Azure DataFactoryManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-datafactory, datafactory
-ms.date: 12/20/2024
+ms.date: 04/24/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: datafactory
 ---
-# Azure DataFactoryManagement client library for JavaScript - version 18.0.0 
+# Azure DataFactoryManagement client library for JavaScript - version 19.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DataFactoryManagement client.
 
 The Azure Data Factory V2 management API provides a RESTful set of web services that interact with Azure Data Factory V2 services.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_18.0.0/sdk/datafactory/arm-datafactory) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_19.0.0/sdk/datafactory/arm-datafactory) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-datafactory) |
 [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-datafactory) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -25,7 +25,7 @@ The Azure Data Factory V2 management API provides a RESTful set of web services 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-datafactory_18.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-datafactory_19.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +44,7 @@ npm install @azure/arm-datafactory
 To create a client object to access the Azure DataFactoryManagement API, you will need the `endpoint` of your Azure DataFactoryManagement resource and a `credential`. The Azure DataFactoryManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure DataFactoryManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-datafactory_18.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-datafactory_19.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -56,24 +56,31 @@ You will also need to **register a new AAD application and grant access to Azure
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
-```javascript
-const { DataFactoryManagementClient } = require("@azure/arm-datafactory");
-const { DefaultAzureCredential } = require("@azure/identity");
-// For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
+Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
+
+```ts snippet:ReadmeSampleCreateClient_Node
+import { DataFactoryManagementClient } from "@azure/arm-datafactory";
+import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new DataFactoryManagementClient(new DefaultAzureCredential(), subscriptionId);
+```
 
-// For client-side applications running in the browser, use this code instead:
-// const credential = new InteractiveBrowserCredential({
-//   tenantId: "<YOUR_TENANT_ID>",
-//   clientId: "<YOUR_CLIENT_ID>"
-// });
-// const client = new DataFactoryManagementClient(credential, subscriptionId);
+For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
+
+```ts snippet:ReadmeSampleCreateClient_Browser
+import { InteractiveBrowserCredential } from "@azure/identity";
+import { DataFactoryManagementClient } from "@azure/arm-datafactory";
+
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const credential = new InteractiveBrowserCredential({
+  tenantId: "<YOUR_TENANT_ID>",
+  clientId: "<YOUR_CLIENT_ID>"
+ });
+const client = new DataFactoryManagementClient(credential, subscriptionId);
 ```
 
 ### JavaScript Bundle
-
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
@@ -88,12 +95,13 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
-const { setLogLevel } = require("@azure/logger");
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
+
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_18.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_19.0.0/sdk/core/logger).
 
 ## Next steps
 
@@ -101,18 +109,17 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-datafactory_18.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-datafactory_19.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
 
-
 [azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_18.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_18.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_19.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-datafactory_19.0.0/sdk/identity/identity#defaultazurecredential
 

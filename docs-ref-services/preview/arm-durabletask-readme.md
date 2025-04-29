@@ -1,12 +1,12 @@
 ---
 title: Azure DurableTask client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-durabletask, durabletask
-ms.date: 03/28/2025
+ms.date: 04/29/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: durabletask
 ---
-# Azure DurableTask client library for JavaScript - version 1.0.0-beta.1 
+# Azure DurableTask client library for JavaScript - version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DurableTask client.
@@ -15,10 +15,10 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.1/sdk/durabletask/arm-durabletask)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.2/sdk/durabletask/arm-durabletask)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/arm-durabletask)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-durabletask?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.1/sdk/durabletask/arm-durabletask/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.2/sdk/durabletask/arm-durabletask/samples)
 
 ## Getting started
 
@@ -27,7 +27,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-durabletask_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-durabletask_1.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ npm install @azure/arm-durabletask
 To create a client object to access the Azure DurableTask API, you will need the `endpoint` of your Azure DurableTask resource and a `credential`. The Azure DurableTask client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure DurableTask resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-durabletask_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-durabletask_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -74,10 +74,11 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 import { InteractiveBrowserCredential } from "@azure/identity";
 import { DurableTaskClient } from "@azure/arm-durabletask";
 
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
-  clientId: "<YOUR_CLIENT_ID>"
- });
+  clientId: "<YOUR_CLIENT_ID>",
+});
 const client = new DurableTaskClient(credential, subscriptionId);
 ```
 
@@ -103,15 +104,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.1/sdk/durabletask/arm-durabletask/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.2/sdk/durabletask/arm-durabletask/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-durabletask_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-durabletask_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -119,6 +120,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-durabletask_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

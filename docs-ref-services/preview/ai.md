@@ -1,7 +1,7 @@
 ---
 title: Azure AI SDK for JavaScript
 description: Reference for Azure AI SDK for JavaScript
-ms.date: 04/30/2025
+ms.date: 05/01/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai

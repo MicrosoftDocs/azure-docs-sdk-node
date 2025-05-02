@@ -57,12 +57,8 @@ functions:
     uid: '@typespec/ts-http-runtime.TypeSpecRuntimeLogger'
     package: '@typespec/ts-http-runtime'
     summary: >-
-      The TypeSpecRuntimeLogger provides a mechanism for overriding where logs
-      are output to.
-
-      By default, logs are sent to stderr.
-
-      Override the `log` method to redirect logs to another location.
+      Immediately enables logging at the specified log level. If no level is
+      specified, logging is disabled.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -71,6 +67,30 @@ functions:
         - id: args
           type: any[]
           description: ''
+  - name: createDefaultHttpClient()
+    uid: '@typespec/ts-http-runtime.createDefaultHttpClient'
+    package: '@typespec/ts-http-runtime'
+    summary: Create the correct HttpClient for the current environment.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function createDefaultHttpClient(): HttpClient'
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.HttpClient" />
+  - name: createEmptyPipeline()
+    uid: '@typespec/ts-http-runtime.createEmptyPipeline'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      Creates a totally empty pipeline.
+      Useful for testing or creating a custom one.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function createEmptyPipeline(): Pipeline'
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.Pipeline" />
   - name: createHttpHeaders(RawHttpHeadersInput)
     uid: '@typespec/ts-http-runtime.createHttpHeaders'
     package: '@typespec/ts-http-runtime'
@@ -164,6 +184,19 @@ functions:
       return:
         description: ''
         type: <xref uid="@typespec/ts-http-runtime.Client" />
+  - name: getLogLevel()
+    uid: '@typespec/ts-http-runtime.getLogLevel'
+    package: '@typespec/ts-http-runtime'
+    summary: Retrieves the currently specified log level.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getLogLevel(): TypeSpecRuntimeLogLevel | undefined'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@typespec/ts-http-runtime.TypeSpecRuntimeLogLevel" /> |
+          undefined
   - name: isRestError(unknown)
     uid: '@typespec/ts-http-runtime.isRestError'
     package: '@typespec/ts-http-runtime'
@@ -196,6 +229,18 @@ functions:
       return:
         description: the result of the conversion in RequestParameters of RLC layer
         type: <xref uid="@typespec/ts-http-runtime.RequestParameters" />
+  - name: setLogLevel(TypeSpecRuntimeLogLevel)
+    uid: '@typespec/ts-http-runtime.setLogLevel'
+    package: '@typespec/ts-http-runtime'
+    summary: Retrieves the currently specified log level.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function setLogLevel(logLevel?: TypeSpecRuntimeLogLevel)'
+      parameters:
+        - id: logLevel
+          type: <xref uid="@typespec/ts-http-runtime.TypeSpecRuntimeLogLevel" />
+          description: ''
   - name: stringToUint8Array(string, EncodingType)
     uid: '@typespec/ts-http-runtime.stringToUint8Array'
     package: '@typespec/ts-http-runtime'
@@ -265,3 +310,4 @@ typeAliases:
   - '@typespec/ts-http-runtime.StreamableMethod'
   - '@typespec/ts-http-runtime.TransferProgressEvent'
   - '@typespec/ts-http-runtime.TypeSpecRuntimeClientLogger'
+  - '@typespec/ts-http-runtime.TypeSpecRuntimeLogLevel'

@@ -45,6 +45,8 @@ Depending on your scenario, you may want to initialize the `AzureCommunicationTo
 
 The tokens supplied to the `AzureCommunicationTokenCredential` either through the constructor or via the token refresher callback can be obtained using the Azure Communication Identity library.
 
+`tokenRefresher` callback should return raw string with a JWT token.
+
 ## Examples
 
 ### Create a credential with a static token

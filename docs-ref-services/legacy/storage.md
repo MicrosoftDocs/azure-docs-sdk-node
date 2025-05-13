@@ -1,12 +1,12 @@
 ---
 title: Azure Storage SDK for JavaScript
 description: Reference for Azure Storage SDK for JavaScript
-ms.date: 05/12/2025
+ms.date: 05/13/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
-manager: twolley
 ms.technology: azure
+manager: twolley
 ---
 # Azure Storage Library for JavaScript
 

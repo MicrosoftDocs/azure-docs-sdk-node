@@ -10,5 +10,30 @@ remarks: ''
 isDeprecated: false
 syntax: |
   type CallWithChatCompositeOptions = {
+    branding?: {
+      backgroundImage?: { url: string }
+      logo?: { alt?: string; shape?: "unset" | "circle"; url: string }
+    }
     callControls?: boolean | CallWithChatControlOptions
+    galleryOptions?: {
+      layout?: VideoGalleryLayout
+      localScreenShareView?: LocalScreenShareView
+    }
+    joinCallOptions?: { microphoneCheck?: "requireMicrophoneAvailable" | "skip" }
+    localVideoTile?: boolean | LocalVideoTileOptions
+    remoteVideoTileMenuOptions?: RemoteVideoTileMenuOptions
+    spotlight?: { hideSpotlightButtons?: boolean }
+    surveyOptions?: {
+      disableSurvey?: boolean
+      onSurveyClosed?: (
+        surveyState: "sent" | "skipped" | "error",
+        surveyError?: string
+      ) => void
+      onSurveySubmitted?: (
+        callId: string,
+        surveyId: string,
+        submittedSurvey: CallSurvey,
+        improvementSuggestions: CallSurveyImprovementSuggestions
+      ) => Promise<void>
+    }
   }

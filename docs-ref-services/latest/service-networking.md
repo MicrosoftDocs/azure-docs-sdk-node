@@ -1,7 +1,7 @@
 ---
 title: Azure Service Networking SDK for JavaScript
 description: Reference for Azure Service Networking SDK for JavaScript
-ms.date: 05/14/2025
+ms.date: 05/15/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: servicenetworking

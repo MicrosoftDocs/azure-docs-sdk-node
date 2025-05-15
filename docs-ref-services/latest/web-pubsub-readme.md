@@ -1,12 +1,12 @@
 ---
 title: Azure Web PubSub service client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub, web-pubsub
-ms.date: 02/28/2025
+ms.date: 05/15/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
 ---
-# Azure Web PubSub service client library for JavaScript - version 1.1.4 
+# Azure Web PubSub service client library for JavaScript - version 1.2.0 
 
 
 [Azure Web PubSub service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe pattern. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from server or submitting HTTP requests can also use Azure Web PubSub service.
@@ -23,7 +23,7 @@ You can use this library in your app server side to manage the WebSocket client 
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.4/sdk/web-pubsub/web-pubsub) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.2.0/sdk/web-pubsub/web-pubsub) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub) |
 [API reference documentation](https://aka.ms/awps/sdk/js) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -109,8 +109,13 @@ When the client is connected, it can send messages to the upstream application, 
 
 ```ts snippet:ReadmeSampleGetClientAccessToken
 import { WebPubSubServiceClient } from "@azure/web-pubsub";
+import { DefaultAzureCredential } from "@azure/identity";
 
-const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+const serviceClient = new WebPubSubServiceClient(
+  "<Endpoint>",
+  new DefaultAzureCredential(),
+  "<hubName>",
+);
 
 // Get the access token for the WebSocket client connection to use
 let token = await serviceClient.getClientAccessToken();
@@ -126,8 +131,13 @@ token = await serviceClient.getClientAccessToken({ userId: "user1", groups: ["Gr
 
 ```ts snippet:ReadmeSampleSendToAll
 import { WebPubSubServiceClient } from "@azure/web-pubsub";
+import { DefaultAzureCredential } from "@azure/identity";
 
-const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+const serviceClient = new WebPubSubServiceClient(
+  "<Endpoint>",
+  new DefaultAzureCredential(),
+  "<hubName>",
+);
 
 // Send a JSON message
 await serviceClient.sendToAll({ message: "Hello world!" });
@@ -146,8 +156,13 @@ Details about `filter` syntax please see [OData filter syntax for Azure Web PubS
 
 ```ts snippet:ReadmeSampleSendToAllWithFilter
 import { WebPubSubServiceClient, odata } from "@azure/web-pubsub";
+import { DefaultAzureCredential } from "@azure/identity";
 
-const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+const serviceClient = new WebPubSubServiceClient(
+  "<Endpoint>",
+  new DefaultAzureCredential(),
+  "<hubName>",
+);
 
 // Send a JSON message to anonymous connections
 await serviceClient.sendToAll({ message: "Hello world!" }, { filter: "userId eq null" });
@@ -167,8 +182,13 @@ await serviceClient.sendToAll("Hello world!", {
 
 ```ts snippet:ReadmeSampleSendToGroup
 import { WebPubSubServiceClient } from "@azure/web-pubsub";
+import { DefaultAzureCredential } from "@azure/identity";
 
-const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+const serviceClient = new WebPubSubServiceClient(
+  "<Endpoint>",
+  new DefaultAzureCredential(),
+  "<hubName>",
+);
 
 const groupClient = serviceClient.group("<groupName>");
 
@@ -190,8 +210,13 @@ await groupClient.sendToAll(payload.buffer);
 
 ```ts snippet:ReadmeSampleSendToUser
 import { WebPubSubServiceClient } from "@azure/web-pubsub";
+import { DefaultAzureCredential } from "@azure/identity";
 
-const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+const serviceClient = new WebPubSubServiceClient(
+  "<Endpoint>",
+  new DefaultAzureCredential(),
+  "<hubName>",
+);
 
 // Send a JSON message
 await serviceClient.sendToUser("user1", { message: "Hello world!" });
@@ -208,8 +233,13 @@ await serviceClient.sendToUser("user1", payload.buffer);
 
 ```ts snippet:ReadmeSampleCheckGroup
 import { WebPubSubServiceClient } from "@azure/web-pubsub";
+import { DefaultAzureCredential } from "@azure/identity";
 
-const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+const serviceClient = new WebPubSubServiceClient(
+  "<Endpoint>",
+  new DefaultAzureCredential(),
+  "<hubName>",
+);
 
 const groupClient = serviceClient.group("<groupName>");
 
@@ -224,8 +254,13 @@ const hasConnections = await serviceClient.groupExists("<groupName>");
 
 ```ts snippet:ReadmeSampleRawResponse
 import { WebPubSubServiceClient } from "@azure/web-pubsub";
+import { DefaultAzureCredential } from "@azure/identity";
 
-const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+const serviceClient = new WebPubSubServiceClient(
+  "<Endpoint>",
+  new DefaultAzureCredential(),
+  "<hubName>",
+);
 
 function onResponse(rawResponse) {
   console.log(rawResponse);
@@ -252,7 +287,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.4/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.2.0/sdk/core/logger).
 
 ### Live Trace
 
@@ -266,13 +301,13 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.1.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
 [azure_sub]: https://azure.microsoft.com/free/
-[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.1.4/sdk/web-pubsub/web-pubsub/samples
+[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.2.0/sdk/web-pubsub/web-pubsub/samples
 [aad_doc]: https://aka.ms/awps/aad
 

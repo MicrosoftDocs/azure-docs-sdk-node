@@ -29,7 +29,7 @@ methods:
   - name: create(UserDefinedFunctionDefinition, RequestOptions)
     uid: '@azure/cosmos.UserDefinedFunctions.create'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Create a UserDefinedFunction.
 
 
@@ -39,6 +39,41 @@ methods:
 
       For additional details, refer to the server-side JavaScript API
       documentation.
+
+
+      **Example**
+
+
+      ```ts snippet:UserDefinedFunctionsCreate
+
+      import { CosmosClient, UserDefinedFunctionDefinition } from
+      "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const udfDefinition: UserDefinedFunctionDefinition = {
+        id: "sample udf",
+        body: "function () { const x = 10; }",
+      };
+
+
+      const { resource: udf } = await
+      container.scripts.userDefinedFunctions.create(udfDefinition);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -83,7 +118,47 @@ methods:
   - name: query<T>(SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.UserDefinedFunctions.query_1'
     package: '@azure/cosmos'
-    summary: Query all User Defined Functions.
+    summary: >+
+      Query all User Defined Functions.
+
+
+      **Example**
+
+
+      ```ts snippet:UserDefinedFunctionsQuery
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const querySpec = {
+        query: "SELECT * FROM root r WHERE r.id=@id",
+        parameters: [
+          {
+            name: "@id",
+            value: "<udf-id>",
+          },
+        ],
+      };
+
+      const { resources: results } = await
+      container.scripts.userDefinedFunctions
+        .query(querySpec)
+        .fetchAll();
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -115,10 +190,28 @@ methods:
 
       Read all User Defined Functions to array.
 
-      ```typescript
+      ```ts snippet:UserDefinedFunctionsReadAll
 
-      const {body: udfList} = await
-      container.userDefinedFunctions.readAll().fetchAll();
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources: udfList } = await
+      container.scripts.userDefinedFunctions.readAll().fetchAll();
 
       ```
 

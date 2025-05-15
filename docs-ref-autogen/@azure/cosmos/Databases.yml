@@ -40,7 +40,7 @@ methods:
   - name: create(DatabaseRequest, RequestOptions)
     uid: '@azure/cosmos.Databases.create'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Send a request for creating a database.
 
 
@@ -60,6 +60,29 @@ methods:
 
       required in order to access and successfully complete any action using the
       User APIs.
+
+
+      **Example**
+
+
+      ```ts snippet:CosmosClientDatabases
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { resource: databaseDefinition, database } = await
+      client.databases.create({
+        id: "<name here>",
+      });
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -84,7 +107,7 @@ methods:
   - name: createIfNotExists(DatabaseRequest, RequestOptions)
     uid: '@azure/cosmos.Databases.createIfNotExists'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Check if a database exists, and if it doesn't, create it.
 
       This will make a read operation based on the id in the `body`, then if it
@@ -107,6 +130,28 @@ methods:
 
       required in order to access and successfully complete any action using the
       User APIs.
+
+
+      **Example**
+
+
+      ```ts snippet:ReadmeSampleCreateDatabase
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -129,21 +174,36 @@ methods:
   - name: query(string | SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Databases.query'
     package: '@azure/cosmos'
-    summary: |+
+    summary: >+
       Queries all databases.
+
 
       **Example**
 
+
       Read all databases to array.
-          * ```typescript
-          * const querySpec: SqlQuerySpec = {
-          *   query: "SELECT * FROM root r WHERE r.id = @db",
-          *   parameters: [
-          *     {name: "@db", value: "Todo"}
-          *   ]
-          * };
-          * const {body: databaseList} = await client.databases.query(querySpec).fetchAll();
-          * ```
+
+      ```ts snippet:DatabasesQueryDatabases
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const querySpec: SqlQuerySpec = {
+        query: `SELECT * FROM root r WHERE r.id = @database`,
+        parameters: [{ name: "@database", value: "Todo" }],
+      };
+
+      const { resources: databaseList } = await
+      client.databases.query(querySpec).fetchAll();
+
+      ```
 
     remarks: ''
     isDeprecated: false
@@ -167,26 +227,40 @@ methods:
         description: >-
           [QueryIterator](xref:@azure/cosmos.QueryIterator) Allows you to return
           all databases in an array or iterate over them one at a time.
-              *
         type: <xref uid="@azure/cosmos.QueryIterator" />&lt;any&gt;
   - name: query<T>(string | SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Databases.query_1'
     package: '@azure/cosmos'
-    summary: |+
+    summary: >+
       Queries all databases.
+
 
       **Example**
 
+
       Read all databases to array.
-          * ```typescript
-          * const querySpec: SqlQuerySpec = {
-          *   query: "SELECT * FROM root r WHERE r.id = @db",
-          *   parameters: [
-          *     {name: "@db", value: "Todo"}
-          *   ]
-          * };
-          * const {body: databaseList} = await client.databases.query(querySpec).fetchAll();
-          * ```
+
+      ```ts snippet:DatabasesQueryDatabases
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const querySpec: SqlQuerySpec = {
+        query: `SELECT * FROM root r WHERE r.id = @database`,
+        parameters: [{ name: "@database", value: "Todo" }],
+      };
+
+      const { resources: databaseList } = await
+      client.databases.query(querySpec).fetchAll();
+
+      ```
 
     remarks: ''
     isDeprecated: false
@@ -210,20 +284,35 @@ methods:
         description: >-
           [QueryIterator](xref:@azure/cosmos.QueryIterator) Allows you to return
           all databases in an array or iterate over them one at a time.
-              *
         type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
   - name: readAll(FeedOptions)
     uid: '@azure/cosmos.Databases.readAll'
     package: '@azure/cosmos'
-    summary: |+
+    summary: >+
       Reads all databases.
+
 
       **Example**
 
+
       Read all databases to array.
-          * ```typescript
-          * const {body: databaseList} = await client.databases.readAll().fetchAll();
-          * ```
+
+      ```ts snippet:DatabasesReadAll
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { resources: databaseList } = await
+      client.databases.readAll().fetchAll();
+
+      ```
 
     remarks: ''
     isDeprecated: false
@@ -241,7 +330,6 @@ methods:
         description: >-
           [QueryIterator](xref:@azure/cosmos.QueryIterator) Allows you to return
           all databases in an array or iterate over them one at a time.
-              *
         type: >-
           <xref uid="@azure/cosmos.QueryIterator" />&lt;<xref
           uid="@azure/cosmos.DatabaseDefinition" /> & <xref

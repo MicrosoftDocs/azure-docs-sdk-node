@@ -29,9 +29,33 @@ methods:
   - name: create(UserDefinition, RequestOptions)
     uid: '@azure/cosmos.Users.create'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Create a database user with the specified
       [UserDefinition](xref:@azure/cosmos.UserDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:UsersCreate
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      await database.users.create({ id: "<user-id>" });
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -74,7 +98,40 @@ methods:
   - name: query<T>(SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Users.query_1'
     package: '@azure/cosmos'
-    summary: Query all users.
+    summary: >+
+      Query all users.
+
+
+      **Example**
+
+
+      Query user with id.
+
+      ```ts snippet:UsersQuery
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const querySpec: SqlQuerySpec = {
+        query: `SELECT * FROM root r WHERE r.id = @user`,
+        parameters: [{ name: "@user", value: "<user-id>" }],
+      };
+
+      const { resources: permisssion } = await
+      database.users.query(querySpec).fetchAll();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -97,14 +154,34 @@ methods:
   - name: readAll(FeedOptions)
     uid: '@azure/cosmos.Users.readAll'
     package: '@azure/cosmos'
-    summary: |+
+    summary: >+
       Read all users.-
+
 
       **Example**
 
+
       Read all users to array.
-      ```typescript
-      const {body: usersList} = await database.users.readAll().fetchAll();
+
+      ```ts snippet:UsersReadAll
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { resources: usersList } = await
+      database.users.readAll().fetchAll();
+
       ```
 
     remarks: ''
@@ -126,9 +203,33 @@ methods:
   - name: upsert(UserDefinition, RequestOptions)
     uid: '@azure/cosmos.Users.upsert'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Upsert a database user with a specified
       [UserDefinition](xref:@azure/cosmos.UserDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:UsersUpsert
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      await database.users.upsert({ id: "<user-id>" });
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

@@ -53,7 +53,35 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.StoredProcedure.delete'
     package: '@azure/cosmos'
-    summary: Delete the given [StoredProcedure](xref:@azure/cosmos.StoredProcedure).
+    summary: >+
+      Delete the given [StoredProcedure](xref:@azure/cosmos.StoredProcedure).
+
+
+      **Example**
+
+
+      ```ts snippet:StoredProcedureDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      await container.scripts.storedProcedure("<sproc-id>").delete();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -70,7 +98,7 @@ methods:
   - name: execute<T>(PartitionKey, any[], RequestOptions)
     uid: '@azure/cosmos.StoredProcedure.execute'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Execute the given [StoredProcedure](xref:@azure/cosmos.StoredProcedure).
 
 
@@ -78,6 +106,34 @@ methods:
 
       Be sure to validate the response from the stored procedure matches the
       type, T, you provide.
+
+
+      **Example**
+
+
+      ```ts snippet:StoredProcedureExecute
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: result } = await container.scripts
+        .storedProcedure("<sproc-id>")
+        .execute(undefined);
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -98,16 +154,46 @@ methods:
           description: >-
             Additional options, such as the partition key to invoke the
             [StoredProcedure](xref:@azure/cosmos.StoredProcedure) on.
+
+            *
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/cosmos.ResourceResponse" />&lt;T&gt;&gt;
   - name: read(RequestOptions)
     uid: '@azure/cosmos.StoredProcedure.read'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Read the
       [StoredProcedureDefinition](xref:@azure/cosmos.StoredProcedureDefinition)
       for the given [StoredProcedure](xref:@azure/cosmos.StoredProcedure).
+
+
+      **Example**
+
+
+      ```ts snippet:StoredProcedureRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: sproc } = await
+      container.scripts.storedProcedure("<sproc-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -124,10 +210,53 @@ methods:
   - name: replace(StoredProcedureDefinition, RequestOptions)
     uid: '@azure/cosmos.StoredProcedure.replace'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the given [StoredProcedure](xref:@azure/cosmos.StoredProcedure)
       with the specified
       [StoredProcedureDefinition](xref:@azure/cosmos.StoredProcedureDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:StoredProcedureReplace
+
+      import { CosmosClient, StoredProcedureDefinition } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const sprocDefinition: StoredProcedureDefinition = {
+        id: "sample sproc",
+        body: "function () { const x = 10; }",
+      };
+
+
+      const { resource: sproc } = await
+      container.scripts.storedProcedures.create(sprocDefinition);
+
+
+      sproc.body = function () {
+        const x = 20;
+        console.log(x);
+      };
+
+      const { resource: replacedSproc } = await container.scripts
+        .storedProcedure(sproc.id)
+        .replace(sproc);
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

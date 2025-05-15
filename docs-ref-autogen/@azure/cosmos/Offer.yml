@@ -51,9 +51,30 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.Offer.read'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Read the [OfferDefinition](xref:@azure/cosmos.OfferDefinition) for the
       given [Offer](xref:@azure/cosmos.Offer).
+
+
+      **Example**
+
+
+      ```ts snippet:OfferRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { resource: offer } = await client.offer("<offer-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -68,9 +89,37 @@ methods:
   - name: replace(OfferDefinition, RequestOptions)
     uid: '@azure/cosmos.Offer.replace'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the given [Offer](xref:@azure/cosmos.Offer) with the specified
       [OfferDefinition](xref:@azure/cosmos.OfferDefinition).
+
+
+      **Example**
+
+
+      replace offer with a new offer definition with updated throughput
+
+      ```ts snippet:OfferReplace
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { resource: offer } = await client.offer("<offer-id>").read();
+
+      // @ts-preservewhitespace
+
+      offer.content.offerThroughput = 1000;
+
+      await client.offer("<offer-id>").replace(offer);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

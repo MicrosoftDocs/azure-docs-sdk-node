@@ -73,7 +73,32 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.User.delete'
     package: '@azure/cosmos'
-    summary: Delete the given [User](xref:@azure/cosmos.User).
+    summary: >+
+      Delete the given [User](xref:@azure/cosmos.User).
+
+
+      **Example**
+
+
+      ```ts snippet:UserDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      await database.user("<user-id>").delete();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -108,9 +133,33 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.User.read'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Read the [UserDefinition](xref:@azure/cosmos.UserDefinition) for the given
       [User](xref:@azure/cosmos.User).
+
+
+      **Example**
+
+
+      ```ts snippet:UserRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { resource: user } = await database.user("<user-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -125,9 +174,37 @@ methods:
   - name: replace(UserDefinition, RequestOptions)
     uid: '@azure/cosmos.User.replace'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the given [User](xref:@azure/cosmos.User)'s definition with the
       specified [UserDefinition](xref:@azure/cosmos.UserDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:UserReplace
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { resource: user } = await database.user("<user-id>").read();
+
+      user.id = "<new user id>";
+
+
+      await database.user("<user-id>").replace(user);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

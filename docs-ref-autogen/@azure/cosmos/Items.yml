@@ -42,24 +42,42 @@ methods:
 
       Usage example:
 
-      ```typescript
+      ```ts snippet:ItemsBatch
+
+      import { CosmosClient, OperationInput } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
 
       // The partitionKey is a required second argument. If it’s undefined, it
       defaults to the expected partition key format.
 
       const operations: OperationInput[] = [
-         {
-            operationType: "Create",
-            resourceBody: { id: "doc1", name: "sample", key: "A" }
-         },
-         {
-            operationType: "Upsert",
-            resourceBody: { id: "doc2", name: "other", key: "A" }
-         }
-      ]
+        {
+          operationType: "Create",
+          resourceBody: { id: "doc1", name: "sample", key: "A" },
+        },
+        {
+          operationType: "Upsert",
+          resourceBody: { id: "doc2", name: "other", key: "A" },
+        },
+      ];
 
 
-      await database.container.items.batch(operations, "A")
+      await container.items.batch(operations, "A");
 
       ```
     remarks: ''
@@ -68,7 +86,7 @@ methods:
       content: >-
         function batch(operations: OperationInput[], partitionKey?:
         PartitionKey, options?: RequestOptions):
-        Promise<Response_2<OperationResponse[]>>
+        Promise<Response<OperationResponse[]>>
       parameters:
         - id: operations
           type: <xref uid="@azure/cosmos.OperationInput" />[]
@@ -82,7 +100,7 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;Response_2&lt;<xref uid="@azure/cosmos.OperationResponse"
+          Promise&lt;Response&lt;<xref uid="@azure/cosmos.OperationResponse"
           />[]&gt;&gt;
   - name: bulk(OperationInput[], BulkOptions, RequestOptions)
     uid: '@azure/cosmos.Items.bulk'
@@ -99,25 +117,43 @@ methods:
 
       Usage example:
 
-      ```typescript
+      ```ts snippet:ItemsBulk
+
+      import { CosmosClient, OperationInput } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
 
       // partitionKey is optional at the top level if present in the
       resourceBody
 
       const operations: OperationInput[] = [
-         {
-            operationType: "Create",
-            resourceBody: { id: "doc1", name: "sample", key: "A" }
-         },
-         {
-            operationType: "Upsert",
-            partitionKey: 'A',
-            resourceBody: { id: "doc2", name: "other", key: "A" }
-         }
-      ]
+        {
+          operationType: "Create",
+          resourceBody: { id: "doc1", name: "sample", key: "A" },
+        },
+        {
+          operationType: "Upsert",
+          partitionKey: "A",
+          resourceBody: { id: "doc2", name: "other", key: "A" },
+        },
+      ];
 
 
-      await database.container.items.bulk(operations)
+      await container.items.bulk(operations);
 
       ```
     remarks: ''
@@ -169,7 +205,7 @@ methods:
       **Example**
 
       Read from the beginning of the change feed.
-      ```javascript
+      ```ts snippet:ignore
       const iterator = items.readChangeFeed({ startFromBeginning: true });
       const firstPage = await iterator.fetchNext();
       const firstPageResults = firstPage.result
@@ -235,7 +271,7 @@ methods:
   - name: create<T>(T, RequestOptions)
     uid: '@azure/cosmos.Items.create'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Create an item.
 
 
@@ -247,6 +283,40 @@ methods:
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
+
+
+      **Example**
+
+
+      Create an item.
+
+      ```ts snippet:ContainerItems
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: createdItem } = await container.items.create({
+        id: "<item id>",
+        properties: {},
+      });
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -267,13 +337,132 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
+  - name: executeBulkOperations(OperationInput[], RequestOptions)
+    uid: '@azure/cosmos.Items.executeBulkOperations'
+    package: '@azure/cosmos'
+    summary: >+
+      Execute bulk operations on items.
+
+
+      **Example**
+
+
+      ```ts snippet:ItemsExecuteBulkOperations
+
+      import { CosmosClient, OperationInput } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const operations: OperationInput[] = [
+        {
+          operationType: "Create",
+          resourceBody: { id: "doc1", name: "sample", key: "A" },
+        },
+        {
+          operationType: "Upsert",
+          partitionKey: "A",
+          resourceBody: { id: "doc2", name: "other", key: "A" },
+        },
+      ];
+
+
+      await container.items.executeBulkOperations(operations);
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function executeBulkOperations(operations: OperationInput[], options?:
+        RequestOptions): Promise<BulkOperationResult[]>
+      parameters:
+        - id: operations
+          type: <xref uid="@azure/cosmos.OperationInput" />[]
+          description: List of operations
+        - id: options
+          type: <xref uid="@azure/cosmos.RequestOptions" />
+          description: used for modifying the request
+      return:
+        description: list of operation results corresponding to the operations
+        type: Promise&lt;<xref uid="@azure/cosmos.BulkOperationResult" />[]&gt;
   - name: getChangeFeedIterator<T>(ChangeFeedIteratorOptions)
     uid: '@azure/cosmos.Items.getChangeFeedIterator'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Returns an iterator to iterate over pages of changes. The iterator
       returned can be used to fetch changes for a single partition key, feed
       range or an entire container.
+
+
+      **Example**
+
+
+      ```ts snippet:ReadmeSampleChangeFeedPullModelIteratorPartitionKey
+
+      import {
+        CosmosClient,
+        PartitionKeyDefinitionVersion,
+        PartitionKeyKind,
+        ChangeFeedStartFrom,
+      } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const containerDefinition = {
+        id: "Test Database",
+        partitionKey: {
+          paths: ["/name", "/address/zip"],
+          version: PartitionKeyDefinitionVersion.V2,
+          kind: PartitionKeyKind.MultiHash,
+        },
+      };
+
+      const { container } = await
+      database.containers.createIfNotExists(containerDefinition);
+
+
+      const partitionKey = "some-partition-Key-value";
+
+      const options = {
+        changeFeedStartFrom: ChangeFeedStartFrom.Beginning(partitionKey),
+      };
+
+
+      const iterator = container.items.getChangeFeedIterator(options);
+
+
+      while (iterator.hasMoreResults) {
+        const response = await iterator.readNext();
+        // process this response
+      }
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -299,17 +488,36 @@ methods:
 
       Read all items to array.
 
-      ```typescript
+      ```ts snippet:ItemsQueryEncryptedItems
 
-      const queryBuilder = new EncryptionQueryBuilder("SELECT firstname FROM
-      Families f WHERE f.lastName = @lastName");
+      import { CosmosClient, EncryptionQueryBuilder } from "@azure/cosmos";
 
-      queryBuilder.addStringParameter("@lastName", "Hendricks", "/lastname");
 
-      const queryIterator = await items.getEncryptionQueryIterator<{firstName:
-      string}>(queryBuilder);
+      const endpoint = "https://your-account.documents.azure.com";
 
-      const {result: items} = await queryIterator.fetchAll();
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const queryBuilder = new EncryptionQueryBuilder(
+        `SELECT firstname FROM Families f WHERE f.lastName = @lastName`,
+      );
+
+      queryBuilder.addParameter("@lastName", "Hendricks", "/lastname");
+
+      const queryIterator = await
+      container.items.getEncryptionQueryIterator(queryBuilder);
+
+      const { resources: items } = await queryIterator.fetchAll();
 
       ```
 
@@ -340,20 +548,43 @@ methods:
   - name: query(string | SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Items.query'
     package: '@azure/cosmos'
-    summary: |+
+    summary: >+
       Queries all items.
+
 
       **Example**
 
+
       Read all items to array.
-      ```typescript
+
+      ```ts snippet:ItemsQueryItems
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
       const querySpec: SqlQuerySpec = {
-        query: "SELECT * FROM Families f WHERE f.lastName = @lastName",
-        parameters: [
-          {name: "@lastName", value: "Hendricks"}
-        ]
+        query: `SELECT * FROM Families f WHERE f.lastName = @lastName`,
+        parameters: [{ name: "@lastName", value: "Hendricks" }],
       };
-      const {result: items} = await items.query(querySpec).fetchAll();
+
+      const { resources: items } = await
+      container.items.query(querySpec).fetchAll();
+
       ```
 
     remarks: ''
@@ -389,17 +620,33 @@ methods:
 
       Read all items to array.
 
-      ```typescript
+      ```ts snippet:ItemsQueryItems
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
 
       const querySpec: SqlQuerySpec = {
-        query: "SELECT firstname FROM Families f WHERE f.lastName = @lastName",
-        parameters: [
-          {name: "@lastName", value: "Hendricks"}
-        ]
+        query: `SELECT * FROM Families f WHERE f.lastName = @lastName`,
+        parameters: [{ name: "@lastName", value: "Hendricks" }],
       };
 
-      const {result: items} = await items.query<{firstName:
-      string}>(querySpec).fetchAll();
+      const { resources: items } = await
+      container.items.query(querySpec).fetchAll();
 
       ```
 
@@ -440,9 +687,28 @@ methods:
 
       Read all items to array.
 
-      ```typescript
+      ```ts snippet:ItemsReadAll
 
-      const {body: containerList} = await items.readAll().fetchAll();
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources: containerList } = await
+      container.items.readAll().fetchAll();
 
       ```
 
@@ -483,9 +749,28 @@ methods:
 
       Read all items to array.
 
-      ```typescript
+      ```ts snippet:ItemsReadAll
 
-      const {body: containerList} = await items.readAll().fetchAll();
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources: containerList } = await
+      container.items.readAll().fetchAll();
 
       ```
 
@@ -529,7 +814,7 @@ methods:
       **Example**
 
       Read from the beginning of the change feed.
-      ```javascript
+      ```ts snippet:ignore
       const iterator = items.readChangeFeed({ startFromBeginning: true });
       const firstPage = await iterator.fetchNext();
       const firstPageResults = firstPage.result
@@ -626,7 +911,7 @@ methods:
   - name: upsert<T>(T, RequestOptions)
     uid: '@azure/cosmos.Items.upsert_1'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Upsert an item.
 
 
@@ -638,6 +923,52 @@ methods:
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
+
+
+      **Example**
+
+
+      Upsert an item.
+
+      ```ts snippet:ItemsUpsert
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: createdItem1 } = await container.items.create({
+        id: "<item id 1>",
+        properties: {},
+      });
+
+
+      const { resource: upsertItem1 } = await container.items.upsert({
+        id: "<item id 1>",
+        updated_properties: {},
+      });
+
+
+      const { resource: upsertItem2 } = await container.items.upsert({
+        id: "<item id 2>",
+        properties: {},
+      });
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

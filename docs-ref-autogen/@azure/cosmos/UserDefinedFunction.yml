@@ -53,7 +53,35 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.UserDefinedFunction.delete'
     package: '@azure/cosmos'
-    summary: Delete the given <xref:UserDefined>.
+    summary: >+
+      Delete the given <xref:UserDefined>.
+
+
+      **Example**
+
+
+      ```ts snippet:UserDefinedFunctionDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      await container.scripts.userDefinedFunction("<udf-id>").delete();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -72,11 +100,39 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.UserDefinedFunction.read'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Read the
       [UserDefinedFunctionDefinition](xref:@azure/cosmos.UserDefinedFunctionDefinition)
       for the given
       [UserDefinedFunction](xref:@azure/cosmos.UserDefinedFunction).
+
+
+      **Example**
+
+
+      ```ts snippet:UserDefinedFunctionRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: udf } = await
+      container.scripts.userDefinedFunction("<udf-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -95,11 +151,50 @@ methods:
   - name: replace(UserDefinedFunctionDefinition, RequestOptions)
     uid: '@azure/cosmos.UserDefinedFunction.replace'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the given
       [UserDefinedFunction](xref:@azure/cosmos.UserDefinedFunction) with the
       specified
       [UserDefinedFunctionDefinition](xref:@azure/cosmos.UserDefinedFunctionDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:UserDefinedFunctionReplace
+
+      import { CosmosClient, UserDefinedFunctionDefinition } from
+      "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const udfDefinition: UserDefinedFunctionDefinition = {
+        id: "sample udf",
+        body: "function () { const x = 10; }",
+      };
+
+      await container.scripts.userDefinedFunctions.create(udfDefinition);
+
+
+      udfDefinition.body = "function () { const x = 20; }";
+
+      const { resource: replacedUdf } = await container.scripts
+        .userDefinedFunction(udfDefinition.id)
+        .replace(udfDefinition);
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

@@ -29,7 +29,37 @@ methods:
   - name: query(SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Offers.query'
     package: '@azure/cosmos'
-    summary: Query all offers.
+    summary: >+
+      Query all offers.
+
+
+      **Example**
+
+
+      Read offer for a specific id.
+
+      ```ts snippet:OffersQuery
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const querySpec: SqlQuerySpec = {
+        query: `SELECT * FROM root r WHERE r.id = @offer`,
+        parameters: [{ name: "@offer", value: "<offer-id>" }],
+      };
+
+      const { resources: offer } = await
+      client.offers.query(querySpec).fetchAll();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -81,8 +111,14 @@ methods:
       **Example**
 
       Read all offers to array.
-      ```typescript
-      const {body: offerList} = await client.offers.readAll().fetchAll();
+      ```ts snippet:OffersReadAll
+      import { CosmosClient } from "@azure/cosmos";
+
+      const endpoint = "https://your-account.documents.azure.com";
+      const key = "<database account masterkey>";
+      const client = new CosmosClient({ endpoint, key });
+
+      const { resources: offerList } = await client.offers.readAll().fetchAll();
       ```
 
     remarks: ''

@@ -53,7 +53,35 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.Trigger.delete'
     package: '@azure/cosmos'
-    summary: Delete the given [Trigger](xref:@azure/cosmos.Trigger).
+    summary: >+
+      Delete the given [Trigger](xref:@azure/cosmos.Trigger).
+
+
+      **Example**
+
+
+      ```ts snippet:TriggerDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      await container.scripts.trigger("<trigger-id>").delete();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -68,9 +96,37 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.Trigger.read'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Read the [TriggerDefinition](xref:@azure/cosmos.TriggerDefinition) for the
       given [Trigger](xref:@azure/cosmos.Trigger).
+
+
+      **Example**
+
+
+      ```ts snippet:TriggerRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: trigger } = await
+      container.scripts.trigger("<trigger-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -85,9 +141,52 @@ methods:
   - name: replace(TriggerDefinition, RequestOptions)
     uid: '@azure/cosmos.Trigger.replace'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the given [Trigger](xref:@azure/cosmos.Trigger) with the specified
       [TriggerDefinition](xref:@azure/cosmos.TriggerDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:TriggerReplace
+
+      import { CosmosClient, TriggerDefinition, TriggerType, TriggerOperation }
+      from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const triggerDefinition: TriggerDefinition = {
+        id: "sample trigger",
+        body: "serverScript() { var x = 10; }",
+        triggerType: TriggerType.Pre,
+        triggerOperation: TriggerOperation.All,
+      };
+
+
+      const { resource: trigger } = await
+      container.scripts.triggers.create(triggerDefinition);
+
+
+      trigger.body = "function () { const x = 20; console.log(x); }";
+
+      const { resource: replacedTrigger } = await
+      container.scripts.trigger(trigger.id).replace(trigger);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

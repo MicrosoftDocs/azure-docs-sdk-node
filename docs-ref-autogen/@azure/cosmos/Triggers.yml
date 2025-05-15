@@ -29,7 +29,7 @@ methods:
   - name: create(TriggerDefinition, RequestOptions)
     uid: '@azure/cosmos.Triggers.create'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Create a trigger.
 
 
@@ -41,6 +41,43 @@ methods:
 
       For additional details, refer to the server-side JavaScript API
       documentation.
+
+
+      **Example**
+
+
+      ```ts snippet:TriggersCreate
+
+      import { CosmosClient, TriggerDefinition, TriggerType, TriggerOperation }
+      from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const triggerDefinition: TriggerDefinition = {
+        id: "sample trigger",
+        body: "serverScript() { var x = 10; }",
+        triggerType: TriggerType.Pre,
+        triggerOperation: TriggerOperation.All,
+      };
+
+
+      const { resource: trigger } = await
+      container.scripts.triggers.create(triggerDefinition);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -83,7 +120,46 @@ methods:
   - name: query<T>(SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Triggers.query_1'
     package: '@azure/cosmos'
-    summary: Query all Triggers.
+    summary: >+
+      Query all Triggers.
+
+
+      **Example**
+
+
+      ```ts snippet:TriggersQuery
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const querySpec = {
+        query: "SELECT * FROM root r WHERE r.id=@id",
+        parameters: [
+          {
+            name: "@id",
+            value: "<trigger-id>",
+          },
+        ],
+      };
+
+      const { resources: results } = await
+      container.scripts.triggers.query(querySpec).fetchAll();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -97,6 +173,8 @@ methods:
             Query configuration for the operation. See
             [SqlQuerySpec](xref:@azure/cosmos.SqlQuerySpec) for more info on how
             to configure a query.
+
+            *
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
           description: ''
@@ -106,14 +184,38 @@ methods:
   - name: readAll(FeedOptions)
     uid: '@azure/cosmos.Triggers.readAll'
     package: '@azure/cosmos'
-    summary: |+
+    summary: >+
       Read all Triggers.
+
 
       **Example**
 
+
       Read all trigger to array.
-      ```typescript
-      const {body: triggerList} = await container.triggers.readAll().fetchAll();
+
+      ```ts snippet:TriggersReadAllTriggers
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources: triggerList } = await
+      container.scripts.triggers.readAll().fetchAll();
+
       ```
 
     remarks: ''

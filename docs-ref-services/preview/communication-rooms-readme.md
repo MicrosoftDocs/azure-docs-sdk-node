@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure RoomsApi client library for JavaScript - version 1.2.1-alpha.20250515.1 
+# Azure RoomsApi client library for JavaScript - version 1.2.1-alpha.20250516.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure RoomsApi client.

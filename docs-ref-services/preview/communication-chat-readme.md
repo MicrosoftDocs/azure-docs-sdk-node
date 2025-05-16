@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Chat client library for JavaScript - version 1.5.5-alpha.20250515.1 
+# Azure Communication Chat client library for JavaScript - version 1.5.5-alpha.20250516.2 
 
 
 Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.

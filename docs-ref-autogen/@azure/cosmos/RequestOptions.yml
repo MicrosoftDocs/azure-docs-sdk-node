@@ -22,6 +22,26 @@ properties:
       return:
         description: ''
         type: '{ condition: string, type: string }'
+  - name: contentResponseOnWriteEnabled
+    uid: '@azure/cosmos.RequestOptions.contentResponseOnWriteEnabled'
+    package: '@azure/cosmos'
+    summary: >-
+      If set to false, service doesn't return payload in the response. It
+      reduces networking and CPU load
+
+      by not sending the payload back over the network. Default value is true.
+
+
+      NOTE: Currently, this option is only supported for bulk and batch
+      operations.
+    fullName: contentResponseOnWriteEnabled
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'contentResponseOnWriteEnabled?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: disableAutomaticIdGeneration
     uid: '@azure/cosmos.RequestOptions.disableAutomaticIdGeneration'
     package: '@azure/cosmos'
@@ -168,14 +188,31 @@ inheritedProperties:
 
       Cancel a read request
 
-      ```typescript
+      ```ts snippet:SharedOptionsAbortSignal
 
-      const controller = new AbortController()
+      import { CosmosClient } from "@azure/cosmos";
 
-      const {result: item} = await items.query('SELECT * from c', { abortSignal:
-      controller.signal});
 
-      controller.abort()
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const controller = new AbortController();
+
+      const results = container.items.query("SELECT * from c", {
+        abortSignal: controller.signal,
+      });
 
       ```
 

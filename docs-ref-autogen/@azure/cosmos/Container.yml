@@ -79,10 +79,30 @@ properties:
 
       Create a new item
 
-      ```typescript
+      ```ts snippet:ContainerItems
 
-      const {body: createdItem} = await container.items.create({id: "<item id>",
-      properties: {}});
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: createdItem } = await container.items.create({
+        id: "<item id>",
+        properties: {},
+      });
 
       ```
 
@@ -122,13 +142,40 @@ methods:
   - name: conflict(string, PartitionKey)
     uid: '@azure/cosmos.Container.conflict'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Used to read, replace, or delete a specific, existing
       [Conflict](xref:@azure/cosmos.Conflict) by id.
 
 
       Use `.conflicts` for creating new conflicts, or querying/reading all
       conflicts.
+
+
+      **Example**
+
+
+      ```ts snippet:ConflictRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const container = database.container("Test Container");
+
+
+      const { resource: conflict } = await
+      container.conflict("<conflict-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -146,7 +193,21 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.Container.delete'
     package: '@azure/cosmos'
-    summary: Delete the container
+    summary: |+
+      Delete the container
+
+      **Example**
+
+      ```ts snippet:DatabaseDeleteContainer
+      import { CosmosClient } from "@azure/cosmos";
+
+      const endpoint = "https://your-account.documents.azure.com";
+      const key = "<database account masterkey>";
+      const client = new CosmosClient({ endpoint, key });
+
+      await client.database("<db id>").container("<container id>").delete();
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -161,9 +222,53 @@ methods:
   - name: deleteAllItemsForPartitionKey(PartitionKey, RequestOptions)
     uid: '@azure/cosmos.Container.deleteAllItemsForPartitionKey'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Delete all documents belong to the container for the provided partition
       key value
+
+
+      **Example**
+
+
+      ```ts snippet:ContainerDeleteAllItemsForPartitionKey
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({
+        id: "Test Container",
+        partitionKey: {
+          paths: ["/state"],
+        },
+      });
+
+
+      const cities = [
+        { id: "1", name: "Olympia", state: "WA", isCapitol: true },
+        { id: "2", name: "Redmond", state: "WA", isCapitol: false },
+        { id: "3", name: "Olympia", state: "IL", isCapitol: false },
+      ];
+
+      for (const city of cities) {
+        await container.items.create(city);
+      }
+
+
+      await container.deleteAllItemsForPartitionKey("WA");
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -183,7 +288,36 @@ methods:
   - name: getFeedRanges()
     uid: '@azure/cosmos.Container.getFeedRanges'
     package: '@azure/cosmos'
-    summary: ''
+    summary: >+
+
+
+      **Example**
+
+
+      ```ts snippet:ContainerGetFeedRanges
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources: ranges } = await container.getFeedRanges();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -218,18 +352,90 @@ methods:
     syntax:
       content: >-
         function getQueryPlan(query: string | SqlQuerySpec):
-        Promise<Response_2<PartitionedQueryExecutionInfo>>
+        Promise<Response<PartitionedQueryExecutionInfo>>
       parameters:
         - id: query
           type: string | <xref uid="@azure/cosmos.SqlQuerySpec" />
           description: ''
       return:
         description: ''
-        type: Promise&lt;Response_2&lt;PartitionedQueryExecutionInfo&gt;&gt;
+        type: Promise&lt;Response&lt;PartitionedQueryExecutionInfo&gt;&gt;
   - name: initializeEncryption()
     uid: '@azure/cosmos.Container.initializeEncryption'
     package: '@azure/cosmos'
-    summary: Warms up encryption related caches for the container.
+    summary: >+
+      Warms up encryption related caches for the container.
+
+
+      **Example**
+
+
+      ```ts snippet:ContainerIntializeEncryption
+
+      import { ClientSecretCredential } from "@azure/identity";
+
+      import {
+        AzureKeyVaultEncryptionKeyResolver,
+        CosmosClient,
+        EncryptionType,
+        EncryptionAlgorithm,
+        ClientEncryptionIncludedPath,
+        ClientEncryptionPolicy,
+      } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const credentials = new ClientSecretCredential("<tenant-id>",
+      "<client-id>", "<app-secret>");
+
+      const keyResolver = new AzureKeyVaultEncryptionKeyResolver(credentials);
+
+      const client = new CosmosClient({
+        endpoint,
+        key,
+        clientEncryptionOptions: {
+          keyEncryptionKeyResolver: keyResolver,
+        },
+      });
+
+      const { database } = await client.databases.createIfNotExists({ id: "<db
+      id>" });
+
+
+      const paths = ["/path1", "/path2", "/path3"].map(
+        (path) =>
+          ({
+            path: path,
+            clientEncryptionKeyId: "< cek - id >",
+            encryptionType: EncryptionType.DETERMINISTIC,
+            encryptionAlgorithm: EncryptionAlgorithm.AEAD_AES_256_CBC_HMAC_SHA256,
+          }) as ClientEncryptionIncludedPath,
+      );
+
+      const clientEncryptionPolicy: ClientEncryptionPolicy = {
+        includedPaths: paths,
+        policyFormatVersion: 2,
+      };
+
+      const containerDefinition = {
+        id: "Test Container",
+        partitionKey: {
+          paths: ["/id"],
+        },
+        clientEncryptionPolicy: clientEncryptionPolicy,
+      };
+
+      const { container } = await
+      database.containers.createIfNotExists(containerDefinition);
+
+
+      await container.initializeEncryption();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -253,9 +459,30 @@ methods:
 
       Replace an item
 
-      `const {body: replacedItem} = await container.item("<item id>",
-      "<partition key value>").replace({id: "<item id>", title: "Updated post",
-      authorID: 5});`
+      ```ts snippet:ContainerItem
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { body: replacedItem } = await container
+        .item("<item id>", "<partition key value>")
+        .replace({ id: "<item id>", title: "Updated post", authorID: 5 });
+      ```
 
     remarks: ''
     isDeprecated: false
@@ -274,7 +501,30 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.Container.read'
     package: '@azure/cosmos'
-    summary: Read the container's definition
+    summary: >+
+      Read the container's definition
+
+
+      **Example**
+
+
+      ```ts snippet:ContainerRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { resource: database } = await client.database("<db
+      id>").container("<container id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -289,9 +539,32 @@ methods:
   - name: readOffer(RequestOptions)
     uid: '@azure/cosmos.Container.readOffer'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Gets offer on container. If none exists, returns an OfferResponse with
       undefined.
+
+
+      **Example**
+
+
+      ```ts snippet:ContainerReadOffer
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { resource: offer } = await client
+        .database("<db id>")
+        .container("<container id>")
+        .readOffer();
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -306,7 +579,38 @@ methods:
   - name: readPartitionKeyRanges(FeedOptions)
     uid: '@azure/cosmos.Container.readPartitionKeyRanges'
     package: '@azure/cosmos'
-    summary: ''
+    summary: >+
+      Gets the partition key ranges for the container.
+
+
+      **Example**
+
+
+      ```ts snippet:ContainerReadPartitionKeyRanges
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources: ranges } = await
+      container.readPartitionKeyRanges().fetchAll();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -316,14 +620,55 @@ methods:
       parameters:
         - id: feedOptions
           type: <xref uid="@azure/cosmos.FeedOptions" />
-          description: ''
+          description: Options for the request.
       return:
-        description: ''
+        description: An iterator of partition key ranges.
         type: <xref uid="@azure/cosmos.QueryIterator" />&lt;PartitionKeyRange&gt;
   - name: replace(ContainerDefinition, RequestOptions)
     uid: '@azure/cosmos.Container.replace'
     package: '@azure/cosmos'
-    summary: Replace the container's definition
+    summary: >+
+      Replace the container's definition
+
+
+      **Example**
+
+
+      ```ts snippet:ContainerReplace
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const containerDefinition = {
+        id: "Test Container",
+        partitionKey: {
+          paths: ["/key1"],
+        },
+        throughput: 1000,
+      };
+
+      const { container } = await
+      database.containers.createIfNotExists(containerDefinition);
+
+
+      containerDefinition.throughput = 400;
+
+      const { container: replacedContainer } = await
+      container.replace(containerDefinition);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

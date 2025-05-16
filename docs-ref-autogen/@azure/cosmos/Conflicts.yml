@@ -72,7 +72,42 @@ methods:
   - name: query<T>(string | SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Conflicts.query_1'
     package: '@azure/cosmos'
-    summary: Queries all conflicts.
+    summary: >+
+      Queries all conflicts.
+
+
+      **Example**
+
+
+      Query conflict with id
+
+      ```ts snippet:ConflictsQuery
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const container = database.container("Test Container");
+
+
+      const querySpec: SqlQuerySpec = {
+        query: `SELECT * FROM root r WHERE r.id = @conflict`,
+        parameters: [{ name: "@conflict", value: "<conflict-id>" }],
+      };
+
+      const { resources: conflict } = await
+      container.conflicts.query(querySpec).fetchAll();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -99,7 +134,35 @@ methods:
   - name: readAll(FeedOptions)
     uid: '@azure/cosmos.Conflicts.readAll'
     package: '@azure/cosmos'
-    summary: Reads all conflicts
+    summary: >+
+      Reads all conflicts
+
+
+      **Example**
+
+
+      ```ts snippet:ConflictsReadAll
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const container = database.container("Test Container");
+
+
+      const { resources: conflicts } = await
+      container.conflicts.readAll().fetchAll();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

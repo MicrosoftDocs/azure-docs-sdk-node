@@ -54,7 +54,34 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.Permission.delete'
     package: '@azure/cosmos'
-    summary: Delete the given [Permission](xref:@azure/cosmos.Permission).
+    summary: >+
+      Delete the given [Permission](xref:@azure/cosmos.Permission).
+
+
+      **Example**
+
+
+      ```ts snippet:PermissionDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const user = database.user("<user-id>");
+
+
+      await user.permission("<permission-id>").delete();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -69,9 +96,36 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.Permission.read'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Read the [PermissionDefinition](xref:@azure/cosmos.PermissionDefinition)
       of the given [Permission](xref:@azure/cosmos.Permission).
+
+
+      **Example**
+
+
+      ```ts snippet:PermissionRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const user = database.user("<user-id>");
+
+
+      const { resource: permission } = await
+      user.permission("<permission-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -86,9 +140,40 @@ methods:
   - name: replace(PermissionDefinition, RequestOptions)
     uid: '@azure/cosmos.Permission.replace'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the given [Permission](xref:@azure/cosmos.Permission) with the
       specified [PermissionDefinition](xref:@azure/cosmos.PermissionDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:PermissionReplace
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const user = database.user("<user-id>");
+
+      const { resource: permission } = await
+      user.permission("<permission-id>").read();
+
+      permission.resource = "<new-resource-url>";
+
+
+      await user.permission("<permission-id>").replace(permission);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

@@ -52,11 +52,21 @@ properties:
 
       Create a new container
 
-      ```typescript
+      ```ts snippet:DatabaseCreateContainer
 
-      const {body: containerDefinition, container} = await client.database("<db
-      id>").containers.create({id: "<container id>"});
+      import { CosmosClient } from "@azure/cosmos";
 
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { body: containerDefinition, container } = await client
+        .database("<db id>")
+        .containers.create({ id: "<container id>" });
       ```
 
     fullName: containers
@@ -82,7 +92,33 @@ properties:
   - name: url
     uid: '@azure/cosmos.Database.url'
     package: '@azure/cosmos'
-    summary: Returns a reference URL to the resource. Used for linking in Permissions.
+    summary: >+
+      Returns a reference URL to the resource. Used for linking in Permissions.
+
+
+      **Example**
+
+
+      ```ts snippet:DatabaseGetUrl
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const url = database.url;
+
+      ```
+
     fullName: url
     remarks: ''
     isDeprecated: false
@@ -126,7 +162,17 @@ methods:
 
       Delete a container
 
-      ```typescript
+      ```ts snippet:DatabaseDeleteContainer
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
 
       await client.database("<db id>").container("<container id>").delete();
 
@@ -148,7 +194,63 @@ methods:
       EncryptionKeyWrapMetadata)
     uid: '@azure/cosmos.Database.createClientEncryptionKey'
     package: '@azure/cosmos'
-    summary: Create Encryption key for database account
+    summary: >+
+      Create Encryption key for database account
+
+
+      **Example**
+
+
+      ```ts snippet:DatabaseCreateClientEncryptionKey
+
+      import { ClientSecretCredential } from "@azure/identity";
+
+      import {
+        AzureKeyVaultEncryptionKeyResolver,
+        CosmosClient,
+        EncryptionKeyWrapMetadata,
+        EncryptionKeyResolverName,
+        KeyEncryptionAlgorithm,
+        EncryptionAlgorithm,
+      } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const credentials = new ClientSecretCredential("<tenant-id>",
+      "<client-id>", "<app-secret>");
+
+      const keyResolver = new AzureKeyVaultEncryptionKeyResolver(credentials);
+
+      const client = new CosmosClient({
+        endpoint,
+        key,
+        clientEncryptionOptions: {
+          keyEncryptionKeyResolver: keyResolver,
+        },
+      });
+
+      const { database } = await client.databases.createIfNotExists({ id: "<db
+      id>" });
+
+      const metadata: EncryptionKeyWrapMetadata = {
+        type: EncryptionKeyResolverName.AzureKeyVault,
+        name: "<key-name>",
+        value: "<key-vault-url>",
+        algorithm: KeyEncryptionAlgorithm.RSA_OAEP,
+      };
+
+
+      await database.createClientEncryptionKey(
+        "<cek-id>",
+        EncryptionAlgorithm.AEAD_AES_256_CBC_HMAC_SHA256,
+        metadata,
+      );
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -177,7 +279,20 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.Database.delete'
     package: '@azure/cosmos'
-    summary: Delete the given Database.
+    summary: |+
+      Delete the given Database.
+
+      **Example**
+
+      ```ts snippet:CosmosClientDatabaseDelete
+      import { CosmosClient } from "@azure/cosmos";
+
+      const endpoint = "https://your-account.documents.azure.com";
+      const key = "<database account masterkey>";
+      const client = new CosmosClient({ endpoint, key });
+      await client.database("<id here>").delete();
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -192,7 +307,21 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.Database.read'
     package: '@azure/cosmos'
-    summary: Read the definition of the given Database.
+    summary: |+
+      Read the definition of the given Database.
+
+      **Example**
+
+      ```ts snippet:DatabaseRead
+      import { CosmosClient } from "@azure/cosmos";
+
+      const endpoint = "https://your-account.documents.azure.com";
+      const key = "<database account masterkey>";
+      const client = new CosmosClient({ endpoint, key });
+
+      const { resource: database } = await client.database("<db id>").read();
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -207,7 +336,47 @@ methods:
   - name: readClientEncryptionKey(string)
     uid: '@azure/cosmos.Database.readClientEncryptionKey'
     package: '@azure/cosmos'
-    summary: Read Encryption key for database account
+    summary: >+
+      Read Encryption key for database account
+
+
+      **Example**
+
+
+      ```ts snippet:DatabaseReadClientEncryptionKey
+
+      import { ClientSecretCredential } from "@azure/identity";
+
+      import { AzureKeyVaultEncryptionKeyResolver, CosmosClient } from
+      "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const credentials = new ClientSecretCredential("<tenant-id>",
+      "<client-id>", "<app-secret>");
+
+      const keyResolver = new AzureKeyVaultEncryptionKeyResolver(credentials);
+
+      const client = new CosmosClient({
+        endpoint,
+        key,
+        clientEncryptionOptions: {
+          keyEncryptionKeyResolver: keyResolver,
+        },
+      });
+
+      const { database } = await client.databases.createIfNotExists({ id: "<db
+      id>" });
+
+
+      const { resource: clientEncryptionKey } = await
+      database.readClientEncryptionKey("<cek-id>");
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -226,9 +395,32 @@ methods:
   - name: readOffer(RequestOptions)
     uid: '@azure/cosmos.Database.readOffer'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Gets offer on database. If none exists, returns an OfferResponse with
       undefined.
+
+
+      **Example**
+
+
+      Read the offer on the database
+
+      ```ts snippet:DatabaseReadOffer
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { resource: offer } = await client.database("<db id>").readOffer();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -243,7 +435,58 @@ methods:
   - name: rewrapClientEncryptionKey(string, EncryptionKeyWrapMetadata)
     uid: '@azure/cosmos.Database.rewrapClientEncryptionKey'
     package: '@azure/cosmos'
-    summary: rewraps a client encryption key with new key encryption key
+    summary: >+
+      rewraps a client encryption key with new key encryption key
+
+
+      **Example**
+
+
+      ```ts snippet:DatabaseRewrapClientEncryptionKey
+
+      import { ClientSecretCredential } from "@azure/identity";
+
+      import {
+        AzureKeyVaultEncryptionKeyResolver,
+        CosmosClient,
+        EncryptionKeyWrapMetadata,
+        EncryptionKeyResolverName,
+        KeyEncryptionAlgorithm,
+      } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const credentials = new ClientSecretCredential("<tenant-id>",
+      "<client-id>", "<app-secret>");
+
+      const keyResolver = new AzureKeyVaultEncryptionKeyResolver(credentials);
+
+      const client = new CosmosClient({
+        endpoint,
+        key,
+        clientEncryptionOptions: {
+          keyEncryptionKeyResolver: keyResolver,
+        },
+      });
+
+      const { database } = await client.databases.createIfNotExists({ id: "<db
+      id>" });
+
+      const newMetadata: EncryptionKeyWrapMetadata = {
+        type: EncryptionKeyResolverName.AzureKeyVault,
+        name: "<key-name>",
+        value: "<key-vault-url>",
+        algorithm: KeyEncryptionAlgorithm.RSA_OAEP,
+      };
+
+
+      await database.rewrapClientEncryptionKey("<new-cek-id>", newMetadata);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -266,12 +509,34 @@ methods:
   - name: user(string)
     uid: '@azure/cosmos.Database.user'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Used to read, replace, or delete a specific, existing
       [User](xref:@azure/cosmos.User) by id.
 
 
       Use `.users` for creating new users, or querying/reading all users.
+
+
+      **Example**
+
+
+      Delete a user
+
+      ```ts snippet:DatabaseDeleteUser
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      await client.database("<db id>").user("<user id>").delete();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

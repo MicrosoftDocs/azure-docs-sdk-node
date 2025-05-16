@@ -29,7 +29,7 @@ methods:
   - name: create(PermissionDefinition, RequestOptions)
     uid: '@azure/cosmos.Permissions.create'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Create a permission.
 
 
@@ -37,6 +37,39 @@ methods:
       resource
 
       e.g. Item or Container.
+
+
+      **Example**
+
+
+      ```ts snippet:PermissionsCreate
+
+      import { CosmosClient, PermissionDefinition, PermissionMode } from
+      "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { user } = await database.users.create({ id: "<user-id>" });
+
+
+      const permissionDefinition: PermissionDefinition = {
+        id: "<permission-id>",
+        permissionMode: PermissionMode.Read,
+        resource: "<resource-url>",
+      };
+
+      await user.permissions.create(permissionDefinition);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -56,7 +89,41 @@ methods:
   - name: query(SqlQuerySpec, FeedOptions)
     uid: '@azure/cosmos.Permissions.query'
     package: '@azure/cosmos'
-    summary: Query all permissions.
+    summary: >+
+      Query all permissions.
+
+
+      **Example**
+
+
+      Query permission with id.
+
+      ```ts snippet:PermissionsQuery
+
+      import { CosmosClient, SqlQuerySpec } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const querySpec: SqlQuerySpec = {
+        query: `SELECT * FROM root r WHERE r.id = @permission`,
+        parameters: [{ name: "@permission", value: "<permission-id>" }],
+      };
+
+      const { resources: permisssion } = await database
+        .user("<user-id>")
+        .permissions.query(querySpec)
+        .fetchAll();
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -111,10 +178,24 @@ methods:
 
       Read all permissions to array.
 
-      ```typescript
+      ```ts snippet:PermissionsReadAll
 
-      const {body: permissionList} = await
-      user.permissions.readAll().fetchAll();
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { resources: permissionList } = await
+      database.user("user1").permissions.readAll().fetchAll();
 
       ```
 
@@ -137,11 +218,45 @@ methods:
   - name: upsert(PermissionDefinition, RequestOptions)
     uid: '@azure/cosmos.Permissions.upsert'
     package: '@azure/cosmos'
-    summary: |-
+    summary: >+
       Upsert a permission.
 
       A permission represents a per-User Permission to access a
+
       specific resource e.g. Item or Container.
+
+
+      **Example**
+
+
+      ```ts snippet:PermissionsUpsert
+
+      import { CosmosClient, PermissionDefinition, PermissionMode } from
+      "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const user = database.user("<user-id>");
+
+      const permissionDefinitionToUpsert: PermissionDefinition = {
+        id: "<permission-id>",
+        permissionMode: PermissionMode.Read,
+        resource: "<resource-url>",
+      };
+
+
+      await user.permissions.upsert(permissionDefinitionToUpsert);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

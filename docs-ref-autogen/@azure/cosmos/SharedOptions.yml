@@ -24,14 +24,31 @@ properties:
 
       Cancel a read request
 
-      ```typescript
+      ```ts snippet:SharedOptionsAbortSignal
 
-      const controller = new AbortController()
+      import { CosmosClient } from "@azure/cosmos";
 
-      const {result: item} = await items.query('SELECT * from c', { abortSignal:
-      controller.signal});
 
-      controller.abort()
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const controller = new AbortController();
+
+      const results = container.items.query("SELECT * from c", {
+        abortSignal: controller.signal,
+      });
 
       ```
 

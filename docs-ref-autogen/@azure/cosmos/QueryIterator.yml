@@ -17,7 +17,38 @@ methods:
   - name: fetchAll()
     uid: '@azure/cosmos.QueryIterator.fetchAll'
     package: '@azure/cosmos'
-    summary: Fetch all pages for the query and return a single FeedResponse.
+    summary: >+
+      Fetch all pages for the query and return a single FeedResponse.
+
+
+      **Example**
+
+
+      ```ts snippet:ReadmeSampleQueryDatabase
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources } = await container.items
+        .query("SELECT * from c WHERE c.isCapitol = true")
+        .fetchAll();
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -28,7 +59,7 @@ methods:
   - name: fetchNext()
     uid: '@azure/cosmos.QueryIterator.fetchNext'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Retrieve the next batch from the feed.
 
 
@@ -39,6 +70,49 @@ methods:
       pages
 
       before returning the first batch of responses.
+
+
+      **Example**
+
+
+      ```ts snippet:ReadmeSampleNonStreamableCrossPartitionQuery
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const querySpec = {
+        query: "SELECT c.status, COUNT(c.id) AS count FROM c GROUP BY c.status",
+      };
+
+      const queryOptions = {
+        maxItemCount: 10, // maximum number of items to return per page
+        enableCrossPartitionQuery: true,
+      };
+
+      const queryIterator = container.items.query(querySpec, queryOptions);
+
+      while (queryIterator.hasMoreResults()) {
+        const { resources: result } = await queryIterator.fetchNext();
+        // process results
+      }
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -63,7 +137,7 @@ methods:
       as you target ES6 or higher and are running on Node 6 or higher.
 
 
-      ```typescript
+      ```ts snippet:ignore
 
       if (!Symbol || !Symbol.asyncIterator) {
         (Symbol as any).asyncIterator = Symbol.for("Symbol.asyncIterator");
@@ -77,9 +151,19 @@ methods:
 
       Iterate over all databases
 
-      ```typescript
+      ```ts snippet:QueryIteratorIterateDatabases
 
-      for await(const { resources: db } of
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      for await (const { resources: db } of
       client.databases.readAll().getAsyncIterator()) {
         console.log(`Got ${db} from AsyncIterator`);
       }
@@ -113,9 +197,47 @@ methods:
   - name: reset()
     uid: '@azure/cosmos.QueryIterator.reset'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Reset the QueryIterator to the beginning and clear all the resources
       inside it
+
+
+      **Example**
+
+
+      ```ts snippet:QueryIteratorReset
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const querySpec = {
+        query: "SELECT c.status, COUNT(c.id) AS count FROM c GROUP BY c.status",
+      };
+
+      const queryIterator = container.items.query(querySpec);
+
+      while (queryIterator.hasMoreResults()) {
+        const { resources: result } = await queryIterator.fetchNext();
+        // process results
+      }
+
+      queryIterator.reset();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

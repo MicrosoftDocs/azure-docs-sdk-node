@@ -51,9 +51,35 @@ methods:
   - name: delete(RequestOptions)
     uid: '@azure/cosmos.Conflict.delete'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Delete the given
       [ConflictDefinition](xref:@azure/cosmos.ConflictDefinition).
+
+
+      **Example**
+
+
+      ```ts snippet:ConflictDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const container = database.container("Test Container");
+
+
+      await container.conflict("<conflict-id>").delete();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -68,9 +94,36 @@ methods:
   - name: read(RequestOptions)
     uid: '@azure/cosmos.Conflict.read'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Read the [ConflictDefinition](xref:@azure/cosmos.ConflictDefinition) for
       the given [Conflict](xref:@azure/cosmos.Conflict).
+
+
+      **Example**
+
+
+      ```ts snippet:ConflictRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const container = database.container("Test Container");
+
+
+      const { resource: conflict } = await
+      container.conflict("<conflict-id>").read();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

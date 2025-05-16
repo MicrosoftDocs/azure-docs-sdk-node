@@ -15,11 +15,16 @@ summary: >+
 
   Instantiate a client and create a new database
 
-  ```typescript
+  ```ts snippet:CosmosClientCreate
 
-  const client = new CosmosClient({endpoint: "<URL HERE>", key: "<KEY HERE>"});
+  import { CosmosClient } from "@azure/cosmos";
 
-  await client.databases.create({id: "<database name here>"});
+
+  const endpoint = "https://your-account.documents.azure.com";
+
+  const key = "<database account masterkey>";
+
+  const client = new CosmosClient({ endpoint, key });
 
   ```
 
@@ -31,14 +36,21 @@ summary: >+
 
   Instantiate a client with custom Connection Policy
 
-  ```typescript
+  ```ts snippet:CosmosClientWithConnectionPolicy
+
+  import { CosmosClient } from "@azure/cosmos";
+
+
+  const endpoint = "https://your-account.documents.azure.com";
+
+  const key = "<database account masterkey>";
 
   const client = new CosmosClient({
-     endpoint: "<URL HERE>",
-     key: "<KEY HERE>",
-     connectionPolicy: {
+    endpoint,
+    key,
+    connectionPolicy: {
       requestTimeout: 10000,
-     },
+    },
   });
 
   ```
@@ -95,10 +107,21 @@ properties:
 
       Create a new database
 
-      ```typescript
+      ```ts snippet:CosmosClientDatabases
 
-      const {resource: databaseDefinition, database} = await
-      client.databases.create({id: "<name here>"});
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { resource: databaseDefinition, database } = await
+      client.databases.create({
+        id: "<name here>",
+      });
 
       ```
 
@@ -143,10 +166,20 @@ methods:
 
       Create a new container off of an existing database
 
-      ```typescript
+      ```ts snippet:CosmosClientDatabaseCreateContainer
 
-      const container = client.database("<database
-      id>").containers.create("<container id>");
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const container = client.database("<database id>").containers.create({
+        id: "<name here>",
+      });
 
       ```
 
@@ -158,7 +191,16 @@ methods:
 
       Delete an existing database
 
-      ```typescript
+      ```ts snippet:CosmosClientDatabaseDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
 
       await client.database("<id here>").delete();
 

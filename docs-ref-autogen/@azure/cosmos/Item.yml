@@ -53,7 +53,7 @@ methods:
   - name: delete<T>(RequestOptions)
     uid: '@azure/cosmos.Item.delete'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Delete the item.
 
 
@@ -61,6 +61,46 @@ methods:
 
       You may get more or less properties and it's up to your logic to enforce
       it.
+
+
+      **Example**
+
+
+      ```ts snippet:ItemDelete
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      interface TodoItem {
+        title: string;
+        done: boolean;
+        id: string;
+      }
+
+
+      const { resource: item } = await container.item("id",
+      "<pkValue>").read<TodoItem>();
+
+
+      await container.item("id").delete<TodoItem>();
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -75,7 +115,7 @@ methods:
   - name: patch<T>(PatchRequestBody, RequestOptions)
     uid: '@azure/cosmos.Item.patch'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Perform a JSONPatch on the item.
 
 
@@ -83,6 +123,57 @@ methods:
 
       You may get more or less properties and it's up to your logic to enforce
       it.
+
+
+      **Example**
+
+
+      ```ts snippet:ItemPatch
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      interface TodoItem {
+        title: string;
+        done: boolean;
+        id: string;
+      }
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resource: item } = await container.item("id",
+      "<pkValue>").read<TodoItem>();
+
+
+      const { resource: patchedItem } = await
+      container.item("id").patch<TodoItem>([
+        {
+          op: "replace", // Operation type (can be replace, add, remove, set, incr)
+          path: "/title", // The path to the property to update
+          value: "new-title", // New value for the property
+        },
+        {
+          op: "remove",
+          path: "/done",
+        },
+      ]);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -126,18 +217,35 @@ methods:
 
       Using custom type for response
 
-      ```typescript
+      ```ts snippet:ItemRead
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
 
       interface TodoItem {
         title: string;
-        done: bool;
+        done: boolean;
         id: string;
       }
 
 
-      let item: TodoItem;
-
-      ({body: item} = await item.read<TodoItem>());
+      const { resource: item } = await container.item("id",
+      "<pkValue>").read<TodoItem>();
 
       ```
 
@@ -155,12 +263,46 @@ methods:
   - name: replace(ItemDefinition, RequestOptions)
     uid: '@azure/cosmos.Item.replace'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the item's definition.
 
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
+
+
+      **Example**
+
+
+      ```ts snippet:ItemReplaceItemDefinition
+
+      import { CosmosClient, ItemDefinition } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const item: ItemDefinition = {
+        id: "id",
+        title: "new_title",
+      };
+
+
+      const { resource: replacedItem } = await
+      container.item("id").replace(item);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:
@@ -184,7 +326,7 @@ methods:
   - name: replace<T>(T, RequestOptions)
     uid: '@azure/cosmos.Item.replace_1'
     package: '@azure/cosmos'
-    summary: >-
+    summary: >+
       Replace the item's definition.
 
 
@@ -196,6 +338,49 @@ methods:
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
+
+
+      **Example**
+
+
+      ```ts snippet:ItemReplace
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      interface TodoItem {
+        title: string;
+        done: boolean;
+        id: string;
+      }
+
+
+      const { resource: item } = await container.item("id",
+      "<pkValue>").read<TodoItem>();
+
+
+      item.done = true;
+
+      const { resource: replacedItem } = await
+      container.item("id").replace<TodoItem>(item);
+
+      ```
+
     remarks: ''
     isDeprecated: false
     syntax:

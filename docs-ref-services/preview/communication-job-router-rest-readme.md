@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Services Job Router REST client library for JavaScript - version 1.1.0-alpha.20250516.2 
+# Azure Communication Services Job Router REST client library for JavaScript - version 1.1.0-alpha.20250516.3 
 
 
 This package contains a JavaScript SDK for Azure Communication Services Job Router.

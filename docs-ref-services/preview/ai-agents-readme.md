@@ -1,12 +1,12 @@
 ---
 title: Azure AI Agents client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-agents, ai
-ms.date: 05/14/2025
+ms.date: 05/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Agents client library for JavaScript - version 1.0.0-beta.1 
+# Azure AI Agents client library for JavaScript - version 1.0.0-beta.2 
 
 
 Use the AI Agents client library to:
@@ -14,7 +14,7 @@ Use the AI Agents client library to:
 - **Develop Agents using the Azure AI Agent Service**, leveraging an extensive ecosystem of models, tools, and capabilities from OpenAI, Microsoft, and other LLM providers. The Azure AI Agent Service enables the building of Agents for a wide range of generative AI use cases.
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.1/sdk/ai/ai-agents/samples/)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.2/sdk/ai/ai-agents/samples/)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-agents)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-preview)
 
@@ -94,7 +94,7 @@ const client = new AgentsClient(projectEndpoint, new DefaultAzureCredential());
 
 ### Agents
 
-Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.1/sdk/ai/ai-agents/samples/) for additional Agent samples.
+Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.2/sdk/ai/ai-agents/samples/) for additional Agent samples.
 
 #### Create Agent
 
@@ -819,7 +819,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.1/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.2/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
 
 ## Contributing
 

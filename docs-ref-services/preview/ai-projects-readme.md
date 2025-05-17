@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-projects, ai
-ms.date: 05/16/2025
+ms.date: 05/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Projects client library for JavaScript - version 1.0.0-beta.6 
+# Azure AI Projects client library for JavaScript - version 1.0.0-beta.7 
 
 
 The AI Projects client library provides easy access to resources in your Azure AI Foundry project.
@@ -24,10 +24,10 @@ Use it to:
 - **Enable OpenTelemetry tracing** using the `enable_telemetry` function.
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.6/sdk/ai/ai-projects/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.7/sdk/ai/ai-projects/samples)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-projects)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-preview)
-| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.6/sdk/ai/ai-projects)
+| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.7/sdk/ai/ai-projects)
 
 ## Table of contents
 
@@ -95,7 +95,7 @@ const client = new AIProjectClient(endpoint, new DefaultAzureCredential());
 
 ### Performing Agent operations
 
-The `.agents` property on the `AIProjectClient` gives you access to an authenticated `AgentsClient` from the `azure-ai-agents` package. Below we show how to create an agent and delete it. To see what you can do with the `agent` you created, see the [many samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.6/sdk/ai/ai-agents/samples) associated with the `azure-ai-agents` package.
+The `.agents` property on the `AIProjectClient` gives you access to an authenticated `AgentsClient` from the `azure-ai-agents` package. Below we show how to create an agent and delete it. To see what you can do with the `agent` you created, see the [many samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.7/sdk/ai/ai-agents/samples) associated with the `azure-ai-agents` package.
 
 ```ts snippet:agentsSample
 const agent = await project.agents.createAgent("gpt-4o", {
@@ -105,7 +105,7 @@ const agent = await project.agents.createAgent("gpt-4o", {
 console.log(`Created agent, agent ID : ${agent.id}`);
 
 // Do something with your Agent!
-// See samples here https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.6/sdk/ai/ai-agents/samples
+// See samples here https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.7/sdk/ai/ai-agents/samples
 await project.agents.deleteAgent(agent.id);
 console.log(`Deleted agent, agent ID: ${agent.id}`);
 ```
@@ -503,7 +503,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.6/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.7/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
 
 ## Contributing
 
@@ -526,10 +526,10 @@ additional questions or comments.
 
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [entra_id]: https://learn.microsoft.com/azure/ai-services/authentication?tabs=powershell#authenticate-with-microsoft-entra-id
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.6/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.7/sdk/identity/identity#defaultazurecredential
 [azure_sub]: https://azure.microsoft.com/free/
 [evaluators]: https://learn.microsoft.com/azure/ai-studio/how-to/develop/evaluate-sdk
 [evaluator_library]: https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-generative-ai-app#view-and-manage-the-evaluators-in-the-evaluator-library
 [azure_ai_evaluation]: https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.6/sdk/ai/ai-projects/samples
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.7/sdk/ai/ai-projects/samples
 

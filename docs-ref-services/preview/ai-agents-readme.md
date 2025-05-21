@@ -1,20 +1,24 @@
 ---
 title: Azure AI Agents client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-agents, ai
-ms.date: 05/17/2025
+ms.date: 05/21/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Agents client library for JavaScript - version 1.0.0-beta.2 
+# Azure AI Agents client library for JavaScript - version 1.0.0-beta.3 
 
 
 Use the AI Agents client library to:
 
 - **Develop Agents using the Azure AI Agent Service**, leveraging an extensive ecosystem of models, tools, and capabilities from OpenAI, Microsoft, and other LLM providers. The Azure AI Agent Service enables the building of Agents for a wide range of generative AI use cases.
 
+* **Note:** While this package can be used independently, we recommend using the [Azure AI Projects client library](https://www.npmjs.com/package/@azure/ai-projects) for an enhanced experience.
+  The Projects library provides simplified access to advanced functionality, such as creating and managing agents, enumerating AI models, working with datasets and
+  managing search indexes, evaluating generative AI performance, and enabling OpenTelemetry tracing.
+
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.2/sdk/ai/ai-agents/samples/)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.3/sdk/ai/ai-agents/samples/)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-agents)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-preview)
 
@@ -94,7 +98,7 @@ const client = new AgentsClient(projectEndpoint, new DefaultAzureCredential());
 
 ### Agents
 
-Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.2/sdk/ai/ai-agents/samples/) for additional Agent samples.
+Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.3/sdk/ai/ai-agents/samples/) for additional Agent samples.
 
 #### Create Agent
 
@@ -138,6 +142,15 @@ const vectorStore = await client.vectorStores
 const toolSet = new ToolSet();
 toolSet.addFileSearchTool([vectorStore.id]);
 toolSet.addCodeInterpreterTool([codeInterpreterFile.id]);
+
+// Create agent with tool set
+const agent = await client.createAgent("gpt-4o", {
+  name: "my-agent",
+  instructions: "You are a helpful agent",
+  tools: toolSet.toolDefinitions,
+  toolResources: toolSet.toolResources,
+});
+console.log(`Created agent, agent ID: ${agent.id}`);
 ```
 
 #### Create Agent with File Search
@@ -339,11 +352,11 @@ class FunctionToolExecutor {
         return undefined;
       }
     }
-    const result = this.functionTools
-      .map((tool) =>
-        tool.definition.function.name === toolCall.function.name ? tool.func(...args) : undefined,
-      )
-      .find((r) => r !== undefined);
+    // Create a mapping of function names to their implementations
+    const functionMap = new Map(
+      this.functionTools.map((tool) => [tool.definition.function.name, tool.func]),
+    );
+    const result = functionMap.get(toolCall.function.name)?.(...args);
     return result
       ? {
           toolCallId: toolCall.id,
@@ -616,17 +629,17 @@ console.log(`Created message, message ID: ${message.id}`);
 Here is an example of `runs.create` and poll until the run is completed:
 
 ```ts snippet:createRun
-import { delay } from "@azure/core-util";
-
-let run = await client.runs.create(thread.id, agent.id);
-console.log(`Created run, run ID: ${run.id}`);
-
-// Wait for run to complete
-while (["queued", "in_progress", "requires_action"].includes(run.status)) {
-  await delay(1000);
-  run = await client.runs.get(thread.id, run.id);
-  console.log(`Run status: ${run.status}`);
-}
+// Create and poll a run
+console.log("Creating run...");
+const run = await client.runs.createAndPoll(thread.id, agent.id, {
+  pollingOptions: {
+    intervalInMs: 2000,
+  },
+  onResponse: (response): void => {
+    console.log(`Received response with status: ${response.status}`);
+  },
+});
+console.log(`Run finished with status: ${run.status}`);
 ```
 
 To have the SDK poll on your behalf, use the `createThreadAndRun` method.
@@ -819,7 +832,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.2/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0-beta.3/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
 
 ## Contributing
 

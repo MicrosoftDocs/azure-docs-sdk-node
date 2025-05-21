@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Call Automation client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-call-automation, communication
-ms.date: 05/20/2025
+ms.date: 05/21/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Call Automation client library for JavaScript - version 1.5.0-beta.1 
+# Azure Communication Call Automation client library for JavaScript - version 1.5.0-beta.2 
 
 
 This package contains a JavaScript SDK for Azure Communication Call Automation. Call Automation provides developers the ability to build server-based, intelligent call workflows, and call recording for voice and PSTN channels.
@@ -130,7 +130,7 @@ setLogLevel("info");
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.5.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.5.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 
@@ -140,7 +140,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[build_doc]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.5.0-beta.1/documentation/Bundling.md
+[build_doc]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.5.0-beta.2/documentation/Bundling.md
 [incomingcall]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/incoming-call-notification
 [build1]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/callflows-for-customer-interactions?pivots=programming-language-csha
 [build2]: https://learn.microsoft.com/azure/communication-services/how-tos/call-automation-sdk/redirect-inbound-telephony-calls?pivots=programming-language-csharp

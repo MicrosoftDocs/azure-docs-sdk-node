@@ -1,7 +1,7 @@
 ---
 title: Azure Kubernetes Configuration SDK for JavaScript
 description: Reference for Azure Kubernetes Configuration SDK for JavaScript
-ms.date: 05/23/2025
+ms.date: 05/27/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesconfiguration

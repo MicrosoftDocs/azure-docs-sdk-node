@@ -4,7 +4,7 @@ description: Reference for Azure Cognitive Services SDK for JavaScript
 ms.date: 05/27/2025
 ms.topic: reference
 ms.devlang: javascript
-ms.service: cognitiveservices
+ms.service: azure-ai-face
 manager: ehansen
 ---
 # JavaScript Azure Cognitive Services modules

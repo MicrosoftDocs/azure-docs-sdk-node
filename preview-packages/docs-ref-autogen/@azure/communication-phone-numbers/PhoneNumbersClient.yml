@@ -255,6 +255,79 @@ methods:
           />&gt;, <xref
           uid="@azure/communication-phone-numbers.ReleasePhoneNumberResult"
           />&gt;&gt;
+  - name: beginReservationPurchase(string, BeginReservationPurchaseOptions)
+    uid: >-
+      @azure/communication-phone-numbers.PhoneNumbersClient.beginReservationPurchase
+    package: '@azure/communication-phone-numbers'
+    summary: >-
+      Starts the purchase of the phone number(s) in the search associated with a
+      given id.
+
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the operation is complete.
+
+
+      Example usage:
+
+      ```ts snippet:PhoneNumbersClientBeginReservationPurchase
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new PhoneNumbersClient("<endpoint-from-resource>",
+      credential);
+
+
+      const reservationId = "<reservation-id>";
+
+
+      const purchasePoller = await
+      client.beginReservationPurchase(reservationId);
+
+
+      // Purchase is underway.
+
+      const purchaseResult = await purchasePoller.pollUntilDone();
+
+      console.log(`Successfully purchased phone numbers in reservation:
+      ${reservationId}`);
+
+      ```
+
+      Begins the purchase of the phone numbers in the reservation with the given
+      ID.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginReservationPurchase(reservationId: string, options?:
+        BeginReservationPurchaseOptions):
+        Promise<PollerLike<PollOperationState<PurchasePhoneNumbersResult>,
+        PurchasePhoneNumbersResult>>
+      parameters:
+        - id: reservationId
+          type: string
+          description: The id of the reservation.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-phone-numbers.BeginReservationPurchaseOptions"
+            />
+          description: Additional request options.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
+          uid="@azure/core-lro.PollOperationState" />&lt;<xref
+          uid="@azure/communication-phone-numbers.PurchasePhoneNumbersResult"
+          />&gt;, <xref
+          uid="@azure/communication-phone-numbers.PurchasePhoneNumbersResult"
+          />&gt;&gt;
   - name: >-
       beginSearchAvailablePhoneNumbers(SearchAvailablePhoneNumbersRequest,
       BeginSearchAvailablePhoneNumbersOptions)
@@ -439,6 +512,257 @@ methods:
           uid="@azure/communication-phone-numbers.PurchasedPhoneNumber" />&gt;,
           <xref uid="@azure/communication-phone-numbers.PurchasedPhoneNumber"
           />&gt;&gt;
+  - name: >-
+      browseAvailablePhoneNumbers(BrowseAvailableNumbersRequest,
+      BrowseAvailableNumbersOptions)
+    uid: >-
+      @azure/communication-phone-numbers.PhoneNumbersClient.browseAvailablePhoneNumbers
+    package: '@azure/communication-phone-numbers'
+    summary: >-
+      Browses for available phone numbers to purchase.
+
+
+      Example usage:
+
+      ```ts snippet:PhoneNumbersClientBrowseAvailablePhoneNumbers
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import {
+        PhoneNumbersClient,
+        BrowseAvailableNumbersRequest,
+      } from "@azure/communication-phone-numbers";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new PhoneNumbersClient("<endpoint-from-resource>",
+      credential);
+
+
+      const browseAvailableNumberRequest: BrowseAvailableNumbersRequest = {
+        countryCode: "US",
+        phoneNumberType: "tollFree",
+      };
+
+      const browseAvailableNumbers = await client.browseAvailablePhoneNumbers(
+        browseAvailableNumberRequest,
+        {
+          capabilities: {
+            calling: "outbound",
+          },
+          assignmentType: "application",
+        },
+      );
+
+      for (const phoneNumber of browseAvailableNumbers.phoneNumbers) {
+        console.log("Found phone number: ", phoneNumber.phoneNumber);
+      }
+
+      ```
+
+      Browse available phone numbers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function browseAvailablePhoneNumbers(request:
+        BrowseAvailableNumbersRequest, options?: BrowseAvailableNumbersOptions):
+        Promise<PhoneNumbersBrowseResult>
+      parameters:
+        - id: request
+          type: >-
+            <xref
+            uid="@azure/communication-phone-numbers.BrowseAvailableNumbersRequest"
+            />
+          description: The request parameters for browsing available phone numbers.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-phone-numbers.BrowseAvailableNumbersOptions"
+            />
+          description: Additional request options.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/communication-phone-numbers.PhoneNumbersBrowseResult"
+          />&gt;
+  - name: >-
+      createOrUpdateReservation(CreateOrUpdateReservationRequest,
+      CreateOrUpdateReservationOptions)
+    uid: >-
+      @azure/communication-phone-numbers.PhoneNumbersClient.createOrUpdateReservation
+    package: '@azure/communication-phone-numbers'
+    summary: >-
+      Adds and removes phone numbers from the reservation with the given ID. The
+      response will be the
+
+      updated state of the reservation. Phone numbers can be reserved by
+      including them in the payload. If
+
+      a number is already in the reservation, it will be ignored. To remove a
+      phone number, set it
+
+      explicitly to null in the request payload. This operation is idempotent.
+      If a reservation with the
+
+      same ID already exists, it will be updated, otherwise a new one is
+      created. Only reservations with
+
+      'active' status can be updated. Updating a reservation will extend the
+      expiration time of the
+
+      reservation to 15 minutes after the last change, up to a maximum of 2
+      hours from creation time.
+
+      Partial success is possible, in which case the response will have a 207
+      status code.
+
+
+      Example usage:
+
+      ```ts snippet:PhoneNumbersClientBrowseAndReserveAvailablePhoneNumbers
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import {
+        PhoneNumbersClient,
+        BrowseAvailableNumbersRequest,
+        AvailablePhoneNumber,
+      } from "@azure/communication-phone-numbers";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new PhoneNumbersClient("<endpoint-from-resource>",
+      credential);
+
+
+      const browseAvailableNumberRequest: BrowseAvailableNumbersRequest = {
+        countryCode: "US",
+        phoneNumberType: "tollFree",
+      };
+
+
+      const browseAvailableNumbers = await client.browseAvailablePhoneNumbers(
+        browseAvailableNumberRequest,
+        {
+          capabilities: {
+            calling: "outbound",
+          },
+          assignmentType: "application",
+        },
+      );
+
+      const phoneNumbers = browseAvailableNumbers.phoneNumbers;
+
+      const phoneNumbersList = [phoneNumbers[0], phoneNumbers[1]];
+
+      const reservationResponse = await client.createOrUpdateReservation(
+        {
+          reservationId: "reservationId",
+        },
+        {
+          add: phoneNumbersList,
+        },
+      );
+
+      const numbersWithError: AvailablePhoneNumber[] = [];
+
+      for (const number of Object.values(reservationResponse.phoneNumbers ||
+      {})) {
+        if (number != null && number.status === "error") {
+          numbersWithError.push(number);
+        }
+      }
+
+      if (numbersWithError.length > 0) {
+        console.log("Errors occurred during reservation");
+      } else {
+        console.log("Reservation operation completed without errors.");
+      }
+
+      ```
+
+
+      Create or update a reservation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createOrUpdateReservation(request:
+        CreateOrUpdateReservationRequest, options?:
+        CreateOrUpdateReservationOptions): Promise<PhoneNumbersReservation>
+      parameters:
+        - id: request
+          type: >-
+            <xref
+            uid="@azure/communication-phone-numbers.CreateOrUpdateReservationRequest"
+            />
+          description: The request parameters for creating or updating a reservation.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-phone-numbers.CreateOrUpdateReservationOptions"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/communication-phone-numbers.PhoneNumbersReservation"
+          />&gt;
+  - name: deleteReservation(string, DeleteReservationOptions)
+    uid: '@azure/communication-phone-numbers.PhoneNumbersClient.deleteReservation'
+    package: '@azure/communication-phone-numbers'
+    summary: >-
+      Deletes a reservation by its ID..
+
+
+      Example usage:
+
+      ```ts snippet:PhoneNumbersClientDeleteReservation
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new PhoneNumbersClient("<endpoint-from-resource>",
+      credential);
+
+
+      const reservationId = "<reservation-id>";
+
+      await client.deleteReservation(reservationId);
+
+
+      console.log(`Reservation with ID ${reservationId} has been deleted.`);
+
+      ```
+
+      Delete a reservation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteReservation(reservationId: string, options?:
+        DeleteReservationOptions): Promise<void>
+      parameters:
+        - id: reservationId
+          type: string
+          description: The id of the reservation.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-phone-numbers.DeleteReservationOptions" />
+          description: Additional request options.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: getPurchasedPhoneNumber(string, OperationOptions)
     uid: >-
       @azure/communication-phone-numbers.PhoneNumbersClient.getPurchasedPhoneNumber
@@ -466,6 +790,61 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/communication-phone-numbers.PurchasedPhoneNumber" />&gt;
+  - name: getReservation(string, GetReservationOptions)
+    uid: '@azure/communication-phone-numbers.PhoneNumbersClient.getReservation'
+    package: '@azure/communication-phone-numbers'
+    summary: >-
+      Retrieves the reservation with the given ID, including all of the phone
+      numbers associated with it.
+
+
+      Example usage:
+
+      ```ts snippet:PhoneNumbersClientGetReservation
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new PhoneNumbersClient("<endpoint-from-resource>",
+      credential);
+
+
+      const reservationId = "<reservation-id>";
+
+      const reservationResponse = await client.getReservation(reservationId);
+
+
+      console.log(`Phone numbers in reservation:
+      ${reservationResponse.phoneNumbers}`);
+
+      ```
+
+      Get a reservation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getReservation(reservationId: string, options?:
+        GetReservationOptions): Promise<PhoneNumbersReservation>
+      parameters:
+        - id: reservationId
+          type: string
+          description: The id of the reservation.
+        - id: options
+          type: >-
+            <xref uid="@azure/communication-phone-numbers.GetReservationOptions"
+            />
+          description: Additional request options.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/communication-phone-numbers.PhoneNumbersReservation"
+          />&gt;
   - name: listAvailableCountries(ListAvailableCountriesOptions)
     uid: >-
       @azure/communication-phone-numbers.PhoneNumbersClient.listAvailableCountries
@@ -792,6 +1171,56 @@ methods:
           <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
           uid="@azure/communication-phone-numbers.PurchasedPhoneNumber" />,
           <xref uid="@azure/communication-phone-numbers.PurchasedPhoneNumber"
+          />[], <xref uid="@azure/core-paging.PageSettings" />&gt;
+  - name: listReservations(ListReservationOptions)
+    uid: '@azure/communication-phone-numbers.PhoneNumbersClient.listReservations'
+    package: '@azure/communication-phone-numbers'
+    summary: >-
+      Iterates all phone number reservations.
+
+
+      Example usage:
+
+      ```ts snippet:PhoneNumbersClientListReservations
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new PhoneNumbersClient("<endpoint-from-resource>",
+      credential);
+
+
+      for await (const reservation of client.listReservations()) {
+        console.log(`Reservation id: ${reservation.id}`);
+      }
+
+      ```
+
+      List all phone number reservations. Note that the reservations will not be
+      populated with the phone numbers associated with them.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listReservations(options?: ListReservationOptions):
+        PagedAsyncIterableIterator<PhoneNumbersReservation,
+        PhoneNumbersReservation[], PageSettings>
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-phone-numbers.ListReservationOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/communication-phone-numbers.PhoneNumbersReservation" />,
+          <xref uid="@azure/communication-phone-numbers.PhoneNumbersReservation"
           />[], <xref uid="@azure/core-paging.PageSettings" />&gt;
   - name: searchOperatorInformation(string[], SearchOperatorInformationOptions)
     uid: >-

@@ -160,7 +160,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -211,7 +211,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -275,7 +275,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -308,24 +308,50 @@ methods:
       **Example**
 
 
-      ```js
+      ```ts snippet:DatalakeServiceClientGetUserDelegationKey
+
+      import {
+        DataLakeServiceClient,
+        generateDataLakeSASQueryParameters,
+        FileSystemSASPermissions,
+        SASProtocol,
+      } from "@azure/storage-file-datalake";
+
+
+      const account = "<account>";
+
+      const sas = "<sas token>";
+
+      const datalakeServiceClient = new DataLakeServiceClient(
+        `https://${account}.dfs.core.windows.net${sas}`,
+      );
+
+
+      const fileSystemName = "<file system name>";
+
+      const accountName = "<account name>";
+
+      const startsOn = new Date();
+
+      const expiresOn = new Date(+new Date() + 86400 * 1000);
 
       // Generate user delegation SAS for a file system
 
       const userDelegationKey = await
-      dataLakeServiceClient.getUserDelegationKey(startsOn, expiresOn);
+      datalakeServiceClient.getUserDelegationKey(startsOn, expiresOn);
 
-      const fileSystemSAS = generateDataLakeSASQueryParameters({
+      const fileSystemSAS = generateDataLakeSASQueryParameters(
+        {
           fileSystemName, // Required
           permissions: FileSystemSASPermissions.parse("racwdl"), // Required
           startsOn, // Required. Date type
           expiresOn, // Optional. Date type
           ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
           protocol: SASProtocol.HttpsAndHttp, // Optional
-          version: "2018-11-09" // Must greater than or equal to 2018-11-09 to generate user delegation SAS
+          version: "2018-11-09", // Must greater than or equal to 2018-11-09 to generate user delegation SAS
         },
         userDelegationKey, // UserDelegationKey
-        accountName
+        accountName,
       ).toString();
 
       ```
@@ -334,7 +360,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-user-delegation-key
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-user-delegation-key
     remarks: ''
     isDeprecated: false
     syntax:
@@ -381,12 +407,27 @@ methods:
       Example using `for await` syntax:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFileSystems
+
+      import { DataLakeServiceClient } from "@azure/storage-file-datalake";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const datalakeServiceClient = new DataLakeServiceClient(
+        `https://${account}.dfs.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
-      for await (const fileSystem of serviceClient.listFileSystems()) {
-        console.log(`FileSystem ${i++}: ${fileSystem.name}`);
+      const fileSystems = datalakeServiceClient.listFileSystems();
+
+      for await (const fileSystem of fileSystems) {
+        console.log(`File system ${i++}: ${fileSystem.name}`);
       }
 
       ```
@@ -395,17 +436,30 @@ methods:
       Example using `iter.next()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFileSystems_Iterator
+
+      import { DataLakeServiceClient } from "@azure/storage-file-datalake";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const datalakeServiceClient = new DataLakeServiceClient(
+        `https://${account}.dfs.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
-      const iter = serviceClient.listFileSystems();
+      const fileSystems = datalakeServiceClient.listFileSystems();
 
-      let fileSystemItem = await iter.next();
+      let { value, done } = await fileSystems.next();
 
-      while (!fileSystemItem.done) {
-        console.log(`FileSystem ${i++}: ${fileSystemItem.value.name}`);
-        fileSystemItem = await iter.next();
+      while (!done) {
+        console.log(`File system ${i++}: ${value.name}`);
+        ({ value, done } = await fileSystems.next());
       }
 
       ```
@@ -414,17 +468,28 @@ methods:
       Example using `byPage()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFileSystems_ByPage
 
-      // passing optional maxPageSize in the page settings
+      import { DataLakeServiceClient } from "@azure/storage-file-datalake";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const datalakeServiceClient = new DataLakeServiceClient(
+        `https://${account}.dfs.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
-      for await (const response of serviceClient.listFileSystems().byPage({
-      maxPageSize: 20 })) {
+      for await (const response of
+      datalakeServiceClient.listFileSystems().byPage({ maxPageSize: 20 })) {
         if (response.fileSystemItems) {
           for (const fileSystem of response.fileSystemItems) {
-            console.log(`FileSystem ${i++}: ${fileSystem.name}`);
+            console.log(`File System ${i++}: ${fileSystem.name}`);
           }
         }
       }
@@ -435,23 +500,35 @@ methods:
       Example using paging with a marker:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFileSystems_Continuation
+
+      import { DataLakeServiceClient } from "@azure/storage-file-datalake";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const datalakeServiceClient = new DataLakeServiceClient(
+        `https://${account}.dfs.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
-      let iterator = serviceClient.listFileSystems().byPage({ maxPageSize: 2 });
+      let fileSystems = datalakeServiceClient.listFileSystems().byPage({
+      maxPageSize: 2 });
 
-      let response = (await iterator.next()).value;
+      let response = (await fileSystems.next()).value;
 
-
-      // Prints 2 file system names
+      // Prints 2 file systems
 
       if (response.fileSystemItems) {
         for (const fileSystem of response.fileSystemItems) {
-          console.log(`FileSystem ${i++}: ${fileSystem.name}`);
+          console.log(`File system ${i++}: ${fileSystem.name}`);
         }
       }
-
 
       // Gets next marker
 
@@ -459,17 +536,16 @@ methods:
 
       // Passing next marker as continuationToken
 
-      iterator = serviceClient
-        .listContainers()
+      fileSystems = datalakeServiceClient
+        .listFileSystems()
         .byPage({ continuationToken: marker, maxPageSize: 10 });
-      response = (await iterator.next()).value;
+      response = (await fileSystems.next()).value;
 
-
-      // Prints 10 file system names
+      // Prints 10 file systems
 
       if (response.fileSystemItems) {
         for (const fileSystem of response.fileSystemItems) {
-           console.log(`FileSystem ${i++}: ${fileSystem.name}`);
+          console.log(`File system ${i++}: ${fileSystem.name}`);
         }
       }
 
@@ -477,7 +553,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/list-containers2
+      https://learn.microsoft.com/en-us/rest/api/storageservices/list-containers2
     remarks: ''
     isDeprecated: false
     syntax:
@@ -510,7 +586,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-service-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-service-properties
     remarks: ''
     isDeprecated: false
     syntax:

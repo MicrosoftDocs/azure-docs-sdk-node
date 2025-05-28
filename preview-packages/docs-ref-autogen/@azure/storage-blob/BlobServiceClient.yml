@@ -72,17 +72,23 @@ constructors:
             Example using DefaultAzureCredential from `@azure/identity`:
 
 
-            ```js
+            ```ts snippet:ReadmeSampleCreateClient_DefaultAzureCredential
 
-            const account = "<storage account name>";
+            import { DefaultAzureCredential } from "@azure/identity";
 
+            import { BlobServiceClient } from "@azure/storage-blob";
+
+
+            // Enter your storage account name
+
+            const account = "<account>";
 
             const defaultAzureCredential = new DefaultAzureCredential();
 
 
             const blobServiceClient = new BlobServiceClient(
               `https://${account}.blob.core.windows.net`,
-              defaultAzureCredential
+              defaultAzureCredential,
             );
 
             ```
@@ -91,17 +97,29 @@ constructors:
             Example using an account name/key:
 
 
-            ```js
+            ```ts snippet:ReadmeSampleCreateClient_StorageSharedKeyCredential
 
-            const account = "<storage account name>"
+            import { StorageSharedKeyCredential, BlobServiceClient } from
+            "@azure/storage-blob";
+
+
+            const account = "<account>";
+
+            const accountKey = "<accountkey>";
+
+
+            // Use StorageSharedKeyCredential with storage account and account
+            key
+
+            // StorageSharedKeyCredential is only available in Node.js runtime,
+            not in browsers
 
             const sharedKeyCredential = new StorageSharedKeyCredential(account,
-            "<account key>");
-
+            accountKey);
 
             const blobServiceClient = new BlobServiceClient(
               `https://${account}.blob.core.windows.net`,
-              sharedKeyCredential
+              sharedKeyCredential,
             );
 
             ```
@@ -163,7 +181,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/create-container
+      https://learn.microsoft.com/en-us/rest/api/storageservices/create-container
     remarks: ''
     isDeprecated: false
     syntax:
@@ -218,78 +236,70 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
 
 
-      Example using `for await` syntax:
+      ```ts snippet:BlobServiceClientFindBlobsByTags
+
+      import { BlobServiceClient } from "@azure/storage-blob";
+
+      import { DefaultAzureCredential } from "@azure/identity";
 
 
-      ```js
+      const account = "<account>";
+
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
+
+      // Use for await to iterate the blobs
 
       let i = 1;
 
       for await (const blob of
       blobServiceClient.findBlobsByTags("tagkey='tagvalue'")) {
-        console.log(`Blob ${i++}: ${container.name}`);
+        console.log(`Blob ${i++}: ${blob.name}`);
       }
 
-      ```
 
+      // Use iter.next() to iterate the blobs
 
-      Example using `iter.next()`:
-
-
-      ```js
-
-      let i = 1;
+      i = 1;
 
       const iter = blobServiceClient.findBlobsByTags("tagkey='tagvalue'");
 
-      let blobItem = await iter.next();
+      let { value, done } = await iter.next();
 
-      while (!blobItem.done) {
-        console.log(`Blob ${i++}: ${blobItem.value.name}`);
-        blobItem = await iter.next();
+      while (!done) {
+        console.log(`Blob ${i++}: ${value.name}`);
+        ({ value, done } = await iter.next());
       }
 
-      ```
 
+      // Use byPage() to iterate the blobs
 
-      Example using `byPage()`:
+      i = 1;
 
-
-      ```js
-
-      // passing optional maxPageSize in the page settings
-
-      let i = 1;
-
-      for await (const response of
-      blobServiceClient.findBlobsByTags("tagkey='tagvalue'").byPage({
-      maxPageSize: 20 })) {
-        if (response.blobs) {
-          for (const blob of response.blobs) {
-            console.log(`Blob ${i++}: ${blob.name}`);
-          }
+      for await (const page of blobServiceClient
+        .findBlobsByTags("tagkey='tagvalue'")
+        .byPage({ maxPageSize: 20 })) {
+        for (const blob of page.blobs) {
+          console.log(`Blob ${i++}: ${blob.name}`);
         }
       }
 
-      ```
 
+      // Use paging with a marker
 
-      Example using paging with a marker:
-
-
-      ```js
-
-      let i = 1;
+      i = 1;
 
       let iterator =
       blobServiceClient.findBlobsByTags("tagkey='tagvalue'").byPage({
       maxPageSize: 2 });
 
       let response = (await iterator.next()).value;
-
 
       // Prints 2 blob names
 
@@ -298,7 +308,6 @@ methods:
           console.log(`Blob ${i++}: ${blob.name}`);
         }
       }
-
 
       // Gets next marker
 
@@ -316,7 +325,7 @@ methods:
 
       if (response.blobs) {
         for (const blob of response.blobs) {
-           console.log(`Blob ${i++}: ${blob.name}`);
+          console.log(`Blob ${i++}: ${blob.name}`);
         }
       }
 
@@ -393,7 +402,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -443,7 +452,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -491,7 +500,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-account-information
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-account-information
     remarks: ''
     isDeprecated: false
     syntax:
@@ -513,7 +522,7 @@ methods:
     summary: |-
       Creates a BlobBatchClient object to conduct batch operations.
 
-      See https://docs.microsoft.com/en-us/rest/api/storageservices/blob-batch
+      See https://learn.microsoft.com/en-us/rest/api/storageservices/blob-batch
     remarks: ''
     isDeprecated: false
     syntax:
@@ -543,7 +552,20 @@ methods:
           Example usage:
 
 
-          ```js
+          ```ts snippet:BlobServiceClientGetContainerClient
+
+          import { BlobServiceClient } from "@azure/storage-blob";
+
+          import { DefaultAzureCredential } from "@azure/identity";
+
+
+          const account = "<account>";
+
+          const blobServiceClient = new BlobServiceClient(
+            `https://${account}.blob.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
+
 
           const containerClient =
           blobServiceClient.getContainerClient("<container name>");
@@ -561,7 +583,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -591,7 +613,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-stats
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob-service-stats
     remarks: ''
     isDeprecated: false
     syntax:
@@ -621,7 +643,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-user-delegation-key
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-user-delegation-key
     remarks: ''
     isDeprecated: false
     syntax:
@@ -663,10 +685,22 @@ methods:
       pages.
 
 
-      Example using `for await` syntax:
+      ```ts snippet:BlobServiceClientListContainers
+
+      import { BlobServiceClient } from "@azure/storage-blob";
+
+      import { DefaultAzureCredential } from "@azure/identity";
 
 
-      ```js
+      const account = "<account>";
+
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
+
+      // Use for await to iterate the containers
 
       let i = 1;
 
@@ -674,55 +708,36 @@ methods:
         console.log(`Container ${i++}: ${container.name}`);
       }
 
-      ```
 
+      // Use iter.next() to iterate the containers
 
-      Example using `iter.next()`:
-
-
-      ```js
-
-      let i = 1;
+      i = 1;
 
       const iter = blobServiceClient.listContainers();
 
-      let containerItem = await iter.next();
+      let { value, done } = await iter.next();
 
-      while (!containerItem.done) {
-        console.log(`Container ${i++}: ${containerItem.value.name}`);
-        containerItem = await iter.next();
+      while (!done) {
+        console.log(`Container ${i++}: ${value.name}`);
+        ({ value, done } = await iter.next());
       }
 
-      ```
 
+      // Use byPage() to iterate the containers
 
-      Example using `byPage()`:
+      i = 1;
 
-
-      ```js
-
-      // passing optional maxPageSize in the page settings
-
-      let i = 1;
-
-      for await (const response of blobServiceClient.listContainers().byPage({
+      for await (const page of blobServiceClient.listContainers().byPage({
       maxPageSize: 20 })) {
-        if (response.containerItems) {
-          for (const container of response.containerItems) {
-            console.log(`Container ${i++}: ${container.name}`);
-          }
+        for (const container of page.containerItems) {
+          console.log(`Container ${i++}: ${container.name}`);
         }
       }
 
-      ```
 
+      // Use paging with a marker
 
-      Example using paging with a marker:
-
-
-      ```js
-
-      let i = 1;
+      i = 1;
 
       let iterator = blobServiceClient.listContainers().byPage({ maxPageSize: 2
       });
@@ -755,7 +770,7 @@ methods:
 
       if (response.containerItems) {
         for (const container of response.containerItems) {
-           console.log(`Container ${i++}: ${container.name}`);
+          console.log(`Container ${i++}: ${container.name}`);
         }
       }
 
@@ -790,7 +805,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-service-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-service-properties
     remarks: ''
     isDeprecated: false
     syntax:

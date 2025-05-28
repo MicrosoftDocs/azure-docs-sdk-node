@@ -196,7 +196,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/abort-copy-blob
+      https://learn.microsoft.com/en-us/rest/api/storageservices/abort-copy-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -255,83 +255,89 @@ inheritedMethods:
       operation to copy from another storage account.
 
 
-      See https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob
+      See https://learn.microsoft.com/en-us/rest/api/storageservices/copy-blob
 
 
-      Example using automatic polling:
+      ```ts snippet:ClientsBeginCopyFromURL
+
+      import { BlobServiceClient } from "@azure/storage-blob";
+
+      import { DefaultAzureCredential } from "@azure/identity";
 
 
-      ```js
+      const account = "<account>";
 
-      const copyPoller = await blobClient.beginCopyFromURL('url');
-
-      const result = await copyPoller.pollUntilDone();
-
-      ```
-
-
-      Example using manual polling:
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
 
 
-      ```js
+      const containerName = "<container name>";
 
-      const copyPoller = await blobClient.beginCopyFromURL('url');
+      const blobName = "<blob name>";
 
-      while (!poller.isDone()) {
-         await poller.poll();
+      const containerClient =
+      blobServiceClient.getContainerClient(containerName);
+
+      const blobClient = containerClient.getBlobClient(blobName);
+
+
+      // Example using automatic polling
+
+      const automaticCopyPoller = await blobClient.beginCopyFromURL("url");
+
+      const automaticResult = await automaticCopyPoller.pollUntilDone();
+
+
+      // Example using manual polling
+
+      const manualCopyPoller = await blobClient.beginCopyFromURL("url");
+
+      while (!manualCopyPoller.isDone()) {
+        await manualCopyPoller.poll();
       }
 
-      const result = copyPoller.getResult();
-
-      ```
+      const manualResult = manualCopyPoller.getResult();
 
 
-      Example using progress updates:
+      // Example using progress updates
 
-
-      ```js
-
-      const copyPoller = await blobClient.beginCopyFromURL('url', {
+      const progressUpdatesCopyPoller = await blobClient.beginCopyFromURL("url",
+      {
         onProgress(state) {
           console.log(`Progress: ${state.copyProgress}`);
-        }
+        },
       });
 
-      const result = await copyPoller.pollUntilDone();
-
-      ```
-
-
-      Example using a changing polling interval (default 15 seconds):
+      const progressUpdatesResult = await
+      progressUpdatesCopyPoller.pollUntilDone();
 
 
-      ```js
+      // Example using a changing polling interval (default 15 seconds)
 
-      const copyPoller = await blobClient.beginCopyFromURL('url', {
-        intervalInMs: 1000 // poll blob every 1 second for copy progress
+      const pollingIntervalCopyPoller = await blobClient.beginCopyFromURL("url",
+      {
+        intervalInMs: 1000, // poll blob every 1 second for copy progress
       });
 
-      const result = await copyPoller.pollUntilDone();
-
-      ```
-
-
-      Example using copy cancellation:
+      const pollingIntervalResult = await
+      pollingIntervalCopyPoller.pollUntilDone();
 
 
-      ```js
+      // Example using copy cancellation:
 
-      const copyPoller = await blobClient.beginCopyFromURL('url');
+      const cancelCopyPoller = await blobClient.beginCopyFromURL("url");
 
       // cancel operation after starting it.
 
       try {
-        await copyPoller.cancelOperation();
+        await cancelCopyPoller.cancelOperation();
         // calls to get the result now throw PollerCancelledError
-        await copyPoller.getResult();
-      } catch (err) {
-        if (err.name === 'PollerCancelledError') {
-          console.log('The copy was cancelled.');
+        cancelCopyPoller.getResult();
+      } catch (err: any) {
+        if (err.name === "PollerCancelledError") {
+          console.log("The copy was cancelled.");
         }
       }
 
@@ -369,7 +375,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/snapshot-blob
+      https://learn.microsoft.com/en-us/rest/api/storageservices/snapshot-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -403,7 +409,7 @@ inheritedMethods:
       Blob operation.
 
 
-      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-blob
+      See https://learn.microsoft.com/en-us/rest/api/storageservices/delete-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -435,7 +441,7 @@ inheritedMethods:
       Blob operation.
 
 
-      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-blob
+      See https://learn.microsoft.com/en-us/rest/api/storageservices/delete-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -494,7 +500,7 @@ inheritedMethods:
       * In browsers, data returns in a promise blobBody
 
 
-      See https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob
+      See https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -522,40 +528,57 @@ inheritedMethods:
             Example usage (Node.js):
 
 
-            ```js
+            ```ts snippet:ReadmeSampleDownloadBlob_Node
 
-            // Download and convert a blob to a string
+            import { BlobServiceClient } from "@azure/storage-blob";
+
+            import { DefaultAzureCredential } from "@azure/identity";
+
+
+            const account = "<account>";
+
+            const blobServiceClient = new BlobServiceClient(
+              `https://${account}.blob.core.windows.net`,
+              new DefaultAzureCredential(),
+            );
+
+
+            const containerName = "<container name>";
+
+            const blobName = "<blob name>";
+
+            const containerClient =
+            blobServiceClient.getContainerClient(containerName);
+
+            const blobClient = containerClient.getBlobClient(blobName);
+
+
+            // Get blob content from position 0 to the end
+
+            // In Node.js, get downloaded data by accessing
+            downloadBlockBlobResponse.readableStreamBody
 
             const downloadBlockBlobResponse = await blobClient.download();
 
-            const downloaded = await
-            streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
+            if (downloadBlockBlobResponse.readableStreamBody) {
+              const downloaded = await streamToString(downloadBlockBlobResponse.readableStreamBody);
+              console.log(`Downloaded blob content: ${downloaded}`);
+            }
 
-            console.log("Downloaded blob content:", downloaded.toString());
 
-
-            async function streamToBuffer(readableStream) {
-
-            return new Promise((resolve, reject) => {
-
-            const chunks = [];
-
-            readableStream.on("data", (data) => {
-
-            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
-
-            });
-
-            readableStream.on("end", () => {
-
-            resolve(Buffer.concat(chunks));
-
-            });
-
-            readableStream.on("error", reject);
-
-            });
-
+            async function streamToString(stream: NodeJS.ReadableStream):
+            Promise<string> {
+              const result = await new Promise<Buffer<ArrayBuffer>>((resolve, reject) => {
+                const chunks: Buffer[] = [];
+                stream.on("data", (data) => {
+                  chunks.push(Buffer.isBuffer(data) ? data : Buffer.from(data));
+                });
+                stream.on("end", () => {
+                  resolve(Buffer.concat(chunks));
+                });
+                stream.on("error", reject);
+              });
+              return result.toString();
             }
 
             ```
@@ -564,30 +587,43 @@ inheritedMethods:
             Example usage (browser):
 
 
-            ```js
+            ```ts snippet:ReadmeSampleDownloadBlob_Browser
 
-            // Download and convert a blob to a string
+            import { BlobServiceClient } from "@azure/storage-blob";
 
-            const downloadBlockBlobResponse = await blobClient.download();
+            import { DefaultAzureCredential } from "@azure/identity";
 
-            const downloaded = await blobToString(await
-            downloadBlockBlobResponse.blobBody);
 
-            console.log(
-              "Downloaded blob content",
-              downloaded
+            const account = "<account>";
+
+            const blobServiceClient = new BlobServiceClient(
+              `https://${account}.blob.core.windows.net`,
+              new DefaultAzureCredential(),
             );
 
 
-            async function blobToString(blob: Blob): Promise<string> {
-              const fileReader = new FileReader();
-              return new Promise<string>((resolve, reject) => {
-                fileReader.onloadend = (ev: any) => {
-                  resolve(ev.target!.result);
-                };
-                fileReader.onerror = reject;
-                fileReader.readAsText(blob);
-              });
+            const containerName = "<container name>";
+
+            const blobName = "<blob name>";
+
+            const containerClient =
+            blobServiceClient.getContainerClient(containerName);
+
+            const blobClient = containerClient.getBlobClient(blobName);
+
+
+            // Get blob content from position 0 to the end
+
+            // In browsers, get downloaded data by accessing
+            downloadBlockBlobResponse.blobBody
+
+            const downloadBlockBlobResponse = await blobClient.download();
+
+            const blobBody = await downloadBlockBlobResponse.blobBody;
+
+            if (blobBody) {
+              const downloaded = await blobBody.text();
+              console.log(`Downloaded blob content: ${downloaded}`);
             }
 
             ```
@@ -783,7 +819,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -817,7 +853,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -853,7 +889,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -886,7 +922,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -925,7 +961,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-account-information
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-account-information
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1017,7 +1053,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob-properties
 
 
       WARNING: The `metadata` object returned in the response will have its keys
@@ -1087,7 +1123,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-tier
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-tier
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1109,7 +1145,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [BlobClient.setAccessTier](xref:@azure/storage-blob.BlobClient.setAccessTier)
-  - name: setHTTPHeaders(BlobHTTPHeaders, BlobSetHTTPHeadersOptions)
+  - name: setHTTPHeaders(BlobHttpHeaders, BlobSetHTTPHeadersOptions)
     uid: '@azure/storage-blob.PageBlobClient.setHTTPHeaders'
     package: '@azure/storage-blob'
     summary: >-
@@ -1123,12 +1159,12 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-properties
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function setHTTPHeaders(blobHTTPHeaders?: BlobHTTPHeaders, options?:
+        function setHTTPHeaders(blobHTTPHeaders?: BlobHttpHeaders, options?:
         BlobSetHTTPHeadersOptions): Promise<BlobSetHTTPHeadersResponse>
       parameters:
         - id: blobHTTPHeaders
@@ -1218,7 +1254,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1286,7 +1322,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob-from-url
+      https://learn.microsoft.com/en-us/rest/api/storageservices/copy-blob-from-url
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1323,7 +1359,7 @@ inheritedMethods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/undelete-blob
+      https://learn.microsoft.com/en-us/rest/api/storageservices/undelete-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1367,7 +1403,7 @@ methods:
     summary: |-
       Frees the specified pages from the page blob.
 
-      See https://docs.microsoft.com/rest/api/storageservices/put-page
+      See https://learn.microsoft.com/rest/api/storageservices/put-page
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1399,7 +1435,7 @@ methods:
       data to a page blob.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/put-blob
+      See https://learn.microsoft.com/rest/api/storageservices/put-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1431,7 +1467,7 @@ methods:
       of the existing blob will remain unchanged.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/put-blob
+      See https://learn.microsoft.com/rest/api/storageservices/put-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1459,7 +1495,7 @@ methods:
       page blob.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/get-page-ranges
+      See https://learn.microsoft.com/rest/api/storageservices/get-page-ranges
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1491,7 +1527,7 @@ methods:
       snapshot and this page blob.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/get-page-ranges
+      See https://learn.microsoft.com/rest/api/storageservices/get-page-ranges
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1527,7 +1563,7 @@ methods:
       snapshot and this page blob for managed disks.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/get-page-ranges
+      See https://learn.microsoft.com/rest/api/storageservices/get-page-ranges
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1560,19 +1596,36 @@ methods:
       Returns an async iterable iterator to list of page ranges for a page blob.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/get-page-ranges
+      See https://learn.microsoft.com/rest/api/storageservices/get-page-ranges
 
        .byPage() returns an async iterable iterator to list of page ranges for a page blob.
 
-      Example using `for await` syntax:
+      ```ts snippet:ClientsListPageBlobs
+
+      import { BlobServiceClient } from "@azure/storage-blob";
+
+      import { DefaultAzureCredential } from "@azure/identity";
 
 
-      ```js
+      const account = "<account>";
 
-      // Get the pageBlobClient before you run these snippets,
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
 
-      // Can be obtained from
-      `blobServiceClient.getContainerClient("<your-container-name>").getPageBlobClient("<your-blob-name>");`
+
+      const containerName = "<container name>";
+
+      const blobName = "<blob name>";
+
+      const containerClient =
+      blobServiceClient.getContainerClient(containerName);
+
+      const pageBlobClient = containerClient.getPageBlobClient(blobName);
+
+
+      // Example using `for await` syntax
 
       let i = 1;
 
@@ -1580,84 +1633,66 @@ methods:
         console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
       }
 
-      ```
 
+      // Example using `iter.next()` syntax
 
-      Example using `iter.next()`:
+      i = 1;
 
+      const iter = pageBlobClient.listPageRanges();
 
-      ```js
+      let { value, done } = await iter.next();
 
-      let i = 1;
-
-      let iter = pageBlobClient.listPageRanges();
-
-      let pageRangeItem = await iter.next();
-
-      while (!pageRangeItem.done) {
-        console.log(`Page range ${i++}: ${pageRangeItem.value.start} - ${pageRangeItem.value.end}, IsClear: ${pageRangeItem.value.isClear}`);
-        pageRangeItem = await iter.next();
+      while (!done) {
+        console.log(`Page range ${i++}: ${value.start} - ${value.end}`);
+        ({ value, done } = await iter.next());
       }
 
-      ```
 
+      // Example using `byPage()` syntax
 
-      Example using `byPage()`:
+      i = 1;
 
-
-      ```js
-
-      // passing optional maxPageSize in the page settings
-
-      let i = 1;
-
-      for await (const response of pageBlobClient.listPageRanges().byPage({
+      for await (const page of pageBlobClient.listPageRanges().byPage({
       maxPageSize: 20 })) {
-        for (const pageRange of response) {
+        for (const pageRange of page.pageRange || []) {
           console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
         }
       }
 
-      ```
 
+      // Example using paging with a marker
 
-      Example using paging with a marker:
-
-
-      ```js
-
-      let i = 1;
+      i = 1;
 
       let iterator = pageBlobClient.listPageRanges().byPage({ maxPageSize: 2 });
 
       let response = (await iterator.next()).value;
 
-
       // Prints 2 page ranges
 
-      for (const pageRange of response) {
-        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      if (response.pageRange) {
+        for (const pageRange of response.pageRange) {
+          console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+        }
       }
-
 
       // Gets next marker
 
       let marker = response.continuationToken;
 
-
       // Passing next marker as continuationToken
-
 
       iterator = pageBlobClient.listPageRanges().byPage({ continuationToken:
       marker, maxPageSize: 10 });
 
       response = (await iterator.next()).value;
 
-
       // Prints 10 page ranges
 
-      for (const blob of response) {
-        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      if (response.pageRange) {
+        for (const pageRange of response.pageRange) {
+          console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+        }
       }
 
       ```
@@ -1696,105 +1731,113 @@ methods:
       between a specified snapshot and this page blob.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/get-page-ranges
+      See https://learn.microsoft.com/rest/api/storageservices/get-page-ranges
 
        .byPage() returns an async iterable iterator to list of page ranges that differ between a specified snapshot and this page blob.
 
-      Example using `for await` syntax:
+      ```ts snippet:ClientsListPageBlobsDiff
+
+      import { BlobServiceClient } from "@azure/storage-blob";
+
+      import { DefaultAzureCredential } from "@azure/identity";
 
 
-      ```js
+      const account = "<account>";
 
-      // Get the pageBlobClient before you run these snippets,
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
 
-      // Can be obtained from
-      `blobServiceClient.getContainerClient("<your-container-name>").getPageBlobClient("<your-blob-name>");`
+
+      const containerName = "<container name>";
+
+      const blobName = "<blob name>";
+
+      const containerClient =
+      blobServiceClient.getContainerClient(containerName);
+
+      const pageBlobClient = containerClient.getPageBlobClient(blobName);
+
+
+      const offset = 0;
+
+      const count = 1024;
+
+      const previousSnapshot = "<previous snapshot>";
+
+      // Example using `for await` syntax
 
       let i = 1;
 
-      for await (const pageRange of pageBlobClient.listPageRangesDiff()) {
+      for await (const pageRange of pageBlobClient.listPageRangesDiff(offset,
+      count, previousSnapshot)) {
         console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
       }
 
-      ```
 
+      // Example using `iter.next()` syntax
 
-      Example using `iter.next()`:
+      i = 1;
 
+      const iter = pageBlobClient.listPageRangesDiff(offset, count,
+      previousSnapshot);
 
-      ```js
+      let { value, done } = await iter.next();
 
-      let i = 1;
-
-      let iter = pageBlobClient.listPageRangesDiff();
-
-      let pageRangeItem = await iter.next();
-
-      while (!pageRangeItem.done) {
-        console.log(`Page range ${i++}: ${pageRangeItem.value.start} - ${pageRangeItem.value.end}, IsClear: ${pageRangeItem.value.isClear}`);
-        pageRangeItem = await iter.next();
+      while (!done) {
+        console.log(`Page range ${i++}: ${value.start} - ${value.end}`);
+        ({ value, done } = await iter.next());
       }
 
-      ```
 
+      // Example using `byPage()` syntax
 
-      Example using `byPage()`:
+      i = 1;
 
-
-      ```js
-
-      // passing optional maxPageSize in the page settings
-
-      let i = 1;
-
-      for await (const response of pageBlobClient.listPageRangesDiff().byPage({
-      maxPageSize: 20 })) {
-        for (const pageRange of response) {
+      for await (const page of pageBlobClient
+        .listPageRangesDiff(offset, count, previousSnapshot)
+        .byPage({ maxPageSize: 20 })) {
+        for (const pageRange of page.pageRange || []) {
           console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
         }
       }
 
-      ```
 
+      // Example using paging with a marker
 
-      Example using paging with a marker:
+      i = 1;
 
-
-      ```js
-
-      let i = 1;
-
-      let iterator = pageBlobClient.listPageRangesDiff().byPage({ maxPageSize: 2
-      });
-
+      let iterator = pageBlobClient
+        .listPageRangesDiff(offset, count, previousSnapshot)
+        .byPage({ maxPageSize: 2 });
       let response = (await iterator.next()).value;
-
 
       // Prints 2 page ranges
 
-      for (const pageRange of response) {
-        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      if (response.pageRange) {
+        for (const pageRange of response.pageRange) {
+          console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+        }
       }
-
 
       // Gets next marker
 
       let marker = response.continuationToken;
 
-
       // Passing next marker as continuationToken
 
-
-      iterator = pageBlobClient.listPageRangesDiff().byPage({ continuationToken:
-      marker, maxPageSize: 10 });
-
+      iterator = pageBlobClient
+        .listPageRangesDiff(offset, count, previousSnapshot)
+        .byPage({ continuationToken: marker, maxPageSize: 10 });
       response = (await iterator.next()).value;
-
 
       // Prints 10 page ranges
 
-      for (const blob of response) {
-        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      if (response.pageRange) {
+        for (const pageRange of response.pageRange) {
+          console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+        }
       }
 
       ```
@@ -1835,7 +1878,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/rest/api/storageservices/set-blob-properties
+      https://learn.microsoft.com/rest/api/storageservices/set-blob-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1871,10 +1914,10 @@ methods:
 
 
       See
-      https://docs.microsoft.com/rest/api/storageservices/incremental-copy-blob
+      https://learn.microsoft.com/rest/api/storageservices/incremental-copy-blob
 
       See
-      https://docs.microsoft.com/en-us/azure/virtual-machines/windows/incremental-snapshots
+      https://learn.microsoft.com/en-us/azure/virtual-machines/windows/incremental-snapshots
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1908,7 +1951,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-properties
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1942,7 +1985,7 @@ methods:
       a multiple of 512.
 
 
-      See https://docs.microsoft.com/rest/api/storageservices/put-page
+      See https://learn.microsoft.com/rest/api/storageservices/put-page
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1981,7 +2024,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/put-page-from-url
+      https://learn.microsoft.com/en-us/rest/api/storageservices/put-page-from-url
     remarks: ''
     isDeprecated: false
     syntax:

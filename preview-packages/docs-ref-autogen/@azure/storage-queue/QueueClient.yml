@@ -141,7 +141,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/clear-messages
+      https://learn.microsoft.com/en-us/rest/api/storageservices/clear-messages
     remarks: ''
     isDeprecated: false
     syntax:
@@ -165,7 +165,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/create-queue4
+      https://learn.microsoft.com/en-us/rest/api/storageservices/create-queue4
     remarks: ''
     isDeprecated: false
     syntax:
@@ -177,20 +177,27 @@ methods:
           type: <xref uid="@azure/storage-queue.QueueCreateOptions" />
           description: Options to Queue create operation.
       return:
-        description: >-
+        description: |-
           Response data for the Queue create operation.
-
 
           Example usage:
 
+          ```ts snippet:ReadmeSampleCreateQueue
+          import { QueueServiceClient } from "@azure/storage-queue";
+          import { DefaultAzureCredential } from "@azure/identity";
 
-          ```js
+          const account = "<account>";
+          const queueServiceClient = new QueueServiceClient(
+            `https://${account}.queue.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
 
-          const queueClient = queueServiceClient.getQueueClient("<new queue
-          name>");
-
+          const queueName = "<valid queue name>";
+          const queueClient = queueServiceClient.getQueueClient(queueName);
           const createQueueResponse = await queueClient.create();
-
+          console.log(
+            `Created queue ${queueName} successfully, service assigned request Id: ${createQueueResponse.requestId}`,
+          );
           ```
         type: Promise&lt;<xref uid="@azure/storage-queue.QueueCreateResponse" />&gt;
   - name: createIfNotExists(QueueCreateOptions)
@@ -204,7 +211,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/create-queue4
+      https://learn.microsoft.com/en-us/rest/api/storageservices/create-queue4
     remarks: ''
     isDeprecated: false
     syntax:
@@ -228,7 +235,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/delete-queue3
+      https://learn.microsoft.com/en-us/rest/api/storageservices/delete-queue3
     remarks: ''
     isDeprecated: false
     syntax:
@@ -245,10 +252,21 @@ methods:
 
           Example usage:
 
-          ```js
+          ```ts snippet:ReadmeSampleDeleteQueue
+          import { QueueServiceClient } from "@azure/storage-queue";
+          import { DefaultAzureCredential } from "@azure/identity";
+
+          const account = "<account>";
+          const queueServiceClient = new QueueServiceClient(
+            `https://${account}.queue.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
+
+          const queueName = "<valid queue name>";
+          const queueClient = queueServiceClient.getQueueClient(queueName);
           const deleteQueueResponse = await queueClient.delete();
           console.log(
-            "Delete queue successfully, service assigned request Id:", deleteQueueResponse.requestId
+            `Deleted queue successfully, service assigned request Id: ${deleteQueueResponse.requestId}`,
           );
           ```
         type: Promise&lt;<xref uid="@azure/storage-queue.QueueDeleteResponse" />&gt;
@@ -260,7 +278,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/delete-queue3
+      https://learn.microsoft.com/en-us/rest/api/storageservices/delete-queue3
     remarks: ''
     isDeprecated: false
     syntax:
@@ -284,7 +302,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/delete-message2
+      https://learn.microsoft.com/en-us/rest/api/storageservices/delete-message2
     remarks: ''
     isDeprecated: false
     syntax:
@@ -348,7 +366,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -379,7 +397,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -409,7 +427,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-acl
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-queue-acl
     remarks: ''
     isDeprecated: false
     syntax:
@@ -435,7 +453,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-metadata
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-queue-metadata
 
 
       WARNING: The `metadata` object returned in the response will have its keys
@@ -473,7 +491,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/peek-messages
+      https://learn.microsoft.com/en-us/rest/api/storageservices/peek-messages
     remarks: ''
     isDeprecated: false
     syntax:
@@ -492,12 +510,29 @@ methods:
           Example usage:
 
 
-          ```js
+          ```ts snippet:ReadmeSamplePeekMessage
+
+          import { QueueServiceClient } from "@azure/storage-queue";
+
+          import { DefaultAzureCredential } from "@azure/identity";
+
+
+          const account = "<account>";
+
+          const queueServiceClient = new QueueServiceClient(
+            `https://${account}.queue.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
+
+
+          const queueName = "<valid queue name>";
+
+          const queueClient = queueServiceClient.getQueueClient(queueName);
 
           const peekMessagesResponse = await queueClient.peekMessages();
 
-          console.log("The peeked message is:",
-          peekMessagesResponse.peekedMessageItems[0].messageText);
+          console.log(`The peeked message is:
+          ${peekMessagesResponse.peekedMessageItems[0].messageText}`);
 
           ```
         type: >-
@@ -511,7 +546,8 @@ methods:
       queue.
 
 
-      See https://docs.microsoft.com/en-us/rest/api/storageservices/get-messages
+      See
+      https://learn.microsoft.com/en-us/rest/api/storageservices/get-messages
     remarks: ''
     isDeprecated: false
     syntax:
@@ -528,18 +564,28 @@ methods:
 
           Example usage:
 
-          ```js
+          ```ts snippet:ReadmeSampleReceiveMessage
+          import { QueueServiceClient } from "@azure/storage-queue";
+          import { DefaultAzureCredential } from "@azure/identity";
+
+          const account = "<account>";
+          const queueServiceClient = new QueueServiceClient(
+            `https://${account}.queue.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
+
+          const queueName = "<valid queue name>";
+          const queueClient = queueServiceClient.getQueueClient(queueName);
           const response = await queueClient.receiveMessages();
-          if (response.receivedMessageItems.length == 1) {
+          if (response.receivedMessageItems.length === 1) {
             const receivedMessageItem = response.receivedMessageItems[0];
-            console.log("Processing & deleting message with content:", receivedMessageItem.messageText);
+            console.log(`Processing & deleting message with content: ${receivedMessageItem.messageText}`);
             const deleteMessageResponse = await queueClient.deleteMessage(
               receivedMessageItem.messageId,
-              receivedMessageItem.popReceipt
+              receivedMessageItem.popReceipt,
             );
             console.log(
-              "Delete message successfully, service assigned request Id:",
-              deleteMessageResponse.requestId
+              `Delete message successfully, service assigned request Id: ${deleteMessageResponse.requestId}`,
             );
           }
           ```
@@ -562,7 +608,7 @@ methods:
       be XML-escaped or Base64-encode.
 
 
-      See https://docs.microsoft.com/en-us/rest/api/storageservices/put-message
+      See https://learn.microsoft.com/en-us/rest/api/storageservices/put-message
     remarks: ''
     isDeprecated: false
     syntax:
@@ -584,14 +630,32 @@ methods:
           Example usage:
 
 
-          ```js
+          ```ts snippet:ReadmeSampleSendMessage
+
+          import { QueueServiceClient } from "@azure/storage-queue";
+
+          import { DefaultAzureCredential } from "@azure/identity";
+
+
+          const account = "<account>";
+
+          const queueServiceClient = new QueueServiceClient(
+            `https://${account}.queue.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
+
+
+          const queueName = "<valid queue name>";
+
+          const queueClient = queueServiceClient.getQueueClient(queueName);
+
+          // Send a message into the queue using the sendMessage method.
 
           const sendMessageResponse = await queueClient.sendMessage("Hello
           World!");
 
           console.log(
-            "Sent message successfully, service assigned message Id:", sendMessageResponse.messageId,
-            "service assigned request Id:", sendMessageResponse.requestId
+            `Sent message successfully, service assigned message Id: ${sendMessageResponse.messageId}, service assigned request Id: ${sendMessageResponse.requestId}`,
           );
 
           ```
@@ -607,7 +671,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-queue-acl
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-queue-acl
     remarks: ''
     isDeprecated: false
     syntax:
@@ -640,7 +704,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/set-queue-metadata
+      https://learn.microsoft.com/en-us/rest/api/storageservices/set-queue-metadata
     remarks: ''
     isDeprecated: false
     syntax:
@@ -673,7 +737,7 @@ methods:
 
 
       See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/update-message
+      https://learn.microsoft.com/en-us/rest/api/storageservices/update-message
     remarks: ''
     isDeprecated: false
     syntax:

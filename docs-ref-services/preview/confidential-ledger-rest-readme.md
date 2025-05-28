@@ -1,12 +1,12 @@
 ---
 title: Azure Confidential Ledger REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/confidential-ledger, confidentialledger
-ms.date: 05/01/2025
+ms.date: 05/28/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: confidentialledger
 ---
-# Azure Confidential Ledger REST client library for JavaScript - version 1.1.2-beta.2 
+# Azure Confidential Ledger REST client library for JavaScript - version 1.1.2-beta.3 
 
 
 Azure Confidential Ledger provides a service for logging to an immutable, tamper-proof ledger. As part of the [Azure Confidential Computing][azure_confidential_computing]
@@ -306,15 +306,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.2/sdk/confidentialledger/confidential-ledger-rest/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/confidentialledger/confidential-ledger-rest/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/confidential-ledger_1.1.2-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/confidential-ledger_1.1.2-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -327,12 +327,12 @@ If you'd like to contribute to this library, please read the [contributing guide
 [ccf]: https://github.com/Microsoft/CCF
 [azure_confidential_computing]: https://azure.microsoft.com/solutions/confidential-compute
 [confidential_ledger_docs]: https://aka.ms/confidentialledger-servicedocs
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/confidential-ledger_1.1.2-beta.2/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.2/sdk/confidentialledger/confidential-ledger-rest
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/confidential-ledger_1.1.2-beta.3/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/confidentialledger/confidential-ledger-rest
 [confidentialledger_npm]: https://www.npmjs.com/package/@azure-rest/confidential-ledger
 [ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_sub]: https://azure.microsoft.com/free/
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.2/sdk/identity/identity#credentials
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/identity/identity#credentials
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/identity/identity#defaultazurecredential
 [azure_resource_manager]: https://learn.microsoft.com/azure/azure-resource-manager/management/overview
 

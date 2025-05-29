@@ -11,7 +11,7 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      ShareDirectoryClient(string, Credential_2 | TokenCredential,
+      ShareDirectoryClient(string, Credential | TokenCredential,
       ShareClientOptions)
     uid: '@azure/storage-file-share.ShareDirectoryClient.constructor'
     package: '@azure/storage-file-share'
@@ -20,7 +20,7 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ShareDirectoryClient(url: string, credential?: Credential_2 |
+        new ShareDirectoryClient(url: string, credential?: Credential |
         TokenCredential, options?: ShareClientOptions)
       parameters:
         - id: url
@@ -491,14 +491,35 @@ methods:
           Example usage:
 
 
-          ```js
+          ```ts snippet:ReadmeSampleGetDirectoryClient
 
-          const directoryClient = shareClient.getDirectoryClient("<directory
-          name>");
+          import { StorageSharedKeyCredential, ShareServiceClient } from
+          "@azure/storage-file-share";
+
+
+          const account = "<account>";
+
+          const accountKey = "<accountkey>";
+
+
+          const credential = new StorageSharedKeyCredential(account,
+          accountKey);
+
+          const serviceClient = new ShareServiceClient(
+            `https://${account}.file.core.windows.net`,
+            credential,
+          );
+
+
+          const shareName = "<share name>";
+
+          const directoryName = "<directory name>";
+
+          const shareClient = serviceClient.getShareClient(shareName);
+
+          const directoryClient = shareClient.getDirectoryClient(directoryName);
 
           await directoryClient.create();
-
-          console.log("Created directory successfully");
 
           ```
         type: <xref uid="@azure/storage-file-share.ShareDirectoryClient" />
@@ -517,21 +538,59 @@ methods:
           type: string
           description: A file name.
       return:
-        description: |-
+        description: >-
           A new ShareFileClient object for the given file name.
+
 
           Example usage:
 
-          ```js
-          const content = "Hello world!"
 
-          const fileClient = directoryClient.getFileClient("<file name>");
+          ```ts snippet:ReadmeSampleCreateFileAndUpload
+
+          import { StorageSharedKeyCredential, ShareServiceClient } from
+          "@azure/storage-file-share";
+
+
+          const account = "<account>";
+
+          const accountKey = "<accountkey>";
+
+
+          const credential = new StorageSharedKeyCredential(account,
+          accountKey);
+
+          const serviceClient = new ShareServiceClient(
+            `https://${account}.file.core.windows.net`,
+            credential,
+          );
+
+
+          const shareName = "<share name>";
+
+          const directoryName = "<directory name>";
+
+          const directoryClient =
+          serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
+
+          const content = "Hello World!";
+
+          const fileName = `newdirectory${+new Date()}`;
+
+          const fileClient = directoryClient.getFileClient(fileName);
 
           await fileClient.create(content.length);
-          console.log("Created file successfully!");
+
+          console.log(`Create file ${fileName} successfully`);
+
+
+          // Upload file range
 
           await fileClient.uploadRange(content, 0, content.length);
-          console.log("Updated file successfully!")
+
+          console.log(`Upload file range "${content}" to ${fileName}
+          successfully`);
+
           ```
         type: <xref uid="@azure/storage-file-share.ShareFileClient" />
   - name: getProperties(DirectoryGetPropertiesOptions)
@@ -582,16 +641,42 @@ methods:
       Example using `for await` syntax:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFilesAndDirectories
+
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
+
+
+      const account = "<account>";
+
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
 
       let i = 1;
 
-      for await (const entity of directoryClient.listFilesAndDirectories()) {
-        if (entity.kind === "directory") {
-          console.log(`${i++} - directory\t: ${entity.name}`);
+      for await (const item of directoryClient.listFilesAndDirectories()) {
+        if (item.kind === "directory") {
+          console.log(`${i} - directory\t: ${item.name}`);
         } else {
-          console.log(`${i++} - file\t: ${entity.name}`);
+          console.log(`${i} - file\t: ${item.name}`);
         }
+        i++;
       }
 
       ```
@@ -600,21 +685,47 @@ methods:
       Example using `iter.next()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFilesAndDirectories_Iterator
+
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
+
+
+      const account = "<account>";
+
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
 
       let i = 1;
 
-      let iter = directoryClient.listFilesAndDirectories();
+      const iter = directoryClient.listFilesAndDirectories();
 
-      let entity = await iter.next();
+      let { value, done } = await iter.next();
 
-      while (!entity.done) {
-        if (entity.value.kind === "directory") {
-          console.log(`${i++} - directory\t: ${entity.value.name}`);
+      while (!done) {
+        if (value.kind === "directory") {
+          console.log(`${i} - directory\t: ${value.name}`);
         } else {
-          console.log(`${i++} - file\t: ${entity.value.name}`);
+          console.log(`${i} - file\t: ${value.name}`);
         }
-        entity = await iter.next();
+        ({ value, done } = await iter.next());
+        i++;
       }
 
       ```
@@ -623,20 +734,44 @@ methods:
       Example using `byPage()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFilesAndDirectories_ByPage
 
-      // passing optional maxPageSize in the page settings
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
+
+
+      const account = "<account>";
+
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
 
       let i = 1;
 
       for await (const response of directoryClient
         .listFilesAndDirectories()
         .byPage({ maxPageSize: 20 })) {
-        for (const fileItem of response.segment.fileItems) {
-          console.log(`${i++} - file\t: ${fileItem.name}`);
+        console.log(`Page ${i++}:`);
+        for (const item of response.segment.directoryItems) {
+          console.log(`\tdirectory: ${item.name}`);
         }
-        for (const dirItem of response.segment.directoryItems) {
-          console.log(`${i++} - directory\t: ${dirItem.name}`);
+        for (const item of response.segment.fileItems) {
+          console.log(`\tfile: ${item.name}`);
         }
       }
 
@@ -646,50 +781,69 @@ methods:
       Example using paging with a marker:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListFilesAndDirectories_Continuation
 
-      let i = 1;
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
+
+
+      const account = "<account>";
+
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
 
       let iterator = directoryClient.listFilesAndDirectories().byPage({
-      maxPageSize: 3 });
+      maxPageSize: 2 });
 
       let response = (await iterator.next()).value;
 
 
-      // Prints 3 file and directory names
-
-      for (const fileItem of response.segment.fileItems) {
-        console.log(`${i++} - file\t: ${fileItem.name}`);
+      for await (const item of response.segment.directoryItems) {
+        console.log(`\tdirectory: ${item.name}`);
       }
 
 
-      for (const dirItem of response.segment.directoryItems) {
-        console.log(`${i++} - directory\t: ${dirItem.name}`);
+      for await (const item of response.segment.fileItems) {
+        console.log(`\tfile: ${item.name}`);
       }
 
 
       // Gets next marker
 
-      let dirMarker = response.continuationToken;
+      let marker = response.continuationToken;
 
 
       // Passing next marker as continuationToken
 
       iterator = directoryClient
         .listFilesAndDirectories()
-        .byPage({ continuationToken: dirMarker, maxPageSize: 4 });
+        .byPage({ continuationToken: marker, maxPageSize: 10 });
       response = (await iterator.next()).value;
 
 
-      // Prints 10 file and directory names
-
-      for (const fileItem of response.segment.fileItems) {
-        console.log(`${i++} - file\t: ${fileItem.name}`);
+      for await (const item of response.segment.directoryItems) {
+        console.log(`\tdirectory: ${item.name}`);
       }
 
 
-      for (const dirItem of response.segment.directoryItems) {
-        console.log(`${i++} - directory\t: ${dirItem.name}`);
+      for await (const item of response.segment.fileItems) {
+        console.log(`\tfile: ${item.name}`);
       }
 
       ```
@@ -732,14 +886,35 @@ methods:
       Example using `for await` syntax:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListHandles
 
-      let i = 1;
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
 
-      let iter = dirClient.listHandles();
 
-      for await (const handle of iter) {
-        console.log(`Handle ${i++}: ${handle.path}, opened time ${handle.openTime}, clientIp ${handle.clientIp}`);
+      const account = "<account>";
+
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
+
+      for await (const handle of directoryClient.listHandles()) {
+        console.log(`Handle: ${handle.handleId}`);
       }
 
       ```
@@ -748,17 +923,40 @@ methods:
       Example using `iter.next()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListHandles_Iterator
 
-      let i = 1;
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
 
-      let iter = dirClient.listHandles();
 
-      let handleItem = await iter.next();
+      const account = "<account>";
 
-      while (!handleItem.done) {
-        console.log(`Handle ${i++}: ${handleItem.value.path}, opened time ${handleItem.value.openTime}, clientIp ${handleItem.value.clientIp}`);
-        handleItem = await iter.next();
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
+
+      const handleIter = directoryClient.listHandles();
+
+      let { value, done } = await handleIter.next();
+
+      while (!done) {
+        console.log(`Handle: ${value.handleId}`);
+        ({ value, done } = await handleIter.next());
       }
 
       ```
@@ -767,18 +965,40 @@ methods:
       Example using `byPage()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListHandles_ByPage
 
-      // passing optional maxPageSize in the page settings
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
+
+
+      const account = "<account>";
+
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
 
       let i = 1;
 
-      for await (const response of dirClient.listHandles({ recursive: true
-      }).byPage({ maxPageSize: 20 })) {
-        if (response.handleList) {
-          for (const handle of response.handleList) {
-            console.log(`Handle ${i++}: ${handle.path}, opened time ${handle.openTime}, clientIp ${handle.clientIp}`);
-          }
+      for await (const response of directoryClient.listHandles().byPage({
+      maxPageSize: 20 })) {
+        console.log(`Page ${i++}:`);
+        for (const handle of response.handleList || []) {
+          console.log(`\thandle: ${handle.handleId}`);
         }
       }
 
@@ -788,46 +1008,58 @@ methods:
       Example using paging with a marker:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListHandles_Continuation
 
-      let i = 1;
-
-      let iterator = dirClient.listHandles().byPage({ maxPageSize: 2 });
-
-      let response = await iterator.next();
+      import { StorageSharedKeyCredential, ShareServiceClient } from
+      "@azure/storage-file-share";
 
 
-      // Prints 2 handles
+      const account = "<account>";
 
-      if (response.value.handleList) {
-        for (const handle of response.value.handleList) {
-          console.log(`Handle ${i++}: ${handle.path}, opened time ${handle.openTime}, clientIp ${handle.clientIp}`);
-        }
+      const accountKey = "<accountkey>";
+
+
+      const credential = new StorageSharedKeyCredential(account, accountKey);
+
+      const serviceClient = new ShareServiceClient(
+        `https://${account}.file.core.windows.net`,
+        credential,
+      );
+
+
+      const shareName = "<share name>";
+
+      const directoryName = "<directory name>";
+
+      const directoryClient =
+      serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
+
+      let iterator = directoryClient.listHandles().byPage({ maxPageSize: 2 });
+
+      let response = (await iterator.next()).value;
+
+
+      for await (const handle of response.handleList || []) {
+        console.log(`\thandle: ${handle.handleId}`);
       }
 
 
       // Gets next marker
 
-      let marker = response.value.continuationToken;
+      let marker = response.continuationToken;
 
 
       // Passing next marker as continuationToken
 
-      console.log(`    continuation`);
+      iterator = directoryClient.listHandles().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
 
-      iterator = dirClient.listHandles().byPage({ continuationToken: marker,
-      maxPageSize: 10 });
-
-      response = await iterator.next();
+      response = (await iterator.next()).value;
 
 
-      // Prints 2 more handles assuming you have more than four directory/files
-      opened
-
-      if (!response.done && response.value.handleList) {
-        for (const handle of response.value.handleList) {
-          console.log(`Handle ${i++}: ${handle.path}, opened time ${handle.openTime}, clientIp ${handle.clientIp}`);
-        }
+      for await (const handle of response.handleList || []) {
+        console.log(`\thandle: ${handle.handleId}`);
       }
 
       ```
@@ -876,16 +1108,45 @@ methods:
           type: <xref uid="@azure/storage-file-share.DirectoryRenameOptions" />
           description: Options for the renaming operation.
       return:
-        description: |-
+        description: >-
           Response data for the file renaming operation.
+
 
           Example usage:
 
-          ```js
 
-          // Rename the directory
-          await diretoryClient.rename(destinationPath);
-          console.log("Renamed directory successfully!");
+          ```ts snippet:ReadmeSampleRenameDirectory
+
+          import { StorageSharedKeyCredential, ShareServiceClient } from
+          "@azure/storage-file-share";
+
+
+          const account = "<account>";
+
+          const accountKey = "<accountkey>";
+
+
+          const credential = new StorageSharedKeyCredential(account,
+          accountKey);
+
+          const serviceClient = new ShareServiceClient(
+            `https://${account}.file.core.windows.net`,
+            credential,
+          );
+
+
+          const shareName = "<share name>";
+
+          const directoryName = "<directory name>";
+
+          const destinationPath = "<destination path>";
+
+          const directoryClient =
+          serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
+
+          await directoryClient.rename(destinationPath);
+
           ```
         type: >-
           Promise&lt;{ destinationDirectoryClient: ShareDirectoryClient,

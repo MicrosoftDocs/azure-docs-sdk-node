@@ -1,7 +1,7 @@
 ---
 title: Azure Agriculture Platform SDK for JavaScript
 description: Reference for Azure Agriculture Platform SDK for JavaScript
-ms.date: 05/28/2025
+ms.date: 05/29/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: agricultureplatform

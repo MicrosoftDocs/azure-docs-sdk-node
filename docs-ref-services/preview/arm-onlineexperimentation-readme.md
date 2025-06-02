@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: onlineexperimentation
 ---
-# Azure OnlineExperimentation client library for JavaScript - version 1.0.0-alpha.20250509.1 
+# Azure OnlineExperimentation client library for JavaScript - version 1.0.0-alpha.20250516.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure OnlineExperimentation client.

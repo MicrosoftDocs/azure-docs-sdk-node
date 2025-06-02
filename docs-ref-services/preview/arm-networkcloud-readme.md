@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: networkcloud
 ---
-# Azure NetworkCloud client library for JavaScript - version 1.1.1-alpha.20250410.1 
+# Azure NetworkCloud client library for JavaScript - version 1.2.0-alpha.20250514.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure NetworkCloud client.

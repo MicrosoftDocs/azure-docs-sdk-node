@@ -6,6 +6,7 @@ type: package
 classes:
   - '@typespec/ts-http-runtime.AbortError'
   - '@typespec/ts-http-runtime.RestError'
+  - '@typespec/ts-http-runtime.Sanitizer'
 interfaces:
   - '@typespec/ts-http-runtime.AddPolicyOptions'
   - '@typespec/ts-http-runtime.AdditionalPolicyConfig'
@@ -52,6 +53,15 @@ interfaces:
   - '@typespec/ts-http-runtime.TelemetryOptions'
   - '@typespec/ts-http-runtime.TlsSettings'
   - '@typespec/ts-http-runtime.UserAgentPolicyOptions'
+  - '@typespec/ts-http-runtime.CreateLoggerContextOptions'
+  - '@typespec/ts-http-runtime.LoggerContext'
+  - '@typespec/ts-http-runtime.DefaultRetryPolicyOptions'
+  - '@typespec/ts-http-runtime.ExponentialRetryPolicyOptions'
+  - '@typespec/ts-http-runtime.RetryInformation'
+  - '@typespec/ts-http-runtime.RetryModifiers'
+  - '@typespec/ts-http-runtime.RetryPolicyOptions'
+  - '@typespec/ts-http-runtime.RetryStrategy'
+  - '@typespec/ts-http-runtime.SanitizerOptions'
 functions:
   - name: TypeSpecRuntimeLogger(any[])
     uid: '@typespec/ts-http-runtime.TypeSpecRuntimeLogger'
@@ -285,6 +295,447 @@ functions:
       return:
         description: a string of the encoded string
         type: string
+  - name: createLoggerContext(CreateLoggerContextOptions)
+    uid: '@typespec/ts-http-runtime.createLoggerContext'
+    package: '@typespec/ts-http-runtime'
+    summary: Creates a logger context base on the provided options.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createLoggerContext(options: CreateLoggerContextOptions):
+        LoggerContext
+      parameters:
+        - id: options
+          type: <xref uid="@typespec/ts-http-runtime.CreateLoggerContextOptions" />
+          description: The options for creating a logger context.
+      return:
+        description: The logger context.
+        type: <xref uid="@typespec/ts-http-runtime.LoggerContext" />
+  - name: agentPolicy(Agent)
+    uid: '@typespec/ts-http-runtime.agentPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: Gets a pipeline policy that sets http.agent
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function agentPolicy(agent?: Agent): PipelinePolicy'
+      parameters:
+        - id: agent
+          type: <xref uid="@typespec/ts-http-runtime.Agent" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: decompressResponsePolicy()
+    uid: '@typespec/ts-http-runtime.decompressResponsePolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      A policy to enable response decompression according to Accept-Encoding
+      header
+
+      https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function decompressResponsePolicy(): PipelinePolicy'
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: defaultRetryPolicy(DefaultRetryPolicyOptions)
+    uid: '@typespec/ts-http-runtime.defaultRetryPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      A policy that retries according to three strategies:
+
+      - When the server sends a 429 response with a Retry-After header.
+
+      - When there are errors in the underlying transport layer (e.g. DNS lookup
+      failures).
+
+      - Or otherwise if the outgoing request fails, it will retry with an
+      exponentially increasing delay.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function defaultRetryPolicy(options?: DefaultRetryPolicyOptions):
+        PipelinePolicy
+      parameters:
+        - id: options
+          type: <xref uid="@typespec/ts-http-runtime.DefaultRetryPolicyOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: exponentialRetryPolicy(ExponentialRetryPolicyOptions)
+    uid: '@typespec/ts-http-runtime.exponentialRetryPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      A policy that attempts to retry requests while introducing an
+      exponentially increasing delay.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function exponentialRetryPolicy(options?:
+        ExponentialRetryPolicyOptions): PipelinePolicy
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@typespec/ts-http-runtime.ExponentialRetryPolicyOptions"
+            />
+          description: Options that configure retry logic.
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: formDataPolicy()
+    uid: '@typespec/ts-http-runtime.formDataPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: A policy that encodes FormData on the request into the body.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function formDataPolicy(): PipelinePolicy'
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: getDefaultProxySettings(string)
+    uid: '@typespec/ts-http-runtime.getDefaultProxySettings'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      This method converts a proxy url into `ProxySettings` for use with
+      ProxyPolicy.
+
+      If no argument is given, it attempts to parse a proxy URL from the
+      environment
+
+      variables `HTTPS_PROXY` or `HTTP_PROXY`.
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      - Internally this method is no longer necessary when setting proxy
+      information.
+    syntax:
+      content: >-
+        function getDefaultProxySettings(proxyUrl?: string): ProxySettings |
+        undefined
+      parameters:
+        - id: proxyUrl
+          type: string
+          description: The url of the proxy to use. May contain authentication information.
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.ProxySettings" /> | undefined
+  - name: logPolicy(LogPolicyOptions)
+    uid: '@typespec/ts-http-runtime.logPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: A policy that logs all requests and responses.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function logPolicy(options?: LogPolicyOptions): PipelinePolicy'
+      parameters:
+        - id: options
+          type: <xref uid="@typespec/ts-http-runtime.LogPolicyOptions" />
+          description: Options to configure logPolicy.
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: multipartPolicy()
+    uid: '@typespec/ts-http-runtime.multipartPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: Pipeline policy for multipart requests
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function multipartPolicy(): PipelinePolicy'
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: 'proxyPolicy(ProxySettings, { customNoProxyList?: string[] })'
+    uid: '@typespec/ts-http-runtime.proxyPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      A policy that allows one to apply proxy settings to all requests.
+      If not passed static settings, they will be retrieved from the HTTPS_PROXY
+      or HTTP_PROXY environment variables.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function proxyPolicy(proxySettings?: ProxySettings, options?: {
+        customNoProxyList?: string[] }): PipelinePolicy
+      parameters:
+        - id: proxySettings
+          type: <xref uid="@typespec/ts-http-runtime.ProxySettings" />
+          description: ProxySettings to use on each request.
+        - id: options
+          type: '{ customNoProxyList?: string[] }'
+          description: additional settings, for example, custom NO_PROXY patterns
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: redirectPolicy(RedirectPolicyOptions)
+    uid: '@typespec/ts-http-runtime.redirectPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      A policy to follow Location headers from the server in order
+      to support server-side redirection.
+      In the browser, this policy is not used.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function redirectPolicy(options?: RedirectPolicyOptions): PipelinePolicy'
+      parameters:
+        - id: options
+          type: <xref uid="@typespec/ts-http-runtime.RedirectPolicyOptions" />
+          description: Options to control policy behavior.
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: retryPolicy(RetryStrategy[], RetryPolicyOptions)
+    uid: '@typespec/ts-http-runtime.retryPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      retryPolicy is a generic policy to enable retrying requests when certain
+      conditions are met
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function retryPolicy(strategies: RetryStrategy[], options?:
+        RetryPolicyOptions): PipelinePolicy
+      parameters:
+        - id: strategies
+          type: <xref uid="@typespec/ts-http-runtime.RetryStrategy" />[]
+          description: ''
+        - id: options
+          type: <xref uid="@typespec/ts-http-runtime.RetryPolicyOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: systemErrorRetryPolicy(SystemErrorRetryPolicyOptions)
+    uid: '@typespec/ts-http-runtime.systemErrorRetryPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      A retry policy that specifically seeks to handle errors in the
+      underlying transport layer (e.g. DNS lookup failures) rather than
+      retryable error codes from the server itself.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function systemErrorRetryPolicy(options?:
+        SystemErrorRetryPolicyOptions): PipelinePolicy
+      parameters:
+        - id: options
+          type: SystemErrorRetryPolicyOptions
+          description: Options that customize the policy.
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: throttlingRetryPolicy(ThrottlingRetryPolicyOptions)
+    uid: '@typespec/ts-http-runtime.throttlingRetryPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      A policy that retries when the server sends a 429 response with a
+      Retry-After header.
+
+
+      To learn more, please refer to
+
+      https://learn.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-request-limits,
+
+      https://learn.microsoft.com/en-us/azure/azure-subscription-service-limits
+      and
+
+      https://learn.microsoft.com/en-us/azure/virtual-machines/troubleshooting/troubleshooting-throttling-errors
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function throttlingRetryPolicy(options?: ThrottlingRetryPolicyOptions):
+        PipelinePolicy
+      parameters:
+        - id: options
+          type: ThrottlingRetryPolicyOptions
+          description: Options that configure retry logic.
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: tlsPolicy(TlsSettings)
+    uid: '@typespec/ts-http-runtime.tlsPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Gets a pipeline policy that adds the client certificate to the HttpClient
+      agent for authentication.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function tlsPolicy(tlsSettings?: TlsSettings): PipelinePolicy'
+      parameters:
+        - id: tlsSettings
+          type: <xref uid="@typespec/ts-http-runtime.TlsSettings" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: userAgentPolicy(UserAgentPolicyOptions)
+    uid: '@typespec/ts-http-runtime.userAgentPolicy'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      A policy that sets the User-Agent header (or equivalent) to reflect
+      the library version.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function userAgentPolicy(options?: UserAgentPolicyOptions):
+        PipelinePolicy
+      parameters:
+        - id: options
+          type: <xref uid="@typespec/ts-http-runtime.UserAgentPolicyOptions" />
+          description: Options to customize the user agent value.
+      return:
+        description: ''
+        type: <xref uid="@typespec/ts-http-runtime.PipelinePolicy" />
+  - name: >-
+      calculateRetryDelay(number, { maxRetryDelayInMs: number, retryDelayInMs:
+      number })
+    uid: '@typespec/ts-http-runtime.calculateRetryDelay'
+    package: '@typespec/ts-http-runtime'
+    summary: >-
+      Calculates the delay interval for retry attempts using exponential delay
+      with jitter.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function calculateRetryDelay(retryAttempt: number, config: {
+        maxRetryDelayInMs: number, retryDelayInMs: number }): { retryAfterInMs:
+        number }
+      parameters:
+        - id: retryAttempt
+          type: number
+          description: The current retry attempt number.
+        - id: config
+          type: '{ maxRetryDelayInMs: number, retryDelayInMs: number }'
+          description: The exponential retry configuration.
+      return:
+        description: An object containing the calculated retry delay.
+        type: '{ retryAfterInMs: number }'
+  - name: computeSha256Hash(string, "base64" | "hex")
+    uid: '@typespec/ts-http-runtime.computeSha256Hash'
+    package: '@typespec/ts-http-runtime'
+    summary: Generates a SHA-256 hash.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function computeSha256Hash(content: string, encoding: "base64" | "hex"):
+        Promise<string>
+      parameters:
+        - id: content
+          type: string
+          description: The data to be included in the hash.
+        - id: encoding
+          type: '"base64" | "hex"'
+          description: The textual encoding to use for the returned hash.
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: computeSha256Hmac(string, string, "base64" | "hex")
+    uid: '@typespec/ts-http-runtime.computeSha256Hmac'
+    package: '@typespec/ts-http-runtime'
+    summary: Generates a SHA-256 HMAC signature.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function computeSha256Hmac(key: string, stringToSign: string, encoding:
+        "base64" | "hex"): Promise<string>
+      parameters:
+        - id: key
+          type: string
+          description: >-
+            The HMAC key represented as a base64 string, used to generate the
+            cryptographic HMAC hash.
+        - id: stringToSign
+          type: string
+          description: The data to be signed.
+        - id: encoding
+          type: '"base64" | "hex"'
+          description: The textual encoding to use for the returned HMAC digest.
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: getRandomIntegerInclusive(number, number)
+    uid: '@typespec/ts-http-runtime.getRandomIntegerInclusive'
+    package: '@typespec/ts-http-runtime'
+    summary: |-
+      Returns a random integer value between a lower and upper bound,
+      inclusive of both bounds.
+      Note that this uses Math.random and isn't secure. If you need to use
+      this for any kind of security purpose, find a better source of random.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getRandomIntegerInclusive(min: number, max: number): number'
+      parameters:
+        - id: min
+          type: number
+          description: The smallest integer value allowed.
+        - id: max
+          type: number
+          description: The largest integer value allowed.
+      return:
+        description: ''
+        type: number
+  - name: isError(unknown)
+    uid: '@typespec/ts-http-runtime.isError'
+    package: '@typespec/ts-http-runtime'
+    summary: Typeguard for an error object shape (has name and message)
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
+  - name: isObject(unknown)
+    uid: '@typespec/ts-http-runtime.isObject'
+    package: '@typespec/ts-http-runtime'
+    summary: Helper to determine when an input is a generic JS object.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isObject(input: unknown): input'
+      parameters:
+        - id: input
+          type: unknown
+          description: ''
+      return:
+        description: >-
+          true when input is an object type that is not null, Array, RegExp, or
+          Date.
+        type: input
+  - name: randomUUID()
+    uid: '@typespec/ts-http-runtime.randomUUID'
+    package: '@typespec/ts-http-runtime'
+    summary: Generated Universally Unique Identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function randomUUID(): string'
+      return:
+        description: RFC4122 v4 UUID.
+        type: string
 typeAliases:
   - '@typespec/ts-http-runtime.AuthScheme'
   - '@typespec/ts-http-runtime.ClientCredential'
@@ -311,3 +762,4 @@ typeAliases:
   - '@typespec/ts-http-runtime.TransferProgressEvent'
   - '@typespec/ts-http-runtime.TypeSpecRuntimeClientLogger'
   - '@typespec/ts-http-runtime.TypeSpecRuntimeLogLevel'
+  - '@typespec/ts-http-runtime.UnknownObject'

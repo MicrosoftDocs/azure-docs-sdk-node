@@ -42,20 +42,22 @@ constructors:
             ### Example using an account name/key:
 
 
-            ```js
+            ```ts snippet:ReadmeSampleCreateClient_NamedKeyCredential
 
-            const { AzureNamedKeyCredential, TableServiceClient } =
-            require("@azure/data-tables")
-
-            const account = "<storage account name>"
-
-            const sharedKeyCredential = new AzureNamedKeyCredential(account,
-            "<account key>");
+            import { AzureNamedKeyCredential, TableServiceClient } from
+            "@azure/data-tables";
 
 
-            const tableServiceClient = new TableServiceClient(
+            const account = "<account>";
+
+            const accountKey = "<accountkey>";
+
+
+            const credential = new AzureNamedKeyCredential(account, accountKey);
+
+            const serviceClient = new TableServiceClient(
               `https://${account}.table.core.windows.net`,
-              sharedKeyCredential
+              credential,
             );
 
             ```
@@ -87,20 +89,20 @@ constructors:
             ### Example using a SAS Token.
 
 
-            ```js
+            ```ts snippet:ReadmeSampleCreateClient_SASToken
 
-            const { AzureSASCredential, TableServiceClient } =
-            require("@azure/data-tables")
-
-            const account = "<storage account name>"
-
-            const sasCredential = new AzureSASCredential(account, "<account
-            key>");
+            import { TableServiceClient, AzureSASCredential } from
+            "@azure/data-tables";
 
 
-            const tableServiceClient = new TableServiceClient(
+            const account = "<account name>";
+
+            const sas = "<service Shared Access Signature Token>";
+
+
+            const serviceClientWithSAS = new TableServiceClient(
               `https://${account}.table.core.windows.net`,
-              sasCredential
+              new AzureSASCredential(sas),
             );
 
             ```
@@ -126,11 +128,14 @@ constructors:
             Options to configure the HTTP pipeline.
             Example appending a SAS token:
 
-            ```js
-            const account = "<storage account name>";
-            const sasToken = "<SAS token>";
+            ```ts snippet:ReadmeSampleCreateClient_SASTokenURL
+            import { TableServiceClient } from "@azure/data-tables";
 
-            const tableServiceClient = new TableServiceClient(
+            const account = "<account name>";
+            const sasToken = "<SAS token>";
+            const tableName = "<tableName>";
+
+            const serviceClientWithSASURL = new TableServiceClient(
               `https://${account}.table.core.windows.net?${sasToken}`,
             );
             ```
@@ -160,15 +165,16 @@ constructors:
 
             ### Example using an Azure Active Directory credential:
 
-            ```js
-            cons { DefaultAzureCredential } = require("@azure/identity");
-            const { TableServiceClient } = require("@azure/data-tables")
-            const account = "<storage account name>"
-            const credential = new DefaultAzureCredential();
+            ```ts snippet:ReadmeSampleCreateClient_TokenCredential
+            import { DefaultAzureCredential } from "@azure/identity";
+            import { TableServiceClient } from "@azure/data-tables";
 
-            const tableServiceClient = new TableServiceClient(
+            const credential = new DefaultAzureCredential();
+            const account = "<account name>";
+
+            const clientWithAAD = new TableServiceClient(
               `https://${account}.table.core.windows.net`,
-              credential
+              credential,
             );
             ```
 properties:
@@ -281,7 +287,7 @@ methods:
     syntax:
       content: >-
         function getProperties(options?: OperationOptions):
-        Promise<GetPropertiesResponse>
+        Promise<ServiceGetPropertiesResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/core-client.OperationOptions" />
@@ -303,7 +309,7 @@ methods:
     syntax:
       content: >-
         function getStatistics(options?: OperationOptions):
-        Promise<GetStatisticsResponse>
+        Promise<ServiceGetStatisticsResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/core-client.OperationOptions" />
@@ -332,7 +338,7 @@ methods:
           uid="@azure/data-tables.TableItem" />, <xref
           uid="@azure/data-tables.TableItemResultPage" />, <xref
           uid="@azure/core-paging.PageSettings" />&gt;
-  - name: setProperties(ServiceProperties, SetPropertiesOptions)
+  - name: setProperties(TableServiceProperties, ServiceSetPropertiesOptionalParams)
     uid: '@azure/data-tables.TableServiceClient.setProperties'
     package: '@azure/data-tables'
     summary: >-
@@ -344,8 +350,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function setProperties(properties: ServiceProperties, options?:
-        SetPropertiesOptions): Promise<ServiceSetPropertiesHeaders>
+        function setProperties(properties: TableServiceProperties, options?:
+        ServiceSetPropertiesOptionalParams):
+        Promise<ServiceSetPropertiesHeaders>
       parameters:
         - id: properties
           type: <xref uid="@azure/data-tables.ServiceProperties" />

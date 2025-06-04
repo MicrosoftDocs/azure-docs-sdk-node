@@ -1,0 +1,236 @@
+### YamlMime:TSType
+name: Triggers
+uid: '@azure/cosmos.Triggers'
+package: '@azure/cosmos'
+summary: >-
+  Operations to create, upsert, query, and read all triggers.
+
+
+  Use `container.triggers` to read, replace, or delete a
+  [Trigger](xref:@azure/cosmos.Trigger).
+fullName: Triggers
+remarks: ''
+isDeprecated: false
+type: class
+properties:
+  - name: container
+    uid: '@azure/cosmos.Triggers.container'
+    package: '@azure/cosmos'
+    summary: ''
+    fullName: container
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'container: Container'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.Container" />
+methods:
+  - name: create(TriggerDefinition, RequestOptions)
+    uid: '@azure/cosmos.Triggers.create'
+    package: '@azure/cosmos'
+    summary: >+
+      Create a trigger.
+
+
+      Azure Cosmos DB supports pre and post triggers defined in JavaScript to be
+      executed
+
+      on creates, updates and deletes.
+
+
+      For additional details, refer to the server-side JavaScript API
+      documentation.
+
+
+      **Example**
+
+
+      ```ts snippet:TriggersCreate
+
+      import { CosmosClient, TriggerDefinition, TriggerType, TriggerOperation }
+      from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const triggerDefinition: TriggerDefinition = {
+        id: "sample trigger",
+        body: "serverScript() { var x = 10; }",
+        triggerType: TriggerType.Pre,
+        triggerOperation: TriggerOperation.All,
+      };
+
+
+      const { resource: trigger } = await
+      container.scripts.triggers.create(triggerDefinition);
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(body: TriggerDefinition, options?: RequestOptions):
+        Promise<TriggerResponse>
+      parameters:
+        - id: body
+          type: <xref uid="@azure/cosmos.TriggerDefinition" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/cosmos.RequestOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.TriggerResponse" />&gt;
+  - name: query(SqlQuerySpec, FeedOptions)
+    uid: '@azure/cosmos.Triggers.query'
+    package: '@azure/cosmos'
+    summary: Query all Triggers.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function query(query: SqlQuerySpec, options?: FeedOptions):
+        QueryIterator<any>
+      parameters:
+        - id: query
+          type: <xref uid="@azure/cosmos.SqlQuerySpec" />
+          description: >-
+            Query configuration for the operation. See
+            [SqlQuerySpec](xref:@azure/cosmos.SqlQuerySpec) for more info on how
+            to configure a query.
+        - id: options
+          type: <xref uid="@azure/cosmos.FeedOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;any&gt;
+  - name: query<T>(SqlQuerySpec, FeedOptions)
+    uid: '@azure/cosmos.Triggers.query_1'
+    package: '@azure/cosmos'
+    summary: >+
+      Query all Triggers.
+
+
+      **Example**
+
+
+      ```ts snippet:TriggersQuery
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const querySpec = {
+        query: "SELECT * FROM root r WHERE r.id=@id",
+        parameters: [
+          {
+            name: "@id",
+            value: "<trigger-id>",
+          },
+        ],
+      };
+
+      const { resources: results } = await
+      container.scripts.triggers.query(querySpec).fetchAll();
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function query<T>(query: SqlQuerySpec, options?: FeedOptions):
+        QueryIterator<T>
+      parameters:
+        - id: query
+          type: <xref uid="@azure/cosmos.SqlQuerySpec" />
+          description: >-
+            Query configuration for the operation. See
+            [SqlQuerySpec](xref:@azure/cosmos.SqlQuerySpec) for more info on how
+            to configure a query.
+
+            *
+        - id: options
+          type: <xref uid="@azure/cosmos.FeedOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
+  - name: readAll(FeedOptions)
+    uid: '@azure/cosmos.Triggers.readAll'
+    package: '@azure/cosmos'
+    summary: >+
+      Read all Triggers.
+
+
+      **Example**
+
+
+      Read all trigger to array.
+
+      ```ts snippet:TriggersReadAllTriggers
+
+      import { CosmosClient } from "@azure/cosmos";
+
+
+      const endpoint = "https://your-account.documents.azure.com";
+
+      const key = "<database account masterkey>";
+
+      const client = new CosmosClient({ endpoint, key });
+
+
+      const { database } = await client.databases.createIfNotExists({ id: "Test
+      Database" });
+
+
+      const { container } = await database.containers.createIfNotExists({ id:
+      "Test Container" });
+
+
+      const { resources: triggerList } = await
+      container.scripts.triggers.readAll().fetchAll();
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function readAll(options?: FeedOptions): QueryIterator<TriggerDefinition
+        & Resource>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/cosmos.FeedOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/cosmos.QueryIterator" />&lt;<xref
+          uid="@azure/cosmos.TriggerDefinition" /> & <xref
+          uid="@azure/cosmos.Resource" />&gt;

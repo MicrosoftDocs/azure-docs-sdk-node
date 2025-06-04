@@ -160,6 +160,21 @@ properties:
       return:
         description: ''
         type: string[]
+  - name: tokenCredential
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.tokenCredential
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: |-
+      Gets the TokenCredential instance if configured.
+      Only available if using AAD-based authentication via TokenCredential.
+    fullName: tokenCredential
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: any tokenCredential
+      return:
+        description: ''
+        type: any
   - name: voiceName
     uid: microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.voiceName
     package: microsoft-cognitiveservices-speech-sdk
@@ -456,7 +471,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        static function fromEndpoint(endpoint: URL, subscriptionKey: string):
+        static function fromEndpoint(endpoint: URL, subscriptionKey?: string):
         SpeechTranslationConfig
       parameters:
         - id: endpoint
@@ -466,7 +481,57 @@ methods:
           type: string
           description: The subscription key.
       return:
-        description: A speech config instance.
+        description: A speech translation config instance.
+        type: >-
+          <xref
+          uid="microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig"
+          />
+  - name: fromEndpoint(URL, TokenCredential)
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromEndpoint_1
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: >-
+      Creates a speech configuration instance using a specified endpoint and
+      Azure Active Directory (AAD) token credential.
+
+      This API is available for **TranslationRecognizer**.
+
+      Intended for use with **non-standard resource paths** or **custom
+      parameter overrides**.
+
+      Query parameters specified in the endpoint URL **are not overridden** by
+      other APIs.
+
+      For example, if the URL includes "language=de-DE" but
+      "speechRecognitionLanguage" is set to "en-US",
+
+      the value from the URL "de-DE" takes precedence — if the parameter is
+      supported by the scenario.
+
+      Parameters **not present in the URL** can still be updated via other APIs.
+
+      To authenticate with a **subscription key**, use
+      SpeechTranslationConfig.fromEndpoint with a key argument.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromEndpoint(endpoint: URL, tokenCredential:
+        TokenCredential): SpeechTranslationConfig
+      parameters:
+        - id: endpoint
+          type: URL
+          description: >-
+            The full service endpoint URL (e.g., for custom domains or private
+            links).
+
+            See:
+            https://learn.microsoft.com/azure/ai-services/speech-service/speech-services-private-link?tabs=portal#create-a-custom-domain-name.
+        - id: tokenCredential
+          type: TokenCredential
+          description: The AAD token credential used for authentication and token requests.
+      return:
+        description: A speech translation config instance.
         type: >-
           <xref
           uid="microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig"
@@ -498,7 +563,7 @@ methods:
     syntax:
       content: >-
         static function fromHost(hostName: URL, subscriptionKey?: string):
-        SpeechConfig
+        SpeechTranslationConfig
       parameters:
         - id: hostName
           type: URL
@@ -510,7 +575,10 @@ methods:
             authorization token must be set.
       return:
         description: A speech factory instance.
-        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
+        type: >-
+          <xref
+          uid="microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig"
+          />
   - name: fromSubscription(string, string)
     uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromSubscription

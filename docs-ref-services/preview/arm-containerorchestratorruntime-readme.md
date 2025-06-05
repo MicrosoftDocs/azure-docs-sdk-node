@@ -1,12 +1,12 @@
 ---
 title: Azure KubernetesRuntime client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-containerorchestratorruntime, kubernetesruntime
-ms.date: 06/04/2025
+ms.date: 06/05/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesruntime
 ---
-# Azure KubernetesRuntime client library for JavaScript - version 1.0.0-alpha.20250530.1 
+# Azure KubernetesRuntime client library for JavaScript - version 1.0.0-alpha.20250603.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure KubernetesRuntime client.

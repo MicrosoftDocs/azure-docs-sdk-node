@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: arizeai
 ---
-# Azure Arize AI SDK for JavaScript - preview
-## Packages - preview
+# Azure Arize AI SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](arize-ai-index.md)]

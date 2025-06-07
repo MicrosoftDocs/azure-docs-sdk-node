@@ -4,8 +4,12 @@ name: '@azure/communication-call-automation'
 summary: ''
 type: package
 enums:
+  - '@azure/communication-call-automation.Channel'
   - '@azure/communication-call-automation.DtmfTone'
   - '@azure/communication-call-automation.KnownCallRejectReason'
+  - '@azure/communication-call-automation.KnownMediaStreamingAudioChannelType'
+  - '@azure/communication-call-automation.KnownMediaStreamingContentType'
+  - '@azure/communication-call-automation.KnownStreamingTransportType'
   - '@azure/communication-call-automation.RecognizeInputType'
   - '@azure/communication-call-automation.VoiceKind'
 classes:
@@ -13,6 +17,7 @@ classes:
   - '@azure/communication-call-automation.CallConnection'
   - '@azure/communication-call-automation.CallMedia'
   - '@azure/communication-call-automation.CallRecording'
+  - '@azure/communication-call-automation.StreamingData'
 interfaces:
   - '@azure/communication-call-automation.AddParticipantFailed'
   - '@azure/communication-call-automation.AddParticipantOptions'
@@ -20,6 +25,8 @@ interfaces:
   - '@azure/communication-call-automation.AddParticipantSucceeded'
   - '@azure/communication-call-automation.AnswerCallOptions'
   - '@azure/communication-call-automation.AnswerFailed'
+  - '@azure/communication-call-automation.AudioData'
+  - '@azure/communication-call-automation.AudioMetadata'
   - '@azure/communication-call-automation.CallAutomationClientOptions'
   - '@azure/communication-call-automation.CallConnected'
   - '@azure/communication-call-automation.CallConnectionProperties'
@@ -33,6 +40,7 @@ interfaces:
   - '@azure/communication-call-automation.CallMediaRecognizeSpeechOptions'
   - '@azure/communication-call-automation.CallMediaRecognizeSpeechOrDtmfOptions'
   - '@azure/communication-call-automation.CallParticipant'
+  - '@azure/communication-call-automation.CallResult'
   - '@azure/communication-call-automation.CallTransferAccepted'
   - '@azure/communication-call-automation.CallTransferFailed'
   - '@azure/communication-call-automation.CancelAddParticipantFailed'
@@ -50,13 +58,20 @@ interfaces:
   - '@azure/communication-call-automation.CreateCallFailed'
   - '@azure/communication-call-automation.CreateCallOptions'
   - '@azure/communication-call-automation.DownloadRecordingOptions'
+  - '@azure/communication-call-automation.DtmfData'
   - '@azure/communication-call-automation.DtmfResult'
   - '@azure/communication-call-automation.FileSource'
   - '@azure/communication-call-automation.HoldFailed'
   - '@azure/communication-call-automation.HoldOptions'
   - '@azure/communication-call-automation.ListParticipantsResult'
+  - '@azure/communication-call-automation.MediaStreamingFailed'
+  - '@azure/communication-call-automation.MediaStreamingOptions'
+  - '@azure/communication-call-automation.MediaStreamingStarted'
+  - '@azure/communication-call-automation.MediaStreamingStopped'
+  - '@azure/communication-call-automation.MediaStreamingUpdate'
   - '@azure/communication-call-automation.MuteParticipantOption'
   - '@azure/communication-call-automation.MuteParticipantResult'
+  - '@azure/communication-call-automation.OutStreamingData'
   - '@azure/communication-call-automation.ParticipantsUpdated'
   - '@azure/communication-call-automation.PlayCanceled'
   - '@azure/communication-call-automation.PlayCompleted'
@@ -93,6 +108,9 @@ interfaces:
     @azure/communication-call-automation.RestContinuousDtmfRecognitionToneReceived
   - '@azure/communication-call-automation.RestCreateCallFailed'
   - '@azure/communication-call-automation.RestHoldFailed'
+  - '@azure/communication-call-automation.RestMediaStreamingFailed'
+  - '@azure/communication-call-automation.RestMediaStreamingStarted'
+  - '@azure/communication-call-automation.RestMediaStreamingStopped'
   - '@azure/communication-call-automation.RestParticipantsUpdated'
   - '@azure/communication-call-automation.RestPlayCanceled'
   - '@azure/communication-call-automation.RestPlayCompleted'
@@ -107,6 +125,10 @@ interfaces:
   - '@azure/communication-call-automation.RestResultInformation'
   - '@azure/communication-call-automation.RestSendDtmfTonesCompleted'
   - '@azure/communication-call-automation.RestSendDtmfTonesFailed'
+  - '@azure/communication-call-automation.RestTranscriptionFailed'
+  - '@azure/communication-call-automation.RestTranscriptionStarted'
+  - '@azure/communication-call-automation.RestTranscriptionStopped'
+  - '@azure/communication-call-automation.RestTranscriptionUpdated'
   - '@azure/communication-call-automation.ResultInformation'
   - '@azure/communication-call-automation.SendDtmfTonesCompleted'
   - '@azure/communication-call-automation.SendDtmfTonesFailed'
@@ -116,14 +138,30 @@ interfaces:
   - '@azure/communication-call-automation.SipUserToUserHeader'
   - '@azure/communication-call-automation.SpeechResult'
   - '@azure/communication-call-automation.SsmlSource'
+  - '@azure/communication-call-automation.StartMediaStreamingOptions'
   - '@azure/communication-call-automation.StartRecordingOptions'
+  - '@azure/communication-call-automation.StartTranscriptionOptions'
+  - '@azure/communication-call-automation.StopAudio'
+  - '@azure/communication-call-automation.StopMediaStreamingOptions'
+  - '@azure/communication-call-automation.StopTranscriptionOptions'
   - '@azure/communication-call-automation.TextSource'
+  - '@azure/communication-call-automation.TranscriptionData'
+  - '@azure/communication-call-automation.TranscriptionFailed'
+  - '@azure/communication-call-automation.TranscriptionMetadata'
+  - '@azure/communication-call-automation.TranscriptionOptions'
+  - '@azure/communication-call-automation.TranscriptionStarted'
+  - '@azure/communication-call-automation.TranscriptionStopped'
+  - '@azure/communication-call-automation.TranscriptionUpdate'
+  - '@azure/communication-call-automation.TranscriptionUpdated'
   - '@azure/communication-call-automation.TransferCallResult'
   - '@azure/communication-call-automation.TransferCallToParticipantOptions'
   - '@azure/communication-call-automation.UnholdOptions'
+  - '@azure/communication-call-automation.UpdateTranscriptionOptions'
   - '@azure/communication-call-automation.VoipHeader'
+  - '@azure/communication-call-automation.WordData'
 typeAliases:
   - '@azure/communication-call-automation.AnswerCallResult'
+  - '@azure/communication-call-automation.AudioFormat'
   - '@azure/communication-call-automation.CallAutomationEvent'
   - '@azure/communication-call-automation.CallConnectionStateModel'
   - '@azure/communication-call-automation.CallLocatorType'
@@ -136,6 +174,9 @@ typeAliases:
   - '@azure/communication-call-automation.GetParticipantOptions'
   - '@azure/communication-call-automation.GetRecordingPropertiesOptions'
   - '@azure/communication-call-automation.HangUpOptions'
+  - '@azure/communication-call-automation.MediaKind'
+  - '@azure/communication-call-automation.MediaStreamingAudioChannelType'
+  - '@azure/communication-call-automation.MediaStreamingContentType'
   - '@azure/communication-call-automation.PauseRecordingOptions'
   - '@azure/communication-call-automation.RecognitionType'
   - '@azure/communication-call-automation.RecordingChannel'
@@ -147,8 +188,36 @@ typeAliases:
   - '@azure/communication-call-automation.RedirectCallOptions'
   - '@azure/communication-call-automation.ResumeRecordingOptions'
   - '@azure/communication-call-automation.StopRecordingOptions'
+  - '@azure/communication-call-automation.StreamingDataKind'
+  - '@azure/communication-call-automation.StreamingDataResult'
   - '@azure/communication-call-automation.Tone'
 functions:
+  - name: createOutboundAudioData(string)
+    uid: '@azure/communication-call-automation.createOutboundAudioData'
+    package: '@azure/communication-call-automation'
+    summary: Helper function to create outbound audio data payload.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function createOutboundAudioData(data: string): string'
+      parameters:
+        - id: data
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: string
+  - name: createOutboundStopAudioData()
+    uid: '@azure/communication-call-automation.createOutboundStopAudioData'
+    package: '@azure/communication-call-automation'
+    summary: Helper function to create outbound stop audio data payload.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function createOutboundStopAudioData(): string'
+      return:
+        description: ''
+        type: string
   - name: parseCallAutomationEvent(string | Record<string, unknown>)
     uid: '@azure/communication-call-automation.parseCallAutomationEvent'
     package: '@azure/communication-call-automation'

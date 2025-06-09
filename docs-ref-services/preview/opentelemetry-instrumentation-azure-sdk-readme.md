@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/opentelemetry-instrumentation-azure-sdk, instrumentation
-ms.date: 02/11/2025
+ms.date: 06/09/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: instrumentation
@@ -15,7 +15,7 @@ ms.service: instrumentation
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.8/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.9/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -53,6 +53,7 @@ import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import { createAzureSdkInstrumentation } from "@azure/opentelemetry-instrumentation-azure-sdk";
 import { KeyClient } from "@azure/keyvault-keys";
 import { DefaultAzureCredential } from "@azure/identity";
+import { trace, context } from "@opentelemetry/api";
 
 // Set-up and configure a Node Tracer Provider using OpenTelemetry SDK.
 const provider = new NodeTracerProvider();
@@ -75,9 +76,9 @@ await keyClient.getKey("MyKeyName");
 // If your scenario requires manual span propagation, all Azure client libraries
 // support explicitly passing a parent context via an `options` parameter.
 // Get a tracer from a registered provider, create a span, and get the current context.
-const tracer = opentelemetry.trace.getTracer("my-tracer");
+const tracer = trace.getTracer("my-tracer");
 const span = tracer.startSpan("main");
-const ctx = opentelemetry.trace.setSpan(opentelemetry.context.active(), span);
+const ctx = trace.setSpan(context.active(), span);
 
 await keyClient.getKey("MyKeyName", {
   tracingOptions: {
@@ -99,7 +100,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.8/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.9/sdk/core/logger).
 
 ### Instrumentation for ES Modules
 
@@ -107,7 +108,7 @@ This package utilizes [@opentelemetry/instrumentation](https://www.npmjs.com/pac
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.8/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.9/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

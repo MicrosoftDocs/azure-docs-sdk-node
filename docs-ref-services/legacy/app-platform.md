@@ -1,7 +1,7 @@
 ---
 title: Azure App Platform SDK for JavaScript
 description: Reference for Azure App Platform SDK for JavaScript
-ms.date: 06/09/2025
+ms.date: 06/10/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: spring-cloud

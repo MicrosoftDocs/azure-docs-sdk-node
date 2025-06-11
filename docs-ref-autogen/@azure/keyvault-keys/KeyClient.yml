@@ -23,18 +23,34 @@ constructors:
   - name: KeyClient(string, TokenCredential, KeyClientOptions)
     uid: '@azure/keyvault-keys.KeyClient.constructor'
     package: '@azure/keyvault-keys'
-    summary: |-
+    summary: >-
       Creates an instance of KeyClient.
 
+
       Example usage:
-      ```ts
-      import { KeyClient } from "@azure/keyvault-keys";
+
+      ```ts snippet:ReadmeSampleCreateClient
+
       import { DefaultAzureCredential } from "@azure/identity";
 
-      let vaultUrl = `https://<MY KEYVAULT HERE>.vault.azure.net`;
-      let credentials = new DefaultAzureCredential();
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      let client = new KeyClient(vaultUrl, credentials);
+
+      const credential = new DefaultAzureCredential();
+
+
+      // Build the URL to reach your key vault
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`; // or
+      `https://${vaultName}.managedhsm.azure.net` for managed HSM.
+
+
+      // Lastly, create our keys client and connect to the service
+
+      const client = new KeyClient(url, credential);
+
       ```
     remarks: ''
     isDeprecated: false
@@ -88,11 +104,28 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleBackupKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let backupContents = await client.backupKey("MyKey");
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const backupContents = await client.backupKey(keyName);
 
       ```
 
@@ -132,29 +165,30 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleDeleteKey
 
-      const client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      await client.createKey("MyKey", "EC");
-
-      const poller = await client.beginDeleteKey("MyKey");
+      import { KeyClient } from "@azure/keyvault-keys";
 
 
-      // Serializing the poller
-
-      const serialized = poller.toString();
-
-      // A new poller can be created with:
-
-      // await client.beginDeleteKey("MyKey", { resumeFrom: serialized });
+      const credential = new DefaultAzureCredential();
 
 
-      // Waiting until it's done
+      const vaultName = "<YOUR KEYVAULT NAME>";
 
-      const deletedKey = await poller.pollUntilDone();
+      const url = `https://${vaultName}.vault.azure.net`;
 
-      console.log(deletedKey);
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const poller = await client.beginDeleteKey(keyName);
+
+      await poller.pollUntilDone();
 
       ```
 
@@ -198,34 +232,35 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleRecoverDeletedKey
 
-      const client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      await client.createKey("MyKey", "EC");
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      const deletePoller = await client.beginDeleteKey("MyKey");
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const deletePoller = await client.beginDeleteKey(keyName);
 
       await deletePoller.pollUntilDone();
 
-      const poller = await client.beginRecoverDeletedKey("MyKey");
 
+      const recoverPoller = await client.beginRecoverDeletedKey(keyName);
 
-      // Serializing the poller
-
-      const serialized = poller.toString();
-
-      // A new poller can be created with:
-
-      // await client.beginRecoverDeletedKey("MyKey", { resumeFrom: serialized
-      });
-
-
-      // Waiting until it's done
-
-      const key = await poller.pollUntilDone();
-
-      console.log(key);
+      const recoveredKey = await recoverPoller.pollUntilDone();
 
       ```
 
@@ -266,11 +301,29 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleCreateEcKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let result = await client.createEcKey("MyKey", { curve: "P-256" });
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+      const result = await client.createEcKey(keyName, { curve: "P-256" });
+
+      console.log("result: ", result);
 
       ```
 
@@ -307,13 +360,29 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleCreateKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      // Create an elliptic-curve key:
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      let result = await client.createKey("MyKey", "EC");
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+      const result = await client.createKey(keyName, "RSA");
+
+      console.log("result: ", result);
 
       ```
 
@@ -355,11 +424,29 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleCreateOctKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let result = await client.createOctKey("MyKey", { hsm: true });
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+      const result = await client.createOctKey("MyKey", { hsm: true });
+
+      console.log("result: ", result);
 
       ```
 
@@ -396,11 +483,29 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleCreateRsaKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let result = await client.createRsaKey("MyKey", { keySize: 2048 });
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+      const result = await client.createRsaKey("MyKey", { keySize: 2048 });
+
+      console.log("result: ", result);
 
       ```
 
@@ -432,13 +537,27 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleGetCryptographyClient
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      // get a cryptography client for a given key
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      let cryptographyClient = client.getCryptographyClient("MyKey");
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      // Get a cryptography client for a given key
+
+      const cryptographyClient = client.getCryptographyClient("MyKey");
 
       ```
     remarks: ''
@@ -472,11 +591,28 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleGetDeletedKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let key = await client.getDeletedKey("MyDeletedKey");
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      await client.getDeletedKey(keyName);
 
       ```
 
@@ -509,11 +645,37 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleGetKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let key = await client.getKey("MyKey");
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const latestKey = await client.getKey(keyName);
+
+      console.log(`Latest version of the key ${keyName}: `, latestKey);
+
+
+      const specificKey = await client.getKey(keyName, { version:
+      latestKey.properties.version! });
+
+      console.log(`The key ${keyName} at the version
+      ${latestKey.properties.version!}: `, specificKey);
 
       ```
 
@@ -534,6 +696,70 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+  - name: getKeyAttestation(string, GetKeyAttestationOptions)
+    uid: '@azure/keyvault-keys.KeyClient.getKeyAttestation'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The getKeyAttestation method gets a specified key and its attestation blob
+      and is applicable to any key stored in Azure Key Vault Managed HSM.
+
+      This operation requires the keys/get permission.
+
+
+      Example usage:
+
+      ```ts snippet:ReadmeSampleGetKeyAttestation
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT MANAGED HSM NAME>";
+
+      const url = `https://${vaultName}.managedhsm.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const latestKey = await client.getKeyAttestation(keyName);
+
+      console.log(`Latest version of the key ${keyName}: `, latestKey);
+
+
+      const specificKey = await client.getKeyAttestation(keyName, {
+        version: latestKey.properties.version!,
+      });
+
+      console.log(`The key ${keyName} at the version
+      ${latestKey.properties.version!}: `, specificKey);
+
+      ```
+
+      Get a specified key from a given key vault.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getKeyAttestation(name: string, options?:
+        GetKeyAttestationOptions): Promise<KeyVaultKey>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.GetKeyAttestationOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
   - name: getKeyRotationPolicy(string, GetKeyRotationPolicyOptions)
     uid: '@azure/keyvault-keys.KeyClient.getKeyRotationPolicy'
     package: '@azure/keyvault-keys'
@@ -543,9 +769,20 @@ methods:
 
       This operation requires the keys/get permission.
       Example usage:
-      ```ts
-      let client = new KeyClient(vaultUrl, credentials);
-      let result = await client.getKeyRotationPolicy("myKey");
+      ```ts snippet:ReadmeSampleGetKeyRotationPolicy
+      import { DefaultAzureCredential } from "@azure/identity";
+      import { KeyClient } from "@azure/keyvault-keys";
+
+      const credential = new DefaultAzureCredential();
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+      const url = `https://${vaultName}.vault.azure.net`;
+
+      const client = new KeyClient(url, credential);
+
+      const keyName = "MyKeyName";
+
+      const result = await client.getKeyRotationPolicy(keyName);
       ```
     remarks: ''
     isDeprecated: false
@@ -575,11 +812,25 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleGetRandomBytes
 
-      let client = new KeyClient(vaultUrl, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let { bytes } = await client.getRandomBytes(10);
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const bytes = await client.getRandomBytes(10);
 
       ```
     remarks: ''
@@ -613,13 +864,41 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleImportKey
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      // Key contents in myKeyContents
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      let result = await client.importKey("MyKey", myKeyContents);
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const jsonWebKey = {
+        kty: "RSA",
+        kid: "test-key-123",
+        use: "sig",
+        alg: "RS256",
+        n: new Uint8Array([112, 34, 56, 98, 123, 244, 200, 99]),
+        e: new Uint8Array([1, 0, 1]),
+        d: new Uint8Array([45, 67, 89, 23, 144, 200, 76, 233]),
+        p: new Uint8Array([34, 89, 100, 77, 204, 56, 29, 77]),
+        q: new Uint8Array([78, 99, 201, 45, 188, 34, 67, 90]),
+        dp: new Uint8Array([23, 45, 78, 56, 200, 144, 32, 67]),
+        dq: new Uint8Array([12, 67, 89, 144, 99, 56, 23, 45]),
+        qi: new Uint8Array([78, 90, 45, 201, 34, 67, 120, 55]),
+      };
+
+
+      const result = await client.importKey("MyKey", jsonWebKey);
 
       ```
 
@@ -659,12 +938,40 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleListKeys
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      for await (const keyProperties of client.listPropertiesOfKeys()) {
+        console.log("Key properties: ", keyProperties);
+      }
+
 
       for await (const deletedKey of client.listDeletedKeys()) {
-        console.log("deleted key: ", deletedKey);
+        console.log("Deleted: ", deletedKey);
+      }
+
+
+      for await (const versionProperties of
+      client.listPropertiesOfKeyVersions(keyName)) {
+        console.log("Version properties: ", versionProperties);
       }
 
       ```
@@ -700,13 +1007,40 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleListKeys
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
 
       for await (const keyProperties of client.listPropertiesOfKeys()) {
-        const key = await client.getKey(keyProperties.name);
-        console.log("key: ", key);
+        console.log("Key properties: ", keyProperties);
+      }
+
+
+      for await (const deletedKey of client.listDeletedKeys()) {
+        console.log("Deleted: ", deletedKey);
+      }
+
+
+      for await (const versionProperties of
+      client.listPropertiesOfKeyVersions(keyName)) {
+        console.log("Version properties: ", versionProperties);
       }
 
       ```
@@ -741,14 +1075,40 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleListKeys
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      for await (const keyProperties of
-      client.listPropertiesOfKeyVersions("MyKey")) {
-        const key = await client.getKey(keyProperties.name);
-        console.log("key version: ", key);
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      for await (const keyProperties of client.listPropertiesOfKeys()) {
+        console.log("Key properties: ", keyProperties);
+      }
+
+
+      for await (const deletedKey of client.listDeletedKeys()) {
+        console.log("Deleted: ", deletedKey);
+      }
+
+
+      for await (const versionProperties of
+      client.listPropertiesOfKeyVersions(keyName)) {
+        console.log("Version properties: ", versionProperties);
       }
 
       ```
@@ -790,15 +1150,33 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSamplePurgeDeletedKey
 
-      const client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      const deletePoller = await client.beginDeleteKey("MyKey")
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const deletePoller = await client.beginDeleteKey(keyName);
 
       await deletePoller.pollUntilDone();
 
-      await client.purgeDeletedKey("MyKey");
+
+      await client.purgeDeletedKey(keyName);
 
       ```
 
@@ -832,11 +1210,28 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleReleaseKey
 
-      let client = new KeyClient(vaultUrl, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let result = await client.releaseKey("myKey", target)
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const result = await client.releaseKey("myKey", "<attestation-target>");
 
       ```
     remarks: ''
@@ -870,15 +1265,31 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleRestoreKeyBackup
 
-      let client = new KeyClient(url, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let backupContents = await client.backupKey("MyKey");
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      // ...
 
-      let key = await client.restoreKeyBackup(backupContents);
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const backupContents = await client.backupKey(keyName);
+
+
+      const key = await client.restoreKeyBackup(backupContents);
 
       ```
 
@@ -909,11 +1320,53 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleKeyRotation
 
-      let client = new KeyClient(vaultUrl, credentials);
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let key = await client.rotateKey("MyKey");
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      // Set the key's automated rotation policy to rotate the key 30 days
+      before expiry.
+
+      const policy = await client.updateKeyRotationPolicy(keyName, {
+        lifetimeActions: [
+          {
+            action: "Rotate",
+            timeBeforeExpiry: "P30D",
+          },
+        ],
+        // You may also specify the duration after which any newly rotated key will expire.
+        // In this case, any new key versions will expire after 90 days.
+        expiresIn: "P90D",
+      });
+
+
+      // You can get the current key rotation policy of a given key by calling
+      the getKeyRotationPolicy method.
+
+      const currentPolicy = await client.getKeyRotationPolicy(keyName);
+
+
+      // Finally, you can rotate a key on-demand by creating a new version of
+      the given key.
+
+      const rotatedKey = await client.rotateKey(keyName);
 
       ```
     remarks: ''
@@ -947,16 +1400,32 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleUpdateKeyProperties
 
-      let keyName = "MyKey";
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let client = new KeyClient(vaultUrl, credentials);
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      let key = await client.getKey(keyName);
 
-      let result = await client.updateKeyProperties(keyName,
-      key.properties.version, { enabled: false });
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const result = await client.createKey(keyName, "RSA");
+
+      await client.updateKeyProperties(keyName, result.properties.version, {
+        enabled: false,
+      });
 
       ```
 
@@ -996,15 +1465,31 @@ methods:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleUpdateKeyProperties
 
-      let keyName = "MyKey";
+      import { DefaultAzureCredential } from "@azure/identity";
 
-      let client = new KeyClient(vaultUrl, credentials);
+      import { KeyClient } from "@azure/keyvault-keys";
 
-      let key = await client.getKey(keyName);
 
-      let result = await client.updateKeyProperties(keyName, { enabled: false
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.vault.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+
+      const result = await client.createKey(keyName, "RSA");
+
+      await client.updateKeyProperties(keyName, result.properties.version, {
+        enabled: false,
       });
 
       ```
@@ -1037,9 +1522,22 @@ methods:
       This operation requires the keys/update permission.
 
       Example usage:
-      ```ts
-      let client = new KeyClient(vaultUrl, credentials);
-      const setPolicy = await client.updateKeyRotationPolicy("MyKey", myPolicy);
+      ```ts snippet:ReadmeSampleUpdateKeyRotationPolicy
+      import { DefaultAzureCredential } from "@azure/identity";
+      import { KeyClient } from "@azure/keyvault-keys";
+
+      const credential = new DefaultAzureCredential();
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+      const url = `https://${vaultName}.vault.azure.net`;
+
+      const client = new KeyClient(url, credential);
+
+      const keyName = "MyKeyName";
+
+      const myPolicy = await client.getKeyRotationPolicy(keyName);
+
+      const setPolicy = await client.updateKeyRotationPolicy(keyName, myPolicy);
       ```
     remarks: ''
     isDeprecated: false

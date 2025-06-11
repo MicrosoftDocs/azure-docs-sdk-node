@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-ms.date: 04/18/2025
+ms.date: 06/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.31 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.32 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
@@ -23,7 +23,7 @@ This exporter package assumes your application is [already instrumented](https:/
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.31/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.32/SUPPORT.md) for more details.
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for browser environments.
 
@@ -39,7 +39,7 @@ Add the exporter to your existing OpenTelemetry Tracer Provider (`NodeTracerProv
 ```ts snippet:ReadmeSampleDistributedTracing
 import { AzureMonitorTraceExporter } from "@azure/monitor-opentelemetry-exporter";
 import { NodeTracerProvider, BatchSpanProcessor } from "@opentelemetry/sdk-trace-node";
-import { Resource } from "@opentelemetry/resources";
+import { resourceFromAttributes } from "@opentelemetry/resources";
 import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
 
 // Create an exporter instance
@@ -49,7 +49,7 @@ const exporter = new AzureMonitorTraceExporter({
 
 // Create and configure the Node Tracer provider
 const tracerProvider = new NodeTracerProvider({
-  resource: new Resource({
+  resource: resourceFromAttributes({
     [ATTR_SERVICE_NAME]: "basic-service",
   }),
   spanProcessors: [
@@ -119,7 +119,7 @@ You can enable sampling to limit the amount of telemetry records you receive. In
 ```ts snippet:ReadmeSampleSampling
 import { ApplicationInsightsSampler } from "@azure/monitor-opentelemetry-exporter";
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
-import { Resource } from "@opentelemetry/resources";
+import { resourceFromAttributes } from "@opentelemetry/resources";
 import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
 
 // Sampler expects a sample rate of between 0 and 1 inclusive
@@ -127,7 +127,7 @@ import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
 const aiSampler = new ApplicationInsightsSampler(0.75);
 const provider = new NodeTracerProvider({
   sampler: aiSampler,
-  resource: new Resource({
+  resource: resourceFromAttributes({
     [ATTR_SERVICE_NAME]: "basic-service",
   }),
 });
@@ -137,7 +137,7 @@ provider.register();
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.31/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.32/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
 
 ## Key concepts
 
@@ -168,7 +168,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.31/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.32/sdk/core/logger).
 
 ## Next steps
 
@@ -182,5 +182,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.31/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.32/CONTRIBUTING.md) to learn more about how to build and test the code.
 

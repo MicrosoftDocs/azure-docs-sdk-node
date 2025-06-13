@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[AI Agents](ai-agents-readme.md)|[@azure/ai-agents](https://www.npmjs.com/package/@azure/ai-agents)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-agents)|
+|[unknown](onlineexperimentation-rest-readme.md)|[@azure-rest/onlineexperimentation](https://www.npmjs.com/package/@azure-rest/onlineexperimentation)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/onlineexperimentation/onlineexperimentation-rest)|

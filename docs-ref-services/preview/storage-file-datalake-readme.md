@@ -1,12 +1,12 @@
 ---
 title: Azure Storage File Data Lake client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-file-datalake, storage
-ms.date: 05/20/2025
+ms.date: 06/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage File Data Lake client library for JavaScript - version 12.27.0-beta.1 
+# Azure Storage File Data Lake client library for JavaScript - version 12.28.0-beta.1 
 
 
 Azure Data Lake Storage (ADLS) includes all the capabilities required to make it easy for developers, data scientists, and analysts to store data of any size, shape, and speed, and do all types of processing and analytics across platforms and languages. It removes the complexities of ingesting and storing all of your data while making it faster to get up and running with batch, streaming, and interactive analytics.
@@ -20,11 +20,11 @@ Use the client libraries in this package to:
 
 key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.27.0-beta.1/sdk/storage/storage-file-datalake)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.28.0-beta.1/sdk/storage/storage-file-datalake)
 - [Package (npm)](https://www.npmjs.com/package/@azure/storage-file-datalake)
 - [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/storage-file-datalake)
 - [Product documentation](https://learn.microsoft.com/azure/storage/blobs/data-lake-storage-introduction?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.27.0-beta.1/sdk/storage/storage-file-datalake/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.28.0-beta.1/sdk/storage/storage-file-datalake/samples)
 - [Azure Storage Data Lake REST APIs](https://learn.microsoft.com/rest/api/storageservices/data-lake-storage-gen2)
 
 ## Getting started
@@ -34,7 +34,7 @@ key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.27.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.28.0-beta.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -59,7 +59,7 @@ Azure Storage supports several ways to authenticate. In order to interact with t
 
 #### Azure Active Directory
 
-The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.27.0-beta.1/sdk/identity/identity/README.md) for more details and samples to get you started.
+The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.28.0-beta.1/sdk/identity/identity/README.md) for more details and samples to get you started.
 
 ### Compatibility
 
@@ -222,7 +222,7 @@ const datalakeServiceClient = new DataLakeServiceClient(
 );
 ```
 
-See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.27.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
+See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.28.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
 
 [Note - Above steps are only for Node.js]
 
@@ -507,11 +507,11 @@ setLogLevel("info");
 
 More code samples:
 
-- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.27.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/javascript)
-- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.27.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/typescript)
-- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.27.0-beta.1/sdk/storage/storage-file-datalake/test/)
+- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.28.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/javascript)
+- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.28.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/typescript)
+- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.28.0-beta.1/sdk/storage/storage-file-datalake/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.27.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.28.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 

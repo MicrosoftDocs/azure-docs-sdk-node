@@ -1,7 +1,7 @@
 ---
 title: Azure Custom Image Search SDK for JavaScript
 description: Reference for Azure Custom Image Search SDK for JavaScript
-ms.date: 06/16/2025
+ms.date: 06/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: customimagesearch

@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesruntime
 ---
-# Azure KubernetesRuntime client library for JavaScript - version 1.0.0-alpha.20250613.1 
+# Azure KubernetesRuntime client library for JavaScript - version 1.0.0-alpha.20250616.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure KubernetesRuntime client.

@@ -1,7 +1,7 @@
 ---
 title: Azure Image Builder SDK for JavaScript
 description: Reference for Azure Image Builder SDK for JavaScript
-ms.date: 06/18/2025
+ms.date: 06/19/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: imagebuilder

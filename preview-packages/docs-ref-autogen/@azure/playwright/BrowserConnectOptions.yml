@@ -1,0 +1,40 @@
+### YamlMime:TSTypeAlias
+name: BrowserConnectOptions
+uid: '@azure/playwright.BrowserConnectOptions'
+package: '@azure/playwright'
+summary: >+
+  Browser connect options for the service. This includes endpoint options and
+  connect options.
+
+
+  **Example**
+
+
+  ```
+
+  import playwright, { test, expect, BrowserType } from "@playwright/test";
+
+  import { getConnectOptions, BrowserConnectOptions } from "@azure/playwright";
+
+
+  test("has title", async ({ browserName }) => {
+   const { wsEndpoint, options } : BrowserConnectOptions = await getConnectOptions();
+   const browser = await (playwright[browserName] as BrowserType).connect(wsEndpoint, options);
+   const context = await browser.newContext();
+   const page = await context.newPage();
+
+   await page.goto("https://playwright.dev/");
+   await expect(page).toHaveTitle(/Playwright/);
+
+   await page.close();
+   await context.close();
+   await browser.close();
+  });
+
+  ```
+
+fullName: BrowserConnectOptions
+remarks: ''
+isDeprecated: false
+syntax: |
+  type BrowserConnectOptions = EndpointOptions & { options: ConnectOptions }

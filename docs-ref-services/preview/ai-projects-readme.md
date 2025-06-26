@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-projects, ai
-ms.date: 05/21/2025
+ms.date: 06/26/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Projects client library for JavaScript - version 1.0.0-beta.8 
+# Azure AI Projects client library for JavaScript - version 1.0.0-beta.9 
 
 
 The AI Projects client library provides easy access to resources in your Azure AI Foundry project.
@@ -24,10 +24,10 @@ Use it to:
 - **Enable OpenTelemetry tracing** using the `enable_telemetry` function.
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.8/sdk/ai/ai-projects/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.9/sdk/ai/ai-projects/samples)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-projects)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-preview)
-| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.8/sdk/ai/ai-projects)
+| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.9/sdk/ai/ai-projects)
 
 ## Table of contents
 
@@ -81,7 +81,7 @@ npm install @azure/ai-projects @azure/identity
 
 ### Create and authenticate the client
 
-To construct an `AIProjectsClient`:
+To construct an `AIProjectsClient`, the `endpoint` can be fetched from [endpoint][ai_project_client_endpoint]. Below we will assume the environment variable `AZURE_AI_PROJECT_ENDPOINT_STRING` was defined to hold this value:
 
 ```ts snippet:setup
 import { AIProjectClient } from "@azure/ai-projects";
@@ -91,11 +91,13 @@ const endpoint = process.env["AZURE_AI_PROJECT_ENDPOINT_STRING"] || "<project en
 const client = new AIProjectClient(endpoint, new DefaultAzureCredential());
 ```
 
+The client uses API version `2025-05-15-preview`, refer to the [API documentation][ai_foundry_data_plane_rest_apis] to learn more about the supported features.
+
 ## Examples
 
 ### Performing Agent operations
 
-The `.agents` property on the `AIProjectClient` gives you access to an authenticated `AgentsClient` from the `azure-ai-agents` package. Below we show how to create an agent and delete it. To see what you can do with the `agent` you created, see the [many samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.8/sdk/ai/ai-agents/samples) associated with the `azure-ai-agents` package.
+The `.agents` property on the `AIProjectClient` gives you access to an authenticated `AgentsClient` from the `azure-ai-agents` package. Below we show how to create an agent and delete it. To see what you can do with the `agent` you created, see the [many samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.9/sdk/ai/ai-agents/samples) associated with the `azure-ai-agents` package.
 
 ```ts snippet:agentsSample
 const agent = await project.agents.createAgent("gpt-4o", {
@@ -105,7 +107,7 @@ const agent = await project.agents.createAgent("gpt-4o", {
 console.log(`Created agent, agent ID : ${agent.id}`);
 
 // Do something with your Agent!
-// See samples here https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.8/sdk/ai/ai-agents/samples
+// See samples here https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.9/sdk/ai/ai-agents/samples
 await project.agents.deleteAgent(agent.id);
 console.log(`Deleted agent, agent ID: ${agent.id}`);
 ```
@@ -136,7 +138,7 @@ See the "inference" folder in the [package samples][samples] for additional samp
 
 ### Get an authenticated ChatCompletionsClient
 
-Your Azure AI Foundry project may have one or more AI models deployed that support chat completions. These could be OpenAI models, Microsoft models, or models from other providers. Use the code below to get an authenticated Client from the [azure-ai-inference](https://www.npmjs.com/package/@azure-rest/ai-inference) package, and execute a chat completions call.
+Your Azure AI Foundry project may have one or more AI models deployed that support chat completions. These could be OpenAI models, Microsoft models, or models from other providers. Use the code below to get an authenticated Client and execute a chat completions call.
 
 Here we assume `deploymentName` (str) is defined. It's the deployment name of an AI model in your Foundry Project. As shown in the "Models + endpoints" tab, under the "Name" column.
 
@@ -447,7 +449,7 @@ const newEvaluation: EvaluationWithOptionalName = {
     },
   },
 };
-const evalResp = await project.evaluations.createRun(newEvaluation);
+const evalResp = await project.evaluations.create(newEvaluation);
 console.log("Create a new evaluation:", JSON.stringify(evalResp, null, 2));
 // get the evaluation by ID
 const eval2 = await project.evaluations.get(evalResp.name);
@@ -503,7 +505,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.8/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.9/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
 
 ## Contributing
 
@@ -526,10 +528,12 @@ additional questions or comments.
 
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [entra_id]: https://learn.microsoft.com/azure/ai-services/authentication?tabs=powershell#authenticate-with-microsoft-entra-id
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.8/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.9/sdk/identity/identity#defaultazurecredential
 [azure_sub]: https://azure.microsoft.com/free/
 [evaluators]: https://learn.microsoft.com/azure/ai-studio/how-to/develop/evaluate-sdk
 [evaluator_library]: https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-generative-ai-app#view-and-manage-the-evaluators-in-the-evaluator-library
 [azure_ai_evaluation]: https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.8/sdk/ai/ai-projects/samples
+[ai_foundry_data_plane_rest_apis]: https://learn.microsoft.com/rest/api/aifoundry/aiprojects/operation-groups?view=rest-aifoundry-aiprojects-2025-05-15-preview
+[ai_project_client_endpoint]: https://learn.microsoft.com/azure/ai-foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-javascript
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_1.0.0-beta.9/sdk/ai/ai-projects/samples
 

@@ -1,7 +1,7 @@
 ---
 title: Azure Policy SDK for JavaScript
 description: Reference for Azure Policy SDK for JavaScript
-ms.date: 06/26/2025
+ms.date: 06/27/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: policy

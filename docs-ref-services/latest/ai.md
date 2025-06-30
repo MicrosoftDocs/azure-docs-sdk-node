@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI SDK for JavaScript - preview
-## Packages - preview
+# Azure AI SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](ai-index.md)]

@@ -1,7 +1,7 @@
 ---
 title: Azure Data Boundaries SDK for JavaScript
 description: Reference for Azure Data Boundaries SDK for JavaScript
-ms.date: 06/30/2025
+ms.date: 07/01/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: databoundaries

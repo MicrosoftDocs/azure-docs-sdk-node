@@ -1,0 +1,131 @@
+### YamlMime:TSPackage
+uid: '@azure/playwright'
+name: '@azure/playwright'
+summary: ''
+type: package
+typeAliases:
+  - '@azure/playwright.AuthenticationType'
+  - '@azure/playwright.BrowserConnectOptions'
+  - '@azure/playwright.EndpointOptions'
+  - '@azure/playwright.OsType'
+  - '@azure/playwright.PlaywrightServiceAdditionalOptions'
+functions:
+  - name: >-
+      getConnectOptions(Omit<PlaywrightServiceAdditionalOptions,
+      "serviceAuthType">)
+    uid: '@azure/playwright.getConnectOptions'
+    package: '@azure/playwright'
+    summary: >+
+      Get connect options required to connect to Azure Playwright's cloud hosted
+      browsers.
+
+
+      **Example**
+
+
+      ```
+
+      import playwright, { test, expect, BrowserType } from "@playwright/test";
+
+      import { getConnectOptions } from "@azure/playwright";
+
+
+      test('has title', async ({ browserName }) => {
+       const { wsEndpoint, options } = await getConnectOptions();
+       const browser = await (playwright[browserName] as BrowserType).connect(wsEndpoint, options);
+       const context = await browser.newContext();
+       const page = await context.newPage();
+
+       await page.goto('https://playwright.dev/');
+       await expect(page).toHaveTitle(/Playwright/);
+
+       await page.close();
+       await context.close();
+       await browser.close();
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getConnectOptions(options?:
+        Omit<PlaywrightServiceAdditionalOptions, "serviceAuthType">):
+        Promise<BrowserConnectOptions>
+      parameters:
+        - id: options
+          type: >-
+            Omit&lt;<xref
+            uid="@azure/playwright.PlaywrightServiceAdditionalOptions" />,
+            "serviceAuthType"&gt;
+          description: additional options for the service
+      return:
+        description: BrowserConnectOptions
+        type: Promise&lt;<xref uid="@azure/playwright.BrowserConnectOptions" />&gt;
+  - name: >-
+      getServiceConfig(PlaywrightTestConfig<{}, {}>,
+      PlaywrightServiceAdditionalOptions)
+    uid: '@azure/playwright.getServiceConfig'
+    package: '@azure/playwright'
+    summary: >+
+      Generate playwright configuration integrated with Azure Playwright.
+
+
+      **Example**
+
+
+      ```
+
+      import { defineConfig } from "playwright/test";
+
+      import { getServiceConfig } from "@azure/playwright";
+
+      import playwrightConfig from "./playwright.config";
+
+
+      export default defineConfig(playwrightConfig,
+      getServiceConfig(playwrightConfig));
+
+      ```
+
+
+
+
+      **Example**
+
+
+      ```
+
+      import { defineConfig } from "playwright/test";
+
+      import { getServiceConfig, ServiceOS } from "@azure/playwright";
+
+      import playwrightConfig from "./playwright.config";
+
+
+      export default defineConfig(playwrightConfig,
+      getServiceConfig(playwrightConfig, {
+       runId: "custom run id",
+       os: ServiceOS.WINDOWS
+      }));
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getServiceConfig(config: PlaywrightTestConfig<{}, {}>,
+        options?: PlaywrightServiceAdditionalOptions): PlaywrightTestConfig<{},
+        {}>
+      parameters:
+        - id: config
+          type: PlaywrightTestConfig&lt;{}, {}&gt;
+          description: base playwright configuration
+        - id: options
+          type: <xref uid="@azure/playwright.PlaywrightServiceAdditionalOptions" />
+          description: additional options for the service
+      return:
+        description: PlaywrightConfig
+        type: PlaywrightTestConfig&lt;{}, {}&gt;

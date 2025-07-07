@@ -1,7 +1,7 @@
 ---
 title: Azure Informatica Data Management SDK for JavaScript
 description: Reference for Azure Informatica Data Management SDK for JavaScript
-ms.date: 07/04/2025
+ms.date: 07/07/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: informaticadatamanagement

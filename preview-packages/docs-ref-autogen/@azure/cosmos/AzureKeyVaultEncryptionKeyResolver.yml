@@ -1,0 +1,94 @@
+### YamlMime:TSType
+name: AzureKeyVaultEncryptionKeyResolver
+uid: '@azure/cosmos.AzureKeyVaultEncryptionKeyResolver'
+package: '@azure/cosmos'
+summary: >-
+  Implementation of EncryptionKeyResolver that uses Azure Key Vault for customer
+  managed keys.
+fullName: AzureKeyVaultEncryptionKeyResolver
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: AzureKeyVaultEncryptionKeyResolver(TokenCredential)
+    uid: '@azure/cosmos.AzureKeyVaultEncryptionKeyResolver.constructor'
+    package: '@azure/cosmos'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new AzureKeyVaultEncryptionKeyResolver(credentials: TokenCredential)'
+      parameters:
+        - id: credentials
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: ''
+properties:
+  - name: encryptionKeyResolverName
+    uid: '@azure/cosmos.AzureKeyVaultEncryptionKeyResolver.encryptionKeyResolverName'
+    package: '@azure/cosmos'
+    summary: |-
+      Name of the resolver to use for client side encryption.
+      Currently only AzureKeyVault implementation is supported.
+    fullName: encryptionKeyResolverName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'encryptionKeyResolverName: AzureKeyVault'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.EncryptionKeyResolverName.AzureKeyVault" />
+methods:
+  - name: unwrapKey(string, string, Uint8Array)
+    uid: '@azure/cosmos.AzureKeyVaultEncryptionKeyResolver.unwrapKey'
+    package: '@azure/cosmos'
+    summary: >-
+      Unwraps the given wrapped key using the specified key encryption key path
+      and algorithm.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function unwrapKey(encryptionKeyId: string, algorithm: string,
+        wrappedKey: Uint8Array): Promise<Uint8Array>
+      parameters:
+        - id: encryptionKeyId
+          type: string
+          description: >-
+            path to the customer managed key to be used for unwrapping. For
+            Azure Key Vault, this is url of the key in the vault.
+        - id: algorithm
+          type: string
+          description: algorithm to be used for unwrapping.
+        - id: wrappedKey
+          type: Uint8Array
+          description: wrapped DEK.
+      return:
+        description: unwrapped DEK.
+        type: Promise&lt;Uint8Array&gt;
+  - name: wrapKey(string, string, Uint8Array)
+    uid: '@azure/cosmos.AzureKeyVaultEncryptionKeyResolver.wrapKey'
+    package: '@azure/cosmos'
+    summary: >-
+      wraps the given key using the specified key encryption key path and
+      algorithm.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function wrapKey(encryptionKeyId: string, algorithm: string,
+        unwrappedKey: Uint8Array): Promise<Uint8Array>
+      parameters:
+        - id: encryptionKeyId
+          type: string
+          description: >-
+            path to the customer managed key to be used for wrapping. For Azure
+            Key Vault, this is url of the key in the vault.
+        - id: algorithm
+          type: string
+          description: algorithm to be used for wrapping.
+        - id: unwrappedKey
+          type: Uint8Array
+          description: dek to be wrapped.
+      return:
+        description: wrapped DEK.
+        type: Promise&lt;Uint8Array&gt;

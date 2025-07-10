@@ -1,7 +1,7 @@
 ---
 title: Azure Azure Stack SDK for JavaScript
 description: Reference for Azure Azure Stack SDK for JavaScript
-ms.date: 07/09/2025
+ms.date: 07/10/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azurestack

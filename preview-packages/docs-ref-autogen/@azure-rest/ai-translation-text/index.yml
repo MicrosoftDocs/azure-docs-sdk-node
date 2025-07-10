@@ -6,7 +6,6 @@ type: package
 interfaces:
   - '@azure-rest/ai-translation-text.BackTranslationOutput'
   - '@azure-rest/ai-translation-text.BreakSentenceItemOutput'
-  - '@azure-rest/ai-translation-text.CommonScriptModelOutput'
   - '@azure-rest/ai-translation-text.DetectedLanguageOutput'
   - '@azure-rest/ai-translation-text.DictionaryExampleItemOutput'
   - '@azure-rest/ai-translation-text.DictionaryExampleOutput'
@@ -25,17 +24,18 @@ interfaces:
   - '@azure-rest/ai-translation-text.FindSentenceBoundariesHeaders'
   - '@azure-rest/ai-translation-text.FindSentenceBoundariesQueryParam'
   - '@azure-rest/ai-translation-text.FindSentenceBoundariesQueryParamProperties'
-  - '@azure-rest/ai-translation-text.GetLanguages'
-  - '@azure-rest/ai-translation-text.GetLanguages200Headers'
-  - '@azure-rest/ai-translation-text.GetLanguages200Response'
-  - '@azure-rest/ai-translation-text.GetLanguagesDefaultHeaders'
-  - '@azure-rest/ai-translation-text.GetLanguagesDefaultResponse'
-  - '@azure-rest/ai-translation-text.GetLanguagesHeaderParam'
-  - '@azure-rest/ai-translation-text.GetLanguagesHeaders'
-  - '@azure-rest/ai-translation-text.GetLanguagesQueryParam'
-  - '@azure-rest/ai-translation-text.GetLanguagesQueryParamProperties'
-  - '@azure-rest/ai-translation-text.GetLanguagesResultOutput'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguages'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguages200Headers'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguages200Response'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesDefaultHeaders'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesDefaultResponse'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesHeaderParam'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesHeaders'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesQueryParam'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesQueryParamProperties'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesResultOutput'
   - '@azure-rest/ai-translation-text.InputTextItem'
+  - '@azure-rest/ai-translation-text.LanguageScriptOutput'
   - '@azure-rest/ai-translation-text.LookupDictionaryEntries'
   - '@azure-rest/ai-translation-text.LookupDictionaryEntries200Headers'
   - '@azure-rest/ai-translation-text.LookupDictionaryEntries200Response'
@@ -57,7 +57,7 @@ interfaces:
   - '@azure-rest/ai-translation-text.LookupDictionaryExamplesQueryParam'
   - '@azure-rest/ai-translation-text.LookupDictionaryExamplesQueryParamProperties'
   - '@azure-rest/ai-translation-text.Routes'
-  - '@azure-rest/ai-translation-text.SentenceLengthOutput'
+  - '@azure-rest/ai-translation-text.SentenceBoundariesOutput'
   - '@azure-rest/ai-translation-text.SourceDictionaryLanguageOutput'
   - '@azure-rest/ai-translation-text.SourceTextOutput'
   - '@azure-rest/ai-translation-text.TargetDictionaryLanguageOutput'
@@ -74,8 +74,9 @@ interfaces:
   - '@azure-rest/ai-translation-text.TranslatedTextAlignmentOutput'
   - '@azure-rest/ai-translation-text.TranslatedTextItemOutput'
   - '@azure-rest/ai-translation-text.TranslationLanguageOutput'
-  - '@azure-rest/ai-translation-text.TranslationOutput'
+  - '@azure-rest/ai-translation-text.TranslationTextOutput'
   - '@azure-rest/ai-translation-text.TranslatorCredential'
+  - '@azure-rest/ai-translation-text.TranslatorTokenCredential'
   - '@azure-rest/ai-translation-text.TransliterableScriptOutput'
   - '@azure-rest/ai-translation-text.Transliterate'
   - '@azure-rest/ai-translation-text.Transliterate200Headers'
@@ -89,13 +90,16 @@ interfaces:
   - '@azure-rest/ai-translation-text.TransliterateQueryParamProperties'
   - '@azure-rest/ai-translation-text.TransliteratedTextOutput'
   - '@azure-rest/ai-translation-text.TransliterationLanguageOutput'
-  - '@azure-rest/ai-translation-text.TransliterationOutput'
 typeAliases:
   - '@azure-rest/ai-translation-text.FindSentenceBoundariesParameters'
-  - '@azure-rest/ai-translation-text.GetLanguagesParameters'
+  - '@azure-rest/ai-translation-text.GetSupportedLanguagesParameters'
+  - '@azure-rest/ai-translation-text.LanguageDirectionalityOutput'
   - '@azure-rest/ai-translation-text.LookupDictionaryEntriesParameters'
   - '@azure-rest/ai-translation-text.LookupDictionaryExamplesParameters'
+  - '@azure-rest/ai-translation-text.ProfanityAction'
+  - '@azure-rest/ai-translation-text.ProfanityMarker'
   - '@azure-rest/ai-translation-text.TextTranslationClient'
+  - '@azure-rest/ai-translation-text.TextType'
   - '@azure-rest/ai-translation-text.TranslateParameters'
   - '@azure-rest/ai-translation-text.TransliterateParameters'
 functions:
@@ -107,10 +111,10 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function buildMultiCollection(queryParameters: string[], parameterName:
-        string): string
+        function buildMultiCollection(items: string[], parameterName: string):
+        string
       parameters:
-        - id: queryParameters
+        - id: items
           type: string[]
           description: ''
         - id: parameterName
@@ -120,8 +124,8 @@ functions:
         description: ''
         type: string
   - name: >-
-      default(undefined | string, TranslatorCredential | KeyCredential |
-      TokenCredential, ClientOptions)
+      default(TranslatorCredential | TranslatorTokenCredential | TokenCredential
+      | KeyCredential, ClientOptions)
     uid: '@azure-rest/ai-translation-text.default'
     package: '@azure-rest/ai-translation-text'
     summary: Initialize a new instance of `TextTranslationClient`
@@ -129,12 +133,66 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function default(endpoint: undefined | string, credential?:
-        TranslatorCredential | KeyCredential | TokenCredential, options?:
+        function default(credential: TranslatorCredential |
+        TranslatorTokenCredential | TokenCredential | KeyCredential, options?:
+        ClientOptions): TextTranslationClient
+      parameters:
+        - id: credential
+          type: >-
+            <xref uid="@azure-rest/ai-translation-text.TranslatorCredential" />
+            | <xref
+            uid="@azure-rest/ai-translation-text.TranslatorTokenCredential" /> |
+            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
+            uid="@azure/core-auth.KeyCredential" />
+          description: >-
+            type: TranslatorCredential | TranslatorTokenCredential |
+            KeyCredential |TokenCredential, credentials
+                 used to authenticate the service with.
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: 'type: ClientOptions, the parameter for all optional parameters'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/ai-translation-text.TextTranslationClient" />
+  - name: default(string, ClientOptions)
+    uid: '@azure-rest/ai-translation-text.default_1'
+    package: '@azure-rest/ai-translation-text'
+    summary: Initialize a new instance of `TextTranslationClient`
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function default(endpoint: string, options?: ClientOptions):
+        TextTranslationClient
+      parameters:
+        - id: endpoint
+          type: string
+          description: >-
+            type: string, Supported Text Translation endpoints (protocol and
+            hostname, for example:
+                https://api.cognitive.microsofttranslator.com).
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: 'type: ClientOptions, the parameter for all optional parameters'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/ai-translation-text.TextTranslationClient" />
+  - name: >-
+      default(string, TranslatorCredential | TranslatorTokenCredential |
+      TokenCredential | KeyCredential, ClientOptions)
+    uid: '@azure-rest/ai-translation-text.default_2'
+    package: '@azure-rest/ai-translation-text'
+    summary: Initialize a new instance of `TextTranslationClient`
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function default(endpoint: string, credential: TranslatorCredential |
+        TranslatorTokenCredential | TokenCredential | KeyCredential, options?:
         ClientOptions): TextTranslationClient
       parameters:
         - id: endpoint
-          type: undefined | string
+          type: string
           description: >-
             type: string, Supported Text Translation endpoints (protocol and
             hostname, for example:
@@ -142,16 +200,23 @@ functions:
         - id: credential
           type: >-
             <xref uid="@azure-rest/ai-translation-text.TranslatorCredential" />
-            | <xref uid="@azure/core-auth.KeyCredential" /> | <xref
-            uid="@azure/core-auth.TokenCredential" />
-          description: ''
+            | <xref
+            uid="@azure-rest/ai-translation-text.TranslatorTokenCredential" /> |
+            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
+            uid="@azure/core-auth.KeyCredential" />
+          description: >-
+            type: TranslatorCredential | TranslatorTokenCredential |
+            KeyCredential |TokenCredential, credentials
+                 used to authenticate the service with.
         - id: options
           type: <xref uid="@azure-rest/core-client.ClientOptions" />
           description: 'type: ClientOptions, the parameter for all optional parameters'
       return:
         description: ''
         type: <xref uid="@azure-rest/ai-translation-text.TextTranslationClient" />
-  - name: isUnexpected(GetLanguages200Response | GetLanguagesDefaultResponse)
+  - name: >-
+      isUnexpected(GetSupportedLanguages200Response |
+      GetSupportedLanguagesDefaultResponse)
     uid: '@azure-rest/ai-translation-text.isUnexpected'
     package: '@azure-rest/ai-translation-text'
     summary: ''
@@ -159,14 +224,16 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isUnexpected(response: GetLanguages200Response |
-        GetLanguagesDefaultResponse): response
+        function isUnexpected(response: GetSupportedLanguages200Response |
+        GetSupportedLanguagesDefaultResponse): response
       parameters:
         - id: response
           type: >-
-            <xref uid="@azure-rest/ai-translation-text.GetLanguages200Response"
+            <xref
+            uid="@azure-rest/ai-translation-text.GetSupportedLanguages200Response"
             /> | <xref
-            uid="@azure-rest/ai-translation-text.GetLanguagesDefaultResponse" />
+            uid="@azure-rest/ai-translation-text.GetSupportedLanguagesDefaultResponse"
+            />
           description: ''
       return:
         description: ''

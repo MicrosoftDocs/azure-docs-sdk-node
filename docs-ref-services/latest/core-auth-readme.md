@@ -1,12 +1,12 @@
 ---
 title: Azure Core Authentication client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-auth, core
-ms.date: 10/16/2024
+ms.date: 07/10/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Core Authentication client library for JavaScript - version 1.9.0 
+# Azure Core Authentication client library for JavaScript - version 1.10.0 
 
 
 The `@azure/core-auth` package provides core interfaces and helper methods for authenticating with Azure services using Azure Active Directory and other authentication schemes common across the Azure SDK. As a "core" library, it shouldn't need to be added as a dependency to any user code, only other Azure SDK libraries.
@@ -35,41 +35,44 @@ The `AzureSASCredential` is a static signature-based credential that supports up
 
 ### AzureKeyCredential
 
-```ts snippet:azure_key_credential
+```ts snippet:ReadmeSampleAzureKeyCredential
 import { AzureKeyCredential } from "@azure/core-auth";
 
 const credential = new AzureKeyCredential("secret value");
-// prints: "secret value"
-console.log(credential.key);
+
+console.log(credential.key); // prints: "secret value"
+
 credential.update("other secret value");
-// prints: "other secret value"
-console.log(credential.key);
+
+console.log(credential.key); // prints: "other secret value"
 ```
 
 ### AzureNamedKeyCredential
 
-```ts snippet:azure_named_key_credential
+```ts snippet:ReadmeSampleAzureNamedCredential
 import { AzureNamedKeyCredential } from "@azure/core-auth";
 
 const credential = new AzureNamedKeyCredential("ManagedPolicy", "secret value");
-// prints: "ManagedPolicy, secret value"
-console.log(`${credential.name}, ${credential.key}`);
+
+console.log(`${credential.name}, ${credential.key}`); // prints: "ManagedPolicy, secret value"
+
 credential.update("OtherManagedPolicy", "other secret value");
-// prints: "OtherManagedPolicy, other secret value"
-console.log(`${credential.name}, ${credential.key}`);
+
+console.log(`${credential.name}, ${credential.key}`); // prints: "OtherManagedPolicy, other secret value"
 ```
 
 ### AzureSASCredential
 
-```ts snippet:azure_sas_credential
+```ts snippet:ReadmeSampleSASCredential
 import { AzureSASCredential } from "@azure/core-auth";
 
 const credential = new AzureSASCredential("signature1");
-// prints: "signature1"
-console.log(credential.signature);
+
+console.log(credential.signature); // prints: "signature1"
+
 credential.update("signature2");
-// prints: "signature2"
-console.log(credential.signature);
+
+console.log(credential.signature); // prints: "signature2"
 ```
 
 ## Next steps
@@ -82,7 +85,5 @@ If you run into issues while using this library, please feel free to [file an is
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-auth_1.9.0/CONTRIBUTING.md) to learn more about how to build and test the code.
-
-
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-auth_1.10.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

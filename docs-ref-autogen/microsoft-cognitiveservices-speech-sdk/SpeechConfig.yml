@@ -234,6 +234,54 @@ methods:
       return:
         description: A speech factory instance.
         type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
+  - name: fromEndpoint(URL, any)
+    uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromEndpoint_1
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: >-
+      Creates an instance of SpeechConfig with a custom endpoint and a
+      credential.
+
+      The query parameters specified in the endpoint URI are not changed, even
+      if they are set by any other API call.
+
+      For example, if the recognition language is defined in the URI query
+      parameter as "language=de-DE", and the property SpeechRecognitionLanguage
+      is set to "en-US",
+
+      the language set in the URI takes precedence, and "de-DE" remains the
+      expected language.
+
+      Since parameters included in the endpoint URI take priority, only
+      parameters that are not specified in the endpoint URI can be set by other
+      APIs.
+
+      Supported credential types:
+
+      - KeyCredential: For API key-based authentication.
+
+      - TokenCredential: For Azure AD-based authentication.
+
+      Note: To use authorization token with fromEndpoint, pass an empty string
+      to the subscriptionKey in the
+
+      fromEndpoint method, and then set authorizationToken="token" on the
+      created SpeechConfig instance to use the authorization token.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromEndpoint(endpoint: URL, credential: any):
+        SpeechConfig
+      parameters:
+        - id: endpoint
+          type: URL
+          description: The service endpoint to connect to.
+        - id: credential
+          type: any
+          description: The credential used for authentication.
+      return:
+        description: A speech factory instance.
+        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
   - name: fromEndpoint(URL, string)
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromEndpoint
     package: microsoft-cognitiveservices-speech-sdk
@@ -283,52 +331,6 @@ methods:
           description: >-
             The subscription key. If a subscription key is not specified, an
             authorization token must be set.
-      return:
-        description: A speech factory instance.
-        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
-  - name: fromEndpoint(URL, TokenCredential)
-    uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromEndpoint_1
-    package: microsoft-cognitiveservices-speech-sdk
-    summary: >-
-      Creates a speech configuration instance using a specified endpoint and
-      Azure Active Directory (AAD) token credential.
-
-      This API supports **SpeechRecognizer** and **ConversationTranscriber**.
-
-      Intended for use with **non-standard resource paths** or **custom
-      parameter overrides**.
-
-      Query parameters specified in the endpoint URL **are not overridden** by
-      other APIs.
-
-      For example, if the URL includes "language=de-DE" but
-      "speechRecognitionLanguage" is set to "en-US",
-
-      the value from the URL "de-DE" takes precedence — if the parameter is
-      supported by the scenario.
-
-      Parameters **not present in the URL** can still be updated via other APIs.
-
-      To authenticate with a **subscription key**, use SpeechConfig.fromEndpoint
-      with a key argument.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function fromEndpoint(endpoint: URL, tokenCredential:
-        TokenCredential): SpeechConfig
-      parameters:
-        - id: endpoint
-          type: URL
-          description: >-
-            The full service endpoint URL (e.g., for custom domains or private
-            links).
-
-            See:
-            https://learn.microsoft.com/azure/ai-services/speech-service/speech-services-private-link?tabs=portal#create-a-custom-domain-name.
-        - id: tokenCredential
-          type: TokenCredential
-          description: The AAD token credential used for authentication and token requests.
       return:
         description: A speech factory instance.
         type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />

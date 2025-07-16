@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: mongodbatlas
 ---
-# Azure Mongodbatlas SDK for JavaScript - preview
-## Packages - preview
+# Azure Mongodbatlas SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](mongodbatlas-index.md)]

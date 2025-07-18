@@ -1,7 +1,7 @@
 ---
 title: Azure DevOps Infrastructure SDK for JavaScript
 description: Reference for Azure DevOps Infrastructure SDK for JavaScript
-ms.date: 07/17/2025
+ms.date: 07/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: devopsinfrastructure

@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, communication
-ms.date: 05/21/2025
+ms.date: 07/22/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Phone Numbers client library for JavaScript - version 1.4.0-beta.1 
+# Azure Communication Phone Numbers client library for JavaScript - version 1.5.0-beta.1 
 
 
 The phone numbers library provides capabilities for phone number administration.
@@ -36,7 +36,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 This SDK provides functionality to easily manage `direct offer` and `direct routing` numbers.
 
-The `direct offer` numbers come in two types: Geographic and Toll-Free. Geographic phone plans are phone plans associated with a location, whose phone numbers' area codes are associated with the area code of a geographic location. Toll-Free phone plans are phone plans not associated location. For example, in the US, toll-free numbers can come with area codes such as 800 or 888.
+The `direct offer` numbers come in three types: Geographic, Toll-Free and Mobile. Geographic and Mobile phone plans are phone plans associated with a location, whose phone numbers' area codes are associated with the area code of a geographic location. Toll-Free phone plans are phone plans not associated location. For example, in the US, toll-free numbers can come with area codes such as 800 or 888.
 They are managed using the `PhoneNumbersClient`
 
 The `direct routing` feature enables connecting your existing telephony infrastructure to ACS.
@@ -46,13 +46,13 @@ The configuration is managed using the `SipRoutingClient`, which provides method
 
 #### Phone number types
 
-Phone numbers come in two types; Geographic and Toll-Free. Geographic phone numbers are phone numbers associated with a location, whose area codes are associated with the area code of a geographic location. Toll-Free phone numbers are not associated with a location. For example, in the US, toll-free numbers can come with area codes such as 800 or 888.
+Phone numbers come in three types; Geographic, Toll-Free and Mobile. Toll-Free numbers are not associated with a location. For example, in the US, toll-free numbers can come with area codes such as 800 or 888. Geographic and Mobile phone numbers are phone numbers associated with a location.
 
-All geographic phone numbers within the same country are grouped into a phone plan group with a Geographic phone number type. All Toll-Free phone numbers within the same country are grouped into a phone plan group.
+Phone number types with the same country are grouped into a phone plan group with that phone number type. For example all Toll-Free phone numbers within the same country are grouped into a phone plan group.
 
 #### Searching and acquiring numbers
 
-Phone numbers can be searched through the search creation API by providing a phone number type (geographic or toll-free), assignment type (person or application), calling and sms capabilities, an area code and quantity of phone numbers. The provided quantity of phone numbers will be reserved for 15 minutes. This search of phone numbers can either be cancelled or purchased. If the search is cancelled, then the phone numbers will become available to others. If the search is purchased, then the phone numbers are acquired for the Azure resource.
+Phone numbers can be searched through the search creation API by providing a phone number type (geographic, toll-free or mobile), assignment type (person or application), calling and sms capabilities, an area code and quantity of phone numbers. The provided quantity of phone numbers will be reserved for 15 minutes. This search of phone numbers can either be cancelled or purchased. If the search is cancelled, then the phone numbers will become available to others. If the search is purchased, then the phone numbers are acquired for the Azure resource.
 
 #### Configuring phone numbers
 
@@ -62,11 +62,11 @@ It is important to consider the assignment type of your phone number. Some capab
 
 #### Browsing and reserving phone numbers
 
-The Browse and Reservations APIs provide an alternate way to acquire phone numbers via a shopping-cart-like experience. This is achieved by splitting the search operation, which finds and reserves numbers using a single LRO, into two separate synchronous steps, Browse and Reservation. 
+The Browse and Reservations APIs provide an alternate way to acquire phone numbers via a shopping-cart-like experience. This is achieved by splitting the search operation, which finds and reserves numbers using a single LRO, into two separate synchronous steps, Browse and Reservation.
 
 The browse operation retrieves a random sample of phone numbers that are available for purchase for a given country, with optional filtering criteria to narrow down results. The returned phone numbers are not reserved for any customer.
 
-Reservations represent a collection of phone numbers that are locked by a specific customer and are awaiting purchase. They have an expiration time of 15 minutes after the last modification or 2 hours from creation time. A reservation can include numbers from different countries, in contrast with the Search operation. Customers can Create, Retrieve, Modify (by adding and removing numbers), Delete, and Purchase reservations. Purchasing a reservation is an LRO.
+Reservations represent a collection of phone numbers that are locked by a specific customer and are awaiting purchase. They have an expiration time of 15 minutes after the last modification or 2 hours from creation time. A reservation can include numbers from different countries, in contrast with the Search operation. Customers can create, retrieve, modify (by adding and removing numbers), delete, and purchase reservations. Purchasing a reservation is an LRO.
 
 ### SIP routing client
 
@@ -155,7 +155,7 @@ PhoneNumbersClient
 
 - [Search for available phone numbers](#search-for-available-phone-numbers)
 - [Purchase phone numbers from a search](#purchase-phone-numbers-from-a-search)
-- [Browse and reserve available phone numbers](#broswse-and-reserve-available-phone-numbers)
+- [Browse and reserve available phone numbers](#browse-and-reserve-available-phone-numbers)
 - [Release a purchased phone number](#release-a-purchased-phone-number)
 - [Update phone number capabilities](#update-phone-number-capabilities)
 - [Purchase reservation](#purchase-reservation)
@@ -531,17 +531,17 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.4.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.5.0-beta.1/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.4.0-beta.1/sdk/communication/communication-phone-numbers/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.5.0-beta.1/sdk/communication/communication-phone-numbers/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.4.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.5.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -551,7 +551,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.4.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.4.0-beta.1/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.4.0-beta.1/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.5.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.5.0-beta.1/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.5.0-beta.1/sdk/identity/identity/README.md
 

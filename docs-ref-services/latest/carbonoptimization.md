@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: carbonoptimization
 ---
-# Azure Carbonoptimization SDK for JavaScript - preview
-## Packages - preview
+# Azure Carbonoptimization SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](carbonoptimization-index.md)]

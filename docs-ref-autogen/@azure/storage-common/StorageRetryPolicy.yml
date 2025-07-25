@@ -1,51 +1,39 @@
 ### YamlMime:TSType
-name: StorageBrowserPolicy
-uid: '@azure/storage-file-share.StorageBrowserPolicy'
-package: '@azure/storage-file-share'
-summary: >-
-  StorageBrowserPolicy will handle differences between Node.js and browser
-  runtime, including:
-
-
-  1. Browsers cache GET/HEAD requests by adding conditional headers such as
-  'IF_MODIFIED_SINCE'.
-
-  StorageBrowserPolicy is a policy used to add a timestamp query to GET/HEAD
-  request URL
-
-  thus avoid the browser cache.
-
-
-  2. Remove cookie header for security
-
-
-  3. Remove content-length header to avoid browsers warning
-fullName: StorageBrowserPolicy
+name: StorageRetryPolicy
+uid: '@azure/storage-common.StorageRetryPolicy'
+package: '@azure/storage-common'
+summary: Retry policy with exponential retry and linear retry implemented.
+fullName: StorageRetryPolicy
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: StorageBrowserPolicy(RequestPolicy, RequestPolicyOptionsLike)
-    uid: '@azure/storage-file-share.StorageBrowserPolicy.constructor'
-    package: '@azure/storage-file-share'
-    summary: Creates an instance of StorageBrowserPolicy.
+  - name: >-
+      StorageRetryPolicy(RequestPolicy, RequestPolicyOptionsLike,
+      StorageRetryOptions)
+    uid: '@azure/storage-common.StorageRetryPolicy.constructor'
+    package: '@azure/storage-common'
+    summary: Creates an instance of RetryPolicy.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        new StorageBrowserPolicy(nextPolicy: RequestPolicy, options:
-        RequestPolicyOptionsLike)
+        new StorageRetryPolicy(nextPolicy: RequestPolicy, options:
+        RequestPolicyOptionsLike, retryOptions?: StorageRetryOptions)
       parameters:
         - id: nextPolicy
-          type: <xref uid="@azure/storage-file-share.IHttpClient" />
+          type: <xref uid="@azure/core-http-compat.RequestPolicy" />
           description: ''
         - id: options
-          type: <xref uid="@azure/storage-file-share.RequestPolicyOptions" />
+          type: <xref uid="@azure/core-http-compat.RequestPolicyOptionsLike" />
+          description: ''
+        - id: retryOptions
+          type: <xref uid="@azure/storage-common.StorageRetryOptions" />
           description: ''
 inheritedMethods:
   - name: log(HttpPipelineLogLevel, string)
-    uid: '@azure/storage-file-share.StorageBrowserPolicy.log'
-    package: '@azure/storage-file-share'
+    uid: '@azure/storage-common.StorageRetryPolicy.log'
+    package: '@azure/storage-common'
     summary: >-
       Attempt to log the provided message to the provided logger. If no logger
       was provided or if
@@ -65,10 +53,10 @@ inheritedMethods:
           description: The message of this log.
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [BaseRequestPolicy.log](xref:@azure/storage-file-share.BaseRequestPolicy.log)
+      [BaseRequestPolicy.log](xref:@azure/storage-common.BaseRequestPolicy.log)
   - name: shouldLog(HttpPipelineLogLevel)
-    uid: '@azure/storage-file-share.StorageBrowserPolicy.shouldLog'
-    package: '@azure/storage-file-share'
+    uid: '@azure/storage-common.StorageRetryPolicy.shouldLog'
+    package: '@azure/storage-common'
     summary: Get whether or not a log with the provided log level should be logged.
     remarks: ''
     isDeprecated: false
@@ -83,23 +71,21 @@ inheritedMethods:
         type: boolean
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [BaseRequestPolicy.shouldLog](xref:@azure/storage-file-share.BaseRequestPolicy.shouldLog)
+      [BaseRequestPolicy.shouldLog](xref:@azure/storage-common.BaseRequestPolicy.shouldLog)
 methods:
   - name: sendRequest(WebResourceLike)
-    uid: '@azure/storage-file-share.StorageBrowserPolicy.sendRequest'
-    package: '@azure/storage-file-share'
-    summary: Sends out request.
+    uid: '@azure/storage-common.StorageRetryPolicy.sendRequest'
+    package: '@azure/storage-common'
+    summary: Sends request.
     remarks: ''
     isDeprecated: false
     syntax:
       content: 'function sendRequest(request: WebResourceLike): Promise<CompatResponse>'
       parameters:
         - id: request
-          type: <xref uid="@azure/storage-file-share.WebResource" />
+          type: <xref uid="@azure/core-http-compat.WebResourceLike" />
           description: ''
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-file-share.HttpOperationResponse"
-          />&gt;
-extends: <xref uid="@azure/storage-file-share.BaseRequestPolicy" />
+        type: Promise&lt;<xref uid="@azure/core-http-compat.CompatResponse" />&gt;
+extends: <xref uid="@azure/storage-common.BaseRequestPolicy" />

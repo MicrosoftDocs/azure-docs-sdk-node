@@ -211,8 +211,7 @@ inheritedMethods:
       length and full metadata. Version 2012-02-12 and newer.
 
 
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/abort-copy-blob
+      See https://learn.microsoft.com/rest/api/storageservices/abort-copy-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -271,83 +270,89 @@ inheritedMethods:
       operation to copy from another storage account.
 
 
-      See https://learn.microsoft.com/en-us/rest/api/storageservices/copy-blob
+      See https://learn.microsoft.com/rest/api/storageservices/copy-blob
 
 
-      Example using automatic polling:
+      ```ts snippet:ClientsBeginCopyFromURL
+
+      import { BlobServiceClient } from "@azure/storage-blob";
+
+      import { DefaultAzureCredential } from "@azure/identity";
 
 
-      ```js
+      const account = "<account>";
 
-      const copyPoller = await blobClient.beginCopyFromURL('url');
-
-      const result = await copyPoller.pollUntilDone();
-
-      ```
-
-
-      Example using manual polling:
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
 
 
-      ```js
+      const containerName = "<container name>";
 
-      const copyPoller = await blobClient.beginCopyFromURL('url');
+      const blobName = "<blob name>";
 
-      while (!poller.isDone()) {
-         await poller.poll();
+      const containerClient =
+      blobServiceClient.getContainerClient(containerName);
+
+      const blobClient = containerClient.getBlobClient(blobName);
+
+
+      // Example using automatic polling
+
+      const automaticCopyPoller = await blobClient.beginCopyFromURL("url");
+
+      const automaticResult = await automaticCopyPoller.pollUntilDone();
+
+
+      // Example using manual polling
+
+      const manualCopyPoller = await blobClient.beginCopyFromURL("url");
+
+      while (!manualCopyPoller.isDone()) {
+        await manualCopyPoller.poll();
       }
 
-      const result = copyPoller.getResult();
-
-      ```
+      const manualResult = manualCopyPoller.getResult();
 
 
-      Example using progress updates:
+      // Example using progress updates
 
-
-      ```js
-
-      const copyPoller = await blobClient.beginCopyFromURL('url', {
+      const progressUpdatesCopyPoller = await blobClient.beginCopyFromURL("url",
+      {
         onProgress(state) {
           console.log(`Progress: ${state.copyProgress}`);
-        }
+        },
       });
 
-      const result = await copyPoller.pollUntilDone();
-
-      ```
-
-
-      Example using a changing polling interval (default 15 seconds):
+      const progressUpdatesResult = await
+      progressUpdatesCopyPoller.pollUntilDone();
 
 
-      ```js
+      // Example using a changing polling interval (default 15 seconds)
 
-      const copyPoller = await blobClient.beginCopyFromURL('url', {
-        intervalInMs: 1000 // poll blob every 1 second for copy progress
+      const pollingIntervalCopyPoller = await blobClient.beginCopyFromURL("url",
+      {
+        intervalInMs: 1000, // poll blob every 1 second for copy progress
       });
 
-      const result = await copyPoller.pollUntilDone();
-
-      ```
-
-
-      Example using copy cancellation:
+      const pollingIntervalResult = await
+      pollingIntervalCopyPoller.pollUntilDone();
 
 
-      ```js
+      // Example using copy cancellation:
 
-      const copyPoller = await blobClient.beginCopyFromURL('url');
+      const cancelCopyPoller = await blobClient.beginCopyFromURL("url");
 
       // cancel operation after starting it.
 
       try {
-        await copyPoller.cancelOperation();
+        await cancelCopyPoller.cancelOperation();
         // calls to get the result now throw PollerCancelledError
-        await copyPoller.getResult();
-      } catch (err) {
-        if (err.name === 'PollerCancelledError') {
-          console.log('The copy was cancelled.');
+        cancelCopyPoller.getResult();
+      } catch (err: any) {
+        if (err.name === "PollerCancelledError") {
+          console.log("The copy was cancelled.");
         }
       }
 
@@ -380,12 +385,10 @@ inheritedMethods:
   - name: createSnapshot(BlobCreateSnapshotOptions)
     uid: '@azure/storage-blob.BlockBlobClient.createSnapshot'
     package: '@azure/storage-blob'
-    summary: >-
+    summary: |-
       Creates a read-only snapshot of a blob.
 
-
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/snapshot-blob
+      See https://learn.microsoft.com/rest/api/storageservices/snapshot-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -419,7 +422,7 @@ inheritedMethods:
       Blob operation.
 
 
-      See https://learn.microsoft.com/en-us/rest/api/storageservices/delete-blob
+      See https://learn.microsoft.com/rest/api/storageservices/delete-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -451,7 +454,7 @@ inheritedMethods:
       Blob operation.
 
 
-      See https://learn.microsoft.com/en-us/rest/api/storageservices/delete-blob
+      See https://learn.microsoft.com/rest/api/storageservices/delete-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -510,7 +513,7 @@ inheritedMethods:
       * In browsers, data returns in a promise blobBody
 
 
-      See https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob
+      See https://learn.microsoft.com/rest/api/storageservices/get-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -538,29 +541,57 @@ inheritedMethods:
             Example usage (Node.js):
 
 
-            ```js
+            ```ts snippet:ReadmeSampleDownloadBlob_Node
 
-            // Download and convert a blob to a string
+            import { BlobServiceClient } from "@azure/storage-blob";
+
+            import { DefaultAzureCredential } from "@azure/identity";
+
+
+            const account = "<account>";
+
+            const blobServiceClient = new BlobServiceClient(
+              `https://${account}.blob.core.windows.net`,
+              new DefaultAzureCredential(),
+            );
+
+
+            const containerName = "<container name>";
+
+            const blobName = "<blob name>";
+
+            const containerClient =
+            blobServiceClient.getContainerClient(containerName);
+
+            const blobClient = containerClient.getBlobClient(blobName);
+
+
+            // Get blob content from position 0 to the end
+
+            // In Node.js, get downloaded data by accessing
+            downloadBlockBlobResponse.readableStreamBody
 
             const downloadBlockBlobResponse = await blobClient.download();
 
-            const downloaded = await
-            streamToBuffer(downloadBlockBlobResponse.readableStreamBody);
+            if (downloadBlockBlobResponse.readableStreamBody) {
+              const downloaded = await streamToString(downloadBlockBlobResponse.readableStreamBody);
+              console.log(`Downloaded blob content: ${downloaded}`);
+            }
 
-            console.log("Downloaded blob content:", downloaded.toString());
 
-
-            async function streamToBuffer(readableStream) {
-              return new Promise((resolve, reject) => {
-                const chunks = [];
-                readableStream.on("data", (data) => {
-                  chunks.push(typeof data === "string" ? Buffer.from(data) : data);
+            async function streamToString(stream: NodeJS.ReadableStream):
+            Promise<string> {
+              const result = await new Promise<Buffer<ArrayBuffer>>((resolve, reject) => {
+                const chunks: Buffer[] = [];
+                stream.on("data", (data) => {
+                  chunks.push(Buffer.isBuffer(data) ? data : Buffer.from(data));
                 });
-                readableStream.on("end", () => {
+                stream.on("end", () => {
                   resolve(Buffer.concat(chunks));
                 });
-                readableStream.on("error", reject);
+                stream.on("error", reject);
               });
+              return result.toString();
             }
 
             ```
@@ -569,30 +600,43 @@ inheritedMethods:
             Example usage (browser):
 
 
-            ```js
+            ```ts snippet:ReadmeSampleDownloadBlob_Browser
 
-            // Download and convert a blob to a string
+            import { BlobServiceClient } from "@azure/storage-blob";
 
-            const downloadBlockBlobResponse = await blobClient.download();
+            import { DefaultAzureCredential } from "@azure/identity";
 
-            const downloaded = await blobToString(await
-            downloadBlockBlobResponse.blobBody);
 
-            console.log(
-              "Downloaded blob content",
-              downloaded
+            const account = "<account>";
+
+            const blobServiceClient = new BlobServiceClient(
+              `https://${account}.blob.core.windows.net`,
+              new DefaultAzureCredential(),
             );
 
 
-            async function blobToString(blob: Blob): Promise<string> {
-              const fileReader = new FileReader();
-              return new Promise<string>((resolve, reject) => {
-                fileReader.onloadend = (ev: any) => {
-                  resolve(ev.target!.result);
-                };
-                fileReader.onerror = reject;
-                fileReader.readAsText(blob);
-              });
+            const containerName = "<container name>";
+
+            const blobName = "<blob name>";
+
+            const containerClient =
+            blobServiceClient.getContainerClient(containerName);
+
+            const blobClient = containerClient.getBlobClient(blobName);
+
+
+            // Get blob content from position 0 to the end
+
+            // In browsers, get downloaded data by accessing
+            downloadBlockBlobResponse.blobBody
+
+            const downloadBlockBlobResponse = await blobClient.download();
+
+            const blobBody = await downloadBlockBlobResponse.blobBody;
+
+            if (blobBody) {
+              const downloaded = await blobBody.text();
+              console.log(`Downloaded blob content: ${downloaded}`);
             }
 
             ```
@@ -788,7 +832,7 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -822,7 +866,7 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -858,7 +902,7 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -891,7 +935,7 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -930,7 +974,7 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/get-account-information
+      https://learn.microsoft.com/rest/api/storageservices/get-account-information
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1022,7 +1066,7 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/get-blob-properties
+      https://learn.microsoft.com/rest/api/storageservices/get-blob-properties
 
 
       WARNING: The `metadata` object returned in the response will have its keys
@@ -1091,8 +1135,7 @@ inheritedMethods:
       storage type. This operation does not update the blob's ETag.
 
 
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-tier
+      See https://learn.microsoft.com/rest/api/storageservices/set-blob-tier
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1114,7 +1157,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [BlobClient.setAccessTier](xref:@azure/storage-blob.BlobClient.setAccessTier)
-  - name: setHTTPHeaders(BlobHTTPHeaders, BlobSetHTTPHeadersOptions)
+  - name: setHTTPHeaders(BlobHttpHeaders, BlobSetHTTPHeadersOptions)
     uid: '@azure/storage-blob.BlockBlobClient.setHTTPHeaders'
     package: '@azure/storage-blob'
     summary: >-
@@ -1128,12 +1171,12 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-properties
+      https://learn.microsoft.com/rest/api/storageservices/set-blob-properties
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function setHTTPHeaders(blobHTTPHeaders?: BlobHTTPHeaders, options?:
+        function setHTTPHeaders(blobHTTPHeaders?: BlobHttpHeaders, options?:
         BlobSetHTTPHeadersOptions): Promise<BlobSetHTTPHeadersResponse>
       parameters:
         - id: blobHTTPHeaders
@@ -1222,8 +1265,7 @@ inheritedMethods:
       metadata will be removed.
 
 
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata
+      See https://learn.microsoft.com/rest/api/storageservices/set-blob-metadata
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1291,7 +1333,7 @@ inheritedMethods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/copy-blob-from-url
+      https://learn.microsoft.com/rest/api/storageservices/copy-blob-from-url
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1327,8 +1369,7 @@ inheritedMethods:
       or later.
 
 
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/undelete-blob
+      See https://learn.microsoft.com/rest/api/storageservices/undelete-blob
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1449,24 +1490,49 @@ methods:
       Example usage (Node.js):
 
 
-      ```js
+      ```ts snippet:ClientsQuery
+
+      import { BlobServiceClient } from "@azure/storage-blob";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
+
+      const containerName = "<container name>";
+
+      const blobName = "<blob name>";
+
+      const containerClient =
+      blobServiceClient.getContainerClient(containerName);
+
+      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
 
       // Query and convert a blob to a string
 
-      const queryBlockBlobResponse = await blockBlobClient.query("select * from
+      const queryBlockBlobResponse = await blockBlobClient.query("select from
       BlobStorage");
 
-      const downloaded = (await
-      streamToBuffer(queryBlockBlobResponse.readableStreamBody)).toString();
+      if (queryBlockBlobResponse.readableStreamBody) {
+        const downloadedBuffer = await streamToBuffer(queryBlockBlobResponse.readableStreamBody);
+        const downloaded = downloadedBuffer.toString();
+        console.log(`Query blob content: ${downloaded}`);
+      }
 
-      console.log("Query blob content:", downloaded);
 
-
-      async function streamToBuffer(readableStream) {
+      async function streamToBuffer(readableStream: NodeJS.ReadableStream):
+      Promise<Buffer> {
         return new Promise((resolve, reject) => {
-          const chunks = [];
+          const chunks: Buffer[] = [];
           readableStream.on("data", (data) => {
-            chunks.push(typeof data === "string" ? Buffer.from(data) : data);
+            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
           });
           readableStream.on("end", () => {
             resolve(Buffer.concat(chunks));
@@ -1542,7 +1608,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/put-block-from-url
+      https://learn.microsoft.com/rest/api/storageservices/put-block-from-url
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1691,7 +1757,30 @@ methods:
           Example usage:
 
 
-          ```js
+          ```ts snippet:ClientsUpload
+
+          import { BlobServiceClient } from "@azure/storage-blob";
+
+          import { DefaultAzureCredential } from "@azure/identity";
+
+
+          const account = "<account>";
+
+          const blobServiceClient = new BlobServiceClient(
+            `https://${account}.blob.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
+
+
+          const containerName = "<container name>";
+
+          const blobName = "<blob name>";
+
+          const containerClient =
+          blobServiceClient.getContainerClient(containerName);
+
+          const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+
 
           const content = "Hello world!";
 

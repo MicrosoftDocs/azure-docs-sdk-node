@@ -72,18 +72,22 @@ constructors:
             Example using DefaultAzureCredential from `@azure/identity`:
 
 
-            ```js
+            ```ts snippet:ReadmeSampleCreateClient_DefaultAzureCredential
+
+            import { DefaultAzureCredential } from "@azure/identity";
+
+            import { QueueServiceClient } from "@azure/storage-queue";
+
 
             const account = "<account>";
-
 
             const credential = new DefaultAzureCredential();
 
 
             const queueServiceClient = new QueueServiceClient(
               `https://${account}.queue.core.windows.net`,
-              credential
-            }
+              credential,
+            );
 
             ```
 
@@ -91,13 +95,27 @@ constructors:
             Example using an account name/key:
 
 
-            ```js
+            ```ts snippet:ReadmeSampleCreateClient_StorageSharedKeyCredential
+
+            import { StorageSharedKeyCredential, QueueServiceClient } from
+            "@azure/storage-queue";
+
+
+            // Enter your storage account name and shared key
 
             const account = "<account>";
 
+            const accountKey = "<accountkey>";
+
+
+            // Use StorageSharedKeyCredential with storage account and account
+            key
+
+            // StorageSharedKeyCredential is only available in Node.js runtime,
+            not in browsers
 
             const sharedKeyCredential = new StorageSharedKeyCredential(account,
-            "<account key>");
+            accountKey);
 
 
             const queueServiceClient = new QueueServiceClient(
@@ -105,8 +123,10 @@ constructors:
               sharedKeyCredential,
               {
                 retryOptions: { maxTries: 4 }, // Retry options
-                telemetry: { value: "BasicSample/V11.0.0" } // Customized telemetry string
-              }
+                userAgentOptions: {
+                  userAgentPrefix: "BasicSample V10.0.0",
+                }, // Customized telemetry string
+              },
             );
 
             ```
@@ -141,12 +161,10 @@ methods:
   - name: createQueue(string, QueueCreateOptions)
     uid: '@azure/storage-queue.QueueServiceClient.createQueue'
     package: '@azure/storage-queue'
-    summary: >-
+    summary: |-
       Creates a new queue under the specified account.
 
-
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/create-queue4
+      See https://learn.microsoft.com/rest/api/storageservices/create-queue4
     remarks: ''
     isDeprecated: false
     syntax:
@@ -166,12 +184,10 @@ methods:
   - name: deleteQueue(string, QueueDeleteOptions)
     uid: '@azure/storage-queue.QueueServiceClient.deleteQueue'
     package: '@azure/storage-queue'
-    summary: >-
+    summary: |-
       Deletes the specified queue permanently.
 
-
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/delete-queue3
+      See https://learn.microsoft.com/rest/api/storageservices/delete-queue3
     remarks: ''
     isDeprecated: false
     syntax:
@@ -233,7 +249,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas
+      https://learn.microsoft.com/rest/api/storageservices/create-account-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -283,7 +299,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/create-account-sas
+      https://learn.microsoft.com/rest/api/storageservices/create-account-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -326,7 +342,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/get-queue-service-properties
+      https://learn.microsoft.com/rest/api/storageservices/get-queue-service-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -355,20 +371,27 @@ methods:
           type: string
           description: ''
       return:
-        description: >-
+        description: |-
           a new QueueClient
-
 
           Example usage:
 
+          ```ts snippet:ReadmeSampleCreateQueue
+          import { QueueServiceClient } from "@azure/storage-queue";
+          import { DefaultAzureCredential } from "@azure/identity";
 
-          ```js
+          const account = "<account>";
+          const queueServiceClient = new QueueServiceClient(
+            `https://${account}.queue.core.windows.net`,
+            new DefaultAzureCredential(),
+          );
 
-          const queueClient = queueServiceClient.getQueueClient("<new queue
-          name>");
-
+          const queueName = "<valid queue name>";
+          const queueClient = queueServiceClient.getQueueClient(queueName);
           const createQueueResponse = await queueClient.create();
-
+          console.log(
+            `Created queue ${queueName} successfully, service assigned request Id: ${createQueueResponse.requestId}`,
+          );
           ```
         type: <xref uid="@azure/storage-queue.QueueClient" />
   - name: getStatistics(ServiceGetStatisticsOptions)
@@ -385,7 +408,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/get-queue-service-stats
+      https://learn.microsoft.com/rest/api/storageservices/get-queue-service-stats
     remarks: ''
     isDeprecated: false
     syntax:
@@ -416,13 +439,25 @@ methods:
       Example using `for await` syntax:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListQueues
+
+      import { QueueServiceClient } from "@azure/storage-queue";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const queueServiceClient = new QueueServiceClient(
+        `https://${account}.queue.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
       for await (const item of queueServiceClient.listQueues()) {
-        console.log(`Queue${i}: ${item.name}`);
-        i++;
+        console.log(`Queue${i++}: ${item.name}`);
       }
 
       ```
@@ -431,18 +466,30 @@ methods:
       Example using `iter.next()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListQueues_Iterator
+
+      import { QueueServiceClient } from "@azure/storage-queue";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const queueServiceClient = new QueueServiceClient(
+        `https://${account}.queue.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
-      let iterator = queueServiceClient.listQueues();
+      const iterator = queueServiceClient.listQueues();
 
-      let item = await iterator.next();
+      let { done, value } = await iterator.next();
 
-      while (!item.done) {
-        console.log(`Queue${i}: ${item.value.name}`);
-        i++;
-        item = await iterator.next();
+      while (!done) {
+        console.log(`Queue${i++}: ${value.name}`);
+        ({ done, value } = await iterator.next());
       }
 
       ```
@@ -451,19 +498,27 @@ methods:
       Example using `byPage()`:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListQueues_ByPage
 
-      // passing optional maxPageSize in the page settings
+      import { QueueServiceClient } from "@azure/storage-queue";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const queueServiceClient = new QueueServiceClient(
+        `https://${account}.queue.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
-      for await (const item2 of queueServiceClient.listQueues().byPage({
+      for await (const page of queueServiceClient.listQueues().byPage({
       maxPageSize: 20 })) {
-        if (item2.queueItems) {
-          for (const queueItem of item2.queueItems) {
-            console.log(`Queue${i}: ${queueItem.name}`);
-            i++;
-          }
+        for (const item of page.queueItems || []) {
+          console.log(`Queue${i++}: ${item.name}`);
         }
       }
 
@@ -473,43 +528,51 @@ methods:
       Example using paging with a marker:
 
 
-      ```js
+      ```ts snippet:ReadmeSampleListQueues_Continuation
+
+      import { QueueServiceClient } from "@azure/storage-queue";
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const account = "<account>";
+
+      const queueServiceClient = new QueueServiceClient(
+        `https://${account}.queue.core.windows.net`,
+        new DefaultAzureCredential(),
+      );
+
 
       let i = 1;
 
       let iterator = queueServiceClient.listQueues().byPage({ maxPageSize: 2 });
 
-      let item = (await iterator.next()).value;
+      let response = (await iterator.next()).value;
 
+      // Prints 2 queues
 
-      // Prints 2 queue names
-
-      if (item.queueItems) {
-        for (const queueItem of item.queueItems) {
-          console.log(`Queue${i}: ${queueItem.name}`);
-          i++;
+      if (response.queueItems) {
+        for (const item of response.queueItems) {
+          console.log(`Queue${i++}: ${item.name}`);
         }
       }
 
       // Gets next marker
 
-      let marker = item.continuationToken;
-
+      let marker = response.continuationToken;
 
       // Passing next marker as continuationToken
 
       iterator = queueServiceClient.listQueues().byPage({ continuationToken:
       marker, maxPageSize: 10 });
 
-      item = (await iterator.next()).value;
+      response = (await iterator.next()).value;
 
+      // Prints 10 queues
 
-      // Prints 10 queue names
-
-      if (item.queueItems) {
-        for (const queueItem of item.queueItems) {
-          console.log(`Queue${i}: ${queueItem.name}`);
-          i++;
+      if (response.queueItems) {
+        for (const item of response.queueItems) {
+          console.log(`Queue${i++}: ${item.name}`);
         }
       }
 
@@ -544,7 +607,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-queue-service-properties
+      https://learn.microsoft.com/rest/api/storageservices/set-queue-service-properties
     remarks: ''
     isDeprecated: false
     syntax:

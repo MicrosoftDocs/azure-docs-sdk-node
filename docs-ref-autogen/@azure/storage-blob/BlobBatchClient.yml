@@ -7,7 +7,7 @@ summary: >-
   Blob service.
 
 
-  See https://learn.microsoft.com/en-us/rest/api/storageservices/blob-batch
+  See https://learn.microsoft.com/rest/api/storageservices/blob-batch
 fullName: BlobBatchClient
 remarks: ''
 isDeprecated: false
@@ -91,13 +91,13 @@ methods:
       Note that in order to delete a blob, you must delete all of its snapshots.
 
       You can delete both at the same time. See [delete operation
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/delete-blob).
+      details](https://learn.microsoft.com/rest/api/storageservices/delete-blob).
 
       The operation(subrequest) will be authenticated and authorized with
       specified credential.
 
       See [blob batch authorization
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-batch#authorization).
+      details](https://learn.microsoft.com/rest/api/storageservices/blob-batch#authorization).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -128,13 +128,13 @@ methods:
       Note that in order to delete a blob, you must delete all of its snapshots.
 
       You can delete both at the same time. See [delete operation
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/delete-blob).
+      details](https://learn.microsoft.com/rest/api/storageservices/delete-blob).
 
       The operations will be authenticated and authorized with specified
       credential.
 
       See [blob batch authorization
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-batch#authorization).
+      details](https://learn.microsoft.com/rest/api/storageservices/blob-batch#authorization).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -184,12 +184,12 @@ methods:
       storage type. This operation does not update the blob's ETag.
 
       See [set blob tier
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-tier).
+      details](https://learn.microsoft.com/rest/api/storageservices/set-blob-tier).
 
       The operation(subrequest) will be authenticated and authorized
 
       with specified credential.See [blob batch authorization
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-batch#authorization).
+      details](https://learn.microsoft.com/rest/api/storageservices/blob-batch#authorization).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -232,12 +232,12 @@ methods:
       storage type. This operation does not update the blob's ETag.
 
       See [set blob tier
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/set-blob-tier).
+      details](https://learn.microsoft.com/rest/api/storageservices/set-blob-tier).
 
       The operation(subrequest) will be authenticated and authorized
 
       with specified credential.See [blob batch authorization
-      details](https://learn.microsoft.com/en-us/rest/api/storageservices/blob-batch#authorization).
+      details](https://learn.microsoft.com/rest/api/storageservices/blob-batch#authorization).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -275,37 +275,104 @@ methods:
   - name: submitBatch(BlobBatch, BlobBatchSubmitBatchOptionalParams)
     uid: '@azure/storage-blob.BlobBatchClient.submitBatch'
     package: '@azure/storage-blob'
-    summary: |-
+    summary: >-
       Submit batch request which consists of multiple subrequests.
 
+
       Get `blobBatchClient` and other details before running the snippets.
+
       `blobServiceClient.getBlobBatchClient()` gives the `blobBatchClient`
+
 
       Example usage:
 
-      ```js
-      let batchRequest = new BlobBatch();
-      await batchRequest.deleteBlob(urlInString0, credential0);
-      await batchRequest.deleteBlob(urlInString1, credential1, {
-       deleteSnapshots: "include"
+
+      ```ts snippet:BlobBatchClientSubmitBatch
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { BlobServiceClient, BlobBatch } from "@azure/storage-blob";
+
+
+      const account = "<account>";
+
+      const credential = new DefaultAzureCredential();
+
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        credential,
+      );
+
+
+      const containerName = "<container name>";
+
+      const containerClient =
+      blobServiceClient.getContainerClient(containerName);
+
+      const blobBatchClient = containerClient.getBlobBatchClient();
+
+
+      const batchRequest = new BlobBatch();
+
+      await batchRequest.deleteBlob("<blob-url-1>", credential);
+
+      await batchRequest.deleteBlob("<blob-url-2>", credential, {
+        deleteSnapshots: "include",
       });
+
       const batchResp = await blobBatchClient.submitBatch(batchRequest);
+
       console.log(batchResp.subResponsesSucceededCount);
+
       ```
+
 
       Example using a lease:
 
-      ```js
-      let batchRequest = new BlobBatch();
-      await batchRequest.setBlobAccessTier(blockBlobClient0, "Cool");
-      await batchRequest.setBlobAccessTier(blockBlobClient1, "Cool", {
-       conditions: { leaseId: leaseId }
+
+      ```ts snippet:BlobBatchClientSubmitBatchWithLease
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { BlobServiceClient, BlobBatch } from "@azure/storage-blob";
+
+
+      const account = "<account>";
+
+      const credential = new DefaultAzureCredential();
+
+      const blobServiceClient = new BlobServiceClient(
+        `https://${account}.blob.core.windows.net`,
+        credential,
+      );
+
+
+      const containerName = "<container name>";
+
+      const containerClient =
+      blobServiceClient.getContainerClient(containerName);
+
+      const blobBatchClient = containerClient.getBlobBatchClient();
+
+      const blobClient = containerClient.getBlobClient("<blob name>");
+
+
+      const batchRequest = new BlobBatch();
+
+      await batchRequest.setBlobAccessTier(blobClient, "Cool");
+
+      await batchRequest.setBlobAccessTier(blobClient, "Cool", {
+        conditions: { leaseId: "<lease-id>" },
       });
+
       const batchResp = await blobBatchClient.submitBatch(batchRequest);
+
       console.log(batchResp.subResponsesSucceededCount);
+
       ```
 
-      See https://learn.microsoft.com/en-us/rest/api/storageservices/blob-batch
+
+      See https://learn.microsoft.com/rest/api/storageservices/blob-batch
     remarks: ''
     isDeprecated: false
     syntax:

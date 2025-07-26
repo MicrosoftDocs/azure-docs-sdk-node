@@ -8,9 +8,7 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: >-
-      ShareFileClient(string, Credential_2 | TokenCredential,
-      ShareClientOptions)
+  - name: ShareFileClient(string, Credential | TokenCredential, ShareClientOptions)
     uid: '@azure/storage-file-share.ShareFileClient.constructor'
     package: '@azure/storage-file-share'
     summary: Creates an instance of ShareFileClient.
@@ -18,7 +16,7 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ShareFileClient(url: string, credential?: Credential_2 |
+        new ShareFileClient(url: string, credential?: Credential |
         TokenCredential, options?: ShareClientOptions)
       parameters:
         - id: url
@@ -147,8 +145,7 @@ methods:
       metadata.
 
 
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/abort-copy-file
+      See https://learn.microsoft.com/rest/api/storageservices/abort-copy-file
     remarks: ''
     isDeprecated: false
     syntax:
@@ -202,7 +199,7 @@ methods:
       with no content.
 
 
-      See https://learn.microsoft.com/en-us/rest/api/storageservices/create-file
+      See https://learn.microsoft.com/rest/api/storageservices/create-file
     remarks: ''
     isDeprecated: false
     syntax:
@@ -217,21 +214,59 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileCreateOptions" />
           description: Options to File Create operation.
       return:
-        description: |-
+        description: >-
           Response data for the File Create  operation.
+
 
           Example usage:
 
-          ```js
-          const content = "Hello world!";
 
-          // Create the file
+          ```ts snippet:ReadmeSampleCreateFileAndUpload
+
+          import { StorageSharedKeyCredential, ShareServiceClient } from
+          "@azure/storage-file-share";
+
+
+          const account = "<account>";
+
+          const accountKey = "<accountkey>";
+
+
+          const credential = new StorageSharedKeyCredential(account,
+          accountKey);
+
+          const serviceClient = new ShareServiceClient(
+            `https://${account}.file.core.windows.net`,
+            credential,
+          );
+
+
+          const shareName = "<share name>";
+
+          const directoryName = "<directory name>";
+
+          const directoryClient =
+          serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
+
+          const content = "Hello World!";
+
+          const fileName = `newdirectory${+new Date()}`;
+
+          const fileClient = directoryClient.getFileClient(fileName);
+
           await fileClient.create(content.length);
-          console.log("Created file successfully!");
 
-          // Then upload data to the file
+          console.log(`Create file ${fileName} successfully`);
+
+
+          // Upload file range
+
           await fileClient.uploadRange(content, 0, content.length);
-          console.log("Updated file successfully!")
+
+          console.log(`Upload file range "${content}" to ${fileName}
+          successfully`);
+
           ```
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.FileCreateResponse"
@@ -261,6 +296,33 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileCreateHardLinkResponse" />&gt;
+  - name: createSymbolicLink(string, FileCreateSymbolicLinkOptions)
+    uid: '@azure/storage-file-share.ShareFileClient.createSymbolicLink'
+    package: '@azure/storage-file-share'
+    summary: NFS only.  Creates a symbolic link.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createSymbolicLink(linkText: string, options?:
+        FileCreateSymbolicLinkOptions): Promise<FileCreateSymbolicLinkResponse>
+      parameters:
+        - id: linkText
+          type: string
+          description: |-
+            The path to the original file, the symbolic link is pointing to.
+                             The path is of type string which is not resolved and is stored as is. The path can be absolute path
+                            or the relative path depending on the content stored in the symbolic link file.
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-file-share.FileCreateSymbolicLinkOptions"
+            />
+          description: Options to create hard link operation.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.FileCreateSymbolicLinkResponse" />&gt;
   - name: delete(FileDeleteOptions)
     uid: '@azure/storage-file-share.ShareFileClient.delete'
     package: '@azure/storage-file-share'
@@ -289,8 +351,7 @@ methods:
       fail with 400 (InvalidQueryParameterValue)
 
 
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/delete-file2
+      See https://learn.microsoft.com/rest/api/storageservices/delete-file2
     remarks: ''
     isDeprecated: false
     syntax:
@@ -334,8 +395,7 @@ methods:
       fail with 400 (InvalidQueryParameterValue)
 
 
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/delete-file2
+      See https://learn.microsoft.com/rest/api/storageservices/delete-file2
     remarks: ''
     isDeprecated: false
     syntax:
@@ -364,7 +424,7 @@ methods:
       * In browsers, data returns in a promise `contentAsBlob`
 
 
-      See https://learn.microsoft.com/en-us/rest/api/storageservices/get-file
+      See https://learn.microsoft.com/rest/api/storageservices/get-file
     remarks: ''
     isDeprecated: false
     syntax:
@@ -386,25 +446,63 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileDownloadOptions" />
           description: Options to File Download operation.
       return:
-        description: |-
+        description: >-
           Response data for the File Download operation.
+
 
           Example usage (Node.js):
 
-          ```js
-          // Download a file to a string
-          const downloadFileResponse = await fileClient.download();
-          console.log(
-            "Downloaded file content:",
-            (await streamToBuffer(downloadFileResponse.readableStreamBody)).toString()}
+
+          ```ts snippet:ReadmeSampleDownloadFileAndConvertToString_Node
+
+          import { StorageSharedKeyCredential, ShareServiceClient } from
+          "@azure/storage-file-share";
+
+
+          const account = "<account>";
+
+          const accountKey = "<accountkey>";
+
+
+          const credential = new StorageSharedKeyCredential(account,
+          accountKey);
+
+          const serviceClient = new ShareServiceClient(
+            `https://${account}.file.core.windows.net`,
+            credential,
           );
 
-          // A helper method used to read a Node.js readable stream into string
-          async function streamToBuffer(readableStream) {
+
+          const shareName = "<share name>";
+
+          const fileName = "<file name>";
+
+          const fileClient = serviceClient
+            .getShareClient(shareName)
+            .rootDirectoryClient.getFileClient(fileName);
+
+          // Get file content from position 0 to the end
+
+          // In Node.js, get downloaded data by accessing
+          downloadFileResponse.readableStreamBody
+
+          const downloadFileResponse = await fileClient.download();
+
+          if (downloadFileResponse.readableStreamBody) {
+            const buffer = await streamToBuffer(downloadFileResponse.readableStreamBody);
+            console.log(`Downloaded file content: ${buffer.toString()}`);
+          }
+
+
+          // [Node.js only] A helper method used to read a Node.js readable
+          stream into a Buffer
+
+          async function streamToBuffer(readableStream: NodeJS.ReadableStream):
+          Promise<Buffer> {
             return new Promise((resolve, reject) => {
-              const chunks = [];
+              const chunks: Buffer[] = [];
               readableStream.on("data", (data) => {
-                chunks.push(typeof data === "string" ? Buffer.from(data) : data);
+                chunks.push(data instanceof Buffer ? data : Buffer.from(data));
               });
               readableStream.on("end", () => {
                 resolve(Buffer.concat(chunks));
@@ -412,29 +510,46 @@ methods:
               readableStream.on("error", reject);
             });
           }
+
           ```
+
 
           Example usage (browsers):
 
-          ```js
-          // Download a file to a string
-          const downloadFileResponse = await fileClient.download(0);
-          console.log(
-            "Downloaded file content:",
-            await blobToString(await downloadFileResponse.blobBody)}
-          );
 
-          // A helper method used to convert a browser Blob into string.
-          export async function blobToString(blob: Blob): Promise<string> {
-            const fileReader = new FileReader();
-            return new Promise<string>((resolve, reject) => {
-              fileReader.onloadend = (ev: any) => {
-                resolve(ev.target!.result);
-              };
-              fileReader.onerror = reject;
-              fileReader.readAsText(blob);
-            });
+          ```ts snippet:ReadmeSampleDownloadFileAndConvertToString_Browser
+
+          import { ShareServiceClient } from "@azure/storage-file-share";
+
+
+          const account = "<account name>";
+
+          const sas = "<service Shared Access Signature Token>";
+
+
+          const serviceClient = new
+          ShareServiceClient(`https://${account}.file.core.windows.net?${sas}`);
+
+
+          const shareName = "<share name>";
+
+          const fileName = "<file name>";
+
+          const fileClient = serviceClient
+            .getShareClient(shareName)
+            .rootDirectoryClient.getFileClient(fileName);
+
+          // Get file content from position 0 to the end
+
+          // In browsers, get downloaded data by accessing
+          downloadFileResponse.blobBody
+
+          const downloadFileResponse = await fileClient.download(0);
+
+          if (downloadFileResponse.blobBody) {
+            console.log(`Downloaded file content: ${(await downloadFileResponse.blobBody).text()}`);
           }
+
           ```
         type: >-
           Promise&lt;<xref
@@ -602,7 +717,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/force-close-handles
+      https://learn.microsoft.com/rest/api/storageservices/force-close-handles
     remarks: ''
     isDeprecated: false
     syntax:
@@ -628,7 +743,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/force-close-handles
+      https://learn.microsoft.com/rest/api/storageservices/force-close-handles
     remarks: ''
     isDeprecated: false
     syntax:
@@ -666,7 +781,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -697,7 +812,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
+      https://learn.microsoft.com/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isDeprecated: false
     syntax:
@@ -722,7 +837,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/get-file-properties
+      https://learn.microsoft.com/rest/api/storageservices/get-file-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -800,6 +915,25 @@ methods:
       return:
         description: A new ShareLeaseClient object for managing leases on the file.
         type: <xref uid="@azure/storage-file-share.ShareLeaseClient" />
+  - name: getSymbolicLink(FileGetSymbolicLinkOptions)
+    uid: '@azure/storage-file-share.ShareFileClient.getSymbolicLink'
+    package: '@azure/storage-file-share'
+    summary: NFS only.  Gets content of a symbolic link.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getSymbolicLink(options?: FileGetSymbolicLinkOptions):
+        Promise<FileGetSymbolicLinkResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-file-share.FileGetSymbolicLinkOptions" />
+          description: Options to get symbolic link operation.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.FileGetSymbolicLinkResponse" />&gt;
   - name: listHandles(FileListHandlesOptions)
     uid: '@azure/storage-file-share.ShareFileClient.listHandles'
     package: '@azure/storage-file-share'
@@ -852,16 +986,48 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileRenameOptions" />
           description: Options for the renaming operation.
       return:
-        description: |-
+        description: >-
           Response data for the file renaming operation.
+
 
           Example usage:
 
-          ```js
 
-          // Rename the file
+          ```ts snippet:ReadmeSampleRenameFile
+
+          import { StorageSharedKeyCredential, ShareServiceClient } from
+          "@azure/storage-file-share";
+
+
+          const account = "<account>";
+
+          const accountKey = "<accountkey>";
+
+
+          const credential = new StorageSharedKeyCredential(account,
+          accountKey);
+
+          const serviceClient = new ShareServiceClient(
+            `https://${account}.file.core.windows.net`,
+            credential,
+          );
+
+
+          const shareName = "<share name>";
+
+          const directoryName = "<directory name>";
+
+          const fileName = "<file name>";
+
+          const destinationPath = "<destination path>";
+
+          const fileClient = serviceClient
+            .getShareClient(shareName)
+            .getDirectoryClient(directoryName)
+            .getFileClient(fileName);
+
           await fileClient.rename(destinationPath);
-          console.log("Renamed file successfully!");
+
           ```
         type: >-
           Promise&lt;{ destinationFileClient: ShareFileClient,
@@ -874,7 +1040,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-file-properties
+      https://learn.microsoft.com/rest/api/storageservices/set-file-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -910,7 +1076,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-file-properties
+      https://learn.microsoft.com/rest/api/storageservices/set-file-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -932,17 +1098,13 @@ methods:
   - name: setMetadata(Metadata, FileSetMetadataOptions)
     uid: '@azure/storage-file-share.ShareFileClient.setMetadata'
     package: '@azure/storage-file-share'
-    summary: >-
+    summary: |-
       Updates user-defined metadata for the specified file.
 
-
       If no metadata defined in the option parameter, the file
-
       metadata will be removed.
 
-
-      See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-file-metadata
+      See https://learn.microsoft.com/rest/api/storageservices/set-file-metadata
     remarks: ''
     isDeprecated: false
     syntax:
@@ -971,7 +1133,7 @@ methods:
 
 
       See
-      https://learn.microsoft.com/en-us/rest/api/storageservices/set-file-properties
+      https://learn.microsoft.com/rest/api/storageservices/set-file-properties
     remarks: ''
     isDeprecated: false
     syntax:
@@ -1117,21 +1279,59 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileUploadRangeOptions" />
           description: Options to File Upload Range operation.
       return:
-        description: |-
+        description: >-
           Response data for the File Upload Range operation.
+
 
           Example usage:
 
-          ```js
-          const content = "Hello world!";
 
-          // Create the file
+          ```ts snippet:ReadmeSampleCreateFileAndUpload
+
+          import { StorageSharedKeyCredential, ShareServiceClient } from
+          "@azure/storage-file-share";
+
+
+          const account = "<account>";
+
+          const accountKey = "<accountkey>";
+
+
+          const credential = new StorageSharedKeyCredential(account,
+          accountKey);
+
+          const serviceClient = new ShareServiceClient(
+            `https://${account}.file.core.windows.net`,
+            credential,
+          );
+
+
+          const shareName = "<share name>";
+
+          const directoryName = "<directory name>";
+
+          const directoryClient =
+          serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
+
+
+          const content = "Hello World!";
+
+          const fileName = `newdirectory${+new Date()}`;
+
+          const fileClient = directoryClient.getFileClient(fileName);
+
           await fileClient.create(content.length);
-          console.log("Created file successfully!");
 
-          // Then upload data to the file
+          console.log(`Create file ${fileName} successfully`);
+
+
+          // Upload file range
+
           await fileClient.uploadRange(content, 0, content.length);
-          console.log("Updated file successfully!")
+
+          console.log(`Upload file range "${content}" to ${fileName}
+          successfully`);
+
           ```
         type: >-
           Promise&lt;<xref

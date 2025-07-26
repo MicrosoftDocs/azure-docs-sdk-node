@@ -48,6 +48,21 @@ properties:
         type: >-
           <xref uid="@azure/arm-containerservice.ManagedClusterAgentPoolProfile"
           />[]
+  - name: aiToolchainOperatorProfile
+    uid: '@azure/arm-containerservice.ManagedCluster.aiToolchainOperatorProfile'
+    package: '@azure/arm-containerservice'
+    summary: AI toolchain operator settings that apply to the whole cluster.
+    fullName: aiToolchainOperatorProfile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-containerservice.ManagedClusterAIToolchainOperatorProfile"
+          />
   - name: apiServerAccessProfile
     uid: '@azure/arm-containerservice.ManagedCluster.apiServerAccessProfile'
     package: '@azure/arm-containerservice'
@@ -110,10 +125,12 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.azurePortalFqdn'
     package: '@azure/arm-containerservice'
     summary: >-
-      The Azure Portal requires certain Cross-Origin Resource Sharing (CORS)
-      headers to be sent in some responses, which Kubernetes APIServer doesn't
-      handle by default. This special FQDN supports CORS, allowing the Azure
-      Portal to function properly.
+      The special FQDN used by the Azure Portal to access the Managed Cluster.
+      This FQDN is for use only by the Azure Portal and should not be used by
+      other clients. The Azure Portal requires certain Cross-Origin Resource
+      Sharing (CORS) headers to be sent in some responses, which Kubernetes
+      APIServer doesn't handle by default. This special FQDN supports CORS,
+      allowing the Azure Portal to function properly.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -143,10 +160,10 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.currentKubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
-      If kubernetesVersion was a fully specified version <major.minor.patch>,
-      this field will be exactly equal to it. If kubernetesVersion was
-      <major.minor>, this field will contain the full <major.minor.patch>
-      version being used.
+      The version of Kubernetes the Managed Cluster is running. If
+      kubernetesVersion was a fully specified version <major.minor.patch>, this
+      field will be exactly equal to it. If kubernetesVersion was <major.minor>,
+      this field will contain the full <major.minor.patch> version being used.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -162,9 +179,10 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.disableLocalAccounts'
     package: '@azure/arm-containerservice'
     summary: >-
-      If set to true, getting static credentials will be disabled for this
-      cluster. This must only be used on Managed Clusters that are AAD enabled.
-      For more details see [disable local
+      If local accounts should be disabled on the Managed Cluster. If set to
+      true, getting static credentials will be disabled for this cluster. This
+      must only be used on Managed Clusters that are AAD enabled. For more
+      details see [disable local
       accounts](https://docs.microsoft.com/azure/aks/managed-aad#disable-local-accounts-preview).
     fullName: disableLocalAccounts
     remarks: ''
@@ -178,7 +196,8 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.diskEncryptionSetID'
     package: '@azure/arm-containerservice'
     summary: >-
-      This is of the form:
+      The Resource ID of the disk encryption set to use for enabling encryption
+      at rest. This is of the form:
       '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{encryptionSetName}'
     fullName: diskEncryptionSetID
     remarks: ''
@@ -191,7 +210,9 @@ properties:
   - name: dnsPrefix
     uid: '@azure/arm-containerservice.ManagedCluster.dnsPrefix'
     package: '@azure/arm-containerservice'
-    summary: This cannot be updated once the Managed Cluster has been created.
+    summary: >-
+      The DNS prefix of the Managed Cluster. This cannot be updated once the
+      Managed Cluster has been created.
     fullName: dnsPrefix
     remarks: ''
     isDeprecated: false
@@ -262,7 +283,9 @@ properties:
   - name: fqdnSubdomain
     uid: '@azure/arm-containerservice.ManagedCluster.fqdnSubdomain'
     package: '@azure/arm-containerservice'
-    summary: This cannot be updated once the Managed Cluster has been created.
+    summary: >-
+      The FQDN subdomain of the private cluster with custom private dns zone.
+      This cannot be updated once the Managed Cluster has been created.
     fullName: fqdnSubdomain
     remarks: ''
     isDeprecated: false
@@ -333,13 +356,14 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.kubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
-      Both patch version <major.minor.patch> (e.g. 1.20.13) and <major.minor>
-      (e.g. 1.20) are supported. When <major.minor> is specified, the latest
-      supported GA patch version is chosen automatically. Updating the cluster
-      with the same <major.minor> once it has been created (e.g. 1.14.x -> 1.14)
-      will not trigger an upgrade, even if a newer patch version is available.
-      When you upgrade a supported AKS cluster, Kubernetes minor versions cannot
-      be skipped. All upgrades must be performed sequentially by major version
+      The version of Kubernetes specified by the user. Both patch version
+      <major.minor.patch> (e.g. 1.20.13) and <major.minor> (e.g. 1.20) are
+      supported. When <major.minor> is specified, the latest supported GA patch
+      version is chosen automatically. Updating the cluster with the same
+      <major.minor> once it has been created (e.g. 1.14.x -> 1.14) will not
+      trigger an upgrade, even if a newer patch version is available. When you
+      upgrade a supported AKS cluster, Kubernetes minor versions cannot be
+      skipped. All upgrades must be performed sequentially by major version
       number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x
       are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an
       AKS cluster](https://docs.microsoft.com/azure/aks/upgrade-cluster) for
@@ -410,6 +434,21 @@ properties:
         type: >-
           <xref uid="@azure/arm-containerservice.ContainerServiceNetworkProfile"
           />
+  - name: nodeProvisioningProfile
+    uid: '@azure/arm-containerservice.ManagedCluster.nodeProvisioningProfile'
+    package: '@azure/arm-containerservice'
+    summary: Node provisioning settings that apply to the whole cluster.
+    fullName: nodeProvisioningProfile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'nodeProvisioningProfile?: ManagedClusterNodeProvisioningProfile'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-containerservice.ManagedClusterNodeProvisioningProfile"
+          />
   - name: nodeResourceGroup
     uid: '@azure/arm-containerservice.ManagedCluster.nodeResourceGroup'
     package: '@azure/arm-containerservice'
@@ -455,7 +494,7 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.podIdentityProfile'
     package: '@azure/arm-containerservice'
     summary: >-
-      See [use AAD pod
+      The pod identity profile of the Managed Cluster. See [use AAD pod
       identity](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity)
       for more details on AAD pod identity integration.
     fullName: podIdentityProfile
@@ -531,7 +570,9 @@ properties:
   - name: publicNetworkAccess
     uid: '@azure/arm-containerservice.ManagedCluster.publicNetworkAccess'
     package: '@azure/arm-containerservice'
-    summary: Allow or deny public network access for AKS
+    summary: >-
+      PublicNetworkAccess of the managedCluster. Allow or deny public network
+      access for AKS
     fullName: publicNetworkAccess
     remarks: ''
     isDeprecated: false

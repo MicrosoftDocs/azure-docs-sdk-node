@@ -1,7 +1,7 @@
 ---
 title: Azure TypeSpec SDK for JavaScript
 description: Reference for Azure TypeSpec SDK for JavaScript
-ms.date: 07/25/2025
+ms.date: 07/28/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: typespec

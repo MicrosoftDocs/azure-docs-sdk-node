@@ -2,26 +2,13 @@
 name: Jobs
 uid: '@azure/quantum-jobs.Jobs'
 package: '@azure/quantum-jobs'
-summary: Class representing a Jobs.
+summary: Interface representing a Jobs.
 fullName: Jobs
 remarks: ''
 isDeprecated: false
-type: class
-constructors:
-  - name: Jobs(QuantumJobClient)
-    uid: '@azure/quantum-jobs.Jobs.constructor'
-    package: '@azure/quantum-jobs'
-    summary: Initialize a new instance of the class Jobs class.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'new Jobs(client: QuantumJobClient)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/quantum-jobs.QuantumJobClient" />
-          description: Reference to the service client
+type: interface
 methods:
-  - name: cancel(string, OperationOptions)
+  - name: cancel(string, JobsCancelOptionalParams)
     uid: '@azure/quantum-jobs.Jobs.cancel'
     package: '@azure/quantum-jobs'
     summary: Cancel a job.
@@ -29,19 +16,19 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function cancel(jobId: string, options?: OperationOptions):
-        Promise<RestResponse>
+        function cancel(jobId: string, options?: JobsCancelOptionalParams):
+        Promise<void>
       parameters:
         - id: jobId
           type: string
           description: Id of the job.
         - id: options
-          type: <xref uid="@azure/core-http.OperationOptions" />
+          type: <xref uid="@azure/quantum-jobs.JobsCancelOptionalParams" />
           description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/core-http.RestResponse" />&gt;
-  - name: create(string, JobDetails, OperationOptions)
+        type: Promise&lt;void&gt;
+  - name: create(string, JobDetails, JobsCreateOptionalParams)
     uid: '@azure/quantum-jobs.Jobs.create'
     package: '@azure/quantum-jobs'
     summary: Create a job.
@@ -50,7 +37,7 @@ methods:
     syntax:
       content: >-
         function create(jobId: string, job: JobDetails, options?:
-        OperationOptions): Promise<JobsCreateResponse>
+        JobsCreateOptionalParams): Promise<JobDetails>
       parameters:
         - id: jobId
           type: string
@@ -59,12 +46,12 @@ methods:
           type: <xref uid="@azure/quantum-jobs.JobDetails" />
           description: The complete metadata of the job to submit.
         - id: options
-          type: <xref uid="@azure/core-http.OperationOptions" />
+          type: <xref uid="@azure/quantum-jobs.JobsCreateOptionalParams" />
           description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/quantum-jobs.JobsCreateResponse" />&gt;
-  - name: get(string, OperationOptions)
+        type: Promise&lt;<xref uid="@azure/quantum-jobs.JobDetails" />&gt;
+  - name: get(string, JobsGetOptionalParams)
     uid: '@azure/quantum-jobs.Jobs.get'
     package: '@azure/quantum-jobs'
     summary: Get job by id
@@ -72,19 +59,19 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function get(jobId: string, options?: OperationOptions):
-        Promise<JobsGetResponse>
+        function get(jobId: string, options?: JobsGetOptionalParams):
+        Promise<JobDetails>
       parameters:
         - id: jobId
           type: string
           description: Id of the job.
         - id: options
-          type: <xref uid="@azure/core-http.OperationOptions" />
+          type: <xref uid="@azure/quantum-jobs.JobsGetOptionalParams" />
           description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/quantum-jobs.JobsGetResponse" />&gt;
-  - name: list(OperationOptions)
+        type: Promise&lt;<xref uid="@azure/quantum-jobs.JobDetails" />&gt;
+  - name: list(JobsListOptionalParams)
     uid: '@azure/quantum-jobs.Jobs.list'
     package: '@azure/quantum-jobs'
     summary: List jobs.
@@ -92,11 +79,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function list(options?: OperationOptions):
+        function list(options?: JobsListOptionalParams):
         PagedAsyncIterableIterator<JobDetails, JobDetails[], PageSettings>
       parameters:
         - id: options
-          type: <xref uid="@azure/core-http.OperationOptions" />
+          type: <xref uid="@azure/quantum-jobs.JobsListOptionalParams" />
           description: The options parameters.
       return:
         description: ''

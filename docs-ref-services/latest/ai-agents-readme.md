@@ -1,12 +1,12 @@
 ---
 title: Azure AI Agents client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-agents, ai
-ms.date: 06/30/2025
+ms.date: 07/31/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Agents client library for JavaScript - version 1.0.0 
+# Azure AI Agents client library for JavaScript - version 1.1.0 
 
 
 Use the AI Agents client library to:
@@ -18,7 +18,7 @@ Use the AI Agents client library to:
   managing search indexes, evaluating generative AI performance, and enabling OpenTelemetry tracing.
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0/sdk/ai/ai-agents/samples/)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.1.0/sdk/ai/ai-agents/samples/)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-agents)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-agents-readme?view=azure-node-latest)
 
@@ -97,7 +97,7 @@ const client = new AgentsClient(projectEndpoint, new DefaultAzureCredential());
 
 ### Agents
 
-Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0/sdk/ai/ai-agents/samples/) for additional Agent samples.
+Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.1.0/sdk/ai/ai-agents/samples/) for additional Agent samples.
 
 #### Create Agent
 
@@ -148,6 +148,34 @@ const agent = await client.createAgent("gpt-4o", {
   instructions: "You are a helpful agent",
   tools: toolSet.toolDefinitions,
   toolResources: toolSet.toolResources,
+});
+console.log(`Created agent, agent ID: ${agent.id}`);
+```
+
+#### Multiple Agents
+You can create multiple Agents with different tools and then connect them together.
+
+```ts snippet:MultiAgents
+import { ToolUtility } from "@azure/ai-agents";
+
+const connectedAgentName = "stock_price_bot";
+const modelDeploymentName = process.env["MODEL_DEPLOYMENT_NAME"] || "gpt-4o";
+const stockAgent = await client.createAgent(modelDeploymentName, {
+  name: "stock-price-agent",
+  instructions:
+    "Your job is to get the stock price of a company. If you don't know the realtime stock price, return the last known stock price.",
+});
+// Initialize Connected Agent tool with the agent id, name, and description
+const connectedAgentTool = ToolUtility.createConnectedAgentTool(
+  stockAgent.id,
+  connectedAgentName,
+  "Gets the stock price of a company",
+);
+// Create agent with the Connected Agent tool and process assistant run
+const agent = await client.createAgent(modelDeploymentName, {
+  name: "my-agent",
+  instructions: "You are a helpful assistant, and use the connected agent to get stock prices.",
+  tools: [connectedAgentTool.definition],
 });
 console.log(`Created agent, agent ID: ${agent.id}`);
 ```
@@ -589,7 +617,7 @@ const content = [
   },
   {
     type: "image_url",
-    image_url: {
+    imageUrl: {
       url: imageDataUrl,
       detail: "high",
     },
@@ -799,7 +827,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.0.0/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.1.0/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
 
 ## Contributing
 

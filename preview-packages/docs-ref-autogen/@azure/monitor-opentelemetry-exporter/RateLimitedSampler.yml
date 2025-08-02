@@ -1,0 +1,101 @@
+### YamlMime:TSType
+name: RateLimitedSampler
+uid: '@azure/monitor-opentelemetry-exporter.RateLimitedSampler'
+package: '@azure/monitor-opentelemetry-exporter'
+summary: >-
+  RateLimitedSampler is responsible for the following:
+
+  - Implements a rate-limiting sampling strategy based on a specified number of
+  requests per second.
+
+  - Dynamically adjusts the sampling rate based on the time elapsed since the
+  last sample.
+
+  - Provides a sampling rate that can be used to determine whether a span should
+  be recorded.
+fullName: RateLimitedSampler
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: RateLimitedSampler(number)
+    uid: '@azure/monitor-opentelemetry-exporter.RateLimitedSampler.constructor'
+    package: '@azure/monitor-opentelemetry-exporter'
+    summary: Initializes a new instance of the RateLimitedSampler class.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new RateLimitedSampler(tracesPerSecond: number)'
+      parameters:
+        - id: tracesPerSecond
+          type: number
+          description: The maximum number of traces to sample per second.
+methods:
+  - name: getSampleRate()
+    uid: '@azure/monitor-opentelemetry-exporter.RateLimitedSampler.getSampleRate'
+    package: '@azure/monitor-opentelemetry-exporter'
+    summary: >-
+      Gets the current sample rate based on the effective window count and
+      nanos.
+
+      This method calculates the sampling probability and returns it as a
+      percentage.
+
+      If `roundToNearest` is true, it rounds down the sampling percentage to the
+      nearest whole number.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getSampleRate(): number'
+      return:
+        description: The current sample rate as a percentage.
+        type: number
+  - name: shouldSample(Context, string, string, SpanKind, Attributes, Link[])
+    uid: '@azure/monitor-opentelemetry-exporter.RateLimitedSampler.shouldSample'
+    package: '@azure/monitor-opentelemetry-exporter'
+    summary: Checks whether span needs to be created and tracked.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function shouldSample(context: Context, traceId: string, spanName:
+        string, spanKind: SpanKind, attributes: Attributes, links: Link[]):
+        SamplingResult
+      parameters:
+        - id: context
+          type: Context
+          description: Parent Context which may contain a span.
+        - id: traceId
+          type: string
+          description: |-
+            traceId of the span to be created. It can be different from the
+                traceId in the <xref:SpanContext>. Typically in situations when the
+                span to be created starts a new trace.
+        - id: spanName
+          type: string
+          description: Name of the span to be created.
+        - id: spanKind
+          type: SpanKind
+          description: Kind of the span to be created.
+        - id: attributes
+          type: Attributes
+          description: Initial set of SpanAttributes for the Span being constructed.
+        - id: links
+          type: Link[]
+          description: |-
+            Collection of links that will be associated with the Span to
+                be created. Typically useful for batch operations.
+      return:
+        description: a <xref:SamplingResult>.
+        type: SamplingResult
+  - name: toString()
+    uid: '@azure/monitor-opentelemetry-exporter.RateLimitedSampler.toString'
+    package: '@azure/monitor-opentelemetry-exporter'
+    summary: Return Sampler description
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function toString(): string'
+      return:
+        description: ''
+        type: string

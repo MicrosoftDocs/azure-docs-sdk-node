@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 06/11/2025
+ms.date: 08/04/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -24,7 +24,7 @@ ms.service: monitor
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.11.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.12.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -101,7 +101,7 @@ useAzureMonitor(options);
   </tr>
   <tr>
     <td><code>azureMonitorExporterOptions</code></td>
-    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.11.1/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
+    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.12.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
     <td></td>
   </tr>
   <tr>
@@ -209,12 +209,12 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 ### Distributed Tracing
 
 - [HTTP/HTTPS](https://github.com/open-telemetry/opentelemetry-js/tree/main/experimental/packages/opentelemetry-instrumentation-http)
-- [MongoDB](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-mongodb)
-- [MySQL](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-mysql)
-- [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-pg)
-- [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis)
-- [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-redis-4)
-- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.11.1/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+- [MongoDB](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-mongodb)
+- [MySQL](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-mysql)
+- [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-pg)
+- [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis)
+- [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis-4)
+- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.12.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 
@@ -222,11 +222,11 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 
 ### Logs
 
-- [Bunyan](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-bunyan)
+- [Bunyan](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-bunyan)
 
-- [Winston](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node/opentelemetry-instrumentation-winston)
+- [Winston](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-winston)
 
-Other OpenTelemetry Instrumentations are available [here](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/plugins/node) and could be added using TracerProvider in AzureMonitorOpenTelemetryClient.
+Other OpenTelemetry Instrumentations are available [here](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages) and could be added using TracerProvider in AzureMonitorOpenTelemetryClient.
 
 ```ts snippet:ReadmeSampleCustomInstrumentation
 import { useAzureMonitor } from "@azure/monitor-opentelemetry";
@@ -460,7 +460,7 @@ You may want to collect metrics beyond what is collected by [instrumentation lib
 
 The OpenTelemetry API offers six metric "instruments" to cover a variety of metric scenarios and you'll need to pick the correct "Aggregation Type" when visualizing metrics in Metrics Explorer. This requirement is true when using the OpenTelemetry Metric API to send metrics and when using an instrumentation library.
 
-The following table shows the recommended aggregation types] for each of the OpenTelemetry Metric Instruments.
+The following table shows the recommended aggregation types for each of the OpenTelemetry Metric Instruments.
 
 | OpenTelemetry Instrument                             | Azure Monitor Aggregation Type                             |
 | ---------------------------------------------------- | ---------------------------------------------------------- |
@@ -544,7 +544,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.11.1/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.12.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -558,5 +558,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.11.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.12.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

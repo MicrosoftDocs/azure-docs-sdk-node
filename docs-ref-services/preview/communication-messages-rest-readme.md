@@ -1,12 +1,12 @@
 ---
 title: Azure CommunicationMessages REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/communication-messages, communication
-ms.date: 04/15/2025
+ms.date: 08/05/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure CommunicationMessages REST client library for JavaScript - version 2.2.0-beta.1 
+# Azure CommunicationMessages REST client library for JavaScript - version 2.2.0-alpha.20250805.1 
 
 
 This package contains a JavaScript SDK for Azure Communication Messages Services.
@@ -226,28 +226,38 @@ if (!isUnexpected(result)) {
 
 `Note: Business can't start a conversation with a media message. It needs to be user initiated.`
 
-```typescript
+```ts snippet:ReadmeSampleSendButtonActionInteractiveMessage
+import { DefaultAzureCredential } from "@azure/identity";
+import MessageClient, {
+  InteractiveMessage,
+  isUnexpected,
+} from "@azure-rest/communication-messages";
+
+const endpoint = "https://<resource-name>.communication.azure.com";
+const credential = new DefaultAzureCredential();
+const client = MessageClient(endpoint, credential);
+
 const interactiveMessage: InteractiveMessage = {
-    body: {
-        kind: "text",
-        text: "Do you want to proceed?",
+  body: {
+    kind: "text",
+    text: "Do you want to proceed?",
+  },
+  action: {
+    kind: "whatsAppButtonAction",
+    content: {
+      kind: "buttonSet",
+      buttons: [
+        {
+          id: "yes",
+          title: "Yes",
+        },
+        {
+          id: "no",
+          title: "No",
+        },
+      ],
     },
-    action: {
-        kind: "whatsAppButtonAction",
-        content: {
-            kind: "buttonSet",
-            buttons: [
-                {
-                    id: "yes",
-                    title: "Yes",
-                },
-                {
-                    id: "no",
-                    title: "No",
-                },
-            ]
-        }
-    }
+  },
 };
 
 const result = await client.path("/messages/notifications:send").post({
@@ -260,13 +270,10 @@ const result = await client.path("/messages/notifications:send").post({
   },
 });
 
-if (result.status === "202") {
-  const response: Send202Response = result as Send202Response;
-  response.body.receipts.forEach((receipt) => {
+if (!isUnexpected(result)) {
+  result.body.receipts.forEach((receipt) => {
     console.log("Message sent to:" + receipt.to + " with message id:" + receipt.messageId);
   });
-} else {
-  throw new Error("Failed to send message");
 }
 ```
 
@@ -274,51 +281,61 @@ if (result.status === "202") {
 
 `Note: Business can't start a conversation with a media message. It needs to be user initiated.`
 
-```typescript
+```ts snippet:ReadmeSampleSendListActionInteractiveMessage
+import { DefaultAzureCredential } from "@azure/identity";
+import MessageClient, {
+  InteractiveMessage,
+  isUnexpected,
+} from "@azure-rest/communication-messages";
+
+const endpoint = "https://<resource-name>.communication.azure.com";
+const credential = new DefaultAzureCredential();
+const client = MessageClient(endpoint, credential);
+
 const interactiveMessage: InteractiveMessage = {
-    body: {
-        kind: "text",
-        text: "Which shipping option do you want?",
+  body: {
+    kind: "text",
+    text: "Which shipping option do you want?",
+  },
+  action: {
+    kind: "whatsAppListAction",
+    content: {
+      kind: "group",
+      title: "Shipping Options",
+      groups: [
+        {
+          title: "Express Delivery",
+          items: [
+            {
+              id: "priority_mail_express",
+              title: "Priority Mail Express",
+              description: "Delivered on same day!",
+            },
+            {
+              id: "priority_mail",
+              title: "Priority Mail",
+              description: "Delivered in 1-2 days",
+            },
+          ],
+        },
+        {
+          title: "Normal Delivery",
+          items: [
+            {
+              id: "usps_ground_advantage",
+              title: "USPS Ground Advantage",
+              description: "Delivered in 2-5 days",
+            },
+            {
+              id: "usps_mail",
+              title: "Normal Mail",
+              description: "Delivered in 5-8 days",
+            },
+          ],
+        },
+      ],
     },
-    action: {
-        kind: "whatsAppListAction",
-        content: {
-            kind: "group",
-            title: "Shipping Options",
-            groups:[
-                {
-                    title: "Express Delivery",
-                    items: [
-                        {
-                            id: "priority_mail_express",
-                            title: "Priority Mail Express",
-                            description: "Delivered on same day!",
-                        },
-                        {
-                            id: "priority_mail",
-                            title: "Priority Mail",
-                            description: "Delivered in 1-2 days",
-                        }
-                    ]
-                },
-                {
-                    title: "Normal Delivery",
-                    items: [
-                        {
-                            id: "usps_ground_advantage",
-                            title: "USPS Ground Advantage",
-                            description: "Delivered in 2-5 days",
-                        },
-                        {
-                            id: "usps_mail",
-                            title: "Normal Mail",
-                            description: "Delivered in 5-8 days",
-                        }
-                    ]
-                }
-            ]
-        }
-    }
+  },
 };
 
 const result = await client.path("/messages/notifications:send").post({
@@ -331,13 +348,10 @@ const result = await client.path("/messages/notifications:send").post({
   },
 });
 
-if (result.status === "202") {
-  const response: Send202Response = result as Send202Response;
-  response.body.receipts.forEach((receipt) => {
+if (!isUnexpected(result)) {
+  result.body.receipts.forEach((receipt) => {
     console.log("Message sent to:" + receipt.to + " with message id:" + receipt.messageId);
   });
-} else {
-  throw new Error("Failed to send message");
 }
 ```
 
@@ -345,24 +359,34 @@ if (result.status === "202") {
 
 `Note: Business can't start a conversation with a media message. It needs to be user initiated.`
 
-```typescript
+```ts snippet:ReadmeSampleSendUrlActionInteractiveMessage
+import { DefaultAzureCredential } from "@azure/identity";
+import MessageClient, {
+  InteractiveMessage,
+  isUnexpected,
+} from "@azure-rest/communication-messages";
+
+const endpoint = "https://<resource-name>.communication.azure.com";
+const credential = new DefaultAzureCredential();
+const client = MessageClient(endpoint, credential);
+
 const interactiveMessage: InteractiveMessage = {
-    body: {
-        kind: "text",
-        text: "Find more detail in the link.",
+  body: {
+    kind: "text",
+    text: "Find more detail in the link.",
+  },
+  action: {
+    kind: "whatsAppUrlAction",
+    content: {
+      kind: "url",
+      title: "link",
+      url: "https://<your-url-link>",
     },
-    action: {
-        kind: "whatsAppUrlAction",
-        content: {
-            kind: "url",
-            title: "link",
-            url: "https://<your-url-link>",
-        }
-    },
-    footer: {
-        kind: "text",
-        text: "This is a footer message",
-    }
+  },
+  footer: {
+    kind: "text",
+    text: "This is a footer message",
+  },
 };
 
 const result = await client.path("/messages/notifications:send").post({
@@ -375,13 +399,10 @@ const result = await client.path("/messages/notifications:send").post({
   },
 });
 
-if (result.status === "202") {
-  const response: Send202Response = result as Send202Response;
-  response.body.receipts.forEach((receipt) => {
+if (!isUnexpected(result)) {
+  result.body.receipts.forEach((receipt) => {
     console.log("Message sent to:" + receipt.to + " with message id:" + receipt.messageId);
   });
-} else {
-  throw new Error("Failed to send message");
 }
 ```
 
@@ -397,15 +418,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_2.2.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-messages_2.2.0-beta.1/sdk/communication/communication-messages-rest/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-messages-rest/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/communication-messages_2.2.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -415,8 +436,8 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_2.2.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/communication-messages_2.2.0-beta.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
 [azure_communication_messaging_qs]: https://learn.microsoft.com/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-overview
 [register_whatsapp_business_account]: https://learn.microsoft.com/azure/communication-services/quickstarts/advanced-messaging/whatsapp/connect-whatsapp-business-account
 [create-manage-whatsapp-template]: https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates/

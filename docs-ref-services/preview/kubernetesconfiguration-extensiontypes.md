@@ -1,7 +1,7 @@
 ---
 title: Azure Kubernetesconfiguration-Extensiontypes SDK for JavaScript
 description: Reference for Azure Kubernetesconfiguration-Extensiontypes SDK for JavaScript
-ms.date: 08/05/2025
+ms.date: 08/06/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesconfiguration-extensiontypes

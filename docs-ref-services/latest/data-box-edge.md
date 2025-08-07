@@ -1,7 +1,7 @@
 ---
 title: Azure Data Box Edge SDK for JavaScript
 description: Reference for Azure Data Box Edge SDK for JavaScript
-ms.date: 08/06/2025
+ms.date: 08/07/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: databoxedge

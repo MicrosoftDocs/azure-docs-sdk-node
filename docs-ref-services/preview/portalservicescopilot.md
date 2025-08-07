@@ -1,7 +1,7 @@
 ---
 title: Azure Portalservicescopilot SDK for JavaScript
 description: Reference for Azure Portalservicescopilot SDK for JavaScript
-ms.date: 08/06/2025
+ms.date: 08/07/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: portalservicescopilot

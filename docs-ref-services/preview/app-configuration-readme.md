@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: appconfiguration
 ---
-# Azure App Configuration client library for JavaScript - version 1.9.1-alpha.20250804.1 
+# Azure App Configuration client library for JavaScript - version 1.9.1-alpha.20250807.2 
 
 
 [Azure App Configuration](https://learn.microsoft.com/azure/azure-app-configuration/overview) is a managed service that helps developers centralize their application and feature settings simply and securely.

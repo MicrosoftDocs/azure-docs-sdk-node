@@ -1,7 +1,7 @@
 ---
 title: Azure Fabric SDK for JavaScript
 description: Reference for Azure Fabric SDK for JavaScript
-ms.date: 08/15/2025
+ms.date: 08/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: fabric

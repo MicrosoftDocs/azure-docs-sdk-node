@@ -1,9 +1,10 @@
 ---
-title: Azure Monitor modules for JavaScript
-description: Reference for Azure Monitor modules for JavaScript
-ms.date: 07/18/2017
+title: Azure Monitor SDK for JavaScript
+description: Reference for Azure Monitor SDK for JavaScript
+ms.date: 08/19/2025
 ms.topic: reference
-ms.service: azure-monitor
+ms.devlang: javascript
+ms.service: monitor
 ---
 # Azure Monitor modules for JavaScript
 
@@ -22,4 +23,3 @@ pm install @azure/arm-monitor
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-monitor)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
-

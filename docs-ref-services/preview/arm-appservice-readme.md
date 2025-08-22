@@ -1,21 +1,21 @@
 ---
 title: Azure WebSiteManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-appservice-profile-2020-09-01-hybrid, appservice
+keywords: Azure, javascript, SDK, API, @azure/arm-appservice, appservice
 ms.date: 08/22/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appservice
 ---
-# Azure WebSiteManagement client library for JavaScript - version 2.1.1 
+# Azure WebSiteManagement client library for JavaScript - version 17.0.0-alpha.20250820.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure WebSiteManagement client.
 
 WebSite Management Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/appservice/arm-appservice-profile-2020-09-01-hybrid) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-appservice-profile-2020-09-01-hybrid) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-appservice-profile-2020-09-01-hybrid) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/appservice/arm-appservice) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-appservice) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-appservice) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-appservice-profile-2020-09-01-hybrid` package
+### Install the `@azure/arm-appservice` package
 
 Install the Azure WebSiteManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-appservice-profile-2020-09-01-hybrid
+npm install @azure/arm-appservice
 ```
 
 ### Create and authenticate a `WebSiteManagementClient`
@@ -53,14 +53,13 @@ npm install @azure/identity
 ```
 
 You will also need to **register a new AAD application and grant access to Azure WebSiteManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
-Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { WebSiteManagementClient } from "@azure/arm-appservice-profile-2020-09-01-hybrid";
+import { WebSiteManagementClient } from "@azure/arm-appservice";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -71,7 +70,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { WebSiteManagementClient } from "@azure/arm-appservice-profile-2020-09-01-hybrid";
+import { WebSiteManagementClient } from "@azure/arm-appservice";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
@@ -82,7 +81,6 @@ const client = new WebSiteManagementClient(credential, subscriptionId);
 ```
 
 ### JavaScript Bundle
-
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
@@ -116,7 +114,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
-
 
 
 [azure_cli]: https://learn.microsoft.com/cli/azure

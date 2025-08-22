@@ -1,12 +1,12 @@
 ---
 title: Azure Schema Registry Avro Serializer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry-avro, schemaregistry
-ms.date: 10/25/2023
+ms.date: 08/22/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: schemaregistry
 ---
-# Azure Schema Registry Avro Serializer client library for JavaScript - version 1.1.0 
+# Azure Schema Registry Avro Serializer client library for JavaScript - version 1.1.1 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
@@ -16,10 +16,10 @@ Avro-serialized data.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/schemaregistry/schema-registry-avro)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/schemaregistry/schema-registry-avro)
 - [Package (npm)](https://www.npmjs.com/package/@azure/schema-registry-avro)
-- [API Reference Documentation](/javascript/api/@azure/schema-registry-avro)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/schemaregistry/schema-registry-avro/samples)
+- [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/schema-registry-avro)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/schemaregistry/schema-registry-avro/samples)
 
 ## Getting started
 
@@ -71,37 +71,62 @@ adapters for their message types.
 
 ### Serialize and deserialize an `@azure/event-hubs`'s `EventData`
 
-```javascript
-const { DefaultAzureCredential } = require("@azure/identity");
-const { createEventDataAdapter } = require("@azure/event-hubs");
-const { SchemaRegistryClient } = require("@azure/schema-registry");
-const { AvroSerializer } = require("@azure/schema-registry-avro");
+```ts snippet:ReadmeSample_SerializeDeserializeEventHubMessage
+import { SchemaRegistryClient } from "@azure/schema-registry";
+import { DefaultAzureCredential } from "@azure/identity";
+import { AvroSerializer } from "@azure/schema-registry-avro";
 
-const client = new SchemaRegistryClient(
-  "<fully qualified namespace>",
-  new DefaultAzureCredential()
-);
-const serializer = new AvroSerializer(client, {
-  groupName: "<group>",
-  messageAdapter: createEventDataAdapter(),
-});
+// The schema group to use for schema registration or lookup
+const groupName = "AzureSdkSampleGroup";
 
-// Example Avro schema
-const schema = JSON.stringify({
+// Sample Avro Schema for user with first and last names
+const schemaObject = {
   type: "record",
-  name: "Rating",
-  namespace: "my.example",
-  fields: [{ name: "score", type: "int" }],
-});
+  name: "User",
+  namespace: "com.azure.schemaregistry.samples",
+  fields: [
+    {
+      name: "firstName",
+      type: "string",
+    },
+    {
+      name: "lastName",
+      type: "string",
+    },
+  ],
+};
 
-// Example value that matches the Avro schema above
-const value = { score: 42 };
+const schema = JSON.stringify(schemaObject);
 
-// Serialize value to a message
+// Description of the schema for registration
+const schemaDescription = {
+  name: `${schemaObject.namespace}.${schemaObject.name}`,
+  groupName,
+  format: "Avro",
+  definition: schema,
+};
+
+// Create a new client
+const client = new SchemaRegistryClient("<endpoint>", new DefaultAzureCredential());
+
+// Register the schema. This would generally have been done somewhere else.
+// You can also skip this step and let `serialize` automatically register
+// schemas using autoRegisterSchemas=true, but that is NOT recommended in production.
+await client.registerSchema(schemaDescription);
+
+// Create a new serializer backed by the client
+const serializer = new AvroSerializer(client, { groupName });
+
+// serialize an object that matches the schema and put it in a message
+const value = { firstName: "Jane", lastName: "Doe" };
 const message = await serializer.serialize(value, schema);
+console.log("Created message:");
+console.log(JSON.stringify(message));
 
-// Deserialize a message to value
-const deserializedValue = await serializer.deserialize(message);
+// deserialize the message back to an object
+const deserializedObject = await serializer.deserialize(message);
+console.log("Deserialized object:");
+console.log(JSON.stringify(deserializedObject));
 ```
 
 ## Troubleshooting
@@ -115,8 +140,8 @@ see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment
 variable to `info`. Alternatively, logging can be enabled at runtime by calling
 `setLogLevel` in the `@azure/logger`:
 
-```javascript
-const { setLogLevel } = require("@azure/logger");
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
@@ -124,7 +149,7 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/schemaregistry/schema-registry-avro/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/schemaregistry/schema-registry-avro/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -147,7 +172,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 If you'd like to contribute to this library, please read the [contributing
-guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry-avro_1.1.0/CONTRIBUTING.md) to
+guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to
 learn more about how to build and test the code.
 
 ## Related projects
@@ -156,10 +181,11 @@ learn more about how to build and test the code.
 
 
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.1.0/sdk/identity/identity#defaultazurecredential
-[resterror]: /javascript/api/@azure/core-rest-pipeline/resterror?view=azure-node-latest
-[schema_registry]: /javascript/api/overview/azure/schema-registry-readme?view=azure-node-latest
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
+[resterror]: https://learn.microsoft.com/javascript/api/@azure/core-rest-pipeline/resterror?view=azure-node-latest
+[schema_registry]: https://learn.microsoft.com/javascript/api/overview/azure/schema-registry-readme?view=azure-node-latest
+

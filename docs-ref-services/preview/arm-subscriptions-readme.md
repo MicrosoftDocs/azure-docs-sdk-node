@@ -1,21 +1,21 @@
 ---
 title: Azure Subscription client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-subscriptions-profile-2020-09-01-hybrid, subscription
+keywords: Azure, javascript, SDK, API, @azure/arm-subscriptions, subscription
 ms.date: 08/22/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: subscription
 ---
-# Azure Subscription client library for JavaScript - version 2.1.1 
+# Azure Subscription client library for JavaScript - version 5.1.1-alpha.20250814.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Subscription client.
 
-All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization.
+The subscription client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/subscription/arm-subscriptions-profile-2020-09-01-hybrid) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-subscriptions-profile-2020-09-01-hybrid) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-subscriptions-profile-2020-09-01-hybrid) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/subscription/arm-subscriptions) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-subscriptions) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-subscriptions) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-subscriptions-profile-2020-09-01-hybrid` package
+### Install the `@azure/arm-subscriptions` package
 
 Install the Azure Subscription client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-subscriptions-profile-2020-09-01-hybrid
+npm install @azure/arm-subscriptions
 ```
 
 ### Create and authenticate a `SubscriptionClient`
@@ -60,7 +60,7 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
  
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { SubscriptionClient } from "@azure/arm-subscriptions-profile-2020-09-01-hybrid";
+import { SubscriptionClient } from "@azure/arm-subscriptions";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -71,7 +71,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
  
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { SubscriptionClient } from "@azure/arm-subscriptions-profile-2020-09-01-hybrid";
+import { SubscriptionClient } from "@azure/arm-subscriptions";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({

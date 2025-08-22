@@ -1,12 +1,12 @@
 ---
 title: Azure AI Content Safety REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-content-safety, contentsafety
-ms.date: 02/12/2025
+ms.date: 08/22/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: contentsafety
 ---
-# Azure AI Content Safety REST client library for JavaScript - version 1.0.1 
+# Azure AI Content Safety REST client library for JavaScript - version 1.0.2 
 
 
 [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview) detects harmful user-generated and AI-generated content in applications and services. Content Safety includes text and image APIs that allow you to detect material that is harmful.
@@ -15,14 +15,14 @@ ms.service: contentsafety
 - Image Analysis API: Scans images for sexual content, violence, hate, and self-harm with multi-severity levels.
 - Text Blocklist Management APIs: The default AI classifiers are sufficient for most content safety needs; however, you might need to screen for terms that are specific to your use case. You can create blocklists of terms to use with the Text API.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-content-safety_1.0.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-content-safety_1.0.1/sdk/contentsafety/ai-content-safety-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentsafety/ai-content-safety-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-content-safety)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/ai-content-safety?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-content-safety_1.0.1/sdk/contentsafety/ai-content-safety-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentsafety/ai-content-safety-rest/samples)
 
 ## Getting started
 
@@ -91,8 +91,8 @@ const client = ContentSafetyClient(endpoint, credential);
 - Step 2: Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
   AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 
-To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity). After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-content-safety_1.0.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-content-safety_1.0.1/sdk/identity/identity#defaultazurecredential)
+To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity). After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_TokenCredential
@@ -636,7 +636,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-content-safety_1.0.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -646,5 +646,5 @@ For more extensive documentation on Azure Content Safety, see the [Azure AI Cont
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-content-safety_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
 

@@ -1,0 +1,11 @@
+---
+title: Azure Storagediscovery SDK for JavaScript
+description: Reference for Azure Storagediscovery SDK for JavaScript
+ms.date: 08/22/2025
+ms.topic: reference
+ms.devlang: javascript
+ms.service: storagediscovery
+---
+# Azure Storagediscovery SDK for JavaScript - preview
+## Packages - preview
+[!INCLUDE [packages](storagediscovery-index.md)]

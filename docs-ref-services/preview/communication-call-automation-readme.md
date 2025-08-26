@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Call Automation client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-call-automation, communication
-ms.date: 05/21/2025
+ms.date: 08/26/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Call Automation client library for JavaScript - version 1.5.0-beta.2 
+# Azure Communication Call Automation client library for JavaScript - version 1.6.0-beta.1 
 
 
 This package contains a JavaScript SDK for Azure Communication Call Automation. Call Automation provides developers the ability to build server-based, intelligent call workflows, and call recording for voice and PSTN channels.
@@ -39,7 +39,9 @@ To use this client library in the browser, first you need to use a bundler. For 
 | CallAutomationClient         | `CallAutomationClient` is the primary interface for developers using this client library. It can be used to initiate calls by `createCall` or `answerCall`.                                                                                                                                                                              |
 | CallConnection               | `CallConnection` represents a ongoing call. Once the call is established with `createCall` or `answerCall`, further actions can be performed for the call, such as `transfer` or `addParticipant`.                                                                                                                                       |
 | CallMedia                    | `CallMedia` can be used to do media related actions, such as `play`, to play media file. This can be retrieved from established `CallConnection`.                                                                                                                                                                                        |
-| CallRecording                | `CallRecording` can be used to do recording related actions, such as `startRecording`. This can be retrieved from `CallAutomationClient`.
+| CallRecording                | `CallRecording` can be used to do recording related actions, such as `startRecording`. This can be retrieved from `CallAutomationClient`.                                                                                                                                                                                                |
+| Callback Events              | Callback events are events sent back during duration of the call. It gives information and state of the call, such as `CallConnected`. `CallbackUrl` must be provided during `createCall` and `answerCall`, and callback events will be sent to this url. You can use `callAutomationEventParser` to parse these events when it arrives. |
+| Incoming Call Event          | When incoming call happens (that can be answered with `answerCall`), incoming call eventgrid event will be sent. This is different from Callback events above, and should be setup on Azure portal. See [Incoming Call][incomingcall] for detail.                                                                                        |
 
 ## Examples
 
@@ -130,7 +132,7 @@ setLogLevel("info");
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.5.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.6.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 
@@ -140,7 +142,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[build_doc]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.5.0-beta.2/documentation/Bundling.md
+[build_doc]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-call-automation_1.6.0-beta.1/documentation/Bundling.md
 [incomingcall]: https://learn.microsoft.com/azure/communication-services/concepts/voice-video-calling/incoming-call-notification
 [build1]: https://learn.microsoft.com/azure/communication-services/quickstarts/voice-video-calling/callflows-for-customer-interactions?pivots=programming-language-csha
 [build2]: https://learn.microsoft.com/azure/communication-services/how-tos/call-automation-sdk/redirect-inbound-telephony-calls?pivots=programming-language-csharp

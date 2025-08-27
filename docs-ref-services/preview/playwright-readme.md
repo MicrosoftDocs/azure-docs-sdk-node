@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/playwright, loadtesting
-ms.date: 08/06/2025
+ms.date: 08/27/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: loadtesting

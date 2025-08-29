@@ -1,7 +1,7 @@
 ---
 title: Azure Security SDK for JavaScript
 description: Reference for Azure Security SDK for JavaScript
-ms.date: 08/28/2025
+ms.date: 08/29/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: security

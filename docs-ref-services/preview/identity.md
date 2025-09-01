@@ -1,7 +1,7 @@
 ---
 title: Azure Identity SDK for JavaScript
 description: Reference for Azure Identity SDK for JavaScript
-ms.date: 08/29/2025
+ms.date: 09/01/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: entra-id

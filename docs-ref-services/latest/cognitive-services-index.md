@@ -19,5 +19,4 @@
 |Question Answering|[@azure/cognitiveservices-qnamaker](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |Question Answering|[@azure/cognitiveservices-qnamaker-runtime](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker-runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |[Spell Check](cognitiveservices-spellcheck-readme.md)|[@azure/cognitiveservices-spellcheck](https://www.npmjs.com/package/@azure/cognitiveservices-spellcheck)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
-|[Speech](microsoft-cognitiveservices-speech-sdk-readme.md)|[microsoft-cognitiveservices-speech-sdk](https://www.npmjs.com/package/microsoft-cognitiveservices-speech-sdk)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Resource Management - Cognitive Services](arm-cognitiveservices-readme.md)|[@azure/arm-cognitiveservices](https://www.npmjs.com/package/@azure/arm-cognitiveservices)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitiveservices/arm-cognitiveservices)|

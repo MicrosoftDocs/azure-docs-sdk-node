@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 09/08/2025
+ms.date: 09/10/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -24,7 +24,7 @@ ms.service: monitor
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.13.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.13.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -101,7 +101,7 @@ useAzureMonitor(options);
   </tr>
   <tr>
     <td><code>azureMonitorExporterOptions</code></td>
-    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.13.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
+    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.13.1/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
     <td></td>
   </tr>
   <tr>
@@ -217,7 +217,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-pg)
 - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis)
 - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis-4)
-- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.13.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.13.1/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 
@@ -262,6 +262,7 @@ Further information on usage of the browser SDK loader can be found [here](https
 You might set the Cloud Role Name and the Cloud Role Instance via [OpenTelemetry Resource](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/resource/sdk.md#resource-sdk) attributes.
 
 ```ts snippet:ReadmeSampleSetRoleNameAndInstance
+import { emptyResource } from "@opentelemetry/resources";
 import {
   ATTR_SERVICE_NAME,
   SEMRESATTRS_SERVICE_NAMESPACE,
@@ -272,7 +273,7 @@ import { AzureMonitorOpenTelemetryOptions, useAzureMonitor } from "@azure/monito
 // ----------------------------------------
 // Setting role name and role instance
 // ----------------------------------------
-const customResource = Resource.EMPTY;
+const customResource = emptyResource();
 customResource.attributes[ATTR_SERVICE_NAME] = "my-helloworld-service";
 customResource.attributes[SEMRESATTRS_SERVICE_NAMESPACE] = "my-namespace";
 customResource.attributes[SEMRESATTRS_SERVICE_INSTANCE_ID] = "my-instance";
@@ -342,7 +343,7 @@ Use a custom span processor and log record processor in order to attach and corr
 import { SpanProcessor, ReadableSpan } from "@opentelemetry/sdk-trace-base";
 import { Span, Context, trace } from "@opentelemetry/api";
 import { AI_OPERATION_NAME } from "@azure/monitor-opentelemetry-exporter";
-import { LogRecordProcessor, LogRecord } from "@opentelemetry/sdk-logs";
+import { LogRecordProcessor, SdkLogRecord } from "@opentelemetry/sdk-logs";
 import { AzureMonitorOpenTelemetryOptions, useAzureMonitor } from "@azure/monitor-opentelemetry";
 
 class SpanEnrichingProcessor implements SpanProcessor {
@@ -369,7 +370,7 @@ class LogRecordEnrichingProcessor implements LogRecordProcessor {
   async shutdown(): Promise<void> {
     // shutdown code here
   }
-  onEmit(_logRecord: LogRecord, _context: Context): void {
+  onEmit(_logRecord: SdkLogRecord, _context: Context): void {
     const parentSpan = trace.getSpan(_context);
     if (parentSpan && "name" in parentSpan) {
       // If the parent span has a name we can assume it is a ReadableSpan and cast it.
@@ -547,7 +548,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.13.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.13.1/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -561,5 +562,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.13.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.13.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 

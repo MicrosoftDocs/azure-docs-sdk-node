@@ -1,22 +1,24 @@
 ---
-title: Azure Deployments client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-resourcesdeployments, resources
+title: Azure Bicep client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/arm-resourcesbicep, resources
 ms.date: 09/10/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: resources
 ---
-# Azure Deployments client library for JavaScript - version 1.0.0-alpha.20250910.1 
+# Azure Bicep client library for JavaScript - version 1.0.0-alpha.20250910.1 
 
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Deployments client.
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Bicep client.
 
-Deployments Client
+Bicep Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resourcesdeployments) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-resourcesdeployments) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-resourcesdeployments?view=azure-node-preview) |
-[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resourcesbicep)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-resourcesbicep)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-resourcesbicep?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resourcesbicep/samples)
 
 ## Getting started
 
@@ -31,18 +33,18 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-resourcesdeployments` package
+### Install the `@azure/arm-resourcesbicep` package
 
-Install the Azure Deployments client library for JavaScript with `npm`:
+Install the Azure Bicep client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-resourcesdeployments
+npm install @azure/arm-resourcesbicep
 ```
 
-### Create and authenticate a `DeploymentsClient`
+### Create and authenticate a `BicepClient`
 
-To create a client object to access the Azure Deployments API, you will need the `endpoint` of your Azure Deployments resource and a `credential`. The Azure Deployments client can use Azure Active Directory credentials to authenticate.
-You can find the endpoint for your Azure Deployments resource in the [Azure Portal][azure_portal].
+To create a client object to access the Azure Bicep API, you will need the `endpoint` of your Azure Bicep resource and a `credential`. The Azure Bicep client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your Azure Bicep resource in the [Azure Portal][azure_portal].
 
 You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
@@ -52,42 +54,43 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure Deployments** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to Azure Bicep** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { DeploymentsClient } from "@azure/arm-resourcesdeployments";
+import { BicepClient } from "@azure/arm-resourcesbicep";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new DeploymentsClient(new DefaultAzureCredential(), subscriptionId);
+const client = new BicepClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { DeploymentsClient } from "@azure/arm-resourcesdeployments";
+import { BicepClient } from "@azure/arm-resourcesbicep";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const client = new DeploymentsClient(credential, subscriptionId);
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const client = new BicepClient(credential, subscriptionId);
 ```
+
 
 ### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
 
-### DeploymentsClient
+### BicepClient
 
-`DeploymentsClient` is the primary interface for developers using the Azure Deployments client library. Explore the methods on this client object to understand the different features of the Azure Deployments service that you can access.
+`BicepClient` is the primary interface for developers using the Azure Bicep client library. Explore the methods on this client object to understand the different features of the Azure Bicep service that you can access.
 
 ## Troubleshooting
 
@@ -105,7 +108,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resourcesbicep/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
@@ -115,9 +118,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-
-[azure_cli]: https://learn.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity

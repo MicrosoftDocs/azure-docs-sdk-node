@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/core-tracing, core
-ms.date: 07/10/2025
+ms.date: 09/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
@@ -30,7 +30,7 @@ Examples can be found in the `samples` folder.
 
 ## Next steps
 
-You can build and run the tests locally by executing `rushx test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
+You can build and run the tests locally by executing `npm run test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
 
 ## Troubleshooting
 
@@ -38,7 +38,7 @@ If you run into issues while using this library, please feel free to [file an is
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-tracing_1.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-tracing_1.3.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [@azure/opentelemetry-instrumentation-azure-sdk]: https://www.npmjs.com/package/@azure/opentelemetry-instrumentation-azure-sdk
 

@@ -1,12 +1,12 @@
 ---
 title: Azure Core Util client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-util, core
-ms.date: 07/10/2025
+ms.date: 09/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Core Util client library for JavaScript - version 1.13.0 
+# Azure Core Util client library for JavaScript - version 1.13.1 
  (Experimental)
 
 This library is intended to provide various shared utility functions for client SDK packages.
@@ -20,7 +20,7 @@ This library is intended to provide various shared utility functions for client 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-util_1.13.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-util_1.13.1/SUPPORT.md) for more details.
 
 ### Installation
 
@@ -44,5 +44,5 @@ If you run into issues while using this library, please feel free to [file an is
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-util_1.13.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-util_1.13.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 

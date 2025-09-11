@@ -5,8 +5,8 @@ ms.date: 09/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
-ms.technology: azure
 manager: twolley
+ms.technology: azure
 ---
 # Azure Storage Library for JavaScript
 

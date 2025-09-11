@@ -5,8 +5,8 @@ ms.date: 09/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-event-hubs
-ms.technology: azure
 manager: timlt
+ms.technology: azure
 ---
 # Azure Event Hub modules for JavaScript
 

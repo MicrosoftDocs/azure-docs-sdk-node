@@ -5,8 +5,8 @@ ms.date: 09/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: activedirectory
-ms.technology: azure
 manager: mtillman
+ms.technology: azure
 ---
 # Azure Active Directory modules for Node.js
 

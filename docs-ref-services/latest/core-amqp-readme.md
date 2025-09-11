@@ -1,12 +1,12 @@
 ---
 title: Azure Core AMQP client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-amqp, core
-ms.date: 07/10/2025
+ms.date: 09/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Core AMQP client library for JavaScript - version 4.4.0 
+# Azure Core AMQP client library for JavaScript - version 4.4.1 
 
 
 The `@azure/core-amqp` package provides common functionality for **Azure** JavaScript
@@ -28,7 +28,7 @@ npm install @azure/core-amqp
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.4.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.4.1/SUPPORT.md) for more details.
 
 ## Key concepts
 
@@ -41,7 +41,7 @@ Some of the key features of Azure Core AMQP library are:
 
 ## Next steps
 
-You can build and run the tests locally by executing `rushx test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
+You can build and run the tests locally by executing `npm run test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
 
 ## Troubleshooting
 
@@ -124,7 +124,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.4.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_4.4.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or

@@ -1,10 +1,10 @@
 ---
 title: Azure Search SDK for JavaScript
 description: Reference for Azure Search SDK for JavaScript
-ms.date: 09/16/2025
+ms.date: 09/17/2025
 ms.topic: reference
 ms.devlang: javascript
-ms.service: cognitive-search
+ms.service: search
 ---
 # JavaScript resource management modules for Azure Search
 

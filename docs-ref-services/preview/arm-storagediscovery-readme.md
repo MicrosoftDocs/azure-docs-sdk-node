@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storagediscovery
 ---
-# Azure StorageDiscovery client library for JavaScript - version 1.0.0-alpha.20250917.1 
+# Azure StorageDiscovery client library for JavaScript - version 1.0.0-alpha.20250918.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorageDiscovery client.

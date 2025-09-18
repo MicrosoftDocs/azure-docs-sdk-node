@@ -1,12 +1,16 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/microsoft-playwright-testing, playwright-testing
-ms.date: 11/29/2024
+ms.date: 09/18/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: playwright-testing
 ---
 # Microsoft Playwright Testing preview
+
+**Deprecation message**
+ 
+This package has been deprecated and will no longer be maintained after **March 8, 2026**. Upgrade to the replacement package, **@azure/playwright**, to continue receiving updates. Refer to the [migration guide](https://aka.ms/mpt/migration-guidance) for guidance on upgrading. Refer to our [deprecation policy](https://azure.github.io/azure-sdk/policies_support.html) for more details.
 
 Microsoft Playwright Testing is a fully managed Azure service that uses the cloud to enable you to run Playwright tests with much higher parallelization across different operating system-browser combinations simultaneously. This means faster test runs with broader scenario coverage, which helps speed up delivery of features without sacrificing quality. The service also enables you to publish test results and related artifacts to the service and view them in the service portal enabling faster and easier troubleshooting. With Microsoft Playwright Testing service, you can release features faster and more confidently.
 

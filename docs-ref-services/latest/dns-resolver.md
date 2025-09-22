@@ -1,7 +1,7 @@
 ---
 title: Azure DNS Resolver SDK for JavaScript
 description: Reference for Azure DNS Resolver SDK for JavaScript
-ms.date: 09/19/2025
+ms.date: 09/22/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: dnsresolver

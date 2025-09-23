@@ -1,12 +1,12 @@
 ---
 title: Azure AI Agents client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-agents, ai
-ms.date: 07/30/2025
+ms.date: 09/23/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Agents client library for JavaScript - version 1.1.0-beta.3 
+# Azure AI Agents client library for JavaScript - version 1.2.0-beta.1 
 
 
 Use the AI Agents client library to:
@@ -18,7 +18,7 @@ Use the AI Agents client library to:
   managing search indexes, evaluating generative AI performance, and enabling OpenTelemetry tracing.
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.1.0-beta.3/sdk/ai/ai-agents/samples/)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.2.0-beta.1/sdk/ai/ai-agents/samples/)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-agents)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-agents-readme?view=azure-node-latest)
 
@@ -36,8 +36,6 @@ Use the AI Agents client library to:
       - [File Search](#create-agent-with-file-search)
       - [Code interpreter](#create-agent-with-code-interpreter)
       - [Bing grounding](#create-agent-with-bing-grounding)
-      - [Deep research](#create-agent-with-deep-research)
-      - [MCP tool](#create-agent-with-mcp-tool)
       - [Azure AI Search](#create-agent-with-azure-ai-search)
       - [Function call](#create-agent-with-function-call)
     - [Create thread](#create-thread) with
@@ -99,7 +97,7 @@ const client = new AgentsClient(projectEndpoint, new DefaultAzureCredential());
 
 ### Agents
 
-Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.1.0-beta.3/sdk/ai/ai-agents/samples/) for additional Agent samples.
+Agents in the Azure AI Projects client library are designed to facilitate various interactions and operations within your AI projects. They serve as the core components that manage and execute tasks, leveraging different tools and resources to achieve specific goals. The following steps outline the typical sequence for interacting with Agents. See the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.2.0-beta.1/sdk/ai/ai-agents/samples/) for additional Agent samples.
 
 #### Create Agent
 
@@ -262,80 +260,6 @@ const agent = await client.createAgent("gpt-4o", {
 });
 console.log(`Created agent, agent ID : ${agent.id}`);
 ```
-#### Create Agent with Deep Research
-
-To enable your Agent to do a detailed research of a topic, use the `DeepResearchTool` along with a connection to a Bing Grounding resource.
-This scenario requires you to specify two model deployments. One is the generic chat model that does arbitration, and is
-specified as usual when you call the `createAgent` method. The other is the Deep Research model, which is specified
-when you define the `DeepResearchTool`.
-
-Here is an example to integrate Deep ReSearch:
-
-```ts snippet:DeepResearch
-import { DeepResearchToolDefinition } from "@azure/ai-agents";
-
-const bingConnectionId = process.env["AZURE_BING_CONNECTION_ID"] || "<connection-name>";
-const deepResearchModelDeploymentName =
-  process.env["DEEP_RESEARCH_MODEL_DEPLOYMENT_NAME"] || "gpt-4o";
-const modelDeploymentName = process.env["MODEL_DEPLOYMENT_NAME"] || "gpt-4o";
-// Create Deep Research tool definition
-const deepResearchTool: DeepResearchToolDefinition = {
-  type: "deep_research",
-  deepResearch: {
-    deepResearchModel: deepResearchModelDeploymentName,
-    deepResearchBingGroundingConnections: [
-      {
-        connectionId: bingConnectionId,
-      },
-    ],
-  },
-};
-// Create agent with the Deep Research tool
-const agent = await client.createAgent(modelDeploymentName, {
-  name: "my-agent",
-  instructions: "You are a helpful Agent that assists in researching scientific topics.",
-  tools: [deepResearchTool],
-});
-console.log(`Created agent, ID: ${agent.id}`);
-```
-
-#### Create Agent with MCP tool
-
-To enable your Agent to use the MCP tool, you can create an instance of the MCP tool and pass it to the agent during creation.
-Here is an example to integrate MCP tool:
-
-```ts snippet:MCPTool
-import { AgentsClient, ToolUtility } from "@azure/ai-agents";
-import { DefaultAzureCredential } from "@azure/identity";
-
-// Get MCP server configuration from environment variables
-const mcpServerUrl =
-  process.env["MCP_SERVER_URL"] || "https://gitmcp.io/Azure/azure-rest-api-specs";
-const mcpServerLabel = process.env["MCP_SERVER_LABEL"] || "github";
-// Create an Azure AI Client
-const client = new AgentsClient(projectEndpoint, new DefaultAzureCredential());
-// Initialize agent MCP tool
-const mcpTool = ToolUtility.createMCPTool({
-  serverLabel: mcpServerLabel,
-  serverUrl: mcpServerUrl,
-  allowedTools: [], // Optional: specify allowed tools
-});
-// You can also add or remove allowed tools dynamically
-const searchApiCode = "search_azure_rest_api_code";
-mcpTool.allowTool(searchApiCode);
-console.log(`Allowed tools: ${mcpTool.allowedTools}`);
-// Create agent with MCP tool
-const agent = await client.createAgent(modelDeploymentName, {
-  name: "my-mcp-agent",
-  instructions:
-    "You are a helpful agent that can use MCP tools to assist users. Use the available MCP tools to answer questions and perform tasks.",
-  tools: mcpTool.definitions,
-});
-console.log(`Created agent, agent ID : ${agent.id}`);
-```
-
-
-
 
 #### Create Agent with Azure AI Search
 
@@ -903,7 +827,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.1.0-beta.3/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-agents_1.2.0-beta.1/sdk/ai/ai-agents/samples) folder, containing fully runnable code.
 
 ## Contributing
 

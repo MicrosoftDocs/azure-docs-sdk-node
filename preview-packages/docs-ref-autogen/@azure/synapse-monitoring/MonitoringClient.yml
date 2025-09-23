@@ -8,9 +8,7 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: >-
-      MonitoringClient(TokenCredential | ServiceClientCredentials, string,
-      MonitoringClientOptionalParams)
+  - name: MonitoringClient(TokenCredential, string, MonitoringClientOptionalParams)
     uid: '@azure/synapse-monitoring.MonitoringClient.constructor'
     package: '@azure/synapse-monitoring'
     summary: Initializes a new instance of the MonitoringClient class.
@@ -18,14 +16,11 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new MonitoringClient(credentials: TokenCredential |
-        ServiceClientCredentials, endpoint: string, options?:
-        MonitoringClientOptionalParams)
+        new MonitoringClient(credentials: TokenCredential, endpoint: string,
+        options?: MonitoringClientOptionalParams)
       parameters:
         - id: credentials
-          type: >-
-            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
-            uid="@azure/core-http.ServiceClientCredentials" />
+          type: <xref uid="@azure/core-auth.TokenCredential" />
           description: >-
             Subscription credentials which uniquely identify client
             subscription.
@@ -40,19 +35,6 @@ constructors:
             />
           description: The parameter options
 properties:
-  - name: monitoring
-    uid: '@azure/synapse-monitoring.MonitoringClient.monitoring'
-    package: '@azure/synapse-monitoring'
-    summary: ''
-    fullName: monitoring
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'monitoring: MonitoringOperation'
-      return:
-        description: ''
-        type: <xref uid="@azure/synapse-monitoring.MonitoringOperation" />
-inheritedProperties:
   - name: apiVersion
     uid: '@azure/synapse-monitoring.MonitoringClient.apiVersion'
     package: '@azure/synapse-monitoring'
@@ -65,9 +47,6 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [MonitoringClientContext.apiVersion](xref:@azure/synapse-monitoring.MonitoringClientContext.apiVersion)
   - name: endpoint
     uid: '@azure/synapse-monitoring.MonitoringClient.endpoint'
     package: '@azure/synapse-monitoring'
@@ -80,13 +59,34 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [MonitoringClientContext.endpoint](xref:@azure/synapse-monitoring.MonitoringClientContext.endpoint)
+  - name: monitoring
+    uid: '@azure/synapse-monitoring.MonitoringClient.monitoring'
+    package: '@azure/synapse-monitoring'
+    summary: ''
+    fullName: monitoring
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'monitoring: Monitoring'
+      return:
+        description: ''
+        type: <xref uid="@azure/synapse-monitoring.Monitoring" />
+inheritedProperties:
+  - name: pipeline
+    uid: '@azure/synapse-monitoring.MonitoringClient.pipeline'
+    package: '@azure/synapse-monitoring'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.Pipeline" />
+    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClient.pipeline
 inheritedMethods:
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
+  - name: sendOperationRequest<T>(OperationArguments, OperationSpec)
     uid: '@azure/synapse-monitoring.MonitoringClient.sendOperationRequest'
     package: '@azure/synapse-monitoring'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
@@ -94,28 +94,22 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
-        Promise<RestResponse>
+        function sendOperationRequest<T>(operationArguments: OperationArguments,
+        operationSpec: OperationSpec): Promise<T>
       parameters:
         - id: operationArguments
-          type: <xref uid="@azure/core-http.OperationArguments" />
+          type: <xref uid="@azure/core-client.OperationArguments" />
           description: >-
             The arguments that the HTTP request's templated values will be
             populated from.
         - id: operationSpec
-          type: <xref uid="@azure/core-http.OperationSpec" />
+          type: <xref uid="@azure/core-client.OperationSpec" />
           description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: <xref uid="@azure/core-http.ServiceCallback" />&lt;any&gt;
-          description: The callback to call when the response is received.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/core-http.RestResponse" />&gt;
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [MonitoringClientContext.sendOperationRequest](xref:@azure/synapse-monitoring.MonitoringClientContext.sendOperationRequest)
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+        type: Promise&lt;T&gt;
+    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClient.sendOperationRequest
+  - name: sendRequest(PipelineRequest)
     uid: '@azure/synapse-monitoring.MonitoringClient.sendRequest'
     package: '@azure/synapse-monitoring'
     summary: Send the provided httpRequest.
@@ -123,18 +117,16 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
-        Promise<HttpOperationResponse>
+        function sendRequest(request: PipelineRequest):
+        Promise<PipelineResponse>
       parameters:
-        - id: options
-          type: >-
-            <xref uid="@azure/core-http.RequestPrepareOptions" /> | <xref
-            uid="@azure/core-http.WebResourceLike" />
+        - id: request
+          type: <xref uid="@azure/core-rest-pipeline.PipelineRequest" />
           description: ''
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [MonitoringClientContext.sendRequest](xref:@azure/synapse-monitoring.MonitoringClientContext.sendRequest)
-extends: <xref uid="@azure/synapse-monitoring.MonitoringClientContext" />
+        type: >-
+          Promise&lt;<xref uid="@azure/core-rest-pipeline.PipelineResponse"
+          />&gt;
+    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClient.sendRequest
+extends: <xref uid="@azure/core-client.ServiceClient" />

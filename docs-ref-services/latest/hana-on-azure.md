@@ -1,7 +1,7 @@
 ---
 title: Azure Hana on Azure SDK for JavaScript
 description: Reference for Azure Hana on Azure SDK for JavaScript
-ms.date: 09/23/2025
+ms.date: 09/24/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hanaonazure

@@ -1,21 +1,23 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-quota, quota
-ms.date: 02/28/2025
+ms.date: 09/25/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: quota
 ---
-# AzureQuotaExtensionApi client library for JavaScript
+# AzureQuotaExtensionAPI client library for JavaScript
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for AzureQuotaExtensionApi client.
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for AzureQuotaExtensionAPI client.
 
-Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota using GroupQuota Entity.
+Microsoft Azure Quota Resource Provider
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_1.1.0/sdk/quota/arm-quota) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-quota) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-quota) |
-[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_2.0.0/sdk/quota/arm-quota)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-quota)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-quota?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_2.0.0/sdk/quota/arm-quota/samples)
 
 ## Getting started
 
@@ -24,7 +26,7 @@ Microsoft Azure Quota Resource Provider. This Swagger is for Azure Group Quota u
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-quota_1.1.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-quota_2.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -32,7 +34,7 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/a
 
 ### Install the `@azure/arm-quota` package
 
-Install the AzureQuotaExtensionApi client library for JavaScript with `npm`:
+Install the AzureQuotaExtensionAPI client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure/arm-quota
@@ -40,10 +42,10 @@ npm install @azure/arm-quota
 
 ### Create and authenticate a `AzureQuotaExtensionAPI`
 
-To create a client object to access the AzureQuotaExtensionApi API, you will need the `endpoint` of your AzureQuotaExtensionApi resource and a `credential`. The AzureQuotaExtensionApi client can use Azure Active Directory credentials to authenticate.
-You can find the endpoint for your AzureQuotaExtensionApi resource in the [Azure Portal][azure_portal].
+To create a client object to access the AzureQuotaExtensionAPI API, you will need the `endpoint` of your AzureQuotaExtensionAPI resource and a `credential`. The AzureQuotaExtensionAPI client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your AzureQuotaExtensionAPI resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-quota_1.1.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-quota_2.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -51,12 +53,12 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to AzureQuotaExtensionApi** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to AzureQuotaExtensionAPI** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
- 
+
 ```ts snippet:ReadmeSampleCreateClient_Node
 import { AzureQuotaExtensionAPI } from "@azure/arm-quota";
 import { DefaultAzureCredential } from "@azure/identity";
@@ -64,30 +66,30 @@ import { DefaultAzureCredential } from "@azure/identity";
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new AzureQuotaExtensionAPI(new DefaultAzureCredential(), subscriptionId);
 ```
- 
+
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
- 
+
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
 import { AzureQuotaExtensionAPI } from "@azure/arm-quota";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new AzureQuotaExtensionAPI(credential, subscriptionId);
 ```
 
-### JavaScript Bundle
 
+### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
 
 ### AzureQuotaExtensionAPI
 
-`AzureQuotaExtensionAPI` is the primary interface for developers using the AzureQuotaExtensionApi client library. Explore the methods on this client object to understand the different features of the AzureQuotaExtensionApi service that you can access.
+`AzureQuotaExtensionAPI` is the primary interface for developers using the AzureQuotaExtensionAPI client library. Explore the methods on this client object to understand the different features of the AzureQuotaExtensionAPI service that you can access.
 
 ## Troubleshooting
 
@@ -101,24 +103,22 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_1.1.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_2.0.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_2.0.0/sdk/quota/arm-quota/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-quota_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-quota_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: https://learn.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_1.1.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_1.1.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_2.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-quota_2.0.0/sdk/identity/identity#defaultazurecredential
 

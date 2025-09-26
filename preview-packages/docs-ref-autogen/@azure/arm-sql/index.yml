@@ -39,6 +39,8 @@ enums:
   - '@azure/arm-sql.KnownExternalGovernanceStatus'
   - '@azure/arm-sql.KnownFailoverGroupDatabasesSecondaryType'
   - '@azure/arm-sql.KnownFailoverGroupReplicationRole'
+  - '@azure/arm-sql.KnownFailoverModeType'
+  - '@azure/arm-sql.KnownFailoverType'
   - '@azure/arm-sql.KnownFreeLimitExhaustionBehavior'
   - '@azure/arm-sql.KnownFreemiumType'
   - '@azure/arm-sql.KnownGeoBackupPolicyName'
@@ -47,6 +49,7 @@ enums:
   - '@azure/arm-sql.KnownIdentityType'
   - '@azure/arm-sql.KnownInstanceFailoverGroupReplicationRole'
   - '@azure/arm-sql.KnownInstancePoolLicenseType'
+  - '@azure/arm-sql.KnownInstanceRole'
   - '@azure/arm-sql.KnownJobAgentState'
   - '@azure/arm-sql.KnownJobExecutionLifecycle'
   - '@azure/arm-sql.KnownJobStepActionSource'
@@ -54,6 +57,7 @@ enums:
   - '@azure/arm-sql.KnownJobStepOutputType'
   - '@azure/arm-sql.KnownJobTargetType'
   - '@azure/arm-sql.KnownLedgerDigestUploadsName'
+  - '@azure/arm-sql.KnownLinkRole'
   - '@azure/arm-sql.KnownLogSizeUnit'
   - '@azure/arm-sql.KnownLongTermRetentionPolicyName'
   - '@azure/arm-sql.KnownManagedDatabaseCreateMode'
@@ -88,11 +92,14 @@ enums:
   - '@azure/arm-sql.KnownReadOnlyEndpointFailoverPolicy'
   - '@azure/arm-sql.KnownReadWriteEndpointFailoverPolicy'
   - '@azure/arm-sql.KnownRecommendedActionCurrentState'
+  - '@azure/arm-sql.KnownReplicaConnectedState'
+  - '@azure/arm-sql.KnownReplicaSynchronizationHealth'
   - '@azure/arm-sql.KnownReplicaType'
   - '@azure/arm-sql.KnownReplicationLinkType'
-  - '@azure/arm-sql.KnownReplicationMode'
+  - '@azure/arm-sql.KnownReplicationModeType'
   - '@azure/arm-sql.KnownReplicationState'
   - '@azure/arm-sql.KnownRestoreDetailsName'
+  - '@azure/arm-sql.KnownRoleChangeType'
   - '@azure/arm-sql.KnownRuleSeverity'
   - '@azure/arm-sql.KnownRuleStatus'
   - '@azure/arm-sql.KnownRuleType'
@@ -101,8 +108,10 @@ enums:
   - '@azure/arm-sql.KnownSecondaryInstanceType'
   - '@azure/arm-sql.KnownSecondaryType'
   - '@azure/arm-sql.KnownSecurityAlertPolicyName'
+  - '@azure/arm-sql.KnownSeedingModeType'
   - '@azure/arm-sql.KnownServerConfigurationOptionName'
   - '@azure/arm-sql.KnownServerConnectionType'
+  - '@azure/arm-sql.KnownServerCreateMode'
   - '@azure/arm-sql.KnownServerKeyType'
   - '@azure/arm-sql.KnownServerNetworkAccessFlag'
   - '@azure/arm-sql.KnownServerPublicNetworkAccessFlag'
@@ -110,6 +119,7 @@ enums:
   - '@azure/arm-sql.KnownServerWorkspaceFeature'
   - '@azure/arm-sql.KnownServiceObjectiveName'
   - '@azure/arm-sql.KnownServicePrincipalType'
+  - '@azure/arm-sql.KnownSetLegalHoldImmutability'
   - '@azure/arm-sql.KnownShortTermRetentionPolicyName'
   - '@azure/arm-sql.KnownSqlAgentConfigurationPropertiesState'
   - '@azure/arm-sql.KnownSqlVulnerabilityAssessmentName'
@@ -125,6 +135,8 @@ enums:
   - '@azure/arm-sql.KnownSyncMemberDbType'
   - '@azure/arm-sql.KnownSyncMemberState'
   - '@azure/arm-sql.KnownTableTemporalType'
+  - '@azure/arm-sql.KnownTimeBasedImmutability'
+  - '@azure/arm-sql.KnownTimeBasedImmutabilityMode'
   - '@azure/arm-sql.KnownTransparentDataEncryptionName'
   - '@azure/arm-sql.KnownUnitDefinitionType'
   - '@azure/arm-sql.KnownUnitType'
@@ -156,6 +168,7 @@ interfaces:
   - '@azure/arm-sql.BenchmarkReference'
   - '@azure/arm-sql.Capabilities'
   - '@azure/arm-sql.CapabilitiesListByLocationOptionalParams'
+  - '@azure/arm-sql.CertificateInfo'
   - '@azure/arm-sql.ChangeLongTermRetentionBackupAccessTierParameters'
   - '@azure/arm-sql.CheckNameAvailabilityRequest'
   - '@azure/arm-sql.CheckNameAvailabilityResponse'
@@ -362,13 +375,19 @@ interfaces:
   - '@azure/arm-sql.DeletedServersListOptionalParams'
   - '@azure/arm-sql.DeletedServersRecoverOptionalParams'
   - '@azure/arm-sql.DistributedAvailabilityGroup'
+  - '@azure/arm-sql.DistributedAvailabilityGroupDatabase'
+  - '@azure/arm-sql.DistributedAvailabilityGroupSetRole'
   - '@azure/arm-sql.DistributedAvailabilityGroups'
   - '@azure/arm-sql.DistributedAvailabilityGroupsCreateOrUpdateOptionalParams'
   - '@azure/arm-sql.DistributedAvailabilityGroupsDeleteOptionalParams'
+  - '@azure/arm-sql.DistributedAvailabilityGroupsFailoverHeaders'
+  - '@azure/arm-sql.DistributedAvailabilityGroupsFailoverOptionalParams'
+  - '@azure/arm-sql.DistributedAvailabilityGroupsFailoverRequest'
   - '@azure/arm-sql.DistributedAvailabilityGroupsGetOptionalParams'
   - '@azure/arm-sql.DistributedAvailabilityGroupsListByInstanceNextOptionalParams'
   - '@azure/arm-sql.DistributedAvailabilityGroupsListByInstanceOptionalParams'
   - '@azure/arm-sql.DistributedAvailabilityGroupsListResult'
+  - '@azure/arm-sql.DistributedAvailabilityGroupsSetRoleOptionalParams'
   - '@azure/arm-sql.DistributedAvailabilityGroupsUpdateOptionalParams'
   - '@azure/arm-sql.EditionCapability'
   - '@azure/arm-sql.ElasticPool'
@@ -621,11 +640,18 @@ interfaces:
   - '@azure/arm-sql.LongTermRetentionBackupOperationResult'
   - '@azure/arm-sql.LongTermRetentionBackups'
   - >-
+    @azure/arm-sql.LongTermRetentionBackupsChangeAccessTierByResourceGroupHeaders
+  - >-
     @azure/arm-sql.LongTermRetentionBackupsChangeAccessTierByResourceGroupOptionalParams
+  - '@azure/arm-sql.LongTermRetentionBackupsChangeAccessTierHeaders'
   - '@azure/arm-sql.LongTermRetentionBackupsChangeAccessTierOptionalParams'
+  - '@azure/arm-sql.LongTermRetentionBackupsCopyByResourceGroupHeaders'
   - '@azure/arm-sql.LongTermRetentionBackupsCopyByResourceGroupOptionalParams'
+  - '@azure/arm-sql.LongTermRetentionBackupsCopyHeaders'
   - '@azure/arm-sql.LongTermRetentionBackupsCopyOptionalParams'
+  - '@azure/arm-sql.LongTermRetentionBackupsDeleteByResourceGroupHeaders'
   - '@azure/arm-sql.LongTermRetentionBackupsDeleteByResourceGroupOptionalParams'
+  - '@azure/arm-sql.LongTermRetentionBackupsDeleteHeaders'
   - '@azure/arm-sql.LongTermRetentionBackupsDeleteOptionalParams'
   - '@azure/arm-sql.LongTermRetentionBackupsGetByResourceGroupOptionalParams'
   - '@azure/arm-sql.LongTermRetentionBackupsGetOptionalParams'
@@ -647,7 +673,37 @@ interfaces:
     @azure/arm-sql.LongTermRetentionBackupsListByResourceGroupServerOptionalParams
   - '@azure/arm-sql.LongTermRetentionBackupsListByServerNextOptionalParams'
   - '@azure/arm-sql.LongTermRetentionBackupsListByServerOptionalParams'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsLockTimeBasedImmutabilityByResourceGroupHeaders
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsLockTimeBasedImmutabilityByResourceGroupOptionalParams
+  - '@azure/arm-sql.LongTermRetentionBackupsLockTimeBasedImmutabilityHeaders'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsLockTimeBasedImmutabilityOptionalParams
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveLegalHoldImmutabilityByResourceGroupHeaders
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveLegalHoldImmutabilityByResourceGroupOptionalParams
+  - '@azure/arm-sql.LongTermRetentionBackupsRemoveLegalHoldImmutabilityHeaders'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveLegalHoldImmutabilityOptionalParams
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveTimeBasedImmutabilityByResourceGroupHeaders
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveTimeBasedImmutabilityByResourceGroupOptionalParams
+  - '@azure/arm-sql.LongTermRetentionBackupsRemoveTimeBasedImmutabilityHeaders'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveTimeBasedImmutabilityOptionalParams
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsSetLegalHoldImmutabilityByResourceGroupHeaders
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsSetLegalHoldImmutabilityByResourceGroupOptionalParams
+  - '@azure/arm-sql.LongTermRetentionBackupsSetLegalHoldImmutabilityHeaders'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsSetLegalHoldImmutabilityOptionalParams
+  - '@azure/arm-sql.LongTermRetentionBackupsUpdateByResourceGroupHeaders'
   - '@azure/arm-sql.LongTermRetentionBackupsUpdateByResourceGroupOptionalParams'
+  - '@azure/arm-sql.LongTermRetentionBackupsUpdateHeaders'
   - '@azure/arm-sql.LongTermRetentionBackupsUpdateOptionalParams'
   - '@azure/arm-sql.LongTermRetentionManagedInstanceBackups'
   - >-
@@ -681,6 +737,7 @@ interfaces:
   - >-
     @azure/arm-sql.LongTermRetentionManagedInstanceBackupsListByResourceGroupLocationOptionalParams
   - '@azure/arm-sql.LongTermRetentionPolicies'
+  - '@azure/arm-sql.LongTermRetentionPoliciesCreateOrUpdateHeaders'
   - '@azure/arm-sql.LongTermRetentionPoliciesCreateOrUpdateOptionalParams'
   - '@azure/arm-sql.LongTermRetentionPoliciesGetOptionalParams'
   - '@azure/arm-sql.LongTermRetentionPoliciesListByDatabaseNextOptionalParams'
@@ -1308,15 +1365,20 @@ interfaces:
   - '@azure/arm-sql.ServerVulnerabilityAssessmentsListByServerOptionalParams'
   - '@azure/arm-sql.Servers'
   - '@azure/arm-sql.ServersCheckNameAvailabilityOptionalParams'
+  - '@azure/arm-sql.ServersCreateOrUpdateHeaders'
   - '@azure/arm-sql.ServersCreateOrUpdateOptionalParams'
+  - '@azure/arm-sql.ServersDeleteHeaders'
   - '@azure/arm-sql.ServersDeleteOptionalParams'
   - '@azure/arm-sql.ServersGetOptionalParams'
+  - '@azure/arm-sql.ServersImportDatabaseHeaders'
   - '@azure/arm-sql.ServersImportDatabaseOptionalParams'
   - '@azure/arm-sql.ServersListByResourceGroupNextOptionalParams'
   - '@azure/arm-sql.ServersListByResourceGroupOptionalParams'
   - '@azure/arm-sql.ServersListNextOptionalParams'
   - '@azure/arm-sql.ServersListOptionalParams'
+  - '@azure/arm-sql.ServersRefreshStatusHeaders'
   - '@azure/arm-sql.ServersRefreshStatusOptionalParams'
+  - '@azure/arm-sql.ServersUpdateHeaders'
   - '@azure/arm-sql.ServersUpdateOptionalParams'
   - '@azure/arm-sql.ServiceObjective'
   - '@azure/arm-sql.ServiceObjectiveCapability'
@@ -1687,9 +1749,11 @@ typeAliases:
   - '@azure/arm-sql.DevOpsAuditingSettingsName'
   - '@azure/arm-sql.DiffBackupIntervalInHours'
   - '@azure/arm-sql.DistributedAvailabilityGroupsCreateOrUpdateResponse'
+  - '@azure/arm-sql.DistributedAvailabilityGroupsFailoverResponse'
   - '@azure/arm-sql.DistributedAvailabilityGroupsGetResponse'
   - '@azure/arm-sql.DistributedAvailabilityGroupsListByInstanceNextResponse'
   - '@azure/arm-sql.DistributedAvailabilityGroupsListByInstanceResponse'
+  - '@azure/arm-sql.DistributedAvailabilityGroupsSetRoleResponse'
   - '@azure/arm-sql.DistributedAvailabilityGroupsUpdateResponse'
   - '@azure/arm-sql.DtcName'
   - '@azure/arm-sql.ElasticPoolActivitiesListByElasticPoolResponse'
@@ -1733,6 +1797,8 @@ typeAliases:
   - '@azure/arm-sql.FailoverGroupsListByServerResponse'
   - '@azure/arm-sql.FailoverGroupsTryPlannedBeforeForcedFailoverResponse'
   - '@azure/arm-sql.FailoverGroupsUpdateResponse'
+  - '@azure/arm-sql.FailoverModeType'
+  - '@azure/arm-sql.FailoverType'
   - '@azure/arm-sql.FirewallRulesCreateOrUpdateResponse'
   - '@azure/arm-sql.FirewallRulesGetResponse'
   - '@azure/arm-sql.FirewallRulesListByServerNextResponse'
@@ -1768,6 +1834,7 @@ typeAliases:
   - '@azure/arm-sql.InstancePoolsListNextResponse'
   - '@azure/arm-sql.InstancePoolsListResponse'
   - '@azure/arm-sql.InstancePoolsUpdateResponse'
+  - '@azure/arm-sql.InstanceRole'
   - '@azure/arm-sql.IsRetryable'
   - '@azure/arm-sql.JobAgentState'
   - '@azure/arm-sql.JobAgentsCreateOrUpdateResponse'
@@ -1830,6 +1897,7 @@ typeAliases:
   - '@azure/arm-sql.LedgerDigestUploadsListByDatabaseResponse'
   - '@azure/arm-sql.LedgerDigestUploadsName'
   - '@azure/arm-sql.LedgerDigestUploadsState'
+  - '@azure/arm-sql.LinkRole'
   - '@azure/arm-sql.LogSizeUnit'
   - >-
     @azure/arm-sql.LongTermRetentionBackupsChangeAccessTierByResourceGroupResponse
@@ -1852,6 +1920,18 @@ typeAliases:
   - '@azure/arm-sql.LongTermRetentionBackupsListByResourceGroupServerResponse'
   - '@azure/arm-sql.LongTermRetentionBackupsListByServerNextResponse'
   - '@azure/arm-sql.LongTermRetentionBackupsListByServerResponse'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsLockTimeBasedImmutabilityByResourceGroupResponse
+  - '@azure/arm-sql.LongTermRetentionBackupsLockTimeBasedImmutabilityResponse'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveLegalHoldImmutabilityByResourceGroupResponse
+  - '@azure/arm-sql.LongTermRetentionBackupsRemoveLegalHoldImmutabilityResponse'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsRemoveTimeBasedImmutabilityByResourceGroupResponse
+  - '@azure/arm-sql.LongTermRetentionBackupsRemoveTimeBasedImmutabilityResponse'
+  - >-
+    @azure/arm-sql.LongTermRetentionBackupsSetLegalHoldImmutabilityByResourceGroupResponse
+  - '@azure/arm-sql.LongTermRetentionBackupsSetLegalHoldImmutabilityResponse'
   - '@azure/arm-sql.LongTermRetentionBackupsUpdateByResourceGroupResponse'
   - '@azure/arm-sql.LongTermRetentionBackupsUpdateResponse'
   - >-
@@ -2113,6 +2193,8 @@ typeAliases:
   - '@azure/arm-sql.RecoverableManagedDatabasesGetResponse'
   - '@azure/arm-sql.RecoverableManagedDatabasesListByInstanceNextResponse'
   - '@azure/arm-sql.RecoverableManagedDatabasesListByInstanceResponse'
+  - '@azure/arm-sql.ReplicaConnectedState'
+  - '@azure/arm-sql.ReplicaSynchronizationHealth'
   - '@azure/arm-sql.ReplicaType'
   - '@azure/arm-sql.ReplicationLinkType'
   - '@azure/arm-sql.ReplicationLinksCreateOrUpdateResponse'
@@ -2124,7 +2206,7 @@ typeAliases:
   - '@azure/arm-sql.ReplicationLinksListByServerNextResponse'
   - '@azure/arm-sql.ReplicationLinksListByServerResponse'
   - '@azure/arm-sql.ReplicationLinksUpdateResponse'
-  - '@azure/arm-sql.ReplicationMode'
+  - '@azure/arm-sql.ReplicationModeType'
   - '@azure/arm-sql.ReplicationRole'
   - '@azure/arm-sql.ReplicationState'
   - '@azure/arm-sql.RestorableDroppedDatabasesGetResponse'
@@ -2139,6 +2221,7 @@ typeAliases:
   - '@azure/arm-sql.RestorePointsGetResponse'
   - '@azure/arm-sql.RestorePointsListByDatabaseNextResponse'
   - '@azure/arm-sql.RestorePointsListByDatabaseResponse'
+  - '@azure/arm-sql.RoleChangeType'
   - '@azure/arm-sql.RuleSeverity'
   - '@azure/arm-sql.RuleStatus'
   - '@azure/arm-sql.RuleType'
@@ -2150,6 +2233,7 @@ typeAliases:
   - '@azure/arm-sql.SecurityAlertPolicyState'
   - '@azure/arm-sql.SecurityAlertsPolicyState'
   - '@azure/arm-sql.SecurityEventType'
+  - '@azure/arm-sql.SeedingModeType'
   - '@azure/arm-sql.SensitivityLabelRank'
   - '@azure/arm-sql.SensitivityLabelSource'
   - '@azure/arm-sql.SensitivityLabelUpdateKind'
@@ -2194,6 +2278,7 @@ typeAliases:
   - '@azure/arm-sql.ServerConnectionPoliciesListByServerNextResponse'
   - '@azure/arm-sql.ServerConnectionPoliciesListByServerResponse'
   - '@azure/arm-sql.ServerConnectionType'
+  - '@azure/arm-sql.ServerCreateMode'
   - '@azure/arm-sql.ServerDevOpsAuditSettingsCreateOrUpdateResponse'
   - '@azure/arm-sql.ServerDevOpsAuditSettingsGetResponse'
   - '@azure/arm-sql.ServerDevOpsAuditSettingsListByServerNextResponse'
@@ -2247,6 +2332,7 @@ typeAliases:
   - '@azure/arm-sql.ServiceObjectivesGetResponse'
   - '@azure/arm-sql.ServiceObjectivesListByServerResponse'
   - '@azure/arm-sql.ServicePrincipalType'
+  - '@azure/arm-sql.SetLegalHoldImmutability'
   - '@azure/arm-sql.ShortTermRetentionPolicyName'
   - '@azure/arm-sql.SqlAgentConfigurationPropertiesState'
   - '@azure/arm-sql.SqlAgentCreateOrUpdateResponse'
@@ -2322,6 +2408,8 @@ typeAliases:
   - '@azure/arm-sql.SyncMembersListMemberSchemasResponse'
   - '@azure/arm-sql.SyncMembersUpdateResponse'
   - '@azure/arm-sql.TableTemporalType'
+  - '@azure/arm-sql.TimeBasedImmutability'
+  - '@azure/arm-sql.TimeBasedImmutabilityMode'
   - '@azure/arm-sql.TimeZonesGetResponse'
   - '@azure/arm-sql.TimeZonesListByLocationNextResponse'
   - '@azure/arm-sql.TimeZonesListByLocationResponse'

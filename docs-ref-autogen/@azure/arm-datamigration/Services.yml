@@ -2,95 +2,144 @@
 name: Services
 uid: '@azure/arm-datamigration.Services'
 package: '@azure/arm-datamigration'
-summary: Class representing a Services.
+summary: Interface representing a Services.
 fullName: Services
 remarks: ''
 isDeprecated: false
-type: class
-constructors:
-  - name: Services(DataMigrationServiceClientContext)
-    uid: '@azure/arm-datamigration.Services.constructor'
-    package: '@azure/arm-datamigration'
-    summary: Create a Services.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'new Services(client: DataMigrationServiceClientContext)'
-      parameters:
-        - id: client
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceClientContext" />
-          description: Reference to the service client.
+type: interface
 methods:
   - name: >-
-      beginCreateOrUpdate(DataMigrationService, string, string,
-      RequestOptionsBase)
+      beginCreateOrUpdate(string, string, DataMigrationService,
+      ServicesCreateOrUpdateOptionalParams)
     uid: '@azure/arm-datamigration.Services.beginCreateOrUpdate'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      The PUT method creates a new service or updates an existing one. When a
-      service is updated,
+      (classic). The PUT method creates a new service or updates an existing
+      one. When a service is
 
-      existing child resources (i.e. tasks) are unaffected. Services currently
-      support a single kind,
+      updated, existing child resources (i.e. tasks) are unaffected. Services
+      currently support a single
 
-      "vm", which refers to a VM-based service, although other kinds may be
-      added in the future. This
+      kind, "vm", which refers to a VM-based service, although other kinds may
+      be added in the future.
 
-      method can change the kind, SKU, and network of the service, but if tasks
-      are currently running
+      This method can change the kind, SKU, and network of the service, but if
+      tasks are currently running
 
       (i.e. the service is busy), this will fail with 400 Bad Request
-      ("ServiceIsBusy"). The provider
+      ("ServiceIsBusy"). The provider will
 
-      will reply when successful with 200 OK or 201 Created. Long-running
-      operations use the
+      reply when successful with 200 OK or 201 Created. Long-running operations
+      use the provisioningState
 
-      provisioningState property.
+      property.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function beginCreateOrUpdate(parameters: DataMigrationService,
-        groupName: string, serviceName: string, options?: RequestOptionsBase):
-        Promise<LROPoller>
+        function beginCreateOrUpdate(groupName: string, serviceName: string,
+        parameters: DataMigrationService, options?:
+        ServicesCreateOrUpdateOptionalParams):
+        Promise<SimplePollerLike<OperationState<DataMigrationService>,
+        DataMigrationService>>
       parameters:
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationService"
-            />
-          description: Information about the service
         - id: groupName
           type: string
           description: Name of the resource group
         - id: serviceName
           type: string
           description: Name of the service
+        - id: parameters
+          type: <xref uid="@azure/arm-datamigration.DataMigrationService" />
+          description: Information about the service
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: >-
+            <xref
+            uid="@azure/arm-datamigration.ServicesCreateOrUpdateOptionalParams"
+            />
+          description: The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;<xref uid="@azure/ms-rest-azure-js.LROPoller" />&gt;
-  - name: beginDeleteMethod(string, string, ServicesBeginDeleteMethodOptionalParams)
-    uid: '@azure/arm-datamigration.Services.beginDeleteMethod'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
+          uid="@azure/arm-datamigration.DataMigrationService" />&gt;, <xref
+          uid="@azure/arm-datamigration.DataMigrationService" />&gt;&gt;
+  - name: >-
+      beginCreateOrUpdateAndWait(string, string, DataMigrationService,
+      ServicesCreateOrUpdateOptionalParams)
+    uid: '@azure/arm-datamigration.Services.beginCreateOrUpdateAndWait'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      The DELETE method deletes a service. Any running tasks will be canceled.
+      (classic). The PUT method creates a new service or updates an existing
+      one. When a service is
+
+      updated, existing child resources (i.e. tasks) are unaffected. Services
+      currently support a single
+
+      kind, "vm", which refers to a VM-based service, although other kinds may
+      be added in the future.
+
+      This method can change the kind, SKU, and network of the service, but if
+      tasks are currently running
+
+      (i.e. the service is busy), this will fail with 400 Bad Request
+      ("ServiceIsBusy"). The provider will
+
+      reply when successful with 200 OK or 201 Created. Long-running operations
+      use the provisioningState
+
+      property.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function beginDeleteMethod(groupName: string, serviceName: string,
-        options?: ServicesBeginDeleteMethodOptionalParams): Promise<LROPoller>
+        function beginCreateOrUpdateAndWait(groupName: string, serviceName:
+        string, parameters: DataMigrationService, options?:
+        ServicesCreateOrUpdateOptionalParams): Promise<DataMigrationService>
+      parameters:
+        - id: groupName
+          type: string
+          description: Name of the resource group
+        - id: serviceName
+          type: string
+          description: Name of the service
+        - id: parameters
+          type: <xref uid="@azure/arm-datamigration.DataMigrationService" />
+          description: Information about the service
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-datamigration.ServicesCreateOrUpdateOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-datamigration.DataMigrationService"
+          />&gt;
+  - name: beginDelete(string, string, ServicesDeleteOptionalParams)
+    uid: '@azure/arm-datamigration.Services.beginDelete'
+    package: '@azure/arm-datamigration'
+    summary: >-
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
+
+      (classic). The DELETE method deletes a service. Any running tasks will be
+      canceled.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDelete(groupName: string, serviceName: string, options?:
+        ServicesDeleteOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: groupName
           type: string
@@ -99,29 +148,57 @@ methods:
           type: string
           description: Name of the service
         - id: options
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesBeginDeleteMethodOptionalParams"
-            />
-          description: The optional parameters
+          type: <xref uid="@azure/arm-datamigration.ServicesDeleteOptionalParams" />
+          description: The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;<xref uid="@azure/ms-rest-azure-js.LROPoller" />&gt;
-  - name: beginStart(string, string, RequestOptionsBase)
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
+  - name: beginDeleteAndWait(string, string, ServicesDeleteOptionalParams)
+    uid: '@azure/arm-datamigration.Services.beginDeleteAndWait'
+    package: '@azure/arm-datamigration'
+    summary: >-
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
+
+      (classic). The DELETE method deletes a service. Any running tasks will be
+      canceled.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(groupName: string, serviceName: string,
+        options?: ServicesDeleteOptionalParams): Promise<void>
+      parameters:
+        - id: groupName
+          type: string
+          description: Name of the resource group
+        - id: serviceName
+          type: string
+          description: Name of the service
+        - id: options
+          type: <xref uid="@azure/arm-datamigration.ServicesDeleteOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: beginStart(string, string, ServicesStartOptionalParams)
     uid: '@azure/arm-datamigration.Services.beginStart'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      This action starts the service and the service can be used for data
-      migration.
+      (classic). This action starts the service and the service can be used for
+      data migration.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function beginStart(groupName: string, serviceName: string, options?:
-        RequestOptionsBase): Promise<LROPoller>
+        ServicesStartOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: groupName
           type: string
@@ -130,28 +207,59 @@ methods:
           type: string
           description: Name of the service
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: <xref uid="@azure/arm-datamigration.ServicesStartOptionalParams" />
+          description: The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;<xref uid="@azure/ms-rest-azure-js.LROPoller" />&gt;
-  - name: beginStop(string, string, RequestOptionsBase)
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
+  - name: beginStartAndWait(string, string, ServicesStartOptionalParams)
+    uid: '@azure/arm-datamigration.Services.beginStartAndWait'
+    package: '@azure/arm-datamigration'
+    summary: >-
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
+
+      (classic). This action starts the service and the service can be used for
+      data migration.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginStartAndWait(groupName: string, serviceName: string,
+        options?: ServicesStartOptionalParams): Promise<void>
+      parameters:
+        - id: groupName
+          type: string
+          description: Name of the resource group
+        - id: serviceName
+          type: string
+          description: Name of the service
+        - id: options
+          type: <xref uid="@azure/arm-datamigration.ServicesStartOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: beginStop(string, string, ServicesStopOptionalParams)
     uid: '@azure/arm-datamigration.Services.beginStop'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      This action stops the service and the service cannot be used for data
-      migration. The service
+      (classic). This action stops the service and the service cannot be used
+      for data migration. The
 
-      owner won't be billed when the service is stopped.
+      service owner won't be billed when the service is stopped.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function beginStop(groupName: string, serviceName: string, options?:
-        RequestOptionsBase): Promise<LROPoller>
+        ServicesStopOptionalParams):
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: groupName
           type: string
@@ -160,39 +268,31 @@ methods:
           type: string
           description: Name of the service
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: <xref uid="@azure/arm-datamigration.ServicesStopOptionalParams" />
+          description: The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;<xref uid="@azure/ms-rest-azure-js.LROPoller" />&gt;
-  - name: beginUpdate(DataMigrationService, string, string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.beginUpdate'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;void&gt;, void&gt;&gt;
+  - name: beginStopAndWait(string, string, ServicesStopOptionalParams)
+    uid: '@azure/arm-datamigration.Services.beginStopAndWait'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      The PATCH method updates an existing service. This method can change the
-      kind, SKU, and network
+      (classic). This action stops the service and the service cannot be used
+      for data migration. The
 
-      of the service, but if tasks are currently running (i.e. the service is
-      busy), this will fail
-
-      with 400 Bad Request ("ServiceIsBusy").
+      service owner won't be billed when the service is stopped.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function beginUpdate(parameters: DataMigrationService, groupName:
-        string, serviceName: string, options?: RequestOptionsBase):
-        Promise<LROPoller>
+        function beginStopAndWait(groupName: string, serviceName: string,
+        options?: ServicesStopOptionalParams): Promise<void>
       parameters:
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationService"
-            />
-          description: Information about the service
         - id: groupName
           type: string
           description: Name of the resource group
@@ -200,14 +300,99 @@ methods:
           type: string
           description: Name of the service
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: <xref uid="@azure/arm-datamigration.ServicesStopOptionalParams" />
+          description: The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;<xref uid="@azure/ms-rest-azure-js.LROPoller" />&gt;
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: >-
+      beginUpdate(string, string, DataMigrationService,
+      ServicesUpdateOptionalParams)
+    uid: '@azure/arm-datamigration.Services.beginUpdate'
+    package: '@azure/arm-datamigration'
+    summary: >-
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
+
+      (classic). The PATCH method updates an existing service. This method can
+      change the kind, SKU, and
+
+      network of the service, but if tasks are currently running (i.e. the
+      service is busy), this will
+
+      fail with 400 Bad Request ("ServiceIsBusy").
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginUpdate(groupName: string, serviceName: string, parameters:
+        DataMigrationService, options?: ServicesUpdateOptionalParams):
+        Promise<SimplePollerLike<OperationState<DataMigrationService>,
+        DataMigrationService>>
+      parameters:
+        - id: groupName
+          type: string
+          description: Name of the resource group
+        - id: serviceName
+          type: string
+          description: Name of the service
+        - id: parameters
+          type: <xref uid="@azure/arm-datamigration.DataMigrationService" />
+          description: Information about the service
+        - id: options
+          type: <xref uid="@azure/arm-datamigration.ServicesUpdateOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
+          uid="@azure/arm-datamigration.DataMigrationService" />&gt;, <xref
+          uid="@azure/arm-datamigration.DataMigrationService" />&gt;&gt;
+  - name: >-
+      beginUpdateAndWait(string, string, DataMigrationService,
+      ServicesUpdateOptionalParams)
+    uid: '@azure/arm-datamigration.Services.beginUpdateAndWait'
+    package: '@azure/arm-datamigration'
+    summary: >-
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
+
+      (classic). The PATCH method updates an existing service. This method can
+      change the kind, SKU, and
+
+      network of the service, but if tasks are currently running (i.e. the
+      service is busy), this will
+
+      fail with 400 Bad Request ("ServiceIsBusy").
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginUpdateAndWait(groupName: string, serviceName: string,
+        parameters: DataMigrationService, options?:
+        ServicesUpdateOptionalParams): Promise<DataMigrationService>
+      parameters:
+        - id: groupName
+          type: string
+          description: Name of the resource group
+        - id: serviceName
+          type: string
+          description: Name of the service
+        - id: parameters
+          type: <xref uid="@azure/arm-datamigration.DataMigrationService" />
+          description: Information about the service
+        - id: options
+          type: <xref uid="@azure/arm-datamigration.ServicesUpdateOptionalParams" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-datamigration.DataMigrationService"
+          />&gt;
   - name: >-
       checkChildrenNameAvailability(string, string, NameAvailabilityRequest,
-      RequestOptionsBase)
+      ServicesCheckChildrenNameAvailabilityOptionalParams)
     uid: '@azure/arm-datamigration.Services.checkChildrenNameAvailability'
     package: '@azure/arm-datamigration'
     summary: >-
@@ -219,8 +404,8 @@ methods:
       content: >-
         function checkChildrenNameAvailability(groupName: string, serviceName:
         string, parameters: NameAvailabilityRequest, options?:
-        RequestOptionsBase):
-        Promise<ServicesCheckChildrenNameAvailabilityResponse>
+        ServicesCheckChildrenNameAvailabilityOptionalParams):
+        Promise<NameAvailabilityResponse>
       parameters:
         - id: groupName
           type: string
@@ -229,88 +414,22 @@ methods:
           type: string
           description: Name of the service
         - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityRequest"
-            />
+          type: <xref uid="@azure/arm-datamigration.NameAvailabilityRequest" />
           description: Requested name to validate
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: >-
+            <xref
+            uid="@azure/arm-datamigration.ServicesCheckChildrenNameAvailabilityOptionalParams"
+            />
+          description: The options parameters.
       return:
-        description: Promise<Models.ServicesCheckChildrenNameAvailabilityResponse>
+        description: ''
         type: >-
           Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesCheckChildrenNameAvailabilityResponse"
-          />&gt;
+          uid="@azure/arm-datamigration.NameAvailabilityResponse" />&gt;
   - name: >-
-      checkChildrenNameAvailability(string, string, NameAvailabilityRequest,
-      RequestOptionsBase, ServiceCallback<NameAvailabilityResponse>)
-    uid: '@azure/arm-datamigration.Services.checkChildrenNameAvailability_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkChildrenNameAvailability(groupName: string, serviceName:
-        string, parameters: NameAvailabilityRequest, options:
-        RequestOptionsBase, callback: ServiceCallback<NameAvailabilityResponse>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityRequest"
-            />
-          description: Requested name to validate
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityResponse"
-            />&gt;
-          description: The callback
-  - name: >-
-      checkChildrenNameAvailability(string, string, NameAvailabilityRequest,
-      ServiceCallback<NameAvailabilityResponse>)
-    uid: '@azure/arm-datamigration.Services.checkChildrenNameAvailability_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkChildrenNameAvailability(groupName: string, serviceName:
-        string, parameters: NameAvailabilityRequest, callback:
-        ServiceCallback<NameAvailabilityResponse>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityRequest"
-            />
-          description: Requested name to validate
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityResponse"
-            />&gt;
-          description: The callback
-  - name: checkNameAvailability(string, NameAvailabilityRequest, RequestOptionsBase)
+      checkNameAvailability(string, NameAvailabilityRequest,
+      ServicesCheckNameAvailabilityOptionalParams)
     uid: '@azure/arm-datamigration.Services.checkNameAvailability'
     package: '@azure/arm-datamigration'
     summary: >-
@@ -321,244 +440,45 @@ methods:
     syntax:
       content: >-
         function checkNameAvailability(location: string, parameters:
-        NameAvailabilityRequest, options?: RequestOptionsBase):
-        Promise<ServicesCheckNameAvailabilityResponse>
+        NameAvailabilityRequest, options?:
+        ServicesCheckNameAvailabilityOptionalParams):
+        Promise<NameAvailabilityResponse>
       parameters:
         - id: location
           type: string
           description: The Azure region of the operation
         - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityRequest"
-            />
+          type: <xref uid="@azure/arm-datamigration.NameAvailabilityRequest" />
           description: Requested name to validate
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: >-
+            <xref
+            uid="@azure/arm-datamigration.ServicesCheckNameAvailabilityOptionalParams"
+            />
+          description: The options parameters.
       return:
-        description: Promise<Models.ServicesCheckNameAvailabilityResponse>
+        description: ''
         type: >-
           Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesCheckNameAvailabilityResponse"
-          />&gt;
-  - name: >-
-      checkNameAvailability(string, NameAvailabilityRequest, RequestOptionsBase,
-      ServiceCallback<NameAvailabilityResponse>)
-    uid: '@azure/arm-datamigration.Services.checkNameAvailability_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkNameAvailability(location: string, parameters:
-        NameAvailabilityRequest, options: RequestOptionsBase, callback:
-        ServiceCallback<NameAvailabilityResponse>)
-      parameters:
-        - id: location
-          type: string
-          description: The Azure region of the operation
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityRequest"
-            />
-          description: Requested name to validate
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityResponse"
-            />&gt;
-          description: The callback
-  - name: >-
-      checkNameAvailability(string, NameAvailabilityRequest,
-      ServiceCallback<NameAvailabilityResponse>)
-    uid: '@azure/arm-datamigration.Services.checkNameAvailability_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkNameAvailability(location: string, parameters:
-        NameAvailabilityRequest, callback:
-        ServiceCallback<NameAvailabilityResponse>)
-      parameters:
-        - id: location
-          type: string
-          description: The Azure region of the operation
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityRequest"
-            />
-          description: Requested name to validate
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.NameAvailabilityResponse"
-            />&gt;
-          description: The callback
-  - name: checkStatus(string, string, RequestOptionsBase)
+          uid="@azure/arm-datamigration.NameAvailabilityResponse" />&gt;
+  - name: checkStatus(string, string, ServicesCheckStatusOptionalParams)
     uid: '@azure/arm-datamigration.Services.checkStatus'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      This action performs a health check and returns the status of the service
-      and virtual machine
+      (classic). This action performs a health check and returns the status of
+      the service and virtual
 
-      size.
+      machine size.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function checkStatus(groupName: string, serviceName: string, options?:
-        RequestOptionsBase): Promise<ServicesCheckStatusResponse>
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<Models.ServicesCheckStatusResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesCheckStatusResponse"
-          />&gt;
-  - name: >-
-      checkStatus(string, string, RequestOptionsBase,
-      ServiceCallback<DataMigrationServiceStatusResponse>)
-    uid: '@azure/arm-datamigration.Services.checkStatus_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkStatus(groupName: string, serviceName: string, options:
-        RequestOptionsBase, callback:
-        ServiceCallback<DataMigrationServiceStatusResponse>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceStatusResponse"
-            />&gt;
-          description: The callback
-  - name: >-
-      checkStatus(string, string,
-      ServiceCallback<DataMigrationServiceStatusResponse>)
-    uid: '@azure/arm-datamigration.Services.checkStatus_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkStatus(groupName: string, serviceName: string, callback:
-        ServiceCallback<DataMigrationServiceStatusResponse>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceStatusResponse"
-            />&gt;
-          description: The callback
-  - name: createOrUpdate(DataMigrationService, string, string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.createOrUpdate'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      The PUT method creates a new service or updates an existing one. When a
-      service is updated,
-
-      existing child resources (i.e. tasks) are unaffected. Services currently
-      support a single kind,
-
-      "vm", which refers to a VM-based service, although other kinds may be
-      added in the future. This
-
-      method can change the kind, SKU, and network of the service, but if tasks
-      are currently running
-
-      (i.e. the service is busy), this will fail with 400 Bad Request
-      ("ServiceIsBusy"). The provider
-
-      will reply when successful with 200 OK or 201 Created. Long-running
-      operations use the
-
-      provisioningState property.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createOrUpdate(parameters: DataMigrationService, groupName:
-        string, serviceName: string, options?: RequestOptionsBase):
-        Promise<ServicesCreateOrUpdateResponse>
-      parameters:
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationService"
-            />
-          description: Information about the service
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<Models.ServicesCreateOrUpdateResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesCreateOrUpdateResponse"
-          />&gt;
-  - name: deleteMethod(string, string, ServicesDeleteMethodOptionalParams)
-    uid: '@azure/arm-datamigration.Services.deleteMethod'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      The DELETE method deletes a service. Any running tasks will be canceled.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(groupName: string, serviceName: string, options?:
-        ServicesDeleteMethodOptionalParams): Promise<RestResponse>
+        ServicesCheckStatusOptionalParams):
+        Promise<DataMigrationServiceStatusResponse>
       parameters:
         - id: groupName
           type: string
@@ -569,26 +489,28 @@ methods:
         - id: options
           type: >-
             <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesDeleteMethodOptionalParams"
-            />
-          description: The optional parameters
+            uid="@azure/arm-datamigration.ServicesCheckStatusOptionalParams" />
+          description: The options parameters.
       return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;<xref uid="@azure/ms-rest-js.RestResponse" />&gt;
-  - name: get(string, string, RequestOptionsBase)
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-datamigration.DataMigrationServiceStatusResponse"
+          />&gt;
+  - name: get(string, string, ServicesGetOptionalParams)
     uid: '@azure/arm-datamigration.Services.get'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      The GET method retrieves information about a service instance.
+      (classic). The GET method retrieves information about a service instance.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function get(groupName: string, serviceName: string, options?:
-        RequestOptionsBase): Promise<ServicesGetResponse>
+        ServicesGetOptionalParams): Promise<DataMigrationService>
       parameters:
         - id: groupName
           type: string
@@ -597,355 +519,91 @@ methods:
           type: string
           description: Name of the service
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: <xref uid="@azure/arm-datamigration.ServicesGetOptionalParams" />
+          description: The options parameters.
       return:
-        description: Promise<Models.ServicesGetResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesGetResponse"
+          Promise&lt;<xref uid="@azure/arm-datamigration.DataMigrationService"
           />&gt;
-  - name: >-
-      get(string, string, RequestOptionsBase,
-      ServiceCallback<DataMigrationService>)
-    uid: '@azure/arm-datamigration.Services.get_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(groupName: string, serviceName: string, options:
-        RequestOptionsBase, callback: ServiceCallback<DataMigrationService>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationService"
-            />&gt;
-          description: The callback
-  - name: get(string, string, ServiceCallback<DataMigrationService>)
-    uid: '@azure/arm-datamigration.Services.get_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(groupName: string, serviceName: string, callback:
-        ServiceCallback<DataMigrationService>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationService"
-            />&gt;
-          description: The callback
-  - name: list(RequestOptionsBase)
+  - name: list(ServicesListOptionalParams)
     uid: '@azure/arm-datamigration.Services.list'
     package: '@azure/arm-datamigration'
     summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
+      The services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      This method returns a list of service resources in a subscription.
+      (classic). This method returns a list of service resources in a
+      subscription.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function list(options?: RequestOptionsBase):
-        Promise<ServicesListResponse>
+        function list(options?: ServicesListOptionalParams):
+        PagedAsyncIterableIterator<DataMigrationService, DataMigrationService[],
+        PageSettings>
       parameters:
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: <xref uid="@azure/arm-datamigration.ServicesListOptionalParams" />
+          description: The options parameters.
       return:
-        description: Promise<Models.ServicesListResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesListResponse"
-          />&gt;
-  - name: list(RequestOptionsBase, ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.list_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(options: RequestOptionsBase, callback:
-        ServiceCallback<DataMigrationServiceList>)
-      parameters:
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: list(ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.list_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function list(callback: ServiceCallback<DataMigrationServiceList>)'
-      parameters:
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: listByResourceGroup(string, RequestOptionsBase)
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-datamigration.DataMigrationService" />, <xref
+          uid="@azure/arm-datamigration.DataMigrationService" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
+  - name: listByResourceGroup(string, ServicesListByResourceGroupOptionalParams)
     uid: '@azure/arm-datamigration.Services.listByResourceGroup'
     package: '@azure/arm-datamigration'
     summary: >-
-      The Services resource is the top-level resource that represents the
-      Database Migration Service.
+      The Services resource is the top-level resource that represents the Azure
+      Database Migration Service
 
-      This method returns a list of service resources in a resource group.
+      (classic). This method returns a list of service resources in a resource
+      group.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function listByResourceGroup(groupName: string, options?:
-        RequestOptionsBase): Promise<ServicesListByResourceGroupResponse>
+        ServicesListByResourceGroupOptionalParams):
+        PagedAsyncIterableIterator<DataMigrationService, DataMigrationService[],
+        PageSettings>
       parameters:
         - id: groupName
           type: string
           description: Name of the resource group
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          type: >-
+            <xref
+            uid="@azure/arm-datamigration.ServicesListByResourceGroupOptionalParams"
+            />
+          description: The options parameters.
       return:
-        description: Promise<Models.ServicesListByResourceGroupResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesListByResourceGroupResponse"
-          />&gt;
-  - name: >-
-      listByResourceGroup(string, RequestOptionsBase,
-      ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.listByResourceGroup_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(groupName: string, options:
-        RequestOptionsBase, callback: ServiceCallback<DataMigrationServiceList>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: listByResourceGroup(string, ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.listByResourceGroup_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(groupName: string, callback:
-        ServiceCallback<DataMigrationServiceList>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: listByResourceGroupNext(string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.listByResourceGroupNext'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The Services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      This method returns a list of service resources in a resource group.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options?:
-        RequestOptionsBase): Promise<ServicesListByResourceGroupNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<Models.ServicesListByResourceGroupNextResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesListByResourceGroupNextResponse"
-          />&gt;
-  - name: >-
-      listByResourceGroupNext(string, RequestOptionsBase,
-      ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.listByResourceGroupNext_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options:
-        RequestOptionsBase, callback: ServiceCallback<DataMigrationServiceList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: listByResourceGroupNext(string, ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.listByResourceGroupNext_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, callback:
-        ServiceCallback<DataMigrationServiceList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: listNext(string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.listNext'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      This method returns a list of service resources in a subscription.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options?: RequestOptionsBase):
-        Promise<ServicesListNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<Models.ServicesListNextResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesListNextResponse"
-          />&gt;
-  - name: >-
-      listNext(string, RequestOptionsBase,
-      ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.listNext_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<DataMigrationServiceList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: listNext(string, ServiceCallback<DataMigrationServiceList>)
-    uid: '@azure/arm-datamigration.Services.listNext_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, callback:
-        ServiceCallback<DataMigrationServiceList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationServiceList"
-            />&gt;
-          description: The callback
-  - name: listSkus(string, string, RequestOptionsBase)
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-datamigration.DataMigrationService" />, <xref
+          uid="@azure/arm-datamigration.DataMigrationService" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;
+  - name: listSkus(string, string, ServicesListSkusOptionalParams)
     uid: '@azure/arm-datamigration.Services.listSkus'
     package: '@azure/arm-datamigration'
     summary: >-
       The services resource is the top-level resource that represents the
-      Database Migration Service.
+      Database Migration Service
 
-      The skus action returns the list of SKUs that a service resource can be
-      updated to.
+      (classic). The skus action returns the list of SKUs that a service
+      resource can be updated to.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function listSkus(groupName: string, serviceName: string, options?:
-        RequestOptionsBase): Promise<ServicesListSkusResponse>
+        ServicesListSkusOptionalParams):
+        PagedAsyncIterableIterator<AvailableServiceSku, AvailableServiceSku[],
+        PageSettings>
       parameters:
         - id: groupName
           type: string
@@ -954,234 +612,14 @@ methods:
           type: string
           description: Name of the service
         - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<Models.ServicesListSkusResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesListSkusResponse"
-          />&gt;
-  - name: >-
-      listSkus(string, string, RequestOptionsBase,
-      ServiceCallback<ServiceSkuList>)
-    uid: '@azure/arm-datamigration.Services.listSkus_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listSkus(groupName: string, serviceName: string, options:
-        RequestOptionsBase, callback: ServiceCallback<ServiceSkuList>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
           type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.ServiceSkuList"
-            />&gt;
-          description: The callback
-  - name: listSkus(string, string, ServiceCallback<ServiceSkuList>)
-    uid: '@azure/arm-datamigration.Services.listSkus_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listSkus(groupName: string, serviceName: string, callback:
-        ServiceCallback<ServiceSkuList>)
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.ServiceSkuList"
-            />&gt;
-          description: The callback
-  - name: listSkusNext(string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.listSkusNext'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      The skus action returns the list of SKUs that a service resource can be
-      updated to.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listSkusNext(nextPageLink: string, options?:
-        RequestOptionsBase): Promise<ServicesListSkusNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<Models.ServicesListSkusNextResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesListSkusNextResponse"
-          />&gt;
-  - name: listSkusNext(string, RequestOptionsBase, ServiceCallback<ServiceSkuList>)
-    uid: '@azure/arm-datamigration.Services.listSkusNext_2'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listSkusNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<ServiceSkuList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.ServiceSkuList"
-            />&gt;
-          description: The callback
-  - name: listSkusNext(string, ServiceCallback<ServiceSkuList>)
-    uid: '@azure/arm-datamigration.Services.listSkusNext_1'
-    package: '@azure/arm-datamigration'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listSkusNext(nextPageLink: string, callback:
-        ServiceCallback<ServiceSkuList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            <xref uid="@azure/ms-rest-js.ServiceCallback" />&lt;<xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.ServiceSkuList"
-            />&gt;
-          description: The callback
-  - name: start(string, string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.start'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      This action starts the service and the service can be used for data
-      migration.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function start(groupName: string, serviceName: string, options?:
-        RequestOptionsBase): Promise<RestResponse>
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;<xref uid="@azure/ms-rest-js.RestResponse" />&gt;
-  - name: stop(string, string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.stop'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      This action stops the service and the service cannot be used for data
-      migration. The service
-
-      owner won't be billed when the service is stopped.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function stop(groupName: string, serviceName: string, options?:
-        RequestOptionsBase): Promise<RestResponse>
-      parameters:
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
-      return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;<xref uid="@azure/ms-rest-js.RestResponse" />&gt;
-  - name: update(DataMigrationService, string, string, RequestOptionsBase)
-    uid: '@azure/arm-datamigration.Services.update'
-    package: '@azure/arm-datamigration'
-    summary: >-
-      The services resource is the top-level resource that represents the
-      Database Migration Service.
-
-      The PATCH method updates an existing service. This method can change the
-      kind, SKU, and network
-
-      of the service, but if tasks are currently running (i.e. the service is
-      busy), this will fail
-
-      with 400 Bad Request ("ServiceIsBusy").
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(parameters: DataMigrationService, groupName: string,
-        serviceName: string, options?: RequestOptionsBase):
-        Promise<ServicesUpdateResponse>
-      parameters:
-        - id: parameters
-          type: >-
-            <xref
-            uid="@azure/arm-datamigration.DataMigrationServiceModels.DataMigrationService"
+            <xref uid="@azure/arm-datamigration.ServicesListSkusOptionalParams"
             />
-          description: Information about the service
-        - id: groupName
-          type: string
-          description: Name of the resource group
-        - id: serviceName
-          type: string
-          description: Name of the service
-        - id: options
-          type: <xref uid="@azure/ms-rest-js.RequestOptionsBase" />
-          description: The optional parameters
+          description: The options parameters.
       return:
-        description: Promise<Models.ServicesUpdateResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-datamigration.DataMigrationServiceModels.ServicesUpdateResponse"
-          />&gt;
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/arm-datamigration.AvailableServiceSku" />, <xref
+          uid="@azure/arm-datamigration.AvailableServiceSku" />[], <xref
+          uid="@azure/core-paging.PageSettings" />&gt;

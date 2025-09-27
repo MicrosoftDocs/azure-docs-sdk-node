@@ -3,8 +3,9 @@ name: CapacityReservationUpdate
 uid: '@azure/arm-compute.CapacityReservationUpdate'
 package: '@azure/arm-compute'
 summary: >-
-  Specifies information about the capacity reservation. Only tags and
-  sku.capacity can be updated.
+  Specifies information about the capacity reservation. sku.capacity cannot be
+  updated for Block Capacity Reservation. Tags can be update for all Capacity
+  Reservation Types.
 fullName: CapacityReservationUpdate
 remarks: ''
 isDeprecated: false
@@ -95,16 +96,39 @@ properties:
       return:
         description: ''
         type: string
+  - name: scheduleProfile
+    uid: '@azure/arm-compute.CapacityReservationUpdate.scheduleProfile'
+    package: '@azure/arm-compute'
+    summary: >-
+      Defines the schedule for Block-type capacity reservations. Specifies the
+      schedule during which capacity reservation is active and VM or VMSS
+      resource can be allocated using reservation. This property is required and
+      only supported when the capacity reservation group type is 'Block'. The
+      scheduleProfile, start, and end fields are immutable after creation.
+      Minimum API version: 2025-04-01. Please refer to
+      https://aka.ms/blockcapacityreservation for more details.
+    fullName: scheduleProfile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'scheduleProfile?: ScheduleProfile'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-compute.ScheduleProfile" />
   - name: sku
     uid: '@azure/arm-compute.CapacityReservationUpdate.sku'
     package: '@azure/arm-compute'
     summary: >-
       SKU of the resource for which capacity needs be reserved. The SKU name and
       capacity is required to be set. Currently VM Skus with the capability
-      called 'CapacityReservationSupported' set to true are supported. Refer to
+      called 'CapacityReservationSupported' set to true are supported. When
+      'CapacityReservationSupported' is true, the SKU capability also specifies
+      the 'SupportedCapacityReservationTypes', which lists the types of capacity
+      reservations (such as Targeted or Block) that the SKU supports. Refer to
       List Microsoft.Compute SKUs in a region
       (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for
-      supported values.
+      supported values. **Note:** The SKU name and capacity cannot be updated
+      for Block capacity reservations.
     fullName: sku
     remarks: ''
     isDeprecated: false

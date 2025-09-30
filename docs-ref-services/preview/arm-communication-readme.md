@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure CommunicationServiceManagement client library for JavaScript - version 4.1.2-alpha.20250930.1 
+# Azure CommunicationServiceManagement client library for JavaScript - version 4.1.2-alpha.20250930.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure CommunicationServiceManagement client.

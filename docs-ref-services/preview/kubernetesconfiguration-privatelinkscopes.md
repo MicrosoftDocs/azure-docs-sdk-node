@@ -1,7 +1,7 @@
 ---
 title: Azure Kubernetesconfiguration-Privatelinkscopes SDK for JavaScript
 description: Reference for Azure Kubernetesconfiguration-Privatelinkscopes SDK for JavaScript
-ms.date: 10/01/2025
+ms.date: 10/02/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesconfiguration-privatelinkscopes

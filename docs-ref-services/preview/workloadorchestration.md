@@ -1,7 +1,7 @@
 ---
 title: Azure Workloadorchestration SDK for JavaScript
 description: Reference for Azure Workloadorchestration SDK for JavaScript
-ms.date: 10/02/2025
+ms.date: 10/03/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: workloadorchestration

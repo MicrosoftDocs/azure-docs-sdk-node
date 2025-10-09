@@ -1,12 +1,12 @@
 ---
 title: Azure Cosmos DB client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/cosmos, cosmosdb
-ms.date: 09/04/2025
+ms.date: 10/09/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cosmosdb
 ---
-# Azure Cosmos DB client library for JavaScript - version 4.5.1 
+# Azure Cosmos DB client library for JavaScript - version 4.6.0 
 /TypeScript
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]
@@ -104,6 +104,7 @@ The following sections provide several code snippets covering some of the most c
 - [Read an item](#read-an-item)
 - [Delete an item](#delete-an-data)
 - [CRUD on Container with hierarchical partition key](#container-hierarchical-partition-key)
+- [Using Excluded Locations](#using-excluded-locations)
 
 ### Create a database
 
@@ -506,6 +507,37 @@ Because the change feed is effectively an infinite list of items that encompasse
 
 More detailed usage guidelines and examples of change feed can be found [here](https://learn.microsoft.com/azure/cosmos-db/nosql/change-feed-pull-model?tabs=javascript).
 
+### Using Excluded Locations
+
+The `excludedLocations` option at the request level allows user to specify one or more Azure regions that should be excluded from serving the request. This is useful for scenarios where user want to avoid certain regions due to compliance, latency, or availability concerns. When set, Cosmos DB will route the request to other available regions, improving control over data residency and failover behavior.
+
+`excludedLocations` is only applied when `enableEndPointDiscovery` is set to true.
+
+This example shows various APIs supporting Excluded Locations.
+
+```ts snippet:ReadmeSampleWithExcludedLocations
+import { CosmosClient, ChangeFeedStartFrom } from "@azure/cosmos";
+
+const endpoint = "https://your-account.documents.azure.com";
+const key = "<database account masterkey>";
+const client = new CosmosClient({ endpoint, key });
+
+const { database } = await client.databases.createIfNotExists({ id: "Test Database" });
+
+const { container } = await database.containers.createIfNotExists({ id: "Test Container" });
+
+const city = { id: "1", name: "Olympia", state: "WA" };
+await container.items.upsert(city, { excludedLocations: ["Test Region"] });
+
+const iterator = container.items.getChangeFeedIterator({
+  excludedLocations: ["Test Region"],
+  maxItemCount: 1,
+  changeFeedStartFrom: ChangeFeedStartFrom.Beginning(),
+});
+
+const response = await iterator.readNext();
+```
+
 ## Error Handling
 
 The SDK generates various types of errors that can occur during an operation.
@@ -590,7 +622,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.5.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.6.0/sdk/core/logger).
 
 ### Diagnostics
 
@@ -777,7 +809,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 - [Welcome to Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/community)
 - [Quick start](https://learn.microsoft.com/azure/cosmos-db/sql-api-nodejs-get-started)
 - [Tutorial](https://learn.microsoft.com/azure/cosmos-db/sql-api-nodejs-application)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.5.1/sdk/cosmosdb/cosmos/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.6.0/sdk/cosmosdb/cosmos/samples)
 - [Introduction to Resource Model of Azure Cosmos DB Service](https://learn.microsoft.com/azure/cosmos-db/sql-api-resources)
 - [Introduction to SQL API of Azure Cosmos DB Service](https://learn.microsoft.com/azure/cosmos-db/sql-api-sql-query)
 - [Partitioning](https://learn.microsoft.com/azure/cosmos-db/sql-api-partition-data)
@@ -785,7 +817,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.5.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.6.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 
@@ -805,7 +837,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [cosmos_item]: https://learn.microsoft.com/azure/cosmos-db/databases-containers-items#azure-cosmos-items
 [cosmos_request_units]: https://learn.microsoft.com/azure/cosmos-db/request-units
 [cosmos_resources]: https://learn.microsoft.com/azure/cosmos-db/databases-containers-items
-[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.5.1/sdk/cosmosdb/cosmos/samples
+[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.6.0/sdk/cosmosdb/cosmos/samples
 [cosmos_sql_queries]: https://learn.microsoft.com/azure/cosmos-db/how-to-sql-query
 [cosmos_ttl]: https://learn.microsoft.com/azure/cosmos-db/time-to-live
 [npm]: https://www.npmjs.com/package/@azure/cosmos

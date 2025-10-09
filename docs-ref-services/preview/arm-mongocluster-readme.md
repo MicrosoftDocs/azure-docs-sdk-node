@@ -1,12 +1,12 @@
 ---
 title: Azure MongoClusterManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-mongocluster, mongocluster
-ms.date: 08/06/2025
+ms.date: 10/09/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: mongocluster
 ---
-# Azure MongoClusterManagement client library for JavaScript - version 1.1.0-beta.1 
+# Azure MongoClusterManagement client library for JavaScript - version 1.1.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure MongoClusterManagement client.
@@ -15,10 +15,10 @@ The Microsoft Azure management API provides create, read, update, and delete fun
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.1/sdk/mongocluster/arm-mongocluster)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.2/sdk/mongocluster/arm-mongocluster)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/arm-mongocluster)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-mongocluster?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.1/sdk/mongocluster/arm-mongocluster/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.2/sdk/mongocluster/arm-mongocluster/samples)
 
 ## Getting started
 
@@ -27,7 +27,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-mongocluster_1.1.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-mongocluster_1.1.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ npm install @azure/arm-mongocluster
 To create a client object to access the Azure MongoClusterManagement API, you will need the `endpoint` of your Azure MongoClusterManagement resource and a `credential`. The Azure MongoClusterManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure MongoClusterManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-mongocluster_1.1.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-mongocluster_1.1.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -104,15 +104,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.1/sdk/mongocluster/arm-mongocluster/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.2/sdk/mongocluster/arm-mongocluster/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-mongocluster_1.1.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-mongocluster_1.1.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -120,6 +120,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-mongocluster_1.1.0-beta.2/sdk/identity/identity#defaultazurecredential
 

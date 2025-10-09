@@ -1,7 +1,7 @@
 ---
 title: Azure Onlineexperimentation SDK for JavaScript
 description: Reference for Azure Onlineexperimentation SDK for JavaScript
-ms.date: 10/08/2025
+ms.date: 10/09/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: onlineexperimentation

@@ -22,16 +22,16 @@ constructors:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleSearchClient
 
-      const { SearchClient, AzureKeyCredential } =
-      require("@azure/search-documents");
+      import { SearchClient, AzureKeyCredential } from
+      "@azure/search-documents";
 
 
-      const client = new SearchClient(
+      const searchClient = new SearchClient(
         "<endpoint>",
         "<indexName>",
-        new AzureKeyCredential("<Admin Key>")
+        new AzureKeyCredential("<apiKey>"),
       );
 
       ```
@@ -40,17 +40,25 @@ constructors:
       Optionally, the type of the model can be used to enable strong typing and
       type hints:
 
-      ```ts
+      ```ts snippet:ReadmeSampleSearchClientWithModel
+
+      import { SearchClient, AzureKeyCredential } from
+      "@azure/search-documents";
+
 
       type TModel = {
         keyName: string;
         field1?: string | null;
-        field2?: { anotherField?: string | null } | null;
+        field2?: {
+          anotherField?: string | null;
+        } | null;
       };
 
 
-      const client = new SearchClient<TModel>(
-        ...
+      const searchClient = new SearchClient<TModel>(
+        "<endpoint>",
+        "<indexName>",
+        new AzureKeyCredential("<apiKey>"),
       );
 
       ```
@@ -141,37 +149,45 @@ methods:
   - name: autocomplete(string, string, AutocompleteOptions<TModel>)
     uid: '@azure/search-documents.SearchClient.autocomplete'
     package: '@azure/search-documents'
-    summary: |+
-      Based on a partial searchText from the user, return a list
-      of potential completion strings based on a specified suggester.
+    summary: >+
+      Based on a partial searchText from the user, return a list of potential
+      completion strings
+
+      based on a specified suggester.
+
 
       **Example**
 
-      ```ts
-      import {
-        AzureKeyCredential,
-        SearchClient,
-        SearchFieldArray,
-      } from "@azure/search-documents";
+
+      ```ts snippet:ReadmeSampleAutocomplete
+
+      import { SearchClient, AzureKeyCredential, SearchFieldArray } from
+      "@azure/search-documents";
+
 
       type TModel = {
         key: string;
-        azure?: { sdk: string | null } | null;
+        azure?: {
+          sdk: string | null;
+        } | null;
       };
+
 
       const client = new SearchClient<TModel>(
         "endpoint.azure",
         "indexName",
-        new AzureKeyCredential("key")
+        new AzureKeyCredential("key"),
       );
+
 
       const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
 
-      const autocompleteResult = await client.autocomplete(
-        "searchText",
-        "suggesterName",
-        { searchFields }
-      );
+
+      const autocompleteResult = await client.autocomplete("searchText",
+      "suggesterName", {
+        searchFields,
+      });
+
       ```
 
     remarks: ''
@@ -186,7 +202,7 @@ methods:
           description: The search text on which to base autocomplete results.
         - id: suggesterName
           type: string
-          description: >-
+          description: |-
             The name of the suggester as specified in the suggesters collection
             that's part of the index definition.
         - id: options
@@ -303,7 +319,7 @@ methods:
       set the `throwOnAnyFailure` option to true.
 
       For more details about how merging works, see:
-      https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
+      https://learn.microsoft.com/rest/api/searchservice/AddUpdate-or-Delete-Documents
     remarks: ''
     isDeprecated: false
     syntax:
@@ -330,8 +346,10 @@ methods:
     summary: >-
       Update a set of documents in the index.
 
+
       For more details about how merging works, see
-      https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
+
+      https://learn.microsoft.com/rest/api/searchservice/AddUpdate-or-Delete-Documents
     remarks: ''
     isDeprecated: false
     syntax:
@@ -356,8 +374,10 @@ methods:
     summary: >-
       Update a set of documents in the index or upload them if they don't exist.
 
+
       For more details about how merging works, see
-      https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
+
+      https://learn.microsoft.com/rest/api/searchservice/AddUpdate-or-Delete-Documents
     remarks: ''
     isDeprecated: false
     syntax:
@@ -379,37 +399,46 @@ methods:
   - name: search<TFields>(string, SearchOptions<TModel, TFields>)
     uid: '@azure/search-documents.SearchClient.search'
     package: '@azure/search-documents'
-    summary: |+
+    summary: >+
       Performs a search on the current index given
+
       the specified arguments.
+
 
       **Example**
 
-      ```ts
-      import {
-        AzureKeyCredential,
-        SearchClient,
-        SearchFieldArray,
-      } from "@azure/search-documents";
+
+      ```ts snippet:ReadmeSampleSearchTModel
+
+      import { SearchClient, AzureKeyCredential, SearchFieldArray } from
+      "@azure/search-documents";
+
 
       type TModel = {
         key: string;
-        azure?: { sdk: string | null } | null;
+        azure?: {
+          sdk: string | null;
+        } | null;
       };
+
 
       const client = new SearchClient<TModel>(
         "endpoint.azure",
         "indexName",
-        new AzureKeyCredential("key")
+        new AzureKeyCredential("key"),
       );
 
+
       const select = ["azure/sdk"] as const;
+
       const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
+
 
       const searchResult = await client.search("searchText", {
         select,
         searchFields,
       });
+
       ```
 
     remarks: ''
@@ -437,33 +466,31 @@ methods:
     uid: '@azure/search-documents.SearchClient.suggest'
     package: '@azure/search-documents'
     summary: >+
-      Returns a short list of suggestions based on the searchText
-
-      and specified suggester.
+      Returns a short list of suggestions based on the searchText and specified
+      suggester.
 
 
       **Example**
 
 
-      ```ts
+      ```ts snippet:ReadmeSampleSuggest
 
-      import {
-        AzureKeyCredential,
-        SearchClient,
-        SearchFieldArray,
-      } from "@azure/search-documents";
+      import { SearchClient, AzureKeyCredential, SearchFieldArray } from
+      "@azure/search-documents";
 
 
       type TModel = {
         key: string;
-        azure?: { sdk: string | null } | null;
+        azure?: {
+          sdk: string | null;
+        } | null;
       };
 
 
       const client = new SearchClient<TModel>(
         "endpoint.azure",
         "indexName",
-        new AzureKeyCredential("key")
+        new AzureKeyCredential("key"),
       );
 
 
@@ -492,10 +519,12 @@ methods:
           type: string
           description: >-
             The search text to use to suggest documents. Must be at least 1
-            character, and no more than 100 characters.
+            character,
+
+            and no more than 100 characters.
         - id: suggesterName
           type: string
-          description: >-
+          description: |-
             The name of the suggester as specified in the suggesters collection
             that's part of the index definition.
         - id: options

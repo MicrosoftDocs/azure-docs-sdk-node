@@ -22,16 +22,14 @@ constructors:
 
       Example usage:
 
-      ```ts
+      ```ts snippet:ReadmeSampleSearchIndexClient
 
-      const { SearchIndexClient, AzureKeyCredential } =
-      require("@azure/search-documents");
+      import { SearchIndexClient, AzureKeyCredential } from
+      "@azure/search-documents";
 
 
-      const client = new SearchIndexClient(
-        "<endpoint>",
-        new AzureKeyCredential("<Admin Key>");
-      );
+      const indexClient = new SearchIndexClient("<endpoint>", new
+      AzureKeyCredential("<apiKey>"));
 
       ```
     remarks: ''
@@ -163,6 +161,46 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
+  - name: createKnowledgeAgent(KnowledgeAgent, CreateKnowledgeAgentOptions)
+    uid: '@azure/search-documents.SearchIndexClient.createKnowledgeAgent'
+    package: '@azure/search-documents'
+    summary: Creates a new agent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createKnowledgeAgent(knowledgeAgent: KnowledgeAgent, options?:
+        CreateKnowledgeAgentOptions): Promise<KnowledgeAgent>
+      parameters:
+        - id: knowledgeAgent
+          type: <xref uid="@azure/search-documents.KnowledgeAgent" />
+          description: definition of the agent to create.
+        - id: options
+          type: <xref uid="@azure/search-documents.CreateKnowledgeAgentOptions" />
+          description: options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeAgent" />&gt;
+  - name: createKnowledgeSource(KnowledgeSource, CreateKnowledgeSourceOptions)
+    uid: '@azure/search-documents.SearchIndexClient.createKnowledgeSource'
+    package: '@azure/search-documents'
+    summary: Creates a new knowledge source.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createKnowledgeSource(knowledgeSource: KnowledgeSource,
+        options?: CreateKnowledgeSourceOptions): Promise<KnowledgeSource>
+      parameters:
+        - id: knowledgeSource
+          type: <xref uid="@azure/search-documents.KnowledgeSource" />
+          description: The definition of the knowledge source to create.
+        - id: options
+          type: <xref uid="@azure/search-documents.CreateKnowledgeSourceOptions" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeSource" />&gt;
   - name: createOrUpdateAlias(SearchAlias, CreateOrUpdateAliasOptions)
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateAlias'
     package: '@azure/search-documents'
@@ -203,6 +241,63 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
+  - name: >-
+      createOrUpdateKnowledgeAgent(string, KnowledgeAgent,
+      CreateOrUpdateKnowledgeAgentOptions)
+    uid: '@azure/search-documents.SearchIndexClient.createOrUpdateKnowledgeAgent'
+    package: '@azure/search-documents'
+    summary: Creates a new agent or updates an agent if it already exists.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createOrUpdateKnowledgeAgent(agentName: string, knowledgeAgent:
+        KnowledgeAgent, options?: CreateOrUpdateKnowledgeAgentOptions):
+        Promise<KnowledgeAgent>
+      parameters:
+        - id: agentName
+          type: string
+          description: name of the agent to create or update.
+        - id: knowledgeAgent
+          type: <xref uid="@azure/search-documents.KnowledgeAgent" />
+          description: definition of the agent to create or update.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/search-documents.CreateOrUpdateKnowledgeAgentOptions" />
+          description: options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeAgent" />&gt;
+  - name: >-
+      createOrUpdateKnowledgeSource(string, KnowledgeSource,
+      CreateOrUpdateKnowledgeSourceOptions)
+    uid: '@azure/search-documents.SearchIndexClient.createOrUpdateKnowledgeSource'
+    package: '@azure/search-documents'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createOrUpdateKnowledgeSource(sourceName: string,
+        knowledgeSource: KnowledgeSource, options?:
+        CreateOrUpdateKnowledgeSourceOptions): Promise<KnowledgeSource>
+      parameters:
+        - id: sourceName
+          type: string
+          description: ''
+        - id: knowledgeSource
+          type: <xref uid="@azure/search-documents.KnowledgeSource" />
+          description: ''
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/search-documents.CreateOrUpdateKnowledgeSourceOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeSource" />&gt;
   - name: createOrUpdateSynonymMap(SynonymMap, CreateOrUpdateSynonymMapOptions)
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateSynonymMap'
     package: '@azure/search-documents'
@@ -245,31 +340,75 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
-  - name: deleteAlias(string | SearchAlias, DeleteAliasOptions)
-    uid: '@azure/search-documents.SearchIndexClient.deleteAlias'
+  - name: deleteAlias(SearchAlias, DeleteAliasOptions)
+    uid: '@azure/search-documents.SearchIndexClient.deleteAlias_1'
     package: '@azure/search-documents'
     summary: >-
       Deletes a search alias and its associated mapping to an index. This
-      operation is permanent, with no
+      operation is permanent,
 
-      recovery option. The mapped index is untouched by this operation.
+      with no recovery option. The mapped index is untouched by this operation.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function deleteAlias(alias: string | SearchAlias, options?:
-        DeleteAliasOptions): Promise<void>
+        function deleteAlias(alias: SearchAlias, options?: DeleteAliasOptions):
+        Promise<void>
       parameters:
         - id: alias
-          type: string | <xref uid="@azure/search-documents.SearchAlias" />
-          description: Alias/Name name of the alias to delete.
+          type: <xref uid="@azure/search-documents.SearchAlias" />
+          description: The alias to delete.
         - id: options
           type: <xref uid="@azure/search-documents.DeleteAliasOptions" />
-          description: The options parameters.
+          description: Additional optional arguments.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: deleteIndex(string | SearchIndex, DeleteIndexOptions)
+  - name: deleteAlias(string, DeleteAliasOptions)
+    uid: '@azure/search-documents.SearchIndexClient.deleteAlias'
+    package: '@azure/search-documents'
+    summary: >-
+      Deletes a search alias and its associated mapping to an index. This
+      operation is permanent,
+
+      with no recovery option. The mapped index is untouched by this operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteAlias(aliasName: string, options?: DeleteAliasOptions):
+        Promise<void>
+      parameters:
+        - id: aliasName
+          type: string
+          description: Name of the alias to delete.
+        - id: options
+          type: <xref uid="@azure/search-documents.DeleteAliasOptions" />
+          description: Additional optional arguments.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteIndex(SearchIndex, DeleteIndexOptions)
+    uid: '@azure/search-documents.SearchIndexClient.deleteIndex_1'
+    package: '@azure/search-documents'
+    summary: Deletes an existing index.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteIndex(index: SearchIndex, options?: DeleteIndexOptions):
+        Promise<void>
+      parameters:
+        - id: index
+          type: <xref uid="@azure/search-documents.SearchIndex" />
+          description: The index to delete.
+        - id: options
+          type: <xref uid="@azure/search-documents.DeleteIndexOptions" />
+          description: Additional optional arguments.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteIndex(string, DeleteIndexOptions)
     uid: '@azure/search-documents.SearchIndexClient.deleteIndex'
     package: '@azure/search-documents'
     summary: Deletes an existing index.
@@ -277,15 +416,95 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteIndex(index: string | SearchIndex, options?:
-        DeleteIndexOptions): Promise<void>
+        function deleteIndex(indexName: string, options?: DeleteIndexOptions):
+        Promise<void>
       parameters:
-        - id: index
-          type: string | <xref uid="@azure/search-documents.SearchIndex" />
-          description: ''
+        - id: indexName
+          type: string
+          description: Name of the index to delete.
         - id: options
           type: <xref uid="@azure/search-documents.DeleteIndexOptions" />
           description: Additional optional arguments.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteKnowledgeAgent(KnowledgeAgent, DeleteKnowledgeAgentOptions)
+    uid: '@azure/search-documents.SearchIndexClient.deleteKnowledgeAgent_1'
+    package: '@azure/search-documents'
+    summary: Deletes an existing agent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteKnowledgeAgent(agent: KnowledgeAgent, options?:
+        DeleteKnowledgeAgentOptions): Promise<void>
+      parameters:
+        - id: agent
+          type: <xref uid="@azure/search-documents.KnowledgeAgent" />
+          description: the agent to delete.
+        - id: options
+          type: <xref uid="@azure/search-documents.DeleteKnowledgeAgentOptions" />
+          description: options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteKnowledgeAgent(string, DeleteKnowledgeAgentOptions)
+    uid: '@azure/search-documents.SearchIndexClient.deleteKnowledgeAgent'
+    package: '@azure/search-documents'
+    summary: Deletes an existing agent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteKnowledgeAgent(agentName: string, options?:
+        DeleteKnowledgeAgentOptions): Promise<void>
+      parameters:
+        - id: agentName
+          type: string
+          description: name of the agent to delete.
+        - id: options
+          type: <xref uid="@azure/search-documents.DeleteKnowledgeAgentOptions" />
+          description: options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteKnowledgeSource(KnowledgeSource, DeleteKnowledgeSourceOptions)
+    uid: '@azure/search-documents.SearchIndexClient.deleteKnowledgeSource_1'
+    package: '@azure/search-documents'
+    summary: Deletes an existing source.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteKnowledgeSource(source: KnowledgeSource, options?:
+        DeleteKnowledgeSourceOptions): Promise<void>
+      parameters:
+        - id: source
+          type: <xref uid="@azure/search-documents.KnowledgeSource" />
+          description: the knowledge source to delete.
+        - id: options
+          type: <xref uid="@azure/search-documents.DeleteKnowledgeSourceOptions" />
+          description: options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteKnowledgeSource(string, DeleteKnowledgeSourceOptions)
+    uid: '@azure/search-documents.SearchIndexClient.deleteKnowledgeSource'
+    package: '@azure/search-documents'
+    summary: Deletes an existing source.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteKnowledgeSource(sourceName: string, options?:
+        DeleteKnowledgeSourceOptions): Promise<void>
+      parameters:
+        - id: sourceName
+          type: string
+          description: name of the knowledge source to delete.
+        - id: options
+          type: <xref uid="@azure/search-documents.DeleteKnowledgeSourceOptions" />
+          description: options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -375,6 +594,87 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.SearchIndexStatistics"
           />&gt;
+  - name: getIndexStatsSummary(GetIndexStatsSummaryOptions)
+    uid: '@azure/search-documents.SearchIndexClient.getIndexStatsSummary'
+    package: '@azure/search-documents'
+    summary: Retrieves a list of existing indexes in the service.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getIndexStatsSummary(options?: GetIndexStatsSummaryOptions):
+        IndexStatisticsSummaryIterator
+      parameters:
+        - id: options
+          type: <xref uid="@azure/search-documents.GetIndexStatsSummaryOptions" />
+          description: Options to the list index operation.
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.IndexStatisticsSummaryIterator" />
+  - name: getKnowledgeAgent(string, GetKnowledgeAgentOptions)
+    uid: '@azure/search-documents.SearchIndexClient.getKnowledgeAgent'
+    package: '@azure/search-documents'
+    summary: Retrieves an agent definition.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getKnowledgeAgent(agentName: string, options?:
+        GetKnowledgeAgentOptions): Promise<KnowledgeAgent>
+      parameters:
+        - id: agentName
+          type: string
+          description: name of the agent to retrieve.
+        - id: options
+          type: <xref uid="@azure/search-documents.GetKnowledgeAgentOptions" />
+          description: options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeAgent" />&gt;
+  - name: getKnowledgeRetrievalClient(string, KnowledgeRetrievalClientOptions)
+    uid: '@azure/search-documents.SearchIndexClient.getKnowledgeRetrievalClient'
+    package: '@azure/search-documents'
+    summary: >-
+      Retrieves the KnowledgeRetrievalClient corresponding to this
+      SearchIndexClient
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getKnowledgeRetrievalClient(agentName: string, options?:
+        KnowledgeRetrievalClientOptions): KnowledgeRetrievalClient
+      parameters:
+        - id: agentName
+          type: string
+          description: Name of the agent
+        - id: options
+          type: >-
+            <xref uid="@azure/search-documents.KnowledgeRetrievalClientOptions"
+            />
+          description: KnowledgeRetrievalClient Options
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.KnowledgeRetrievalClient" />
+  - name: getKnowledgeSource(string, GetKnowledgeSourceOptions)
+    uid: '@azure/search-documents.SearchIndexClient.getKnowledgeSource'
+    package: '@azure/search-documents'
+    summary: Retrieves a knowledge source definition.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getKnowledgeSource(sourceName: string, options?:
+        GetKnowledgeSourceOptions): Promise<KnowledgeSource>
+      parameters:
+        - id: sourceName
+          type: string
+          description: The name of the knowledge source to retrieve.
+        - id: options
+          type: <xref uid="@azure/search-documents.GetKnowledgeSourceOptions" />
+          description: The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeSource" />&gt;
   - name: getSearchClient<TModel>(string, SearchClientOptions)
     uid: '@azure/search-documents.SearchIndexClient.getSearchClient'
     package: '@azure/search-documents'
@@ -481,6 +781,40 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/search-documents.IndexNameIterator" />
+  - name: listKnowledgeAgents(ListKnowledgeAgentsOptions)
+    uid: '@azure/search-documents.SearchIndexClient.listKnowledgeAgents'
+    package: '@azure/search-documents'
+    summary: Retrieves a list of existing KnowledgeAgents in the service.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listKnowledgeAgents(options?: ListKnowledgeAgentsOptions):
+        KnowledgeAgentIterator
+      parameters:
+        - id: options
+          type: <xref uid="@azure/search-documents.ListKnowledgeAgentsOptions" />
+          description: Options to the list knowledge agents operation.
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.KnowledgeAgentIterator" />
+  - name: listKnowledgeSources(ListKnowledgeSourcesOptions)
+    uid: '@azure/search-documents.SearchIndexClient.listKnowledgeSources'
+    package: '@azure/search-documents'
+    summary: Retrieves a list of existing KnowledgeSources in the service.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listKnowledgeSources(options?: ListKnowledgeSourcesOptions):
+        KnowledgeSourceIterator
+      parameters:
+        - id: options
+          type: <xref uid="@azure/search-documents.ListKnowledgeSourcesOptions" />
+          description: Options to the list knowledge sources operation.
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.KnowledgeSourceIterator" />
   - name: listSynonymMaps(OperationOptions)
     uid: '@azure/search-documents.SearchIndexClient.listSynonymMaps'
     package: '@azure/search-documents'

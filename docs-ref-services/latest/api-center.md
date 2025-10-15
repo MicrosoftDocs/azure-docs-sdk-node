@@ -1,7 +1,7 @@
 ---
 title: Azure API Center SDK for JavaScript
 description: Reference for Azure API Center SDK for JavaScript
-ms.date: 10/14/2025
+ms.date: 10/15/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: apicenter

@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/storage-common, storage
-ms.date: 07/24/2025
+ms.date: 10/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage

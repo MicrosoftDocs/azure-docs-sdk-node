@@ -1,7 +1,7 @@
 ---
 title: Azure New Relic Observability SDK for JavaScript
 description: Reference for Azure New Relic Observability SDK for JavaScript
-ms.date: 10/16/2025
+ms.date: 10/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: newrelicobservability

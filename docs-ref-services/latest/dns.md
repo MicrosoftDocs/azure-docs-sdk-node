@@ -1,7 +1,7 @@
 ---
-title: Azure DNS SDK for JavaScript
-description: Reference for Azure DNS SDK for JavaScript
-ms.date: 10/22/2025
+title: Azure Dns SDK for JavaScript
+description: Reference for Azure Dns SDK for JavaScript
+ms.date: 10/23/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: dns

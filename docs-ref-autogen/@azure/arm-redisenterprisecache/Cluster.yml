@@ -2,7 +2,7 @@
 name: Cluster
 uid: '@azure/arm-redisenterprisecache.Cluster'
 package: '@azure/arm-redisenterprisecache'
-summary: Describes the RedisEnterprise cluster
+summary: Describes the Redis Enterprise cluster
 fullName: Cluster
 remarks: ''
 isDeprecated: false
@@ -16,12 +16,28 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'encryption?: ClusterPropertiesEncryption'
+      content: 'encryption?: ClusterCommonPropertiesEncryption'
       return:
         description: ''
         type: >-
           <xref
-          uid="@azure/arm-redisenterprisecache.ClusterPropertiesEncryption" />
+          uid="@azure/arm-redisenterprisecache.ClusterCommonPropertiesEncryption"
+          />
+  - name: highAvailability
+    uid: '@azure/arm-redisenterprisecache.Cluster.highAvailability'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      Enabled by default. If highAvailability is disabled, the data set is not
+      replicated. This affects the availability SLA, and increases the risk of
+      data loss.
+    fullName: highAvailability
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'highAvailability?: string'
+      return:
+        description: ''
+        type: string
   - name: hostName
     uid: '@azure/arm-redisenterprisecache.Cluster.hostName'
     package: '@azure/arm-redisenterprisecache'
@@ -50,10 +66,30 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-redisenterprisecache.ManagedServiceIdentity" />
+  - name: kind
+    uid: '@azure/arm-redisenterprisecache.Cluster.kind'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      Distinguishes the kind of cluster. Read-only.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: kind
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'kind?: string'
+      return:
+        description: ''
+        type: string
   - name: minimumTlsVersion
     uid: '@azure/arm-redisenterprisecache.Cluster.minimumTlsVersion'
     package: '@azure/arm-redisenterprisecache'
-    summary: The minimum TLS version for the cluster to support, e.g. '1.2'
+    summary: >-
+      The minimum TLS version for the cluster to support, e.g. '1.2'. Newer
+      versions can be added in the future. Note that TLS 1.0 and TLS 1.1 are now
+      completely obsolete -- you cannot use them. They are mentioned only for
+      the sake of consistency with old API versions.
     fullName: minimumTlsVersion
     remarks: ''
     isDeprecated: false
@@ -66,8 +102,8 @@ properties:
     uid: '@azure/arm-redisenterprisecache.Cluster.privateEndpointConnections'
     package: '@azure/arm-redisenterprisecache'
     summary: >-
-      List of private endpoint connections associated with the specified
-      RedisEnterprise cluster
+      List of private endpoint connections associated with the specified Redis
+      Enterprise cluster
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -97,6 +133,22 @@ properties:
       return:
         description: ''
         type: string
+  - name: publicNetworkAccess
+    uid: '@azure/arm-redisenterprisecache.Cluster.publicNetworkAccess'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      Whether or not public network traffic can access the Redis cluster. Only
+      'Enabled' or 'Disabled' can be set. null is returned only for clusters
+      created using an old API version which do not have this property and
+      cannot be set.
+    fullName: publicNetworkAccess
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'publicNetworkAccess?: string'
+      return:
+        description: ''
+        type: string
   - name: redisVersion
     uid: '@azure/arm-redisenterprisecache.Cluster.redisVersion'
     package: '@azure/arm-redisenterprisecache'
@@ -110,6 +162,23 @@ properties:
     isDeprecated: false
     syntax:
       content: 'redisVersion?: string'
+      return:
+        description: ''
+        type: string
+  - name: redundancyMode
+    uid: '@azure/arm-redisenterprisecache.Cluster.redundancyMode'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      Explains the current redundancy strategy of the cluster, which affects the
+      expected SLA.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: redundancyMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'redundancyMode?: string'
       return:
         description: ''
         type: string

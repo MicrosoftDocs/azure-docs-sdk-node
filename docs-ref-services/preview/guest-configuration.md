@@ -1,7 +1,7 @@
 ---
 title: Azure Guest Configuration SDK for JavaScript
 description: Reference for Azure Guest Configuration SDK for JavaScript
-ms.date: 10/28/2025
+ms.date: 10/29/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: guestconfiguration

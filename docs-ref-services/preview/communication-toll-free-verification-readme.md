@@ -1,15 +1,15 @@
 ---
-title: Azure Communication Alpha IDs client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure-tools/communication-alpha-ids, communication
+title: Azure Communication Toll Free Verification client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure-tools/communication-toll-free-verification, communication
 ms.date: 11/03/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Alpha IDs client library for JavaScript - version 1.0.0-alpha.20251103.1 
+# Azure Communication Toll Free Verification client library for JavaScript - version 1.0.0-alpha.20251103.1 
 
 
-The Alpha IDs library provides capabilities for Alpha IDs administration.
+The Toll Free Verification library provides capabilities for Campaign Brief administration.
 
 ## Getting started
 
@@ -21,7 +21,7 @@ The Alpha IDs library provides capabilities for Alpha IDs administration.
 ### Installing
 
 ```bash
-npm install @azure-tools/communication-alpha-ids
+npm install @azure-tools/communication-toll-free-verification
 ```
 
 ### Browser support
@@ -36,31 +36,31 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ## Authentication
 
-To create a client object to access the Communication Services API, you will need a `connection string` or the `endpoint` of your Communication Services resource and a `credential`. The Alpha IDs client can use either Azure Active Directory credentials or an API key credential to authenticate.
+To create a client object to access the Communication Services API, you will need a `connection string` or the `endpoint` of your Communication Services resource and a `credential`. The Toll Free Verification client can use either Azure Active Directory credentials or an API key credential to authenticate.
 
 You can get a key and/or connection string from your Communication Services resource in the [Azure Portal][azure_portal]. You can also find the endpoint for your Communication Services resource in the [Azure Portal][azure_portal].
 
-Once you have a key, you can authenticate the `AlphaIdsClient` with any of the following methods:
+Once you have a key, you can authenticate the `TollFreeVerificationClient` with any of the following methods:
 
 ### Using a connection string
 
 ```ts snippet:ReadmeSampleCreateClient_ConnectionString
-import { AlphaIdsClient } from "@azure-tools/communication-alpha-ids";
+import { TollFreeVerificationClient } from "@azure-tools/communication-toll-free-verification";
 
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new AlphaIdsClient(connectionString);
+const client = new TollFreeVerificationClient(connectionString);
 ```
 
 ### Using an access key with `AzureKeyCredential`
 
 If you use a key to initialize the client you will also need to provide the appropriate endpoint. You can get this endpoint from your Communication Services resource in [Azure Portal][azure_portal]. Once you have a key and endpoint, you can authenticate with the following code:
 
-```ts snippet:ReadmeSampleCreateClient_AzureKeyCredential
+```ts snippet:ReadmeSampleCreateClient_KeyCredential
 import { AzureKeyCredential } from "@azure/core-auth";
-import { AlphaIdsClient } from "@azure-tools/communication-alpha-ids";
+import { TollFreeVerificationClient } from "@azure-tools/communication-toll-free-verification";
 
 const credential = new AzureKeyCredential("<key-from-resource>");
-const client = new AlphaIdsClient("<endpoint-from-resource>", credential);
+const client = new TollFreeVerificationClient("<endpoint-from-resource>", credential);
 ```
 
 ### Using an Azure Active Directory Credential
@@ -73,34 +73,35 @@ npm install @azure/identity
 
 The [`@azure/identity`][azure_identity] package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`][azure_identity_readme] provides more details and samples to get you started.
 
-```ts snippet:ReadmeSampleCreateClient_ActiveDirectory
+```ts snippet:ReadmeSampleCreateClient_TokenCredential
 import { DefaultAzureCredential } from "@azure/identity";
-import { AlphaIdsClient } from "@azure-tools/communication-alpha-ids";
+import { TollFreeVerificationClient } from "@azure-tools/communication-toll-free-verification";
 
 const credential = new DefaultAzureCredential();
-const client = new AlphaIdsClient("<endpoint-from-resource>", credential);
+const client = new TollFreeVerificationClient("<endpoint-from-resource>", credential);
 ```
 
 ## Usage
 
-The following sections provide code snippets that cover some of the common tasks using the Azure Communication Services Alpha IDs client. The scenarios that are covered here consist of:
+The following sections provide code snippets that cover some of the common tasks using the Azure Communication Services Toll Free Verification client. The scenarios that are covered here consist of:
 
-- [Get the current applied configuration](#get-the-current-applied-configuration)
+- [Get a Campaign Brief](#get-a-campaign-brief)
 
 ### Get the current applied configuration
 
-Use the `getDynamicAlphaIdConfiguration` method to obtain the current applied configuration for your resource.
+Use the `getCampaignBrief` method to obtain the current applied configuration for your resource.
 
-```ts snippet:AlphaIdsGetConfiguration
-import { AlphaIdsClient } from "@azure-tools/communication-alpha-ids";
+```ts snippet:SampleReadmeGetCampaignBrief
+import { DefaultAzureCredential } from "@azure/identity";
+import { TollFreeVerificationClient } from "@azure-tools/communication-toll-free-verification";
 
-const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new AlphaIdsClient(connectionString);
+const credential = new DefaultAzureCredential();
+const client = new TollFreeVerificationClient("<endpoint-from-resource>", credential);
 
-// get the current configuration
-const configuration = await client.getDynamicAlphaIdConfiguration();
+// get a campaign brief
+const campaignBrief = await client.getCampaignBrief("63215741-b596-4eb4-a9c0-b2905ce22cb0", "US");
 
-console.log(`Usage of Alpha IDs is currently ${configuration.enabled ? "enabled" : "disabled"}`);
+console.log(campaignBrief);
 ```
 
 ## Troubleshooting

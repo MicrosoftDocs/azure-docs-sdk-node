@@ -30,8 +30,6 @@ interfaces:
   - '@azure/arm-subscriptions.ErrorResponseBody'
   - '@azure/arm-subscriptions.GetTenantPolicyListResponse'
   - '@azure/arm-subscriptions.GetTenantPolicyResponse'
-  - '@azure/arm-subscriptions.Location'
-  - '@azure/arm-subscriptions.LocationListResult'
   - '@azure/arm-subscriptions.Operation'
   - '@azure/arm-subscriptions.OperationDisplay'
   - '@azure/arm-subscriptions.OperationListResult'
@@ -53,11 +51,12 @@ interfaces:
   - '@azure/arm-subscriptions.SubscriptionAliasResponseProperties'
   - '@azure/arm-subscriptions.SubscriptionCancelOptionalParams'
   - '@azure/arm-subscriptions.SubscriptionClientOptionalParams'
+  - '@azure/arm-subscriptions.SubscriptionCreationResult'
   - '@azure/arm-subscriptions.SubscriptionEnableOptionalParams'
-  - '@azure/arm-subscriptions.SubscriptionListResult'
   - '@azure/arm-subscriptions.SubscriptionName'
-  - '@azure/arm-subscriptions.SubscriptionOperations'
-  - '@azure/arm-subscriptions.SubscriptionPolicies'
+  - '@azure/arm-subscriptions.SubscriptionOperation'
+  - '@azure/arm-subscriptions.SubscriptionOperationGetHeaders'
+  - '@azure/arm-subscriptions.SubscriptionOperationGetOptionalParams'
   - '@azure/arm-subscriptions.SubscriptionPolicy'
   - >-
     @azure/arm-subscriptions.SubscriptionPolicyAddUpdatePolicyForTenantOptionalParams
@@ -66,18 +65,8 @@ interfaces:
     @azure/arm-subscriptions.SubscriptionPolicyListPolicyForTenantNextOptionalParams
   - '@azure/arm-subscriptions.SubscriptionPolicyListPolicyForTenantOptionalParams'
   - '@azure/arm-subscriptions.SubscriptionRenameOptionalParams'
-  - '@azure/arm-subscriptions.Subscriptions'
-  - '@azure/arm-subscriptions.SubscriptionsGetOptionalParams'
-  - '@azure/arm-subscriptions.SubscriptionsListLocationsOptionalParams'
-  - '@azure/arm-subscriptions.SubscriptionsListNextOptionalParams'
-  - '@azure/arm-subscriptions.SubscriptionsListOptionalParams'
   - '@azure/arm-subscriptions.SystemData'
-  - '@azure/arm-subscriptions.TenantIdDescription'
-  - '@azure/arm-subscriptions.TenantListResult'
   - '@azure/arm-subscriptions.TenantPolicy'
-  - '@azure/arm-subscriptions.Tenants'
-  - '@azure/arm-subscriptions.TenantsListNextOptionalParams'
-  - '@azure/arm-subscriptions.TenantsListOptionalParams'
 typeAliases:
   - '@azure/arm-subscriptions.AcceptOwnership'
   - '@azure/arm-subscriptions.AliasCreateResponse'
@@ -89,31 +78,24 @@ typeAliases:
   - '@azure/arm-subscriptions.OperationsListResponse'
   - '@azure/arm-subscriptions.Provisioning'
   - '@azure/arm-subscriptions.ProvisioningState'
-  - '@azure/arm-subscriptions.SpendingLimit'
   - '@azure/arm-subscriptions.SubscriptionAcceptOwnershipResponse'
   - '@azure/arm-subscriptions.SubscriptionAcceptOwnershipStatusResponse'
   - '@azure/arm-subscriptions.SubscriptionCancelResponse'
   - '@azure/arm-subscriptions.SubscriptionEnableResponse'
+  - '@azure/arm-subscriptions.SubscriptionOperationGetResponse'
   - '@azure/arm-subscriptions.SubscriptionPolicyAddUpdatePolicyForTenantResponse'
   - '@azure/arm-subscriptions.SubscriptionPolicyGetPolicyForTenantResponse'
   - '@azure/arm-subscriptions.SubscriptionPolicyListPolicyForTenantNextResponse'
   - '@azure/arm-subscriptions.SubscriptionPolicyListPolicyForTenantResponse'
   - '@azure/arm-subscriptions.SubscriptionRenameResponse'
-  - '@azure/arm-subscriptions.SubscriptionState'
-  - '@azure/arm-subscriptions.SubscriptionsGetResponse'
-  - '@azure/arm-subscriptions.SubscriptionsListLocationsResponse'
-  - '@azure/arm-subscriptions.SubscriptionsListNextResponse'
-  - '@azure/arm-subscriptions.SubscriptionsListResponse'
-  - '@azure/arm-subscriptions.TenantsListNextResponse'
-  - '@azure/arm-subscriptions.TenantsListResponse'
   - '@azure/arm-subscriptions.Workload'
 functions:
   - name: getContinuationToken(unknown)
     uid: '@azure/arm-subscriptions.getContinuationToken'
     package: '@azure/arm-subscriptions'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -122,7 +104,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

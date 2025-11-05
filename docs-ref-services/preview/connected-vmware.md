@@ -1,7 +1,7 @@
 ---
 title: Azure Connected VMware SDK for JavaScript
 description: Reference for Azure Connected VMware SDK for JavaScript
-ms.date: 11/04/2025
+ms.date: 11/05/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: connectedvmware

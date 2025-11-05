@@ -1,17 +1,17 @@
 ---
 title: Azure Batch REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/batch, batch
-ms.date: 07/22/2025
+ms.date: 11/05/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: batch
 ---
-# Azure Batch REST client library for JavaScript - version 1.0.0-beta.3 
+# Azure Batch REST client library for JavaScript - version 1.0.0-beta.4 
 
 
 Azure Batch provides Cloud-scale job scheduling and compute management.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/batch_1.0.0-beta.3/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/batch_1.0.0-beta.4/documentation/rest-clients.md) to use this library**
 
 Key links:
 
@@ -45,14 +45,14 @@ Azure batch supports authentication either via Microsoft Entra ID or Shared Key.
 
 #### Microsoft Entra ID
 
-To use an [Microsoft Entra ID token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/batch_1.0.0-beta.3/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Microsoft Entra ID token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/batch_1.0.0-beta.4/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.3/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.4/sdk/identity/identity#credentials) library.
 
 To authenticate with Microsoft Entra ID, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.3/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.4/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the Microsoft Entra ID application as environment variables:
@@ -82,5 +82,5 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/batch_1.0.0-beta.4/sdk/core/logger).
 

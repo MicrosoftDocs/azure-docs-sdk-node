@@ -1,7 +1,7 @@
 ---
 title: Azure Durable Task SDK for JavaScript
 description: Reference for Azure Durable Task SDK for JavaScript
-ms.date: 11/05/2025
+ms.date: 11/06/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: durabletask

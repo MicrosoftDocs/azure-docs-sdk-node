@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/identity-broker, entra-id
-ms.date: 02/18/2025
+ms.date: 11/06/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: entra-id
@@ -12,7 +12,7 @@ This package provides a plugin to the Azure Identity library for JavaScript ([`@
 
 An authentication broker is an application that runs on a user’s machine that manages the authentication handshakes and token maintenance for connected accounts. Currently, only the Windows authentication broker, Web Account Manager (WAM), is supported.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-broker_1.2.0/sdk/identity/identity-broker) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/sdk/identity/identity-broker/samples) | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/identity-broker-readme?view=azure-node-latest) | [Microsoft Entra ID documentation] (https://learn.microsoft.com/entra/identity/)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-broker_1.3.0/sdk/identity/identity-broker) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.3.0/sdk/identity/identity-broker/samples) | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/identity-broker-readme?view=azure-node-latest) | [Microsoft Entra ID documentation] (https://learn.microsoft.com/entra/identity/)
 
 ## Getting started
 
@@ -27,6 +27,17 @@ useIdentityPlugin(nativeBrokerPlugin);
 
 - An [Azure subscription](https://azure.microsoft.com/free/nodejs/).
 
+> Note: For local development with `@azure/identity-broker`, you may need to install additional tools. [node-gyp](https://github.com/nodejs/node-gyp) is used to compile [addons](https://nodejs.org/api/addons.html) for accessing system APIs. Installation requirements are listed in the [node-gyp README](https://github.com/nodejs/node-gyp#installation).
+
+On Linux, the library uses `libsecret` so you may need to install it. Depending on your distribution, you will need to run the following command:
+
+- Debian/Ubuntu: `sudo apt-get install libsecret-1-dev`
+- Red Hat-based: `sudo yum install libsecret-devel`
+- Arch Linux: `sudo pacman -S libsecret`
+
+> [!NOTE] 
+> Brokered authentication is currently only supported on Windows and Linux. macOS isn't yet supported.
+
 ### Install the package
 
 This package is designed to be used with Azure Identity for JavaScript. Install both `@azure/identity` and this package using `npm`:
@@ -38,11 +49,11 @@ npm install --save @azure/identity-broker
 
 #### Supported environments
 
-Azure Identity plugins for JavaScript support stable (even numbered) versions of Node.js starting from v18. While the plugins may run in other Node.js versions, no support is guaranteed. `@azure/identity-broker` **does not** support browser environments.
+Azure Identity plugins for JavaScript support stable (even numbered) versions of Node.js starting from v20. While the plugins may run in other Node.js versions, no support is guaranteed. `@azure/identity-broker` **does not** support browser environments.
 
 ## Key concepts
 
-If this is your first time using `@azure/identity` or Microsoft Entra ID, we recommend that you read [Using `@azure/identity` with Microsoft Entra ID](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
+If this is your first time using `@azure/identity` or Microsoft Entra ID, we recommend that you read [Using `@azure/identity` with Microsoft Entra ID](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.3.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
 
 ### Parent window handles
 
@@ -80,6 +91,17 @@ const credential = new InteractiveBrowserCredential({
 
 After calling `useIdentityPlugin`, the native broker plugin is registered to the `@azure/identity` package and will be available on the `InteractiveBrowserCredential` that supports WAM broker authentication. This credential has `brokerOptions` in the constructor options.
 
+**Notes**: As of `@azure/identity` version 4.11.0-beta.1, `DefaultAzureCredential` provides support to sign-in via the Windows Web Account Manager. Enable native broker in your program as follows:
+
+```ts snippet:using_plugins_dac
+import { useIdentityPlugin, DefaultAzureCredential } from "@azure/identity";
+import { nativeBrokerPlugin } from "@azure/identity-broker";
+
+useIdentityPlugin(nativeBrokerPlugin);
+
+const credential = new DefaultAzureCredential();
+```
+
 ## Examples
 
 Once the plugin is registered, you can enable WAM broker authentication by passing `brokerOptions` with an `enabled` property set to `true` to a credential constructor. In the following example, we use the `InteractiveBrowserCredential`.
@@ -104,7 +126,7 @@ const scope = "https://graph.microsoft.com/.default";
 console.log((await credential.getToken(scope)).token.substring(0, 10), "...");
 ```
 
-For a complete example of using an Electron app for retrieving a window handle, see [this sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/sdk/identity/identity-broker/samples/v1/typescript/src/index.ts).
+For a complete example of using an Electron app for retrieving a window handle, see [this sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.3.0/sdk/identity/identity-broker/samples/v1/typescript/src/index.ts).
 
 ### Use the default account for sign-in
 
@@ -133,7 +155,7 @@ console.log((await credential.getToken(scope)).token.substr(0, 10), "...");
 
 ## Troubleshooting
 
-See the Azure Identity [troubleshooting guide][https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/sdk/identity/identity/TROUBLESHOOTING.md] for details on how to diagnose various failure scenarios.
+See the Azure Identity [troubleshooting guide][https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.3.0/sdk/identity/identity/TROUBLESHOOTING.md] for details on how to diagnose various failure scenarios.
 
 ### Logging
 
@@ -153,5 +175,5 @@ If you encounter bugs or have suggestions, please [open an issue](https://github
 
 ## Contributing
 
-If you'd like to contribute to this library, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-broker_1.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

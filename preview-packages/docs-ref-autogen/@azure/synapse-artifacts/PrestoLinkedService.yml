@@ -2,7 +2,10 @@
 name: PrestoLinkedService
 uid: '@azure/synapse-artifacts.PrestoLinkedService'
 package: '@azure/synapse-artifacts'
-summary: Presto server linked service.
+summary: >-
+  Presto server linked service. This linked service has supported version
+  property. The Version 1.0 is scheduled for deprecation while your pipeline
+  will continue to run after EOL but without any bug fix or new features.
 fullName: PrestoLinkedService
 remarks: ''
 isDeprecated: false
@@ -14,7 +17,7 @@ properties:
     summary: >-
       Specifies whether to require a CA-issued SSL certificate name to match the
       host name of the server when connecting over SSL. The default value is
-      false.
+      false. Only used for Version 1.0.
     fullName: allowHostNameCNMismatch
     remarks: ''
     isDeprecated: false
@@ -28,7 +31,7 @@ properties:
     package: '@azure/synapse-artifacts'
     summary: >-
       Specifies whether to allow self-signed certificates from the server. The
-      default value is false.
+      default value is false. Only used for Version 1.0.
     fullName: allowSelfSignedServerCert
     remarks: ''
     isDeprecated: false
@@ -61,12 +64,28 @@ properties:
       return:
         description: ''
         type: any
+  - name: enableServerCertificateValidation
+    uid: >-
+      @azure/synapse-artifacts.PrestoLinkedService.enableServerCertificateValidation
+    package: '@azure/synapse-artifacts'
+    summary: >-
+      Specifies whether the connections to the server will validate server
+      certificate, the default value is True. Only used for Version 2.0
+    fullName: enableServerCertificateValidation
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enableServerCertificateValidation?: any'
+      return:
+        description: ''
+        type: any
   - name: enableSsl
     uid: '@azure/synapse-artifacts.PrestoLinkedService.enableSsl'
     package: '@azure/synapse-artifacts'
     summary: >-
       Specifies whether the connections to the server are encrypted using SSL.
-      The default value is false.
+      The default value for legacy version is False. The default value for
+      version 2.0 is True.
     fullName: enableSsl
     remarks: ''
     isDeprecated: false
@@ -119,7 +138,8 @@ properties:
     package: '@azure/synapse-artifacts'
     summary: >-
       The TCP port that the Presto server uses to listen for client connections.
-      The default value is 8080.
+      The default value is 8080 when disable SSL, default value is 443 when
+      enable SSL.
     fullName: port
     remarks: ''
     isDeprecated: false
@@ -131,12 +151,14 @@ properties:
   - name: serverVersion
     uid: '@azure/synapse-artifacts.PrestoLinkedService.serverVersion'
     package: '@azure/synapse-artifacts'
-    summary: The version of the Presto server. (i.e. 0.148-t)
+    summary: >-
+      The version of the Presto server. (i.e. 0.148-t) Only used for Version
+      1.0.
     fullName: serverVersion
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'serverVersion: any'
+      content: 'serverVersion?: any'
       return:
         description: ''
         type: any
@@ -145,8 +167,9 @@ properties:
     package: '@azure/synapse-artifacts'
     summary: >-
       The local time zone used by the connection. Valid values for this option
-      are specified in the IANA Time Zone Database. The default value is the
-      system time zone.
+      are specified in the IANA Time Zone Database. The default value for
+      Version 1.0 is the client system time zone. The default value for Version
+      2.0 is server system timeZone
     fullName: timeZoneID
     remarks: ''
     isDeprecated: false
@@ -162,7 +185,7 @@ properties:
       The full path of the .pem file containing trusted CA certificates for
       verifying the server when connecting over SSL. This property can only be
       set when using SSL on self-hosted IR. The default value is the cacerts.pem
-      file installed with the IR.
+      file installed with the IR. Only used for Version 1.0.
     fullName: trustedCertPath
     remarks: ''
     isDeprecated: false
@@ -202,7 +225,8 @@ properties:
     package: '@azure/synapse-artifacts'
     summary: >-
       Specifies whether to use a CA certificate from the system trust store or
-      from a specified PEM file. The default value is false.
+      from a specified PEM file. The default value is false. Only used for
+      Version 1.0.
     fullName: useSystemTrustStore
     remarks: ''
     isDeprecated: false

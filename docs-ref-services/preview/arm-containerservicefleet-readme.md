@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: containerservice
 ---
-# Azure ContainerServiceFleet client library for JavaScript - version 2.1.0-alpha.20251107.1 
+# Azure ContainerServiceFleet client library for JavaScript - version 2.1.0-alpha.20251105.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ContainerServiceFleet client.

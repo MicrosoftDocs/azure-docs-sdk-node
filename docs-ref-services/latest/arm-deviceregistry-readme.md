@@ -1,12 +1,12 @@
 ---
 title: Azure DeviceRegistryManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-deviceregistry, deviceregistry
-ms.date: 02/28/2025
+ms.date: 11/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: deviceregistry
 ---
-# Azure DeviceRegistryManagement client library for JavaScript - version 1.0.0 
+# Azure DeviceRegistryManagement client library for JavaScript - version 1.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DeviceRegistryManagement client.
@@ -15,10 +15,10 @@ Microsoft.DeviceRegistry Resource Provider management API.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.0.0/sdk/deviceregistry/arm-deviceregistry)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.1.0/sdk/deviceregistry/arm-deviceregistry)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/arm-deviceregistry)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-deviceregistry)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.0.0/sdk/deviceregistry/arm-deviceregistry/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.1.0/sdk/deviceregistry/arm-deviceregistry/samples)
 
 ## Getting started
 
@@ -27,7 +27,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-deviceregistry_1.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-deviceregistry_1.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ npm install @azure/arm-deviceregistry
 To create a client object to access the Azure DeviceRegistryManagement API, you will need the `endpoint` of your Azure DeviceRegistryManagement resource and a `credential`. The Azure DeviceRegistryManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure DeviceRegistryManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-deviceregistry_1.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-deviceregistry_1.1.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -54,7 +54,7 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure DeviceRegistry** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to Azure DeviceRegistryManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
@@ -74,16 +74,16 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 import { InteractiveBrowserCredential } from "@azure/identity";
 import { DeviceRegistryManagementClient } from "@azure/arm-deviceregistry";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new DeviceRegistryManagementClient(credential, subscriptionId);
 ```
 
-### JavaScript Bundle
 
+### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
@@ -104,15 +104,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.1.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.0.0/sdk/deviceregistry/arm-deviceregistry/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.1.0/sdk/deviceregistry/arm-deviceregistry/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-deviceregistry_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-deviceregistry_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -120,6 +120,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.1.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-deviceregistry_1.1.0/sdk/identity/identity#defaultazurecredential
 

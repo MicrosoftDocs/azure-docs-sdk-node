@@ -1,12 +1,12 @@
 ---
 title: Azure Synapse Artifacts client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/synapse-artifacts, synapse-analytics
-ms.date: 03/21/2025
+ms.date: 11/11/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: synapse-analytics
 ---
-## Azure Synapse Artifacts client library for JavaScript - version 1.0.0-beta.16 
+## Azure Synapse Artifacts client library for JavaScript - version 1.0.0-beta.17 
 
 
 This package contains an isomorphic SDK for Artifacts.
@@ -24,14 +24,13 @@ npm install @azure/synapse-artifacts
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.16/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.17/SUPPORT.md) for more details.
 
 ## Key concepts
 
 ## Examples
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-
 import { ArtifactsClient } from "@azure/synapse-artifacts";
 import { DefaultAzureCredential } from "@azure/identity";
 
@@ -55,7 +54,6 @@ for await (const pipeline of pipelinesByWorkspace) {
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
 ```ts snippet:SetLogLevel
-
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
@@ -67,5 +65,5 @@ In the future, you'll find additional code samples here.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.16/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.17/CONTRIBUTING.md) to learn more about how to build and test the code.
 

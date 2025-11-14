@@ -1,12 +1,12 @@
 ---
 title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, tables
-ms.date: 06/02/2025
+ms.date: 11/14/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: tables
 ---
-# Azure Tables client library for JavaScript - version 13.3.1 
+# Azure Tables client library for JavaScript - version 13.3.2 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
@@ -27,11 +27,11 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.1/sdk/tables/data-tables/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.2/sdk/tables/data-tables/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/data-tables)
 - [Product documentation](https://learn.microsoft.com/azure/storage/tables/table-storage-overview/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.3.1/sdk/tables/data-tables/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.3.2/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -159,7 +159,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.1/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.2/sdk/identity/identity/README.md)
 
 ```ts snippet:ReadmeSampleCreateClient_TokenCredential
 import { DefaultAzureCredential } from "@azure/identity";
@@ -294,7 +294,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.1/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.2/sdk/identity/identity/README.md)
 
 ```ts snippet:ReadmeSampleCreateTableClient_TokenCredential
 import { DefaultAzureCredential } from "@azure/identity";
@@ -436,5 +436,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.3.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 

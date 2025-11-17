@@ -1,14 +1,14 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/playwright, loadtesting
-ms.date: 08/06/2025
+ms.date: 11/17/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: loadtesting
 ---
-# Azure Playwright preview
+# Azure Playwright
 
-Azure Playwright is a fully managed Azure service that uses the cloud to enable you to run Playwright tests with much higher parallelization across different operating system-browser combinations simultaneously. This means faster test runs with broader scenario coverage, which helps speed up delivery of features without sacrificing quality. The service also enables you to publish test results and related artifacts to the service and view them in the service portal enabling faster and easier troubleshooting. With Azure Playwright service, you can release features faster and more confidently.
+Azure Playwright is a fully managed Azure service that uses the cloud to enable you to run Playwright tests with much higher parallelization across different operating system-browser combinations simultaneously. This means faster test runs with broader scenario coverage, which helps speed up delivery of features without sacrificing quality. With Playwright workspaces, you can release features faster and more confidently.
 
 Ready to get started? Jump into our [quickstart guide](#get-started)!
 
@@ -73,14 +73,14 @@ Follow these steps to run your existing Playwright test suite with the service.
 1. Run this command to install the service package
 
     ```nodejs
-    npm init @azure/playwright
+    npm init @azure/playwright@latest
     ```
 
 Installing the service package will create a service config file named `playwright.service.config.ts`
 
 The service configuration serves to:
 
-- Direct and authenticate Playwright to the Azure Playwright service.
+- Direct and authenticate Playwright to the Playwright Workspaces.
 - Override timeouts for service operations, if needed.
 
 > Make sure your project uses @playwright/test version 1.47 or above.

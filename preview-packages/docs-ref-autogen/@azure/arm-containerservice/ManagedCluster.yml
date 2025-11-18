@@ -110,7 +110,7 @@ properties:
   - name: azureMonitorProfile
     uid: '@azure/arm-containerservice.ManagedCluster.azureMonitorProfile'
     package: '@azure/arm-containerservice'
-    summary: Prometheus addon profile for the container service cluster
+    summary: Azure Monitor addon profiles for monitoring the managed cluster.
     fullName: azureMonitorProfile
     remarks: ''
     isDeprecated: false
@@ -156,25 +156,14 @@ properties:
         type: >-
           <xref uid="@azure/arm-containerservice.ManagedClusterBootstrapProfile"
           />
-  - name: creationData
-    uid: '@azure/arm-containerservice.ManagedCluster.creationData'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      CreationData to be used to specify the source Snapshot ID if the cluster
-      will be created/upgraded using a snapshot.
-    fullName: creationData
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'creationData?: CreationData'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-containerservice.CreationData" />
   - name: currentKubernetesVersion
     uid: '@azure/arm-containerservice.ManagedCluster.currentKubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
-      The version of Kubernetes the Managed Cluster is running.
+      The version of Kubernetes the Managed Cluster is running. If
+      kubernetesVersion was a fully specified version <major.minor.patch>, this
+      field will be exactly equal to it. If kubernetesVersion was <major.minor>,
+      this field will contain the full <major.minor.patch> version being used.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -232,22 +221,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: enableNamespaceResources
-    uid: '@azure/arm-containerservice.ManagedCluster.enableNamespaceResources'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      Enable namespace as Azure resource. The default value is false. It can be
-      enabled/disabled on creation and updating of the managed cluster. See
-      [https://aka.ms/NamespaceARMResource](https://aka.ms/NamespaceARMResource)
-      for more details on Namespace as a ARM Resource.
-    fullName: enableNamespaceResources
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'enableNamespaceResources?: boolean'
-      return:
-        description: ''
-        type: boolean
   - name: enableRbac
     uid: '@azure/arm-containerservice.ManagedCluster.enableRbac'
     package: '@azure/arm-containerservice'
@@ -321,22 +294,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: hostedSystemProfile
-    uid: '@azure/arm-containerservice.ManagedCluster.hostedSystemProfile'
-    package: '@azure/arm-containerservice'
-    summary: >-
-      Settings for hosted system addons. For more information, see
-      https://aka.ms/aks/automatic/systemcomponents.
-    fullName: hostedSystemProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'hostedSystemProfile?: ManagedClusterHostedSystemProfile'
-      return:
-        description: ''
-        type: >-
-          <xref
-          uid="@azure/arm-containerservice.ManagedClusterHostedSystemProfile" />
   - name: httpProxyConfig
     uid: '@azure/arm-containerservice.ManagedCluster.httpProxyConfig'
     package: '@azure/arm-containerservice'
@@ -413,8 +370,13 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.kubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
-      The version of Kubernetes the Managed Cluster is requested to run. When
-      you upgrade a supported AKS cluster, Kubernetes minor versions cannot be
+      The version of Kubernetes specified by the user. Both patch version
+      <major.minor.patch> (e.g. 1.20.13) and <major.minor> (e.g. 1.20) are
+      supported. When <major.minor> is specified, the latest supported GA patch
+      version is chosen automatically. Updating the cluster with the same
+      <major.minor> once it has been created (e.g. 1.14.x -> 1.14) will not
+      trigger an upgrade, even if a newer patch version is available. When you
+      upgrade a supported AKS cluster, Kubernetes minor versions cannot be
       skipped. All upgrades must be performed sequentially by major version
       number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x
       are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an
@@ -516,7 +478,7 @@ properties:
   - name: nodeResourceGroupProfile
     uid: '@azure/arm-containerservice.ManagedCluster.nodeResourceGroupProfile'
     package: '@azure/arm-containerservice'
-    summary: The node resource group configuration profile.
+    summary: Profile of the node resource group configuration.
     fullName: nodeResourceGroupProfile
     remarks: ''
     isDeprecated: false
@@ -650,18 +612,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: schedulerProfile
-    uid: '@azure/arm-containerservice.ManagedCluster.schedulerProfile'
-    package: '@azure/arm-containerservice'
-    summary: Profile of the pod scheduler configuration.
-    fullName: schedulerProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'schedulerProfile?: SchedulerProfile'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-containerservice.SchedulerProfile" />
   - name: securityProfile
     uid: '@azure/arm-containerservice.ManagedCluster.securityProfile'
     package: '@azure/arm-containerservice'

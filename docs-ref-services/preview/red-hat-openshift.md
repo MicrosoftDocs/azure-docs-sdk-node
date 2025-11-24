@@ -1,7 +1,7 @@
 ---
 title: Azure Red Hat OpenShift SDK for JavaScript
 description: Reference for Azure Red Hat OpenShift SDK for JavaScript
-ms.date: 11/21/2025
+ms.date: 11/24/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: redhatopenshift

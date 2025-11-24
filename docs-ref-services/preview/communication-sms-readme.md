@@ -1,12 +1,12 @@
 ---
 title: Azure Communication SMS client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-sms, communication
-ms.date: 06/16/2025
+ms.date: 11/24/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication SMS client library for JavaScript - version 1.2.0-beta.4 
+# Azure Communication SMS client library for JavaScript - version 1.2.0-alpha.20251124.1 
 
 
 Azure Communication SMS services gives developers the ability to send SMS messages from a phone number that can be purchased through Communication Services.
@@ -253,17 +253,17 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.4/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.4/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
+- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
 - [Read more about SMS in Azure Communication Services][next_steps]
 - For a basic guide on how to configure Delivery Reporting for your SMS messages please refer to the [Handle SMS Events quickstart][handle_sms_events].
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -273,11 +273,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.4/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.4/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
 [get_phone_number_az_portal]: https://learn.microsoft.com/azure/communication-services/quickstarts/telephony/get-phone-number?pivots=platform-azp
-[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.2.0-beta.4/sdk/communication/communication-phone-numbers
-[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.2.0-beta.4/sdk/communication/communication-phone-numbers/README.md
+[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/communication/communication-phone-numbers
+[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/README.md
 [handle_sms_events]: https://learn.microsoft.com/azure/communication-services/quickstarts/telephony-sms/handle-sms-events
 [next_steps]: https://learn.microsoft.com/azure/communication-services/quickstarts/telephony-sms/send?pivots=programming-language-javascript
 

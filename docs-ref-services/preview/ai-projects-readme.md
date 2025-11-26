@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-projects, ai
-ms.date: 11/13/2025
+ms.date: 11/26/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Projects client library for JavaScript - version 2.0.0-beta.1 
+# Azure AI Projects client library for JavaScript - version 2.0.0-alpha.20251126.1 
 
 
 The AI Projects client library provides easy access to resources in your Microsoft Foundry project.
@@ -23,10 +23,10 @@ Use it to:
 The client library uses version `2025-11-15-preview` of the Microsoft Foundry [data plane REST APIs](https://aka.ms/azsdk/azure-ai-projects/rest-api-reference).
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.1/sdk/ai/ai-projects/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-projects)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-v1)
-| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.1/sdk/ai/ai-projects)
+| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects)
 
 ## Table of contents
 
@@ -451,7 +451,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.1/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
 
 ## Contributing
 
@@ -474,11 +474,11 @@ additional questions or comments.
 
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [entra_id]: https://learn.microsoft.com/azure/ai-foundry/foundry-models/how-to/configure-entra-id?tabs=javascript&pivots=ai-foundry-portal
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [azure_sub]: https://azure.microsoft.com/free/
 [evaluators]: https://learn.microsoft.com/azure/ai-studio/how-to/develop/evaluate-sdk
 [evaluator_library]: https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-generative-ai-app#view-and-manage-the-evaluators-in-the-evaluator-library
 [ai_foundry_data_plane_rest_apis]: https://learn.microsoft.com/rest/api/aifoundry/aiprojects/operation-groups?view=rest-aifoundry-aiprojects-v1
 [ai_project_client_endpoint]: https://learn.microsoft.com/azure/ai-foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-javascript
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.1/sdk/ai/ai-projects/samples
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples
 

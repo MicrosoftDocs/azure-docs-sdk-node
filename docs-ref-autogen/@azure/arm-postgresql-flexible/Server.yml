@@ -2,7 +2,7 @@
 name: Server
 uid: '@azure/arm-postgresql-flexible.Server'
 package: '@azure/arm-postgresql-flexible'
-summary: Represents a server.
+summary: Properties of a server.
 fullName: Server
 remarks: ''
 isDeprecated: false
@@ -12,8 +12,12 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.administratorLogin'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      The administrator's login name of a server. Can only be specified when the
-      server is being created (and is required for creation).
+      Name of the login designated as the first password based administrator
+      assigned to your instance of PostgreSQL. Must be specified the first time
+      that you enable password based authentication on a server. Once set to a
+      given value, it cannot be changed for the rest of the life of a server. If
+      you disable password based authentication on a server which had it
+      enabled, this password based role isn't deleted.
     fullName: administratorLogin
     remarks: ''
     isDeprecated: false
@@ -26,7 +30,8 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.administratorLoginPassword'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      The administrator login password (required for server creation).
+      Password assigned to the administrator login. As long as password
+      authentication is enabled, this password can be changed at any time.
 
       This value contains a credential. Consider obscuring before showing to
       users
@@ -41,7 +46,7 @@ properties:
   - name: authConfig
     uid: '@azure/arm-postgresql-flexible.Server.authConfig'
     package: '@azure/arm-postgresql-flexible'
-    summary: AuthConfig properties of a server.
+    summary: Authentication configuration properties of a server.
     fullName: authConfig
     remarks: ''
     isDeprecated: false
@@ -53,7 +58,7 @@ properties:
   - name: availabilityZone
     uid: '@azure/arm-postgresql-flexible.Server.availabilityZone'
     package: '@azure/arm-postgresql-flexible'
-    summary: availability zone information of the server.
+    summary: Availability zone of a server.
     fullName: availabilityZone
     remarks: ''
     isDeprecated: false
@@ -74,10 +79,22 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-postgresql-flexible.Backup" />
+  - name: cluster
+    uid: '@azure/arm-postgresql-flexible.Server.cluster'
+    package: '@azure/arm-postgresql-flexible'
+    summary: Cluster properties of a server.
+    fullName: cluster
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'cluster?: Cluster'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-postgresql-flexible.Cluster" />
   - name: createMode
     uid: '@azure/arm-postgresql-flexible.Server.createMode'
     package: '@azure/arm-postgresql-flexible'
-    summary: The mode to create a new PostgreSQL server.
+    summary: Creation mode of a new server.
     fullName: createMode
     remarks: ''
     isDeprecated: false
@@ -102,7 +119,7 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.fullyQualifiedDomainName'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      The fully qualified domain name of a server.
+      Fully qualified domain name of a server.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -129,7 +146,7 @@ properties:
   - name: identity
     uid: '@azure/arm-postgresql-flexible.Server.identity'
     package: '@azure/arm-postgresql-flexible'
-    summary: Describes the identity of the application.
+    summary: User assigned managed identities assigned to the server.
     fullName: identity
     remarks: ''
     isDeprecated: false
@@ -154,7 +171,7 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.minorVersion'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      The minor version of the server.
+      Minor version of PostgreSQL database engine.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -170,8 +187,8 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.network'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      Network properties of a server. This Network property is required to be
-      passed only in case you want the server to be Private access server.
+      Network properties of a server. Only required if you want your server to
+      be integrated into a virtual network provided by customer.
     fullName: network
     remarks: ''
     isDeprecated: false
@@ -184,9 +201,9 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.pointInTimeUTC'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      Restore point creation time (ISO8601 format), specifying the time to
-      restore from. It's required when 'createMode' is 'PointInTimeRestore' or
-      'GeoRestore' or 'ReviveDropped'.
+      Creation time (in ISO8601 format) of the backup which you want to restore
+      in the new server. It's required when 'createMode' is
+      'PointInTimeRestore', 'GeoRestore', or 'ReviveDropped'.
     fullName: pointInTimeUTC
     remarks: ''
     isDeprecated: false
@@ -199,8 +216,7 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.privateEndpointConnections'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      List of private endpoint connections associated with the specified
-      resource.
+      List of private endpoint connections associated with the specified server.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -218,8 +234,8 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.replica'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      Replica properties of a server. These Replica properties are required to
-      be passed only in case you want to Promote a server.
+      Read replica properties of a server. Required only in case that you want
+      to promote a server.
     fullName: replica
     remarks: ''
     isDeprecated: false
@@ -232,7 +248,7 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.replicaCapacity'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      Replicas allowed for a server.
+      Maximum number of read replicas allowed for a server.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -247,7 +263,7 @@ properties:
   - name: replicationRole
     uid: '@azure/arm-postgresql-flexible.Server.replicationRole'
     package: '@azure/arm-postgresql-flexible'
-    summary: Replication role of the server
+    summary: Role of the server in a replication set.
     fullName: replicationRole
     remarks: ''
     isDeprecated: false
@@ -259,7 +275,7 @@ properties:
   - name: sku
     uid: '@azure/arm-postgresql-flexible.Server.sku'
     package: '@azure/arm-postgresql-flexible'
-    summary: The SKU (pricing tier) of the server.
+    summary: Compute tier and size of a server.
     fullName: sku
     remarks: ''
     isDeprecated: false
@@ -272,9 +288,10 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.sourceServerResourceId'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      The source server resource ID to restore from. It's required when
-      'createMode' is 'PointInTimeRestore' or 'GeoRestore' or 'Replica' or
-      'ReviveDropped'. This property is returned only for Replica server
+      Identifier of the server to be used as the source of the new server.
+      Required when 'createMode' is 'PointInTimeRestore', 'GeoRestore',
+      'Replica', or 'ReviveDropped'. This property is returned only when the
+      target server is a read replica.
     fullName: sourceServerResourceId
     remarks: ''
     isDeprecated: false
@@ -287,7 +304,7 @@ properties:
     uid: '@azure/arm-postgresql-flexible.Server.state'
     package: '@azure/arm-postgresql-flexible'
     summary: >-
-      A state of a server that is visible to user.
+      Possible states of a server.
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -314,7 +331,7 @@ properties:
   - name: version
     uid: '@azure/arm-postgresql-flexible.Server.version'
     package: '@azure/arm-postgresql-flexible'
-    summary: PostgreSQL Server version.
+    summary: Major version of PostgreSQL database engine.
     fullName: version
     remarks: ''
     isDeprecated: false

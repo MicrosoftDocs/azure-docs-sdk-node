@@ -1,7 +1,7 @@
 ---
 title: Azure farmbeats SDK for JavaScript
 description: Reference for Azure farmbeats SDK for JavaScript
-ms.date: 12/04/2025
+ms.date: 12/05/2025
 ms.topic: reference
 ms.devlang: javascript
 ms.service: farmbeats

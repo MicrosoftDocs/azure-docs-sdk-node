@@ -54,6 +54,7 @@ interfaces:
   - '@azure/app-configuration.SetReadOnlyResponse'
   - '@azure/app-configuration.SettingLabel'
   - '@azure/app-configuration.SnapshotInfo'
+  - '@azure/app-configuration.SnapshotReferenceValue'
   - '@azure/app-configuration.SnapshotResponse'
   - '@azure/app-configuration.SyncTokenHeaderField'
   - '@azure/app-configuration.UpdateSnapshotOptions'
@@ -113,6 +114,32 @@ functions:
       return:
         description: ''
         type: setting
+  - name: isSnapshotReference(ConfigurationSetting<string>)
+    uid: '@azure/app-configuration.isSnapshotReference'
+    package: '@azure/app-configuration'
+    summary: >-
+      Lets you know if the ConfigurationSetting is a snapshot reference.
+
+
+      [Checks if the content type is snapshotReferenceContentType
+      `"application/json;
+      profile=\"https://azconfig.io/mime-profiles/snapshot-ref\";
+      charset=utf-8"`]
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isSnapshotReference(setting: ConfigurationSetting<string>):
+        setting
+      parameters:
+        - id: setting
+          type: >-
+            <xref uid="@azure/app-configuration.ConfigurationSetting"
+            />&lt;string&gt;
+          description: ''
+      return:
+        description: ''
+        type: setting
   - name: parseFeatureFlag(ConfigurationSetting<string>)
     uid: '@azure/app-configuration.parseFeatureFlag'
     package: '@azure/app-configuration'
@@ -159,3 +186,26 @@ functions:
         type: >-
           <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
           uid="@azure/app-configuration.SecretReferenceValue" />&gt;
+  - name: parseSnapshotReference(ConfigurationSetting<string>)
+    uid: '@azure/app-configuration.parseSnapshotReference'
+    package: '@azure/app-configuration'
+    summary: >-
+      Takes the ConfigurationSetting as input and returns the
+      ConfigurationSetting<SnapshotReferenceValue> by parsing the value string.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function parseSnapshotReference(setting: ConfigurationSetting<string>):
+        ConfigurationSetting<SnapshotReferenceValue>
+      parameters:
+        - id: setting
+          type: >-
+            <xref uid="@azure/app-configuration.ConfigurationSetting"
+            />&lt;string&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
+          uid="@azure/app-configuration.SnapshotReferenceValue" />&gt;

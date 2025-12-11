@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: template
 ---
-# Azure WidgetAnalytics client library for JavaScript - version 1.0.13-alpha.20251210.14 
+# Azure WidgetAnalytics client library for JavaScript - version 1.0.13-alpha.20251211.13 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure WidgetAnalytics client.

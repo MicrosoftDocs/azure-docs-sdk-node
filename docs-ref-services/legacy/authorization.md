@@ -4,7 +4,7 @@ description: Reference for Azure Authorization modules for JavaScript
 ms.date: 07/18/2017
 ms.topic: reference
 ms.devlang: nodejs
-ms.service: app-service
+ms.service: azure-authorization
 manager: angrobe
 ---
 # Azure Authorization modules for JavaScript

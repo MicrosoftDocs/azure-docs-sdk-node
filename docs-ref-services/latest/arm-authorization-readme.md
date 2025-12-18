@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/arm-authorization, authorization
 ms.date: 04/24/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: authorization
+ms.service: azure-authorization
 ---
 # Azure AuthorizationManagement client library for JavaScript - version 9.0.0 
 

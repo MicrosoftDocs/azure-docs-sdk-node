@@ -1,10 +1,10 @@
 ---
 title: Azure Authorization SDK for JavaScript
 description: Reference for Azure Authorization SDK for JavaScript
-ms.date: 12/17/2025
+ms.date: 12/18/2025
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-authorization
+ms.service: authorization
 ---
 # Azure Authorization modules for JavaScript
 

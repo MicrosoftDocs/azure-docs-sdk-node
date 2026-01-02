@@ -1,7 +1,7 @@
 ---
 title: Azure Lambdatesthyperexecute SDK for JavaScript
 description: Reference for Azure Lambdatesthyperexecute SDK for JavaScript
-ms.date: 01/01/2026
+ms.date: 01/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: lambdatesthyperexecute

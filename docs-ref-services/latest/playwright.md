@@ -1,7 +1,7 @@
 ---
 title: Azure Playwright SDK for JavaScript
 description: Reference for Azure Playwright SDK for JavaScript
-ms.date: 01/05/2026
+ms.date: 01/06/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: playwright

@@ -1,10 +1,10 @@
 ---
 title: Azure Synapse SDK for JavaScript
 description: Reference for Azure Synapse SDK for JavaScript
-ms.date: 01/06/2026
+ms.date: 01/07/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: synapse-analytics
+ms.service: synapse
 ---
 # Azure Synapse SDK for JavaScript - latest
 ## Packages - latest

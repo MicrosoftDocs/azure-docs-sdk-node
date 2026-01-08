@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-avs, avs
-ms.date: 07/07/2025
+ms.date: 01/08/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: avs
@@ -14,10 +14,10 @@ Azure VMware Solution API
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.0.0/sdk/avs/arm-avs)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.1.0/sdk/avs/arm-avs)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/arm-avs)
-- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-avs?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.0.0/sdk/avs/arm-avs/samples)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-avs)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.1.0/sdk/avs/arm-avs/samples)
 
 ## Getting started
 
@@ -26,7 +26,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-avs_7.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-avs_7.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -45,7 +45,7 @@ npm install @azure/arm-avs
 To create a client object to access the AzureVMwareSolutionAPI API, you will need the `endpoint` of your AzureVMwareSolutionAPI resource and a `credential`. The AzureVMwareSolutionAPI client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your AzureVMwareSolutionAPI resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-avs_7.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-avs_7.1.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -103,15 +103,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.1.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.0.0/sdk/avs/arm-avs/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.1.0/sdk/avs/arm-avs/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-avs_7.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-avs_7.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -119,6 +119,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.1.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-avs_7.1.0/sdk/identity/identity#defaultazurecredential
 

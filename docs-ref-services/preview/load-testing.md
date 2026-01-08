@@ -1,10 +1,10 @@
 ---
 title: Azure Load Testing SDK for JavaScript
 description: Reference for Azure Load Testing SDK for JavaScript
-ms.date: 01/07/2026
+ms.date: 01/08/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: loadtesting
+ms.service: load-testing
 ---
 # Azure Load Testing SDK for JavaScript - preview
 ## Packages - preview

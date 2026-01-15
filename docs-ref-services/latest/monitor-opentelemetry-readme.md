@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 11/14/2025
+ms.date: 01/15/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -24,7 +24,7 @@ ms.service: monitor
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.14.2/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.15.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -47,7 +47,44 @@ const options: AzureMonitorOpenTelemetryOptions = {
 useAzureMonitor(options);
 ```
 
-- Connection String could be set using the environment variable `APPLICATIONINSIGHTS_CONNECTION_STRING`.
+- Connection String can be set via `APPLICATIONINSIGHTS_CONNECTION_STRING`.
+- Sampler can be set via the OpenTelemetry env vars `OTEL_TRACES_SAMPLER` and `OTEL_TRACES_SAMPLER_ARG` (takes precedence over the `samplingRatio` option). Supported sampler values: `microsoft.rate_limited`, `microsoft.fixed_percentage`, `always_on`, `always_off`, `trace_id_ratio`, `parentbased_always_on`, `parentbased_always_off`, `parentbased_trace_id_ratio`. For `microsoft.rate_limited`, the arg is spans per second; for `trace_id_ratio`/parentbased, the arg is a probability in [0,1]. When the arg is omitted, defaults apply (rate limit disabled; probability defaults to 1). See the upstream OpenTelemetry environment variable spec for full context: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/.
+
+### ESM Support
+
+> _Note:_ ESM support requires Node.js 18.19.0 or later. For more details on ESM support in OpenTelemetry, see the [OpenTelemetry ESM Support documentation](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/esm-support.md).
+
+For ECMAScript Module (ESM) applications, OpenTelemetry instrumentation requires the loader hooks to be registered **before** any instrumented modules (like `http`) are loaded. This is a fundamental requirement of ESM - modules cannot be instrumented after they are loaded.
+
+Use the `--import` flag to ensure the loader is registered at the very start of the Node.js process. Replace `<your-app-entry-point>` with the path to your application's main file (e.g., `./dist/index.js`, `./src/index.mjs`, `./server.js`, etc.):
+
+```bash
+node --import @azure/monitor-opentelemetry/loader <your-app-entry-point>
+```
+
+For example, in your `package.json`:
+
+```json
+{
+  "scripts": {
+    "start": "node --import @azure/monitor-opentelemetry/loader ./dist/index.js"
+  }
+}
+```
+
+Then in your application entry file, call `useAzureMonitor()` to configure the SDK:
+
+```ts snippet:ReadmeSampleESMUsage
+import { useAzureMonitor } from "@azure/monitor-opentelemetry";
+
+useAzureMonitor({
+  azureMonitorExporterOptions: {
+    connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING,
+  },
+});
+```
+
+For CommonJS applications, no additional flags are needed - the loader is automatically registered when the package is imported.
 
 ## Configuration
 
@@ -89,6 +126,7 @@ const options: AzureMonitorOpenTelemetryOptions = {
   resource: resource,
   logRecordProcessors: [],
   spanProcessors: [],
+  views: [],
 };
 useAzureMonitor(options);
 ```
@@ -101,7 +139,7 @@ useAzureMonitor(options);
   </tr>
   <tr>
     <td><code>azureMonitorExporterOptions</code></td>
-    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.14.2/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
+    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.15.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
     <td></td>
   </tr>
   <tr>
@@ -168,6 +206,11 @@ useAzureMonitor(options);
     <td></td>
   </tr>
   <tr>
+    <td><code>views</code></td>
+    <td>Array of metric views to register to the global meter provider.</td>
+    <td></td>
+  </tr>
+  <tr>
     <td><code>enableTraceBasedSamplingForLogs</code></td>
     <td>Enable log sampling based on trace.</td>
     <td><code>false</code></td>
@@ -217,7 +260,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-pg)
 - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis)
 - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis-4)
-- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.14.2/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.15.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 
@@ -548,7 +591,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.14.2/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.15.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -562,5 +605,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.14.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.15.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

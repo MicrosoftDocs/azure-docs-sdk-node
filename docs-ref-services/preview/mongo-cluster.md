@@ -1,7 +1,7 @@
 ---
 title: Azure Mongo Cluster SDK for JavaScript
 description: Reference for Azure Mongo Cluster SDK for JavaScript
-ms.date: 01/16/2026
+ms.date: 01/19/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: mongocluster

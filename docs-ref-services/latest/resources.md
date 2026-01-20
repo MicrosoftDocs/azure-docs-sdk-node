@@ -1,7 +1,7 @@
 ---
 title: Azure Resources SDK for JavaScript
 description: Reference for Azure Resources SDK for JavaScript
-ms.date: 01/19/2026
+ms.date: 01/20/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: resources

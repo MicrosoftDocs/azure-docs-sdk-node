@@ -1,12 +1,12 @@
 ---
 title: Azure TextTranslation REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-translation-text, translation
-ms.date: 01/08/2026
+ms.date: 01/23/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: translation
 ---
-# Azure TextTranslation REST client library for JavaScript - version 2.0.0-beta.1 
+# Azure TextTranslation REST client library for JavaScript - version 2.0.0-alpha.20260123.1 
 
 
 Azure text translation is a cloud-based REST API provided by the Azure Translator service. It utilizes neural machine translation technology to deliver precise, contextually relevant, and semantically accurate real-time text translations across all supported languages.
@@ -21,13 +21,13 @@ The client library offers several key functionalities:
 
 - Use LLM models to produce translation output variants that are tone-specific and gender-aware.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-translation-text_2.0.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
 Key links:
 
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-translation-text)
 - [API reference documentation](https://learn.microsoft.com/azure/ai-services/translator/text-translation/preview/rest-api-guide)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_2.0.0-beta.1/sdk/translation/ai-translation-text-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/translation/ai-translation-text-rest/samples)
 
 ## Getting started
 
@@ -252,7 +252,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_2.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 [azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_portal]: https://portal.azure.com

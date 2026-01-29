@@ -1,12 +1,12 @@
 ---
 title: Azure Cosmos DB client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/cosmos, cosmosdb
-ms.date: 11/25/2025
+ms.date: 01/29/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cosmosdb
 ---
-# Azure Cosmos DB client library for JavaScript - version 4.9.0 
+# Azure Cosmos DB client library for JavaScript - version 4.9.1 
 /TypeScript
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]
@@ -408,6 +408,77 @@ const { resources } = await container.items
   .fetchAll();
 ```
 
+**Note:** To use continuation tokens with queries, ensure that `enableQueryControl` is set to `true` in the query options. This enables support for retrieving query continuation tokens for paginating through large result sets.
+
+Here's an example of using continuation tokens with `enableQueryControl`:
+
+```ts snippet:QueryWithContinuationToken
+import { CosmosClient } from "@azure/cosmos";
+
+const endpoint = "https://your-account.documents.azure.com";
+const key = "<database account masterkey>";
+const client = new CosmosClient({ endpoint, key });
+
+const { database } = await client.databases.createIfNotExists({ id: "Test Database" });
+
+const { container } = await database.containers.createIfNotExists({ id: "Test Container" });
+
+const queryIterator = container.items.query("SELECT * from c", {
+  maxItemCount: 10,
+  enableQueryControl: true,
+  forceQueryPlan: true,
+});
+
+let pageCount = 0;
+while (queryIterator.hasMoreResults()) {
+  pageCount++;
+  const { resources, continuationToken } = await queryIterator.fetchNext();
+  console.log(`Page ${pageCount} has ${resources.length} items`);
+  // continuationToken can be saved and used later to resume from where you left off
+}
+```
+
+**Special case: ORDER BY queries**
+
+When using `enableQueryControl` with ORDER BY queries, be aware that the continuation token behavior requires special handling:
+
+```ts snippet:QueryWithContinuationTokenOrderBy
+import { CosmosClient } from "@azure/cosmos";
+
+const endpoint = "https://your-account.documents.azure.com";
+const key = "<database account masterkey>";
+const client = new CosmosClient({ endpoint, key });
+
+const { database } = await client.databases.createIfNotExists({ id: "Test Database" });
+
+const { container } = await database.containers.createIfNotExists({ id: "Test Container" });
+
+const queryIterator = container.items.query("SELECT * from c ORDER BY c.id", {
+  maxItemCount: 10,
+  enableQueryControl: true,
+  forceQueryPlan: true,
+});
+
+let pageCount = 0;
+while (queryIterator.hasMoreResults()) {
+  pageCount++;
+  const { resources, continuationToken } = await queryIterator.fetchNext();
+  if (resources.length > 0) {
+    // Process results
+    // Safe to use continuationToken after receiving data
+    if (continuationToken) {
+      // Can persist token for resuming later
+    }
+  }
+}
+```
+
+**Important:** When using `enableQueryControl` with ORDER BY queries:
+- The `resources` array and `continuationToken` may be empty and `undefined` repectively during the initial calls
+- This occurs because the query needs to consolidate results across partitions before returning
+- Always verify `resources.length > 0` before relying on the continuation token
+- Use `forceQueryPlan: true` in your query options to ensure consistent query execution behavior across partitions, which helps with continuation token stability
+
 For more information on querying Cosmos DB databases using the SQL API, see [Query Azure Cosmos DB data with SQL queries][cosmos_sql_queries].
 
 ### Change Feed Pull Model
@@ -622,7 +693,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.1/sdk/core/logger).
 
 ### Diagnostics
 
@@ -750,6 +821,7 @@ Currently the features below are **not supported**. For alternatives options, ch
 - Change Feed: Processor
 - Change Feed: Read multiple partitions key values
 - Cross-partition ORDER BY for mixed types
+- We recommend upgrading to the latest SDK to use continuation tokens for pagination. When using continuation tokens with `enableQueryControl` on cross-partition queries (queries that scan multiple partitions), ensure you set `forceQueryPlan: true` in query options to enforce a deterministic execution plan. Without it, query execution behavior may vary across partitions, affecting continuation token consistency.
 
 ### Control Plane Limitations:
 
@@ -759,9 +831,9 @@ Currently the features below are **not supported**. For alternatives options, ch
 
 ## Workarounds
 
-### Continuation token for cross partitions queries
+### Continuation token for cross partitions queries for older versions(< 4.9.0)
 
-You can achieve cross partition queries with continuation token support by using
+You can achieve cross partition queries with continuation token support for older versions before 4.9.0 by using
 [Side car pattern](https://github.com/Azure-Samples/Cosmosdb-query-sidecar).
 This pattern can also enable applications to be composed of heterogeneous components and technologies.
 
@@ -809,7 +881,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 - [Welcome to Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/community)
 - [Quick start](https://learn.microsoft.com/azure/cosmos-db/sql-api-nodejs-get-started)
 - [Tutorial](https://learn.microsoft.com/azure/cosmos-db/sql-api-nodejs-application)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.0/sdk/cosmosdb/cosmos/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.1/sdk/cosmosdb/cosmos/samples)
 - [Introduction to Resource Model of Azure Cosmos DB Service](https://learn.microsoft.com/azure/cosmos-db/sql-api-resources)
 - [Introduction to SQL API of Azure Cosmos DB Service](https://learn.microsoft.com/azure/cosmos-db/sql-api-sql-query)
 - [Partitioning](https://learn.microsoft.com/azure/cosmos-db/sql-api-partition-data)
@@ -817,7 +889,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.9.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.9.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 
@@ -837,7 +909,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [cosmos_item]: https://learn.microsoft.com/azure/cosmos-db/databases-containers-items#azure-cosmos-items
 [cosmos_request_units]: https://learn.microsoft.com/azure/cosmos-db/request-units
 [cosmos_resources]: https://learn.microsoft.com/azure/cosmos-db/databases-containers-items
-[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.0/sdk/cosmosdb/cosmos/samples
+[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.1/sdk/cosmosdb/cosmos/samples
 [cosmos_sql_queries]: https://learn.microsoft.com/azure/cosmos-db/how-to-sql-query
 [cosmos_ttl]: https://learn.microsoft.com/azure/cosmos-db/time-to-live
 [npm]: https://www.npmjs.com/package/@azure/cosmos

@@ -3,11 +3,9 @@ name: MCPTool
 uid: '@azure/ai-projects.MCPTool'
 package: '@azure/ai-projects'
 summary: >-
-  MCP (Model Context Protocol) tool definition for agents.
+  Give the model access to additional tools via remote Model Context Protocol
 
-  Gives the model access to additional tools via remote MCP servers.
-
-  [Learn more about
+  (MCP) servers. [Learn more about
   MCP](https://platform.openai.com/docs/guides/tools-remote-mcp).
 fullName: MCPTool
 remarks: ''
@@ -17,21 +15,66 @@ properties:
   - name: allowed_tools
     uid: '@azure/ai-projects.MCPTool.allowed_tools'
     package: '@azure/ai-projects'
-    summary: List of allowed tool names or a filter object.
+    summary: ''
     fullName: allowed_tools
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'allowed_tools?: string[] | { tool_names?: string[] }'
+      content: 'allowed_tools?: string[] | MCPToolFilter'
       return:
         description: ''
-        type: 'string[] | { tool_names?: string[] }'
+        type: string[] | <xref uid="@azure/ai-projects.MCPToolFilter" />
+  - name: authorization
+    uid: '@azure/ai-projects.MCPTool.authorization'
+    package: '@azure/ai-projects'
+    summary: |-
+      An OAuth access token that can be used with a remote MCP server, either
+        with a custom MCP server URL or a service connector. Your application
+        must handle the OAuth authorization flow and provide the token here.
+    fullName: authorization
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'authorization?: string'
+      return:
+        description: ''
+        type: string
+  - name: connector_id
+    uid: '@azure/ai-projects.MCPTool.connector_id'
+    package: '@azure/ai-projects'
+    summary: |-
+      Identifier for service connectors, like those available in ChatGPT. One of
+        `server_url` or `connector_id` must be provided. Learn more about service
+        connectors [here](https://platform.openai.com/docs/guides/tools-remote-mcp#connectors).
+        Currently supported `connector_id` values are:
+        - Dropbox: `connector_dropbox`
+        - Gmail: `connector_gmail`
+        - Google Calendar: `connector_googlecalendar`
+        - Google Drive: `connector_googledrive`
+        - Microsoft Teams: `connector_microsoftteams`
+        - Outlook Calendar: `connector_outlookcalendar`
+        - Outlook Email: `connector_outlookemail`
+        - SharePoint: `connector_sharepoint`
+    fullName: connector_id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        connector_id?: "connector_dropbox" | "connector_gmail" |
+        "connector_googlecalendar" | "connector_googledrive" |
+        "connector_microsoftteams" | "connector_outlookcalendar" |
+        "connector_outlookemail" | "connector_sharepoint"
+      return:
+        description: ''
+        type: >-
+          "connector_dropbox" | "connector_gmail" | "connector_googlecalendar" |
+          "connector_googledrive" | "connector_microsoftteams" |
+          "connector_outlookcalendar" | "connector_outlookemail" |
+          "connector_sharepoint"
   - name: headers
     uid: '@azure/ai-projects.MCPTool.headers'
     package: '@azure/ai-projects'
-    summary: |-
-      Optional HTTP headers to send to the MCP server. Use for authentication
-      or other purposes.
+    summary: ''
     fullName: headers
     remarks: ''
     isDeprecated: false
@@ -58,19 +101,29 @@ properties:
   - name: require_approval
     uid: '@azure/ai-projects.MCPTool.require_approval'
     package: '@azure/ai-projects'
-    summary: Specify which of the MCP server's tools require approval.
+    summary: ''
     fullName: require_approval
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        require_approval?: { always?: { tool_names?: string[] }, never?: {
-        tool_names?: string[] } } | "always" | "never"
+      content: 'require_approval?: MCPToolRequireApproval | "always" | "never"'
       return:
         description: ''
         type: >-
-          { always?: { tool_names?: string[] }, never?: { tool_names?: string[]
-          } } | "always" | "never"
+          <xref uid="@azure/ai-projects.MCPToolRequireApproval" /> | "always" |
+          "never"
+  - name: server_description
+    uid: '@azure/ai-projects.MCPTool.server_description'
+    package: '@azure/ai-projects'
+    summary: Optional description of the MCP server, used to provide more context.
+    fullName: server_description
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'server_description?: string'
+      return:
+        description: ''
+        type: string
   - name: server_label
     uid: '@azure/ai-projects.MCPTool.server_label'
     package: '@azure/ai-projects'
@@ -86,12 +139,14 @@ properties:
   - name: server_url
     uid: '@azure/ai-projects.MCPTool.server_url'
     package: '@azure/ai-projects'
-    summary: The URL for the MCP server.
+    summary: |-
+      The URL for the MCP server. One of `server_url` or `connector_id` must be
+        provided.
     fullName: server_url
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'server_url: string'
+      content: 'server_url?: string'
       return:
         description: ''
         type: string

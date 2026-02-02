@@ -1,7 +1,7 @@
 ---
 title: Azure Power BI Embedded SDK for JavaScript
 description: Reference for Azure Power BI Embedded SDK for JavaScript
-ms.date: 01/30/2026
+ms.date: 02/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: powerbiembedded

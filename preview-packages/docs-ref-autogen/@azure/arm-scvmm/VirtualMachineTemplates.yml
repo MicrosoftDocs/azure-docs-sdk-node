@@ -19,20 +19,20 @@ methods:
     syntax:
       content: >-
         function beginCreateOrUpdate(resourceGroupName: string,
-        virtualMachineTemplateName: string, body: VirtualMachineTemplate,
+        virtualMachineTemplateName: string, resource: VirtualMachineTemplate,
         options?: VirtualMachineTemplatesCreateOrUpdateOptionalParams):
-        Promise<PollerLike<PollOperationState<VirtualMachineTemplate>,
+        Promise<SimplePollerLike<OperationState<VirtualMachineTemplate>,
         VirtualMachineTemplate>>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: virtualMachineTemplateName
           type: string
           description: Name of the VirtualMachineTemplate.
-        - id: body
+        - id: resource
           type: <xref uid="@azure/arm-scvmm.VirtualMachineTemplate" />
-          description: Request payload.
+          description: Resource create parameters.
         - id: options
           type: >-
             <xref
@@ -42,8 +42,8 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;<xref
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
           uid="@azure/arm-scvmm.VirtualMachineTemplate" />&gt;, <xref
           uid="@azure/arm-scvmm.VirtualMachineTemplate" />&gt;&gt;
   - name: >-
@@ -57,19 +57,19 @@ methods:
     syntax:
       content: >-
         function beginCreateOrUpdateAndWait(resourceGroupName: string,
-        virtualMachineTemplateName: string, body: VirtualMachineTemplate,
+        virtualMachineTemplateName: string, resource: VirtualMachineTemplate,
         options?: VirtualMachineTemplatesCreateOrUpdateOptionalParams):
         Promise<VirtualMachineTemplate>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: virtualMachineTemplateName
           type: string
           description: Name of the VirtualMachineTemplate.
-        - id: body
+        - id: resource
           type: <xref uid="@azure/arm-scvmm.VirtualMachineTemplate" />
-          description: Request payload.
+          description: Resource create parameters.
         - id: options
           type: >-
             <xref
@@ -90,11 +90,12 @@ methods:
         function beginDelete(resourceGroupName: string,
         virtualMachineTemplateName: string, options?:
         VirtualMachineTemplatesDeleteOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
+        Promise<SimplePollerLike<OperationState<VirtualMachineTemplatesDeleteHeaders>,
+        VirtualMachineTemplatesDeleteHeaders>>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: virtualMachineTemplateName
           type: string
           description: Name of the VirtualMachineTemplate.
@@ -107,8 +108,11 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;void&gt;, void&gt;&gt;
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
+          uid="@azure/arm-scvmm.VirtualMachineTemplatesDeleteHeaders" />&gt;,
+          <xref uid="@azure/arm-scvmm.VirtualMachineTemplatesDeleteHeaders"
+          />&gt;&gt;
   - name: >-
       beginDeleteAndWait(string, string,
       VirtualMachineTemplatesDeleteOptionalParams)
@@ -121,11 +125,12 @@ methods:
       content: >-
         function beginDeleteAndWait(resourceGroupName: string,
         virtualMachineTemplateName: string, options?:
-        VirtualMachineTemplatesDeleteOptionalParams): Promise<void>
+        VirtualMachineTemplatesDeleteOptionalParams):
+        Promise<VirtualMachineTemplatesDeleteHeaders>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: virtualMachineTemplateName
           type: string
           description: Name of the VirtualMachineTemplate.
@@ -137,9 +142,11 @@ methods:
           description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-scvmm.VirtualMachineTemplatesDeleteHeaders" />&gt;
   - name: >-
-      beginUpdate(string, string, ResourcePatch,
+      beginUpdate(string, string, VirtualMachineTemplateTagsUpdate,
       VirtualMachineTemplatesUpdateOptionalParams)
     uid: '@azure/arm-scvmm.VirtualMachineTemplates.beginUpdate'
     package: '@azure/arm-scvmm'
@@ -149,20 +156,21 @@ methods:
     syntax:
       content: >-
         function beginUpdate(resourceGroupName: string,
-        virtualMachineTemplateName: string, body: ResourcePatch, options?:
+        virtualMachineTemplateName: string, properties:
+        VirtualMachineTemplateTagsUpdate, options?:
         VirtualMachineTemplatesUpdateOptionalParams):
-        Promise<PollerLike<PollOperationState<VirtualMachineTemplate>,
+        Promise<SimplePollerLike<OperationState<VirtualMachineTemplate>,
         VirtualMachineTemplate>>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: virtualMachineTemplateName
           type: string
           description: Name of the VirtualMachineTemplate.
-        - id: body
-          type: <xref uid="@azure/arm-scvmm.ResourcePatch" />
-          description: VirtualMachineTemplates patch details.
+        - id: properties
+          type: <xref uid="@azure/arm-scvmm.VirtualMachineTemplateTagsUpdate" />
+          description: The resource properties to be updated.
         - id: options
           type: >-
             <xref
@@ -172,12 +180,12 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/core-lro.PollerLike" />&lt;<xref
-          uid="@azure/core-lro.PollOperationState" />&lt;<xref
+          Promise&lt;<xref uid="@azure/core-lro.SimplePollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;<xref
           uid="@azure/arm-scvmm.VirtualMachineTemplate" />&gt;, <xref
           uid="@azure/arm-scvmm.VirtualMachineTemplate" />&gt;&gt;
   - name: >-
-      beginUpdateAndWait(string, string, ResourcePatch,
+      beginUpdateAndWait(string, string, VirtualMachineTemplateTagsUpdate,
       VirtualMachineTemplatesUpdateOptionalParams)
     uid: '@azure/arm-scvmm.VirtualMachineTemplates.beginUpdateAndWait'
     package: '@azure/arm-scvmm'
@@ -187,19 +195,20 @@ methods:
     syntax:
       content: >-
         function beginUpdateAndWait(resourceGroupName: string,
-        virtualMachineTemplateName: string, body: ResourcePatch, options?:
+        virtualMachineTemplateName: string, properties:
+        VirtualMachineTemplateTagsUpdate, options?:
         VirtualMachineTemplatesUpdateOptionalParams):
         Promise<VirtualMachineTemplate>
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: virtualMachineTemplateName
           type: string
           description: Name of the VirtualMachineTemplate.
-        - id: body
-          type: <xref uid="@azure/arm-scvmm.ResourcePatch" />
-          description: VirtualMachineTemplates patch details.
+        - id: properties
+          type: <xref uid="@azure/arm-scvmm.VirtualMachineTemplateTagsUpdate" />
+          description: The resource properties to be updated.
         - id: options
           type: >-
             <xref
@@ -223,7 +232,7 @@ methods:
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: virtualMachineTemplateName
           type: string
           description: Name of the VirtualMachineTemplate.
@@ -252,7 +261,7 @@ methods:
       parameters:
         - id: resourceGroupName
           type: string
-          description: The name of the resource group.
+          description: The name of the resource group. The name is case insensitive.
         - id: options
           type: >-
             <xref

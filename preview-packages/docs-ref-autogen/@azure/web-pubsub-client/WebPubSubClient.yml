@@ -16,10 +16,10 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new WebPubSubClient(clientAccessUri: string, options?:
+        new WebPubSubClient(clientAccessUrl: string, options?:
         WebPubSubClientOptions)
       parameters:
-        - id: clientAccessUri
+        - id: clientAccessUrl
           type: string
           description: The uri to connect
         - id: options
@@ -43,6 +43,37 @@ constructors:
           type: <xref uid="@azure/web-pubsub-client.WebPubSubClientOptions" />
           description: The client options
 methods:
+  - name: >-
+      invokeEvent(string, JSONTypes | ArrayBuffer, WebPubSubDataType,
+      InvokeEventOptions)
+    uid: '@azure/web-pubsub-client.WebPubSubClient.invokeEvent'
+    package: '@azure/web-pubsub-client'
+    summary: Invoke an upstream event and wait for the correlated response.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function invokeEvent(eventName: string, content: JSONTypes |
+        ArrayBuffer, dataType: WebPubSubDataType, options?: InvokeEventOptions):
+        Promise<InvokeEventResult>
+      parameters:
+        - id: eventName
+          type: string
+          description: The event name
+        - id: content
+          type: <xref uid="@azure/web-pubsub-client.JSONTypes" /> | ArrayBuffer
+          description: The payload
+        - id: dataType
+          type: <xref uid="@azure/web-pubsub-client.WebPubSubDataType" />
+          description: The payload type
+        - id: options
+          type: <xref uid="@azure/web-pubsub-client.InvokeEventOptions" />
+          description: Invoke options
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/web-pubsub-client.InvokeEventResult"
+          />&gt;
   - name: joinGroup(string, JoinGroupOptions)
     uid: '@azure/web-pubsub-client.WebPubSubClient.joinGroup'
     package: '@azure/web-pubsub-client'
@@ -284,7 +315,7 @@ methods:
       SendEventOptions)
     uid: '@azure/web-pubsub-client.WebPubSubClient.sendEvent'
     package: '@azure/web-pubsub-client'
-    summary: Send custom event to server
+    summary: Send custom event to server.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -320,7 +351,7 @@ methods:
       content: >-
         function sendToGroup(groupName: string, content: JSONTypes |
         ArrayBuffer, dataType: WebPubSubDataType, options?: SendToGroupOptions):
-        Promise<void | WebPubSubResult>
+        Promise<WebPubSubResult>
       parameters:
         - id: groupName
           type: string
@@ -336,9 +367,7 @@ methods:
           description: The options
       return:
         description: ''
-        type: >-
-          Promise&lt;void | <xref uid="@azure/web-pubsub-client.WebPubSubResult"
-          />&gt;
+        type: Promise&lt;<xref uid="@azure/web-pubsub-client.WebPubSubResult" />&gt;
   - name: start(StartOptions)
     uid: '@azure/web-pubsub-client.WebPubSubClient.start'
     package: '@azure/web-pubsub-client'

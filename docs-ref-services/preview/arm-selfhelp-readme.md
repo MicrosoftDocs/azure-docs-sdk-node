@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: selfhelp
 ---
-# Azure HelpRP client library for JavaScript - version 2.0.0-alpha.20260210.1 
+# Azure HelpRP client library for JavaScript - version 2.0.0-alpha.20260211.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure HelpRP client.

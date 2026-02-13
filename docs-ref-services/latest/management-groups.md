@@ -1,7 +1,7 @@
 ---
 title: Azure Management Groups SDK for JavaScript
 description: Reference for Azure Management Groups SDK for JavaScript
-ms.date: 02/12/2026
+ms.date: 02/13/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: managementgroups

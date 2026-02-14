@@ -13,19 +13,46 @@ properties:
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.actionOnUnmanage
     package: '@azure/arm-resourcesdeploymentstacks'
     summary: >-
-      Defines the behavior of resources that are not managed immediately after
-      the stack is updated.
+      Defines the behavior of resources that are no longer managed after the
+      Deployment stack is updated or deleted.
     fullName: actionOnUnmanage
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'actionOnUnmanage: DeploymentStackPropertiesActionOnUnmanage'
+      content: 'actionOnUnmanage: ActionOnUnmanage'
       return:
         description: ''
-        type: >-
-          <xref
-          uid="@azure/arm-resourcesdeploymentstacks.DeploymentStackPropertiesActionOnUnmanage"
-          />
+        type: <xref uid="@azure/arm-resourcesdeploymentstacks.ActionOnUnmanage" />
+  - name: bypassStackOutOfSyncError
+    uid: >-
+      @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.bypassStackOutOfSyncError
+    package: '@azure/arm-resourcesdeploymentstacks'
+    summary: >-
+      Flag to bypass service errors that indicate the stack resource list is not
+      correctly synchronized.
+    fullName: bypassStackOutOfSyncError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'bypassStackOutOfSyncError?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: correlationId
+    uid: >-
+      @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.correlationId
+    package: '@azure/arm-resourcesdeploymentstacks'
+    summary: >-
+      The correlation id of the last Deployment stack upsert or delete
+      operation. It is in GUID format and is used for tracing.
+    fullName: correlationId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'correlationId?: string'
+      return:
+        description: ''
+        type: string
   - name: debugSetting
     uid: >-
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.debugSetting
@@ -47,10 +74,9 @@ properties:
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.deletedResources
     package: '@azure/arm-resourcesdeploymentstacks'
     summary: >-
-      An array of resources that were deleted during the most recent update.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      An array of resources that were deleted during the most recent Deployment
+      stack update. Deleted means that the resource was removed from the
+      template and relevant deletion operations were specified.
     fullName: deletedResources
     remarks: ''
     isDeprecated: false
@@ -74,15 +100,28 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-resourcesdeploymentstacks.DenySettings" />
+  - name: deploymentExtensions
+    uid: >-
+      @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.deploymentExtensions
+    package: '@azure/arm-resourcesdeploymentstacks'
+    summary: >-
+      The extensions used during deployment. Contains extension data for all
+      extensible resources managed by the stack.
+    fullName: deploymentExtensions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'deploymentExtensions?: DeploymentExtension[]'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-resourcesdeploymentstacks.DeploymentExtension"
+          />[]
   - name: deploymentId
     uid: >-
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.deploymentId
     package: '@azure/arm-resourcesdeploymentstacks'
-    summary: >-
-      The resourceId of the deployment resource created by the deployment stack.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The resourceId of the deployment resource created by the deployment stack.
     fullName: deploymentId
     remarks: ''
     isDeprecated: false
@@ -114,7 +153,7 @@ properties:
   - name: description
     uid: '@azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.description'
     package: '@azure/arm-resourcesdeploymentstacks'
-    summary: Deployment stack description.
+    summary: Deployment stack description. Max length of 4096 characters.
     fullName: description
     remarks: ''
     isDeprecated: false
@@ -128,10 +167,10 @@ properties:
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.detachedResources
     package: '@azure/arm-resourcesdeploymentstacks'
     summary: >-
-      An array of resources that were detached during the most recent update.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      An array of resources that were detached during the most recent Deployment
+      stack update. Detached means that the resource was removed from the
+      template, but no relevant deletion operations were specified. So, the
+      resource still exists while no longer being associated with the stack.
     fullName: detachedResources
     remarks: ''
     isDeprecated: false
@@ -145,11 +184,7 @@ properties:
   - name: duration
     uid: '@azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.duration'
     package: '@azure/arm-resourcesdeploymentstacks'
-    summary: >-
-      The duration of the deployment stack update.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The duration of the last successful Deployment stack update.
     fullName: duration
     remarks: ''
     isDeprecated: false
@@ -158,16 +193,79 @@ properties:
       return:
         description: ''
         type: string
+  - name: error
+    uid: '@azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.error'
+    package: '@azure/arm-resourcesdeploymentstacks'
+    summary: The error detail.
+    fullName: error
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'error?: ErrorDetail'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-resourcesdeploymentstacks.ErrorDetail" />
+  - name: extensionConfigs
+    uid: >-
+      @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.extensionConfigs
+    package: '@azure/arm-resourcesdeploymentstacks'
+    summary: >-
+      The deployment extension configs. Keys of this object are extension
+      aliases as defined in the deployment template.
+    fullName: extensionConfigs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'extensionConfigs?: Record<string, DeploymentExtensionConfig>'
+      return:
+        description: ''
+        type: >-
+          Record&lt;string, <xref
+          uid="@azure/arm-resourcesdeploymentstacks.DeploymentExtensionConfig"
+          />&gt;
+  - name: externalInputDefinitions
+    uid: >-
+      @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.externalInputDefinitions
+    package: '@azure/arm-resourcesdeploymentstacks'
+    summary: >-
+      External input definitions, used by external tooling to define expected
+      external input values.
+    fullName: externalInputDefinitions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        externalInputDefinitions?: Record<string,
+        DeploymentExternalInputDefinition>
+      return:
+        description: ''
+        type: >-
+          Record&lt;string, <xref
+          uid="@azure/arm-resourcesdeploymentstacks.DeploymentExternalInputDefinition"
+          />&gt;
+  - name: externalInputs
+    uid: >-
+      @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.externalInputs
+    package: '@azure/arm-resourcesdeploymentstacks'
+    summary: External input values, used by external tooling for parameter evaluation.
+    fullName: externalInputs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'externalInputs?: Record<string, DeploymentExternalInput>'
+      return:
+        description: ''
+        type: >-
+          Record&lt;string, <xref
+          uid="@azure/arm-resourcesdeploymentstacks.DeploymentExternalInput"
+          />&gt;
   - name: failedResources
     uid: >-
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.failedResources
     package: '@azure/arm-resourcesdeploymentstacks'
     summary: >-
       An array of resources that failed to reach goal state during the most
-      recent update.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      recent update. Each resourceId is accompanied by an error message.
     fullName: failedResources
     remarks: ''
     isDeprecated: false
@@ -182,19 +280,15 @@ properties:
   - name: outputs
     uid: '@azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.outputs'
     package: '@azure/arm-resourcesdeploymentstacks'
-    summary: >-
-      The outputs of the underlying deployment.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The outputs of the deployment resource created by the deployment stack.
     fullName: outputs
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'outputs?: Record<string, unknown>'
+      content: 'outputs?: Record<string, any>'
       return:
         description: ''
-        type: Record&lt;string, unknown&gt;
+        type: Record&lt;string, any&gt;
   - name: parameters
     uid: '@azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.parameters'
     package: '@azure/arm-resourcesdeploymentstacks'
@@ -202,16 +296,17 @@ properties:
       Name and value pairs that define the deployment parameters for the
       template. Use this element when providing the parameter values directly in
       the request, rather than linking to an existing parameter file. Use either
-      the parametersLink property or the parameters property, but not both. It
-      can be a JObject or a well formed JSON string.
+      the parametersLink property or the parameters property, but not both.
     fullName: parameters
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'parameters?: Record<string, unknown>'
+      content: 'parameters?: Record<string, DeploymentParameter>'
       return:
         description: ''
-        type: Record&lt;string, unknown&gt;
+        type: >-
+          Record&lt;string, <xref
+          uid="@azure/arm-resourcesdeploymentstacks.DeploymentParameter" />&gt;
   - name: parametersLink
     uid: >-
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.parametersLink
@@ -235,11 +330,7 @@ properties:
     uid: >-
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.provisioningState
     package: '@azure/arm-resourcesdeploymentstacks'
-    summary: >-
-      State of the deployment stack.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: State of the deployment stack.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -251,11 +342,7 @@ properties:
   - name: resources
     uid: '@azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.resources'
     package: '@azure/arm-resourcesdeploymentstacks'
-    summary: >-
-      An array of resources currently managed by the deployment stack.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: An array of resources currently managed by the deployment stack.
     fullName: resources
     remarks: ''
     isDeprecated: false
@@ -279,10 +366,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'template?: Record<string, unknown>'
+      content: 'template?: Record<string, any>'
       return:
         description: ''
-        type: Record&lt;string, unknown&gt;
+        type: Record&lt;string, any&gt;
   - name: templateLink
     uid: >-
       @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.templateLink
@@ -301,23 +388,16 @@ properties:
           <xref
           uid="@azure/arm-resourcesdeploymentstacks.DeploymentStacksTemplateLink"
           />
-inheritedProperties:
-  - name: error
-    uid: '@azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.error'
+  - name: validationLevel
+    uid: >-
+      @azure/arm-resourcesdeploymentstacks.DeploymentStackProperties.validationLevel
     package: '@azure/arm-resourcesdeploymentstacks'
-    summary: >-
-      Common error response for all Azure Resource Manager APIs to return error
-      details for failed operations. (This also follows the OData error response
-      format.).
-    fullName: error
+    summary: The validation level of the deployment stack
+    fullName: validationLevel
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'error?: ErrorResponse'
+      content: 'validationLevel?: string'
       return:
         description: ''
-        type: <xref uid="@azure/arm-resourcesdeploymentstacks.ErrorResponse" />
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [DeploymentStacksError.error](xref:@azure/arm-resourcesdeploymentstacks.DeploymentStacksError.error)
-extends: <xref uid="@azure/arm-resourcesdeploymentstacks.DeploymentStacksError" />
+        type: string

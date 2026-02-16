@@ -1,12 +1,12 @@
 ---
 title: Azure VoiceLive client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-voicelive, ai
-ms.date: 01/06/2026
+ms.date: 02/16/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure VoiceLive client library for JavaScript - version 1.0.0-beta.2 
+# Azure VoiceLive client library for JavaScript - version 1.0.0-alpha.20260216.1 
 
 
 Azure VoiceLive is a managed service that enables low-latency, high-quality speech-to-speech interactions for voice agents. The service consolidates speech recognition, generative AI, and text-to-speech functionalities into a single, unified interface, providing an end-to-end solution for creating seamless voice-driven experiences.
@@ -102,9 +102,54 @@ The VoiceLive API provides Azure-specific enhancements:
 - **Echo Cancellation**: Removes echo from the model's own voice
 - **End-of-Turn Detection**: Allows natural pauses without premature interruption
 
+### Session Modes
+
+VoiceLive supports two distinct modes for creating sessions:
+
+#### Model Mode (LLM as Main Actor)
+
+In model mode, the LLM model is the primary AI actor. You specify a model name and optionally configure tools like functions or MCP servers.
+
+```typescript snippet:ReadmeSampleModelModeSession
+import { DefaultAzureCredential } from "@azure/identity";
+import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+const credential = new DefaultAzureCredential();
+const endpoint = "https://your-resource.cognitiveservices.azure.com";
+const client = new VoiceLiveClient(endpoint, credential);
+
+// Model mode - LLM is the main actor
+const session = await client.startSession("gpt-4o-realtime-preview");
+```
+
+#### Agent Mode (Agent as Main Actor)
+
+In agent mode, a Foundry agent is the primary AI actor. The agent's configuration (tools, instructions, temperature) is managed in the Azure AI Foundry portal, not in session code. This is ideal for:
+
+- Voice-enabling existing text-based agents
+- Scenarios where agent configuration should be managed centrally
+- Simplified integration without runtime configuration
+
+```typescript snippet:ReadmeSampleAgentModeSession
+import { DefaultAzureCredential } from "@azure/identity";
+import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+const credential = new DefaultAzureCredential();
+const endpoint = "https://your-resource.cognitiveservices.azure.com";
+const client = new VoiceLiveClient(endpoint, credential);
+
+// Agent mode - Foundry agent is the main actor
+const session = await client.startSession({
+  agent: {
+    agentName: "my-agent",
+    projectName: "my-foundry-project",
+  },
+});
+```
+
 ## Authenticating with Azure Active Directory
 
-The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.2/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 To interact with the Azure VoiceLive service, you need to create an instance of the `VoiceLiveClient` class, a **service endpoint** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][defaultazurecredential], which is appropriate for most scenarios, including local development and production environments. We recommend using a [managed identity][managed_identity] for authentication in production environments.
 
@@ -144,6 +189,7 @@ const client = new VoiceLiveClient(endpoint, credential);
 The following sections provide code snippets that cover some of the common tasks using Azure VoiceLive. The scenarios covered here consist of:
 
 - [Creating a basic voice assistant](#creating-a-basic-voice-assistant)
+- [Creating an agent-powered voice assistant](#creating-an-agent-powered-voice-assistant)
 - [Configuring session options](#configuring-session-options)
 - [Handling real-time events](#handling-real-time-events)
 - [Implementing function calling](#implementing-function-calling)
@@ -182,6 +228,45 @@ await session.updateSession({
   inputAudioFormat: "pcm16",
   outputAudioFormat: "pcm16",
 });
+```
+
+### Creating an agent-powered voice assistant
+
+This example shows how to create a voice assistant powered by a Foundry agent. In agent mode, the agent's configuration is managed in the Azure AI Foundry portal:
+
+```ts snippet:ReadmeSampleAgentVoiceAssistant
+import { DefaultAzureCredential } from "@azure/identity";
+import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+const credential = new DefaultAzureCredential();
+const endpoint = "https://your-resource.cognitiveservices.azure.com";
+
+// Create the client
+const client = new VoiceLiveClient(endpoint, credential);
+
+// Create and connect a session with an agent as the main actor
+const session = await client.startSession({
+  agent: {
+    agentName: "your-agent-name",
+    projectName: "your-foundry-project",
+  },
+});
+
+// Subscribe to events - audio settings can still be configured
+const subscription = session.subscribe({
+  onResponseAudioDelta: async (event, context) => {
+    // Handle audio from the agent
+    playAudioChunk(event.delta);
+  },
+  onResponseTextDelta: async (event, context) => {
+    console.log("Agent:", event.delta);
+  },
+});
+
+// Send audio data from microphone
+function sendAudioChunk(audioBuffer: ArrayBuffer) {
+  session.sendAudio(audioBuffer);
+}
 ```
 
 ### Configuring session options
@@ -349,18 +434,18 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-voicelive_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
 You can find more code samples through the following links:
 
-- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.2/sdk/ai/ai-voicelive/samples)
-- [VoiceLive Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.2/sdk/ai/ai-voicelive/test)
+- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-voicelive/samples)
+- [VoiceLive Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-voicelive/test)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [defaultazurecredential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest
 [managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview  

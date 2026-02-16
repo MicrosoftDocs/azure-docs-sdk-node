@@ -1,21 +1,20 @@
 ---
-title: Azure Migrate Assessment client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-migrationassessment, migrate
+title: 
+keywords: Azure, javascript, SDK, API, @azure/arm-migrate, migrate
 ms.date: 02/16/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: migrate
 ---
-# Azure Migrate Assessment client library for JavaScript - version 1.0.0-alpha.20260216.1 
+# AzureMigrateV2 client library for JavaScript
 
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for AzureMigrateV2 client.
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Migrate Assessment client.
+Assess your workloads for Azure.
 
-Azure Migrate Resource Provider management API.
-
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/migrate/arm-migrationassessment) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-migrationassessment) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-migrationassessment?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/migrate/arm-migrate) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-migrate) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-migrate) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,18 +30,18 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-migrationassessment` package
+### Install the `@azure/arm-migrate` package
 
-Install the Azure Migrate Assessment client library for JavaScript with `npm`:
+Install the AzureMigrateV2 client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-migrationassessment
+npm install @azure/arm-migrate
 ```
 
-### Create and authenticate a `AzureMigrateAssessmentService`
+### Create and authenticate a `AzureMigrateV2`
 
-To create a client object to access the Azure Migrate Assessment API, you will need the `endpoint` of your Azure Migrate Assessment resource and a `credential`. The Azure Migrate Assessment client can use Azure Active Directory credentials to authenticate.
-You can find the endpoint for your Azure Migrate Assessment resource in the [Azure Portal][azure_portal].
+To create a client object to access the AzureMigrateV2 API, you will need the `endpoint` of your AzureMigrateV2 resource and a `credential`. The AzureMigrateV2 client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your AzureMigrateV2 resource in the [Azure Portal][azure_portal].
 
 You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
@@ -52,43 +51,44 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure Migrate Assessment** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to AzureMigrateV2** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
- 
+
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { AzureMigrateAssessmentService } from "@azure/arm-migrationassessment";
+import { AzureMigrateV2 } from "@azure/arm-migrate";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new AzureMigrateAssessmentService(new DefaultAzureCredential(), subscriptionId);
+const client = new AzureMigrateV2(new DefaultAzureCredential(), subscriptionId);
 ```
- 
+
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
- 
+
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { AzureMigrateAssessmentService } from "@azure/arm-migrationassessment";
+import { AzureMigrateV2 } from "@azure/arm-migrate";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const client = new AzureMigrateAssessmentService(credential, subscriptionId);
+const client = new AzureMigrateV2(credential, subscriptionId);
 ```
 
-
 ### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
 
-### AzureMigrateAssessmentService
+### AzureMigrateV2
 
-`AzureMigrateAssessmentService` is the primary interface for developers using the Azure Migrate Assessment client library. Explore the methods on this client object to understand the different features of the Azure Migrate Assessment service that you can access.
+`AzureMigrateV2` is the primary interface for developers using the AzureMigrateV2 client library. Explore the methods on this client object to understand the different features of the AzureMigrateV2 service that you can access.
 
 ## Troubleshooting
 

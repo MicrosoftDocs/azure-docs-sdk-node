@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Container Service SDK for JavaScript
 description: Reference for Azure Hybrid Container Service SDK for JavaScript
-ms.date: 02/16/2026
+ms.date: 02/17/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hybridcontainerservice

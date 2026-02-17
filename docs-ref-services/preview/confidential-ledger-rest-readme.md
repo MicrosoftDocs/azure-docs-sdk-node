@@ -1,12 +1,12 @@
 ---
 title: Azure Confidential Ledger REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/confidential-ledger, confidentialledger
-ms.date: 05/28/2025
+ms.date: 02/17/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: confidentialledger
 ---
-# Azure Confidential Ledger REST client library for JavaScript - version 1.1.2-beta.3 
+# Azure Confidential Ledger REST client library for JavaScript - version 1.1.2-alpha.20260217.1 
 
 
 Azure Confidential Ledger provides a service for logging to an immutable, tamper-proof ledger. As part of the [Azure Confidential Computing][azure_confidential_computing]
@@ -108,6 +108,11 @@ const client = ConfidentialLedger(
 
 Every write to Azure Confidential Ledger generates an immutable ledger entry in the service. Writes, also referred to as transactions, are uniquely identified by transaction ids that increment with each write. Once written, ledger entries may be retrieved at any time.
 
+#### Tags
+It is possible to further organize data within a collection as part of the latest preview version dated `2024-12-09-preview` or newer.
+
+Specify the `tags` parameter as part of the create entry operation. Multiple tags can be specified using commas. There is a limit of five tags per transaction.
+
 ### Receipts
 
 State changes to the Confidential Ledger are saved in a data structure called a Merkle tree. To cryptographically verify that writes were correctly saved, a Merkle proof, or receipt, can be retrieved for any transaction id.
@@ -135,8 +140,14 @@ Azure Confidential Ledger is built on Microsoft Research's open-source [Confiden
 This section contains code snippets for the following samples:
 
 - [Post Ledger Entry](#post-ledger-entry "Post Ledger Entry")
+- [Post Ledger Entry With CollectionId](#post-ledger-entry-with-collectionid "Post Ledger Entry With CollectionId")]
+- [Post Ledger Entry With CollectionId and Tags](#post-ledger-entry-with-collectionid-and-tags "Post Ledger Entry With CollectionId and Tags")]
 - [Get a Ledger Entry By Transaction Id](#get-a-ledger-entry "Get a Ledger Entry By Transaction Id")
+- [Get a Ledger Entry By Transaction Id With CollectionId](#get-a-ledger-entry-with-collectionid "Get a Ledger Entry By Transaction Id With CollectionId")
+- [Get a Ledger Entry By Transaction Id With CollectionId and Tag](#get-a-ledger-entry-with-collectionid-and-tag "Get a Ledger Entry By Transaction Id With CollectionId and Tag")
 - [Get All Ledger Entries](#get-all-ledger-entries "Get All Ledger Entries")
+- [Get All Ledger Entries With CollectionId](#get-all-ledger-entries-with-collectionid "Get All Ledger Entries With CollectionId")
+- [Get All Ledger Entries With CollectionId and Tag](#get-all-ledger-entries-with-collectionid-and-tag "Get All Ledger Entries With CollectionId and Tag")
 - [Get All Collections](#get-all-collections "Get All Collections")
 - [Get Transactions for a Collection](#transactions-for-collection "Get Transactions for a Collection")
 - [List Enclave Quotes](#list-enclave-quotes "List Enclave Quotes")
@@ -173,6 +184,73 @@ const ledgerEntry: CreateLedgerEntryParameters = {
 const result = await client.path("/app/transactions").post(ledgerEntry);
 ```
 
+### Post Ledger Entry With CollectionId
+
+```ts snippet:ReadmeSamplePostLedgerEntryWithCollectionId
+import ConfidentialLedger, {
+  getLedgerIdentity,
+  LedgerEntry,
+  CreateLedgerEntryParameters,
+} from "@azure-rest/confidential-ledger";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const { ledgerIdentityCertificate } = await getLedgerIdentity(
+  "test-ledger-name",
+  "https://identity.confidential-ledger.core.azure.com",
+);
+const credential = new DefaultAzureCredential();
+const client = ConfidentialLedger(
+  "https://test-ledger-name.confidential-ledger.azure.com",
+  ledgerIdentityCertificate,
+  credential,
+);
+// Type assertion is used to allow collectionId
+const entry: LedgerEntry = {
+  contents: "<content>",
+};
+const ledgerEntry: CreateLedgerEntryParameters = {
+  queryParameters: {
+    collectionId: "my collection",
+  },
+  contentType: "application/json",
+  body: entry,
+};
+const result = await client.path("/app/transactions").post(ledgerEntry);
+```
+
+### Post Ledger Entry With CollectionId and Tags 
+```ts snippet:ReadmeSamplePostLedgerEntryWithCollectionIdAndTags
+import ConfidentialLedger, {
+  getLedgerIdentity,
+  LedgerEntry,
+  CreateLedgerEntryParameters,
+} from "@azure-rest/confidential-ledger";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const { ledgerIdentityCertificate } = await getLedgerIdentity(
+  "test-ledger-name",
+  "https://identity.confidential-ledger.core.azure.com",
+);
+const credential = new DefaultAzureCredential();
+const client = ConfidentialLedger(
+  "https://test-ledger-name.confidential-ledger.azure.com",
+  ledgerIdentityCertificate,
+  credential,
+);
+// Type assertion is used to allow collectionId and tags
+const entry: LedgerEntry = {
+  contents: "<content>",
+};
+const ledgerEntry: CreateLedgerEntryParameters = {
+  queryParameters: {
+    tags: "tag1,tag2",
+  },
+  contentType: "application/json",
+  body: entry,
+};
+const result = await client.path("/app/transactions").post(ledgerEntry);
+```
+
 ### Get a Ledger Entry By Transaction Id
 
 ```ts snippet:ReadmeSampleGetLedgerEntry
@@ -195,6 +273,56 @@ const transactionId = "<TRANSACTION_ID>";
 const status = await client.path("/app/transactions/{transactionId}/status", transactionId).get();
 ```
 
+### Get a Ledger Entry By Transaction Id With CollectionId
+
+```ts snippet:ReadmeSampleGetLedgerEntryWithCollectionIdSample
+import ConfidentialLedger, { getLedgerIdentity } from "@azure-rest/confidential-ledger";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const { ledgerIdentityCertificate } = await getLedgerIdentity(
+  "test-ledger-name",
+  "https://identity.confidential-ledger.core.azure.com",
+);
+const credential = new DefaultAzureCredential();
+const client = ConfidentialLedger(
+  "https://test-ledger-name.confidential-ledger.azure.com",
+  ledgerIdentityCertificate,
+  credential,
+);
+const transactionId = "<TRANSACTION_ID>";
+const getLedgerEntryParams = {
+  queryParameters: { collectionId: "my-collection" },
+};
+const result = await client
+  .path("/app/transactions/{transactionId}", transactionId)
+  .get(getLedgerEntryParams);
+```
+
+### Get a Ledger Entry By Transaction Id With CollectionId and Tag
+
+```ts snippet:ReadmeSampleGetLedgerEntryWithCollectionIdAndTagSample
+import ConfidentialLedger, { getLedgerIdentity } from "@azure-rest/confidential-ledger";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const { ledgerIdentityCertificate } = await getLedgerIdentity(
+  "test-ledger-name",
+  "https://identity.confidential-ledger.core.azure.com",
+);
+const credential = new DefaultAzureCredential();
+const client = ConfidentialLedger(
+  "https://test-ledger-name.confidential-ledger.azure.com",
+  ledgerIdentityCertificate,
+  credential,
+);
+const transactionId = "<TRANSACTION_ID>";
+const getLedgerEntryParams = {
+  queryParameters: { collectionId: "my-collection", tag: "tag1" },
+};
+const result = await client
+  .path("/app/transactions/{transactionId}", transactionId)
+  .get(getLedgerEntryParams);
+```
+
 ### Get All Ledger Entries
 
 ```ts snippet:ReadmeSampleGetAllLedgerEntries
@@ -214,6 +342,50 @@ const client = ConfidentialLedger(
 );
 
 const ledgerEntries = await client.path("/app/transactions");
+```
+
+### Get All Ledger Entries With CollectionId
+
+```ts snippet:ReadmeSampleGetAllLedgerEntriesWithCollectionIdSample
+import ConfidentialLedger, { getLedgerIdentity } from "@azure-rest/confidential-ledger";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const { ledgerIdentityCertificate } = await getLedgerIdentity(
+  "test-ledger-name",
+  "https://identity.confidential-ledger.core.azure.com",
+);
+const credential = new DefaultAzureCredential();
+const client = ConfidentialLedger(
+  "https://test-ledger-name.confidential-ledger.azure.com",
+  ledgerIdentityCertificate,
+  credential,
+);
+const getLedgerEntriesParams = {
+  queryParameters: { collectionId: "my-collection" },
+};
+const ledgerEntries = await client.path("/app/transactions").get(getLedgerEntriesParams);
+```
+
+### Get All Ledger Entries With CollectionId and Tag
+
+```ts snippet:ReadmeSampleGetAllLedgerEntriesWithCollectionIdAndTagSample
+import ConfidentialLedger, { getLedgerIdentity } from "@azure-rest/confidential-ledger";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const { ledgerIdentityCertificate } = await getLedgerIdentity(
+  "test-ledger-name",
+  "https://identity.confidential-ledger.core.azure.com",
+);
+const credential = new DefaultAzureCredential();
+const client = ConfidentialLedger(
+  "https://test-ledger-name.confidential-ledger.azure.com",
+  ledgerIdentityCertificate,
+  credential,
+);
+const getLedgerEntriesParams = {
+  queryParameters: { collectionId: "my-collection", tag: "tag1" },
+};
+const ledgerEntries = await client.path("/app/transactions").get(getLedgerEntriesParams);
 ```
 
 ### Get All Collections
@@ -306,15 +478,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/confidentialledger/confidential-ledger-rest/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/confidentialledger/confidential-ledger-rest/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/confidential-ledger_1.1.2-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -327,12 +499,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [ccf]: https://github.com/Microsoft/CCF
 [azure_confidential_computing]: https://azure.microsoft.com/solutions/confidential-compute
 [confidential_ledger_docs]: https://aka.ms/confidentialledger-servicedocs
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/confidential-ledger_1.1.2-beta.3/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/confidentialledger/confidential-ledger-rest
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/confidentialledger/confidential-ledger-rest
 [confidentialledger_npm]: https://www.npmjs.com/package/@azure-rest/confidential-ledger
 [ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_sub]: https://azure.microsoft.com/free/
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/identity/identity#credentials
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/confidential-ledger_1.1.2-beta.3/sdk/identity/identity#defaultazurecredential
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [azure_resource_manager]: https://learn.microsoft.com/azure/azure-resource-manager/management/overview
-

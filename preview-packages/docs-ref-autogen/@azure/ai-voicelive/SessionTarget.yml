@@ -1,0 +1,73 @@
+### YamlMime:TSTypeAlias
+name: SessionTarget
+uid: '@azure/ai-voicelive.SessionTarget'
+package: '@azure/ai-voicelive'
+summary: >+
+  Target for a Voice Live session, specifying either a model or an agent.
+
+
+  Use `{ model: string }` for model-centric sessions where the LLM is the main
+  actor.
+
+  Use `{ agent: AgentSessionConfig }` for agent-centric sessions where the agent
+  is the main actor.
+
+
+  **Example**
+
+
+  Model-centric session
+
+  ```typescript snippet:CreateSessionModelTarget
+
+  import { DefaultAzureCredential } from "@azure/identity";
+
+  import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+
+  const credential = new DefaultAzureCredential();
+
+  const endpoint = "https://your-resource.cognitiveservices.azure.com";
+
+  const client = new VoiceLiveClient(endpoint, credential);
+
+
+  const session = client.createSession({ model: "gpt-4o-realtime-preview" });
+
+  ```
+
+
+
+
+  **Example**
+
+
+  Agent-centric session
+
+  ```typescript snippet:CreateSessionAgentTarget
+
+  import { DefaultAzureCredential } from "@azure/identity";
+
+  import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+
+  const credential = new DefaultAzureCredential();
+
+  const endpoint = "https://your-resource.cognitiveservices.azure.com";
+
+  const client = new VoiceLiveClient(endpoint, credential);
+
+
+  const session = client.createSession({
+    agent: { agentName: "my-agent", projectName: "my-project" },
+  });
+
+  ```
+
+fullName: SessionTarget
+remarks: ''
+isDeprecated: false
+syntax: |
+  type SessionTarget =
+    | { agent?: never; model: string }
+    | { agent: AgentSessionConfig; model?: never }

@@ -1,21 +1,21 @@
 ---
 title: Azure EventHubManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-eventhub, azure-event-hubs
+keywords: Azure, javascript, SDK, API, @azure/arm-eventhub-profile-2020-09-01-hybrid, eventhub
 ms.date: 02/19/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-event-hubs
+ms.service: eventhub
 ---
-# Azure EventHubManagement client library for JavaScript - version 5.3.0-alpha.20260218.1 
+# Azure EventHubManagement client library for JavaScript - version 2.1.2-alpha.20260218.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure EventHubManagement client.
 
 Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/arm-eventhub) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-eventhub) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-eventhub?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/arm-eventhub-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-eventhub-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-eventhub-profile-2020-09-01-hybrid?view=azure-node-preview) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-eventhub` package
+### Install the `@azure/arm-eventhub-profile-2020-09-01-hybrid` package
 
 Install the Azure EventHubManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-eventhub
+npm install @azure/arm-eventhub-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `EventHubManagementClient`
@@ -53,13 +53,14 @@ npm install @azure/identity
 ```
 
 You will also need to **register a new AAD application and grant access to Azure EventHubManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { EventHubManagementClient } from "@azure/arm-eventhub";
+import { EventHubManagementClient } from "@azure/arm-eventhub-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -70,7 +71,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { EventHubManagementClient } from "@azure/arm-eventhub";
+import { EventHubManagementClient } from "@azure/arm-eventhub-profile-2020-09-01-hybrid";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({

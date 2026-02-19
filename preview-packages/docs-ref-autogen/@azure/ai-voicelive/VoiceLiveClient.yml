@@ -67,7 +67,7 @@ properties:
         type: string
 methods:
   - name: createSession(RequestSession, CreateSessionOptions)
-    uid: '@azure/ai-voicelive.VoiceLiveClient.createSession_1'
+    uid: '@azure/ai-voicelive.VoiceLiveClient.createSession_2'
     package: '@azure/ai-voicelive'
     summary: >-
       Creates a new VoiceLiveSession for real-time voice communication with
@@ -84,7 +84,82 @@ methods:
           description: Session configuration including model and other settings
         - id: sessionOptions
           type: <xref uid="@azure/ai-voicelive.CreateSessionOptions" />
-          description: ''
+          description: Optional configuration specific to this session
+      return:
+        description: A new VoiceLiveSession instance ready to connect
+        type: <xref uid="@azure/ai-voicelive.VoiceLiveSession" />
+  - name: createSession(SessionTarget, CreateSessionOptions)
+    uid: '@azure/ai-voicelive.VoiceLiveClient.createSession_1'
+    package: '@azure/ai-voicelive'
+    summary: >+
+      Creates a new VoiceLiveSession using a session target (model or agent).
+
+
+      **Example**
+
+
+      Model-centric session
+
+      ```typescript snippet:CreateSessionModelTarget
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const endpoint = "https://your-resource.cognitiveservices.azure.com";
+
+      const client = new VoiceLiveClient(endpoint, credential);
+
+
+      const session = client.createSession({ model: "gpt-4o-realtime-preview"
+      });
+
+      ```
+
+
+
+
+      **Example**
+
+
+      Agent-centric session
+
+      ```typescript snippet:CreateSessionAgentTarget
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const endpoint = "https://your-resource.cognitiveservices.azure.com";
+
+      const client = new VoiceLiveClient(endpoint, credential);
+
+
+      const session = client.createSession({
+        agent: { agentName: "my-agent", projectName: "my-project" },
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createSession(target: SessionTarget, sessionOptions?:
+        CreateSessionOptions): VoiceLiveSession
+      parameters:
+        - id: target
+          type: <xref uid="@azure/ai-voicelive.SessionTarget" />
+          description: The session target specifying either a model or agent
+        - id: sessionOptions
+          type: <xref uid="@azure/ai-voicelive.CreateSessionOptions" />
+          description: Optional configuration specific to this session
       return:
         description: A new VoiceLiveSession instance ready to connect
         type: <xref uid="@azure/ai-voicelive.VoiceLiveSession" />
@@ -111,7 +186,7 @@ methods:
         description: A new VoiceLiveSession instance ready to connect
         type: <xref uid="@azure/ai-voicelive.VoiceLiveSession" />
   - name: startSession(RequestSession, StartSessionOptions)
-    uid: '@azure/ai-voicelive.VoiceLiveClient.startSession_1'
+    uid: '@azure/ai-voicelive.VoiceLiveClient.startSession_2'
     package: '@azure/ai-voicelive'
     summary: >-
       Creates and immediately connects a new VoiceLiveSession with session
@@ -126,6 +201,82 @@ methods:
         - id: sessionConfig
           type: <xref uid="@azure/ai-voicelive.RequestSession" />
           description: Session configuration including model and other settings
+        - id: sessionOptions
+          type: <xref uid="@azure/ai-voicelive.StartSessionOptions" />
+          description: Optional configuration specific to this session
+      return:
+        description: A connected VoiceLiveSession instance
+        type: Promise&lt;<xref uid="@azure/ai-voicelive.VoiceLiveSession" />&gt;
+  - name: startSession(SessionTarget, StartSessionOptions)
+    uid: '@azure/ai-voicelive.VoiceLiveClient.startSession_1'
+    package: '@azure/ai-voicelive'
+    summary: >+
+      Creates and immediately connects a new VoiceLiveSession using a session
+      target.
+
+
+      **Example**
+
+
+      Model-centric session
+
+      ```typescript snippet:StartSessionModelTarget
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const endpoint = "https://your-resource.cognitiveservices.azure.com";
+
+      const client = new VoiceLiveClient(endpoint, credential);
+
+
+      const session = await client.startSession({ model:
+      "gpt-4o-realtime-preview" });
+
+      ```
+
+
+
+
+      **Example**
+
+
+      Agent-centric session
+
+      ```typescript snippet:StartSessionAgentTarget
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+
+      const credential = new DefaultAzureCredential();
+
+      const endpoint = "https://your-resource.cognitiveservices.azure.com";
+
+      const client = new VoiceLiveClient(endpoint, credential);
+
+
+      const session = await client.startSession({
+        agent: { agentName: "my-agent", projectName: "my-project" },
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startSession(target: SessionTarget, sessionOptions?:
+        StartSessionOptions): Promise<VoiceLiveSession>
+      parameters:
+        - id: target
+          type: <xref uid="@azure/ai-voicelive.SessionTarget" />
+          description: The session target specifying either a model or agent
         - id: sessionOptions
           type: <xref uid="@azure/ai-voicelive.StartSessionOptions" />
           description: Optional configuration specific to this session

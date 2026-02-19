@@ -1,12 +1,12 @@
 ---
 title: Azure Document Translator Rest-Level client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-document-translator, documenttranslator
-ms.date: 02/14/2025
+ms.date: 02/19/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: documenttranslator
 ---
-# Azure Document Translator Rest-Level client library for JavaScript - version 1.0.0-beta.2 
+# Azure Document Translator Rest-Level client library for JavaScript - version 1.0.0-alpha.20260218.1 
 
 
 [Azure Document Translator](https://learn.microsoft.com/azure/cognitive-services/translator/document-translation/overview) is a cloud-based feature of the Azure Translator service and is part of the Azure Cognitive Service family of REST APIs. The Document Translation API translates documents to and from 90 languages and dialects while preserving document structure and data format.
@@ -23,11 +23,11 @@ Use the client library to:
 | Apply custom translation          | Translate documents using general and [custom translation](https://learn.microsoft.com/azure/cognitive-services/translator/customization#custom-translator) models. |
 | Apply custom glossaries           | Translate documents using custom glossaries.                                                                                                                        |
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/documenttranslator/ai-document-translator-rest/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/documenttranslator/ai-document-translator-rest/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-document-translator) |
 [API reference documentation](https://learn.microsoft.com/azure/cognitive-services/translator/document-translation/overview) |
 [Product documentation](https://learn.microsoft.com/azure/cognitive-services/translator/document-translation/overview) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/documenttranslator/ai-document-translator-rest/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/documenttranslator/ai-document-translator-rest/samples)
 
 ## Getting started
 
@@ -179,8 +179,8 @@ See the service documentation for all [supported languages][supported_languages]
 
 Please refer to the samples folder to see code samples, including:
 
-- [List Supported Formats](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/documenttranslator/ai-document-translator-rest/samples/v1/typescript/src/listFormats.ts)
-- [Translate documents](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/documenttranslator/ai-document-translator-rest/samples/v1/typescript/src/translateFromBlob.ts)
+- [List Supported Formats](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/documenttranslator/ai-document-translator-rest/samples/v1/typescript/src/listFormats.ts)
+- [Translate documents](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/documenttranslator/ai-document-translator-rest/samples/v1/typescript/src/translateFromBlob.ts)
 
 ## Troubleshooting
 
@@ -194,15 +194,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/documenttranslator/ai-document-translator-rest/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/documenttranslator/ai-document-translator-rest/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-document-translator_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -214,10 +214,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [translator_resource]: https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesTextTranslation
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
 [cognitive_auth]: https://learn.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://learn.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-document-translator_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [azure_cli_create_dt_resource]: https://learn.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli?tabs=windows
 [azure_portal_get_endpoint]: https://learn.microsoft.com/azure/ai-services/translator/document-translation/quickstarts/document-translation-rest-api?pivots=programming-language-javascript#retrieve-your-key-and-document-translation-endpoint
 [source_containers]: https://learn.microsoft.com/azure/ai-services/translator/document-translation/quickstarts/document-translation-rest-api?pivots=programming-language-javascript#create-azure-blob-storage-containers

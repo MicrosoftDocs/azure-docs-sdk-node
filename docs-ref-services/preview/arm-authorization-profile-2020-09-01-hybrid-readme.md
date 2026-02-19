@@ -1,21 +1,21 @@
 ---
 title: Azure AuthorizationManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-authorization, authorization
+keywords: Azure, javascript, SDK, API, @azure/arm-authorization-profile-2020-09-01-hybrid, authorization
 ms.date: 02/19/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: authorization
 ---
-# Azure AuthorizationManagement client library for JavaScript - version 10.0.0-alpha.20260218.1 
+# Azure AuthorizationManagement client library for JavaScript - version 2.1.2-alpha.20260218.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure AuthorizationManagement client.
 
 Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/authorization/arm-authorization) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-authorization) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-authorization?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/authorization/arm-authorization-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-authorization-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-authorization-profile-2020-09-01-hybrid) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-authorization` package
+### Install the `@azure/arm-authorization-profile-2020-09-01-hybrid` package
 
 Install the Azure AuthorizationManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-authorization
+npm install @azure/arm-authorization-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `AuthorizationManagementClient`
@@ -60,7 +60,7 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { AuthorizationManagementClient } from "@azure/arm-authorization";
+import { AuthorizationManagementClient } from "@azure/arm-authorization-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -71,7 +71,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { AuthorizationManagementClient } from "@azure/arm-authorization";
+import { AuthorizationManagementClient } from "@azure/arm-authorization-profile-2020-09-01-hybrid";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({

@@ -1,12 +1,12 @@
 ---
 title: Azure VoiceLive client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-voicelive, ai
-ms.date: 02/17/2026
+ms.date: 02/19/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure VoiceLive client library for JavaScript - version 1.0.0-beta.3 
+# Azure VoiceLive client library for JavaScript - version 1.0.0-alpha.20260219.1 
 
 
 Azure VoiceLive is a managed service that enables low-latency, high-quality speech-to-speech interactions for voice agents. The service consolidates speech recognition, generative AI, and text-to-speech functionalities into a single, unified interface, providing an end-to-end solution for creating seamless voice-driven experiences.
@@ -149,7 +149,7 @@ const session = await client.startSession({
 
 ## Authenticating with Azure Active Directory
 
-The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 To interact with the Azure VoiceLive service, you need to create an instance of the `VoiceLiveClient` class, a **service endpoint** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][defaultazurecredential], which is appropriate for most scenarios, including local development and production environments. We recommend using a [managed identity][managed_identity] for authentication in production environments.
 
@@ -434,18 +434,18 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-voicelive_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
 You can find more code samples through the following links:
 
-- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/ai/ai-voicelive/samples)
-- [VoiceLive Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/ai/ai-voicelive/test)
+- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-voicelive/samples)
+- [VoiceLive Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-voicelive/test)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [defaultazurecredential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest
 [managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview  

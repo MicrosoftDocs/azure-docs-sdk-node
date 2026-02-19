@@ -1,12 +1,12 @@
 ---
 title: Azure Purview Administration REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-administration, purview
-ms.date: 02/12/2025
+ms.date: 02/19/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: purview
 ---
-# Azure Purview Administration REST client library for JavaScript - version 1.0.0-beta.2 
+# Azure Purview Administration REST client library for JavaScript - version 1.0.0-alpha.20260218.1 
 
 
 Azure Purview data plane administration. It supports data plane operations. It can manage account, collections, keys, resource set rule, metadata policy, metadata roles.
@@ -62,18 +62,16 @@ AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 
 Use the returned token credential to authenticate the client:
 
-```typescript
-import {
-  PurviewAccountClient,
-  PurviewMetadataPoliciesClient,
-} from "@azure-rest/purview-administration";
+```ts snippet:ReadmeSampleCreateClient_Node
+import { PurviewAccount, PurviewMetadataPolicies } from "@azure-rest/purview-administration";
 import { DefaultAzureCredential } from "@azure/identity";
-const accountClient = PurviewAccountClient(
+
+const accountClient = PurviewAccount.createClient(
   "https://<my-account-name>.purview.azure.com",
   new DefaultAzureCredential(),
 );
 
-const metadataClient = PurviewAccountClient(
+const metadataClient = PurviewMetadataPolicies.createClient(
   "https://<my-account-name>.purview.azure.com",
   new DefaultAzureCredential(),
 );
@@ -87,33 +85,63 @@ This client is one of our REST clients. We highly recommend you read how to use 
 
 ## Examples
 
-The following section shows you how to initialize and authenticate your client, then get all of your type-defs.
+The following section shows you how to initialize and authenticate your client and perform various operations.
 
-- [Get A List of Collections](#get-a-list-of-collections "Get A List of Collections")
+- Get A List of Collections
 
-```typescript
-import { PurviewAccountClient } from "@azure-rest/purview-administration";
+Gets a list of collections in the account.
+
+```ts snippet:ReadmeSampleGetCollections
+import { PurviewAccount } from "@azure-rest/purview-administration";
 import { DefaultAzureCredential } from "@azure/identity";
-import dotenv from "dotenv";
 
-dotenv.config();
+const accountClient = PurviewAccount.createClient(
+  "https://<my-account-name>.purview.azure.com",
+  new DefaultAzureCredential(),
+);
 
-const endpoint = process.env["ENDPOINT"] || "";
+const response = await accountClient.path("/collections").get();
 
-async function main() {
-  console.log("== List collections sample ==");
-  const client = PurviewAccountClient(endpoint, new DefaultAzureCredential());
-
-  const response = await client.path("/collections").get();
-
-  if (response.status !== "200") {
-    console.log(`GET "/collections" failed with ${response.status}`);
-  }
-
-  console.log(response.body);
+if (PurviewAccount.UnexpectedHelper.isUnexpected(response)) {
+  throw response.body.error;
 }
 
-main().catch(console.error);
+const paginated = PurviewAccount.PaginateHelper.paginate(accountClient, response);
+for await (const collection of paginated) {
+  console.log(
+    `Collection name: ${collection.name}\tCollection description: ${collection.description}`,
+  );
+}
+```
+
+- Get A List of Metadata Policies
+
+Gets a list of metadata policies in the account.
+
+```ts snippet:ReadmeSampleGetMetadataPolicies
+import { PurviewMetadataPolicies } from "@azure-rest/purview-administration";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const metadataClient = PurviewMetadataPolicies.createClient(
+  "https://<my-account-name>.purview.azure.com",
+  new DefaultAzureCredential(),
+);
+
+const response = await metadataClient.path("/metadataPolicies").get();
+
+if (PurviewMetadataPolicies.UnexpectedHelper.isUnexpected(response)) {
+  throw response.body.error;
+}
+
+const policies = PurviewMetadataPolicies.PaginateHelper.paginate(metadataClient, response);
+
+for await (const policy of policies) {
+  if (Array.isArray(policy)) {
+    console.error("Unexpected array:", policy);
+  } else {
+    console.log(`Policy name: ${policy.name}`);
+  }
+}
 ```
 
 ## Troubleshooting
@@ -122,36 +150,34 @@ main().catch(console.error);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```ts
+```ts snippet:SetLogLevel
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-administration_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-
-
 [account_product_documentation]: https://azure.microsoft.com/services/purview/
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/purview-administration_1.0.0-beta.2/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/purview/purview-catalog-rest
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/purview/purview-administration-rest
 [account_npm]: https://www.npmjs.com/org/azure-rest
 [account_ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
 [purview_resource]: https://learn.microsoft.com/azure/purview/create-catalog-portal
 [authenticate_with_token]: https://learn.microsoft.com/azure/purview/tutorial-using-rest-apis#create-a-service-principal-application
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/identity/identity#credentials
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
 [enable_aad]: https://learn.microsoft.com/azure/purview/create-catalog-portal#add-a-security-principal-to-a-data-plane-role
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-administration_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

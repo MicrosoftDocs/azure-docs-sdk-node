@@ -1,22 +1,21 @@
 ---
 title: Azure Monitor client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-monitor, monitor
+keywords: Azure, javascript, SDK, API, @azure/arm-monitor-profile-2020-09-01-hybrid, monitor
 ms.date: 02/19/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor client library for JavaScript - version 8.0.0-alpha.20260218.1 
+# Azure Monitor client library for JavaScript - version 2.1.2-alpha.20260218.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Monitor client.
 
 Monitor Management Client
 
-[Migration guide from MetricsQueryClient in @azure/monitor-query → @azure/arm-monitor](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/monitor/arm-monitor/MIGRATION_METRICSQUERYCLIENT_TO_ARM_MONITOR.md)
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitor) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-monitor) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-monitor?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitor-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-monitor-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-monitor-profile-2020-09-01-hybrid?view=azure-node-preview) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -32,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-monitor` package
+### Install the `@azure/arm-monitor-profile-2020-09-01-hybrid` package
 
 Install the Azure Monitor client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-monitor
+npm install @azure/arm-monitor-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `MonitorClient`
@@ -61,25 +60,23 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { MonitorClient } from "@azure/arm-monitor";
+import { MonitorClient } from "@azure/arm-monitor-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new MonitorClient(new DefaultAzureCredential(), subscriptionId);
+const client = new MonitorClient(new DefaultAzureCredential());
 ```
 
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { MonitorClient } from "@azure/arm-monitor";
+import { MonitorClient } from "@azure/arm-monitor-profile-2020-09-01-hybrid";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const client = new MonitorClient(credential, subscriptionId);
+const client = new MonitorClient(credential);
 ```
 
 ### JavaScript Bundle

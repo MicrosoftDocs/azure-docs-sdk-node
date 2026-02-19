@@ -1,22 +1,24 @@
 ---
-title: Azure Synapse Access Control client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/synapse-access-control, synapse-analytics
+title: Azure Synapse Access Control REST client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure-rest/synapse-access-control, synapse
 ms.date: 02/19/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: synapse-analytics
+ms.service: synapse
 ---
-## Azure Synapse Access Control client library for JavaScript - version 1.0.0-alpha.20260218.1 
+## Azure Synapse Access Control REST client library for JavaScript - version 1.0.0-alpha.20260219.1 
 
 
-This package contains an isomorphic SDK for Access Control.
+This package contains an isomorphic REST Client SDK for Azure Synapse Access Control.
+
+**Please rely heavily on the [service's documentation][synapse_product_documentation] and our [REST client docs][rest_client] to use this library**
 
 ## Getting started
 
 ### Install the package
 
 ```bash
-npm install @azure/synapse-access-control
+npm install @azure-rest/synapse-access-control
 ```
 
 ### Currently supported environments
@@ -31,17 +33,19 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 ## Examples
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { AccessControlClient } from "@azure/synapse-access-control";
+import AccessControl, { isUnexpected, paginate } from "@azure-rest/synapse-access-control";
 import { DefaultAzureCredential } from "@azure/identity";
 
-const client = new AccessControlClient(
-  new DefaultAzureCredential(),
-  "https://mysynapse.dev.azuresynapse.net",
-);
+const client = AccessControl("<endpoint>", new DefaultAzureCredential());
 
-const roleDefinitions = await client.roleDefinitions.listRoleDefinitions();
-for await (const roleDefinition of roleDefinitions) {
-  console.log(`Role Definition ID: ${roleDefinition.id}`);
+const initialResponse = await client.path("/roleAssignments").get();
+if (isUnexpected(initialResponse)) {
+  throw initialResponse.body.error;
+}
+
+const assignments = paginate(client, initialResponse);
+for await (const assignment of assignments) {
+  console.log(`Role Assignment ID: ${assignment.id}`);
 }
 ```
 
@@ -66,4 +70,7 @@ In the future, you'll find additional code samples here.
 ## Contributing
 
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
+
+[synapse_product_documentation]: https://learn.microsoft.com/rest/api/synapse/data-plane/role-assignments/create-role-assignment
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md
 

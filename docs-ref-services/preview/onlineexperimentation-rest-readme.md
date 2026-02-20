@@ -1,21 +1,21 @@
 ---
 title: Azure OnlineExperimentation REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/onlineexperimentation, onlineexperimentation
-ms.date: 06/13/2025
+ms.date: 02/20/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: onlineexperimentation
 ---
-# Azure OnlineExperimentation REST client library for JavaScript - version 1.0.0-beta.1 
+# Azure OnlineExperimentation REST client library for JavaScript - version 1.0.0-alpha.20260219.1 
 
 
 Azure Online Experimentation Service
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/onlineexperimentation_1.0.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/onlineexperimentation_1.0.0-beta.1/sdk/onlineexperimentation/onlineexperimentation-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/onlineexperimentation/onlineexperimentation-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/onlineexperimentation)
 
 ## Getting started
@@ -41,7 +41,7 @@ npm install @azure-rest/onlineexperimentation
 The Azure Online Experimentation client library initialization requires two parameters:
 
 - The `endpoint` property value from the [`Microsoft.OnlineExperimentation/workspaces`](https://learn.microsoft.com/azure/templates/microsoft.onlineexperimentation/workspaces) resource.
-- A `TokenCredential` for authentication, the simplest approach is to use [`DefaultAzureCredential`](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/onlineexperimentation_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential) from the `@azure/identity` library.
+- A `TokenCredential` for authentication, the simplest approach is to use [`DefaultAzureCredential`](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential) from the `@azure/identity` library.
 
 ```ts snippet:InitializeClient
 import { DefaultAzureCredential } from "@azure/identity";
@@ -55,15 +55,15 @@ const client = OnlineExperimentationClient(endpoint, credential);
 
 ## Examples
 
-- Full set of [examples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/onlineexperimentation_1.0.0-beta.1/sdk/onlineexperimentation/onlineexperimentation-rest/EXAMPLES.md) demonstrating individual API operations.
-- Example demonstrating experiment metrics management lifecycle: [TypeScript](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/onlineexperimentation_1.0.0-beta.1/sdk/onlineexperimentation/onlineexperimentation-rest/samples/v1-beta/typescript/README.md) and [JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/onlineexperimentation_1.0.0-beta.1/sdk/onlineexperimentation/onlineexperimentation-rest/samples/v1-beta/javascript/README.md).
+- Full set of [examples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/onlineexperimentation/onlineexperimentation-rest/EXAMPLES.md) demonstrating individual API operations.
+- Example demonstrating experiment metrics management lifecycle: [TypeScript](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/onlineexperimentation/onlineexperimentation-rest/samples/v1-beta/typescript/README.md) and [JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/onlineexperimentation/onlineexperimentation-rest/samples/v1-beta/javascript/README.md).
 
 ### Quick Start - Initialize Client and List Experiment Metrics
 
 The Azure OnlineExperimentation REST client library initialization requires two parameters:
 
 - The `endpoint` property value from the [`Microsoft.OnlineExperimentation/workspaces`](https://learn.microsoft.com/azure/templates/microsoft.onlineexperimentation/workspaces) resource.
-- A `TokenCredential` for authentication, the simplest approach is to use [`DefaultAzureCredential`](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/onlineexperimentation_1.0.0-beta.1/sdk/identity/identity/README.md#defaultazurecredential).
+- A `TokenCredential` for authentication, the simplest approach is to use [`DefaultAzureCredential`](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md#defaultazurecredential).
 
 ```ts snippet:ListExperimentMetrics
 import { DefaultAzureCredential } from "@azure/identity";
@@ -104,5 +104,5 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/onlineexperimentation_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 

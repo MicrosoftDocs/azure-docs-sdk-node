@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-projects, ai
-ms.date: 01/28/2026
+ms.date: 02/20/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: ai
 ---
-# Azure AI Projects client library for JavaScript - version 2.0.0-beta.4 
+# Azure AI Projects client library for JavaScript - version 2.0.0-alpha.20260220.2 
 
 
 The AI Projects client library (in preview) is part of the Microsoft Foundry SDK, and provides easy access to
@@ -44,10 +44,10 @@ resources in your Microsoft Foundry Project. Use it to:
 The client library uses version `2025-11-15-preview` of the Microsoft Foundry [data plane REST APIs](https://aka.ms/azsdk/azure-ai-projects-v2/api-reference-2025-11-15-preview).
 
 [Product documentation](https://aka.ms/azsdk/azure-ai-projects-v2/product-doc)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples)
 | [Package (npm)](https://www.npmjs.com/package/@azure/ai-projects)
 | [API reference documentation](https://learn.microsoft.com/javascript/api/overview/azure/ai-projects-readme?view=azure-node-v1)
-| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects)
+| [SDK source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects)
 
 ## Table of contents
 
@@ -221,7 +221,7 @@ const response = await openAIClient.responses.create({
 console.log(`Response output: ${response.output_text}`);
 ```
 
-See the full sample code in [agentCodeInterpreter.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/agentCodeInterpreter.ts).
+See the full sample code in [agentCodeInterpreter.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/agentCodeInterpreter.ts).
 
 **File Search**
 
@@ -264,7 +264,7 @@ const agent = await project.agents.createVersion("StreamingFileSearchAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentFileSearchStream.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentFileSearchStream.ts).
+See the full sample code in [agentFileSearchStream.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentFileSearchStream.ts).
 
 **Image Generation**
 
@@ -371,7 +371,7 @@ const response = await openAIClient.responses.create(
 console.log(`Response: ${response.output_text}`);
 ```
 
-See the full sample code in [agentWebSearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentWebSearch.ts).
+See the full sample code in [agentWebSearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentWebSearch.ts).
 
 **Computer Use**
 
@@ -400,7 +400,7 @@ console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${age
 
 *After calling `responses.create()`, process the response in an interaction loop. Handle `computer_call` output items and provide screenshots as `computer_call_output` with `computer_screenshot` type to continue the interaction.*
 
-See the full sample code in [agentComputerUse.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentComputerUse.ts).
+See the full sample code in [agentComputerUse.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentComputerUse.ts).
 
 **Model Context Protocol (MCP)**
 
@@ -443,7 +443,7 @@ const response = await openAIClient.responses.create(
 
 *After calling `responses.create()`, check for `mcp_approval_request` items in the response output. Send back `McpApprovalResponse` with your approval decision to allow the agent to continue its work.*
 
-See the full sample code in [agentMcp.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentMcp.ts).
+See the full sample code in [agentMcp.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentMcp.ts).
 
 **OpenAPI**
 
@@ -471,7 +471,7 @@ const agent = await project.agents.createVersion("MyOpenApiAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentOpenApi.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentOpenApi.ts).
+See the full sample code in [agentOpenApi.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentOpenApi.ts).
 
 **Function Tool**
 
@@ -511,7 +511,7 @@ console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${age
 
 *After calling `responses.create()`, process `function_call` items from response output, execute your function logic with the provided arguments, and send back `FunctionCallOutput` with the results.*
 
-See the full sample code in [agentFunctionTool.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/agentFunctionTool.ts).
+See the full sample code in [agentFunctionTool.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/agentFunctionTool.ts).
 
 * **Memory Search Tool**
 
@@ -559,7 +559,7 @@ const agent = await project.agents.createVersion("MemorySearchAgent", {
 });
 ```
 
-See the full sample code in [agentMemorySearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentMemorySearch.ts).
+See the full sample code in [agentMemorySearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentMemorySearch.ts).
 
 #### Connection-Based Tools
 
@@ -595,7 +595,7 @@ const agent = await project.agents.createVersion("MyAISearchAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentAiSearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentAiSearch.ts).
+See the full sample code in [agentAiSearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentAiSearch.ts).
 
 **Bing Grounding**
 
@@ -623,7 +623,7 @@ const agent = await project.agents.createVersion("MyBingGroundingAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentBingGrounding.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentBingGrounding.ts).
+See the full sample code in [agentBingGrounding.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentBingGrounding.ts).
 
 **Bing Custom Search**
 
@@ -653,7 +653,7 @@ const agent = await project.agents.createVersion("MyAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentBingCustomSearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentBingCustomSearch.ts).
+See the full sample code in [agentBingCustomSearch.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentBingCustomSearch.ts).
 
 **Microsoft Fabric**
 
@@ -681,7 +681,7 @@ const agent = await project.agents.createVersion("MyFabricAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentFabric.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentFabric.ts).
+See the full sample code in [agentFabric.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentFabric.ts).
 
 **SharePoint**
 
@@ -711,7 +711,7 @@ const agent = await project.agents.createVersion("MyAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentSharepoint.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentSharepoint.ts).
+See the full sample code in [agentSharepoint.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentSharepoint.ts).
 
 **Browser Automation**
 
@@ -740,7 +740,7 @@ const agent = await project.agents.createVersion("MyAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentBrowserAutomation.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentBrowserAutomation.ts).
+See the full sample code in [agentBrowserAutomation.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentBrowserAutomation.ts).
 
 **MCP with Project Connection**
 
@@ -765,7 +765,7 @@ const agent = await project.agents.createVersion("agent-mcp-connection-auth", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentMcpConnectionAuth.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentMcpConnectionAuth.ts).
+See the full sample code in [agentMcpConnectionAuth.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentMcpConnectionAuth.ts).
 
 **Agent-to-Agent (A2A)**
 
@@ -788,7 +788,7 @@ const agent = await project.agents.createVersion("MyA2AAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentAgentToAgent.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentAgentToAgent.ts).
+See the full sample code in [agentAgentToAgent.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentAgentToAgent.ts).
 
 **OpenAPI with Project Connection**
 
@@ -835,9 +835,9 @@ const agent = await project.agents.createVersion("MyOpenApiConnectionAgent", {
 console.log(`Agent created (id: ${agent.id}, name: ${agent.name}, version: ${agent.version})`);
 ```
 
-See the full sample code in [agentOpenApiConnectionAuth.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/agents/tools/agentOpenApiConnectionAuth.ts).
+See the full sample code in [agentOpenApiConnectionAuth.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/agents/tools/agentOpenApiConnectionAuth.ts).
 
-For complete working examples of all tools, see the [samples-dev directory](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev).
+For complete working examples of all tools, see the [samples-dev directory](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples-dev).
 
 ### Evaluation
 
@@ -872,7 +872,7 @@ const evalObject = await openAIClient.evals.create({
 console.log(`Evaluation created (id: ${evalObject.id}, name: ${evalObject.name})`);
 ```
 
-See the full sample code in [agentEvaluation.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/evaluations/agentEvaluation.ts).
+See the full sample code in [agentEvaluation.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/evaluations/agentEvaluation.ts).
 
 ### Deployments operations
 
@@ -1194,7 +1194,7 @@ const options: AzureMonitorOpenTelemetryOptions = {
 useAzureMonitor(options);
 ```
 
-See the full sample code in [remoteTelemetry.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples-dev/telemetry/remoteTelemetry.ts).
+See the full sample code in [remoteTelemetry.ts](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects/samples-dev/telemetry/remoteTelemetry.ts).
 
 ## Troubleshooting
 
@@ -1230,7 +1230,7 @@ To report issues with the client library, or request additional features, please
 
 ## Next steps
 
-Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
+Have a look at the [package samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples) folder, containing fully runnable code.
 
 ## Contributing
 
@@ -1253,11 +1253,11 @@ additional questions or comments.
 
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [entra_id]: https://learn.microsoft.com/azure/ai-foundry/foundry-models/how-to/configure-entra-id?tabs=javascript&pivots=ai-foundry-portal
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.4/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [azure_sub]: https://azure.microsoft.com/free/
 [evaluators]: https://learn.microsoft.com/azure/ai-studio/how-to/develop/evaluate-sdk
 [evaluator_library]: https://learn.microsoft.com/azure/ai-studio/how-to/evaluate-generative-ai-app#view-and-manage-the-evaluators-in-the-evaluator-library
 [ai_foundry_data_plane_rest_apis]: https://learn.microsoft.com/rest/api/aifoundry/aiprojects/operation-groups?view=rest-aifoundry-aiprojects-v1
 [ai_project_client_endpoint]: https://learn.microsoft.com/azure/ai-foundry/how-to/develop/sdk-overview?tabs=sync&pivots=programming-language-javascript
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-projects_2.0.0-beta.4/sdk/ai/ai-projects/samples
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/ai/ai-projects/samples
 

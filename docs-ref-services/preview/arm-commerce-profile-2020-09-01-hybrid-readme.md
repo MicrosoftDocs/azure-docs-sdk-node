@@ -1,19 +1,19 @@
 ---
 title: Azure UsageManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-commerce, commerce
+keywords: Azure, javascript, SDK, API, @azure/arm-commerce-profile-2020-09-01-hybrid, commerce
 ms.date: 02/20/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: commerce
 ---
-# Azure UsageManagement client library for JavaScript - version 4.0.0-alpha.20260220.1 
+# Azure UsageManagement client library for JavaScript - version 2.1.1-alpha.20260220.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure UsageManagement client.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/commerce/arm-commerce) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-commerce) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-commerce?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/commerce/arm-commerce-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-commerce-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-commerce-profile-2020-09-01-hybrid?view=azure-node-preview) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -29,12 +29,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-commerce` package
+### Install the `@azure/arm-commerce-profile-2020-09-01-hybrid` package
 
 Install the Azure UsageManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-commerce
+npm install @azure/arm-commerce-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `UsageManagementClient`
@@ -58,7 +58,7 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { UsageManagementClient } from "@azure/arm-commerce";
+import { UsageManagementClient } from "@azure/arm-commerce-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -69,7 +69,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { UsageManagementClient } from "@azure/arm-commerce";
+import { UsageManagementClient } from "@azure/arm-commerce-profile-2020-09-01-hybrid";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({

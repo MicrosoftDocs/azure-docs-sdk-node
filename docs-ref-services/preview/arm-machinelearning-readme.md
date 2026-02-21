@@ -1,21 +1,20 @@
 ---
-title: Azure ML Commitment Plans Management client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-commitmentplans, machinelearning
+title: 
+keywords: Azure, javascript, SDK, API, @azure/arm-machinelearning, machinelearning
 ms.date: 02/21/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: machinelearning
 ---
-# Azure ML Commitment Plans Management client library for JavaScript - version 2.0.0-alpha.20260220.1 
+# AzureMachineLearningServicesManagement client library for JavaScript
 
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for AzureMachineLearningServicesManagement client.
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ML Commitment Plans Management client.
+These APIs allow end users to operate on Azure Machine Learning Workspace resources.
 
-These APIs allow end users to operate on Azure Machine Learning Commitment Plans resources and their child Commitment Association resources. They support CRUD operations for commitment plans, get and list operations for commitment associations, moving commitment associations between commitment plans, and retrieving commitment plan usage history.
-
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/machinelearning/arm-commitmentplans) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-commitmentplans) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-commitmentplans?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/machinelearning/arm-machinelearning) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-machinelearning) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-machinelearning) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,18 +30,18 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-commitmentplans` package
+### Install the `@azure/arm-machinelearning` package
 
-Install the Azure ML Commitment Plans Management client library for JavaScript with `npm`:
+Install the AzureMachineLearningServicesManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-commitmentplans
+npm install @azure/arm-machinelearning
 ```
 
-### Create and authenticate a `AzureMLCommitmentPlansManagementClient`
+### Create and authenticate a `AzureMachineLearningServicesManagementClient`
 
-To create a client object to access the Azure ML Commitment Plans Management API, you will need the `endpoint` of your Azure ML Commitment Plans Management resource and a `credential`. The Azure ML Commitment Plans Management client can use Azure Active Directory credentials to authenticate.
-You can find the endpoint for your Azure ML Commitment Plans Management resource in the [Azure Portal][azure_portal].
+To create a client object to access the AzureMachineLearningServicesManagement API, you will need the `endpoint` of your AzureMachineLearningServicesManagement resource and a `credential`. The AzureMachineLearningServicesManagement client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your AzureMachineLearningServicesManagement resource in the [Azure Portal][azure_portal].
 
 You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
@@ -52,7 +51,7 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure ML Commitment Plans Management** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to AzureMachineLearningServicesManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
@@ -60,11 +59,11 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { AzureMLCommitmentPlansManagementClient } from "@azure/arm-commitmentplans";
+import { AzureMachineLearningServicesManagementClient } from "@azure/arm-machinelearning";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new AzureMLCommitmentPlansManagementClient(
+const client = new AzureMachineLearningServicesManagementClient(
   new DefaultAzureCredential(),
   subscriptionId,
 );
@@ -74,14 +73,14 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { AzureMLCommitmentPlansManagementClient } from "@azure/arm-commitmentplans";
+import { AzureMachineLearningServicesManagementClient } from "@azure/arm-machinelearning";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const client = new AzureMLCommitmentPlansManagementClient(credential, subscriptionId);
+const client = new AzureMachineLearningServicesManagementClient(credential, subscriptionId);
 ```
 
 ### JavaScript Bundle
@@ -90,9 +89,9 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ## Key concepts
 
-### AzureMLCommitmentPlansManagementClient
+### AzureMachineLearningServicesManagementClient
 
-`AzureMLCommitmentPlansManagementClient` is the primary interface for developers using the Azure ML Commitment Plans Management client library. Explore the methods on this client object to understand the different features of the Azure ML Commitment Plans Management service that you can access.
+`AzureMachineLearningServicesManagementClient` is the primary interface for developers using the AzureMachineLearningServicesManagement client library. Explore the methods on this client object to understand the different features of the AzureMachineLearningServicesManagement service that you can access.
 
 ## Troubleshooting
 

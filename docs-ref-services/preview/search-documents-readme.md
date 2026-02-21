@@ -1,12 +1,12 @@
 ---
 title: Azure AI Search client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/search-documents, search
-ms.date: 11/14/2025
+ms.date: 02/21/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: search
 ---
-# Azure AI Search client library for JavaScript - version 12.3.0-beta.1 
+# Azure AI Search client library for JavaScript - version 12.3.0-alpha.20260220.1 
 
 
 [Azure AI Search](https://learn.microsoft.com/azure/search/) (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.
@@ -40,12 +40,12 @@ Use the @azure/search-documents client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.3.0-beta.1/sdk/search/search-documents/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/search/search-documents/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/search-documents)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/search-documents)
 - [REST API documentation](https://learn.microsoft.com/rest/api/searchservice/)
 - [Product documentation](https://learn.microsoft.com/azure/search/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.3.0-beta.1/sdk/search/search-documents/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples)
 
 ## Getting started
 
@@ -60,7 +60,7 @@ npm install @azure/search-documents
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Microsoft Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.3.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -205,7 +205,7 @@ Typically you will only wish to [show a subset of search results](https://learn.
 
 ## Examples
 
-The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.3.0-beta.1/sdk/search/search-documents/samples) for much more.
+The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples) for much more.
 
 - [Creating an index](#create-an-index)
 - [Retrieving a specific document from your index](#retrieve-a-specific-document-from-an-index)
@@ -487,16 +487,16 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.3.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.3.0-beta.1/sdk/search/search-documents/samples)
+- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples)
 - [Read more about the Azure AI Search service](https://learn.microsoft.com/azure/search/search-what-is-azure-search)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.3.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
 

@@ -1,21 +1,21 @@
 ---
 title: Azure ServiceFabric client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/arm-servicefabric, servicefabric
-ms.date: 02/11/2025
+ms.date: 02/21/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: servicefabric
 ---
-# Azure ServiceFabric client library for JavaScript - version 1.0.0-beta.2 
+# Azure ServiceFabric client library for JavaScript - version 1.0.0-alpha.20260219.1 
 
 
 Service Fabric Client
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-servicefabric_1.0.0-beta.2/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-servicefabric_1.0.0-beta.2/sdk/servicefabric/arm-servicefabric-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/servicefabric/arm-servicefabric-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/arm-servicefabric)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/arm-servicefabric?view=azure-node-preview)
 - [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -40,14 +40,14 @@ npm install @azure-rest/arm-servicefabric
 
 ### Create and authenticate a `ServiceFabricClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/arm-servicefabric_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-servicefabric_1.0.0-beta.2/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-servicefabric_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-servicefabric_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -59,24 +59,34 @@ The following section shows you how to initialize and authenticate your client, 
 
 ### List All Clusters
 
-```typescript
-import ServiceFabricManagementClient from "@azure-rest/arm-servicefabric";
+```ts snippet:ReadmeSampleListAllClusters
 import { DefaultAzureCredential } from "@azure/identity";
+import ServiceFabricManagementClient, {
+  isUnexpected,
+  paginate,
+} from "@azure-rest/arm-servicefabric";
 
-async function listClusters() {
-  const subscriptionId = "00000000-0000-0000-0000-000000000000";
-  const credential = new DefaultAzureCredential();
-  const client = ServiceFabricManagementClient(credential);
-  const result = await client
-    .path(
-      "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters",
-      subscriptionId,
-    )
-    .get();
-  console.log(result);
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const credential = new DefaultAzureCredential();
+const client = ServiceFabricManagementClient(credential);
+
+const result = await client
+  .path(
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters",
+    subscriptionId,
+  )
+  .get();
+
+if (isUnexpected(result)) {
+  throw result.body.error;
 }
 
-listClusters().catch(console.error);
+const clusters = paginate(client, result);
+for await (const cluster of clusters) {
+  console.log(`Cluster name: ${cluster.name}`);
+  console.log(`Cluster id: ${cluster.id}`);
+  console.log(`Cluster type: ${cluster.type}`);
+}
 ```
 
 ## Troubleshooting
@@ -85,11 +95,11 @@ listClusters().catch(console.error);
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts snippet:SetLogLevel
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/arm-servicefabric_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 

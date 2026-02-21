@@ -1,23 +1,23 @@
 ---
 title: Azure IoT Models Repository client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/iot-modelsrepository,
-ms.date: 05/28/2021
+keywords: Azure, javascript, SDK, API, @azure/iot-modelsrepository, iot
+ms.date: 02/21/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure
+ms.service: iot
 ---
-# Azure IoT Models Repository client library for JavaScript - version 1.0.0-beta.2 
+# Azure IoT Models Repository client library for JavaScript - version 1.0.0-alpha.20260220.1 
 
 
 This package contains an isomorphic Client Library for Azure IoT Models Repository in JavaScript. Use the Azure IoT Models Repository library for JavaScript to pull DTDL files from remote endpoints.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/iot-modelsrepository_1.0.0-beta.2/sdk/iot/iot-modelsrepository) |
-[Package (npm)](https://www.npmjs.com/package/@azure/iot-modelsrepository/) |
-Samples
+Key links:
 
--------------------------------------
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/iot/iot-modelsrepository)
+- [Package (npm)](https://www.npmjs.com/package/@azure/iot-modelsrepository/)
+- Samples
 
-# Getting started
+## Getting started
 
 ## Key concepts
 
@@ -25,8 +25,10 @@ The Azure IoT Models Repository library for JavaScript provides functionality fo
 
 ### Currently supported environments
 
-- Node.js version 8.x.x or higher
-- Browser JavaScript
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
+- Latest versions of Safari, Chrome, Edge, and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### How to Install
 
@@ -36,34 +38,40 @@ The preferred way to install the Azure IoT Models Repository client library for 
 npm install @azure/iot-modelsrepository
 ```
 
-# Examples
+## Examples
 
+### Initializing the Models Repository Client
 
-## Initializing the Models Repository Client
+```ts snippet:ReadmeSampleCreate_Global
+import { ModelsRepositoryClient } from "@azure/iot-modelsrepository";
 
-```ts
-// When no URI is provided for instantiation, the Azure IoT Models Repository global endpoint
-// https://devicemodels.azure.com/ is used and the model dependency resolution
-// configuration is set to TryFromExpanded.
 const client = new ModelsRepositoryClient();
 console.log(`Initialized client point to global endpoint: ${client.repositoryLocation}`);
 ```
-```ts
-// The client will also work with a local filesystem URI. This example shows initalization
+
+```ts snippet:ReadmeSampleCreate_Local
+import { ModelsRepositoryClient } from "@azure/iot-modelsrepository";
+
+// The client will also work with a local filesystem URI. This example shows initialization
 // with a local URI and disabling model dependency resolution.
-const client = new ModelsRepositoryClient({repositoryLocation: 'file:///path/to/repository/', dependencyResolution: 'disabled'});
+const client = new ModelsRepositoryClient({
+  repositoryLocation: "file:///path/to/repository/",
+  dependencyResolution: "disabled",
+});
 console.log(`Initialized client pointing to local path: ${client.repositoryLocation}`);
 ```
 
-## Publish Models
+### Publish Models
 
-Publishing models to the models repository requires [exercising](https://docs.microsoft.com/azure/iot-pnp/concepts-model-repository#publish-a-model) common GitHub workflows.
+Publishing models to the models repository requires [exercising](https://learn.microsoft.com/azure/iot-pnp/concepts-model-repository#publish-a-model) common GitHub workflows.
 
-## Get Models
+### Get Models
 
 After publishing, your model(s) will be available for consumption from the global repository endpoint. The following snippet shows how to retrieve the corresponding JSON-LD content.
 
-```ts
+```ts snippet:ReadmeSampleGetModels
+import { ModelsRepositoryClient } from "@azure/iot-modelsrepository";
+
 // Global endpoint client
 const client = new ModelsRepositoryClient();
 
@@ -71,20 +79,25 @@ const client = new ModelsRepositoryClient();
 // If the model dependency resolution configuration is not disabled, then models in which the
 // target dtmi depends on will also be included in the returned object (mapping dtmis to model objects).
 const dtmi = "dtmi:com:example:TemperatureController;1";
-const models = await client.getModels(dtmi, {dependencyResolution: 'tryFromExpanded'});
+const models = await client.getModels(dtmi, { dependencyResolution: "tryFromExpanded" });
 
 // In this case the above dtmi has 2 model dependencies.
 // dtmi:com:example:Thermostat;1 and dtmi:azure:DeviceManagement:DeviceInformation;1
-console.log(`${dtmi} resolved in ${models.keys().length} interfaces.`);
+console.log(`${dtmi} resolved in ${Object.keys(models).length} interfaces.`);
 ```
 
 GitHub pull-request workflows are a core aspect of the IoT Models Repository service. To submit models, the user is expected to fork and clone the global [models repository project](https://github.com/Azure/iot-plugandplay-models) then iterate against the local copy. Changes would then be pushed to the fork (ideally in a new branch) and a PR created against the global repository.
 
 To support this workflow and similar use cases, the client supports initialization with a local file-system URI. You can use this for example, to test and ensure newly added models to the locally cloned models repository are in their proper locations.
 
-```ts
+```ts snippet:ReadmeSampleGetModels_Local
+import { ModelsRepositoryClient } from "@azure/iot-modelsrepository";
+
 // Local sample repository client
-const client = new ModelsRepositoryClient(`file:///path/to/repository/`);
+const client = new ModelsRepositoryClient({
+  repositoryLocation: "file:///path/to/repository/",
+  dependencyResolution: "disabled",
+});
 
 // The output of getModels() will include at least the definition for the target dtmi.
 // If the model dependency resolution configuration is not disabled, then models in which the
@@ -94,33 +107,40 @@ const models = await client.getModels(dtmi);
 
 // In this case the above dtmi has 2 model dependencies.
 // dtmi:com:example:Thermostat;1 and dtmi:azure:DeviceManagement:DeviceInformation;1
-console.log(`${dtmi} resolved in ${models.keys().length} interfaces.`);
+console.log(`${dtmi} resolved in {Object.keys(models).length} interfaces.`);
 ```
 
 You are also able to get definitions for multiple root models at a time by leveraging the `GetModels` overload.
 
-```ts
+```ts snippet:ReadmeSampleGetModels_Multiple
+import { ModelsRepositoryClient } from "@azure/iot-modelsrepository";
+
 // Global endpoint client
 const client = new ModelsRepositoryClient();
 
-const dtmis = ["dtmi:com:example:TemperatureController;1", "dtmi:com:example:azuresphere:sampledevice;1"];
+const dtmis = [
+  "dtmi:com:example:TemperatureController;1",
+  "dtmi:com:example:azuresphere:sampledevice;1",
+];
 const models = await client.getModels(dtmis);
 
 // In this case the dtmi "dtmi:com:example:TemperatureController;1" has 2 model dependencies
 // and the dtmi "dtmi:com:example:azuresphere:sampledevice;1" has no additional dependencies.
 // The returned IDictionary will include 4 models.
-console.log(`${dtmis.toString()} resolved in ${models.keys().length} interfaces.`);
+console.log(`${dtmis.toString()} resolved in ${Object.keys(models.keys).length} interfaces.`);
 ```
 
-## Digital Twins Model Parser Integration
+### Digital Twins Model Parser Integration
 
-*When the Digital Twins Model Parser is completed, we will update you with information on how to integrate this client.*
+_When the Digital Twins Model Parser is completed, we will update you with information on how to integrate this client._
 
-## DtmiConventions utility functions
+### DtmiConventions utility functions
 
 The IoT Models Repository applies a set of conventions for organizing digital twin models. This package exposes two auxiliary functions related to `DtmiConventions`, `getModelUri` and `isValidDtmi`. These same functions are used throughout the client.
 
-```ts
+```ts snippet:ReadmeSampleDtmiConventions
+import { isValidDtmi } from "@azure/iot-modelsrepository";
+
 // This snippet shows how to validate a given DTMI string is well-formed.
 
 // Returns true
@@ -130,43 +150,62 @@ isValidDtmi("dtmi:com:example:Thermostat;1");
 isValidDtmi("dtmi:com:example:Thermostat");
 ```
 
-```ts
-// This snippet shows obtaining a fully qualified path to a model file.
+The `getModelUri` function is used to obtain a fully qualified path to a model file. This can be used to retrieve a model file from a local or remote repository. This snippet shows obtaining a fully qualified path to a model file.
 
+```ts snippet:ReadmeSampleGetModelUri_Local
+import { getModelUri } from "@azure/iot-modelsrepository";
+
+// This snippet shows obtaining a fully qualified path to a model file.
 // Local repository example
 const localRepositoryUri: string = "file:///path/to/repository/";
-const fullyQualifiedModelPath: string =
-    getModelUri("dtmi:com:example:Thermostat;1", localRepositoryUri);
-
+const fullyQualifiedModelPath: string = getModelUri(
+  "dtmi:com:example:Thermostat;1",
+  localRepositoryUri,
+);
 // Prints '/path/to/repository/dtmi/com/example/thermostat-1.json'
 console.log(fullyQualifiedModelPath);
+```
+
+```ts snippet:ReadmeSampleGetModelUri_Remote
+import { getModelUri } from "@azure/iot-modelsrepository";
 
 // Remote repository example
 const remoteRepositoryUri: string = "https://contoso.com/models/";
-const fullyQualifiedModelPath: string =
-    GetModelUri("dtmi:com:example:Thermostat;1", remoteRepositoryUri);
-
+const fullyQualifiedModelPath: string = getModelUri(
+  "dtmi:com:example:Thermostat;1",
+  remoteRepositoryUri,
+);
 // Prints 'https://contoso.com/models/dtmi/com/example/thermostat-1.json'
 console.log(fullyQualifiedModelPath);
 ```
 
------------------------------------------
+---
 
-# Troubleshooting
+## Troubleshooting
 
 - If you run into an error, first make sure the model you are access exists at the location you are attempting to get it from.
 
-# Next steps
+### Logging
 
-- Review the [DTDL Spec](https://docs.microsoft.com/azure/iot-pnp/concepts-model-parser).
+Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
+
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
+
+setLogLevel("info");
+```
+
+## Next steps
+
+- Review the [DTDL Spec](https://learn.microsoft.com/azure/iot-pnp/concepts-model-parser).
 - Understand the [Device Models Repository](https://devicemodels.azure.com/).
-- Code a IoT Plug and Play 'Device' using the [Azure IoT SDK for Node](https://github.com/Azure/azure-iot-sdk-node/tree/master/device/samples/pnp/readme.md).  
+- Code a IoT Plug and Play 'Device' using the [Azure IoT SDK for Node](https://github.com/Azure/azure-iot-sdk-node/tree/master/device/samples#plug-and-play-examples).
 
-# Related projects
+## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-# Contributing
+## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us

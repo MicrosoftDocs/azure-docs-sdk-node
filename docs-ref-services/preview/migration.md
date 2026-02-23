@@ -1,7 +1,7 @@
 ---
 title: Azure Migration SDK for JavaScript
 description: Reference for Azure Migration SDK for JavaScript
-ms.date: 02/20/2026
+ms.date: 02/23/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: migration

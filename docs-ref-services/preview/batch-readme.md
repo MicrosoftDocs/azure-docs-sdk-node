@@ -1,12 +1,12 @@
 ---
 title: Azure Batch client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/batch, batch
-ms.date: 02/06/2026
+ms.date: 02/23/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: batch
 ---
-# Azure Batch client library for JavaScript - version 13.0.0-beta.1 
+# Azure Batch client library for JavaScript - version 13.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Batch client.
@@ -20,7 +20,7 @@ Azure Batch provides Cloud-scale job scheduling and compute management.
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/batch_13.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/batch_13.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ Azure batch supports authentication either via Microsoft Entra ID or Shared Key.
 
 #### Microsoft Entra ID
 
-You can authenticate with Azure Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/batch_13.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/batch_13.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -115,12 +115,12 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/batch_13.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/batch_13.0.0-beta.2/sdk/core/logger).
 
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/batch_13.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/batch_13.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -128,6 +128,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/batch_13.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/batch_13.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/batch_13.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/batch_13.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

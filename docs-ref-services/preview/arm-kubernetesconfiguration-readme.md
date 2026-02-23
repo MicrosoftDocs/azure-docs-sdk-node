@@ -1,21 +1,21 @@
 ---
-title: Azure Extensions client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-kubernetesconfiguration-extensions, kubernetesconfiguration
+title: Azure SourceControlConfiguration client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/arm-kubernetesconfiguration, kubernetesconfiguration
 ms.date: 02/23/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesconfiguration
 ---
-# Azure Extensions client library for JavaScript - version 1.0.0-alpha.20260223.1 
+# Azure SourceControlConfiguration client library for JavaScript - version 6.1.2-alpha.20260223.1 
 
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Extensions client.
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SourceControlConfiguration client.
 
-KubernetesConfiguration Extensions Client
+KubernetesConfiguration Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/kubernetesconfiguration/arm-kubernetesconfiguration-extensions) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-kubernetesconfiguration-extensions) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-kubernetesconfiguration-extensions?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/kubernetesconfiguration/arm-kubernetesconfiguration) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-kubernetesconfiguration) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-kubernetesconfiguration) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,18 +31,18 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-kubernetesconfiguration-extensions` package
+### Install the `@azure/arm-kubernetesconfiguration` package
 
-Install the Azure Extensions client library for JavaScript with `npm`:
+Install the Azure SourceControlConfiguration client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-kubernetesconfiguration-extensions
+npm install @azure/arm-kubernetesconfiguration
 ```
 
-### Create and authenticate a `ExtensionsClient`
+### Create and authenticate a `SourceControlConfigurationClient`
 
-To create a client object to access the Azure Extensions API, you will need the `endpoint` of your Azure Extensions resource and a `credential`. The Azure Extensions client can use Azure Active Directory credentials to authenticate.
-You can find the endpoint for your Azure Extensions resource in the [Azure Portal][azure_portal].
+To create a client object to access the Azure SourceControlConfiguration API, you will need the `endpoint` of your Azure SourceControlConfiguration resource and a `credential`. The Azure SourceControlConfiguration client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your Azure SourceControlConfiguration resource in the [Azure Portal][azure_portal].
 
 You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
@@ -52,42 +52,44 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure Extensions** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to Azure SourceControlConfiguration** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { ExtensionsClient } from "@azure/arm-kubernetesconfiguration-extensions";
+import { SourceControlConfigurationClient } from "@azure/arm-kubernetesconfiguration";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new ExtensionsClient(new DefaultAzureCredential(), subscriptionId);
+const client = new SourceControlConfigurationClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { ExtensionsClient } from "@azure/arm-kubernetesconfiguration-extensions";
+import { SourceControlConfigurationClient } from "@azure/arm-kubernetesconfiguration";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const client = new ExtensionsClient(credential, subscriptionId);
+const client = new SourceControlConfigurationClient(credential, subscriptionId);
 ```
 
 ### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
 
-### ExtensionsClient
+### SourceControlConfigurationClient
 
-`ExtensionsClient` is the primary interface for developers using the Azure Extensions client library. Explore the methods on this client object to understand the different features of the Azure Extensions service that you can access.
+`SourceControlConfigurationClient` is the primary interface for developers using the Azure SourceControlConfiguration client library. Explore the methods on this client object to understand the different features of the Azure SourceControlConfiguration service that you can access.
 
 ## Troubleshooting
 
@@ -114,7 +116,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
-
 
 [azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

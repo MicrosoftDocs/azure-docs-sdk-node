@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 01/15/2026
+ms.date: 02/24/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -24,7 +24,7 @@ ms.service: monitor
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.15.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.16.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -49,6 +49,9 @@ useAzureMonitor(options);
 
 - Connection String can be set via `APPLICATIONINSIGHTS_CONNECTION_STRING`.
 - Sampler can be set via the OpenTelemetry env vars `OTEL_TRACES_SAMPLER` and `OTEL_TRACES_SAMPLER_ARG` (takes precedence over the `samplingRatio` option). Supported sampler values: `microsoft.rate_limited`, `microsoft.fixed_percentage`, `always_on`, `always_off`, `trace_id_ratio`, `parentbased_always_on`, `parentbased_always_off`, `parentbased_trace_id_ratio`. For `microsoft.rate_limited`, the arg is spans per second; for `trace_id_ratio`/parentbased, the arg is a probability in [0,1]. When the arg is omitted, defaults apply (rate limit disabled; probability defaults to 1). See the upstream OpenTelemetry environment variable spec for full context: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/.
+- To use the **fixed percentage sampler** (instead of the default rate-limited sampler), you can either:
+  - Set the environment variable `OTEL_TRACES_SAMPLER=microsoft.fixed_percentage` with an optional `OTEL_TRACES_SAMPLER_ARG` for the sampling probability (e.g., `0.5` for 50%).
+  - Set `tracesPerSecond: 0` in the distro options, which disables rate limiting and falls back to using `samplingRatio` for fixed percentage sampling.
 
 ### ESM Support
 
@@ -139,13 +142,18 @@ useAzureMonitor(options);
   </tr>
   <tr>
     <td><code>azureMonitorExporterOptions</code></td>
-    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.15.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
+    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.16.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
     <td></td>
   </tr>
   <tr>
     <td><code>samplingRatio</code></td>
-    <td>Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out.</td>
+    <td>Sampling ratio must take a value in the range [0,1], 1 meaning all data will sampled and 0 all Tracing data will be sampled out. Only used when <code>tracesPerSecond</code> is set to 0.</td>
     <td><code>1</code></td>
+  </tr>
+  <tr>
+    <td><code>tracesPerSecond</code></td>
+    <td>The maximum number of traces to sample per second using the rate-limited sampler. Set to 0 to disable rate limiting and use fixed percentage sampling with <code>samplingRatio</code> instead.</td>
+    <td><code>5</code></td>
   </tr>
   <tr>
     <td><code>instrumentationOptions</code></td>
@@ -260,7 +268,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-pg)
 - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis)
 - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis-4)
-- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.15.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.16.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 
 ### Metrics
 
@@ -591,7 +599,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.15.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.16.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -605,5 +613,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.15.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.16.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

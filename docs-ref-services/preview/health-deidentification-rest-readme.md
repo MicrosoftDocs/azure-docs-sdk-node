@@ -1,12 +1,12 @@
 ---
 title: Azure Health Data Services de-identification service REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/health-deidentification, healthdataaiservices
-ms.date: 09/30/2025
+ms.date: 02/24/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: healthdataaiservices
 ---
-# Azure Health Data Services de-identification service REST client library for JavaScript - version 1.1.0-beta.1 
+# Azure Health Data Services de-identification service REST client library for JavaScript - version 1.1.0-alpha.20260223.1 
 
 
 This package contains a client library for the de-identification service in Azure Health Data Services which
@@ -19,11 +19,11 @@ Use the client library for the de-identification service to:
 - Replace PHI in unstructured text with realistic surrogate values
 - Manage asynchronous jobs to de-identify documents in Azure Storage
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/health-deidentification_1.1.0-beta.1/documentation/rest-clients.md) to use this library.**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library.**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/health-deidentification_1.1.0-beta.1/sdk/healthdataaiservices/health-deidentification-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/healthdataaiservices/health-deidentification-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/health-deidentification)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure-rest/health-deidentification)
 - [Product documentation][product_documentation]
@@ -57,8 +57,8 @@ You can authenticate with Microsoft Entra ID using the [Azure Identity library][
 npm install @azure/identity
 ```
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/health-deidentification_1.1.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/health-deidentification_1.1.0-beta.1/sdk/identity/identity#defaultazurecredential) can be used to authenticate the client.
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential) can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
 `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
@@ -228,13 +228,13 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/health-deidentification_1.1.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 <!-- LINKS -->
 
 [azure_sub]: https://azure.microsoft.com/free/
 [deid_quickstart]: https://learn.microsoft.com/azure/healthcare-apis/deidentification/quickstart
-[string_index]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/health-deidentification_1.1.0-beta.1/sdk/healthdataaiservices/health-deidentification-rest/src/outputModels.ts#L175
+[string_index]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/healthdataaiservices/health-deidentification-rest/src/outputModels.ts#L175
 [character_encoding]: https://learn.microsoft.com/dotnet/standard/base-types/character-encoding-introduction
 [deid_redact]: https://learn.microsoft.com/azure/healthcare-apis/deidentification/redaction-format
 [deid_rbac]: https://learn.microsoft.com/azure/healthcare-apis/deidentification/manage-access-rbac

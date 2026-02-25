@@ -13,6 +13,7 @@ interfaces:
   - '@azure/app-configuration.AddConfigurationSettingOptions'
   - '@azure/app-configuration.AddConfigurationSettingResponse'
   - '@azure/app-configuration.AppConfigurationClientOptions'
+  - '@azure/app-configuration.CheckConfigurationSettingsOptions'
   - '@azure/app-configuration.ConfigurationSettingId'
   - '@azure/app-configuration.ConfigurationSettingsFilter'
   - '@azure/app-configuration.ConfigurationSnapshot'
@@ -54,6 +55,7 @@ interfaces:
   - '@azure/app-configuration.SetReadOnlyResponse'
   - '@azure/app-configuration.SettingLabel'
   - '@azure/app-configuration.SnapshotInfo'
+  - '@azure/app-configuration.SnapshotReferenceValue'
   - '@azure/app-configuration.SnapshotResponse'
   - '@azure/app-configuration.SyncTokenHeaderField'
   - '@azure/app-configuration.UpdateSnapshotOptions'
@@ -108,6 +110,21 @@ variables:
         type: >-
           "<xref uid="application/vnd.microsoft.appconfig.keyvaultref"
           />+json;charset=utf-8"
+  - name: snapshotReferenceContentType
+    uid: '@azure/app-configuration.snapshotReferenceContentType'
+    package: '@azure/app-configuration'
+    summary: content-type for the snapshot reference.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        snapshotReferenceContentType: "application/json;
+        profile="https://azconfig.io/mime-profiles/snapshot-ref"; charset=utf-8"
+      return:
+        description: ''
+        type: >-
+          "application/json; profile="https:<xref
+          uid="//azconfig.io/mime-profiles/snapshot-ref" />"; charset=utf-8"
 functions:
   - name: isFeatureFlag(ConfigurationSetting<string>)
     uid: '@azure/app-configuration.isFeatureFlag'
@@ -145,6 +162,32 @@ functions:
     syntax:
       content: >-
         function isSecretReference(setting: ConfigurationSetting<string>):
+        setting
+      parameters:
+        - id: setting
+          type: >-
+            <xref uid="@azure/app-configuration.ConfigurationSetting"
+            />&lt;string&gt;
+          description: ''
+      return:
+        description: ''
+        type: setting
+  - name: isSnapshotReference(ConfigurationSetting<string>)
+    uid: '@azure/app-configuration.isSnapshotReference'
+    package: '@azure/app-configuration'
+    summary: >-
+      Lets you know if the ConfigurationSetting is a snapshot reference.
+
+
+      [Checks if the content type is snapshotReferenceContentType
+      `"application/json;
+      profile=\"https://azconfig.io/mime-profiles/snapshot-ref\";
+      charset=utf-8"`]
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isSnapshotReference(setting: ConfigurationSetting<string>):
         setting
       parameters:
         - id: setting
@@ -201,3 +244,26 @@ functions:
         type: >-
           <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
           uid="@azure/app-configuration.SecretReferenceValue" />&gt;
+  - name: parseSnapshotReference(ConfigurationSetting<string>)
+    uid: '@azure/app-configuration.parseSnapshotReference'
+    package: '@azure/app-configuration'
+    summary: >-
+      Takes the ConfigurationSetting as input and returns the
+      ConfigurationSetting<SnapshotReferenceValue> by parsing the value string.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function parseSnapshotReference(setting: ConfigurationSetting<string>):
+        ConfigurationSetting<SnapshotReferenceValue>
+      parameters:
+        - id: setting
+          type: >-
+            <xref uid="@azure/app-configuration.ConfigurationSetting"
+            />&lt;string&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
+          uid="@azure/app-configuration.SnapshotReferenceValue" />&gt;

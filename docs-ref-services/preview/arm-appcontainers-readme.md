@@ -1,21 +1,21 @@
 ---
 title: Azure ContainerApps API client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-appcontainers, appcontainers
-ms.date: 08/22/2025
+ms.date: 02/26/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appcontainers
 ---
-# Azure ContainerApps API client library for JavaScript - version 3.0.0-beta.1 
+# Azure ContainerApps API client library for JavaScript - version 3.0.0-alpha.20260226.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ContainerApps API client.
 
-Functions is an extension resource to revisions and the api listed is used to proxy the call from Web RP to the function app's host process, this api is not exposed to users and only Web RP is allowed to invoke functions extension resource.
+Logic app is an extension resource on container app and the extension resource enables logic specific operations on the container app through the APIs listed.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appcontainers_3.0.0-beta.1/sdk/appcontainers/arm-appcontainers) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/appcontainers/arm-appcontainers) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-appcontainers) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-appcontainers?view=azure-node-preview) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-appcontainers) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -25,7 +25,7 @@ Functions is an extension resource to revisions and the api listed is used to pr
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-appcontainers_3.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +44,7 @@ npm install @azure/arm-appcontainers
 To create a client object to access the Azure ContainerApps API API, you will need the `endpoint` of your Azure ContainerApps API resource and a `credential`. The Azure ContainerApps API client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure ContainerApps API resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-appcontainers_3.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -101,7 +101,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appcontainers_3.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -109,7 +109,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-appcontainers_3.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -120,6 +120,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appcontainers_3.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appcontainers_3.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

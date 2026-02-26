@@ -1,21 +1,21 @@
 ---
 title: Azure DnsManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-dns, dns
+keywords: Azure, javascript, SDK, API, @azure/arm-dns-profile-2020-09-01-hybrid, dns
 ms.date: 02/26/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: dns
 ---
-# Azure DnsManagement client library for JavaScript - version 5.2.0-alpha.20260226.1 
+# Azure DnsManagement client library for JavaScript - version 2.1.2-alpha.20260226.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DnsManagement client.
 
 The DNS Management Client.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/dns/arm-dns) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-dns) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-dns?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/dns/arm-dns-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-dns-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-dns-profile-2020-09-01-hybrid) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-dns` package
+### Install the `@azure/arm-dns-profile-2020-09-01-hybrid` package
 
 Install the Azure DnsManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-dns
+npm install @azure/arm-dns-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `DnsManagementClient`
@@ -60,7 +60,7 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { DnsManagementClient } from "@azure/arm-dns";
+import { DnsManagementClient } from "@azure/arm-dns-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -71,7 +71,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { DnsManagementClient } from "@azure/arm-dns";
+import { DnsManagementClient } from "@azure/arm-dns-profile-2020-09-01-hybrid";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({

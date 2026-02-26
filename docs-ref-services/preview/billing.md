@@ -1,9 +1,9 @@
 ---
-title: Azure Billing modules for JavaScript
-description: Reference for Azure Billing modules for JavaScript
-ms.date: 07/18/2017
+title: Azure Billing SDK for JavaScript
+description: Reference for Azure Billing SDK for JavaScript
+ms.date: 02/26/2026
 ms.topic: reference
-ms.devlang: nodejs
+ms.devlang: javascript
 ms.service: billing
 manager: timlt
 ms.product: 
@@ -28,4 +28,3 @@ npm install @azure/arm-billing
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-billing)
 
 * For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
-

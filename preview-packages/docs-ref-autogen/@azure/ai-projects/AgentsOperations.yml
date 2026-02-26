@@ -17,12 +17,12 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        delete: (agentName: string, options?: AgentsDeleteAgentOptionalParams)
-        => Promise<DeleteAgentResponse>
+        delete: (agentName: string, options?: AgentsDeleteOptionalParams) =>
+        Promise<DeleteAgentResponse>
       return:
         description: ''
         type: >-
-          (agentName: string, options?: AgentsDeleteAgentOptionalParams) =&gt;
+          (agentName: string, options?: AgentsDeleteOptionalParams) =&gt;
           Promise&lt;DeleteAgentResponse&gt;
   - name: deleteVersion
     uid: '@azure/ai-projects.AgentsOperations.deleteVersion'
@@ -34,13 +34,13 @@ properties:
     syntax:
       content: >-
         deleteVersion: (agentName: string, agentVersion: string, options?:
-        AgentsDeleteAgentVersionOptionalParams) =>
+        AgentsDeleteVersionOptionalParams) =>
         Promise<DeleteAgentVersionResponse>
       return:
         description: ''
         type: >-
           (agentName: string, agentVersion: string, options?:
-          AgentsDeleteAgentVersionOptionalParams) =&gt;
+          AgentsDeleteVersionOptionalParams) =&gt;
           Promise&lt;DeleteAgentVersionResponse&gt;
   - name: get
     uid: '@azure/ai-projects.AgentsOperations.get'
@@ -51,12 +51,12 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        get: (agentName: string, options?: AgentsGetAgentOptionalParams) =>
+        get: (agentName: string, options?: AgentsGetOptionalParams) =>
         Promise<Agent>
       return:
         description: ''
         type: >-
-          (agentName: string, options?: AgentsGetAgentOptionalParams) =&gt;
+          (agentName: string, options?: AgentsGetOptionalParams) =&gt;
           Promise&lt;Agent&gt;
   - name: getVersion
     uid: '@azure/ai-projects.AgentsOperations.getVersion'
@@ -68,12 +68,12 @@ properties:
     syntax:
       content: >-
         getVersion: (agentName: string, agentVersion: string, options?:
-        AgentsGetAgentVersionOptionalParams) => Promise<AgentVersion>
+        AgentsGetVersionOptionalParams) => Promise<AgentVersion>
       return:
         description: ''
         type: >-
           (agentName: string, agentVersion: string, options?:
-          AgentsGetAgentVersionOptionalParams) =&gt; Promise&lt;AgentVersion&gt;
+          AgentsGetVersionOptionalParams) =&gt; Promise&lt;AgentVersion&gt;
   - name: list
     uid: '@azure/ai-projects.AgentsOperations.list'
     package: '@azure/ai-projects'
@@ -83,12 +83,12 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        list: (options?: AgentsListAgentsOptionalParams) =>
+        list: (options?: AgentsListOptionalParams) =>
         PagedAsyncIterableIterator<Agent, Agent[], PageSettings>
       return:
         description: ''
         type: >-
-          (options?: AgentsListAgentsOptionalParams) =&gt;
+          (options?: AgentsListOptionalParams) =&gt;
           PagedAsyncIterableIterator&lt;Agent, Agent[], PageSettings&gt;
   - name: listVersions
     uid: '@azure/ai-projects.AgentsOperations.listVersions'
@@ -100,83 +100,25 @@ properties:
     syntax:
       content: >-
         listVersions: (agentName: string, options?:
-        AgentsListAgentVersionsOptionalParams) =>
+        AgentsListVersionsOptionalParams) =>
         PagedAsyncIterableIterator<AgentVersion, AgentVersion[], PageSettings>
       return:
         description: ''
         type: >-
-          (agentName: string, options?: AgentsListAgentVersionsOptionalParams)
-          =&gt; PagedAsyncIterableIterator&lt;AgentVersion, AgentVersion[],
+          (agentName: string, options?: AgentsListVersionsOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;AgentVersion, AgentVersion[],
           PageSettings&gt;
-  - name: streamAgentContainerLogs
-    uid: '@azure/ai-projects.AgentsOperations.streamAgentContainerLogs'
-    package: '@azure/ai-projects'
-    summary: >-
-      Container log entry streamed from the container as text chunks.
-
-      Each chunk is a UTF-8 string that may be either a plain text log line
-
-      or a JSON-formatted log entry, depending on the type of container log
-      being streamed.
-
-      Clients should treat each chunk as opaque text and, if needed, attempt
-
-      to parse it as JSON based on their logging requirements.
-
-
-      For system logs, the format is JSON with the following structure:
-
-      {"TimeStamp":"2025-12-15T16:51:33Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Connecting
-      to the events
-      collector...","Reason":"StartingGettingEvents","EventSource":"ContainerAppController","Count":1}
-
-      {"TimeStamp":"2025-12-15T16:51:34Z","Type":"Normal","ContainerAppName":null,"RevisionName":null,"ReplicaName":null,"Msg":"Successfully
-      connected to events
-      server","Reason":"ConnectedToEventsServer","EventSource":"ContainerAppController","Count":1}
-
-
-      For console logs, the format is plain text as emitted by the container's
-      stdout/stderr.
-
-      2025-12-15T08:43:48.72656  Connecting to the container
-      'agent-container'...
-
-      2025-12-15T08:43:48.75451  Successfully Connected to container:
-      'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b',
-      Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']
-
-      2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - "GET
-      /readiness HTTP/1.1" 200 OK
-
-      2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET
-      /readiness HTTP/1.1" 200 OK
-
-      2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET
-      /readiness HTTP/1.1" 200 OK
-    fullName: streamAgentContainerLogs
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        streamAgentContainerLogs: (agentName: string, agentVersion: string,
-        options?: AgentsStreamAgentContainerLogsOptionalParams) => Promise<void>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, agentVersion: string, options?:
-          AgentsStreamAgentContainerLogsOptionalParams) =&gt;
-          Promise&lt;void&gt;
 methods:
-  - name: create(string, AgentDefinitionUnion, AgentsCreateAgentOptionalParams)
+  - name: create(string, AgentDefinitionUnion, AgentsCreateOptionalParams)
     uid: '@azure/ai-projects.AgentsOperations.create'
     package: '@azure/ai-projects'
-    summary: Creates an agent from a definition.
+    summary: Creates the agent.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function create(name: string, definition: AgentDefinitionUnion,
-        options?: AgentsCreateAgentOptionalParams): Promise<Agent>
+        options?: AgentsCreateOptionalParams): Promise<Agent>
       parameters:
         - id: name
           type: string
@@ -185,7 +127,7 @@ methods:
           type: <xref uid="@azure/ai-projects.AgentDefinitionUnion" />
           description: ''
         - id: options
-          type: <xref uid="@azure/ai-projects.AgentsCreateAgentOptionalParams" />
+          type: <xref uid="@azure/ai-projects.AgentsCreateOptionalParams" />
           description: ''
       return:
         description: ''
@@ -222,18 +164,16 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/ai-projects.Agent" />&gt;
-  - name: >-
-      createVersion(string, AgentDefinitionUnion,
-      AgentsCreateAgentVersionOptionalParams)
+  - name: createVersion(string, AgentDefinitionUnion, AgentsCreateOptionalParams)
     uid: '@azure/ai-projects.AgentsOperations.createVersion'
     package: '@azure/ai-projects'
-    summary: Create a new agent version from a definition.
+    summary: Create a new agent version.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function createVersion(agentName: string, definition:
-        AgentDefinitionUnion, options?: AgentsCreateAgentVersionOptionalParams):
+        AgentDefinitionUnion, options?: AgentsCreateOptionalParams):
         Promise<AgentVersion>
       parameters:
         - id: agentName
@@ -243,9 +183,7 @@ methods:
           type: <xref uid="@azure/ai-projects.AgentDefinitionUnion" />
           description: ''
         - id: options
-          type: >-
-            <xref
-            uid="@azure/ai-projects.AgentsCreateAgentVersionOptionalParams" />
+          type: <xref uid="@azure/ai-projects.AgentsCreateOptionalParams" />
           description: ''
       return:
         description: ''
@@ -283,8 +221,8 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/ai-projects.AgentVersion" />&gt;
-  - name: update(string, AgentDefinitionUnion, AgentsUpdateAgentOptionalParams)
-    uid: '@azure/ai-projects.AgentsOperations.update'
+  - name: update(string, AgentDefinitionUnion, AgentsUpdateOptionalParams)
+    uid: '@azure/ai-projects.AgentsOperations.update_1'
     package: '@azure/ai-projects'
     summary: >-
       Updates the agent by adding a new version if there are any changes to the
@@ -296,7 +234,7 @@ methods:
     syntax:
       content: >-
         function update(agentName: string, definition: AgentDefinitionUnion,
-        options?: AgentsUpdateAgentOptionalParams): Promise<Agent>
+        options?: AgentsUpdateOptionalParams): Promise<Agent>
       parameters:
         - id: agentName
           type: string
@@ -305,7 +243,7 @@ methods:
           type: <xref uid="@azure/ai-projects.AgentDefinitionUnion" />
           description: ''
         - id: options
-          type: <xref uid="@azure/ai-projects.AgentsUpdateAgentOptionalParams" />
+          type: <xref uid="@azure/ai-projects.AgentsUpdateOptionalParams" />
           description: ''
       return:
         description: ''
@@ -313,11 +251,11 @@ methods:
   - name: >-
       update(string, string, Record<string, any>,
       AgentsUpdateAgentFromManifestOptionalParams)
-    uid: '@azure/ai-projects.AgentsOperations.update_1'
+    uid: '@azure/ai-projects.AgentsOperations.update'
     package: '@azure/ai-projects'
     summary: >-
       Updates the agent from a manifest by adding a new version if there are any
-      changes.
+      changes to the agent definition.
 
       If no changes, returns the existing agent version.
     remarks: ''

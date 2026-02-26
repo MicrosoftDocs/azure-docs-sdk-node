@@ -1,12 +1,12 @@
 ---
 title: Azure VoiceLive client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/ai-voicelive, ai
-ms.date: 02/17/2026
+keywords: Azure, javascript, SDK, API, @azure/ai-voicelive, voicelive
+ms.date: 02/26/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: ai
+ms.service: voicelive
 ---
-# Azure VoiceLive client library for JavaScript - version 1.0.0-beta.3 
+# Azure VoiceLive client library for JavaScript - version 1.0.0-alpha.20260226.1 
 
 
 Azure VoiceLive is a managed service that enables low-latency, high-quality speech-to-speech interactions for voice agents. The service consolidates speech recognition, generative AI, and text-to-speech functionalities into a single, unified interface, providing an end-to-end solution for creating seamless voice-driven experiences.
@@ -79,7 +79,7 @@ Represents an active WebSocket connection for real-time voice communication. Thi
 The service uses session configuration to control various aspects of voice interaction:
 
 - **Turn Detection**: Configure how the service detects when users start and stop speaking
-- **Audio Processing**: Enable noise suppression and echo cancellation  
+- **Audio Processing**: Enable noise suppression and echo cancellation
 - **Voice Selection**: Choose from standard Azure voices, high-definition voices, or custom voices
 - **Model Selection**: Select the AI model (GPT-4o, GPT-4o-mini, Phi variants) that best fits your needs
 
@@ -87,11 +87,11 @@ The service uses session configuration to control various aspects of voice inter
 
 The VoiceLive API supports multiple AI models with different capabilities:
 
-| Model | Description | Use Case |
-|-------|-------------|----------|
-| `gpt-4o-realtime-preview` | GPT-4o with real-time audio processing | High-quality conversational AI |
-| `gpt-4o-mini-realtime-preview` | Lightweight GPT-4o variant | Fast, efficient interactions |
-| `phi4-mm-realtime` | Phi model with multimodal support | Cost-effective voice applications |
+| Model                          | Description                            | Use Case                          |
+| ------------------------------ | -------------------------------------- | --------------------------------- |
+| `gpt-4o-realtime-preview`      | GPT-4o with real-time audio processing | High-quality conversational AI    |
+| `gpt-4o-mini-realtime-preview` | Lightweight GPT-4o variant             | Fast, efficient interactions      |
+| `phi4-mm-realtime`             | Phi model with multimodal support      | Cost-effective voice applications |
 
 ### Conversational Enhancements
 
@@ -149,7 +149,7 @@ const session = await client.startSession({
 
 ## Authenticating with Azure Active Directory
 
-The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 To interact with the Azure VoiceLive service, you need to create an instance of the `VoiceLiveClient` class, a **service endpoint** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][defaultazurecredential], which is appropriate for most scenarios, including local development and production environments. We recommend using a [managed identity][managed_identity] for authentication in production environments.
 
@@ -410,16 +410,19 @@ const subscription = session.subscribe({
 ### Common errors and exceptions
 
 **Authentication Errors**: If you receive authentication errors, verify that:
+
 - Your Azure AI Foundry resource is correctly configured
 - Your API key or credential has the necessary permissions
 - The endpoint URL is correct and accessible
 
 **WebSocket Connection Issues**: VoiceLive uses WebSocket connections. Ensure that:
+
 - Your network allows WebSocket connections
 - Firewall rules permit connections to `*.cognitiveservices.azure.com`
 - Browser policies allow WebSocket and microphone access (for browser usage)
 
 **Audio Issues**: For audio-related problems:
+
 - Verify microphone permissions in the browser
 - Check that audio formats (PCM16, PCM24) are supported
 - Ensure proper audio context setup for playback
@@ -434,20 +437,20 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-voicelive_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
 You can find more code samples through the following links:
 
-- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/ai/ai-voicelive/samples)
-- [VoiceLive Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/ai/ai-voicelive/test)
+- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/rhurey/azure-sdk-for-js/tree/rhurey/move_voicelive/sdk/voicelive/ai-voicelive/samples)
+- [VoiceLive Test Cases](https://github.com/rhurey/azure-sdk-for-js/tree/rhurey/move_voicelive/sdk/voicelive/ai-voicelive/test)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [defaultazurecredential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest
-[managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview  
+[managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview
 [azure_identity]: https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest
 

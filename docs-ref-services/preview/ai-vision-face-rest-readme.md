@@ -1,12 +1,12 @@
 ---
 title: Azure AI Face client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-vision-face, azure-ai-face
-ms.date: 02/11/2025
+ms.date: 02/26/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-ai-face
 ---
-# Azure AI Face client library for JavaScript - version 1.0.0-beta.3 
+# Azure AI Face client library for JavaScript - version 1.0.0-alpha.20260226.1 
 
 
 The Azure AI Face service provides AI algorithms that detect, recognize, and analyze human faces in images. It includes the following main features:
@@ -20,9 +20,9 @@ The Azure AI Face service provides AI algorithms that detect, recognize, and ana
 - Group faces
 
 [Product documentation](https://learn.microsoft.com/azure/ai-services/computer-vision/overview-identity)
-| [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.3/sdk/face/ai-vision-face-rest)
+| [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/face/ai-vision-face-rest)
 | [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-vision-face)
-| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.3/sdk/face/ai-vision-face-rest/samples)
+| [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/face/ai-vision-face-rest/samples)
 | [API reference documentation](https://aka.ms/azsdk-javascript-face-ref)
 
 ## Getting started
@@ -31,7 +31,7 @@ The Azure AI Face service provides AI algorithms that detect, recognize, and ana
 
 - LTS versions of Node.js
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-vision-face_1.0.0-beta.3/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -386,12 +386,13 @@ const client = FaceClient(endpoint, credential);
 
 console.log("Create a new liveness session.");
 const createLivenessSessionResponse = await client
-  .path("/detectLiveness-sessions")
+  .path("/detectLiveness/singleModal/sessions")
   .post({
     body: {
       livenessOperationMode: "Passive",
       deviceCorrelationId: randomUUID(),
-      enableSessionImage: true,
+      sendResultsToClient: false,
+      authTokenTimeToLiveInSeconds: 60,
     },
   });
 
@@ -404,7 +405,7 @@ const { sessionId } = createLivenessSessionResponse.body;
 
 console.log("Get liveness detection results.");
 const getLivenessSessionResponse = await client
-  .path("/detectLiveness-sessions/{sessionId}", sessionId)
+  .path("/detectLiveness/singleModal/sessions/{sessionId}", sessionId)
   .get();
 
 if (isUnexpected(getLivenessSessionResponse)) {
@@ -427,26 +428,22 @@ const client = FaceClient(endpoint, credential);
 
 console.log("Create a new liveness with verify session with verify image.");
 const createLivenessSessionResponse = await client
-  .path("/detectLivenessWithVerify-sessions")
+  .path("/detectLivenessWithVerify/singleModal/sessions")
   .post({
     contentType: "multipart/form-data",
     body: [
       {
-        name: "verifyImage",
+        name: "VerifyImage",
         body: readFileSync("path/to/verify/image"),
-        filename: "verifyImage.jpg",
       },
       {
-        name: "livenessOperationMode",
-        body: "Passive",
-      },
-      {
-        name: "deviceCorrelationId",
-        body: randomUUID(),
-      },
-      {
-        name: "enableSessionImage",
-        body: true,
+        name: "Parameters",
+        body: {
+          livenessOperationMode: "Passive",
+          sendResultsToClient: false,
+          authTokenTimeToLiveInSeconds: 60,
+          deviceCorrelationId: randomUUID(),
+        },
       },
     ],
   });
@@ -460,7 +457,7 @@ const { sessionId } = createLivenessSessionResponse.body;
 
 console.log("Get the liveness detection and verification result.");
 const getLivenessSessionResultResponse = await client
-  .path("/detectLivenessWithVerify-sessions/{sessionId}", sessionId)
+  .path("/detectLivenessWithVerify/singleModal/sessions/{sessionId}", sessionId)
   .get();
 
 if (isUnexpected(getLivenessSessionResultResponse)) {
@@ -485,13 +482,13 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
 ### More sample code
 
-See the [Sample README](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-vision-face_1.0.0-beta.3/sdk/face/ai-vision-face-rest/samples) for several code snippets illustrating common patterns used in the Face JavaScript API.
+See the [Sample README](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/face/ai-vision-face-rest/samples) for several code snippets illustrating common patterns used in the Face JavaScript API.
 
 ### Additional documentation
 

@@ -1,21 +1,21 @@
 ---
 title: Azure iotHub client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-iothub, iothub
+keywords: Azure, javascript, SDK, API, @azure/arm-iothub-profile-2020-09-01-hybrid, iothub
 ms.date: 02/28/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: iothub
 ---
-# Azure iotHub client library for JavaScript - version 7.0.0-alpha.20260227.1 
+# Azure iotHub client library for JavaScript - version 2.1.2-alpha.20260227.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure iotHub client.
 
 Use this API to manage the IoT hubs in your Azure subscription.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/iothub/arm-iothub) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-iothub) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-iothub?view=azure-node-preview) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/iothub/arm-iothub-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-iothub-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-iothub-profile-2020-09-01-hybrid?view=azure-node-preview) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -31,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-iothub` package
+### Install the `@azure/arm-iothub-profile-2020-09-01-hybrid` package
 
 Install the Azure iotHub client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-iothub
+npm install @azure/arm-iothub-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `IotHubClient`
@@ -53,13 +53,14 @@ npm install @azure/identity
 ```
 
 You will also need to **register a new AAD application and grant access to Azure iotHub** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { IotHubClient } from "@azure/arm-iothub";
+import { IotHubClient } from "@azure/arm-iothub-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -70,7 +71,7 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { IotHubClient } from "@azure/arm-iothub";
+import { IotHubClient } from "@azure/arm-iothub-profile-2020-09-01-hybrid";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
@@ -81,6 +82,7 @@ const client = new IotHubClient(credential, subscriptionId);
 ```
 
 ### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
@@ -114,7 +116,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
-
 
 [azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

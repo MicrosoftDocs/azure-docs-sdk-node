@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: changeanalysis
 ---
-# Azure Change Analysis SDK for JavaScript - latest
-## Packages - latest
+# Azure Change Analysis SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](change-analysis-index.md)]

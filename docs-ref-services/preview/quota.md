@@ -1,7 +1,7 @@
 ---
 title: Azure Quota SDK for JavaScript
 description: Reference for Azure Quota SDK for JavaScript
-ms.date: 03/09/2026
+ms.date: 03/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: quota

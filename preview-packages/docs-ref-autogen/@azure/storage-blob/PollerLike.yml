@@ -1,0 +1,164 @@
+### YamlMime:TSType
+name: PollerLike
+uid: '@azure/storage-blob.PollerLike'
+package: '@azure/storage-blob'
+summary: >-
+  Abstract representation of a poller, intended to expose just the minimal API
+  that the user needs to work with.
+fullName: PollerLike<TState, TResult>
+remarks: ''
+isDeprecated: false
+type: interface
+methods:
+  - name: 'cancelOperation({ abortSignal?: AbortSignalLike })'
+    uid: '@azure/storage-blob.PollerLike.cancelOperation'
+    package: '@azure/storage-blob'
+    summary: Attempts to cancel the underlying operation.
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: '`cancelOperation` has been deprecated because it was not implemented.'
+    syntax:
+      content: >-
+        function cancelOperation(options?: { abortSignal?: AbortSignalLike }):
+        Promise<void>
+      parameters:
+        - id: options
+          type: '{ abortSignal?: AbortSignalLike }'
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: getOperationState()
+    uid: '@azure/storage-blob.PollerLike.getOperationState'
+    package: '@azure/storage-blob'
+    summary: |-
+      Returns the state of the operation.
+      The TState defined in PollerLike can be a subset of the TState defined in
+      the Poller implementation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getOperationState(): TState'
+      return:
+        description: ''
+        type: TState
+  - name: getResult()
+    uid: '@azure/storage-blob.PollerLike.getResult'
+    package: '@azure/storage-blob'
+    summary: |-
+      Returns the result value of the operation,
+      regardless of the state of the poller.
+      It can return undefined or an incomplete form of the final TResult value
+      depending on the implementation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getResult(): undefined | TResult'
+      return:
+        description: ''
+        type: undefined | TResult
+  - name: isDone()
+    uid: '@azure/storage-blob.PollerLike.isDone'
+    package: '@azure/storage-blob'
+    summary: Returns true if the poller has finished polling.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isDone(): boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: isStopped()
+    uid: '@azure/storage-blob.PollerLike.isStopped'
+    package: '@azure/storage-blob'
+    summary: Returns true if the poller is stopped.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isStopped(): boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: 'onProgress((state: TState) => void)'
+    uid: '@azure/storage-blob.PollerLike.onProgress'
+    package: '@azure/storage-blob'
+    summary: >-
+      Invokes the provided callback after each polling is completed,
+
+      sending the current state of the poller's operation.
+
+
+      It returns a method that can be used to stop receiving updates on the
+      given callback function.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function onProgress(callback: (state: TState) => void): CancelOnProgress'
+      parameters:
+        - id: callback
+          type: '(state: TState) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-lro.CancelOnProgress" />
+  - name: 'poll({ abortSignal?: AbortSignalLike })'
+    uid: '@azure/storage-blob.PollerLike.poll'
+    package: '@azure/storage-blob'
+    summary: >-
+      Returns a promise that will resolve once a single polling request
+      finishes.
+
+      It does this by calling the update method of the Poller's operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function poll(options?: { abortSignal?: AbortSignalLike }):
+        Promise<void>
+      parameters:
+        - id: options
+          type: '{ abortSignal?: AbortSignalLike }'
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'pollUntilDone({ abortSignal?: AbortSignalLike })'
+    uid: '@azure/storage-blob.PollerLike.pollUntilDone'
+    package: '@azure/storage-blob'
+    summary: >-
+      Returns a promise that will resolve once the underlying operation is
+      completed.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function pollUntilDone(pollOptions?: { abortSignal?: AbortSignalLike }):
+        Promise<TResult>
+      parameters:
+        - id: pollOptions
+          type: '{ abortSignal?: AbortSignalLike }'
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;TResult&gt;
+  - name: stopPolling()
+    uid: '@azure/storage-blob.PollerLike.stopPolling'
+    package: '@azure/storage-blob'
+    summary: Stops the poller. After this, no manual or automated requests can be sent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: function stopPolling()
+  - name: toString()
+    uid: '@azure/storage-blob.PollerLike.toString'
+    package: '@azure/storage-blob'
+    summary: |-
+      Returns a serialized version of the poller's operation
+      by invoking the operation's toString method.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function toString(): string'
+      return:
+        description: ''
+        type: string

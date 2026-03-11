@@ -1,7 +1,7 @@
 ---
 title: Azure StorSimple 8000 series SDK for JavaScript
 description: Reference for Azure StorSimple 8000 series SDK for JavaScript
-ms.date: 03/10/2026
+ms.date: 03/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storsimple8000series

@@ -1,24 +1,22 @@
 ---
 title: Azure PostgreSQLManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-postgresql-flexible, postgresql
+keywords: Azure, javascript, SDK, API, @azure/arm-postgresql, postgresql
 ms.date: 03/16/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: postgresql
 ---
-# Azure PostgreSQLManagement client library for JavaScript - version 10.0.0-alpha.20260316.1 
+# Azure PostgreSQLManagement client library for JavaScript - version 6.1.2-alpha.20260316.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure PostgreSQLManagement client.
 
-The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.
+The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 
-Key links:
-
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/postgresql/arm-postgresql-flexible)
-- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-postgresql-flexible)
-- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-postgresql-flexible?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/postgresql/arm-postgresql-flexible/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/postgresql/arm-postgresql) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-postgresql) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-postgresql) |
+[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
 
@@ -33,20 +31,20 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-postgresql-flexible` package
+### Install the `@azure/arm-postgresql` package
 
 Install the Azure PostgreSQLManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-postgresql-flexible
+npm install @azure/arm-postgresql
 ```
 
-### Create and authenticate a `PostgreSQLManagementFlexibleServerClient`
+### Create and authenticate a `PostgreSQLManagementClient`
 
 To create a client object to access the Azure PostgreSQLManagement API, you will need the `endpoint` of your Azure PostgreSQLManagement resource and a `credential`. The Azure PostgreSQLManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure PostgreSQLManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -55,45 +53,43 @@ npm install @azure/identity
 ```
 
 You will also need to **register a new AAD application and grant access to Azure PostgreSQLManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { PostgreSQLManagementFlexibleServerClient } from "@azure/arm-postgresql-flexible";
+import { PostgreSQLManagementClient } from "@azure/arm-postgresql";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new PostgreSQLManagementFlexibleServerClient(
-  new DefaultAzureCredential(),
-  subscriptionId,
-);
+const client = new PostgreSQLManagementClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { PostgreSQLManagementFlexibleServerClient } from "@azure/arm-postgresql-flexible";
+import { PostgreSQLManagementClient } from "@azure/arm-postgresql";
 
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new PostgreSQLManagementFlexibleServerClient(credential, subscriptionId);
+const client = new PostgreSQLManagementClient(credential, subscriptionId);
 ```
 
-
 ### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
 
-### PostgreSQLManagementFlexibleServerClient
+### PostgreSQLManagementClient
 
-`PostgreSQLManagementFlexibleServerClient` is the primary interface for developers using the Azure PostgreSQLManagement client library. Explore the methods on this client object to understand the different features of the Azure PostgreSQLManagement service that you can access.
+`PostgreSQLManagementClient` is the primary interface for developers using the Azure PostgreSQLManagement client library. Explore the methods on this client object to understand the different features of the Azure PostgreSQLManagement service that you can access.
 
 ## Troubleshooting
 
@@ -111,7 +107,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/postgresql/arm-postgresql-flexible/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
 
 ## Contributing
 
@@ -121,6 +117,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
+
+
+[azure_cli]: https://learn.microsoft.com/cli/azure
+[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity

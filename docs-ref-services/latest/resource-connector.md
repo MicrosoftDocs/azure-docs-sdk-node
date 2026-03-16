@@ -1,7 +1,7 @@
 ---
 title: Azure Resource Connector SDK for JavaScript
 description: Reference for Azure Resource Connector SDK for JavaScript
-ms.date: 03/13/2026
+ms.date: 03/16/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: resourceconnector

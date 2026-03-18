@@ -1,23 +1,22 @@
 ---
 title: Azure Load Testing client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/load-testing, load-testing
-ms.date: 05/27/2025
+ms.date: 03/18/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: load-testing
 ---
-# Azure Load Testing client library for JavaScript - version 1.1.0-beta.1 
+# Azure Load Testing client library for JavaScript - version 1.2.0-alpha.20260318.1 
 
 
 Azure Load Testing provides client library in JavaScript to the user by which they can interact natively with Azure Load Testing service. Azure Load Testing is a fully managed load-testing service that enables you to generate high-scale load. The service simulates traffic for your applications, regardless of where they're hosted. Developers, testers, and quality assurance (QA) engineers can use it to optimize application performance, scalability, or capacity.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/load-testing_1.1.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
-## Documentation
-
-Various documentation is available to help you get started
+Key links:
 
 - [Source code][source_code]
+- [Package (NPM)][package_npm]
 - [API reference documentation][api_reference_doc]
 - [Product Documentation][product_documentation]
 
@@ -40,16 +39,16 @@ Install the Azure Load Testing client REST client library for JavaScript with `n
 npm install @azure-rest/load-testing
 ```
 
-### Create and authenticate a `AzureLoadTesting` client
+### Create and authenticate a `AzureLoadTestingClient`
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/load-testing_1.1.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.1.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.1.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.1.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -67,15 +66,15 @@ const client = AzureLoadTesting(endpoint, new DefaultAzureCredential());
 
 The following components make up the Azure Load Testing Service. The Azure Load Test client library for JavaScript allows you to interact with each of these components through the use of a dedicated client object.
 
-#### Test
+### Test
 
 A test specifies the test script, and configuration settings for running a load test. You can create one or more tests in an Azure Load Testing resource.
 
-#### App Component
+### App Component
 
 When you run a load test for an Azure-hosted application, you can monitor resource metrics for the different Azure application components (server-side metrics). While the load test runs, and after completion of the test, you can monitor and analyze the resource metrics in the Azure Load Testing dashboard.
 
-#### Metrics
+### Metrics
 
 During a load test, Azure Load Testing collects metrics about the test execution. There are two types of metrics:
 
@@ -135,7 +134,7 @@ await client.path("/tests/{testId}", TEST_ID).patch({
 });
 ```
 
-### Uploading Test script file to a Test
+### Uploading a test script file to a test
 
 ```ts snippet:ReadmeSampleUploadTestScriptFile
 import AzureLoadTesting, { isUnexpected, getLongRunningPoller } from "@azure-rest/load-testing";
@@ -163,7 +162,7 @@ const fileValidatePoller = await getLongRunningPoller(client, fileUploadResult);
 const fileValidateResult = await fileValidatePoller.pollUntilDone();
 ```
 
-### Running a Test and fetching Metrics
+### Running a test and fetching metrics
 
 ```ts snippet:ReadmeSampleRunTest
 import AzureLoadTesting, { isUnexpected, getLongRunningPoller } from "@azure-rest/load-testing";
@@ -259,7 +258,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.1.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -269,7 +268,7 @@ See [Azure Load Testing samples][sample_code].
 
 ## Contributing
 
-For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/load-testing_1.1.0-beta.1/CONTRIBUTING.md) to learn more on how to build and test the code.
+For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more on how to build and test the code.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -283,10 +282,10 @@ For details on contributing to this repository, see the [contributing guide](htt
 
 <!-- LINKS -->
 
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.1.0-beta.1/sdk/loadtesting/load-testing-rest/src
-[sample_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.1.0-beta.1/sdk/loadtesting/load-testing-rest/samples/v1-beta
-[api_reference_doc]: https://learn.microsoft.com/rest/api/loadtesting/
-[obtaining_data_plane_uri]: https://learn.microsoft.com/rest/api/loadtesting/data-plane-uri
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/loadtesting/load-testing-rest/src
+[package_npm]: https://www.npmjs.com/package/@azure-rest/load-testing
+[api_reference_doc]: https://learn.microsoft.com/javascript/api/@azure-rest/load-testing
+[obtaining_data_plane_uri]: https://learn.microsoft.com/rest/api/apptesting/loadtest/data-plane-uri
 [product_documentation]: https://azure.microsoft.com/services/load-testing/
-[azure_subscription]: https://azure.microsoft.com/free/
+[sample_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/loadtesting/load-testing-rest/samples/v1
 

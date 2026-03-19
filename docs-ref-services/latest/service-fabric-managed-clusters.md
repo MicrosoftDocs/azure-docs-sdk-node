@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: servicefabricmanagedclusters
 ---
-# Azure Service Fabric Managed Clusters SDK for JavaScript - preview
-## Packages - preview
+# Azure Service Fabric Managed Clusters SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](service-fabric-managed-clusters-index.md)]

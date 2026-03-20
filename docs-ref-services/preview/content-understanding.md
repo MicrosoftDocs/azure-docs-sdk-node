@@ -1,0 +1,11 @@
+---
+title: Azure Content Understanding SDK for JavaScript
+description: Reference for Azure Content Understanding SDK for JavaScript
+ms.date: 03/20/2026
+ms.topic: reference
+ms.devlang: javascript
+ms.service: contentunderstanding
+---
+# Azure Content Understanding SDK for JavaScript - preview
+## Packages - preview
+[!INCLUDE [packages](content-understanding-index.md)]

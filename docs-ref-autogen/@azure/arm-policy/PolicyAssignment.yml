@@ -64,9 +64,6 @@ properties:
     summary: >-
       The effective version of the policy definition in use. This is only
       present if requested via the $expand query parameter.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: effectiveDefinitionVersion
     remarks: ''
     isDeprecated: false
@@ -79,29 +76,13 @@ properties:
     uid: '@azure/arm-policy.PolicyAssignment.enforcementMode'
     package: '@azure/arm-policy'
     summary: >-
-      The policy assignment enforcement mode. Possible values are Default and
-      DoNotEnforce.
+      The policy assignment enforcement mode. Possible values are Default,
+      DoNotEnforce, and Enroll
     fullName: enforcementMode
     remarks: ''
     isDeprecated: false
     syntax:
       content: 'enforcementMode?: string'
-      return:
-        description: ''
-        type: string
-  - name: id
-    uid: '@azure/arm-policy.PolicyAssignment.id'
-    package: '@azure/arm-policy'
-    summary: >-
-      The ID of the policy assignment.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
-    fullName: id
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'id?: string'
       return:
         description: ''
         type: string
@@ -117,15 +98,26 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-policy.Identity" />
+  - name: instanceId
+    uid: '@azure/arm-policy.PolicyAssignment.instanceId'
+    package: '@azure/arm-policy'
+    summary: >-
+      The instance ID of the policy assignment. This ID only and always changes
+      when the assignment is deleted and recreated.
+    fullName: instanceId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'instanceId?: string'
+      return:
+        description: ''
+        type: string
   - name: latestDefinitionVersion
     uid: '@azure/arm-policy.PolicyAssignment.latestDefinitionVersion'
     package: '@azure/arm-policy'
     summary: >-
       The latest version of the policy definition available. This is only
       present if requested via the $expand query parameter.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: latestDefinitionVersion
     remarks: ''
     isDeprecated: false
@@ -162,22 +154,6 @@ properties:
       return:
         description: ''
         type: any
-  - name: name
-    uid: '@azure/arm-policy.PolicyAssignment.name'
-    package: '@azure/arm-policy'
-    summary: >-
-      The name of the policy assignment.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
-    fullName: name
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'name?: string'
-      return:
-        description: ''
-        type: string
   - name: nonComplianceMessages
     uid: '@azure/arm-policy.PolicyAssignment.nonComplianceMessages'
     package: '@azure/arm-policy'
@@ -226,12 +202,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'parameters?: {[propertyName: string]: ParameterValuesValue}'
+      content: 'parameters?: Record<string, ParameterValuesValue>'
       return:
         description: ''
         type: >-
-          {[propertyName: string]: <xref
-          uid="@azure/arm-policy.ParameterValuesValue" />}
+          Record&lt;string, <xref uid="@azure/arm-policy.ParameterValuesValue"
+          />&gt;
   - name: policyDefinitionId
     uid: '@azure/arm-policy.PolicyAssignment.policyDefinitionId'
     package: '@azure/arm-policy'
@@ -259,11 +235,7 @@ properties:
   - name: scope
     uid: '@azure/arm-policy.PolicyAssignment.scope'
     package: '@azure/arm-policy'
-    summary: >-
-      The scope for the policy assignment.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The scope for the policy assignment.
     fullName: scope
     remarks: ''
     isDeprecated: false
@@ -272,14 +244,45 @@ properties:
       return:
         description: ''
         type: string
+inheritedProperties:
+  - name: id
+    uid: '@azure/arm-policy.PolicyAssignment.id'
+    package: '@azure/arm-policy'
+    summary: >-
+      Fully qualified resource ID for the resource. Ex -
+      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+    fullName: id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'id?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ExtensionResource.id](xref:@azure/arm-policy.ExtensionResource.id)
+  - name: name
+    uid: '@azure/arm-policy.PolicyAssignment.name'
+    package: '@azure/arm-policy'
+    summary: The name of the resource
+    fullName: name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'name?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ExtensionResource.name](xref:@azure/arm-policy.ExtensionResource.name)
   - name: systemData
     uid: '@azure/arm-policy.PolicyAssignment.systemData'
     package: '@azure/arm-policy'
     summary: >-
-      The system metadata relating to this resource.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Azure Resource Manager metadata containing createdBy and modifiedBy
+      information.
     fullName: systemData
     remarks: ''
     isDeprecated: false
@@ -288,14 +291,15 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-policy.SystemData" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ExtensionResource.systemData](xref:@azure/arm-policy.ExtensionResource.systemData)
   - name: type
     uid: '@azure/arm-policy.PolicyAssignment.type'
     package: '@azure/arm-policy'
     summary: >-
-      The type of the policy assignment.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+      "Microsoft.Storage/storageAccounts"
     fullName: type
     remarks: ''
     isDeprecated: false
@@ -304,3 +308,7 @@ properties:
       return:
         description: ''
         type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ExtensionResource.type](xref:@azure/arm-policy.ExtensionResource.type)
+extends: <xref uid="@azure/arm-policy.ExtensionResource" />

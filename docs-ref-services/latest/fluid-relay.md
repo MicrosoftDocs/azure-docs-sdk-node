@@ -1,7 +1,7 @@
 ---
 title: Azure Fluid Relay SDK for JavaScript
 description: Reference for Azure Fluid Relay SDK for JavaScript
-ms.date: 03/20/2026
+ms.date: 03/23/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: fluidrelay

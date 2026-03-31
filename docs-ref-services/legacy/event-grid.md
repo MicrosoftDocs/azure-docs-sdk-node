@@ -5,8 +5,8 @@ ms.date: 03/31/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-event-grid
-ms.prod: 
 manager: angerobe
+ms.prod: 
 ms.custom: devcenter
 ---
 # Azure Event Grid libraries for JavaScript

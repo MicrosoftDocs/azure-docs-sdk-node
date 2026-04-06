@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: playwright
 ---
-# Azure Playwright SDK for JavaScript - latest
-## Packages - latest
+# Azure Playwright SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](playwright-index.md)]

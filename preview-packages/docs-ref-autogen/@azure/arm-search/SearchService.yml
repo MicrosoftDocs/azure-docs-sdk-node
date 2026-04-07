@@ -28,7 +28,7 @@ properties:
     package: '@azure/arm-search'
     summary: >-
       Configure this property to support the search service using either the
-      default compute or Azure Confidential Compute.
+      Default Compute or Azure Confidential Compute.
     fullName: computeType
     remarks: ''
     isDeprecated: false
@@ -37,19 +37,19 @@ properties:
       return:
         description: ''
         type: string
-  - name: disabledDataExfiltrationOptions
-    uid: '@azure/arm-search.SearchService.disabledDataExfiltrationOptions'
+  - name: dataExfiltrationProtections
+    uid: '@azure/arm-search.SearchService.dataExfiltrationProtections'
     package: '@azure/arm-search'
     summary: >-
       A list of data exfiltration scenarios that are explicitly disallowed for
       the search service. Currently, the only supported value is 'All' to
       disable all possible data export scenarios with more fine grained controls
       planned for the future.
-    fullName: disabledDataExfiltrationOptions
+    fullName: dataExfiltrationProtections
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'disabledDataExfiltrationOptions?: string[]'
+      content: 'dataExfiltrationProtections?: string[]'
       return:
         description: ''
         type: string[]
@@ -100,9 +100,6 @@ properties:
     summary: >-
       A system generated property representing the service's etag that can be
       for optimistic concurrency control during updates.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: eTag
     remarks: ''
     isDeprecated: false
@@ -118,8 +115,8 @@ properties:
       Applicable only for the standard3 SKU. You can set this property to enable
       up to 3 high density partitions that allow up to 1000 indexes, which is
       much higher than the maximum indexes allowed for any other SKU. For the
-      standard3 SKU, the value is either 'default' or 'highDensity'. For all
-      other SKUs, this value must be 'default'.
+      standard3 SKU, the value is either 'Default' or 'HighDensity'. For all
+      other SKUs, this value must be 'Default'.
     fullName: hostingMode
     remarks: ''
     isDeprecated: false
@@ -140,6 +137,21 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-search.Identity" />
+  - name: knowledgeRetrieval
+    uid: '@azure/arm-search.SearchService.knowledgeRetrieval'
+    package: '@azure/arm-search'
+    summary: >-
+      Specifies the billing plan for agentic retrieval on the Azure AI Search
+      service. This configuration is only available for certain pricing tiers in
+      certain regions.
+    fullName: knowledgeRetrieval
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'knowledgeRetrieval?: string'
+      return:
+        description: ''
+        type: string
   - name: networkRuleSet
     uid: '@azure/arm-search.SearchService.networkRuleSet'
     package: '@azure/arm-search'
@@ -158,10 +170,10 @@ properties:
     uid: '@azure/arm-search.SearchService.partitionCount'
     package: '@azure/arm-search'
     summary: >-
-      The number of partitions in the search service; if specified, it can be 1,
-      2, 3, 4, 6, or 12. Values greater than 1 are only valid for standard SKUs.
-      For 'standard3' services with hostingMode set to 'highDensity', the
-      allowed values are between 1 and 3.
+      The number of partitions in the dedicated search service; if specified, it
+      can be 1, 2, 3, 4, 6, or 12. Values greater than 1 are only valid for
+      standard SKUs. For 'standard3' services with hostingMode set to
+      'highDensity', the allowed values are between 1 and 3.
     fullName: partitionCount
     remarks: ''
     isDeprecated: false
@@ -173,11 +185,7 @@ properties:
   - name: privateEndpointConnections
     uid: '@azure/arm-search.SearchService.privateEndpointConnections'
     package: '@azure/arm-search'
-    summary: >-
-      The list of private endpoint connections to the Azure AI Search service.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The list of private endpoint connections to the Azure AI Search service.
     fullName: privateEndpointConnections
     remarks: ''
     isDeprecated: false
@@ -200,9 +208,6 @@ properties:
       tends to come back as 'Succeeded' directly in the call to Create search
       service. This is because the free service uses capacity that is already
       set up.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -215,8 +220,8 @@ properties:
     uid: '@azure/arm-search.SearchService.publicNetworkAccess'
     package: '@azure/arm-search'
     summary: >-
-      This value can be set to 'enabled' to avoid breaking changes on existing
-      customer resources and templates. If set to 'disabled', traffic over
+      This value can be set to 'Enabled' to avoid breaking changes on existing
+      customer resources and templates. If set to 'Disabled', traffic over
       public interface is not allowed, and private endpoint connections would be
       the exclusive access method.
     fullName: publicNetworkAccess
@@ -231,9 +236,9 @@ properties:
     uid: '@azure/arm-search.SearchService.replicaCount'
     package: '@azure/arm-search'
     summary: >-
-      The number of replicas in the search service. If specified, it must be a
-      value between 1 and 12 inclusive for standard SKUs or between 1 and 3
-      inclusive for basic SKU.
+      The number of replicas in the dedicated search service. If specified, it
+      must be a value between 1 and 12 inclusive for standard SKUs or between 1
+      and 3 inclusive for basic SKU.
     fullName: replicaCount
     remarks: ''
     isDeprecated: false
@@ -246,9 +251,9 @@ properties:
     uid: '@azure/arm-search.SearchService.semanticSearch'
     package: '@azure/arm-search'
     summary: >-
-      Sets options that control the availability of semantic search. This
-      configuration is only possible for certain Azure AI Search SKUs in certain
-      locations.
+      Specifies the availability and billing plan for semantic search on the
+      Azure AI Search service. This configuration is only available for certain
+      pricing tiers in certain regions.
     fullName: semanticSearch
     remarks: ''
     isDeprecated: false
@@ -257,20 +262,17 @@ properties:
       return:
         description: ''
         type: string
-  - name: serviceUpgradeDate
-    uid: '@azure/arm-search.SearchService.serviceUpgradeDate'
+  - name: serviceUpgradedAt
+    uid: '@azure/arm-search.SearchService.serviceUpgradedAt'
     package: '@azure/arm-search'
     summary: >-
       The date and time the search service was last upgraded. This field will be
       null until the service gets upgraded for the first time.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
-    fullName: serviceUpgradeDate
+    fullName: serviceUpgradedAt
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'serviceUpgradeDate?: Date'
+      content: 'serviceUpgradedAt?: Date'
       return:
         description: ''
         type: Date
@@ -280,9 +282,6 @@ properties:
     summary: >-
       The list of shared private link resources managed by the Azure AI Search
       service.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: sharedPrivateLinkResources
     remarks: ''
     isDeprecated: false
@@ -323,9 +322,6 @@ properties:
       Search team is actively investigating the underlying issue. Dedicated
       services in these states are still chargeable based on the number of
       search units provisioned.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: status
     remarks: ''
     isDeprecated: false
@@ -337,11 +333,7 @@ properties:
   - name: statusDetails
     uid: '@azure/arm-search.SearchService.statusDetails'
     package: '@azure/arm-search'
-    summary: >-
-      The details of the search service status.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The details of the search service status.
     fullName: statusDetails
     remarks: ''
     isDeprecated: false
@@ -350,39 +342,18 @@ properties:
       return:
         description: ''
         type: string
-  - name: systemData
-    uid: '@azure/arm-search.SearchService.systemData'
-    package: '@azure/arm-search'
-    summary: >-
-      Azure Resource Manager metadata of the search service containing createdBy
-      and modifiedBy information.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
-    fullName: systemData
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'systemData?: SystemData'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-search.SystemData" />
   - name: upgradeAvailable
     uid: '@azure/arm-search.SearchService.upgradeAvailable'
     package: '@azure/arm-search'
-    summary: >-
-      Indicates whether or not the search service has an upgrade available.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Indicates if the search service has an upgrade available.
     fullName: upgradeAvailable
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'upgradeAvailable?: boolean'
+      content: 'upgradeAvailable?: string'
       return:
         description: ''
-        type: boolean
+        type: string
 inheritedProperties:
   - name: id
     uid: '@azure/arm-search.SearchService.id'
@@ -390,9 +361,6 @@ inheritedProperties:
     summary: >-
       Fully qualified resource ID for the resource. Ex -
       /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -422,11 +390,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-search.SearchService.name'
     package: '@azure/arm-search'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -438,6 +402,23 @@ inheritedProperties:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.name](xref:@azure/arm-search.TrackedResource.name)
+  - name: systemData
+    uid: '@azure/arm-search.SearchService.systemData'
+    package: '@azure/arm-search'
+    summary: >-
+      Azure Resource Manager metadata containing createdBy and modifiedBy
+      information.
+    fullName: systemData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'systemData?: SystemData'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-search.SystemData" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.systemData](xref:@azure/arm-search.TrackedResource.systemData)
   - name: tags
     uid: '@azure/arm-search.SearchService.tags'
     package: '@azure/arm-search'
@@ -446,10 +427,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.tags](xref:@azure/arm-search.TrackedResource.tags)
@@ -459,9 +440,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

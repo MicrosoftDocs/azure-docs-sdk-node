@@ -28,12 +28,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'addonProfiles?: {[propertyName: string]: ManagedClusterAddonProfile}'
+      content: 'addonProfiles?: Record<string, ManagedClusterAddonProfile>'
       return:
         description: ''
         type: >-
-          {[propertyName: string]: <xref
-          uid="@azure/arm-containerservice.ManagedClusterAddonProfile" />}
+          Record&lt;string, <xref
+          uid="@azure/arm-containerservice.ManagedClusterAddonProfile" />&gt;
   - name: agentPoolProfiles
     uid: '@azure/arm-containerservice.ManagedCluster.agentPoolProfiles'
     package: '@azure/arm-containerservice'
@@ -110,7 +110,7 @@ properties:
   - name: azureMonitorProfile
     uid: '@azure/arm-containerservice.ManagedCluster.azureMonitorProfile'
     package: '@azure/arm-containerservice'
-    summary: Prometheus addon profile for the container service cluster
+    summary: Azure Monitor addon profiles for monitoring the managed cluster.
     fullName: azureMonitorProfile
     remarks: ''
     isDeprecated: false
@@ -131,9 +131,6 @@ properties:
       Sharing (CORS) headers to be sent in some responses, which Kubernetes
       APIServer doesn't handle by default. This special FQDN supports CORS,
       allowing the Azure Portal to function properly.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: azurePortalFqdn
     remarks: ''
     isDeprecated: false
@@ -174,10 +171,10 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.currentKubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
-      The version of Kubernetes the Managed Cluster is running.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      The version of Kubernetes the Managed Cluster is running. If
+      kubernetesVersion was a fully specified version <major.minor.patch>, this
+      field will be exactly equal to it. If kubernetesVersion was <major.minor>,
+      this field will contain the full <major.minor.patch> version being used.
     fullName: currentKubernetesVersion
     remarks: ''
     isDeprecated: false
@@ -264,13 +261,11 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.eTag'
     package: '@azure/arm-containerservice'
     summary: >-
-      Unique read-only string used to implement optimistic concurrency. The eTag
-      value will change when the resource is updated. Specify an if-match or
-      if-none-match header with the eTag value for a subsequent request to
-      enable optimistic concurrency per the normal eTag convention.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      If eTag is provided in the response body, it may also be provided as a
+      header per the normal etag convention.  Entity tags are used for comparing
+      two or more entities from the same requested resource. HTTP/1.1 uses
+      entity tags in the etag (section 14.19), If-Match (section 14.24),
+      If-None-Match (section 14.26), and If-Range (section 14.27) header fields.
     fullName: eTag
     remarks: ''
     isDeprecated: false
@@ -294,11 +289,7 @@ properties:
   - name: fqdn
     uid: '@azure/arm-containerservice.ManagedCluster.fqdn'
     package: '@azure/arm-containerservice'
-    summary: >-
-      The FQDN of the master pool.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The FQDN of the master pool.
     fullName: fqdn
     remarks: ''
     isDeprecated: false
@@ -321,6 +312,21 @@ properties:
       return:
         description: ''
         type: string
+  - name: healthMonitorProfile
+    uid: '@azure/arm-containerservice.ManagedCluster.healthMonitorProfile'
+    package: '@azure/arm-containerservice'
+    summary: Health monitor profile for the managed cluster.
+    fullName: healthMonitorProfile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'healthMonitorProfile?: ManagedClusterHealthMonitorProfile'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-containerservice.ManagedClusterHealthMonitorProfile"
+          />
   - name: hostedSystemProfile
     uid: '@azure/arm-containerservice.ManagedCluster.hostedSystemProfile'
     package: '@azure/arm-containerservice'
@@ -375,12 +381,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'identityProfile?: {[propertyName: string]: UserAssignedIdentity}'
+      content: 'identityProfile?: Record<string, UserAssignedIdentity>'
       return:
         description: ''
         type: >-
-          {[propertyName: string]: <xref
-          uid="@azure/arm-containerservice.UserAssignedIdentity" />}
+          Record&lt;string, <xref
+          uid="@azure/arm-containerservice.UserAssignedIdentity" />&gt;
   - name: ingressProfile
     uid: '@azure/arm-containerservice.ManagedCluster.ingressProfile'
     package: '@azure/arm-containerservice'
@@ -413,8 +419,13 @@ properties:
     uid: '@azure/arm-containerservice.ManagedCluster.kubernetesVersion'
     package: '@azure/arm-containerservice'
     summary: >-
-      The version of Kubernetes the Managed Cluster is requested to run. When
-      you upgrade a supported AKS cluster, Kubernetes minor versions cannot be
+      The version of Kubernetes specified by the user. Both patch version
+      <major.minor.patch> (e.g. 1.20.13) and <major.minor> (e.g. 1.20) are
+      supported. When <major.minor> is specified, the latest supported GA patch
+      version is chosen automatically. Updating the cluster with the same
+      <major.minor> once it has been created (e.g. 1.14.x -> 1.14) will not
+      trigger an upgrade, even if a newer patch version is available. When you
+      upgrade a supported AKS cluster, Kubernetes minor versions cannot be
       skipped. All upgrades must be performed sequentially by major version
       number. For example, upgrades between 1.14.x -> 1.15.x or 1.15.x -> 1.16.x
       are allowed, however 1.14.x -> 1.16.x is not allowed. See [upgrading an
@@ -445,11 +456,7 @@ properties:
   - name: maxAgentPools
     uid: '@azure/arm-containerservice.ManagedCluster.maxAgentPools'
     package: '@azure/arm-containerservice'
-    summary: >-
-      The max number of agent pools for the managed cluster.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The max number of agent pools for the managed cluster.
     fullName: maxAgentPools
     remarks: ''
     isDeprecated: false
@@ -516,7 +523,7 @@ properties:
   - name: nodeResourceGroupProfile
     uid: '@azure/arm-containerservice.ManagedCluster.nodeResourceGroupProfile'
     package: '@azure/arm-containerservice'
-    summary: The node resource group configuration profile.
+    summary: Profile of the node resource group configuration.
     fullName: nodeResourceGroupProfile
     remarks: ''
     isDeprecated: false
@@ -562,11 +569,7 @@ properties:
   - name: powerState
     uid: '@azure/arm-containerservice.ManagedCluster.powerState'
     package: '@azure/arm-containerservice'
-    summary: >-
-      The Power State of the cluster.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The Power State of the cluster.
     fullName: powerState
     remarks: ''
     isDeprecated: false
@@ -578,11 +581,7 @@ properties:
   - name: privateFqdn
     uid: '@azure/arm-containerservice.ManagedCluster.privateFqdn'
     package: '@azure/arm-containerservice'
-    summary: >-
-      The FQDN of private cluster.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The FQDN of private cluster.
     fullName: privateFqdn
     remarks: ''
     isDeprecated: false
@@ -606,11 +605,7 @@ properties:
   - name: provisioningState
     uid: '@azure/arm-containerservice.ManagedCluster.provisioningState'
     package: '@azure/arm-containerservice'
-    summary: >-
-      The current provisioning state.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The current provisioning state.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -639,9 +634,6 @@ properties:
     summary: >-
       The resourceUID uniquely identifies ManagedClusters that reuse ARM
       ResourceIds (i.e: create, delete, create sequence)
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: resourceUID
     remarks: ''
     isDeprecated: false
@@ -803,11 +795,8 @@ inheritedProperties:
     uid: '@azure/arm-containerservice.ManagedCluster.id'
     package: '@azure/arm-containerservice'
     summary: >-
-      Fully qualified resource ID for the resource. E.g.
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Fully qualified resource ID for the resource. Ex -
+      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -837,11 +826,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-containerservice.ManagedCluster.name'
     package: '@azure/arm-containerservice'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -859,9 +844,6 @@ inheritedProperties:
     summary: >-
       Azure Resource Manager metadata containing createdBy and modifiedBy
       information.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: systemData
     remarks: ''
     isDeprecated: false
@@ -881,10 +863,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.tags](xref:@azure/arm-containerservice.TrackedResource.tags)
@@ -894,9 +876,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

@@ -1,7 +1,7 @@
 ---
 title: Azure Container Orchestrator Runtime SDK for JavaScript
 description: Reference for Azure Container Orchestrator Runtime SDK for JavaScript
-ms.date: 04/08/2026
+ms.date: 04/09/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: containerorchestratorruntime

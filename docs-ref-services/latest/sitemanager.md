@@ -1,7 +1,7 @@
 ---
 title: Azure Sitemanager SDK for JavaScript
 description: Reference for Azure Sitemanager SDK for JavaScript
-ms.date: 04/09/2026
+ms.date: 04/10/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: sitemanager

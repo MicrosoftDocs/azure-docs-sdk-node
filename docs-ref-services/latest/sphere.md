@@ -1,7 +1,7 @@
 ---
 title: Azure Sphere SDK for JavaScript
 description: Reference for Azure Sphere SDK for JavaScript
-ms.date: 04/13/2026
+ms.date: 04/14/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: sphere

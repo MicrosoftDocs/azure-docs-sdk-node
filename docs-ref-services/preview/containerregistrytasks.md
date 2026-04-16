@@ -1,7 +1,7 @@
 ---
 title: Azure Containerregistrytasks SDK for JavaScript
 description: Reference for Azure Containerregistrytasks SDK for JavaScript
-ms.date: 04/15/2026
+ms.date: 04/16/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: containerregistrytasks

@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: computelimit
 ---
-# Azure Computelimit SDK for JavaScript - preview
-## Packages - preview
+# Azure Computelimit SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](computelimit-index.md)]

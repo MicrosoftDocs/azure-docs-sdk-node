@@ -8,18 +8,6 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: description
-    uid: '@azure/arm-azurestackhci.UpdateRun.description'
-    package: '@azure/arm-azurestackhci'
-    summary: More detailed description of the step.
-    fullName: description
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'description?: string'
-      return:
-        description: ''
-        type: string
   - name: duration
     uid: '@azure/arm-azurestackhci.UpdateRun.duration'
     package: '@azure/arm-azurestackhci'
@@ -29,44 +17,6 @@ properties:
     isDeprecated: false
     syntax:
       content: 'duration?: string'
-      return:
-        description: ''
-        type: string
-  - name: endTimeUtc
-    uid: '@azure/arm-azurestackhci.UpdateRun.endTimeUtc'
-    package: '@azure/arm-azurestackhci'
-    summary: When the step reached a terminal state.
-    fullName: endTimeUtc
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'endTimeUtc?: Date'
-      return:
-        description: ''
-        type: Date
-  - name: errorMessage
-    uid: '@azure/arm-azurestackhci.UpdateRun.errorMessage'
-    package: '@azure/arm-azurestackhci'
-    summary: Error message, specified if the step is in a failed state.
-    fullName: errorMessage
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'errorMessage?: string'
-      return:
-        description: ''
-        type: string
-  - name: expectedExecutionTime
-    uid: '@azure/arm-azurestackhci.UpdateRun.expectedExecutionTime'
-    package: '@azure/arm-azurestackhci'
-    summary: >-
-      Expected execution time of a given step. This is optionally authored in
-      the update action plan and can be empty.
-    fullName: expectedExecutionTime
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'expectedExecutionTime?: string'
       return:
         description: ''
         type: string
@@ -82,18 +32,6 @@ properties:
       return:
         description: ''
         type: Date
-  - name: lastUpdatedTimeUtc
-    uid: '@azure/arm-azurestackhci.UpdateRun.lastUpdatedTimeUtc'
-    package: '@azure/arm-azurestackhci'
-    summary: Completion time of this step or the last completed sub-step.
-    fullName: lastUpdatedTimeUtc
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'lastUpdatedTimeUtc?: Date'
-      return:
-        description: ''
-        type: Date
   - name: location
     uid: '@azure/arm-azurestackhci.UpdateRun.location'
     package: '@azure/arm-azurestackhci'
@@ -106,26 +44,25 @@ properties:
       return:
         description: ''
         type: string
-  - name: namePropertiesProgressName
-    uid: '@azure/arm-azurestackhci.UpdateRun.namePropertiesProgressName'
+  - name: progress
+    uid: '@azure/arm-azurestackhci.UpdateRun.progress'
     package: '@azure/arm-azurestackhci'
-    summary: Name of the step.
-    fullName: namePropertiesProgressName
+    summary: Progress representation of the update run steps.
+    fullName: progress
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'namePropertiesProgressName?: string'
+      content: 'progress?: Step'
       return:
         description: ''
-        type: string
+        type: <xref uid="@azure/arm-azurestackhci.Step" />
   - name: provisioningState
     uid: '@azure/arm-azurestackhci.UpdateRun.provisioningState'
     package: '@azure/arm-azurestackhci'
     summary: >-
-      Provisioning state of the UpdateRuns proxy resource.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Provisioning state of the UpdateRuns proxy resource. Indicates the current
+      lifecycle status of the update operation, such as whether it has been
+      accepted, is in progress, or has completed.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -134,22 +71,13 @@ properties:
       return:
         description: ''
         type: string
-  - name: startTimeUtc
-    uid: '@azure/arm-azurestackhci.UpdateRun.startTimeUtc'
-    package: '@azure/arm-azurestackhci'
-    summary: When the step started, or empty if it has not started executing.
-    fullName: startTimeUtc
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'startTimeUtc?: Date'
-      return:
-        description: ''
-        type: Date
   - name: state
     uid: '@azure/arm-azurestackhci.UpdateRun.state'
     package: '@azure/arm-azurestackhci'
-    summary: State of the update run.
+    summary: >-
+      Represents the current state of the update run. Indicates whether the
+      update is in progress, has completed successfully, failed, or is in an
+      unknown state.
     fullName: state
     remarks: ''
     isDeprecated: false
@@ -158,33 +86,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: status
-    uid: '@azure/arm-azurestackhci.UpdateRun.status'
-    package: '@azure/arm-azurestackhci'
-    summary: >-
-      Status of the step, bubbled up from the ECE action plan for installation
-      attempts. Values are: 'Success', 'Error', 'InProgress', and 'Unknown
-      status'.
-    fullName: status
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'status?: string'
-      return:
-        description: ''
-        type: string
-  - name: steps
-    uid: '@azure/arm-azurestackhci.UpdateRun.steps'
-    package: '@azure/arm-azurestackhci'
-    summary: Recursive model for child steps of this step.
-    fullName: steps
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'steps?: Step[]'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-azurestackhci.Step" />[]
   - name: timeStarted
     uid: '@azure/arm-azurestackhci.UpdateRun.timeStarted'
     package: '@azure/arm-azurestackhci'
@@ -202,11 +103,8 @@ inheritedProperties:
     uid: '@azure/arm-azurestackhci.UpdateRun.id'
     package: '@azure/arm-azurestackhci'
     summary: >-
-      Fully qualified resource ID for the resource. E.g.
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Fully qualified resource ID for the resource. Ex -
+      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -221,11 +119,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-azurestackhci.UpdateRun.name'
     package: '@azure/arm-azurestackhci'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -243,9 +137,6 @@ inheritedProperties:
     summary: >-
       Azure Resource Manager metadata containing createdBy and modifiedBy
       information.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: systemData
     remarks: ''
     isDeprecated: false
@@ -263,9 +154,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

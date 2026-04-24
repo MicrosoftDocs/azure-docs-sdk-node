@@ -26,7 +26,10 @@ properties:
   - name: availabilityType
     uid: '@azure/arm-azurestackhci.Update.availabilityType'
     package: '@azure/arm-azurestackhci'
-    summary: Indicates the way the update content can be downloaded.
+    summary: >-
+      Indicates how the update content is made available for download. This
+      determines whether the update is sourced locally, from an online
+      repository, or requires user notification.
     fullName: availabilityType
     remarks: ''
     isDeprecated: false
@@ -145,18 +148,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: notifyMessage
-    uid: '@azure/arm-azurestackhci.Update.notifyMessage'
-    package: '@azure/arm-azurestackhci'
-    summary: Brief message with instructions for updates of AvailabilityType Notify.
-    fullName: notifyMessage
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'notifyMessage?: string'
-      return:
-        description: ''
-        type: string
   - name: packagePath
     uid: '@azure/arm-azurestackhci.Update.packagePath'
     package: '@azure/arm-azurestackhci'
@@ -211,29 +202,13 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-azurestackhci.UpdatePrerequisite" />[]
-  - name: progressPercentage
-    uid: '@azure/arm-azurestackhci.Update.progressPercentage'
-    package: '@azure/arm-azurestackhci'
-    summary: >-
-      Progress percentage of ongoing operation. Currently this property is only
-      valid when the update is in the Downloading state, where it maps to how
-      much of the update content has been downloaded.
-    fullName: progressPercentage
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'progressPercentage?: number'
-      return:
-        description: ''
-        type: number
   - name: provisioningState
     uid: '@azure/arm-azurestackhci.Update.provisioningState'
     package: '@azure/arm-azurestackhci'
     summary: >-
-      Provisioning state of the Updates proxy resource.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Provisioning state of the Updates proxy resource. Indicates the current
+      lifecycle status of the update operation, such as whether it has been
+      accepted, is in progress, or has completed.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -257,7 +232,9 @@ properties:
   - name: rebootRequired
     uid: '@azure/arm-azurestackhci.Update.rebootRequired'
     package: '@azure/arm-azurestackhci'
-    summary: ''
+    summary: >-
+      Indicates whether a reboot is required after the update or operation.
+      Helps determine if a system restart is necessary to complete the process.
     fullName: rebootRequired
     remarks: ''
     isDeprecated: false
@@ -281,7 +258,11 @@ properties:
   - name: state
     uid: '@azure/arm-azurestackhci.Update.state'
     package: '@azure/arm-azurestackhci'
-    summary: State of the update as it relates to this stamp.
+    summary: >-
+      Represents the current state of the update as it relates to this stamp.
+      This includes phases such as preparation, installation, scanning, and
+      error handling, providing insight into the update's progress and any
+      issues encountered.
     fullName: state
     remarks: ''
     isDeprecated: false
@@ -290,6 +271,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: updateStateProperties
+    uid: '@azure/arm-azurestackhci.Update.updateStateProperties'
+    package: '@azure/arm-azurestackhci'
+    summary: >-
+      Additional information regarding the state of the update. See definition
+      of UpdateStateProperties type below for more details on this property.
+    fullName: updateStateProperties
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'updateStateProperties?: UpdateStateProperties'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-azurestackhci.UpdateStateProperties" />
   - name: version
     uid: '@azure/arm-azurestackhci.Update.version'
     package: '@azure/arm-azurestackhci'
@@ -307,11 +302,8 @@ inheritedProperties:
     uid: '@azure/arm-azurestackhci.Update.id'
     package: '@azure/arm-azurestackhci'
     summary: >-
-      Fully qualified resource ID for the resource. E.g.
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Fully qualified resource ID for the resource. Ex -
+      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -326,11 +318,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-azurestackhci.Update.name'
     package: '@azure/arm-azurestackhci'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -348,9 +336,6 @@ inheritedProperties:
     summary: >-
       Azure Resource Manager metadata containing createdBy and modifiedBy
       information.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: systemData
     remarks: ''
     isDeprecated: false
@@ -368,9 +353,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

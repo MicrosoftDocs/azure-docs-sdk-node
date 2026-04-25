@@ -1,12 +1,12 @@
 ---
 title: Azure AI Content Understanding client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-content-understanding, contentunderstanding
-ms.date: 02/28/2026
+ms.date: 04/25/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: contentunderstanding
 ---
-# Azure AI Content Understanding client library for JavaScript - version 1.0.0 
+# Azure AI Content Understanding client library for JavaScript - version 1.1.0 
 
 
 Azure AI Content Understanding is a multimodal AI service that extracts semantic content from documents, video, audio, and image files. It transforms unstructured content into structured, machine-readable data optimized for retrieval-augmented generation (RAG) and automated workflows.
@@ -22,7 +22,7 @@ Use the client library for Azure AI Content Understanding to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/contentunderstanding/ai-content-understanding)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/contentunderstanding/ai-content-understanding)
 - Package (NPM)
 - [Product documentation][product_docs]
 - [Samples][samples_directory]
@@ -34,7 +34,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-content-understanding_1.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-content-understanding_1.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -363,7 +363,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/core/logger).
 
 ## Testing
 
@@ -564,8 +564,8 @@ node analyzeBinary.js
 
 For full setup instructions and available samples, see:
 
-- [TypeScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/contentunderstanding/ai-content-understanding/samples/v1/typescript/README.md)
-- [JavaScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/contentunderstanding/ai-content-understanding/samples/v1/javascript/README.md)
+- [TypeScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/contentunderstanding/ai-content-understanding/samples/v1/typescript/README.md)
+- [JavaScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/contentunderstanding/ai-content-understanding/samples/v1/javascript/README.md)
 
 ## Next steps
 
@@ -574,7 +574,7 @@ For full setup instructions and available samples, see:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-content-understanding_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-content-understanding_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -583,15 +583,15 @@ If you'd like to contribute to this library, please read the [contributing guide
 <!-- LINKS -->
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/identity/identity#defaultazurecredential
 [product_docs]: https://learn.microsoft.com/azure/ai-services/content-understanding/
 [cu_quickstart]: https://learn.microsoft.com/azure/ai-services/content-understanding/quickstart/use-rest-api?tabs=portal%2Cdocument
 [cu_region_support]: https://learn.microsoft.com/azure/ai-services/content-understanding/language-region-support
 [deploy_models_docs]: https://learn.microsoft.com/azure/ai-studio/how-to/deploy-models-openai
 [prebuilt_analyzers_docs]: https://learn.microsoft.com/azure/ai-services/content-understanding/concepts/prebuilt-analyzers
-[samples_directory]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/contentunderstanding/ai-content-understanding/samples
-[sample_update_defaults]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.0.0/sdk/contentunderstanding/ai-content-understanding/samples-dev/updateDefaults.ts
+[samples_directory]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/contentunderstanding/ai-content-understanding/samples
+[sample_update_defaults]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.1.0/sdk/contentunderstanding/ai-content-understanding/samples-dev/updateDefaults.ts
 [client_options]: https://learn.microsoft.com/javascript/api/@azure/core-rest-pipeline/pipelineoptions?view=azure-node-latest
 [accessing_response]: https://learn.microsoft.com/javascript/api/@azure/core-rest-pipeline/pipelineresponse?view=azure-node-latest
 [long_running_operations]: https://learn.microsoft.com/javascript/api/@azure/core-lro?view=azure-node-latest

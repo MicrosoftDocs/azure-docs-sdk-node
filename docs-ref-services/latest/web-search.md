@@ -1,7 +1,7 @@
 ---
 title: Azure Web Search SDK for JavaScript
 description: Reference for Azure Web Search SDK for JavaScript
-ms.date: 04/27/2026
+ms.date: 04/28/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: websearch

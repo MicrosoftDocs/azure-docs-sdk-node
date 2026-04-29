@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Short Codes client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-tools/communication-short-codes, communication
-ms.date: 08/18/2022
+ms.date: 04/29/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Short Codes client library for JavaScript - version 1.0.0-beta.4 
+# Azure Communication Short Codes client library for JavaScript - version 1.0.0-alpha.20260429.1 
 
 
 The phone numbers library provides capabilities for short codes administration.
@@ -58,7 +58,7 @@ Once you have a key, you can authenticate the `ShortCodesClient` with any of the
 
 ### Using a connection string
 
-```typescript
+```ts snippet:ReadmeSampleCreateClient_ConnectionString
 import { ShortCodesClient } from "@azure-tools/communication-short-codes";
 
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
@@ -69,7 +69,7 @@ const client = new ShortCodesClient(connectionString);
 
 If you use a key to initialize the client you will also need to provide the appropriate endpoint. You can get this endpoint from your Communication Services resource in [Azure Portal][azure_portal]. Once you have a key and endpoint, you can authenticate with the following code:
 
-```typescript
+```ts snippet:ReadmeSampleCreateClient_KeyCredential
 import { AzureKeyCredential } from "@azure/core-auth";
 import { ShortCodesClient } from "@azure-tools/communication-short-codes";
 
@@ -87,11 +87,11 @@ npm install @azure/identity
 
 The [`@azure/identity`][azure_identity] package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`][azure_identity_readme] provides more details and samples to get you started.
 
-```typescript
+```ts snippet:ReadmeSampleCreateClient_TokenCredential
 import { DefaultAzureCredential } from "@azure/identity";
 import { ShortCodesClient } from "@azure-tools/communication-short-codes";
 
-let credential = new DefaultAzureCredential();
+const credential = new DefaultAzureCredential();
 const client = new ShortCodesClient("<endpoint-from-resource>", credential);
 ```
 
@@ -105,213 +105,232 @@ The following sections provide code snippets that cover some of the common tasks
 - [Get short codes](#get-short-codes)
 
 ### Create and submit a program brief
-Initialize a `ShortCodesCreateUSProgramBriefParams` object and populate it with the details for your program brief.
 
-```typescript
-import { ShortCodesClient } from "@azure-tools/communication-short-codes";
+Initialize a `ShortCodesCreateUSProgramBriefParams` object and populate it with the details for your program brief. Then add a call to `upsertUSProgramBrief` and use the object you created as the parameter. This will create a program brief object which can then be modified as much as needed until it's ready to be submitted. When ready to submit, call `submitUSProgramBrief` to submit for processing. After submission no edits will be allowed unless requested as part of the application process.
 
-const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new ShortCodesClient(connectionString);
+```ts snippet:ReadmeSampleCreateProgramBrief
+import { DefaultAzureCredential } from "@azure/identity";
+import {
+  ShortCodesClient,
+  ShortCodesUpsertUSProgramBriefOptionalParams,
+} from "@azure-tools/communication-short-codes";
 
-async main function() {
-  const programBriefId = "00000000-0000-0000-0000-000000000000";
-  const programBriefRequest: ShortCodesCreateUSProgramBriefParams = {
-    body: {
-      id: programBriefId,
-      programDetails: {
-        description: "Customers can sign up to receive regular updates on coupons and other perks of our loyalty program.",
-        expectedDateOfService: new Date(2022, 1, 25),
-        isPoliticalCampaign: false,
-        isVanity: false,
-        name: "Contoso Loyalty Program",
-        numberType: "shortCode",
-        privacyPolicyUrl: "https://contoso.com/privacy",
-        signUp: "This program will allow customers to receive exclusive offers and information to help them utilize our loyalty program to their best advantage. Customers who opt-in will receive regular coupons they can use in our stores, as well as advanced notice of sales and other promotional and marketing campaigns.",
-        signUpTypes: [ "sms", "website" ],
-        termsOfServiceUrl: "https://contoso.com/terms",
-        url: "https://contoso.com/loyalty-program"
+const credential = new DefaultAzureCredential();
+const client = new ShortCodesClient("<endpoint-from-resource>", credential);
+
+// create a new program brief request
+const programBriefId = "1b4411b7-edb0-44e7-9eca-dc7208b8d88c";
+const programBriefRequest: ShortCodesUpsertUSProgramBriefOptionalParams = {
+  body: {
+    id: programBriefId,
+    programDetails: {
+      description:
+        "Customers can sign up to receive regular updates on coupons and other perks of our loyalty program.",
+      expectedDateOfService: new Date(2022, 1, 25),
+      isPoliticalCampaign: false,
+      isVanity: false,
+      name: "Contoso Loyalty Program",
+      numberType: "shortCode",
+      privacyPolicyUrl: "https://contoso.com/privacy",
+      callToActionTypes: ["sms", "website"],
+      termsOfServiceUrl: "https://contoso.com/terms",
+      url: "https://contoso.com/loyalty-program",
+      callToActionUrl: "https://contoso.com/sign-up",
+    },
+    companyInformation: {
+      address: "1 Contoso Way Redmond, WA 98052",
+      name: "Contoso",
+      url: "https://contoso.com",
+      contactInformation: {
+        email: "alex@contoso.com",
+        name: "Alex",
+        phone: "+14255551234",
       },
-      companyInformation: {
-        address: "1 Contoso Way Redmond, WA 98052",
-        name: "Contoso",
-        url: "contoso.com",
-        contactInformation: {
-          email: "alex@contoso.com",
-          name: "Alex",
-          phone: "+14255551234"
+      customerCareInformation: {
+        email: "customercare@contoso.com",
+        tollFreeNumber: "+18005551234",
+      },
+    },
+    messageDetails: {
+      supportedProtocol: "sms",
+      recurrence: "subscription",
+      useCases: [
+        {
+          contentType: "marketingAndPromotion",
+          examples: [{ messages: [{ direction: "fromUser", text: "txtMessage" }] }],
         },
-        customerCareInformation: {
-          email: "customercare@contoso.com",
-          tollFreeNumber: "+18005551234"
-        }
-      },
-      messageDetails: {
-        types: [ "sms" ],
-        recurrence: "subscription",
-        contentTypes: [ "coupons", "loyaltyProgram", "loyaltyProgramPointsPrizes" ],
-        optInMessage: "Someone requested to subscribe this number to receive updates about Contoso's loyalty program.  To confirm subscription, reply to this message with 'JOIN'",
-        optInReply: "JOIN",
-        confirmationMessage: "Congrats, you have been successfully subscribed to loyalty program updates.  Welcome!",
-        useCase: "two-way"
-      },
-      trafficDetails: {
-        estimatedVolume: 10000,
-        monthlyAverageMessagesFromUser: 1,
-        monthlyAverageMessagesToUser: 3,
-        isSpiky: true,
-        spikeDetails: "Higher traffic expected around major shopping holidays, most notably Black Friday and Memorial Day."
-      }
-    }
-  }
-}
+        {
+          contentType: "loyaltyProgram",
+          examples: [{ messages: [{ direction: "toUser", text: "txtMessage" }] }],
+        },
+        {
+          contentType: "sweepstakesOrContest",
+          examples: [{ messages: [{ direction: "toUser", text: "txtMessage" }] }],
+        },
+      ],
+      optInMessageToUser:
+        "Someone requested to subscribe this number to receive updates about Contoso's loyalty program.  To confirm subscription, reply to this message with 'JOIN'",
+      optInAnswerFromUser: "JOIN",
+      optInConfirmationMessageToUser:
+        "Congrats, you have been successfully subscribed to loyalty program updates.  Welcome!",
+      optOutAnswerToUser: "Reply STOP to unsubscribe.",
+      helpAnswerToUser: "Reply HELP for help. Msg&Data rates may apply.",
+      directionality: "twoWay",
+    },
+    trafficDetails: {
+      totalMonthlyVolume: 10000,
+      monthlyAverageMessagesFromUser: 1,
+      monthlyAverageMessagesToUser: 3,
+      estimatedRampUpTimeInDays: 50,
+      isSpiky: true,
+      spikeDetails:
+        "Higher traffic expected around major shopping holidays, most notably Black Friday and Memorial Day.",
+    },
+  },
+};
 
-main();
-```
+// create program brief
+const createResponse = await client.upsertUSProgramBrief(programBriefId, programBriefRequest);
 
-Then add a call to `upsertUSProgramBrief` and use the object you created as the parameter. This will create a program brief object which can then be modified as much as needed until it's ready to be submitted.
-
-```typescript
-  // create program brief
-  var createResponse = await client.upsertUSProgramBrief(programBriefId, programBriefRequest);
-  if (createResponse._response.status != 201) {
-    throw new Error(`Program brief creation failed.
-    Status code: ${createResponse._response.status}; Error: ${createResponse._response.bodyAsText}; CV: ${createResponse._response.headers.get("MS-CV")}`);
-  } else {
-    console.log(`Successfully created a new program brief with Id ${programBriefId}.`);
-  }
-```
-
-When ready to submit, call `submitUSProgramBrief` to submit for processing. After submission no edits will be allowed unless requested as part of the application process.
-
-```typescript
-  // submit program brief
-  var submittedProgramBrief = await client.submitUSProgramBrief(programBriefId);
-  if (submittedProgramBrief._response.status == 200) {
-    console.log(`Successfully submitted program brief with Id ${programBriefId}`);
-  } else {
-    throw new Error(`Failed to submit program brief with Id ${programBriefId}.
-    Status code: ${submittedProgramBrief._response.status}; Error: ${submittedProgramBrief._response.bodyAsText}; CV: ${submittedProgramBrief._response.headers.get("MS-CV")}`);
-  }
+// submit program brief
+const submittedProgramBrief = await client.submitUSProgramBrief(programBriefId);
 ```
 
 ### Get and delete program briefs
+
 Use the `listUSProgramBriefs` method to page through all program briefs for an ACS resource. Use `deleteUSProgramBrief` to delete unwanted program briefs. Keep in mind that once a program brief is submitted it is not eligible for deletion.
 
-```typescript
+```ts snippet:ReadmeSampleGetAndDeleteProgramBriefs
+import { DefaultAzureCredential } from "@azure/identity";
 import { ShortCodesClient } from "@azure-tools/communication-short-codes";
 
-const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new ShortCodesClient(connectionString);
+const credential = new DefaultAzureCredential();
+const client = new ShortCodesClient("<endpoint-from-resource>", credential);
 
-async main function() {
-  // get all program briefs for a resource
-  var programBriefs = await client.listUSProgramBriefs();
+// get all program briefs for a resource
+const programBriefs = client.listUSProgramBriefs();
 
-  // find draft program briefs, and delete them
-  for await (const programBrief of programBriefs) {
-    console.log(`Program Brief with Id ${programBrief.id} has status ${programBrief.status}`);
+// find draft program briefs, and delete them
+for await (const programBrief of programBriefs) {
+  console.log(`Program Brief with Id ${programBrief.id} has status ${programBrief.status}`);
 
-    // identify drafts
-    if (programBrief.status == 'draft') {
-      var unsubmittedProgramBriefId = programBrief.id;
-    
-      // delete draft program brief
-      var deleteResponse = await client.deleteUSProgramBrief(unsubmittedProgramBriefId);
-      if (deleteResponse._response.status == 200) {
-          console.log(`Successfully deleted draft program brief with Id ${unsubmittedProgramBriefId}`);
-      } else {
-          console.log(`Failed to delete draft program brief with Id ${unsubmittedProgramBriefId}.
-          Status code: ${deleteResponse._response.status}; Error: ${deleteResponse._response.bodyAsText}; CV: ${deleteResponse._response.headers.get("MS-CV")}`);
-      }
-    }
+  // identify drafts
+  if (programBrief.status === "draft") {
+    const unsubmittedProgramBriefId = programBrief.id;
+
+    // delete draft program brief
+    const deleteResponse = await client.deleteUSProgramBrief(unsubmittedProgramBriefId);
   }
 }
-
-main();
 ```
 
 ### Get and update program brief
+
 Use the `getUSProgramBrief` to retrieve a single program brief by its Id. Use the `upsertUSProgramBrief` to update a program brief. `upsertUSProgramBrief` accepts a `ShortCodesUpsertUSProgramBriefOptionalParams` object, in which only the fields that are changing need to be set.
 
-```typescript
-import { ShortCodesClient } from "@azure-tools/communication-short-codes";
+```ts snippet:ReadmeSampleGetAndUpdateProgramBrief
+import { DefaultAzureCredential } from "@azure/identity";
+import {
+  ShortCodesClient,
+  ShortCodesUpsertUSProgramBriefOptionalParams,
+} from "@azure-tools/communication-short-codes";
 
-const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new ShortCodesClient(connectionString);
+const credential = new DefaultAzureCredential();
+const client = new ShortCodesClient("<endpoint-from-resource>", credential);
 
-async main function() {
-  // get a program briefs for a resource
-  const programBriefId = process.env.PROGRAM_BRIEF_TO_GET || "<program brief Id>";
-  var programBrief = await client.getUSProgramBrief(programBriefId);
-  console.log(`Program brief with Id ${programBrief.id} has status ${programBrief.status} which was last updated ${programBrief.statusUpdatedDate}`);
+// get a program briefs for a resource
+const programBriefId = "1b4411b7-edb0-44e7-9eca-dc7208b8d88c";
+const programBrief = await client.getUSProgramBrief(programBriefId);
+console.log(
+  `Program brief with Id ${programBrief.id} has status ${programBrief.status} which was last updated ${programBrief.statusUpdatedDate}`,
+);
 
-  // update the program brief
-  var updateRequest: ShortCodesUpsertUSProgramBriefOptionalParams = {
-      body: {
-          id: programBriefId,
-          programDetails: {
-              privacyPolicyUrl: "https://contoso.com/updated-privacy",
-              termsOfServiceUrl: "https://contoso.com/updated-terms-of-service"
-          }
-      }
-  };
-  var upsertResponse = await client.upsertUSProgramBrief(programBriefId, updateRequest);
-  if (upsertResponse._response.status == 200) {
-      console.log(`Successfully updated terms of service and privacy policy for program brief ${programBriefId}`);
-  } else {
-      throw new Error(`Failed to update program brief with Id ${programBriefId}.
-      Status code: ${upsertResponse._response.status}; Error: ${upsertResponse._response.bodyAsText}; CV: ${upsertResponse._response.headers.get("MS-CV")}`);
-  }
-}
-
-main();
+// update the program brief
+const updateRequest: ShortCodesUpsertUSProgramBriefOptionalParams = {
+  body: {
+    id: programBriefId,
+    programDetails: {
+      privacyPolicyUrl: "https://contoso.com/updated-privacy",
+      termsOfServiceUrl: "https://contoso.com/updated-terms-of-service",
+    },
+  },
+};
+const upsertResponse = await client.upsertUSProgramBrief(programBriefId, updateRequest);
 ```
 
 ### Get short codes
+
 Use `listShortCodes` to page through all short codes owned by a resource.
 
-```typescript
+```ts snippet:ReadmeSampleGetShortCodes
+import { DefaultAzureCredential } from "@azure/identity";
 import { ShortCodesClient } from "@azure-tools/communication-short-codes";
 
-const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new ShortCodesClient(connectionString);
+const credential = new DefaultAzureCredential();
+const client = new ShortCodesClient("<endpoint-from-resource>", credential);
 
-async main function() {
-  // get all short codes for a resource
-  var shortCodes = await client.listShortCodes();
+// get all short codes for a resource
+const shortCodes = client.listShortCodes();
 
-  // print all short codes
-  for await (const shortCode of shortCodes) {
-    console.log(`${shortCode}`);
-  }
+// print all short codes
+for await (const shortCode of shortCodes) {
+  console.log(`${shortCode}`);
 }
+```
 
-main();
+### Get short code costs
+
+Use `listShortCodeCosts` to page through all short code costs eligible by a resource.
+
+```ts snippet:ReadmeSampleGetShortCodeCosts
+import { DefaultAzureCredential } from "@azure/identity";
+import { ShortCodesClient } from "@azure-tools/communication-short-codes";
+
+const credential = new DefaultAzureCredential();
+const client = new ShortCodesClient("<endpoint-from-resource>", credential);
+
+// get all eligible short code costs for a resource
+const shortCodeCosts = client.listShortCodeCosts();
+
+// print all short code costs
+for await (const shortCodeCost of shortCodeCosts) {
+  console.log(`${shortCodeCost}`);
+}
 ```
 
 ## Troubleshooting
 
+### Logging
+
+Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
+
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
+
+setLogLevel("info");
+```
+
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
+
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/communication/communication-short-codes/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-short-codes/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/identity/identity/README.md
-
-
+[azure_powershell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md
 

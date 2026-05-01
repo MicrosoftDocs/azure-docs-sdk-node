@@ -1,0 +1,11 @@
+---
+title: Azure Planetarycomputer SDK for JavaScript
+description: Reference for Azure Planetarycomputer SDK for JavaScript
+ms.date: 05/01/2026
+ms.topic: reference
+ms.devlang: javascript
+ms.service: planetarycomputer
+---
+# Azure Planetarycomputer SDK for JavaScript - latest
+## Packages - latest
+[!INCLUDE [packages](planetarycomputer-index.md)]

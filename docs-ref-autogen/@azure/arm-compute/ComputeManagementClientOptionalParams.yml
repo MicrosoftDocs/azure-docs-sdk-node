@@ -2,36 +2,26 @@
 name: ComputeManagementClientOptionalParams
 uid: '@azure/arm-compute.ComputeManagementClientOptionalParams'
 package: '@azure/arm-compute'
-summary: Optional parameters.
+summary: Optional parameters for the client.
 fullName: ComputeManagementClientOptionalParams
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: $host
-    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.$host'
+  - name: cloudSetting
+    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.cloudSetting'
     package: '@azure/arm-compute'
-    summary: server parameter
-    fullName: $host
+    summary: Specifies the Azure cloud environment for the client.
+    fullName: cloudSetting
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '$host?: string'
+      content: >-
+        cloudSetting?: "AZURE_PUBLIC_CLOUD" | "AZURE_CHINA_CLOUD" |
+        "AZURE_US_GOVERNMENT"
       return:
         description: ''
-        type: string
-  - name: endpoint
-    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.endpoint'
-    package: '@azure/arm-compute'
-    summary: Overrides client endpoint.
-    fullName: endpoint
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'endpoint?: string'
-      return:
-        description: ''
-        type: string
+        type: '"AZURE_PUBLIC_CLOUD" | "AZURE_CHINA_CLOUD" | "AZURE_US_GOVERNMENT"'
 inheritedProperties:
   - name: additionalPolicies
     uid: >-
@@ -45,8 +35,8 @@ inheritedProperties:
       content: 'additionalPolicies?: AdditionalPolicyConfig[]'
       return:
         description: ''
-        type: <xref uid="@azure/core-client.AdditionalPolicyConfig" />[]
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.additionalPolicies
+        type: <xref uid="@azure-rest/core-client.AdditionalPolicyConfig" />[]
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.additionalPolicies
   - name: agent
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.agent'
     package: '@azure/arm-compute'
@@ -59,12 +49,12 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.Agent" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.agent
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.agent
   - name: allowInsecureConnection
     uid: >-
       @azure/arm-compute.ComputeManagementClientOptionalParams.allowInsecureConnection
     package: '@azure/arm-compute'
-    summary: Set to true if the request is sent over HTTP instead of HTTPS
+    summary: Option to allow calling http (insecure) endpoints
     fullName: allowInsecureConnection
     remarks: ''
     isDeprecated: false
@@ -73,60 +63,66 @@ inheritedProperties:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      coreClient.ServiceClientOptions.allowInsecureConnection
-  - name: baseUri
-    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.baseUri'
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.allowInsecureConnection
+  - name: apiVersion
+    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.apiVersion'
     package: '@azure/arm-compute'
-    summary: >-
-      If specified, this is the base URI that requests will be made against for
-      this ServiceClient.
-
-      If it is not specified, then all OperationSpecs must contain a baseUrl
-      property.
-    fullName: baseUri
+    summary: Options for setting a custom apiVersion.
+    fullName: apiVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'apiVersion?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.apiVersion
+  - name: baseUrl
+    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.baseUrl'
+    package: '@azure/arm-compute'
+    summary: Base url for the client
+    fullName: baseUrl
     remarks: ''
     isDeprecated: true
     customDeprecatedMessage: >-
       This property is deprecated and will be removed soon, please use endpoint
       instead
     syntax:
-      content: 'baseUri?: string'
+      content: 'baseUrl?: string'
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.baseUri
-  - name: credential
-    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.credential'
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.baseUrl
+  - name: credentials
+    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.credentials'
     package: '@azure/arm-compute'
-    summary: Credential used to authenticate the request.
-    fullName: credential
+    summary: Credentials information
+    fullName: credentials
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'credential?: TokenCredential'
+      content: 'credentials?: { apiKeyHeaderName?: string, scopes?: string[] }'
       return:
         description: ''
-        type: <xref uid="@azure/core-auth.TokenCredential" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.credential
-  - name: credentialScopes
-    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.credentialScopes'
+        type: '{ apiKeyHeaderName?: string, scopes?: string[] }'
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.credentials
+  - name: endpoint
+    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.endpoint'
     package: '@azure/arm-compute'
-    summary: If specified, will be used to build the BearerTokenAuthenticationPolicy.
-    fullName: credentialScopes
+    summary: Endpoint for the client
+    fullName: endpoint
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'credentialScopes?: string | string[]'
+      content: 'endpoint?: string'
       return:
         description: ''
-        type: string | string[]
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.credentialScopes
+        type: string
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.endpoint
   - name: httpClient
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.httpClient'
     package: '@azure/arm-compute'
-    summary: The HttpClient that will be used to send HTTP requests.
+    summary: Specify a custom HttpClient when making requests.
     fullName: httpClient
     remarks: ''
     isDeprecated: false
@@ -135,11 +131,31 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.HttpClient" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.httpClient
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.httpClient
+  - name: loggingOptions
+    uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.loggingOptions'
+    package: '@azure/arm-compute'
+    summary: Options to configure request/response logging.
+    fullName: loggingOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'loggingOptions?: LogPolicyOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.LogPolicyOptions" />
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.loggingOptions
   - name: pipeline
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.pipeline'
     package: '@azure/arm-compute'
-    summary: A customized pipeline to use, otherwise a default one will be created.
+    summary: >-
+      Pipeline to use for the client. If not provided, a default pipeline will
+      be created using the options provided.
+
+      Use with caution -- when setting this option, all client options that are
+      used in the creation of the default pipeline
+
+      will be ignored.
     fullName: pipeline
     remarks: ''
     isDeprecated: false
@@ -148,7 +164,7 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.Pipeline" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.pipeline
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.pipeline
   - name: proxyOptions
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.proxyOptions'
     package: '@azure/arm-compute'
@@ -161,7 +177,7 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.ProxySettings" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.proxyOptions
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.proxyOptions
   - name: redirectOptions
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.redirectOptions'
     package: '@azure/arm-compute'
@@ -174,23 +190,7 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.RedirectPolicyOptions" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.redirectOptions
-  - name: requestContentType
-    uid: >-
-      @azure/arm-compute.ComputeManagementClientOptionalParams.requestContentType
-    package: '@azure/arm-compute'
-    summary: |-
-      The default request content type for the service.
-      Used if no requestContentType is present on an OperationSpec.
-    fullName: requestContentType
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'requestContentType?: string'
-      return:
-        description: ''
-        type: string
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.requestContentType
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.redirectOptions
   - name: retryOptions
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.retryOptions'
     package: '@azure/arm-compute'
@@ -203,7 +203,7 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelineRetryOptions" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.retryOptions
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.retryOptions
   - name: telemetryOptions
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.telemetryOptions'
     package: '@azure/arm-compute'
@@ -218,7 +218,7 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.TelemetryOptions" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.telemetryOptions
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.telemetryOptions
   - name: tlsOptions
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.tlsOptions'
     package: '@azure/arm-compute'
@@ -231,7 +231,7 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.TlsSettings" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.tlsOptions
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.tlsOptions
   - name: userAgentOptions
     uid: '@azure/arm-compute.ComputeManagementClientOptionalParams.userAgentOptions'
     package: '@azure/arm-compute'
@@ -244,5 +244,5 @@ inheritedProperties:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.UserAgentPolicyOptions" />
-    inheritanceDescription: <b>Inherited From</b> coreClient.ServiceClientOptions.userAgentOptions
-extends: <xref uid="@azure/core-client.ServiceClientOptions" />
+    inheritanceDescription: <b>Inherited From</b> ClientOptions.userAgentOptions
+extends: <xref uid="@azure-rest/core-client.ClientOptions" />

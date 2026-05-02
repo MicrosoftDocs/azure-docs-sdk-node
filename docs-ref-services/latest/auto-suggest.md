@@ -1,7 +1,7 @@
 ---
 title: Azure Auto Suggest SDK for JavaScript
 description: Reference for Azure Auto Suggest SDK for JavaScript
-ms.date: 04/30/2026
+ms.date: 05/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: autosuggest

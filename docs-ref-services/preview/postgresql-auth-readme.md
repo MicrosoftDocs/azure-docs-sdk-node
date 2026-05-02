@@ -1,19 +1,19 @@
 ---
 title: Azure PostgreSQL Authentication client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/postgresql-auth, postgresql
-ms.date: 04/28/2026
+ms.date: 05/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: postgresql
 ---
-# Azure PostgreSQL Authentication client library for JavaScript - version 1.0.0-beta.1 
+# Azure PostgreSQL Authentication client library for JavaScript - version 1.0.0-alpha.20260429.1 
 
 
 This package provides Azure Entra ID (formerly Azure Active Directory) authentication for PostgreSQL connections in JavaScript. It supports both [node-postgres (`pg`)](https://node-postgres.com/) and [Sequelize](https://sequelize.org/) clients.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/postgresql-auth_1.0.0-beta.1/sdk/postgresql/postgresql-auth)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/postgresql/postgresql-auth)
 - <!---[Package (NPM)](https://www.npmjs.com/package/@azure/postgresql-auth)--->
 - <!---[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/postgresql-auth)--->
 - [Product documentation](https://learn.microsoft.com/azure/postgresql/)
@@ -24,7 +24,7 @@ Key links:
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/postgresql-auth_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -108,15 +108,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/postgresql-auth_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/postgresql-auth_1.0.0-beta.1/sdk/postgresql/postgresql-auth/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/postgresql/postgresql-auth/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/postgresql-auth_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 

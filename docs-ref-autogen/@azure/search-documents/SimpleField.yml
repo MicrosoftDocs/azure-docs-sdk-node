@@ -17,12 +17,12 @@ properties:
     package: '@azure/search-documents'
     summary: >-
       The name of the analyzer to use for the field. This option can be used
-      only with searchable
+      only with
 
-      fields and it can't be set together with either searchAnalyzer or
-      indexAnalyzer. Once the
+      searchable fields and it can't be set together with either searchAnalyzer
+      or indexAnalyzer.
 
-      analyzer is chosen, it cannot be changed for the field.
+      Once the analyzer is chosen, it cannot be changed for the field.
     fullName: analyzerName
     remarks: ''
     isDeprecated: false
@@ -42,12 +42,12 @@ properties:
       category (for example,
 
       search for digital cameras and see hits by brand, by megapixels, by price,
-      and so on). Fields
+      and so on).
 
-      of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be
-      facetable. Default is
+      Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot
+      be facetable.
 
-      false.
+      Default is false for all other simple fields.
     fullName: facetable
     remarks: ''
     isDeprecated: false
@@ -61,10 +61,10 @@ properties:
     package: '@azure/search-documents'
     summary: >-
       A value indicating whether to enable the field to be referenced in $filter
-      queries. filterable
+      queries.
 
-      differs from searchable in how strings are handled. Fields of type
-      Edm.String or
+      `filterable` differs from `searchable` in how strings are handled. Fields
+      of type Edm.String or
 
       Collection(Edm.String) that are filterable do not undergo word-breaking,
       so comparisons are for
@@ -78,6 +78,21 @@ properties:
     isDeprecated: false
     syntax:
       content: 'filterable?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: hasSensitivityLabel
+    uid: '@azure/search-documents.SimpleField.hasSensitivityLabel'
+    package: '@azure/search-documents'
+    summary: >-
+      A value indicating whether the field should be used for sensitivity label
+      filtering. This enables document-level filtering based on Microsoft
+      Purview sensitivity labels.
+    fullName: hasSensitivityLabel
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'hasSensitivityLabel?: boolean'
       return:
         description: ''
         type: boolean
@@ -114,18 +129,15 @@ properties:
     package: '@azure/search-documents'
     summary: >-
       The name of the analyzer used at indexing time for the field. This option
-      can be used only
+      can be used only with
 
-      with searchable fields. It must be set together with searchAnalyzer and it
-      cannot be set
+      searchable fields. It must be set together with searchAnalyzer and it
+      cannot be set together
 
-      together with the analyzer option.  This property cannot be set to the
-      name of a language
+      with the `analyzerName` option. Once the analyzer is chosen, it cannot be
+      changed for the
 
-      analyzer; use the analyzer property instead if you need a language
-      analyzer. Once the analyzer
-
-      is chosen, it cannot be changed for the field.
+      field. KnownAnalyzerNames is an enum containing known values.
     fullName: indexAnalyzerName
     remarks: ''
     isDeprecated: false
@@ -175,14 +187,7 @@ properties:
   - name: normalizerName
     uid: '@azure/search-documents.SimpleField.normalizerName'
     package: '@azure/search-documents'
-    summary: >-
-      The name of the normalizer to use for the field. This option can be used
-      only with fields with
-
-      filterable, sortable, or facetable enabled. Once the normalizer is chosen,
-      it cannot be changed
-
-      for the field. Must be null for complex fields.
+    summary: The name of the normalizer used at indexing time for the field.
     fullName: normalizerName
     remarks: ''
     isDeprecated: false
@@ -207,18 +212,18 @@ properties:
       enables full-text searches for these terms. Fields of type Edm.String or
       Collection(Edm.String)
 
-      are searchable by default. This property must be false for simple fields
-      of other non-string
+      are searchable by default. This property must be false for simple
 
-      data types. Note: searchable fields consume extra space
+      fields of other non-string data types.
 
-      in your index to accommodate additional tokenized versions of the field
-      value for full-text
+      Note: searchable fields consume extra space in your index to accommodate
+      additional tokenized
 
-      searches. If you want to save space in your index and you don't need a
-      field to be included in
+      versions of the field value for full-text searches. If you want to save
+      space in your index and
 
-      searches, set searchable to false. Default is false.
+      you don't need a field to be included in searches, set searchable to
+      false. Default is false.
     fullName: searchable
     remarks: ''
     isDeprecated: false
@@ -259,16 +264,16 @@ properties:
       A value indicating whether to enable the field to be referenced in
       $orderby expressions. By
 
-      default, the search engine sorts results by score, but in many experiences
-      users will want to
+      default, the service sorts results by score, but in many experiences users
+      will want
 
-      sort by fields in the documents. A simple field can be sortable only if it
-      is single-valued (it
+      to sort by fields in the documents. A simple field can be sortable only if
+      it is single-valued
 
-      has a single value in the scope of the parent document). Simple collection
-      fields cannot be
+      (it has a single value in the scope of the parent document). Simple
+      collection fields cannot
 
-      sortable, since they are multi-valued. Simple sub-fields of complex
+      be sortable, since they are multi-valued. Simple sub-fields of complex
       collections are also
 
       multi-valued, and therefore cannot be sortable. This is true whether it's
@@ -300,14 +305,16 @@ properties:
       creation and only for vector fields. This property cannot be changed for
       existing fields or set
 
-      as false for new fields. If this property is set as false, the property
-      'hidden' must be set to
+      as false for new fields. If this property is set to `false`, the property
+      `hidden` must be set
 
-      'true'. This property must be true or unset for key fields, for new
-      fields, and for non-vector
+      to `true`. This property must be true or unset for key fields, for new
+      fields, and for
 
-      fields. Disabling this property will reduce index storage requirements.
-      The default is true for vector fields.
+      non-vector fields, and it must be null for complex fields. Disabling this
+      property will reduce
+
+      index storage requirements. The default is true for vector fields.
     fullName: stored
     remarks: ''
     isDeprecated: false
@@ -327,10 +334,12 @@ properties:
       supported. Assigning a
 
       synonym map to a field ensures that query terms targeting that field are
-      expanded at query-time
+      expanded at
 
-      using the rules in the synonym map. This attribute can be changed on
-      existing fields.
+      query-time using the rules in the synonym map. This attribute can be
+      changed on existing
+
+      fields.
     fullName: synonymMapNames
     remarks: ''
     isDeprecated: false

@@ -1,0 +1,126 @@
+### YamlMime:TSType
+name: BrokerPersistence
+uid: '@azure/arm-iotoperations.BrokerPersistence'
+package: '@azure/arm-iotoperations'
+summary: >-
+  Disk persistence configuration.
+
+
+  When persistence is enabled, certain items (non-performance-critical data)
+  selected for persistence will reside only on disk. Below are the affected
+  items:
+
+
+  - Retained messages will be stored on disk only.
+
+  - WILL messages will be stored on disk only.
+
+  - DSS key/value pairs will be stored on disk only, except for
+  performance-critical items like timed locks, which remain in both disk and
+  memory for improved performance.
+
+
+  Optional. Everything is in-memory if not set.
+
+  Note: if configured, all MQTT session states are written to disk.
+fullName: BrokerPersistence
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: encryption
+    uid: '@azure/arm-iotoperations.BrokerPersistence.encryption'
+    package: '@azure/arm-iotoperations'
+    summary: >-
+      Controls settings related to encryption of the persistence database.
+      Optional, defaults to enabling encryption.
+    fullName: encryption
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'encryption?: BrokerPersistenceEncryption'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-iotoperations.BrokerPersistenceEncryption" />
+  - name: maxSize
+    uid: '@azure/arm-iotoperations.BrokerPersistence.maxSize'
+    package: '@azure/arm-iotoperations'
+    summary: >-
+      The max size of the message buffer on disk. If a PVC template is specified
+      using persistentVolumeClaimSpec Then this size is used as the request and
+      limit sizes of that template. If a PVC template isn't specified Then
+      local-path provisioner is requested with this size limit. Required.
+    fullName: maxSize
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxSize: string'
+      return:
+        description: ''
+        type: string
+  - name: persistentVolumeClaimSpec
+    uid: '@azure/arm-iotoperations.BrokerPersistence.persistentVolumeClaimSpec'
+    package: '@azure/arm-iotoperations'
+    summary: >-
+      Use the specified persistent volume claim template to mount a persistent
+      volume. Same object as in diskBackedMessageBuffer, but with a limitation
+      that access modes field must be set to `ReadWriteOncePod`.
+
+
+      If unset, a default PVC with default properties will be used. Among other
+      things this PVC will use the cluster default storage class, which may or
+      may not be using a local path provisioner. User is opting in to
+      sub-optimal behavior if they leave this unset or set it without the
+      storage class field, and their cluster default is not a local path class.
+    fullName: persistentVolumeClaimSpec
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'persistentVolumeClaimSpec?: VolumeClaimSpec'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-iotoperations.VolumeClaimSpec" />
+  - name: retain
+    uid: '@azure/arm-iotoperations.BrokerPersistence.retain'
+    package: '@azure/arm-iotoperations'
+    summary: Controls which topic's retained messages should be persisted to disk.
+    fullName: retain
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'retain?: BrokerRetainMessagesPolicyUnion'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-iotoperations.BrokerRetainMessagesPolicyUnion"
+          />
+  - name: stateStore
+    uid: '@azure/arm-iotoperations.BrokerPersistence.stateStore'
+    package: '@azure/arm-iotoperations'
+    summary: Controls which keys should be persisted to disk for the state store.
+    fullName: stateStore
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'stateStore?: BrokerStateStorePolicyUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-iotoperations.BrokerStateStorePolicyUnion" />
+  - name: subscriberQueue
+    uid: '@azure/arm-iotoperations.BrokerPersistence.subscriberQueue'
+    package: '@azure/arm-iotoperations'
+    summary: >-
+      Controls which subscriber message queues should be persisted to disk.
+      Important: to facilitate reconnection, session state metadata are ALWAYS
+      written to disk if any persistence setting is specified, even if this
+      section isn't set.
+    fullName: subscriberQueue
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'subscriberQueue?: BrokerSubscriberQueuePolicyUnion'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-iotoperations.BrokerSubscriberQueuePolicyUnion"
+          />

@@ -1,12 +1,12 @@
 ---
 title: Azure VoiceLive client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/ai-voicelive, ai
-ms.date: 02/17/2026
+keywords: Azure, javascript, SDK, API, @azure/ai-voicelive, voicelive
+ms.date: 05/06/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: ai
+ms.service: voicelive
 ---
-# Azure VoiceLive client library for JavaScript - version 1.0.0-beta.3 
+# Azure VoiceLive client library for JavaScript - version 1.0.0-beta.4 
 
 
 Azure VoiceLive is a managed service that enables low-latency, high-quality speech-to-speech interactions for voice agents. The service consolidates speech recognition, generative AI, and text-to-speech functionalities into a single, unified interface, providing an end-to-end solution for creating seamless voice-driven experiences.
@@ -79,7 +79,7 @@ Represents an active WebSocket connection for real-time voice communication. Thi
 The service uses session configuration to control various aspects of voice interaction:
 
 - **Turn Detection**: Configure how the service detects when users start and stop speaking
-- **Audio Processing**: Enable noise suppression and echo cancellation  
+- **Audio Processing**: Enable noise suppression and echo cancellation
 - **Voice Selection**: Choose from standard Azure voices, high-definition voices, or custom voices
 - **Model Selection**: Select the AI model (GPT-4o, GPT-4o-mini, Phi variants) that best fits your needs
 
@@ -87,11 +87,11 @@ The service uses session configuration to control various aspects of voice inter
 
 The VoiceLive API supports multiple AI models with different capabilities:
 
-| Model | Description | Use Case |
-|-------|-------------|----------|
-| `gpt-4o-realtime-preview` | GPT-4o with real-time audio processing | High-quality conversational AI |
-| `gpt-4o-mini-realtime-preview` | Lightweight GPT-4o variant | Fast, efficient interactions |
-| `phi4-mm-realtime` | Phi model with multimodal support | Cost-effective voice applications |
+| Model                          | Description                            | Use Case                          |
+| ------------------------------ | -------------------------------------- | --------------------------------- |
+| `gpt-4o-realtime-preview`      | GPT-4o with real-time audio processing | High-quality conversational AI    |
+| `gpt-4o-mini-realtime-preview` | Lightweight GPT-4o variant             | Fast, efficient interactions      |
+| `phi4-mm-realtime`             | Phi model with multimodal support      | Cost-effective voice applications |
 
 ### Conversational Enhancements
 
@@ -149,7 +149,7 @@ const session = await client.startSession({
 
 ## Authenticating with Azure Active Directory
 
-The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.4/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 To interact with the Azure VoiceLive service, you need to create an instance of the `VoiceLiveClient` class, a **service endpoint** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][defaultazurecredential], which is appropriate for most scenarios, including local development and production environments. We recommend using a [managed identity][managed_identity] for authentication in production environments.
 
@@ -410,19 +410,136 @@ const subscription = session.subscribe({
 ### Common errors and exceptions
 
 **Authentication Errors**: If you receive authentication errors, verify that:
+
 - Your Azure AI Foundry resource is correctly configured
 - Your API key or credential has the necessary permissions
 - The endpoint URL is correct and accessible
 
 **WebSocket Connection Issues**: VoiceLive uses WebSocket connections. Ensure that:
+
 - Your network allows WebSocket connections
 - Firewall rules permit connections to `*.cognitiveservices.azure.com`
 - Browser policies allow WebSocket and microphone access (for browser usage)
 
 **Audio Issues**: For audio-related problems:
+
 - Verify microphone permissions in the browser
 - Check that audio formats (PCM16, PCM24) are supported
 - Ensure proper audio context setup for playback
+
+### Telemetry / Distributed Tracing
+
+The VoiceLive SDK supports [distributed tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing) via the `@azure/core-tracing` package. Tracing is **no-op by default** — no spans are created unless you opt in by registering an OpenTelemetry-compatible tracing provider.
+
+#### How it works
+
+When tracing is enabled, the SDK automatically creates spans for the session lifecycle:
+
+```
+connect (parent span — open for the entire session lifetime)
+├── send session.update
+├── send conversation.item.create
+├── send response.create
+├── recv session.created
+├── recv response.done          ← turn count incremented, token usage recorded
+├── send response.cancel        ← interruption count incremented
+├── recv error                  ← error event recorded
+└── close                       ← session-level counters finalized
+```
+
+Span attributes follow the [OpenTelemetry GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) (`gen_ai.system`, `gen_ai.operation.name`, `gen_ai.request.model`, etc.) plus VoiceLive-specific extensions (`gen_ai.voice.session_id`, `gen_ai.voice.turn_count`, `gen_ai.voice.audio_bytes_sent`, …). Session-level metrics are aggregated onto the `connect` span when the session ends.
+
+#### Enable tracing (Node.js, CommonJS — recommended)
+
+For CommonJS apps, use the standard Azure SDK instrumentation bridge:
+
+```bash
+npm install @azure/opentelemetry-instrumentation-azure-sdk @opentelemetry/instrumentation @opentelemetry/sdk-trace-node
+```
+
+```
+const {
+  NodeTracerProvider,
+  SimpleSpanProcessor,
+  ConsoleSpanExporter,
+} = require("@opentelemetry/sdk-trace-node");
+const { registerInstrumentations } = require("@opentelemetry/instrumentation");
+const { createAzureSdkInstrumentation } = require("@azure/opentelemetry-instrumentation-azure-sdk");
+
+// 1. Configure an OpenTelemetry tracer provider
+const provider = new NodeTracerProvider({
+  spanProcessors: [new SimpleSpanProcessor(new ConsoleSpanExporter())],
+});
+provider.register();
+
+// 2. Register the Azure SDK instrumentation BEFORE requiring @azure/ai-voicelive
+registerInstrumentations({
+  instrumentations: [createAzureSdkInstrumentation()],
+});
+
+// 3. Use VoiceLive — spans are emitted automatically
+const { VoiceLiveClient } = require("@azure/ai-voicelive");
+const { DefaultAzureCredential } = require("@azure/identity");
+
+const client = new VoiceLiveClient(endpoint, new DefaultAzureCredential());
+const session = client.createSession("gpt-4o-realtime-preview");
+await session.connect(); // creates "connect" span
+```
+
+#### Enable tracing (Node.js ESM and browsers)
+
+`createAzureSdkInstrumentation` relies on CommonJS require-hooks and produces no spans when the SDK is loaded as ESM (i.e. `"type": "module"` packages or browser bundlers like Vite). For those environments, register a minimal `Instrumenter` directly through `useInstrumenter` from `@azure/core-tracing`:
+
+```
+import { useInstrumenter } from "@azure/core-tracing";
+import { trace, context } from "@opentelemetry/api";
+
+useInstrumenter({
+  startSpan(name, spanOptions) {
+    const ctx = spanOptions.tracingContext ?? context.active();
+    const tracer = trace.getTracer(spanOptions.packageName ?? "@azure/ai-voicelive", spanOptions.packageVersion);
+    const span = tracer.startSpan(name, { attributes: spanOptions.spanAttributes }, ctx);
+    return {
+      span: {
+        end: () => span.end(),
+        setStatus: (s) => { if (s.status === "error") span.setStatus({ code: 2, message: String(s.error ?? "") }); },
+        setAttribute: (k, v) => span.setAttribute(k, v),
+        isRecording: () => span.isRecording(),
+        recordException: (e) => span.recordException(e),
+      },
+      tracingContext: trace.setSpan(ctx, span),
+    };
+  },
+  withContext: (ctx, fn, ...args) => context.with(ctx, fn, undefined, ...args),
+  parseTraceparentHeader: () => undefined,
+  createRequestHeaders: () => ({}),
+});
+```
+
+This produces spans identical to the CommonJS bridge.
+
+> Complete, runnable samples:
+> - **Node.js (ESM):** [`samples/telemetry/`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.4/sdk/voicelive/ai-voicelive/samples/telemetry/README.md) — console exporter and Azure Monitor variant.
+> - **Browser (Vite):** [`samples/telemetry-browser/`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.4/sdk/voicelive/ai-voicelive/samples/telemetry-browser/README.md) — in-page span viewer.
+
+#### Span attributes
+
+The SDK sets attributes following [GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/):
+
+| Attribute | Description |
+|---|---|
+| `az.namespace` | Always `Microsoft.CognitiveServices` |
+| `gen_ai.system` | Always `az.ai.voicelive` |
+| `gen_ai.operation.name` | `connect`, `send`, `recv`, or `close` |
+| `gen_ai.request.model` | The model name (e.g., `gpt-4o-realtime-preview`) |
+| `gen_ai.voice.session_id` | Voice session ID from `session.created` |
+| `gen_ai.voice.turn_count` | Total completed response turns (connect span) |
+| `gen_ai.voice.interruption_count` | Number of `response.cancel` events (connect span) |
+| `gen_ai.voice.audio_bytes_sent` | Total audio bytes sent (connect span) |
+| `gen_ai.voice.audio_bytes_received` | Total audio bytes received (connect span) |
+| `gen_ai.voice.first_token_latency_ms` | Time from `response.create` to first audio/text delta |
+| `gen_ai.usage.input_tokens` | Input token count from `response.done` |
+| `gen_ai.usage.output_tokens` | Output token count from `response.done` |
 
 ### Logging
 
@@ -434,20 +551,20 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-voicelive_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-voicelive_1.0.0-beta.4/sdk/core/logger).
 
 ## Next steps
 
 You can find more code samples through the following links:
 
-- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/ai/ai-voicelive/samples)
-- [VoiceLive Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/sdk/ai/ai-voicelive/test)
+- [VoiceLive Samples (JavaScript/TypeScript)](https://github.com/rhurey/azure-sdk-for-js/tree/rhurey/move_voicelive/sdk/voicelive/ai-voicelive/samples)
+- [VoiceLive Test Cases](https://github.com/rhurey/azure-sdk-for-js/tree/rhurey/move_voicelive/sdk/voicelive/ai-voicelive/test)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [defaultazurecredential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest
-[managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview  
+[managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview
 [azure_identity]: https://learn.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest
 

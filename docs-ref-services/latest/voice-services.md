@@ -1,7 +1,7 @@
 ---
 title: Azure Voice Services SDK for JavaScript
 description: Reference for Azure Voice Services SDK for JavaScript
-ms.date: 05/06/2026
+ms.date: 05/07/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: voiceservices

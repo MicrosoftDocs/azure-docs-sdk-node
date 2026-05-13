@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: peering
 ---
-# Azure Peering SDK for JavaScript - latest
-## Packages - latest
+# Azure Peering SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](peering-index.md)]

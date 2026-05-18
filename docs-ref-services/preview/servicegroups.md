@@ -1,7 +1,7 @@
 ---
 title: Azure Servicegroups SDK for JavaScript
 description: Reference for Azure Servicegroups SDK for JavaScript
-ms.date: 05/15/2026
+ms.date: 05/18/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: servicegroups

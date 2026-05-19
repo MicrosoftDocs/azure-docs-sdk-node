@@ -1,7 +1,7 @@
 ---
 title: Azure Log Analytics SDK for JavaScript
 description: Reference for Azure Log Analytics SDK for JavaScript
-ms.date: 05/18/2026
+ms.date: 05/19/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-monitor

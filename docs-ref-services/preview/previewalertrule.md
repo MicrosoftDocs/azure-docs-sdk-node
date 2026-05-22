@@ -1,7 +1,7 @@
 ---
 title: Azure Previewalertrule SDK for JavaScript
 description: Reference for Azure Previewalertrule SDK for JavaScript
-ms.date: 05/21/2026
+ms.date: 05/22/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: previewalertrule

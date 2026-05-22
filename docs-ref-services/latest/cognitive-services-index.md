@@ -10,6 +10,7 @@
 |[Language Text](ai-language-text-readme.md)|[@azure/ai-language-text](https://www.npmjs.com/package/@azure/ai-language-text)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text)|
 |[AI Projects](ai-projects-readme.md)|[@azure/ai-projects](https://www.npmjs.com/package/@azure/ai-projects)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/ai/ai-projects)|
 |[Text Analytics](ai-text-analytics-readme.md)|[@azure/ai-text-analytics](https://www.npmjs.com/package/@azure/ai-text-analytics)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/textanalytics/ai-text-analytics)|
+|[Voice Live](ai-voicelive-readme.md)|[@azure/ai-voicelive](https://www.npmjs.com/package/@azure/ai-voicelive)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/voicelive/ai-voicelive)|
 |Computer Vision|[@azure/cognitiveservices-computervision](https://www.npmjs.com/package/@azure/cognitiveservices-computervision)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |Content Safety|[@azure/cognitiveservices-contentmoderator](https://www.npmjs.com/package/@azure/cognitiveservices-contentmoderator)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |Custom Vision Prediction|[@azure/cognitiveservices-customvision-prediction](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-prediction)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|

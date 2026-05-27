@@ -16,12 +16,13 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'encryption?: ClusterPropertiesEncryption'
+      content: 'encryption?: ClusterCommonPropertiesEncryption'
       return:
         description: ''
         type: >-
           <xref
-          uid="@azure/arm-redisenterprisecache.ClusterPropertiesEncryption" />
+          uid="@azure/arm-redisenterprisecache.ClusterCommonPropertiesEncryption"
+          />
   - name: highAvailability
     uid: '@azure/arm-redisenterprisecache.ClusterUpdate.highAvailability'
     package: '@azure/arm-redisenterprisecache'
@@ -40,11 +41,7 @@ properties:
   - name: hostName
     uid: '@azure/arm-redisenterprisecache.ClusterUpdate.hostName'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      DNS name of the cluster endpoint
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: DNS name of the cluster endpoint
     fullName: hostName
     remarks: ''
     isDeprecated: false
@@ -56,7 +53,7 @@ properties:
   - name: identity
     uid: '@azure/arm-redisenterprisecache.ClusterUpdate.identity'
     package: '@azure/arm-redisenterprisecache'
-    summary: The identity of the resource.
+    summary: The managed service identities assigned to this resource.
     fullName: identity
     remarks: ''
     isDeprecated: false
@@ -65,6 +62,34 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-redisenterprisecache.ManagedServiceIdentity" />
+  - name: maintenanceConfiguration
+    uid: '@azure/arm-redisenterprisecache.ClusterUpdate.maintenanceConfiguration'
+    package: '@azure/arm-redisenterprisecache'
+    summary: Cluster-level maintenance configuration.
+    fullName: maintenanceConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maintenanceConfiguration?: MaintenanceConfiguration'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-redisenterprisecache.MaintenanceConfiguration"
+          />
+  - name: migratedEndpoint
+    uid: '@azure/arm-redisenterprisecache.ClusterUpdate.migratedEndpoint'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      The endpoint of the source resource that is currently pointing to this
+      resource as a result of an ACR/ACRE to AMR migration.
+    fullName: migratedEndpoint
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'migratedEndpoint?: string'
+      return:
+        description: ''
+        type: string
   - name: minimumTlsVersion
     uid: '@azure/arm-redisenterprisecache.ClusterUpdate.minimumTlsVersion'
     package: '@azure/arm-redisenterprisecache'
@@ -87,9 +112,6 @@ properties:
     summary: >-
       List of private endpoint connections associated with the specified Redis
       Enterprise cluster
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: privateEndpointConnections
     remarks: ''
     isDeprecated: false
@@ -103,11 +125,7 @@ properties:
   - name: provisioningState
     uid: '@azure/arm-redisenterprisecache.ClusterUpdate.provisioningState'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      Current provisioning status of the cluster
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Current provisioning status of the cluster
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -116,14 +134,26 @@ properties:
       return:
         description: ''
         type: string
+  - name: publicNetworkAccess
+    uid: '@azure/arm-redisenterprisecache.ClusterUpdate.publicNetworkAccess'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      Whether or not public network traffic can access the Redis cluster. Only
+      'Enabled' or 'Disabled' can be set. null is returned only for clusters
+      created using an old API version which do not have this property and
+      cannot be set.
+    fullName: publicNetworkAccess
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'publicNetworkAccess?: string'
+      return:
+        description: ''
+        type: string
   - name: redisVersion
     uid: '@azure/arm-redisenterprisecache.ClusterUpdate.redisVersion'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      Version of redis the cluster supports, e.g. '6'
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Version of redis the cluster supports, e.g. '6'
     fullName: redisVersion
     remarks: ''
     isDeprecated: false
@@ -138,9 +168,6 @@ properties:
     summary: >-
       Explains the current redundancy strategy of the cluster, which affects the
       expected SLA.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: redundancyMode
     remarks: ''
     isDeprecated: false
@@ -152,11 +179,7 @@ properties:
   - name: resourceState
     uid: '@azure/arm-redisenterprisecache.ClusterUpdate.resourceState'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      Current resource status of the cluster
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Current resource status of the cluster
     fullName: resourceState
     remarks: ''
     isDeprecated: false
@@ -185,7 +208,7 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;

@@ -16,12 +16,13 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'encryption?: ClusterPropertiesEncryption'
+      content: 'encryption?: ClusterCommonPropertiesEncryption'
       return:
         description: ''
         type: >-
           <xref
-          uid="@azure/arm-redisenterprisecache.ClusterPropertiesEncryption" />
+          uid="@azure/arm-redisenterprisecache.ClusterCommonPropertiesEncryption"
+          />
   - name: highAvailability
     uid: '@azure/arm-redisenterprisecache.Cluster.highAvailability'
     package: '@azure/arm-redisenterprisecache'
@@ -40,11 +41,7 @@ properties:
   - name: hostName
     uid: '@azure/arm-redisenterprisecache.Cluster.hostName'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      DNS name of the cluster endpoint
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: DNS name of the cluster endpoint
     fullName: hostName
     remarks: ''
     isDeprecated: false
@@ -56,7 +53,7 @@ properties:
   - name: identity
     uid: '@azure/arm-redisenterprisecache.Cluster.identity'
     package: '@azure/arm-redisenterprisecache'
-    summary: The identity of the resource.
+    summary: The managed service identities assigned to this resource.
     fullName: identity
     remarks: ''
     isDeprecated: false
@@ -68,16 +65,40 @@ properties:
   - name: kind
     uid: '@azure/arm-redisenterprisecache.Cluster.kind'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      Distinguishes the kind of cluster. Read-only.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Distinguishes the kind of cluster. Read-only.
     fullName: kind
     remarks: ''
     isDeprecated: false
     syntax:
       content: 'kind?: string'
+      return:
+        description: ''
+        type: string
+  - name: maintenanceConfiguration
+    uid: '@azure/arm-redisenterprisecache.Cluster.maintenanceConfiguration'
+    package: '@azure/arm-redisenterprisecache'
+    summary: Cluster-level maintenance configuration.
+    fullName: maintenanceConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maintenanceConfiguration?: MaintenanceConfiguration'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-redisenterprisecache.MaintenanceConfiguration"
+          />
+  - name: migratedEndpoint
+    uid: '@azure/arm-redisenterprisecache.Cluster.migratedEndpoint'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      The endpoint of the source resource that is currently pointing to this
+      resource as a result of an ACR/ACRE to AMR migration.
+    fullName: migratedEndpoint
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'migratedEndpoint?: string'
       return:
         description: ''
         type: string
@@ -103,9 +124,6 @@ properties:
     summary: >-
       List of private endpoint connections associated with the specified Redis
       Enterprise cluster
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: privateEndpointConnections
     remarks: ''
     isDeprecated: false
@@ -119,11 +137,7 @@ properties:
   - name: provisioningState
     uid: '@azure/arm-redisenterprisecache.Cluster.provisioningState'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      Current provisioning status of the cluster
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Current provisioning status of the cluster
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -132,14 +146,26 @@ properties:
       return:
         description: ''
         type: string
+  - name: publicNetworkAccess
+    uid: '@azure/arm-redisenterprisecache.Cluster.publicNetworkAccess'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      Whether or not public network traffic can access the Redis cluster. Only
+      'Enabled' or 'Disabled' can be set. null is returned only for clusters
+      created using an old API version which do not have this property and
+      cannot be set.
+    fullName: publicNetworkAccess
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'publicNetworkAccess?: string'
+      return:
+        description: ''
+        type: string
   - name: redisVersion
     uid: '@azure/arm-redisenterprisecache.Cluster.redisVersion'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      Version of redis the cluster supports, e.g. '6'
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Version of redis the cluster supports, e.g. '6'
     fullName: redisVersion
     remarks: ''
     isDeprecated: false
@@ -154,9 +180,6 @@ properties:
     summary: >-
       Explains the current redundancy strategy of the cluster, which affects the
       expected SLA.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: redundancyMode
     remarks: ''
     isDeprecated: false
@@ -168,11 +191,7 @@ properties:
   - name: resourceState
     uid: '@azure/arm-redisenterprisecache.Cluster.resourceState'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      Current resource status of the cluster
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Current resource status of the cluster
     fullName: resourceState
     remarks: ''
     isDeprecated: false
@@ -196,7 +215,7 @@ properties:
   - name: zones
     uid: '@azure/arm-redisenterprisecache.Cluster.zones'
     package: '@azure/arm-redisenterprisecache'
-    summary: The Availability Zones where this cluster will be deployed.
+    summary: The availability zones.
     fullName: zones
     remarks: ''
     isDeprecated: false
@@ -212,9 +231,6 @@ inheritedProperties:
     summary: >-
       Fully qualified resource ID for the resource. Ex -
       /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -244,11 +260,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-redisenterprisecache.Cluster.name'
     package: '@azure/arm-redisenterprisecache'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -260,6 +272,23 @@ inheritedProperties:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.name](xref:@azure/arm-redisenterprisecache.TrackedResource.name)
+  - name: systemData
+    uid: '@azure/arm-redisenterprisecache.Cluster.systemData'
+    package: '@azure/arm-redisenterprisecache'
+    summary: >-
+      Azure Resource Manager metadata containing createdBy and modifiedBy
+      information.
+    fullName: systemData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'systemData?: SystemData'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-redisenterprisecache.SystemData" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.systemData](xref:@azure/arm-redisenterprisecache.TrackedResource.systemData)
   - name: tags
     uid: '@azure/arm-redisenterprisecache.Cluster.tags'
     package: '@azure/arm-redisenterprisecache'
@@ -268,10 +297,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.tags](xref:@azure/arm-redisenterprisecache.TrackedResource.tags)
@@ -281,9 +310,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

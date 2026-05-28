@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: transcription
 ---
-# Azure Transcription SDK for JavaScript - preview
-## Packages - preview
+# Azure Transcription SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](transcription-index.md)]

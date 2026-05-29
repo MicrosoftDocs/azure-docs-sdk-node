@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: billingbenefits
 ---
-# Azure Billing Benefits SDK for JavaScript - latest
-## Packages - latest
+# Azure Billing Benefits SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](billing-benefits-index.md)]

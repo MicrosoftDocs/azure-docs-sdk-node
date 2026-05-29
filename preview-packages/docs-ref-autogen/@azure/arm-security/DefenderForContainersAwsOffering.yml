@@ -8,18 +8,6 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: autoProvisioning
-    uid: '@azure/arm-security.DefenderForContainersAwsOffering.autoProvisioning'
-    package: '@azure/arm-security'
-    summary: Is audit logs pipeline auto provisioning enabled
-    fullName: autoProvisioning
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'autoProvisioning?: boolean'
-      return:
-        description: ''
-        type: boolean
   - name: cloudWatchToKinesis
     uid: '@azure/arm-security.DefenderForContainersAwsOffering.cloudWatchToKinesis'
     package: '@azure/arm-security'
@@ -37,52 +25,57 @@ properties:
           <xref
           uid="@azure/arm-security.DefenderForContainersAwsOfferingCloudWatchToKinesis"
           />
-  - name: containerVulnerabilityAssessment
+  - name: dataCollectionExternalId
     uid: >-
-      @azure/arm-security.DefenderForContainersAwsOffering.containerVulnerabilityAssessment
+      @azure/arm-security.DefenderForContainersAwsOffering.dataCollectionExternalId
     package: '@azure/arm-security'
-    summary: The container vulnerability assessment configuration
-    fullName: containerVulnerabilityAssessment
+    summary: >-
+      The externalId used by the data reader to prevent the confused deputy
+      attack
+    fullName: dataCollectionExternalId
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        containerVulnerabilityAssessment?:
-        DefenderForContainersAwsOfferingContainerVulnerabilityAssessment
+      content: 'dataCollectionExternalId?: string'
       return:
         description: ''
-        type: >-
-          <xref
-          uid="@azure/arm-security.DefenderForContainersAwsOfferingContainerVulnerabilityAssessment"
-          />
-  - name: containerVulnerabilityAssessmentTask
+        type: string
+  - name: enableAuditLogsAutoProvisioning
     uid: >-
-      @azure/arm-security.DefenderForContainersAwsOffering.containerVulnerabilityAssessmentTask
+      @azure/arm-security.DefenderForContainersAwsOffering.enableAuditLogsAutoProvisioning
     package: '@azure/arm-security'
-    summary: The container vulnerability assessment task configuration
-    fullName: containerVulnerabilityAssessmentTask
+    summary: Is audit logs data collection enabled
+    fullName: enableAuditLogsAutoProvisioning
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        containerVulnerabilityAssessmentTask?:
-        DefenderForContainersAwsOfferingContainerVulnerabilityAssessmentTask
+      content: 'enableAuditLogsAutoProvisioning?: boolean'
       return:
         description: ''
-        type: >-
-          <xref
-          uid="@azure/arm-security.DefenderForContainersAwsOfferingContainerVulnerabilityAssessmentTask"
-          />
-  - name: enableContainerVulnerabilityAssessment
+        type: boolean
+  - name: enableDefenderAgentAutoProvisioning
     uid: >-
-      @azure/arm-security.DefenderForContainersAwsOffering.enableContainerVulnerabilityAssessment
+      @azure/arm-security.DefenderForContainersAwsOffering.enableDefenderAgentAutoProvisioning
     package: '@azure/arm-security'
-    summary: Enable container vulnerability assessment feature
-    fullName: enableContainerVulnerabilityAssessment
+    summary: Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled
+    fullName: enableDefenderAgentAutoProvisioning
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'enableContainerVulnerabilityAssessment?: boolean'
+      content: 'enableDefenderAgentAutoProvisioning?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: enablePolicyAgentAutoProvisioning
+    uid: >-
+      @azure/arm-security.DefenderForContainersAwsOffering.enablePolicyAgentAutoProvisioning
+    package: '@azure/arm-security'
+    summary: Is Policy Kubernetes agent auto provisioning enabled
+    fullName: enablePolicyAgentAutoProvisioning
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enablePolicyAgentAutoProvisioning?: boolean'
       return:
         description: ''
         type: boolean
@@ -116,22 +109,23 @@ properties:
       return:
         description: ''
         type: number
-  - name: kubernetesScubaReader
-    uid: '@azure/arm-security.DefenderForContainersAwsOffering.kubernetesScubaReader'
+  - name: kubernetesDataCollection
+    uid: >-
+      @azure/arm-security.DefenderForContainersAwsOffering.kubernetesDataCollection
     package: '@azure/arm-security'
-    summary: The kubernetes to scuba connection configuration
-    fullName: kubernetesScubaReader
+    summary: The kubernetes data collection connection configuration
+    fullName: kubernetesDataCollection
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        kubernetesScubaReader?:
-        DefenderForContainersAwsOfferingKubernetesScubaReader
+        kubernetesDataCollection?:
+        DefenderForContainersAwsOfferingKubernetesDataCollection
       return:
         description: ''
         type: >-
           <xref
-          uid="@azure/arm-security.DefenderForContainersAwsOfferingKubernetesScubaReader"
+          uid="@azure/arm-security.DefenderForContainersAwsOfferingKubernetesDataCollection"
           />
   - name: kubernetesService
     uid: '@azure/arm-security.DefenderForContainersAwsOffering.kubernetesService'
@@ -187,9 +181,7 @@ properties:
   - name: offeringType
     uid: '@azure/arm-security.DefenderForContainersAwsOffering.offeringType'
     package: '@azure/arm-security'
-    summary: >-
-      Polymorphic discriminator, which specifies the different types this object
-      can be
+    summary: The type of the security offering.
     fullName: offeringType
     remarks: ''
     isDeprecated: false
@@ -198,29 +190,26 @@ properties:
       return:
         description: ''
         type: '"DefenderForContainersAws"'
-  - name: scubaExternalId
-    uid: '@azure/arm-security.DefenderForContainersAwsOffering.scubaExternalId'
+  - name: vmScanners
+    uid: '@azure/arm-security.DefenderForContainersAwsOffering.vmScanners'
     package: '@azure/arm-security'
-    summary: >-
-      The externalId used by the data reader to prevent the confused deputy
-      attack
-    fullName: scubaExternalId
+    summary: The Microsoft Defender for Container K8s VM host scanning configuration
+    fullName: vmScanners
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'scubaExternalId?: string'
+      content: 'vmScanners?: DefenderForContainersAwsOfferingVmScanners'
       return:
         description: ''
-        type: string
+        type: >-
+          <xref
+          uid="@azure/arm-security.DefenderForContainersAwsOfferingVmScanners"
+          />
 inheritedProperties:
   - name: description
     uid: '@azure/arm-security.DefenderForContainersAwsOffering.description'
     package: '@azure/arm-security'
-    summary: >-
-      The offering description.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The offering description.
     fullName: description
     remarks: ''
     isDeprecated: false

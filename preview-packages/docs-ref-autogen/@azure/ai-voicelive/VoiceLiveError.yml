@@ -38,7 +38,13 @@ inheritedProperties:
   - name: cause
     uid: '@azure/ai-voicelive.VoiceLiveError.cause'
     package: '@azure/ai-voicelive'
-    summary: The original error that caused this error, if any
+    summary: |-
+      The original error that caused this error, if any.
+
+      Note: the standard `Error.cause` (ES2022) is typed as `unknown` because in
+      general code can throw anything. We narrow this to `Error` because every
+      call site in this SDK is internal and always wraps non-`Error` values
+      before constructing one of these errors (see `classifyConnectionError`).
     fullName: cause
     remarks: ''
     isDeprecated: false

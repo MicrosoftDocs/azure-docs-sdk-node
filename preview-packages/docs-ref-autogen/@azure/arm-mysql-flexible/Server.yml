@@ -25,11 +25,7 @@ properties:
   - name: administratorLoginPassword
     uid: '@azure/arm-mysql-flexible.Server.administratorLoginPassword'
     package: '@azure/arm-mysql-flexible'
-    summary: >-
-      The password of the administrator login (required for server creation).
-
-      This value contains a credential. Consider obscuring before showing to
-      users
+    summary: The password of the administrator login (required for server creation).
     fullName: administratorLoginPassword
     remarks: ''
     isDeprecated: false
@@ -74,6 +70,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: databasePort
+    uid: '@azure/arm-mysql-flexible.Server.databasePort'
+    package: '@azure/arm-mysql-flexible'
+    summary: >-
+      The server database port. Can only be specified when the server is being
+      created.
+    fullName: databasePort
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'databasePort?: number'
+      return:
+        description: ''
+        type: number
   - name: dataEncryption
     uid: '@azure/arm-mysql-flexible.Server.dataEncryption'
     package: '@azure/arm-mysql-flexible'
@@ -86,14 +96,22 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-mysql-flexible.DataEncryption" />
+  - name: fullVersion
+    uid: '@azure/arm-mysql-flexible.Server.fullVersion'
+    package: '@azure/arm-mysql-flexible'
+    summary: Major version and actual engine version
+    fullName: fullVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'fullVersion?: string'
+      return:
+        description: ''
+        type: string
   - name: fullyQualifiedDomainName
     uid: '@azure/arm-mysql-flexible.Server.fullyQualifiedDomainName'
     package: '@azure/arm-mysql-flexible'
-    summary: >-
-      The fully qualified domain name of a server.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The fully qualified domain name of a server.
     fullName: fullyQualifiedDomainName
     remarks: ''
     isDeprecated: false
@@ -138,10 +156,39 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-mysql-flexible.ImportSourceProperties" />
+  - name: lowerCaseTableNames
+    uid: '@azure/arm-mysql-flexible.Server.lowerCaseTableNames'
+    package: '@azure/arm-mysql-flexible'
+    summary: >-
+      The mysql parameter lower_case_table_names. Can only be specified when the
+      server is being created. Allowed values 1 or 2.
+    fullName: lowerCaseTableNames
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lowerCaseTableNames?: number'
+      return:
+        description: ''
+        type: number
+  - name: maintenancePolicy
+    uid: '@azure/arm-mysql-flexible.Server.maintenancePolicy'
+    package: '@azure/arm-mysql-flexible'
+    summary: Maintenance policy of a server.
+    fullName: maintenancePolicy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maintenancePolicy?: MaintenancePolicy'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-mysql-flexible.MaintenancePolicy" />
   - name: maintenanceWindow
     uid: '@azure/arm-mysql-flexible.Server.maintenanceWindow'
     package: '@azure/arm-mysql-flexible'
-    summary: Maintenance window of a server.
+    summary: >-
+      Maintenance window of a server. Known issue: cannot be set during server
+      creation or updated with other properties during server update; must be
+      updated separately.
     fullName: maintenanceWindow
     remarks: ''
     isDeprecated: false
@@ -165,11 +212,7 @@ properties:
   - name: privateEndpointConnections
     uid: '@azure/arm-mysql-flexible.Server.privateEndpointConnections'
     package: '@azure/arm-mysql-flexible'
-    summary: >-
-      PrivateEndpointConnections related properties of a server.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: PrivateEndpointConnections related properties of a server.
     fullName: privateEndpointConnections
     remarks: ''
     isDeprecated: false
@@ -181,11 +224,7 @@ properties:
   - name: replicaCapacity
     uid: '@azure/arm-mysql-flexible.Server.replicaCapacity'
     package: '@azure/arm-mysql-flexible'
-    summary: >-
-      The maximum number of replicas that a primary server can have.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The maximum number of replicas that a primary server can have.
     fullName: replicaCapacity
     remarks: ''
     isDeprecated: false
@@ -247,11 +286,7 @@ properties:
   - name: state
     uid: '@azure/arm-mysql-flexible.Server.state'
     package: '@azure/arm-mysql-flexible'
-    summary: >-
-      The state of a server.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The state of a server.
     fullName: state
     remarks: ''
     isDeprecated: false
@@ -275,7 +310,9 @@ properties:
   - name: version
     uid: '@azure/arm-mysql-flexible.Server.version'
     package: '@azure/arm-mysql-flexible'
-    summary: Server version.
+    summary: >-
+      Major version of MySQL. 8.0.21 stands for MySQL 8.0, 5.7.44 stands for
+      MySQL 5.7
     fullName: version
     remarks: ''
     isDeprecated: false
@@ -289,11 +326,8 @@ inheritedProperties:
     uid: '@azure/arm-mysql-flexible.Server.id'
     package: '@azure/arm-mysql-flexible'
     summary: >-
-      Fully qualified resource ID for the resource. E.g.
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Fully qualified resource ID for the resource. Ex -
+      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -323,11 +357,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-mysql-flexible.Server.name'
     package: '@azure/arm-mysql-flexible'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -345,9 +375,6 @@ inheritedProperties:
     summary: >-
       Azure Resource Manager metadata containing createdBy and modifiedBy
       information.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: systemData
     remarks: ''
     isDeprecated: false
@@ -367,10 +394,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.tags](xref:@azure/arm-mysql-flexible.TrackedResource.tags)
@@ -380,9 +407,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

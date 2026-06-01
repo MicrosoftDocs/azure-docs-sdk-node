@@ -1,7 +1,7 @@
 ---
 title: Azure Media Services SDK for JavaScript
 description: Reference for Azure Media Services SDK for JavaScript
-ms.date: 05/29/2026
+ms.date: 06/01/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: mediaservices

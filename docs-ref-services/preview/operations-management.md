@@ -1,7 +1,7 @@
 ---
 title: Azure Operations Management SDK for JavaScript
 description: Reference for Azure Operations Management SDK for JavaScript
-ms.date: 06/01/2026
+ms.date: 06/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: operationsmanagement

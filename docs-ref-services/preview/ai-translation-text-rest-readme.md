@@ -1,12 +1,12 @@
 ---
 title: Azure TextTranslation REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/ai-translation-text, translation
-ms.date: 01/08/2026
+ms.date: 06/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: translation
 ---
-# Azure TextTranslation REST client library for JavaScript - version 2.0.0-beta.1 
+# Azure TextTranslation REST client library for JavaScript - version 2.0.0-alpha.20260602.1 
 
 
 Azure text translation is a cloud-based REST API provided by the Azure Translator service. It utilizes neural machine translation technology to deliver precise, contextually relevant, and semantically accurate real-time text translations across all supported languages.
@@ -21,28 +21,30 @@ The client library offers several key functionalities:
 
 - Use LLM models to produce translation output variants that are tone-specific and gender-aware.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/ai-translation-text_2.0.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
 Key links:
 
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/translation/ai-translation-text-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/ai-translation-text)
 - [API reference documentation](https://learn.microsoft.com/azure/ai-services/translator/text-translation/preview/rest-api-guide)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_2.0.0-beta.1/sdk/translation/ai-translation-text-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/translation/ai-translation-text-rest/samples)
 
 ## Getting started
 
 ### Currently supported environments
 
 - LTS versions of Node.js
-- Latest versions of Edge, Chrome, Safar and Firefox
+- Latest versions of Edge, Chrome, Safari and Firefox
 
 ### Prerequisites
 
+- You must have an [Azure subscription](https://azure.microsoft.com/free/) to use this package.
 - An existing Translator service or Cognitive Services resource.
 
 ### Install the `@azure-rest/ai-translation-text` package
 
-Install the Azure Text Translation REST client library for JavaScript with `npm`:
+Install the Azure TextTranslation REST client REST client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure-rest/ai-translation-text
@@ -50,7 +52,7 @@ npm install @azure-rest/ai-translation-text
 
 #### Create a Translator service resource
 
-You can create Translator resource following [Create a Translator resource][translator_resource_create].
+You can create a Translator resource following [Create a Translator resource][translator_resource_create].
 
 ### Browser support
 
@@ -71,6 +73,18 @@ Alternatively, use the [Azure CLI][azure_cli] snippet below to get the API key f
 ```PowerShell
 az cognitiveservices account keys list --resource-group <your-resource-group-name> --name <your-resource-name>
 ```
+
+#### Create a `TextTranslationClient` using an Azure Active Directory credential
+
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+provide an instance of the desired credential type obtained from the
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) library.
+
+To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
+
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential)
+can be used to authenticate the client.
 
 ### Create a `TextTranslationClient` using an API key and Region credential
 
@@ -252,7 +266,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/ai-translation-text_2.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 [azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_portal]: https://portal.azure.com

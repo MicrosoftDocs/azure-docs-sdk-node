@@ -11,7 +11,15 @@ properties:
   - name: delete
     uid: '@azure/ai-projects.AgentsOperations.delete'
     package: '@azure/ai-projects'
-    summary: Deletes an agent.
+    summary: >-
+      Deletes an agent. For hosted agents, if any version has active sessions,
+      the request
+
+      is rejected with HTTP 409 unless `force` is set to true. When force is
+      true, all
+
+      associated sessions are cascade-deleted along with the agent and its
+      versions.
     fullName: delete
     remarks: ''
     isDeprecated: false
@@ -27,7 +35,15 @@ properties:
   - name: deleteVersion
     uid: '@azure/ai-projects.AgentsOperations.deleteVersion'
     package: '@azure/ai-projects'
-    summary: Deletes a specific version of an agent.
+    summary: >-
+      Deletes a specific version of an agent. For hosted agents, if the version
+      has active
+
+      sessions, the request is rejected with HTTP 409 unless `force` is set to
+      true. When
+
+      force is true, all sessions associated with this version are
+      cascade-deleted.
     fullName: deleteVersion
     remarks: ''
     isDeprecated: false
@@ -164,7 +180,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/ai-projects.Agent" />&gt;
-  - name: createVersion(string, AgentDefinitionUnion, AgentsCreateOptionalParams)
+  - name: >-
+      createVersion(string, AgentDefinitionUnion,
+      AgentsCreateVersionOptionalParams)
     uid: '@azure/ai-projects.AgentsOperations.createVersion'
     package: '@azure/ai-projects'
     summary: Create a new agent version.
@@ -173,7 +191,7 @@ methods:
     syntax:
       content: >-
         function createVersion(agentName: string, definition:
-        AgentDefinitionUnion, options?: AgentsCreateOptionalParams):
+        AgentDefinitionUnion, options?: AgentsCreateVersionOptionalParams):
         Promise<AgentVersion>
       parameters:
         - id: agentName
@@ -183,7 +201,7 @@ methods:
           type: <xref uid="@azure/ai-projects.AgentDefinitionUnion" />
           description: ''
         - id: options
-          type: <xref uid="@azure/ai-projects.AgentsCreateOptionalParams" />
+          type: <xref uid="@azure/ai-projects.AgentsCreateVersionOptionalParams" />
           description: ''
       return:
         description: ''

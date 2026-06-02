@@ -11,35 +11,40 @@ properties:
   - name: create
     uid: '@azure/ai-projects.BetaSkillsOperations.create'
     package: '@azure/ai-projects'
-    summary: Creates a skill.
+    summary: >-
+      Creates a new version of a skill. If the skill does not exist, it will be
+      created.
     fullName: create
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         create: (name: string, options?: BetaSkillsCreateOptionalParams) =>
-        Promise<SkillObject>
+        Promise<SkillVersion>
       return:
         description: ''
         type: >-
           (name: string, options?: BetaSkillsCreateOptionalParams) =&gt;
-          Promise&lt;SkillObject&gt;
-  - name: createFromPackage
-    uid: '@azure/ai-projects.BetaSkillsOperations.createFromPackage'
+          Promise&lt;SkillVersion&gt;
+  - name: createFromFiles
+    uid: '@azure/ai-projects.BetaSkillsOperations.createFromFiles'
     package: '@azure/ai-projects'
-    summary: Creates a skill from a zip package.
-    fullName: createFromPackage
+    summary: >-
+      Creates a new version of a skill from uploaded files via multipart form
+      data.
+    fullName: createFromFiles
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        createFromPackage: (body: Uint8Array, options?:
-        CreateFromPackageOptionalParams) => Promise<SkillObject>
+        createFromFiles: (name: string, content:
+        CreateSkillVersionFromFilesBody, options?:
+        CreateFromFilesOptionalParams) => Promise<SkillVersion>
       return:
         description: ''
         type: >-
-          (body: Uint8Array, options?: CreateFromPackageOptionalParams) =&gt;
-          Promise&lt;SkillObject&gt;
+          (name: string, content: CreateSkillVersionFromFilesBody, options?:
+          CreateFromFilesOptionalParams) =&gt; Promise&lt;SkillVersion&gt;
   - name: delete
     uid: '@azure/ai-projects.BetaSkillsOperations.delete'
     package: '@azure/ai-projects'
@@ -49,29 +54,62 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        delete: (skillName: string, options?: BetaSkillsDeleteOptionalParams) =>
+        delete: (name: string, options?: BetaSkillsDeleteOptionalParams) =>
         Promise<DeleteSkillResponse>
       return:
         description: ''
         type: >-
-          (skillName: string, options?: BetaSkillsDeleteOptionalParams) =&gt;
+          (name: string, options?: BetaSkillsDeleteOptionalParams) =&gt;
           Promise&lt;DeleteSkillResponse&gt;
+  - name: deleteVersion
+    uid: '@azure/ai-projects.BetaSkillsOperations.deleteVersion'
+    package: '@azure/ai-projects'
+    summary: Delete a specific version of a skill.
+    fullName: deleteVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        deleteVersion: (name: string, version: string, options?:
+        DeleteVersionOptionalParams) => Promise<DeleteSkillVersionResponse>
+      return:
+        description: ''
+        type: >-
+          (name: string, version: string, options?: DeleteVersionOptionalParams)
+          =&gt; Promise&lt;DeleteSkillVersionResponse&gt;
   - name: download
     uid: '@azure/ai-projects.BetaSkillsOperations.download'
     package: '@azure/ai-projects'
-    summary: Downloads a skill package.
+    summary: Download the zip content for the default version of a skill.
     fullName: download
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        download: (skillName: string, options?:
-        BetaSkillsDownloadOptionalParams) => Promise<BetaSkillsDownloadResponse>
+        download: (name: string, options?: BetaSkillsDownloadOptionalParams) =>
+        Promise<BetaSkillsDownloadResponse>
       return:
         description: ''
         type: >-
-          (skillName: string, options?: BetaSkillsDownloadOptionalParams) =&gt;
+          (name: string, options?: BetaSkillsDownloadOptionalParams) =&gt;
           Promise&lt;BetaSkillsDownloadResponse&gt;
+  - name: downloadVersion
+    uid: '@azure/ai-projects.BetaSkillsOperations.downloadVersion'
+    package: '@azure/ai-projects'
+    summary: Download the zip content for a specific version of a skill.
+    fullName: downloadVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        downloadVersion: (name: string, version: string, options?:
+        DownloadVersionOptionalParams) => Promise<DownloadVersionResponse>
+      return:
+        description: ''
+        type: >-
+          (name: string, version: string, options?:
+          DownloadVersionOptionalParams) =&gt;
+          Promise&lt;DownloadVersionResponse&gt;
   - name: get
     uid: '@azure/ai-projects.BetaSkillsOperations.get'
     package: '@azure/ai-projects'
@@ -81,13 +119,29 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        get: (skillName: string, options?: BetaSkillsGetOptionalParams) =>
-        Promise<SkillObject>
+        get: (name: string, options?: BetaSkillsGetOptionalParams) =>
+        Promise<Skill>
       return:
         description: ''
         type: >-
-          (skillName: string, options?: BetaSkillsGetOptionalParams) =&gt;
-          Promise&lt;SkillObject&gt;
+          (name: string, options?: BetaSkillsGetOptionalParams) =&gt;
+          Promise&lt;Skill&gt;
+  - name: getVersion
+    uid: '@azure/ai-projects.BetaSkillsOperations.getVersion'
+    package: '@azure/ai-projects'
+    summary: Retrieve a specific version of a skill.
+    fullName: getVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getVersion: (name: string, version: string, options?:
+        GetVersionOptionalParams) => Promise<SkillVersion>
+      return:
+        description: ''
+        type: >-
+          (name: string, version: string, options?: GetVersionOptionalParams)
+          =&gt; Promise&lt;SkillVersion&gt;
   - name: list
     uid: '@azure/ai-projects.BetaSkillsOperations.list'
     package: '@azure/ai-projects'
@@ -98,26 +152,42 @@ properties:
     syntax:
       content: >-
         list: (options?: BetaSkillsListOptionalParams) =>
-        PagedAsyncIterableIterator<SkillObject, SkillObject[], PageSettings>
+        PagedAsyncIterableIterator<Skill, Skill[], PageSettings>
       return:
         description: ''
         type: >-
           (options?: BetaSkillsListOptionalParams) =&gt;
-          PagedAsyncIterableIterator&lt;SkillObject, SkillObject[],
+          PagedAsyncIterableIterator&lt;Skill, Skill[], PageSettings&gt;
+  - name: listVersions
+    uid: '@azure/ai-projects.BetaSkillsOperations.listVersions'
+    package: '@azure/ai-projects'
+    summary: List all versions of a skill.
+    fullName: listVersions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listVersions: (name: string, options?: ListVersionsOptionalParams) =>
+        PagedAsyncIterableIterator<SkillVersion, SkillVersion[], PageSettings>
+      return:
+        description: ''
+        type: >-
+          (name: string, options?: ListVersionsOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;SkillVersion, SkillVersion[],
           PageSettings&gt;
   - name: update
     uid: '@azure/ai-projects.BetaSkillsOperations.update'
     package: '@azure/ai-projects'
-    summary: Updates an existing skill.
+    summary: Update a skill.
     fullName: update
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        update: (skillName: string, options?: BetaSkillsUpdateOptionalParams) =>
-        Promise<SkillObject>
+        update: (name: string, defaultVersion: string, options?:
+        BetaSkillsUpdateOptionalParams) => Promise<Skill>
       return:
         description: ''
         type: >-
-          (skillName: string, options?: BetaSkillsUpdateOptionalParams) =&gt;
-          Promise&lt;SkillObject&gt;
+          (name: string, defaultVersion: string, options?:
+          BetaSkillsUpdateOptionalParams) =&gt; Promise&lt;Skill&gt;

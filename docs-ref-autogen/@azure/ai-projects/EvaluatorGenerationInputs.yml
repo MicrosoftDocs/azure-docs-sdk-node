@@ -1,0 +1,97 @@
+### YamlMime:TSType
+name: EvaluatorGenerationInputs
+uid: '@azure/ai-projects.EvaluatorGenerationInputs'
+package: '@azure/ai-projects'
+summary: Caller-supplied inputs for an evaluator generation job.
+fullName: EvaluatorGenerationInputs
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: evaluator_description
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.evaluator_description'
+    package: '@azure/ai-projects'
+    summary: >-
+      Optional human-friendly description for the resulting evaluator. Surfaced
+      as `EvaluatorVersion.description` on the persisted evaluator. Typically
+      collected from the UI alongside `evaluator_display_name`. The `evaluator_`
+      prefix disambiguates this from any other description fields on related
+      models.
+    fullName: evaluator_description
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluator_description?: string'
+      return:
+        description: ''
+        type: string
+  - name: evaluator_display_name
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.evaluator_display_name'
+    package: '@azure/ai-projects'
+    summary: >-
+      Optional human-friendly display name for the resulting evaluator. Surfaced
+      as `EvaluatorVersion.display_name` on the persisted evaluator. When
+      omitted, the service uses `evaluator_name` as the display name. The
+      `evaluator_` prefix disambiguates this from the immutable `evaluator_name`
+      identifier.
+    fullName: evaluator_display_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluator_display_name?: string'
+      return:
+        description: ''
+        type: string
+  - name: evaluator_name
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.evaluator_name'
+    package: '@azure/ai-projects'
+    summary: >-
+      The evaluator name (immutable identifier). 1-256 characters; allowed
+      characters are ASCII letters, digits, underscore (`_`), period (`.`),
+      tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for
+      system-managed evaluators and is rejected by the service. If an evaluator
+      with this name already exists in the project (and is rubric-subtype), the
+      service creates a new version under the same name and uses the prior
+      version's `dimensions` as context for incremental improvement (foundation
+      of the post-//build adaptive loop). Old versions remain queryable via
+      `get_version(name, version)`. If the existing evaluator is not a
+      rubric-subtype evaluator (built-in, prompt-based, code-based), the request
+      is rejected with `400 Bad Request`.
+    fullName: evaluator_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluator_name: string'
+      return:
+        description: ''
+        type: string
+  - name: model
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.model'
+    package: '@azure/ai-projects'
+    summary: >-
+      The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required —
+      users must provide their own model rather than relying on service-owned
+      capacity.
+    fullName: model
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'model: string'
+      return:
+        description: ''
+        type: string
+  - name: sources
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.sources'
+    package: '@azure/ai-projects'
+    summary: >-
+      Source materials for generation — agent descriptions, prompts, traces, or
+      datasets. Each entry is an `EvaluatorGenerationJobSource` variant
+      discriminated by `type`.
+    fullName: sources
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sources: EvaluatorGenerationJobSourceUnion[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.EvaluatorGenerationJobSourceUnion" />[]

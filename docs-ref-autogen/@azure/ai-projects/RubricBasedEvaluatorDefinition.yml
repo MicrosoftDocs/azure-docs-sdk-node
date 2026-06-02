@@ -1,0 +1,110 @@
+### YamlMime:TSType
+name: RubricBasedEvaluatorDefinition
+uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition'
+package: '@azure/ai-projects'
+summary: >-
+  Rubric-based evaluator definition — stores dimensions produced by the generate
+  API. Used for both quality and safety evaluators.
+fullName: RubricBasedEvaluatorDefinition
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: dimensions
+    uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.dimensions'
+    package: '@azure/ai-projects'
+    summary: >-
+      The set of dimensions — the scoring blueprint used by the LLM judge.
+      Quality evaluators include a non-editable residual dimension with id
+      'general_quality' (always_applicable: true); safety evaluators include
+      'general_policy_compliance'. Both use the same Dimension structure.
+    fullName: dimensions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'dimensions: Dimension[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.Dimension" />[]
+  - name: pass_threshold
+    uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.pass_threshold'
+    package: '@azure/ai-projects'
+    summary: >-
+      Pass/fail threshold for the aggregate rubric score, on the same normalized
+      0.0-1.0 scale as the emitted `score`. When the runtime weighted average
+      meets or exceeds this value, the result is `pass`. Defaults to 0.5
+      (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension
+      scored 1 → fail' rule still applies regardless of this threshold.
+    fullName: pass_threshold
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pass_threshold?: number'
+      return:
+        description: ''
+        type: number
+  - name: type
+    uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.type'
+    package: '@azure/ai-projects'
+    summary: 'The discriminator possible values: code, prompt, rubric'
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "rubric"'
+      return:
+        description: ''
+        type: '"rubric"'
+inheritedProperties:
+  - name: data_schema
+    uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.data_schema'
+    package: '@azure/ai-projects'
+    summary: >-
+      The JSON schema (Draft 2020-12) for the evaluator's input data. This
+      includes parameters like type, properties, required.
+    fullName: data_schema
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'data_schema?: Record<string, unknown>'
+      return:
+        description: ''
+        type: Record&lt;string, unknown&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [EvaluatorDefinition.data_schema](xref:@azure/ai-projects.EvaluatorDefinition.data_schema)
+  - name: init_parameters
+    uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.init_parameters'
+    package: '@azure/ai-projects'
+    summary: >-
+      The JSON schema (Draft 2020-12) for the evaluator's input parameters. This
+      includes parameters like type, properties, required.
+    fullName: init_parameters
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'init_parameters?: Record<string, unknown>'
+      return:
+        description: ''
+        type: Record&lt;string, unknown&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [EvaluatorDefinition.init_parameters](xref:@azure/ai-projects.EvaluatorDefinition.init_parameters)
+  - name: metrics
+    uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.metrics'
+    package: '@azure/ai-projects'
+    summary: List of output metrics produced by this evaluator
+    fullName: metrics
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'metrics?: Record<string, EvaluatorMetric>'
+      return:
+        description: ''
+        type: >-
+          Record&lt;string, <xref uid="@azure/ai-projects.EvaluatorMetric"
+          />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [EvaluatorDefinition.metrics](xref:@azure/ai-projects.EvaluatorDefinition.metrics)
+extends: <xref uid="@azure/ai-projects.EvaluatorDefinition" />

@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, communication
-ms.date: 06/05/2025
+ms.date: 06/03/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Common client library for JavaScript - version 2.4.0 
+# Azure Communication Common client library for JavaScript - version 2.4.2 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -126,7 +126,7 @@ For scenarios where an Entra user can be used with Communication Services, you n
 Along with this, you must provide the URI of the Azure Communication Services resource and the scopes required for the Entra user token. These scopes determine the permissions granted to the token.
 
 This approach needs to be used for authorizing an Entra user with a Teams license to use Teams Phone Extensibility features through your Azure Communication Services resource.
-This requires providing the `https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls` scope.
+This requires providing the `https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls` scope. For the GCCH cloud environment, use `https://auth.msft.communication.azure.us/TeamsExtension.ManageCalls`.
 
 ```ts snippet:ReadmeSampleCredentialEntraUserTeamsPhoneExtensibility 
 import { InteractiveBrowserCredential } from "@azure/identity";
@@ -197,7 +197,7 @@ setLogLevel("info");
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.4.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.4.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

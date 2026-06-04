@@ -10,6 +10,8 @@ enums:
   - '@azure/arm-containerservicefleet.KnownAutoUpgradeLastTriggerStatus'
   - '@azure/arm-containerservicefleet.KnownAutoUpgradeNodeImageSelectionType'
   - '@azure/arm-containerservicefleet.KnownAutoUpgradeProfileProvisioningState'
+  - '@azure/arm-containerservicefleet.KnownClusterMeshProfileProvisioningState'
+  - '@azure/arm-containerservicefleet.KnownClusterMeshState'
   - '@azure/arm-containerservicefleet.KnownCreatedByType'
   - '@azure/arm-containerservicefleet.KnownDeletePolicy'
   - '@azure/arm-containerservicefleet.KnownFleetManagedNamespaceProvisioningState'
@@ -22,6 +24,7 @@ enums:
   - '@azure/arm-containerservicefleet.KnownLabelSelectorOperator'
   - '@azure/arm-containerservicefleet.KnownManagedClusterUpgradeType'
   - '@azure/arm-containerservicefleet.KnownManagedServiceIdentityType'
+  - '@azure/arm-containerservicefleet.KnownMeshMemberState'
   - '@azure/arm-containerservicefleet.KnownNodeImageSelectionType'
   - '@azure/arm-containerservicefleet.KnownOrigin'
   - '@azure/arm-containerservicefleet.KnownPlacementType'
@@ -56,7 +59,19 @@ interfaces:
   - >-
     @azure/arm-containerservicefleet.AutoUpgradeProfilesListByFleetOptionalParams
   - '@azure/arm-containerservicefleet.AutoUpgradeProfilesOperations'
+  - '@azure/arm-containerservicefleet.CiliumProperties'
   - '@azure/arm-containerservicefleet.ClusterAffinity'
+  - '@azure/arm-containerservicefleet.ClusterMeshProfile'
+  - '@azure/arm-containerservicefleet.ClusterMeshProfileProperties'
+  - '@azure/arm-containerservicefleet.ClusterMeshProfileStatus'
+  - '@azure/arm-containerservicefleet.ClusterMeshProfilesApplyOptionalParams'
+  - >-
+    @azure/arm-containerservicefleet.ClusterMeshProfilesCreateOrUpdateOptionalParams
+  - '@azure/arm-containerservicefleet.ClusterMeshProfilesDeleteOptionalParams'
+  - '@azure/arm-containerservicefleet.ClusterMeshProfilesGetOptionalParams'
+  - >-
+    @azure/arm-containerservicefleet.ClusterMeshProfilesListByFleetOptionalParams
+  - '@azure/arm-containerservicefleet.ClusterMeshProfilesOperations'
   - '@azure/arm-containerservicefleet.ClusterResourcePlacementSpec'
   - '@azure/arm-containerservicefleet.ClusterSelector'
   - '@azure/arm-containerservicefleet.ClusterSelectorTerm'
@@ -128,7 +143,10 @@ interfaces:
   - '@azure/arm-containerservicefleet.ManagedClusterUpgradeSpec'
   - '@azure/arm-containerservicefleet.ManagedNamespaceProperties'
   - '@azure/arm-containerservicefleet.ManagedServiceIdentity'
+  - '@azure/arm-containerservicefleet.MemberSelector'
   - '@azure/arm-containerservicefleet.MemberUpdateStatus'
+  - '@azure/arm-containerservicefleet.MeshMemberStatus'
+  - '@azure/arm-containerservicefleet.MeshProperties'
   - '@azure/arm-containerservicefleet.NetworkPolicy'
   - '@azure/arm-containerservicefleet.NodeImageSelection'
   - '@azure/arm-containerservicefleet.NodeImageSelectionStatus'
@@ -174,6 +192,18 @@ interfaces:
   - '@azure/arm-containerservicefleet.UpdateStatus'
   - '@azure/arm-containerservicefleet.UserAssignedIdentity'
   - '@azure/arm-containerservicefleet.WaitStatus'
+variables:
+  - name: RestError
+    uid: '@azure/arm-containerservicefleet.RestError'
+    package: '@azure/arm-containerservicefleet'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/arm-containerservicefleet.ActionType'
   - '@azure/arm-containerservicefleet.AdoptionPolicy'
@@ -181,6 +211,8 @@ typeAliases:
   - '@azure/arm-containerservicefleet.AutoUpgradeNodeImageSelectionType'
   - '@azure/arm-containerservicefleet.AutoUpgradeProfileProvisioningState'
   - '@azure/arm-containerservicefleet.AzureSupportedClouds'
+  - '@azure/arm-containerservicefleet.ClusterMeshProfileProvisioningState'
+  - '@azure/arm-containerservicefleet.ClusterMeshState'
   - '@azure/arm-containerservicefleet.ContinuablePage'
   - '@azure/arm-containerservicefleet.CreatedByType'
   - '@azure/arm-containerservicefleet.DeletePolicy'
@@ -194,6 +226,7 @@ typeAliases:
   - '@azure/arm-containerservicefleet.LabelSelectorOperator'
   - '@azure/arm-containerservicefleet.ManagedClusterUpgradeType'
   - '@azure/arm-containerservicefleet.ManagedServiceIdentityType'
+  - '@azure/arm-containerservicefleet.MeshMemberState'
   - '@azure/arm-containerservicefleet.NodeImageSelectionType'
   - '@azure/arm-containerservicefleet.Origin'
   - '@azure/arm-containerservicefleet.PlacementType'
@@ -208,6 +241,21 @@ typeAliases:
   - '@azure/arm-containerservicefleet.UpdateState'
   - '@azure/arm-containerservicefleet.UpgradeChannel'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-containerservicefleet.isRestError'
+    package: '@azure/arm-containerservicefleet'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: >-
       restorePoller<TResponse, TResult>(ContainerServiceFleetClient, string,
       (args: any[]) => PollerLike<OperationState<TResult>, TResult>,

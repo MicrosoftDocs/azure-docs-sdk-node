@@ -12,14 +12,16 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: BlobServiceClient(string, PipelineLike)
+  - name: BlobServiceClient(string, PipelineLike, BlobClientConfig)
     uid: '@azure/storage-blob.BlobServiceClient.constructor_1'
     package: '@azure/storage-blob'
     summary: Creates an instance of BlobServiceClient.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new BlobServiceClient(url: string, pipeline: PipelineLike)'
+      content: >-
+        new BlobServiceClient(url: string, pipeline: PipelineLike, options?:
+        BlobClientConfig)
       parameters:
         - id: url
           type: string
@@ -32,9 +34,12 @@ constructors:
           description: |-
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobClientConfig" />
+          description: ''
   - name: >-
       BlobServiceClient(string, StorageSharedKeyCredential | AnonymousCredential
-      | TokenCredential, StoragePipelineOptions)
+      | TokenCredential, BlobServiceClientOptions)
     uid: '@azure/storage-blob.BlobServiceClient.constructor'
     package: '@azure/storage-blob'
     summary: Creates an instance of BlobServiceClient.
@@ -44,7 +49,7 @@ constructors:
       content: >-
         new BlobServiceClient(url: string, credential?:
         StorageSharedKeyCredential | AnonymousCredential | TokenCredential,
-        options?: StoragePipelineOptions)
+        options?: BlobServiceClientOptions)
       parameters:
         - id: url
           type: string
@@ -64,7 +69,7 @@ constructors:
             implements the TokenCredential interface. If not specified,
             AnonymousCredential is used.
         - id: options
-          type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
+          type: <xref uid="@azure/storage-blob.BlobServiceClientOptions" />
           description: >-
             Optional. Options to configure the HTTP pipeline.
 
@@ -355,7 +360,7 @@ methods:
           uid="@azure/storage-blob.FilterBlobItem" />, <xref
           uid="@azure/storage-blob.ServiceFindBlobsByTagsSegmentResponse" />,
           <xref uid="@azure/core-paging.PageSettings" />&gt;
-  - name: fromConnectionString(string, StoragePipelineOptions)
+  - name: fromConnectionString(string, BlobServiceClientOptions)
     uid: '@azure/storage-blob.BlobServiceClient.fromConnectionString'
     package: '@azure/storage-blob'
     summary: Creates an instance of BlobServiceClient from connection string.
@@ -364,7 +369,7 @@ methods:
     syntax:
       content: >-
         static function fromConnectionString(connectionString: string, options?:
-        StoragePipelineOptions): BlobServiceClient
+        BlobServiceClientOptions): BlobServiceClient
       parameters:
         - id: connectionString
           type: string
@@ -377,7 +382,7 @@ methods:
                                              SAS connection string example -
                                              `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
         - id: options
-          type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
+          type: <xref uid="@azure/storage-blob.BlobServiceClientOptions" />
           description: Optional. Options to configure the HTTP pipeline.
       return:
         description: ''
@@ -627,6 +632,47 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.ServiceGetStatisticsResponse" />&gt;
+  - name: >-
+      getUserDelegationKey(BlobGetUserDelegationKeyParameters,
+      ServiceGetUserDelegationKeyOptions)
+    uid: '@azure/storage-blob.BlobServiceClient.getUserDelegationKey_1'
+    package: '@azure/storage-blob'
+    summary: >-
+      ONLY AVAILABLE WHEN USING BEARER TOKEN AUTHENTICATION (TokenCredential).
+
+
+      Retrieves a user delegation key for the Blob service. This is only a valid
+      operation when using
+
+      bearer token authentication.
+
+
+      See
+      https://learn.microsoft.com/rest/api/storageservices/get-user-delegation-key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getUserDelegationKey(parameters:
+        BlobGetUserDelegationKeyParameters, options?:
+        ServiceGetUserDelegationKeyOptions):
+        Promise<ServiceGetUserDelegationKeyResponse>
+      parameters:
+        - id: parameters
+          type: >-
+            <xref uid="@azure/storage-blob.BlobGetUserDelegationKeyParameters"
+            />
+          description: Parameters to specific start time, expiry time and tenant id.
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.ServiceGetUserDelegationKeyOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.ServiceGetUserDelegationKeyResponse" />&gt;
   - name: getUserDelegationKey(Date, Date, ServiceGetUserDelegationKeyOptions)
     uid: '@azure/storage-blob.BlobServiceClient.getUserDelegationKey'
     package: '@azure/storage-blob'

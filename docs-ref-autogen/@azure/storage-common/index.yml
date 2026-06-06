@@ -12,8 +12,10 @@ classes:
   - '@azure/storage-common.BufferScheduler'
   - '@azure/storage-common.Credential'
   - '@azure/storage-common.CredentialPolicy'
+  - '@azure/storage-common.Readable'
   - '@azure/storage-common.StorageBrowserPolicy'
   - '@azure/storage-common.StorageBrowserPolicyFactory'
+  - '@azure/storage-common.StorageCRC64Calculator'
   - '@azure/storage-common.StorageRetryPolicy'
   - '@azure/storage-common.StorageRetryPolicyFactory'
   - '@azure/storage-common.StorageSharedKeyCredential'
@@ -23,6 +25,8 @@ interfaces:
   - '@azure/storage-common.NodeJSReadableStream'
   - '@azure/storage-common.StorageRetryOptions'
   - '@azure/storage-common.StorageSharedKeyCredentialPolicyOptions'
+  - '@azure/storage-common.StructuredMessageDecodingStreamOptions'
+  - '@azure/storage-common.StructuredMessageEncodingStreamOptions'
   - '@azure/storage-common.UserDelegationKey'
 typeAliases:
   - '@azure/storage-common.CredentialPolicyCreator'
@@ -109,6 +113,82 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-http-compat.RequestPolicyFactory" />
+  - name: allocBuffer(number)
+    uid: '@azure/storage-common.allocBuffer'
+    package: '@azure/storage-common'
+    summary: Allocates a new zero-filled Buffer of the given size.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function allocBuffer(size: number): NodeBuffer'
+      parameters:
+        - id: size
+          type: number
+          description: ''
+      return:
+        description: ''
+        type: NodeBuffer
+  - name: bufferFromArrayBuffer(ArrayBuffer, number, number)
+    uid: '@azure/storage-common.bufferFromArrayBuffer'
+    package: '@azure/storage-common'
+    summary: Creates a Buffer from an ArrayBuffer, with optional offset and length.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function bufferFromArrayBuffer(ab: ArrayBuffer, byteOffset?: number,
+        length?: number): NodeBuffer
+      parameters:
+        - id: ab
+          type: ArrayBuffer
+          description: ''
+        - id: byteOffset
+          type: number
+          description: ''
+        - id: length
+          type: number
+          description: ''
+      return:
+        description: ''
+        type: NodeBuffer
+  - name: createBlobFromData(Blob | ArrayBuffer | ArrayBufferView)
+    uid: '@azure/storage-common.createBlobFromData'
+    package: '@azure/storage-common'
+    summary: >-
+      Creates a Blob from the given data.
+
+      Uses an indirect constructor reference to work around React Native's
+      restrictive
+
+      Blob type definitions (which only accept string | Blob, not ArrayBuffer).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createBlobFromData(data: Blob | ArrayBuffer | ArrayBufferView):
+        Blob
+      parameters:
+        - id: data
+          type: Blob | ArrayBuffer | ArrayBufferView
+          description: ''
+      return:
+        description: ''
+        type: Blob
+  - name: getBufferLength(Buffer)
+    uid: '@azure/storage-common.getBufferLength'
+    package: '@azure/storage-common'
+    summary: Returns the byte length of a buffer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getBufferLength(buffer: Buffer): number'
+      parameters:
+        - id: buffer
+          type: Buffer
+          description: ''
+      return:
+        description: ''
+        type: number
   - name: getCachedDefaultHttpClient()
     uid: '@azure/storage-common.getCachedDefaultHttpClient'
     package: '@azure/storage-common'
@@ -120,6 +200,21 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.HttpClient" />
+  - name: isBuffer(unknown)
+    uid: '@azure/storage-common.isBuffer'
+    package: '@azure/storage-common'
+    summary: Checks whether a value is a Node.js Buffer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isBuffer(value: unknown): value'
+      parameters:
+        - id: value
+          type: unknown
+          description: ''
+      return:
+        description: ''
+        type: value
   - name: storageBrowserPolicy()
     uid: '@azure/storage-common.storageBrowserPolicy'
     package: '@azure/storage-common'
@@ -128,6 +223,9 @@ functions:
       requests
 
       and to remove cookies and explicit content-length headers.
+
+
+      In Node.js, this policy is a no-op pass-through.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -198,3 +296,72 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: structuredMessageDecodingBrowser(Blob | ReadableStream<Uint8Array>)
+    uid: '@azure/storage-common.structuredMessageDecodingBrowser'
+    package: '@azure/storage-common'
+    summary: >-
+      To decode structured body for CRC64 content validtion in storage
+      downloading.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function structuredMessageDecodingBrowser(source: Blob |
+        ReadableStream<Uint8Array>): Promise<Blob>
+      parameters:
+        - id: source
+          type: Blob | ReadableStream&lt;Uint8Array&gt;
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;Blob&gt;
+  - name: >-
+      structuredMessageDecodingStream(ReadableStream,
+      StructuredMessageDecodingStreamOptions)
+    uid: '@azure/storage-common.structuredMessageDecodingStream'
+    package: '@azure/storage-common'
+    summary: >-
+      To decode structured body for CRC64 content validtion in storage
+      downloading.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function structuredMessageDecodingStream(source: ReadableStream,
+        options: StructuredMessageDecodingStreamOptions): NodeJS.ReadableStream
+      parameters:
+        - id: source
+          type: ReadableStream
+          description: ''
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-common.StructuredMessageDecodingStreamOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="NodeJS.ReadableStream" />
+  - name: structuredMessageEncoding(RequestBodyType, number)
+    uid: '@azure/storage-common.structuredMessageEncoding'
+    package: '@azure/storage-common'
+    summary: >-
+      To encode structured body for CRC64 content validtion in storage
+      uploading.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function structuredMessageEncoding(source: RequestBodyType,
+        contentLength: number): Promise<{ body: HttpRequestBody,
+        encodedContentLength: number }>
+      parameters:
+        - id: source
+          type: <xref uid="@azure/core-rest-pipeline.RequestBodyType" />
+          description: ''
+        - id: contentLength
+          type: number
+          description: ''
+      return:
+        description: ''
+        type: 'Promise&lt;{ body: HttpRequestBody, encodedContentLength: number }&gt;'

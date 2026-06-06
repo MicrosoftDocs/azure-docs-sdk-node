@@ -11,14 +11,16 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: DataLakeServiceClient(string, Pipeline)
+  - name: DataLakeServiceClient(string, Pipeline, DataLakeClientConfig)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.constructor_1'
     package: '@azure/storage-file-datalake'
     summary: Creates an instance of DataLakeServiceClient from url and pipeline.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new DataLakeServiceClient(url: string, pipeline: Pipeline)'
+      content: >-
+        new DataLakeServiceClient(url: string, pipeline: Pipeline, options?:
+        DataLakeClientConfig)
       parameters:
         - id: url
           type: string
@@ -31,9 +33,12 @@ constructors:
           description: |-
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
+        - id: options
+          type: <xref uid="@azure/storage-file-datalake.DataLakeClientConfig" />
+          description: ''
   - name: >-
       DataLakeServiceClient(string, StorageSharedKeyCredential |
-      AnonymousCredential | TokenCredential, StoragePipelineOptions)
+      AnonymousCredential | TokenCredential, DataLakeServiceClientOptions)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.constructor'
     package: '@azure/storage-file-datalake'
     summary: Creates an instance of DataLakeServiceClient from url.
@@ -43,7 +48,7 @@ constructors:
       content: >-
         new DataLakeServiceClient(url: string, credential?:
         StorageSharedKeyCredential | AnonymousCredential | TokenCredential,
-        options?: StoragePipelineOptions)
+        options?: DataLakeServiceClientOptions)
       parameters:
         - id: url
           type: string
@@ -63,7 +68,9 @@ constructors:
             implements the TokenCredential interface. If not specified,
             AnonymousCredential is used.
         - id: options
-          type: <xref uid="@azure/storage-file-datalake.StoragePipelineOptions" />
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.DataLakeServiceClientOptions" />
           description: Optional. Options to configure the HTTP pipeline.
 inheritedProperties:
   - name: accountName
@@ -115,7 +122,7 @@ inheritedProperties:
         type: string
     inheritanceDescription: <b>Inherited From</b> StorageClient.url
 methods:
-  - name: fromConnectionString(string, StoragePipelineOptions)
+  - name: fromConnectionString(string, DataLakeServiceClientOptions)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.fromConnectionString'
     package: '@azure/storage-file-datalake'
     summary: Creates an instance of DataLakeServiceClient from connection string.
@@ -124,7 +131,7 @@ methods:
     syntax:
       content: >-
         static function fromConnectionString(connectionString: string, options?:
-        StoragePipelineOptions): DataLakeServiceClient
+        DataLakeServiceClientOptions): DataLakeServiceClient
       parameters:
         - id: connectionString
           type: string
@@ -137,7 +144,9 @@ methods:
                                              SAS connection string example -
                                              `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
         - id: options
-          type: <xref uid="@azure/storage-file-datalake.StoragePipelineOptions" />
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.DataLakeServiceClientOptions" />
           description: Optional. Options to configure the HTTP pipeline.
       return:
         description: ''
@@ -291,6 +300,50 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-datalake.DataLakeServiceGetPropertiesResponse"
+          />&gt;
+  - name: >-
+      getUserDelegationKey(DataLakeGetUserDelegationKeyParameters,
+      ServiceGetUserDelegationKeyOptions)
+    uid: '@azure/storage-file-datalake.DataLakeServiceClient.getUserDelegationKey_1'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      ONLY AVAILABLE WHEN USING BEARER TOKEN AUTHENTICATION (TokenCredential).
+
+
+      Retrieves a user delegation key for the Data Lake service. This is only a
+      valid operation when using
+
+      bearer token authentication.
+
+
+      See
+      https://learn.microsoft.com/rest/api/storageservices/get-user-delegation-key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getUserDelegationKey(parameters:
+        DataLakeGetUserDelegationKeyParameters, options?:
+        ServiceGetUserDelegationKeyOptions):
+        Promise<ServiceGetUserDelegationKeyResponse>
+      parameters:
+        - id: parameters
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.DataLakeGetUserDelegationKeyParameters"
+            />
+          description: Parameters to specific start time, expiry time and tenant id.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.ServiceGetUserDelegationKeyOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-datalake.ServiceGetUserDelegationKeyResponse"
           />&gt;
   - name: getUserDelegationKey(Date, Date, ServiceGetUserDelegationKeyOptions)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.getUserDelegationKey'

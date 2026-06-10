@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Common client library for JavaScript - version 2.4.2-alpha.20260609.3 
+# Azure Communication Common client library for JavaScript - version 2.4.2-alpha.20260610.1 
 
 
 This package contains common code for Azure Communication Service libraries.

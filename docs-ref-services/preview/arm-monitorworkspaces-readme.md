@@ -1,6 +1,6 @@
 ---
 title: Azure Monitor client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-monitorslis, monitor
+keywords: Azure, javascript, SDK, API, @azure/arm-monitorworkspaces, monitor
 ms.date: 06/11/2026
 ms.topic: reference
 ms.devlang: javascript
@@ -15,10 +15,10 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitorslis)
-- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-monitorslis)
-- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-monitorslis?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitorslis/samples)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitorworkspaces)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-monitorworkspaces)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-monitorworkspaces?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitorworkspaces/samples)
 
 ## Getting started
 
@@ -33,12 +33,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-monitorslis` package
+### Install the `@azure/arm-monitorworkspaces` package
 
 Install the Azure Monitor client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-monitorslis
+npm install @azure/arm-monitorworkspaces
 ```
 
 ### Create and authenticate a `MonitorClient`
@@ -61,23 +61,25 @@ For more information about how to create an Azure AD Application check out [this
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { MonitorClient } from "@azure/arm-monitorslis";
+import { MonitorClient } from "@azure/arm-monitorworkspaces";
 import { DefaultAzureCredential } from "@azure/identity";
 
-const client = new MonitorClient(new DefaultAzureCredential());
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const client = new MonitorClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { MonitorClient } from "@azure/arm-monitorslis";
+import { MonitorClient } from "@azure/arm-monitorworkspaces";
 
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const client = new MonitorClient(credential);
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const client = new MonitorClient(credential, subscriptionId);
 ```
 
 
@@ -106,7 +108,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitorslis/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitorworkspaces/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 

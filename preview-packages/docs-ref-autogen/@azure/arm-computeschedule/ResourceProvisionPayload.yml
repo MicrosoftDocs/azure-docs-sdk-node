@@ -8,21 +8,6 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: baseProfile
-    uid: '@azure/arm-computeschedule.ResourceProvisionPayload.baseProfile'
-    package: '@azure/arm-computeschedule'
-    summary: >-
-      JSON object that contains VM properties that are common across all VMs in
-      this batch (if you want to create 100 VMs in this request, and they all
-      have same vmSize, then include vmSize in baseProfile)
-    fullName: baseProfile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'baseProfile?: Record<string, any>'
-      return:
-        description: ''
-        type: Record&lt;string, any&gt;
   - name: resourceCount
     uid: '@azure/arm-computeschedule.ResourceProvisionPayload.resourceCount'
     package: '@azure/arm-computeschedule'
@@ -35,23 +20,6 @@ properties:
       return:
         description: ''
         type: number
-  - name: resourceOverrides
-    uid: '@azure/arm-computeschedule.ResourceProvisionPayload.resourceOverrides'
-    package: '@azure/arm-computeschedule'
-    summary: >-
-      JSON array, that contains VM properties that should to be overridden for
-      each VM in the batch (if you want to create 100 VMs, they all need a
-      distinct computerName property, you pass computerNames for each VM in
-      batch in this array), service will merge baseProfile with VM specific
-      overrides and create a merged VMProfile.
-    fullName: resourceOverrides
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'resourceOverrides?: Record<string, any>[]'
-      return:
-        description: ''
-        type: Record&lt;string, any&gt;[]
   - name: resourcePrefix
     uid: '@azure/arm-computeschedule.ResourceProvisionPayload.resourcePrefix'
     package: '@azure/arm-computeschedule'
@@ -66,3 +34,38 @@ properties:
       return:
         description: ''
         type: string
+  - name: virtualMachineBaseProfile
+    uid: >-
+      @azure/arm-computeschedule.ResourceProvisionPayload.virtualMachineBaseProfile
+    package: '@azure/arm-computeschedule'
+    summary: >-
+      Virtual machine profile object that contains VM properties that are common
+      across all VMs in this batch  (if you want to create 100 VMs in this
+      request, and they all have same vmSize, then include vmSize in
+      baseProfile)
+    fullName: virtualMachineBaseProfile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'virtualMachineBaseProfile?: BulkVMConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-computeschedule.BulkVMConfiguration" />
+  - name: virtualMachineOverrides
+    uid: >-
+      @azure/arm-computeschedule.ResourceProvisionPayload.virtualMachineOverrides
+    package: '@azure/arm-computeschedule'
+    summary: >-
+      Virtual machine profile array that contains VM properties that needs to be
+      overridden for each VM in the batch (if you want to create 100 VMs, they
+      all need a distinct computerName property, you pass computerNames for each
+      VM in batch in this array), service will merge baseProfile with VM
+      specific overrides and create a merged VMProfile.
+    fullName: virtualMachineOverrides
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'virtualMachineOverrides?: BulkVMConfiguration[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-computeschedule.BulkVMConfiguration" />[]

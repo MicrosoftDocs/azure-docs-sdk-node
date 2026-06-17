@@ -1,7 +1,7 @@
 ---
 title: Azure Monitorslis SDK for JavaScript
 description: Reference for Azure Monitorslis SDK for JavaScript
-ms.date: 06/16/2026
+ms.date: 06/17/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitorslis

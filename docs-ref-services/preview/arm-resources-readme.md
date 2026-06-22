@@ -1,24 +1,24 @@
 ---
-title: Azure Deployments client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-resourcesdeployments, resources
+title: Azure ResourceManagement client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/arm-resources, resources
 ms.date: 06/22/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: resources
 ---
-# Azure Deployments client library for JavaScript - version 1.0.0-alpha.20260619.1 
+# Azure ResourceManagement client library for JavaScript - version 8.0.0-alpha.20260622.1 
 
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Deployments client.
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ResourceManagement client.
 
-Provides operations for working with deployments.
+Provides operations for working with resources and resource groups.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resourcesdeployments)
-- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-resourcesdeployments)
-- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-resourcesdeployments)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resourcesdeployments/samples)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resources)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-resources)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-resources?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resources/samples)
 
 ## Getting started
 
@@ -33,18 +33,18 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-resourcesdeployments` package
+### Install the `@azure/arm-resources` package
 
-Install the Azure Deployments client library for JavaScript with `npm`:
+Install the Azure ResourceManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-resourcesdeployments
+npm install @azure/arm-resources
 ```
 
-### Create and authenticate a `DeploymentsClient`
+### Create and authenticate a `ResourceManagementClient`
 
-To create a client object to access the Azure Deployments API, you will need the `endpoint` of your Azure Deployments resource and a `credential`. The Azure Deployments client can use Azure Active Directory credentials to authenticate.
-You can find the endpoint for your Azure Deployments resource in the [Azure Portal][azure_portal].
+To create a client object to access the Azure ResourceManagement API, you will need the `endpoint` of your Azure ResourceManagement resource and a `credential`. The Azure ResourceManagement client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your Azure ResourceManagement resource in the [Azure Portal][azure_portal].
 
 You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
@@ -54,32 +54,32 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure Deployments** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to Azure ResourceManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { DeploymentsClient } from "@azure/arm-resourcesdeployments";
+import { ResourceManagementClient } from "@azure/arm-resources";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new DeploymentsClient(new DefaultAzureCredential(), subscriptionId);
+const client = new ResourceManagementClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { DeploymentsClient } from "@azure/arm-resourcesdeployments";
+import { ResourceManagementClient } from "@azure/arm-resources";
 
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new DeploymentsClient(credential, subscriptionId);
+const client = new ResourceManagementClient(credential, subscriptionId);
 ```
 
 
@@ -88,9 +88,9 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ## Key concepts
 
-### DeploymentsClient
+### ResourceManagementClient
 
-`DeploymentsClient` is the primary interface for developers using the Azure Deployments client library. Explore the methods on this client object to understand the different features of the Azure Deployments service that you can access.
+`ResourceManagementClient` is the primary interface for developers using the Azure ResourceManagement client library. Explore the methods on this client object to understand the different features of the Azure ResourceManagement service that you can access.
 
 ## Troubleshooting
 
@@ -108,7 +108,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resourcesdeployments/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/resources/arm-resources/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 

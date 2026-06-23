@@ -21,6 +21,7 @@ typeAliases:
   - '@azure-rest/core-client.HttpBrowserStreamResponse'
   - '@azure-rest/core-client.HttpNodeStreamResponse'
   - '@azure-rest/core-client.HttpResponse'
+  - '@azure-rest/core-client.NodeReadableStream'
   - '@azure-rest/core-client.PathParameters'
   - '@azure-rest/core-client.PathUnchecked'
   - '@azure-rest/core-client.PathUncheckedResponse'
@@ -89,6 +90,40 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.RestError" />
+  - name: getBinaryStreamResponse(StreamableMethod<PathUncheckedResponse>)
+    uid: '@azure-rest/core-client.getBinaryStreamResponse'
+    package: '@azure-rest/core-client'
+    summary: >-
+      Resolves a StreamableMethod into a binary stream response using Node.js
+      streaming.
+
+      Returns both the raw HttpResponse (for status/header inspection) and the
+      readable stream body.
+
+      Error handling is left to the caller so that generated deserializers can
+      apply
+
+      operation-specific error deserialization (per-status-code details,
+      exception headers, etc.).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getBinaryStreamResponse(streamableMethod:
+        StreamableMethod<PathUncheckedResponse>): Promise<HttpResponse & {
+        blobBody?: Promise<Blob>, readableStreamBody?: NodeReadableStream }>
+      parameters:
+        - id: streamableMethod
+          type: >-
+            <xref uid="@azure-rest/core-client.StreamableMethod" />&lt;<xref
+            uid="@azure-rest/core-client.PathUncheckedResponse" />&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure-rest/core-client.HttpResponse" /> & {
+          blobBody?: Promise&lt;Blob&gt;, readableStreamBody?:
+          NodeReadableStream }&gt;
   - name: getClient(string, ClientOptions)
     uid: '@azure-rest/core-client.getClient'
     package: '@azure-rest/core-client'

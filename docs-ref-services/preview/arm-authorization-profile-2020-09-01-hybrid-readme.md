@@ -1,24 +1,22 @@
 ---
 title: Azure AuthorizationManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-authorization, authorization
+keywords: Azure, javascript, SDK, API, @azure/arm-authorization-profile-2020-09-01-hybrid, authorization
 ms.date: 06/23/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: authorization
 ---
-# Azure AuthorizationManagement client library for JavaScript - version 10.0.0-alpha.20260622.1 
+# Azure AuthorizationManagement client library for JavaScript - version 2.1.2-alpha.20260622.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure AuthorizationManagement client.
 
-Attribute namespaces provide a way to organize attributes associated with Federated Managed Identities. These attributes can also be used in attribute-based access control conditions in Azure role assignments. These operations enable users to manage attribute namespaces at the provider level to guarantee tenant-level uniqueness.
+Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users.
 
-Key links:
-
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/authorization/arm-authorization)
-- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-authorization)
-- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-authorization?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/authorization/arm-authorization/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/authorization/arm-authorization-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-authorization-profile-2020-09-01-hybrid) |
+[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-authorization-profile-2020-09-01-hybrid) |
+[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
 
@@ -33,12 +31,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-authorization` package
+### Install the `@azure/arm-authorization-profile-2020-09-01-hybrid` package
 
 Install the Azure AuthorizationManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-authorization
+npm install @azure/arm-authorization-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `AuthorizationManagementClient`
@@ -46,7 +44,7 @@ npm install @azure/arm-authorization
 To create a client object to access the Azure AuthorizationManagement API, you will need the `endpoint` of your Azure AuthorizationManagement resource and a `credential`. The Azure AuthorizationManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure AuthorizationManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -55,13 +53,14 @@ npm install @azure/identity
 ```
 
 You will also need to **register a new AAD application and grant access to Azure AuthorizationManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { AuthorizationManagementClient } from "@azure/arm-authorization";
+import { AuthorizationManagementClient } from "@azure/arm-authorization-profile-2020-09-01-hybrid";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
@@ -72,18 +71,18 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { AuthorizationManagementClient } from "@azure/arm-authorization";
+import { AuthorizationManagementClient } from "@azure/arm-authorization-profile-2020-09-01-hybrid";
 
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new AuthorizationManagementClient(credential, subscriptionId);
 ```
 
-
 ### JavaScript Bundle
+
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
@@ -108,7 +107,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/authorization/arm-authorization/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
 
 ## Contributing
 
@@ -118,6 +117,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
+
+
+[azure_cli]: https://learn.microsoft.com/cli/azure
+[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity

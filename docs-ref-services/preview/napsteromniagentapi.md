@@ -1,7 +1,7 @@
 ---
 title: Azure Napsteromniagentapi SDK for JavaScript
 description: Reference for Azure Napsteromniagentapi SDK for JavaScript
-ms.date: 06/23/2026
+ms.date: 06/24/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: napsteromniagentapi

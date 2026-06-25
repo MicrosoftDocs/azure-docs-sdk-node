@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: discovery
 ---
-# Azure Discovery client library for JavaScript - version 1.0.0-alpha.20260624.1 
+# Azure Discovery client library for JavaScript - version 1.0.0-alpha.20260625.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Discovery client.

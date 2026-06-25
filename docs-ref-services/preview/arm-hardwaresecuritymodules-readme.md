@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: hardwaresecuritymodules
 ---
-# Azure HardwareSecurityModules client library for JavaScript - version 2.0.1-alpha.20260623.1 
+# Azure HardwareSecurityModules client library for JavaScript - version 2.0.1-alpha.20260624.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure HardwareSecurityModules client.

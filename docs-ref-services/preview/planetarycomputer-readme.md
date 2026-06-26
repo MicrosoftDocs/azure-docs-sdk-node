@@ -1,12 +1,12 @@
 ---
 title: Azure Planetary Computer Pro client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/planetarycomputer, planetarycomputer
-ms.date: 06/12/2026
+ms.date: 06/26/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: planetarycomputer
 ---
-# Azure Planetary Computer Pro client library for JavaScript - version 1.0.0-beta.1 
+# Azure Planetary Computer Pro client library for JavaScript - version 1.0.0-alpha.20260626.1 
 
 
 The [Microsoft Planetary Computer Pro][service_overview] is a geospatial data management service built on Azure's hyperscale infrastructure. The GeoCatalog is an Azure resource that provides foundational capabilities to ingest, manage, search, and distribute geospatial datasets using the [SpatioTemporal Asset Catalog (STAC)][stac_spec] open specification.
@@ -24,7 +24,7 @@ The [Microsoft Planetary Computer Pro][service_overview] is a geospatial data ma
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/planetarycomputer)
 - [API reference documentation][api_ref_docs]
 - [Product documentation][service_overview]
@@ -36,7 +36,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/planetarycomputer_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -131,7 +131,7 @@ STAC is an open specification for organizing and describing geospatial data. Mic
 
 ## Examples
 
-This section provides code snippets covering common GeoCatalog workflows. For complete working examples, see the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev) directory.
+This section provides code snippets covering common GeoCatalog workflows. For complete working examples, see the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev) directory.
 
 - [List STAC Collections](#list-stac-collections)
 - [Search for STAC Items](#search-for-stac-items)
@@ -342,7 +342,7 @@ console.log(`Signed URL: ${signed.href}`);
 
 ### General
 
-Planetary Computer Pro client library will raise exceptions defined in [Azure Core](https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/core/core-rest-pipeline).
+Planetary Computer Pro client library will raise exceptions defined in [Azure Core](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/core-rest-pipeline).
 
 ```ts snippet:ReadmeSampleErrorHandling
 import { DefaultAzureCredential } from "@azure/identity";
@@ -372,7 +372,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -402,7 +402,7 @@ For complete working examples, see the individual sample files:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/planetarycomputer_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
 
@@ -412,7 +412,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer
 [service_overview]: https://learn.microsoft.com/azure/planetary-computer/microsoft-planetary-computer-pro-overview
 [stac_spec]: https://stacspec.org/
 [deploy_geocatalog]: https://learn.microsoft.com/azure/planetary-computer/deploy-geocatalog-resource
@@ -428,14 +428,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [email_opencode]: mailto:opencode@microsoft.com
-[sample_create_collection]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/stacCreateCollectionSample.ts
-[sample_create_item]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/stacCreateItemSample.ts
-[sample_search]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/stacSearchSample.ts
-[sample_register_mosaic]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/dataRegisterMosaicsSearchSample.ts
-[sample_get_tile]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/dataGetTileSample.ts
-[sample_get_point]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/dataGetPointSample.ts
-[sample_create_source]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/ingestionCreateSourceSample.ts
-[sample_create_ingestion]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/ingestionCreateSample.ts
-[sample_get_token]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/sharedAccessSignatureGetTokenSample.ts
-[sample_get_legend]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/planetarycomputer_1.0.0-beta.1/sdk/planetarycomputer/planetarycomputer/samples-dev/dataGetLegendSample.ts
+[sample_create_collection]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/stacCreateCollectionSample.ts
+[sample_create_item]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/stacCreateItemSample.ts
+[sample_search]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/stacSearchSample.ts
+[sample_register_mosaic]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/dataRegisterMosaicsSearchSample.ts
+[sample_get_tile]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/dataGetTileSample.ts
+[sample_get_point]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/dataGetPointSample.ts
+[sample_create_source]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/ingestionCreateSourceSample.ts
+[sample_create_ingestion]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/ingestionCreateSample.ts
+[sample_get_token]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/sharedAccessSignatureGetTokenSample.ts
+[sample_get_legend]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/planetarycomputer/planetarycomputer/samples-dev/dataGetLegendSample.ts
 

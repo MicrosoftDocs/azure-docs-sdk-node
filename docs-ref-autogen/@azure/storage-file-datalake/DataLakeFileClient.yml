@@ -338,6 +338,60 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [DataLakePathClient.getProperties](xref:@azure/storage-file-datalake.DataLakePathClient.getProperties)
+  - name: getSystemProperties(PathGetSystemPropertiesOptions)
+    uid: '@azure/storage-file-datalake.DataLakeFileClient.getSystemProperties'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      Returns all standard HTTP properties, and system properties
+
+      for the path (directory or file).
+
+
+      See
+      https://learn.microsoft.com/en-us/rest/api/storageservices/datalakestoragegen2/path/get-properties?view=rest-storageservices-datalakestoragegen2-2019-12-12
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getSystemProperties(options?: PathGetSystemPropertiesOptions):
+        Promise<PathGetSystemPropertiesResponse>
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.PathGetSystemPropertiesOptions" />
+          description: Optional. Options when getting path properties.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-datalake.PathGetSystemPropertiesResponse"
+          />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DataLakePathClient.getSystemProperties](xref:@azure/storage-file-datalake.DataLakePathClient.getSystemProperties)
+  - name: getTags(PathGetTagsOptions)
+    uid: '@azure/storage-file-datalake.DataLakeFileClient.getTags'
+    package: '@azure/storage-file-datalake'
+    summary: Gets the tags associated with the underlying path.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getTags(options?: PathGetTagsOptions):
+        Promise<PathGetTagsResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-file-datalake.PathGetTagsOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-datalake.PathGetTagsResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DataLakePathClient.getTags](xref:@azure/storage-file-datalake.DataLakePathClient.getTags)
   - name: move(string, PathMoveOptions)
     uid: '@azure/storage-file-datalake.DataLakeFileClient.move'
     package: '@azure/storage-file-datalake'
@@ -626,6 +680,41 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [DataLakePathClient.setPermissions](xref:@azure/storage-file-datalake.DataLakePathClient.setPermissions)
+  - name: setTags(Tags, PathSetTagsOptions)
+    uid: '@azure/storage-file-datalake.DataLakeFileClient.setTags'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      Sets tags on the underlying path.
+
+      A path can have up to 10 tags. Tag keys must be between 1 and 128
+      characters.  Tag values must be between 0 and 256 characters.
+
+      Valid tag key and value characters include lower and upper case letters,
+      digits (0-9),
+
+      space (' '), plus ('+'), minus ('-'), period ('.'), forward slash ('/'),
+      colon (':'), equals ('='), and underscore ('_').
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setTags(tags: Tags, options?: PathSetTagsOptions):
+        Promise<PathSetTagsResponse>
+      parameters:
+        - id: tags
+          type: <xref uid="@azure/storage-blob.Tags" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-file-datalake.PathSetTagsOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-datalake.PathSetTagsResponse" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DataLakePathClient.setTags](xref:@azure/storage-file-datalake.DataLakePathClient.setTags)
   - name: toDirectoryClient()
     uid: '@azure/storage-file-datalake.DataLakeFileClient.toDirectoryClient'
     package: '@azure/storage-file-datalake'
@@ -1021,6 +1110,8 @@ methods:
 
       import { DataLakeServiceClient } from "@azure/storage-file-datalake";
 
+      import { buffer } from "node:stream/consumers";
+
 
       const account = "<account>";
 
@@ -1046,24 +1137,10 @@ methods:
       const queryResponse = await fileClient.query("select * from BlobStorage");
 
       if (queryResponse.readableStreamBody) {
-        const responseBuffer = await streamToBuffer(queryResponse.readableStreamBody);
-        const downloaded = responseBuffer.toString();
-        console.log(`Query file content: ${downloaded}`);
-      }
-
-
-      async function streamToBuffer(readableStream: NodeJS.ReadableStream):
-      Promise<Buffer> {
-        return new Promise((resolve, reject) => {
-          const chunks: Buffer[] = [];
-          readableStream.on("data", (data) => {
-            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
-          });
-          readableStream.on("end", () => {
-            resolve(Buffer.concat(chunks));
-          });
-          readableStream.on("error", reject);
-        });
+        // Read the response bytes. Use `text` from "node:stream/consumers" instead
+        // if you want the response as a string directly.
+        const responseBuffer = await buffer(queryResponse.readableStreamBody);
+        console.log(`Query file content: ${responseBuffer.toString()}`);
       }
 
       ```
@@ -1109,6 +1186,8 @@ methods:
 
       import { DefaultAzureCredential } from "@azure/identity";
 
+      import { buffer } from "node:stream/consumers";
+
 
       const account = "<account>";
 
@@ -1136,26 +1215,10 @@ methods:
       const downloadResponse = await fileClient.read();
 
       if (downloadResponse.readableStreamBody) {
-        const downloaded = await streamToBuffer(downloadResponse.readableStreamBody);
+        // Download the raw bytes of the file. Use `text` from "node:stream/consumers"
+        // instead if you want to read the content as a string directly.
+        const downloaded = await buffer(downloadResponse.readableStreamBody);
         console.log("Downloaded file content:", downloaded.toString());
-      }
-
-
-      // [Node.js only] A helper method used to read a Node.js readable stream
-      into a Buffer.
-
-      async function streamToBuffer(readableStream: NodeJS.ReadableStream):
-      Promise<Buffer> {
-        return new Promise((resolve, reject) => {
-          const chunks: Buffer[] = [];
-          readableStream.on("data", (data) => {
-            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
-          });
-          readableStream.on("end", () => {
-            resolve(Buffer.concat(chunks));
-          });
-          readableStream.on("error", reject);
-        });
       }
 
       ```

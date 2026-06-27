@@ -8,14 +8,36 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: autoPauseDelay
+    uid: '@azure/arm-sql.ElasticPool.autoPauseDelay'
+    package: '@azure/arm-sql'
+    summary: >-
+      Time in minutes after which elastic pool is automatically paused. A value
+      of -1 means that automatic pause is disabled
+    fullName: autoPauseDelay
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'autoPauseDelay?: number'
+      return:
+        description: ''
+        type: number
+  - name: availabilityZone
+    uid: '@azure/arm-sql.ElasticPool.availabilityZone'
+    package: '@azure/arm-sql'
+    summary: Specifies the availability zone the pool's primary replica is pinned to.
+    fullName: availabilityZone
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'availabilityZone?: string'
+      return:
+        description: ''
+        type: string
   - name: creationDate
     uid: '@azure/arm-sql.ElasticPool.creationDate'
     package: '@azure/arm-sql'
-    summary: >-
-      The creation date of the elastic pool (ISO8601 format).
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The creation date of the elastic pool (ISO8601 format).
     fullName: creationDate
     remarks: ''
     isDeprecated: false
@@ -28,8 +50,9 @@ properties:
     uid: '@azure/arm-sql.ElasticPool.highAvailabilityReplicaCount'
     package: '@azure/arm-sql'
     summary: >-
-      The number of secondary replicas associated with the elastic pool that are
-      used to provide high availability.
+      The number of secondary replicas associated with the Business Critical,
+      Premium, or Hyperscale edition elastic pool that are used to provide high
+      availability. Applicable only to Hyperscale elastic pools.
     fullName: highAvailabilityReplicaCount
     remarks: ''
     isDeprecated: false
@@ -44,9 +67,6 @@ properties:
     summary: >-
       Kind of elastic pool. This is metadata used for the Azure portal
       experience.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: kind
     remarks: ''
     isDeprecated: false
@@ -94,6 +114,18 @@ properties:
       return:
         description: ''
         type: number
+  - name: minCapacity
+    uid: '@azure/arm-sql.ElasticPool.minCapacity'
+    package: '@azure/arm-sql'
+    summary: Minimal capacity that serverless pool will not shrink below, if not paused
+    fullName: minCapacity
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'minCapacity?: number'
+      return:
+        description: ''
+        type: number
   - name: perDatabaseSettings
     uid: '@azure/arm-sql.ElasticPool.perDatabaseSettings'
     package: '@azure/arm-sql'
@@ -106,6 +138,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-sql.ElasticPoolPerDatabaseSettings" />
+  - name: preferredEnclaveType
+    uid: '@azure/arm-sql.ElasticPool.preferredEnclaveType'
+    package: '@azure/arm-sql'
+    summary: Type of enclave requested on the elastic pool.
+    fullName: preferredEnclaveType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'preferredEnclaveType?: string'
+      return:
+        description: ''
+        type: string
   - name: sku
     uid: '@azure/arm-sql.ElasticPool.sku'
     package: '@azure/arm-sql'
@@ -123,7 +167,7 @@ properties:
 
       az sql elastic-pool list-editions -l <location> -o table
 
-      ````
+      ```
     fullName: sku
     remarks: ''
     isDeprecated: false
@@ -135,11 +179,7 @@ properties:
   - name: state
     uid: '@azure/arm-sql.ElasticPool.state'
     package: '@azure/arm-sql'
-    summary: >-
-      The state of the elastic pool.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The state of the elastic pool.
     fullName: state
     remarks: ''
     isDeprecated: false
@@ -168,10 +208,8 @@ inheritedProperties:
     uid: '@azure/arm-sql.ElasticPool.id'
     package: '@azure/arm-sql'
     summary: >-
-      Resource ID.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Fully qualified resource ID for the resource. Ex -
+      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -186,7 +224,7 @@ inheritedProperties:
   - name: location
     uid: '@azure/arm-sql.ElasticPool.location'
     package: '@azure/arm-sql'
-    summary: Resource location.
+    summary: The geo-location where the resource lives
     fullName: location
     remarks: ''
     isDeprecated: false
@@ -201,11 +239,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-sql.ElasticPool.name'
     package: '@azure/arm-sql'
-    summary: >-
-      Resource name.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -217,6 +251,23 @@ inheritedProperties:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.name](xref:@azure/arm-sql.TrackedResource.name)
+  - name: systemData
+    uid: '@azure/arm-sql.ElasticPool.systemData'
+    package: '@azure/arm-sql'
+    summary: >-
+      Azure Resource Manager metadata containing createdBy and modifiedBy
+      information.
+    fullName: systemData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'systemData?: SystemData'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-sql.SystemData" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.systemData](xref:@azure/arm-sql.TrackedResource.systemData)
   - name: tags
     uid: '@azure/arm-sql.ElasticPool.tags'
     package: '@azure/arm-sql'
@@ -225,10 +276,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.tags](xref:@azure/arm-sql.TrackedResource.tags)
@@ -236,10 +287,8 @@ inheritedProperties:
     uid: '@azure/arm-sql.ElasticPool.type'
     package: '@azure/arm-sql'
     summary: >-
-      Resource type.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+      "Microsoft.Storage/storageAccounts"
     fullName: type
     remarks: ''
     isDeprecated: false

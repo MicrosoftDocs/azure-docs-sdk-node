@@ -36,10 +36,10 @@ properties:
     uid: '@azure/arm-sql.ServerUpdate.administrators'
     package: '@azure/arm-sql'
     summary: >-
-      The Azure Active Directory administrator of the server. This can only be
-      used at server create time. If used for server update, it will be ignored
-      or it will result in an error. For updates individual APIs will need to be
-      used.
+      The Azure Active Directory administrator can be utilized during server
+      creation and for server updates, except for the azureADOnlyAuthentication
+      property. To update the azureADOnlyAuthentication property, individual API
+      must be used.
     fullName: administrators
     remarks: ''
     isDeprecated: false
@@ -48,14 +48,22 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-sql.ServerExternalAdministrator" />
+  - name: createMode
+    uid: '@azure/arm-sql.ServerUpdate.createMode'
+    package: '@azure/arm-sql'
+    summary: Create mode for server, only valid values for this are Normal and Restore.
+    fullName: createMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'createMode?: string'
+      return:
+        description: ''
+        type: string
   - name: externalGovernanceStatus
     uid: '@azure/arm-sql.ServerUpdate.externalGovernanceStatus'
     package: '@azure/arm-sql'
-    summary: >-
-      Status of external governance.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Status of external governance.
     fullName: externalGovernanceStatus
     remarks: ''
     isDeprecated: false
@@ -79,11 +87,7 @@ properties:
   - name: fullyQualifiedDomainName
     uid: '@azure/arm-sql.ServerUpdate.fullyQualifiedDomainName'
     package: '@azure/arm-sql'
-    summary: >-
-      The fully qualified domain name of the server.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The fully qualified domain name of the server.
     fullName: fullyQualifiedDomainName
     remarks: ''
     isDeprecated: false
@@ -104,6 +108,20 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-sql.ResourceIdentity" />
+  - name: isIPv6Enabled
+    uid: '@azure/arm-sql.ServerUpdate.isIPv6Enabled'
+    package: '@azure/arm-sql'
+    summary: >-
+      Whether or not to enable IPv6 support for this server.  Value is optional
+      but if passed in, must be 'Enabled' or 'Disabled'
+    fullName: isIPv6Enabled
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isIPv6Enabled?: string'
+      return:
+        description: ''
+        type: string
   - name: keyId
     uid: '@azure/arm-sql.ServerUpdate.keyId'
     package: '@azure/arm-sql'
@@ -119,7 +137,7 @@ properties:
   - name: minimalTlsVersion
     uid: '@azure/arm-sql.ServerUpdate.minimalTlsVersion'
     package: '@azure/arm-sql'
-    summary: 'Minimal TLS version. Allowed values: ''None'', ''1.0'', ''1.1'', ''1.2'''
+    summary: 'Minimal TLS version. Allowed values: ''None'', 1.0'', ''1.1'', ''1.2'', ''1.3'''
     fullName: minimalTlsVersion
     remarks: ''
     isDeprecated: false
@@ -143,11 +161,7 @@ properties:
   - name: privateEndpointConnections
     uid: '@azure/arm-sql.ServerUpdate.privateEndpointConnections'
     package: '@azure/arm-sql'
-    summary: >-
-      List of private endpoint connections on a server
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: List of private endpoint connections on a server
     fullName: privateEndpointConnections
     remarks: ''
     isDeprecated: false
@@ -185,14 +199,22 @@ properties:
       return:
         description: ''
         type: string
+  - name: retentionDays
+    uid: '@azure/arm-sql.ServerUpdate.retentionDays'
+    package: '@azure/arm-sql'
+    summary: Number of days this server will stay soft-deleted.
+    fullName: retentionDays
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'retentionDays?: number'
+      return:
+        description: ''
+        type: number
   - name: state
     uid: '@azure/arm-sql.ServerUpdate.state'
     package: '@azure/arm-sql'
-    summary: >-
-      The state of the server.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The state of the server.
     fullName: state
     remarks: ''
     isDeprecated: false
@@ -209,10 +231,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
   - name: version
     uid: '@azure/arm-sql.ServerUpdate.version'
     package: '@azure/arm-sql'
@@ -231,9 +253,6 @@ properties:
     summary: >-
       Whether or not existing server has a workspace created and if it allows
       connection from workspace
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: workspaceFeature
     remarks: ''
     isDeprecated: false

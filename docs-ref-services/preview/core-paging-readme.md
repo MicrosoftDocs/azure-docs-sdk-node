@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Core Paging client library for JavaScript - version 1.6.3-alpha.20260626.3 
+# Azure Core Paging client library for JavaScript - version 1.6.3-alpha.20260629.5 
 
 
 This library provides core types for paging async iterable iterators.

@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-client, web-pubsub
-ms.date: 03/18/2026
+ms.date: 06/29/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
@@ -112,7 +112,53 @@ console.log(`Invocation result: ${JSON.stringify(result.data)}`);
 ```
 
 `invokeEvent` sends an `invoke` request to the service, awaits the correlated `invokeResponse`, and returns the payload. You can abort the invocation by passing `{ abortSignal }`.
-_Streaming and service-initiated invocations are not yet supported._
+_Service-initiated invocations are not yet supported._
+
+### 6. Stream messages to a group (preview)
+
+You can send a large or continuous payload to a group as an ordered stream of fragments, and consume each inbound stream as a whole unit on the receiving side.
+
+```ts snippet:ReadmeSampleStreaming
+import { WebPubSubClient } from "@azure/web-pubsub-client";
+
+const client = new WebPubSubClient("<client-access-url>");
+
+// Receiving side: subscribe once, then consume each inbound stream with for-await.
+client.onGroupStream(
+  async (stream) => {
+    const parts: string[] = [];
+    try {
+      for await (const message of stream) {
+        parts.push(message.data as string);
+      }
+      console.log(`Stream ${stream.streamId} completed: ${parts.join("")}`);
+    } catch (err) {
+      console.log(
+        `Stream ${stream.streamId} failed: ${
+          (
+            err as {
+              name?: string;
+            }
+          ).name
+        }`,
+      );
+    }
+  },
+  { handleFromStart: true },
+);
+
+await client.start();
+const groupName = "group1";
+await client.joinGroup(groupName);
+
+// Sending side: write a logical stream in ordered fragments, then end it.
+const stream = await client.openGroupStream(groupName);
+await stream.write("hello ", "text");
+await stream.write("world", "text");
+await stream.end();
+```
+
+`onGroupStream` returns a subscription with `close()` for unregistering the listener. Each callback receives a `GroupStream` that is async iterable over its fragments. `openGroupStream` returns a `GroupStreamWriter` you use to `write` fragments, `end` the stream successfully, or `abort` it with an error.
 
 ---
 
@@ -167,14 +213,22 @@ const hubName = "sample_chat";
 const serviceClient = new WebPubSubServiceClient("<web-pubsub-connectionstring>", hubName);
 
 // Note that the token allows the client to join and send messages to any groups. It is specified with the "roles" option.
-app.get("/negotiate", async (req, res) => {
-  const token = await serviceClient.getClientAccessToken({
-    roles: ["webpubsub.joinLeaveGroup", "webpubsub.sendToGroup"],
-  });
-  res.json({
-    url: token.url,
-  });
-});
+app.get(
+  "/negotiate",
+  async (
+    _req: unknown,
+    res: {
+      json: (body: { url: string }) => void;
+    },
+  ) => {
+    const token = await serviceClient.getClientAccessToken({
+      roles: ["webpubsub.joinLeaveGroup", "webpubsub.sendToGroup"],
+    });
+    res.json({
+      url: token.url,
+    });
+  },
+);
 
 app.listen(port, () =>
   console.log(`Application server listening at http://localhost:${port}/negotiate`),
@@ -191,7 +245,9 @@ import { WebPubSubClient } from "@azure/web-pubsub-client";
 const client = new WebPubSubClient({
   getClientAccessUrl: async () => {
     const negotiate = await fetch("/negotiate");
-    const { url } = await negotiate.json();
+    const { url } = (await negotiate.json()) as {
+      url: string;
+    };
     return url;
   },
 });
@@ -199,7 +255,7 @@ const client = new WebPubSubClient({
 await client.start();
 ```
 
-_To see the full code of this sample, please refer to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.4/sdk/web-pubsub/web-pubsub-client/samples-browser)._
+_To see the full code of this sample, please refer to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.1.0/sdk/web-pubsub/web-pubsub-client/samples-browser)._
 
 ---
 
@@ -259,7 +315,7 @@ const groupName = "group1";
 try {
   await client.joinGroup(groupName);
 } catch (err) {
-  let id = null;
+  let id: number | undefined;
   if (err instanceof SendMessageError) {
     id = err.ackId;
   }
@@ -329,7 +385,7 @@ Each of the Web PubSub clients is safe to cache and be used as a singleton for t
 
 ## JavaScript Bundle
 
-To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.4/documentation/Bundling.md).
+To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.1.0/documentation/Bundling.md).
 
 ---
 
@@ -351,7 +407,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.4/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.1.0/sdk/core/logger).
 
 - ### Live Trace
 
@@ -371,7 +427,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_sub]: https://azure.microsoft.com/free/
 [samples_ref]: https://github.com/Azure/azure-webpubsub/tree/main/samples/javascript/

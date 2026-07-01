@@ -1,12 +1,12 @@
 ---
 title: Azure AI Speech Transcription client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-speech-transcription, transcription
-ms.date: 05/14/2026
+ms.date: 07/01/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: transcription
 ---
-# Azure AI Speech Transcription client library for JavaScript - version 1.0.0-beta.2 
+# Azure AI Speech Transcription client library for JavaScript - version 1.1.0-alpha.20260701.1 
 
 
 The Azure AI Speech Transcription client library provides easy access to Azure's speech-to-text transcription service, enabling you to convert audio to text with high accuracy.
@@ -23,9 +23,9 @@ Use the client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/src)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/src)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/ai-speech-transcription)
-- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/ai-speech-transcription?view=azure-node-preview)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/ai-speech-transcription?view=azure-node-latest)
 - [Product documentation](https://learn.microsoft.com/azure/ai-services/speech-service/overview)
 
 ## Getting started
@@ -35,7 +35,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-speech-transcription_1.0.0-beta.2/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -147,6 +147,7 @@ You can customize transcription with options like:
 - [Improve accuracy with custom phrases](#improve-accuracy-with-custom-phrases)
 - [Transcribe with a known language](#transcribe-with-a-known-language)
 - [Use Enhanced Mode for highest accuracy](#use-enhanced-mode-for-highest-accuracy)
+- [Guide Enhanced Mode with a locale](#guide-enhanced-mode-with-a-locale)
 - [Translate with Enhanced Mode](#translate-with-enhanced-mode)
 - [Combine multiple options](#combine-multiple-options)
 
@@ -303,6 +304,8 @@ for (const phrase of result.phrases) {
 }
 ```
 
+> **Note**: `locales` applies to both Fast Transcription and Enhanced Mode. In Enhanced Mode the service runs in multi-lingual mode by default; when `locales` is specified, the service uses the first locale as a recognition hint to bias language recognition.
+
 ### Use Enhanced Mode for highest accuracy
 
 Enhanced Mode uses LLM-powered processing for the highest accuracy transcription:
@@ -330,6 +333,27 @@ const result = await client.transcribe(audioFile, {
 for (const phrase of result.phrases) {
   console.log(`[Speaker ${phrase.speaker}] ${phrase.text}`);
 }
+```
+
+### Guide Enhanced Mode with a locale
+
+Enhanced Mode runs in multi-lingual mode by default, so you don't need to specify the input language. To guide recognition toward a specific language, set `locales`; the service uses the first locale as a recognition hint:
+
+```ts snippet:EnhancedModeWithLocale
+import { TranscriptionClient } from "@azure/ai-speech-transcription";
+import { AzureKeyCredential } from "@azure/core-auth";
+import { readFileSync } from "node:fs";
+
+const client = new TranscriptionClient("<endpoint>", new AzureKeyCredential("<api-key>"));
+const audioFile = readFileSync("path/to/audio.wav");
+const result = await client.transcribe(audioFile, {
+  enhancedMode: {
+    task: "transcribe",
+  },
+  // Guide recognition toward a specific language; the service uses the first locale as a hint
+  locales: ["en-US"],
+});
+console.log("Transcription:", result.combinedPhrases[0]?.text);
 ```
 
 ### Translate with Enhanced Mode
@@ -402,25 +426,25 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
 Explore additional samples to learn more about advanced features:
 
-- [Basic Transcription](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/basicTranscription.ts) - Create clients and basic transcription
-- [Transcription Options](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/transcriptionOptions.ts) - Combine multiple transcription features
-- [Transcription from URL](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/transcriptionFromUrl.ts) - Transcribe from remote URLs
-- [Enhanced Mode](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/enhancedMode.ts) - LLM-powered transcription and translation
-- [Profanity Filtering](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/profanityFiltering.ts) - All profanity filtering modes
-- [Speaker Diarization](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/speakerDiarization.ts) - Speaker identification
-- [Phrase List](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/phraseList.ts) - Custom vocabulary
-- [Transcription with Locale](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/transcriptionWithLocale.ts) - Language specification and detection
-- [Multilingual Transcription](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/transcription/ai-speech-transcription/samples-dev/multilingualTranscription.ts) - Multilingual content (preview)
+- [Basic Transcription](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/basicTranscription.ts) - Create clients and basic transcription
+- [Transcription Options](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/transcriptionOptions.ts) - Combine multiple transcription features
+- [Transcription from URL](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/transcriptionFromUrl.ts) - Transcribe from remote URLs
+- [Enhanced Mode](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/enhancedMode.ts) - LLM-powered transcription and translation
+- [Profanity Filtering](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/profanityFiltering.ts) - All profanity filtering modes
+- [Speaker Diarization](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/speakerDiarization.ts) - Speaker identification
+- [Phrase List](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/phraseList.ts) - Custom vocabulary
+- [Transcription with Locale](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/transcriptionWithLocale.ts) - Language specification and detection
+- [Multilingual Transcription](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/transcription/ai-speech-transcription/samples-dev/multilingualTranscription.ts) - Multilingual content (preview)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-speech-transcription_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -428,6 +452,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-speech-transcription_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

@@ -4,12 +4,14 @@ name: '@azure/arm-qumulo'
 summary: ''
 type: package
 enums:
+  - '@azure/arm-qumulo.AzureClouds'
   - '@azure/arm-qumulo.KnownActionType'
   - '@azure/arm-qumulo.KnownCreatedByType'
   - '@azure/arm-qumulo.KnownManagedServiceIdentityType'
   - '@azure/arm-qumulo.KnownMarketplaceSubscriptionStatus'
   - '@azure/arm-qumulo.KnownOrigin'
   - '@azure/arm-qumulo.KnownProvisioningState'
+  - '@azure/arm-qumulo.KnownVersions'
 classes:
   - '@azure/arm-qumulo.QumuloStorage'
 interfaces:
@@ -17,71 +19,107 @@ interfaces:
   - '@azure/arm-qumulo.ErrorDetail'
   - '@azure/arm-qumulo.ErrorResponse'
   - '@azure/arm-qumulo.FileSystemResource'
-  - '@azure/arm-qumulo.FileSystemResourceListResult'
+  - '@azure/arm-qumulo.FileSystemResourceProperties'
   - '@azure/arm-qumulo.FileSystemResourceUpdate'
   - '@azure/arm-qumulo.FileSystemResourceUpdateProperties'
-  - '@azure/arm-qumulo.FileSystems'
-  - '@azure/arm-qumulo.FileSystemsCreateOrUpdateHeaders'
   - '@azure/arm-qumulo.FileSystemsCreateOrUpdateOptionalParams'
-  - '@azure/arm-qumulo.FileSystemsDeleteHeaders'
   - '@azure/arm-qumulo.FileSystemsDeleteOptionalParams'
   - '@azure/arm-qumulo.FileSystemsGetOptionalParams'
-  - '@azure/arm-qumulo.FileSystemsListByResourceGroupNextOptionalParams'
   - '@azure/arm-qumulo.FileSystemsListByResourceGroupOptionalParams'
-  - '@azure/arm-qumulo.FileSystemsListBySubscriptionNextOptionalParams'
   - '@azure/arm-qumulo.FileSystemsListBySubscriptionOptionalParams'
+  - '@azure/arm-qumulo.FileSystemsOperations'
   - '@azure/arm-qumulo.FileSystemsUpdateOptionalParams'
   - '@azure/arm-qumulo.ManagedServiceIdentity'
   - '@azure/arm-qumulo.MarketplaceDetails'
   - '@azure/arm-qumulo.Operation'
   - '@azure/arm-qumulo.OperationDisplay'
-  - '@azure/arm-qumulo.OperationListResult'
-  - '@azure/arm-qumulo.Operations'
-  - '@azure/arm-qumulo.OperationsListNextOptionalParams'
   - '@azure/arm-qumulo.OperationsListOptionalParams'
+  - '@azure/arm-qumulo.OperationsOperations'
+  - '@azure/arm-qumulo.PageSettings'
+  - '@azure/arm-qumulo.PagedAsyncIterableIterator'
   - '@azure/arm-qumulo.QumuloStorageOptionalParams'
   - '@azure/arm-qumulo.Resource'
+  - '@azure/arm-qumulo.RestorePollerOptions'
+  - '@azure/arm-qumulo.SimplePollerLike'
   - '@azure/arm-qumulo.SystemData'
   - '@azure/arm-qumulo.TrackedResource'
   - '@azure/arm-qumulo.UserAssignedIdentity'
   - '@azure/arm-qumulo.UserDetails'
-typeAliases:
-  - '@azure/arm-qumulo.ActionType'
-  - '@azure/arm-qumulo.CreatedByType'
-  - '@azure/arm-qumulo.FileSystemsCreateOrUpdateResponse'
-  - '@azure/arm-qumulo.FileSystemsDeleteResponse'
-  - '@azure/arm-qumulo.FileSystemsGetResponse'
-  - '@azure/arm-qumulo.FileSystemsListByResourceGroupNextResponse'
-  - '@azure/arm-qumulo.FileSystemsListByResourceGroupResponse'
-  - '@azure/arm-qumulo.FileSystemsListBySubscriptionNextResponse'
-  - '@azure/arm-qumulo.FileSystemsListBySubscriptionResponse'
-  - '@azure/arm-qumulo.FileSystemsUpdateResponse'
-  - '@azure/arm-qumulo.ManagedServiceIdentityType'
-  - '@azure/arm-qumulo.MarketplaceSubscriptionStatus'
-  - '@azure/arm-qumulo.OperationsListNextResponse'
-  - '@azure/arm-qumulo.OperationsListResponse'
-  - '@azure/arm-qumulo.Origin'
-  - '@azure/arm-qumulo.ProvisioningState'
-functions:
-  - name: getContinuationToken(unknown)
-    uid: '@azure/arm-qumulo.getContinuationToken'
+variables:
+  - name: RestError
+    uid: '@azure/arm-qumulo.RestError'
     package: '@azure/arm-qumulo'
-    summary: |-
-      Given the last `.value` produced by the `byPage` iterator,
-      returns a continuation token that can be used to begin paging from
-      that point later.
+    summary: A custom error type for failed pipeline requests.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function getContinuationToken(page: unknown): string | undefined'
-      parameters:
-        - id: page
-          type: unknown
-          description: >-
-            An object from accessing `value` on the IteratorResult from a
-            `byPage` iterator.
+      content: 'RestError: RestErrorConstructor'
       return:
-        description: >-
-          The continuation token that can be passed into byPage() during future
-          calls.
-        type: string | undefined
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
+typeAliases:
+  - '@azure/arm-qumulo.ActionType'
+  - '@azure/arm-qumulo.AzureSupportedClouds'
+  - '@azure/arm-qumulo.ContinuablePage'
+  - '@azure/arm-qumulo.CreatedByType'
+  - '@azure/arm-qumulo.ManagedServiceIdentityType'
+  - '@azure/arm-qumulo.MarketplaceSubscriptionStatus'
+  - '@azure/arm-qumulo.Origin'
+  - '@azure/arm-qumulo.ProvisioningState'
+functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-qumulo.isRestError'
+    package: '@azure/arm-qumulo'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
+  - name: >-
+      restorePoller<TResponse, TResult>(QumuloStorage, string, (args: any[]) =>
+      PollerLike<OperationState<TResult>, TResult>,
+      RestorePollerOptions<TResult, PathUncheckedResponse>)
+    uid: '@azure/arm-qumulo.restorePoller'
+    package: '@azure/arm-qumulo'
+    summary: |-
+      Creates a poller from the serialized state of another poller. This can be
+      useful when you want to create pollers on a different host or a poller
+      needs to be constructed after the original one is not in scope.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function restorePoller<TResponse, TResult>(client: QumuloStorage,
+        serializedState: string, sourceOperation: (args: any[]) =>
+        PollerLike<OperationState<TResult>, TResult>, options?:
+        RestorePollerOptions<TResult, PathUncheckedResponse>):
+        PollerLike<OperationState<TResult>, TResult>
+      parameters:
+        - id: client
+          type: <xref uid="@azure/arm-qumulo.QumuloStorage" />
+          description: ''
+        - id: serializedState
+          type: string
+          description: ''
+        - id: sourceOperation
+          type: >-
+            (args: any[]) =&gt; PollerLike&lt;OperationState&lt;TResult&gt;,
+            TResult&gt;
+          description: ''
+        - id: options
+          type: >-
+            <xref uid="@azure/arm-qumulo.RestorePollerOptions" />&lt;TResult,
+            <xref uid="@azure-rest/core-client.PathUncheckedResponse" />&gt;
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-lro.PollerLike" />&lt;<xref
+          uid="@azure/core-lro.OperationState" />&lt;TResult&gt;, TResult&gt;

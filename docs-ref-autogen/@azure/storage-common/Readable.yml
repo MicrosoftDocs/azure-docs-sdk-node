@@ -327,7 +327,7 @@ inheritedMethods:
         - id: args
           type: any[]
           description: ''
-    inheritanceDescription: <b>Inherited From</b> Stream.__@captureRejectionSymbol@175
+    inheritanceDescription: <b>Inherited From</b> Stream.__@captureRejectionSymbol@180
 methods:
   - name: 'addListener(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.Readable.addListener_1'
@@ -1949,4 +1949,65 @@ methods:
       return:
         description: '`AsyncIterator` to fully consume the stream.'
         type: AsyncIterator&lt;any, undefined, any&gt;
+  - name: '[toAsyncStreamable]()'
+    uid: '@azure/storage-common.Readable.[toAsyncStreamable]'
+    package: '@azure/storage-common'
+    summary: >-
+      When the `--experimental-stream-iter` flag is enabled, `Readable` streams
+
+      implement the `Stream.toAsyncStreamable` protocol, enabling efficient
+
+      consumption by the `stream/iter` API.
+
+
+      This provides a batched async iterator that drains the stream's internal
+
+      buffer into `Uint8Array[]` batches, amortizing the per-chunk Promise
+      overhead
+
+      of the standard `Symbol.asyncIterator` path. For byte-mode streams, chunks
+
+      are yielded directly as `Buffer` instances (which are `Uint8Array`
+      subclasses).
+
+      For object-mode or encoded streams, each chunk is normalized to
+      `Uint8Array`
+
+      before batching.
+
+
+      The returned iterator is tagged as a validated source, so `from()`
+
+      passes it through without additional normalization.
+
+
+      ```js
+
+      import { Readable } from 'node:stream';
+
+      import { text, from } from 'node:stream/iter';
+
+
+      const readable = new Readable({
+        read() { this.push('hello'); this.push(null); },
+      });
+
+
+      // Readable is automatically consumed via toAsyncStreamable
+
+      console.log(await text(from(readable))); // 'hello'
+
+      ```
+
+
+      Without the `--experimental-stream-iter` flag, calling this method throws
+
+      `ERR_STREAM_ITER_MISSING_FLAG`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function [toAsyncStreamable](): ByteReadableStream'
+      return:
+        description: ''
+        type: ByteReadableStream
 extends: Stream

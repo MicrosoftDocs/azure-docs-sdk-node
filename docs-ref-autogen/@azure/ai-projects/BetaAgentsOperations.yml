@@ -11,7 +11,9 @@ properties:
   - name: cancelOptimizationJob
     uid: '@azure/ai-projects.BetaAgentsOperations.cancelOptimizationJob'
     package: '@azure/ai-projects'
-    summary: Request cancellation. Idempotent on terminal states.
+    summary: >-
+      Request cancellation of a running or queued job. Returns an error if the
+      job is already in a terminal state.
     fullName: cancelOptimizationJob
     remarks: ''
     isDeprecated: false
@@ -37,66 +39,15 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        createOptimizationJob: (inputs: OptimizationJobInputs, options?:
+        createOptimizationJob: (job: OptimizationJob, options?:
         BetaAgentsCreateOptimizationJobOptionalParams) =>
         Promise<OptimizationJob>
       return:
         description: ''
         type: >-
-          (inputs: OptimizationJobInputs, options?:
+          (job: OptimizationJob, options?:
           BetaAgentsCreateOptimizationJobOptionalParams) =&gt;
           Promise&lt;OptimizationJob&gt;
-  - name: createSession
-    uid: '@azure/ai-projects.BetaAgentsOperations.createSession'
-    package: '@azure/ai-projects'
-    summary: >-
-      Creates a new session for an agent endpoint.
-
-      The endpoint resolves the backing agent version from `version_indicator`
-      and
-
-      enforces session ownership using the provided isolation key for
-      session-mutating operations.
-    fullName: createSession
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        createSession: (agentName: string, versionIndicator:
-        VersionIndicatorUnion, options?: BetaAgentsCreateSessionOptionalParams)
-        => Promise<AgentSessionResource>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, versionIndicator: VersionIndicatorUnion, options?:
-          BetaAgentsCreateSessionOptionalParams) =&gt;
-          Promise&lt;AgentSessionResource&gt;
-  - name: createVersionFromCode
-    uid: '@azure/ai-projects.BetaAgentsOperations.createVersionFromCode'
-    package: '@azure/ai-projects'
-    summary: >-
-      Creates a new agent version from code content and makes it available for
-      hosting.
-
-      Returns the created version, which may be in `provisioning` state —
-      clients should poll `getVersion` until the status is `active` before
-      creating sessions or downloading code.
-    fullName: createVersionFromCode
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        createVersionFromCode: (agentName: string, codeZipSha256: string,
-        content: CreateAgentVersionFromCodeContent, options?:
-        BetaAgentsCreateAgentVersionFromCodeOptionalParams) =>
-        Promise<AgentVersion>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, codeZipSha256: string, content:
-          CreateAgentVersionFromCodeContent, options?:
-          BetaAgentsCreateAgentVersionFromCodeOptionalParams) =&gt;
-          Promise&lt;AgentVersion&gt;
   - name: deleteOptimizationJob
     uid: '@azure/ai-projects.BetaAgentsOperations.deleteOptimizationJob'
     package: '@azure/ai-projects'
@@ -114,169 +65,10 @@ properties:
           (jobId: string, options?:
           BetaAgentsDeleteOptimizationJobOptionalParams) =&gt;
           Promise&lt;void&gt;
-  - name: deleteSession
-    uid: '@azure/ai-projects.BetaAgentsOperations.deleteSession'
-    package: '@azure/ai-projects'
-    summary: |-
-      Deletes a session synchronously.
-      Returns 204 No Content when the session is deleted or does not exist.
-    fullName: deleteSession
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        deleteSession: (agentName: string, sessionId: string, options?:
-        BetaAgentsDeleteSessionOptionalParams) => Promise<void>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, sessionId: string, options?:
-          BetaAgentsDeleteSessionOptionalParams) =&gt; Promise&lt;void&gt;
-  - name: deleteSessionFile
-    uid: '@azure/ai-projects.BetaAgentsOperations.deleteSessionFile'
-    package: '@azure/ai-projects'
-    summary: >-
-      Delete a file or directory from the session sandbox.
-
-      If `recursive` is false (default) and the target is a non-empty directory,
-      the API returns 409 Conflict.
-    fullName: deleteSessionFile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        deleteSessionFile: (agentName: string, agentSessionId: string, path:
-        string, options?: BetaAgentsDeleteSessionFileOptionalParams) =>
-        Promise<void>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, agentSessionId: string, path: string, options?:
-          BetaAgentsDeleteSessionFileOptionalParams) =&gt; Promise&lt;void&gt;
-  - name: downloadAgentCode
-    uid: '@azure/ai-projects.BetaAgentsOperations.downloadAgentCode'
-    package: '@azure/ai-projects'
-    summary: |-
-      Download the code zip for a code-based hosted agent.
-      Returns the previously-uploaded zip (`application/zip`).
-
-      If `agent_version` is supplied, returns that version's code zip; otherwise
-      returns the latest version's code zip.
-
-      The SHA-256 digest of the returned bytes matches the `content_hash` on the
-      resolved version's `code_configuration`.
-    fullName: downloadAgentCode
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        downloadAgentCode: (agentName: string, options?:
-        BetaAgentsDownloadAgentCodeOptionalParams) =>
-        Promise<BetaAgentsDownloadAgentCodeResponse>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, options?:
-          BetaAgentsDownloadAgentCodeOptionalParams) =&gt;
-          Promise&lt;BetaAgentsDownloadAgentCodeResponse&gt;
-  - name: downloadSessionFile
-    uid: '@azure/ai-projects.BetaAgentsOperations.downloadSessionFile'
-    package: '@azure/ai-projects'
-    summary: Download a file from the session sandbox as a binary stream.
-    fullName: downloadSessionFile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        downloadSessionFile: (agentName: string, agentSessionId: string, path:
-        string, options?: BetaAgentsDownloadSessionFileOptionalParams) =>
-        Promise<BetaAgentsDownloadSessionFileResponse>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, agentSessionId: string, path: string, options?:
-          BetaAgentsDownloadSessionFileOptionalParams) =&gt;
-          Promise&lt;BetaAgentsDownloadSessionFileResponse&gt;
-  - name: getCandidateFile
-    uid: '@azure/ai-projects.BetaAgentsOperations.getCandidateFile'
-    package: '@azure/ai-projects'
-    summary: Stream a specific file from the candidate's blob directory.
-    fullName: getCandidateFile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        getCandidateFile: (jobId: string, candidateId: string, path: string,
-        options?: BetaAgentsGetCandidateFileOptionalParams) =>
-        Promise<BetaAgentsGetCandidateFileResponse>
-      return:
-        description: ''
-        type: >-
-          (jobId: string, candidateId: string, path: string, options?:
-          BetaAgentsGetCandidateFileOptionalParams) =&gt;
-          Promise&lt;BetaAgentsGetCandidateFileResponse&gt;
-  - name: getOptimizationCandidate
-    uid: '@azure/ai-projects.BetaAgentsOperations.getOptimizationCandidate'
-    package: '@azure/ai-projects'
-    summary: Get a single candidate's metadata, manifest, and promotion info.
-    fullName: getOptimizationCandidate
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        getOptimizationCandidate: (jobId: string, candidateId: string, options?:
-        BetaAgentsGetOptimizationCandidateOptionalParams) =>
-        Promise<CandidateMetadata>
-      return:
-        description: ''
-        type: >-
-          (jobId: string, candidateId: string, options?:
-          BetaAgentsGetOptimizationCandidateOptionalParams) =&gt;
-          Promise&lt;CandidateMetadata&gt;
-  - name: getOptimizationCandidateConfig
-    uid: '@azure/ai-projects.BetaAgentsOperations.getOptimizationCandidateConfig'
-    package: '@azure/ai-projects'
-    summary: >-
-      Get the candidate's deploy config JSON. Used to compose
-      `agents.create_version(...)` from a candidate.
-    fullName: getOptimizationCandidateConfig
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        getOptimizationCandidateConfig: (jobId: string, candidateId: string,
-        options?: BetaAgentsGetOptimizationCandidateConfigOptionalParams) =>
-        Promise<CandidateDeployConfig>
-      return:
-        description: ''
-        type: >-
-          (jobId: string, candidateId: string, options?:
-          BetaAgentsGetOptimizationCandidateConfigOptionalParams) =&gt;
-          Promise&lt;CandidateDeployConfig&gt;
-  - name: getOptimizationCandidateResults
-    uid: '@azure/ai-projects.BetaAgentsOperations.getOptimizationCandidateResults'
-    package: '@azure/ai-projects'
-    summary: Get full per-task evaluation results for a candidate.
-    fullName: getOptimizationCandidateResults
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        getOptimizationCandidateResults: (jobId: string, candidateId: string,
-        options?: BetaAgentsGetOptimizationCandidateResultsOptionalParams) =>
-        Promise<CandidateResults>
-      return:
-        description: ''
-        type: >-
-          (jobId: string, candidateId: string, options?:
-          BetaAgentsGetOptimizationCandidateResultsOptionalParams) =&gt;
-          Promise&lt;CandidateResults&gt;
   - name: getOptimizationJob
     uid: '@azure/ai-projects.BetaAgentsOperations.getOptimizationJob'
     package: '@azure/ai-projects'
-    summary: >-
-      Get an optimization job by id. Returns 202 while in progress, 200 when
-      terminal.
+    summary: Get an optimization job by id.
     fullName: getOptimizationJob
     remarks: ''
     isDeprecated: false
@@ -289,113 +81,6 @@ properties:
         type: >-
           (jobId: string, options?: BetaAgentsGetOptimizationJobOptionalParams)
           =&gt; Promise&lt;OptimizationJob&gt;
-  - name: getSession
-    uid: '@azure/ai-projects.BetaAgentsOperations.getSession'
-    package: '@azure/ai-projects'
-    summary: Retrieves a session by ID.
-    fullName: getSession
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        getSession: (agentName: string, sessionId: string, options?:
-        BetaAgentsGetSessionOptionalParams) => Promise<AgentSessionResource>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, sessionId: string, options?:
-          BetaAgentsGetSessionOptionalParams) =&gt;
-          Promise&lt;AgentSessionResource&gt;
-  - name: getSessionLogStream
-    uid: '@azure/ai-projects.BetaAgentsOperations.getSessionLogStream'
-    package: '@azure/ai-projects'
-    summary: >-
-      Streams console logs (stdout / stderr) for a specific hosted agent session
-
-      as a Server-Sent Events (SSE) stream.
-
-
-      Each SSE frame contains:
-
-      - `event`: always `"log"`
-
-      - `data`: a plain-text log line (currently JSON-formatted, but the schema
-
-      is not contractual and may include additional keys or change format
-
-      over time — clients should treat it as an opaque string)
-
-
-      Example SSE frames:
-
-      ```
-
-      event: log
-
-      data:
-      {"timestamp":"2026-03-10T09:33:17.121Z","stream":"stdout","message":"Starting
-      FoundryCBAgent server on port 8088"}
-
-
-      event: log
-
-      data:
-      {"timestamp":"2026-03-10T09:33:17.130Z","stream":"stderr","message":"INFO:
-      Application startup complete."}
-
-
-      event: log
-
-      data:
-      {"timestamp":"2026-03-10T09:34:52.714Z","stream":"status","message":"Successfully
-      connected to container"}
-
-
-      event: log
-
-      data:
-      {"timestamp":"2026-03-10T09:35:52.714Z","stream":"status","message":"No
-      logs since last 60 seconds"}
-
-      ```
-
-
-      The stream remains open until the client disconnects or the server
-
-      terminates the connection. Clients should handle reconnection as needed.
-    fullName: getSessionLogStream
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        getSessionLogStream: (agentName: string, agentVersion: string,
-        sessionId: string, options?:
-        BetaAgentsGetSessionLogStreamOptionalParams) =>
-        Promise<BetaAgentsDownloadSessionFileResponse>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, agentVersion: string, sessionId: string, options?:
-          BetaAgentsGetSessionLogStreamOptionalParams) =&gt;
-          Promise&lt;BetaAgentsDownloadSessionFileResponse&gt;
-  - name: listOptimizationCandidates
-    uid: '@azure/ai-projects.BetaAgentsOperations.listOptimizationCandidates'
-    package: '@azure/ai-projects'
-    summary: List candidates produced by a job.
-    fullName: listOptimizationCandidates
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        listOptimizationCandidates: (jobId: string, options?:
-        BetaAgentsListOptimizationCandidatesOptionalParams) =>
-        Promise<AgentsPagedResultOptimizationCandidate>
-      return:
-        description: ''
-        type: >-
-          (jobId: string, options?:
-          BetaAgentsListOptimizationCandidatesOptionalParams) =&gt;
-          Promise&lt;AgentsPagedResultOptimizationCandidate&gt;
   - name: listOptimizationJobs
     uid: '@azure/ai-projects.BetaAgentsOperations.listOptimizationJobs'
     package: '@azure/ai-projects'
@@ -409,135 +94,11 @@ properties:
       content: >-
         listOptimizationJobs: (options?:
         BetaAgentsListOptimizationJobsOptionalParams) =>
-        PagedAsyncIterableIterator<OptimizationJob, OptimizationJob[],
-        PageSettings>
+        PagedAsyncIterableIterator<OptimizationJobListItem,
+        OptimizationJobListItem[], PageSettings>
       return:
         description: ''
         type: >-
           (options?: BetaAgentsListOptimizationJobsOptionalParams) =&gt;
-          PagedAsyncIterableIterator&lt;OptimizationJob, OptimizationJob[],
-          PageSettings&gt;
-  - name: listSessionFiles
-    uid: '@azure/ai-projects.BetaAgentsOperations.listSessionFiles'
-    package: '@azure/ai-projects'
-    summary: >-
-      List files and directories at a given path in the session sandbox.
-
-      Returns only the immediate children of the specified directory
-      (non-recursive).
-
-      If path is not provided, lists the session home directory.
-    fullName: listSessionFiles
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        listSessionFiles: (agentName: string, agentSessionId: string, options?:
-        BetaAgentsListSessionFilesOptionalParams) =>
-        PagedAsyncIterableIterator<SessionDirectoryEntry,
-        SessionDirectoryEntry[], PageSettings>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, agentSessionId: string, options?:
-          BetaAgentsListSessionFilesOptionalParams) =&gt;
-          PagedAsyncIterableIterator&lt;SessionDirectoryEntry,
-          SessionDirectoryEntry[], PageSettings&gt;
-  - name: listSessions
-    uid: '@azure/ai-projects.BetaAgentsOperations.listSessions'
-    package: '@azure/ai-projects'
-    summary: Returns a list of sessions for the specified agent.
-    fullName: listSessions
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        listSessions: (agentName: string, options?:
-        BetaAgentsListSessionsOptionalParams) =>
-        PagedAsyncIterableIterator<AgentSessionResource, AgentSessionResource[],
-        PageSettings>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, options?: BetaAgentsListSessionsOptionalParams)
-          =&gt; PagedAsyncIterableIterator&lt;AgentSessionResource,
-          AgentSessionResource[], PageSettings&gt;
-  - name: promoteCandidate
-    uid: '@azure/ai-projects.BetaAgentsOperations.promoteCandidate'
-    package: '@azure/ai-projects'
-    summary: >-
-      Promotes a candidate, recording the deployment timestamp and target agent
-      version.
-    fullName: promoteCandidate
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        promoteCandidate: (jobId: string, candidateId: string, candidateRequest:
-        PromoteCandidateRequest, options?:
-        BetaAgentsPromoteCandidateOptionalParams) =>
-        Promise<PromoteCandidateResponse>
-      return:
-        description: ''
-        type: >-
-          (jobId: string, candidateId: string, candidateRequest:
-          PromoteCandidateRequest, options?:
-          BetaAgentsPromoteCandidateOptionalParams) =&gt;
-          Promise&lt;PromoteCandidateResponse&gt;
-  - name: stopSession
-    uid: '@azure/ai-projects.BetaAgentsOperations.stopSession'
-    package: '@azure/ai-projects'
-    summary: |-
-      Stops a session.
-      Returns 204 No Content when the stop succeeds.
-    fullName: stopSession
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        stopSession: (agentName: string, sessionId: string, options?:
-        BetaAgentsStopSessionOptionalParams) => Promise<void>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, sessionId: string, options?:
-          BetaAgentsStopSessionOptionalParams) =&gt; Promise&lt;void&gt;
-  - name: updateAgent
-    uid: '@azure/ai-projects.BetaAgentsOperations.updateAgent'
-    package: '@azure/ai-projects'
-    summary: Updates an agent endpoint.
-    fullName: updateAgent
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        updateAgent: (agentName: string, options?:
-        BetaAgentsPatchAgentObjectOptionalParams) => Promise<Agent>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, options?:
-          BetaAgentsPatchAgentObjectOptionalParams) =&gt; Promise&lt;Agent&gt;
-  - name: uploadSessionFile
-    uid: '@azure/ai-projects.BetaAgentsOperations.uploadSessionFile'
-    package: '@azure/ai-projects'
-    summary: >-
-      Upload a file to the session sandbox via binary stream.
-
-      Maximum file size is 50 MB. Uploads exceeding this limit return 413
-      Payload Too Large.
-    fullName: uploadSessionFile
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        uploadSessionFile: (agentName: string, agentSessionId: string, path:
-        string, content: Uint8Array, options?:
-        BetaAgentsUploadSessionFileOptionalParams) =>
-        Promise<SessionFileWriteResponse>
-      return:
-        description: ''
-        type: >-
-          (agentName: string, agentSessionId: string, path: string, content:
-          Uint8Array, options?: BetaAgentsUploadSessionFileOptionalParams) =&gt;
-          Promise&lt;SessionFileWriteResponse&gt;
+          PagedAsyncIterableIterator&lt;OptimizationJobListItem,
+          OptimizationJobListItem[], PageSettings&gt;

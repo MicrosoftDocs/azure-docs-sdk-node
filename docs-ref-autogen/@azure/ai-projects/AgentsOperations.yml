@@ -8,6 +8,62 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: createSession
+    uid: '@azure/ai-projects.AgentsOperations.createSession'
+    package: '@azure/ai-projects'
+    summary: >-
+      Creates a new session for an agent endpoint.
+
+      The endpoint resolves the backing agent version from `version_indicator`
+      and
+
+      enforces session ownership using the provided isolation key for
+      session-mutating operations.
+    fullName: createSession
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        createSession: (agentName: string, versionIndicator:
+        VersionIndicatorUnion, options?: AgentsCreateSessionOptionalParams) =>
+        Promise<AgentSessionResource>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, versionIndicator: VersionIndicatorUnion, options?:
+          AgentsCreateSessionOptionalParams) =&gt;
+          Promise&lt;AgentSessionResource&gt;
+  - name: createVersionFromCode
+    uid: '@azure/ai-projects.AgentsOperations.createVersionFromCode'
+    package: '@azure/ai-projects'
+    summary: >-
+      Creates a new agent version from code. Uploads the code zip and creates a
+      new version
+
+      for an existing agent. The SHA-256 hex digest of the zip is provided in
+      the
+
+      `x-ms-code-zip-sha256` header for integrity and dedup.
+
+      The request body is multipart/form-data with a JSON metadata part and a
+      binary code part (part order is irrelevant).
+
+      Maximum upload size is 250 MB.
+    fullName: createVersionFromCode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        createVersionFromCode: (agentName: string, codeZipSha256: string,
+        content: CreateAgentVersionFromCodeContent, options?:
+        AgentsCreateVersionFromCodeOptionalParams) => Promise<AgentVersion>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, codeZipSha256: string, content:
+          CreateAgentVersionFromCodeContent, options?:
+          AgentsCreateVersionFromCodeOptionalParams) =&gt;
+          Promise&lt;AgentVersion&gt;
   - name: delete
     uid: '@azure/ai-projects.AgentsOperations.delete'
     package: '@azure/ai-projects'
@@ -32,6 +88,44 @@ properties:
         type: >-
           (agentName: string, options?: AgentsDeleteOptionalParams) =&gt;
           Promise&lt;DeleteAgentResponse&gt;
+  - name: deleteSession
+    uid: '@azure/ai-projects.AgentsOperations.deleteSession'
+    package: '@azure/ai-projects'
+    summary: |-
+      Deletes a session synchronously.
+      Returns 204 No Content when the session is deleted or does not exist.
+    fullName: deleteSession
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        deleteSession: (agentName: string, sessionId: string, options?:
+        AgentsDeleteSessionOptionalParams) => Promise<void>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, sessionId: string, options?:
+          AgentsDeleteSessionOptionalParams) =&gt; Promise&lt;void&gt;
+  - name: deleteSessionFile
+    uid: '@azure/ai-projects.AgentsOperations.deleteSessionFile'
+    package: '@azure/ai-projects'
+    summary: >-
+      Deletes the specified file or directory from the session sandbox.
+
+      When `recursive` is false, deleting a non-empty directory returns 409
+      Conflict.
+    fullName: deleteSessionFile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        deleteSessionFile: (agentName: string, sessionId: string, path: string,
+        options?: AgentsDeleteSessionFileOptionalParams) => Promise<void>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, sessionId: string, path: string, options?:
+          AgentsDeleteSessionFileOptionalParams) =&gt; Promise&lt;void&gt;
   - name: deleteVersion
     uid: '@azure/ai-projects.AgentsOperations.deleteVersion'
     package: '@azure/ai-projects'
@@ -58,6 +152,96 @@ properties:
           (agentName: string, agentVersion: string, options?:
           AgentsDeleteVersionOptionalParams) =&gt;
           Promise&lt;DeleteAgentVersionResponse&gt;
+  - name: disable
+    uid: '@azure/ai-projects.AgentsOperations.disable'
+    package: '@azure/ai-projects'
+    summary: >-
+      Disables the specified agent, preventing it from accepting new sessions or
+      processing requests.
+
+      Existing active sessions are allowed to drain gracefully but no new
+      sessions can be created.
+
+      This operation is idempotent — disabling an already-disabled agent returns
+      success with no side effects.
+    fullName: disable
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        disable: (agentName: string, options?: AgentsDisableOptionalParams) =>
+        Promise<void>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, options?: AgentsDisableOptionalParams) =&gt;
+          Promise&lt;void&gt;
+  - name: downloadAgentCode
+    uid: '@azure/ai-projects.AgentsOperations.downloadAgentCode'
+    package: '@azure/ai-projects'
+    summary: |-
+      Downloads the code zip for a code-based hosted agent.
+      Returns the previously-uploaded zip (`application/zip`).
+
+      If `agent_version` is supplied, returns that version's code zip; otherwise
+      returns the latest version's code zip.
+
+      The SHA-256 digest of the returned bytes matches the `content_hash` on the
+      resolved version's `code_configuration`.
+    fullName: downloadAgentCode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        downloadAgentCode: (agentName: string, options?:
+        AgentsDownloadAgentCodeOptionalParams) =>
+        Promise<AgentsDownloadAgentCodeResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, options?: AgentsDownloadAgentCodeOptionalParams)
+          =&gt; Promise&lt;AgentsDownloadAgentCodeResponse&gt;
+  - name: downloadSessionFile
+    uid: '@azure/ai-projects.AgentsOperations.downloadSessionFile'
+    package: '@azure/ai-projects'
+    summary: |-
+      Downloads the file at the specified sandbox path as a binary stream.
+      The path is resolved relative to the session home directory.
+    fullName: downloadSessionFile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        downloadSessionFile: (agentName: string, sessionId: string, path:
+        string, options?: AgentsDownloadSessionFileOptionalParams) =>
+        Promise<AgentsDownloadSessionFileResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, sessionId: string, path: string, options?:
+          AgentsDownloadSessionFileOptionalParams) =&gt;
+          Promise&lt;AgentsDownloadSessionFileResponse&gt;
+  - name: enable
+    uid: '@azure/ai-projects.AgentsOperations.enable'
+    package: '@azure/ai-projects'
+    summary: >-
+      Enables the specified agent, allowing it to accept new sessions and
+      process requests.
+
+      This operation is idempotent — enabling an already-enabled agent returns
+      success with no side effects.
+    fullName: enable
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        enable: (agentName: string, options?: AgentsEnableOptionalParams) =>
+        Promise<void>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, options?: AgentsEnableOptionalParams) =&gt;
+          Promise&lt;void&gt;
   - name: get
     uid: '@azure/ai-projects.AgentsOperations.get'
     package: '@azure/ai-projects'
@@ -74,6 +258,96 @@ properties:
         type: >-
           (agentName: string, options?: AgentsGetOptionalParams) =&gt;
           Promise&lt;Agent&gt;
+  - name: getSession
+    uid: '@azure/ai-projects.AgentsOperations.getSession'
+    package: '@azure/ai-projects'
+    summary: >-
+      Retrieves the details of a hosted agent session by agent name and session
+      identifier.
+    fullName: getSession
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getSession: (agentName: string, sessionId: string, options?:
+        AgentsGetSessionOptionalParams) => Promise<AgentSessionResource>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, sessionId: string, options?:
+          AgentsGetSessionOptionalParams) =&gt;
+          Promise&lt;AgentSessionResource&gt;
+  - name: getSessionLogStream
+    uid: '@azure/ai-projects.AgentsOperations.getSessionLogStream'
+    package: '@azure/ai-projects'
+    summary: >-
+      Streams console logs (stdout / stderr) for a specific hosted agent session
+
+      as a Server-Sent Events (SSE) stream.
+
+
+      Each SSE frame contains:
+
+      - `event`: always `"log"`
+
+      - `data`: a plain-text log line (currently JSON-formatted, but the schema
+
+      is not contractual and may include additional keys or change format
+
+      over time — clients should treat it as an opaque string)
+
+
+      Example SSE frames:
+
+      ```
+
+      event: log
+
+      data:
+      {"timestamp":"2026-03-10T09:33:17.121Z","stream":"stdout","message":"Starting
+      FoundryCBAgent server on port 8088"}
+
+
+      event: log
+
+      data:
+      {"timestamp":"2026-03-10T09:33:17.130Z","stream":"stderr","message":"INFO:
+      Application startup complete."}
+
+
+      event: log
+
+      data:
+      {"timestamp":"2026-03-10T09:34:52.714Z","stream":"status","message":"Successfully
+      connected to container"}
+
+
+      event: log
+
+      data:
+      {"timestamp":"2026-03-10T09:35:52.714Z","stream":"status","message":"No
+      logs since last 60 seconds"}
+
+      ```
+
+
+      The stream remains open until the client disconnects or the server
+
+      terminates the connection. Clients should handle reconnection as needed.
+    fullName: getSessionLogStream
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getSessionLogStream: (agentName: string, agentVersion: string,
+        sessionId: string, options?: AgentsGetSessionLogStreamOptionalParams) =>
+        Promise<AgentsDownloadSessionFileResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, agentVersion: string, sessionId: string, options?:
+          AgentsGetSessionLogStreamOptionalParams) =&gt;
+          Promise&lt;AgentsDownloadSessionFileResponse&gt;
   - name: getVersion
     uid: '@azure/ai-projects.AgentsOperations.getVersion'
     package: '@azure/ai-projects'
@@ -106,6 +380,52 @@ properties:
         type: >-
           (options?: AgentsListOptionalParams) =&gt;
           PagedAsyncIterableIterator&lt;Agent, Agent[], PageSettings&gt;
+  - name: listSessionFiles
+    uid: '@azure/ai-projects.AgentsOperations.listSessionFiles'
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns files and directories at the specified path in the session
+      sandbox.
+
+      The response includes only the immediate children of the target directory
+      and defaults to the session home directory when no path is supplied.
+    fullName: listSessionFiles
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listSessionFiles: (agentName: string, sessionId: string, options?:
+        AgentsListSessionFilesOptionalParams) =>
+        PagedAsyncIterableIterator<SessionDirectoryEntry,
+        SessionDirectoryEntry[], PageSettings>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, sessionId: string, options?:
+          AgentsListSessionFilesOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;SessionDirectoryEntry,
+          SessionDirectoryEntry[], PageSettings&gt;
+  - name: listSessions
+    uid: '@azure/ai-projects.AgentsOperations.listSessions'
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns a paged collection of sessions associated with the specified agent
+      endpoint.
+    fullName: listSessions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listSessions: (agentName: string, options?:
+        AgentsListSessionsOptionalParams) =>
+        PagedAsyncIterableIterator<AgentSessionResource, AgentSessionResource[],
+        PageSettings>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, options?: AgentsListSessionsOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;AgentSessionResource,
+          AgentSessionResource[], PageSettings&gt;
   - name: listVersions
     uid: '@azure/ai-projects.AgentsOperations.listVersions'
     package: '@azure/ai-projects'
@@ -124,6 +444,64 @@ properties:
           (agentName: string, options?: AgentsListVersionsOptionalParams) =&gt;
           PagedAsyncIterableIterator&lt;AgentVersion, AgentVersion[],
           PageSettings&gt;
+  - name: stopSession
+    uid: '@azure/ai-projects.AgentsOperations.stopSession'
+    package: '@azure/ai-projects'
+    summary: >-
+      Terminates the specified hosted agent session and returns 204 No Content
+      when the request succeeds.
+    fullName: stopSession
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        stopSession: (agentName: string, sessionId: string, options?:
+        AgentsStopSessionOptionalParams) => Promise<void>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, sessionId: string, options?:
+          AgentsStopSessionOptionalParams) =&gt; Promise&lt;void&gt;
+  - name: updateAgent
+    uid: '@azure/ai-projects.AgentsOperations.updateAgent'
+    package: '@azure/ai-projects'
+    summary: >-
+      Applies a merge-patch update to the specified agent endpoint
+      configuration.
+    fullName: updateAgent
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        updateAgent: (agentName: string, options?:
+        AgentsUpdateAgentObjectOptionalParams) => Promise<Agent>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, options?: AgentsUpdateAgentObjectOptionalParams)
+          =&gt; Promise&lt;Agent&gt;
+  - name: uploadSessionFile
+    uid: '@azure/ai-projects.AgentsOperations.uploadSessionFile'
+    package: '@azure/ai-projects'
+    summary: >-
+      Uploads binary file content to the specified path in the session sandbox.
+
+      The service stores the file relative to the session home directory and
+      rejects payloads larger than 50 MB.
+    fullName: uploadSessionFile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        uploadSessionFile: (agentName: string, sessionId: string, path: string,
+        content: Uint8Array, options?: AgentsUploadSessionFileOptionalParams) =>
+        Promise<SessionFileWriteResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, sessionId: string, path: string, content:
+          Uint8Array, options?: AgentsUploadSessionFileOptionalParams) =&gt;
+          Promise&lt;SessionFileWriteResponse&gt;
 methods:
   - name: create(string, AgentDefinitionUnion, AgentsCreateOptionalParams)
     uid: '@azure/ai-projects.AgentsOperations.create'

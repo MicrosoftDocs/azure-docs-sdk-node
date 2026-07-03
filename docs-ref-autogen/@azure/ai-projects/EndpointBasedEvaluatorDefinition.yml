@@ -1,0 +1,97 @@
+### YamlMime:TSType
+name: EndpointBasedEvaluatorDefinition
+uid: '@azure/ai-projects.EndpointBasedEvaluatorDefinition'
+package: '@azure/ai-projects'
+summary: >-
+  Endpoint-based evaluator definition. The customer owns and hosts an HTTP
+  endpoint that implements the evaluation contract. The evaluator references a
+  Project Connection by name; the connection stores the endpoint URL and
+  credentials (API Key or Entra ID). At execution time, the service resolves the
+  connection to obtain the endpoint URL and authentication details, then calls
+  the endpoint for each evaluation row.
+fullName: EndpointBasedEvaluatorDefinition
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: connection_name
+    uid: '@azure/ai-projects.EndpointBasedEvaluatorDefinition.connection_name'
+    package: '@azure/ai-projects'
+    summary: >-
+      Name of the Project Connection that stores the endpoint URL and
+      credentials. The connection must exist on the project and have a non-empty
+      target URL. Supported auth types: ApiKey (sends `api-key` header) and
+      AAD/Entra ID (acquires a bearer token via the project's Managed Identity).
+    fullName: connection_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'connection_name: string'
+      return:
+        description: ''
+        type: string
+  - name: type
+    uid: '@azure/ai-projects.EndpointBasedEvaluatorDefinition.type'
+    package: '@azure/ai-projects'
+    summary: 'The discriminator possible values: code, prompt, rubric, endpoint'
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "endpoint"'
+      return:
+        description: ''
+        type: '"endpoint"'
+inheritedProperties:
+  - name: data_schema
+    uid: '@azure/ai-projects.EndpointBasedEvaluatorDefinition.data_schema'
+    package: '@azure/ai-projects'
+    summary: >-
+      The JSON schema (Draft 2020-12) for the evaluator's input data. This
+      includes parameters like type, properties, required.
+    fullName: data_schema
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'data_schema?: Record<string, unknown>'
+      return:
+        description: ''
+        type: Record&lt;string, unknown&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [EvaluatorDefinition.data_schema](xref:@azure/ai-projects.EvaluatorDefinition.data_schema)
+  - name: init_parameters
+    uid: '@azure/ai-projects.EndpointBasedEvaluatorDefinition.init_parameters'
+    package: '@azure/ai-projects'
+    summary: >-
+      The JSON schema (Draft 2020-12) for the evaluator's input parameters. This
+      includes parameters like type, properties, required.
+    fullName: init_parameters
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'init_parameters?: Record<string, unknown>'
+      return:
+        description: ''
+        type: Record&lt;string, unknown&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [EvaluatorDefinition.init_parameters](xref:@azure/ai-projects.EvaluatorDefinition.init_parameters)
+  - name: metrics
+    uid: '@azure/ai-projects.EndpointBasedEvaluatorDefinition.metrics'
+    package: '@azure/ai-projects'
+    summary: List of output metrics produced by this evaluator
+    fullName: metrics
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'metrics?: Record<string, EvaluatorMetric>'
+      return:
+        description: ''
+        type: >-
+          Record&lt;string, <xref uid="@azure/ai-projects.EvaluatorMetric"
+          />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [EvaluatorDefinition.metrics](xref:@azure/ai-projects.EvaluatorDefinition.metrics)
+extends: <xref uid="@azure/ai-projects.EvaluatorDefinition" />

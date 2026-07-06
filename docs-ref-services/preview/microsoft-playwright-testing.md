@@ -1,7 +1,7 @@
 ---
 title: Azure Microsoft Playwright Testing SDK for JavaScript
 description: Reference for Azure Microsoft Playwright Testing SDK for JavaScript
-ms.date: 07/03/2026
+ms.date: 07/06/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: playwright-testing

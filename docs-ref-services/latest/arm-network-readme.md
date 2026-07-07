@@ -1,22 +1,24 @@
 ---
 title: Azure NetworkManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-network, network
-ms.date: 02/13/2026
+ms.date: 07/07/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: network
 ---
-# Azure NetworkManagement client library for JavaScript - version 36.0.0 
+# Azure NetworkManagement client library for JavaScript - version 37.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure NetworkManagement client.
 
-Network Client
+APIs to manage web application firewall rules.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_36.0.0/sdk/network/arm-network) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-network) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-network?view=azure-node-preview) |
-[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_37.0.0/sdk/network/arm-network)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-network)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-network)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_37.0.0/sdk/network/arm-network/samples)
 
 ## Getting started
 
@@ -25,7 +27,7 @@ Network Client
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_36.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_37.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -41,10 +43,10 @@ npm install @azure/arm-network
 
 ### Create and authenticate a `NetworkManagementClient`
 
-To create a client object to access the Azure NetworkManagement API, you will need the `endpoint` of your Azure NetworkManagement resource and a `credential`. The Azure NetworkManagement client can use Azure Active Directory credentials to authenticate.
+To create a client object to access the Azure NetworkManagement API, you will need the `endpoint` of your Azure NetworkManagement resource and a `credential`. The Azure NetworkManagement client can use Microsoft Entra credentials to authenticate.
 You can find the endpoint for your Azure NetworkManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_36.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Microsoft Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing Microsoft Entra token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_37.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -52,9 +54,9 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure NetworkManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new Microsoft Entra application and grant access to Azure NetworkManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 
-For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
+For more information about how to create a Microsoft Entra application check out [this guide](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
@@ -72,13 +74,14 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 import { InteractiveBrowserCredential } from "@azure/identity";
 import { NetworkManagementClient } from "@azure/arm-network";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new NetworkManagementClient(credential, subscriptionId);
 ```
+
 
 ### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
@@ -101,25 +104,22 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_36.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_37.0.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_37.0.0/sdk/network/arm-network/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_36.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_37.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-
-[azure_cli]: https://learn.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_36.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_36.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_37.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_37.0.0/sdk/identity/identity#defaultazurecredential
 

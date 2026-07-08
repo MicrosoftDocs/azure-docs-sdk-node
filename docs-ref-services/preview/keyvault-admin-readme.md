@@ -1,12 +1,12 @@
 ---
 title: Azure Key Vault Administration client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-admin, keyvault
-ms.date: 03/19/2025
+ms.date: 07/08/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: keyvault
 ---
-# Azure Key Vault Administration client library for JavaScript - version 4.7.0-beta.1 
+# Azure Key Vault Administration client library for JavaScript - version 4.7.3-beta.1 
 
 
 Azure Key Vault Managed HSM is a fully-managed, highly-available, single-tenant, standards-compliant cloud service that enables you to safeguard cryptographic keys for your cloud applications using FIPS 140-2 Level 3 validated HSMs. If you would like to know more about Azure Key Vault Managed HSM, you may want to review: [What is Azure Key Vault Managed HSM?][managedhsm]
@@ -15,7 +15,7 @@ The package `@azure/keyvault-admin` provides support for administrative Key Vaul
 
 > Note: The Administration library only works with [Azure Key Vault Managed HSM][managedhsm] - functions targeting a Key Vault will fail.
 >
-> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.0-beta.1/samples/cors/ts/README.md) for guidance.
+> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.3-beta.1/samples/cors/ts/README.md) for guidance.
 
 Key links:
 
@@ -56,7 +56,7 @@ You also need to enable `compilerOptions.allowSyntheticDefaultImports` in your t
 
 ## Authenticate the client
 
-In order to interact with the Azure Key Vault service, you will need to create an instance of either the [`KeyVaultAccessControlClient`](#create-keyvaultaccesscontrolclient) class or the [`KeyVaultBackupClient`](#create-keyvaultbackupclient) class, as well as a **vault url** (which you may see as "DNS Name" in the Azure Portal) and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][default_azure_credential], which is appropriate for most scenarios, including local development and production environments. Additionally, we recommend using a [managed identity][managed_identity] for authentication in production environments.
+In order to interact with the Azure Key Vault service, you will need to create an instance of either the [`KeyVaultAccessControlClient`](#create-keyvaultaccesscontrolclient) class or the [`KeyVaultBackupClient`](#create-keyvaultbackupclient), [KeyVaultSettingsClient](#create-a-keyvaultsettingsclient), or [KeyVaultEkmClient](#create-a-keyvaultekmclient) class, as well as a **vault url** (which you may see as "DNS Name" in the Azure Portal) and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][default_azure_credential], which is appropriate for most scenarios, including local development and production environments. Additionally, we recommend using a [managed identity][managed_identity] for authentication in production environments.
 
 You can find more information on different ways of authenticating and their corresponding credential types in the [Azure Identity documentation][azure_identity].
 
@@ -86,6 +86,19 @@ const credentials = new DefaultAzureCredential();
 const client = new KeyVaultBackupClient(vaultUrl, credentials);
 ```
 
+### Create KeyVaultEkmClient
+
+Once you've authenticated with [the authentication method that suits you best][default_azure_credential], you can create a `KeyVaultEkmClient` to manage the External Key Manager (EKM) connection, substituting in your Managed HSM URL in the constructor:
+
+```ts snippet:ReadmeSampleCreateEkmClient
+import { DefaultAzureCredential } from "@azure/identity";
+import { KeyVaultEkmClient } from "@azure/keyvault-admin";
+
+const vaultUrl = `https://<MY KEY VAULT HERE>.managedhsm.azure.net`;
+const credentials = new DefaultAzureCredential();
+const client = new KeyVaultEkmClient(vaultUrl, credentials);
+```
+
 ## Key concepts
 
 ### KeyVaultRoleDefinition
@@ -106,6 +119,18 @@ A `KeyVaultAccessControlClient` provides operations allowing for management of R
 
 A `KeyVaultBackupClient` provides operations for performing full key backups, full key restores, and selective key restores.
 
+### KeyVaultSettingsClient
+
+A `KeyVaultSettingsClient` manages Managed HSM account settings.
+
+### KeyVaultEkmClient
+
+A `KeyVaultEkmClient` manages the Managed HSM's External Key Manager (EKM) connection.
+
+### EKM Connection
+
+An EKM connection represents the connection of an Azure Managed HSM resource with an external HSM.
+
 ### Long running operations
 
 The operations done by the `KeyVaultBackupClient` may take as much time as needed by the Azure resources, requiring a client layer to keep track, serialize, and resume the operations through the lifecycle of the programs that wait for them to finish. This is done via a common abstraction through the package [@azure/core-lro][core-lro].
@@ -122,12 +147,12 @@ The methods that begin long running operations return a poller that allows you t
 
 We have samples both in JavaScript and TypeScript that show the access control and backup/restore features in this package. Please follow the corresponding readmes for detailed steps to run the samples.
 
-- [Readme for JavaScript samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin/samples/v4/javascript/README.md)
-- [Readme for TypeScript samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin/samples/v4/typescript/README.md)
+- [Readme for JavaScript samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin/samples/v4/javascript/README.md)
+- [Readme for TypeScript samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin/samples/v4/typescript/README.md)
 
 ## Troubleshooting
 
-See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
+See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
@@ -141,25 +166,25 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [Key Vault Administration Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin/samples/v4/javascript)
-- [Key Vault Administration Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin/samples/v4/typescript)
-- [Key Vault Administration Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin/test/)
+- [Key Vault Administration Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin/samples/v4/javascript)
+- [Key Vault Administration Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin/samples/v4/typescript)
+- [Key Vault Administration Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-admin_4.7.3-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 
 [compiler-options]: https://www.typescriptlang.org/docs/handbook/compiler-options.html
-[core-lro]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.0-beta.1/sdk/core/core-lro
+[core-lro]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.3-beta.1/sdk/core/core-lro
 [docs-service]: https://azure.microsoft.com/services/key-vault/
 [docs]: https://learn.microsoft.com/javascript/api/@azure/keyvault-admin
 [managedhsm]: https://learn.microsoft.com/azure/key-vault/managed-hsm/overview
 [npm]: https://www.npmjs.com/
-[package-gh]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin
+[package-gh]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin
 [package-npm]: https://www.npmjs.com/package/@azure/keyvault-admin
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.0-beta.1/sdk/keyvault/keyvault-admin/samples
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-admin_4.7.3-beta.1/sdk/keyvault/keyvault-admin/samples
 [azure_keyvault_mhsm]: https://learn.microsoft.com/azure/key-vault/managed-hsm/overview
 [azure_keyvault_mhsm_cli]: https://learn.microsoft.com/azure/key-vault/managed-hsm/quick-create-cli
 [default_azure_credential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest

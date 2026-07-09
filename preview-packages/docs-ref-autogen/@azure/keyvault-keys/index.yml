@@ -33,6 +33,7 @@ interfaces:
   - '@azure/keyvault-keys.DeletedKey'
   - '@azure/keyvault-keys.EncryptOptions'
   - '@azure/keyvault-keys.EncryptResult'
+  - '@azure/keyvault-keys.ExternalKey'
   - '@azure/keyvault-keys.GetCryptographyClientOptions'
   - '@azure/keyvault-keys.GetDeletedKeyOptions'
   - '@azure/keyvault-keys.GetKeyAttestationOptions'
@@ -65,6 +66,9 @@ interfaces:
   - '@azure/keyvault-keys.RotateKeyOptions'
   - '@azure/keyvault-keys.RsaDecryptParameters'
   - '@azure/keyvault-keys.RsaEncryptParameters'
+  - '@azure/keyvault-keys.SecureKeyOperationResult'
+  - '@azure/keyvault-keys.SecureUnwrapKeyOptions'
+  - '@azure/keyvault-keys.SecureWrapKeyOptions'
   - '@azure/keyvault-keys.SignOptions'
   - '@azure/keyvault-keys.SignResult'
   - '@azure/keyvault-keys.UnwrapKeyOptions'
@@ -76,6 +80,29 @@ interfaces:
   - '@azure/keyvault-keys.VerifyResult'
   - '@azure/keyvault-keys.WrapKeyOptions'
   - '@azure/keyvault-keys.WrapResult'
+variables:
+  - name: RestError
+    uid: '@azure/keyvault-keys.RestError'
+    package: '@azure/keyvault-keys'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
+  - name: logger
+    uid: '@azure/keyvault-keys.logger'
+    package: '@azure/keyvault-keys'
+    summary: The @azure/logger configuration for this package.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'logger: AzureLogger'
+      return:
+        description: ''
+        type: <xref uid="@azure/logger.AzureLogger" />
 typeAliases:
   - '@azure/keyvault-keys.AesCbcEncryptionAlgorithm'
   - '@azure/keyvault-keys.AesGcmEncryptionAlgorithm'
@@ -90,20 +117,24 @@ typeAliases:
   - '@azure/keyvault-keys.KeyType'
   - '@azure/keyvault-keys.KeyWrapAlgorithm'
   - '@azure/keyvault-keys.RsaEncryptionAlgorithm'
+  - '@azure/keyvault-keys.SecureKeyWrapAlgorithm'
   - '@azure/keyvault-keys.SignatureAlgorithm'
-variables:
-  - name: logger
-    uid: '@azure/keyvault-keys.logger'
+functions:
+  - name: isRestError(unknown)
+    uid: '@azure/keyvault-keys.isRestError'
     package: '@azure/keyvault-keys'
-    summary: The @azure/logger configuration for this package.
+    summary: Typeguard for RestError
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'logger: AzureLogger'
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
       return:
         description: ''
-        type: <xref uid="@azure/logger.AzureLogger" />
-functions:
+        type: e
   - name: parseKeyVaultKeyIdentifier(string)
     uid: '@azure/keyvault-keys.parseKeyVaultKeyIdentifier'
     package: '@azure/keyvault-keys'

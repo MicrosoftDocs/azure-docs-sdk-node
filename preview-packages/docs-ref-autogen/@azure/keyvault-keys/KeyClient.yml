@@ -345,6 +345,75 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+  - name: createExternalKey(string, ExternalKey, CreateKeyOptions)
+    uid: '@azure/keyvault-keys.KeyClient.createExternalKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The createExternalKey method creates a new key in Azure Key Vault that is
+      backed by a key
+
+      stored in an external key management system. If the named key already
+      exists, Azure Key Vault
+
+      creates a new version of the key. It requires the keys/create permission.
+
+
+      The key type and key size must not be specified for external keys; the
+      service derives them
+
+      from the referenced external key.
+
+
+      Example usage:
+
+      ```ts snippet:ReadmeSampleCreateExternalKey
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.managedhsm.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+      const result = await client.createExternalKey(keyName, { id:
+      "my-external-key-id" });
+
+      console.log("result: ", result);
+
+      ```
+
+      Creates a new key, stores it, then returns key parameters and properties
+      to the client.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createExternalKey(name: string, externalKey: ExternalKey,
+        options?: CreateKeyOptions): Promise<KeyVaultKey>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: externalKey
+          type: <xref uid="@azure/keyvault-keys.ExternalKey" />
+          description: A reference to the key stored in the external key management system.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.CreateKeyOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
   - name: createKey(string, string, CreateKeyOptions)
     uid: '@azure/keyvault-keys.KeyClient.createKey'
     package: '@azure/keyvault-keys'
@@ -1385,6 +1454,154 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+  - name: >-
+      secureUnwrapKey(string, SecureKeyWrapAlgorithm, Uint8Array, string,
+      SecureUnwrapKeyOptions)
+    uid: '@azure/keyvault-keys.KeyClient.secureUnwrapKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Unwraps a symmetric key that was previously wrapped via
+
+      [secureWrapKey](xref:@azure/keyvault-keys.KeyClient.secureWrapKey). The
+      unwrap operation runs inside a
+
+      Trusted Execution Environment (TEE) attested by the Microsoft Azure
+
+      Attestation Service (MAA).
+
+
+      This operation requires the `keys/unwrapKey` permission.
+
+
+      Example usage:
+
+      ```ts snippet:ReadmeSampleSecureUnwrapKey
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.managedhsm.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const wrapped = await client.secureWrapKey("myKey", "RSA-OAEP-256");
+
+      const unwrapped = await client.secureUnwrapKey(
+        "myKey",
+        wrapped.algorithm,
+        wrapped.result,
+        "<attestation-target>",
+      );
+
+      console.log(unwrapped.keyID, unwrapped.algorithm, unwrapped.result);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function secureUnwrapKey(name: string, algorithm:
+        SecureKeyWrapAlgorithm, value: Uint8Array, targetAttestationToken:
+        string, options?: SecureUnwrapKeyOptions):
+        Promise<SecureKeyOperationResult>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key encryption key.
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.SecureKeyWrapAlgorithm" />
+          description: The algorithm originally used to wrap the value.
+        - id: value
+          type: Uint8Array
+          description: The wrapped key value to unwrap.
+        - id: targetAttestationToken
+          type: string
+          description: |-
+            The attestation assertion for the target
+              of the key release.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.SecureUnwrapKeyOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-keys.SecureKeyOperationResult"
+          />&gt;
+  - name: secureWrapKey(string, SecureKeyWrapAlgorithm, SecureWrapKeyOptions)
+    uid: '@azure/keyvault-keys.KeyClient.secureWrapKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Wraps a 256-bit AES key generated inside a Trusted Execution Environment
+
+      (TEE) using a key encryption key previously stored in Azure Key Vault.
+
+
+      Unlike [wrapKey](xref:@azure/keyvault-keys.CryptographyClient.wrapKey),
+      the key being wrapped is
+
+      generated by the service inside a TEE rather than supplied by the caller,
+
+      which provides additional protection for the symmetric key material.
+
+
+      This operation requires the `keys/wrapKey` permission.
+
+
+      Example usage:
+
+      ```ts snippet:ReadmeSampleSecureWrapKey
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.managedhsm.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const wrapped = await client.secureWrapKey("myKey", "RSA-OAEP-256");
+
+      console.log(wrapped.keyID, wrapped.algorithm, wrapped.result);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function secureWrapKey(name: string, algorithm: SecureKeyWrapAlgorithm,
+        options?: SecureWrapKeyOptions): Promise<SecureKeyOperationResult>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key encryption key.
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.SecureKeyWrapAlgorithm" />
+          description: The algorithm to use to wrap the generated key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.SecureWrapKeyOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-keys.SecureKeyOperationResult"
+          />&gt;
   - name: updateKeyProperties(string, string, UpdateKeyPropertiesOptions)
     uid: '@azure/keyvault-keys.KeyClient.updateKeyProperties'
     package: '@azure/keyvault-keys'

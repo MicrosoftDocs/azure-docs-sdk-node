@@ -9,13 +9,23 @@ enums:
 classes:
   - '@azure/keyvault-admin.KeyVaultAccessControlClient'
   - '@azure/keyvault-admin.KeyVaultBackupClient'
+  - '@azure/keyvault-admin.KeyVaultEkmClient'
   - '@azure/keyvault-admin.KeyVaultSettingsClient'
 interfaces:
   - '@azure/keyvault-admin.AccessControlClientOptions'
   - '@azure/keyvault-admin.BooleanKeyVaultSetting'
+  - '@azure/keyvault-admin.CheckEkmConnectionOptions'
+  - '@azure/keyvault-admin.CreateEkmConnectionOptions'
   - '@azure/keyvault-admin.CreateRoleAssignmentOptions'
+  - '@azure/keyvault-admin.DeleteEkmConnectionOptions'
   - '@azure/keyvault-admin.DeleteRoleAssignmentOptions'
   - '@azure/keyvault-admin.DeleteRoleDefinitionOptions'
+  - '@azure/keyvault-admin.EkmClientOptions'
+  - '@azure/keyvault-admin.EkmConnection'
+  - '@azure/keyvault-admin.EkmProxyClientCertificateInfo'
+  - '@azure/keyvault-admin.EkmProxyInfo'
+  - '@azure/keyvault-admin.GetEkmCertificateOptions'
+  - '@azure/keyvault-admin.GetEkmConnectionOptions'
   - '@azure/keyvault-admin.GetRoleAssignmentOptions'
   - '@azure/keyvault-admin.GetRoleDefinitionOptions'
   - '@azure/keyvault-admin.GetSettingOptions'
@@ -46,14 +56,20 @@ interfaces:
   - '@azure/keyvault-admin.PollerLike'
   - '@azure/keyvault-admin.SetRoleDefinitionOptions'
   - '@azure/keyvault-admin.SettingsClientOptions'
+  - '@azure/keyvault-admin.UpdateEkmConnectionOptions'
   - '@azure/keyvault-admin.UpdateSettingOptions'
-typeAliases:
-  - '@azure/keyvault-admin.KeyVaultBackupOperationState'
-  - '@azure/keyvault-admin.KeyVaultDataAction'
-  - '@azure/keyvault-admin.KeyVaultRoleScope'
-  - '@azure/keyvault-admin.OperationStatus'
-  - '@azure/keyvault-admin.SUPPORTED_API_VERSIONS'
 variables:
+  - name: RestError
+    uid: '@azure/keyvault-admin.RestError'
+    package: '@azure/keyvault-admin'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
   - name: LATEST_API_VERSION
     uid: '@azure/keyvault-admin.LATEST_API_VERSION'
     package: '@azure/keyvault-admin'
@@ -61,10 +77,10 @@ variables:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'LATEST_API_VERSION: "7.6-preview.2"'
+      content: 'LATEST_API_VERSION: "2026-01-01-preview"'
       return:
         description: ''
-        type: '"<xref uid="7.6-preview.2" />"'
+        type: '"2026-01-01-preview"'
   - name: SDK_VERSION
     uid: '@azure/keyvault-admin.SDK_VERSION'
     package: '@azure/keyvault-admin'
@@ -76,6 +92,12 @@ variables:
       return:
         description: ''
         type: string
+typeAliases:
+  - '@azure/keyvault-admin.KeyVaultBackupOperationState'
+  - '@azure/keyvault-admin.KeyVaultDataAction'
+  - '@azure/keyvault-admin.KeyVaultRoleScope'
+  - '@azure/keyvault-admin.OperationStatus'
+  - '@azure/keyvault-admin.SUPPORTED_API_VERSIONS'
 functions:
   - name: isBooleanSetting(KeyVaultSetting)
     uid: '@azure/keyvault-admin.isBooleanSetting'
@@ -96,3 +118,18 @@ functions:
       return:
         description: ''
         type: setting
+  - name: isRestError(unknown)
+    uid: '@azure/keyvault-admin.isRestError'
+    package: '@azure/keyvault-admin'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e

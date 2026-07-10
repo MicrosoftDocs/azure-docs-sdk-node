@@ -1,7 +1,7 @@
 ---
 title: Azure DevHub SDK for JavaScript
 description: Reference for Azure DevHub SDK for JavaScript
-ms.date: 07/09/2026
+ms.date: 07/10/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: devhub

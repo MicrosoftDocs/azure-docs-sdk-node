@@ -8,14 +8,22 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: activeHoursConfiguration
+    uid: '@azure/arm-devcenter.Pool.activeHoursConfiguration'
+    package: '@azure/arm-devcenter'
+    summary: Active hours configuration settings for Dev Boxes created in this pool.
+    fullName: activeHoursConfiguration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'activeHoursConfiguration?: ActiveHoursConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-devcenter.ActiveHoursConfiguration" />
   - name: devBoxCount
     uid: '@azure/arm-devcenter.Pool.devBoxCount'
     package: '@azure/arm-devcenter'
-    summary: >-
-      Indicates the number of provisioned Dev Boxes in this pool.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Indicates the number of provisioned Dev Boxes in this pool.
     fullName: devBoxCount
     remarks: ''
     isDeprecated: false
@@ -24,15 +32,57 @@ properties:
       return:
         description: ''
         type: number
+  - name: devBoxDefinition
+    uid: '@azure/arm-devcenter.Pool.devBoxDefinition'
+    package: '@azure/arm-devcenter'
+    summary: >-
+      A definition of the machines that are created from this Pool. Will be
+      ignored if devBoxDefinitionType is Reference or not provided.
+    fullName: devBoxDefinition
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'devBoxDefinition?: PoolDevBoxDefinition'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-devcenter.PoolDevBoxDefinition" />
   - name: devBoxDefinitionName
     uid: '@azure/arm-devcenter.Pool.devBoxDefinitionName'
     package: '@azure/arm-devcenter'
-    summary: Name of a Dev Box definition in parent Project of this Pool
+    summary: >-
+      Name of a Dev Box definition in parent Project of this Pool. Will be
+      ignored if devBoxDefinitionType is Value.
     fullName: devBoxDefinitionName
     remarks: ''
     isDeprecated: false
     syntax:
       content: 'devBoxDefinitionName?: string'
+      return:
+        description: ''
+        type: string
+  - name: devBoxDefinitionType
+    uid: '@azure/arm-devcenter.Pool.devBoxDefinitionType'
+    package: '@azure/arm-devcenter'
+    summary: >-
+      Indicates if the pool is created from an existing Dev Box Definition or if
+      one is provided directly.
+    fullName: devBoxDefinitionType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'devBoxDefinitionType?: string'
+      return:
+        description: ''
+        type: string
+  - name: devBoxTunnelEnableStatus
+    uid: '@azure/arm-devcenter.Pool.devBoxTunnelEnableStatus'
+    package: '@azure/arm-devcenter'
+    summary: Indicates whether Dev Box Tunnel is enabled for a the pool.
+    fullName: devBoxTunnelEnableStatus
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'devBoxTunnelEnableStatus?: string'
       return:
         description: ''
         type: string
@@ -54,9 +104,6 @@ properties:
     summary: >-
       Overall health status of the Pool. Indicates whether or not the Pool is
       available to create Dev Boxes.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: healthStatus
     remarks: ''
     isDeprecated: false
@@ -72,9 +119,6 @@ properties:
       Details on the Pool health status to help diagnose issues. This is only
       populated when the pool status indicates the pool is in a non-healthy
       state
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: healthStatusDetails
     remarks: ''
     isDeprecated: false
@@ -128,7 +172,7 @@ properties:
   - name: networkConnectionName
     uid: '@azure/arm-devcenter.Pool.networkConnectionName'
     package: '@azure/arm-devcenter'
-    summary: Name of a Network Connection in parent Project of this Pool
+    summary: Name of a Network Connection in parent Project of this Pool.
     fullName: networkConnectionName
     remarks: ''
     isDeprecated: false
@@ -140,11 +184,7 @@ properties:
   - name: provisioningState
     uid: '@azure/arm-devcenter.Pool.provisioningState'
     package: '@azure/arm-devcenter'
-    summary: >-
-      The provisioning state of the resource.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The provisioning state of the resource.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -181,6 +221,20 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-devcenter.StopOnDisconnectConfiguration" />
+  - name: stopOnNoConnect
+    uid: '@azure/arm-devcenter.Pool.stopOnNoConnect'
+    package: '@azure/arm-devcenter'
+    summary: >-
+      Stop on no connect configuration settings for Dev Boxes created in this
+      pool.
+    fullName: stopOnNoConnect
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'stopOnNoConnect?: StopOnNoConnectConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-devcenter.StopOnNoConnectConfiguration" />
   - name: virtualNetworkType
     uid: '@azure/arm-devcenter.Pool.virtualNetworkType'
     package: '@azure/arm-devcenter'
@@ -202,9 +256,6 @@ inheritedProperties:
     summary: >-
       Fully qualified resource ID for the resource. Ex -
       /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -234,11 +285,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-devcenter.Pool.name'
     package: '@azure/arm-devcenter'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -256,9 +303,6 @@ inheritedProperties:
     summary: >-
       Azure Resource Manager metadata containing createdBy and modifiedBy
       information.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: systemData
     remarks: ''
     isDeprecated: false
@@ -278,10 +322,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.tags](xref:@azure/arm-devcenter.TrackedResource.tags)
@@ -291,9 +335,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

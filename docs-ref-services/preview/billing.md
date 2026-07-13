@@ -5,8 +5,8 @@ ms.date: 07/13/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: billing
-manager: timlt
 ms.product: 
+manager: timlt
 ---
 # Azure Billing modules for JavaScript
 

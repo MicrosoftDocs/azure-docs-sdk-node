@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesconfiguration-fluxconfigurations
 ---
-# Azure Kubernetesconfiguration-Fluxconfigurations SDK for JavaScript - preview
-## Packages - preview
+# Azure Kubernetesconfiguration-Fluxconfigurations SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](kubernetesconfiguration-fluxconfigurations-index.md)]

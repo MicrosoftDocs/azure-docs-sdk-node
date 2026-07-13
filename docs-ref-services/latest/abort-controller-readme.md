@@ -1,18 +1,18 @@
 ---
 title: Azure Abort Controller client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/abort-controller, core
-ms.date: 04/11/2024
+ms.date: 07/13/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Abort Controller client library for JavaScript - version 2.1.2 
+# Azure Abort Controller client library for JavaScript - version 2.2.0 
 
 
 The `@azure/abort-controller` package provides `AbortSignalLike` interface and
 `AbortError` classes to make it easier to work with the
 [AbortController](https://developer.mozilla.org/docs/Web/API/AbortController)
- and the `AbortSignal` used by
+and the `AbortSignal` used by
 [fetch](https://developer.mozilla.org/docs/Web/API/Fetch_API) built into modern JavaScript platforms.
 
 Customers of Azure SDK for JavaScript in general do not need to use this library. Instead they
@@ -20,9 +20,9 @@ use `AbortController` and `AbortSignal` provided by their platforms and pass the
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/abort-controller_2.1.2/sdk/core/abort-controller)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/abort-controller_2.2.0/sdk/core/abort-controller)
 - [Package (npm)](https://www.npmjs.com/package/@azure/abort-controller)
-- [API Reference Documentation](/javascript/api/overview/azure/abort-controller-readme)
+- [API Reference Documentation](https://learn.microsoft.com/javascript/api/overview/azure/abort-controller-readme)
 
 ## Getting started
 
@@ -48,7 +48,15 @@ of the abort signal.
 
 ### Example 1 - basic usage
 
-```js
+```ts snippet:ReadmeSampleBasicUsage
+async function doAsyncWork(options: { abortSignal: AbortSignal }): Promise<void> {
+  if (options.abortSignal.aborted) {
+    return;
+  }
+
+  // do async work
+}
+
 const controller = new AbortController();
 doAsyncWork({ abortSignal: controller.signal });
 
@@ -58,14 +66,22 @@ controller.abort();
 
 ### Example 2 - Aborting with timeout
 
-```js
+```ts snippet:ReadmeSampleBasicTimeout
+async function doAsyncWork(options: { abortSignal: AbortSignal }): Promise<void> {
+  if (options.abortSignal.aborted) {
+    return;
+  }
+
+  // do async work
+}
+
 const signal = AbortSignal.timeout(1000);
 doAsyncWork({ abortSignal: signal });
 ```
 
 ## Next steps
 
-You can build and run the tests locally by executing `rushx test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
+You can build and run the tests locally by executing `npm run test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
 
 ## Troubleshooting
 
@@ -73,7 +89,5 @@ If you run into issues while using this library, please feel free to [file an is
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/abort-controller_2.1.2/CONTRIBUTING.md) to learn more about how to build and test the code.
-
-
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/abort-controller_2.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

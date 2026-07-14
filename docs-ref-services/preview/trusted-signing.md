@@ -1,7 +1,7 @@
 ---
 title: Azure Trusted Signing SDK for JavaScript
 description: Reference for Azure Trusted Signing SDK for JavaScript
-ms.date: 07/13/2026
+ms.date: 07/14/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: trustedsigning

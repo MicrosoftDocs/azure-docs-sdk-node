@@ -2,23 +2,44 @@
 name: AbortError
 uid: '@azure/abort-controller.AbortError'
 package: '@azure/abort-controller'
-summary: |+
+summary: >+
   This error is thrown when an asynchronous operation has been aborted.
+
   Check for this error by testing the `name` that the name property of the
+
   error matches `"AbortError"`.
+
 
   **Example**
 
-  ```ts
+
+  ```ts snippet:AbortErrorSample
+
+  import { AbortError } from "@azure/abort-controller";
+
+
+  async function doAsyncWork(options: { abortSignal: AbortSignal }):
+  Promise<void> {
+    if (options.abortSignal.aborted) {
+      throw new AbortError();
+    }
+
+    // do async work
+  }
+
+
   const controller = new AbortController();
+
   controller.abort();
+
   try {
-    doAsyncWork(controller.signal)
+    doAsyncWork({ abortSignal: controller.signal });
   } catch (e) {
-    if (e.name === 'AbortError') {
+    if (e instanceof Error && e.name === "AbortError") {
       // handle abort error here.
     }
   }
+
   ```
 
 fullName: AbortError

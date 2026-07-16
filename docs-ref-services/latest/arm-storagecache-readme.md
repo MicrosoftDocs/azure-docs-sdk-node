@@ -1,22 +1,24 @@
 ---
 title: Azure StorageCacheManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-storagecache, storagecache
-ms.date: 03/19/2026
+ms.date: 07/16/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storagecache
 ---
-# Azure StorageCacheManagement client library for JavaScript - version 8.2.0 
+# Azure StorageCacheManagement client library for JavaScript - version 9.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorageCacheManagement client.
 
-Azure Managed Lustre provides a fully managed Lustre® file system, integrated with Blob storage, for use on demand. These operations create and manage Azure Managed Lustre file systems.
+A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as "Storage Targets"). These operations allow you to manage Caches.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_8.2.0/sdk/storagecache/arm-storagecache) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-storagecache) |
-[API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-storagecache?view=azure-node-preview) |
-[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_9.0.0/sdk/storagecache/arm-storagecache)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-storagecache)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-storagecache?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_9.0.0/sdk/storagecache/arm-storagecache/samples)
 
 ## Getting started
 
@@ -25,7 +27,7 @@ Azure Managed Lustre provides a fully managed Lustre® file system, integrated w
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagecache_8.2.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagecache_9.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +46,7 @@ npm install @azure/arm-storagecache
 To create a client object to access the Azure StorageCacheManagement API, you will need the `endpoint` of your Azure StorageCacheManagement resource and a `credential`. The Azure StorageCacheManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure StorageCacheManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagecache_8.2.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagecache_9.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -72,13 +74,14 @@ For browser environments, use the `InteractiveBrowserCredential` from the `@azur
 import { InteractiveBrowserCredential } from "@azure/identity";
 import { StorageCacheManagementClient } from "@azure/arm-storagecache";
 
-const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new StorageCacheManagementClient(credential, subscriptionId);
 ```
+
 
 ### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
@@ -101,25 +104,22 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_8.2.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_9.0.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_9.0.0/sdk/storagecache/arm-storagecache/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagecache_8.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-storagecache_9.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-
-[azure_cli]: https://learn.microsoft.com/cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_8.2.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_8.2.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_9.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-storagecache_9.0.0/sdk/identity/identity#defaultazurecredential
 

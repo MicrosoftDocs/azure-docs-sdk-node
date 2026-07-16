@@ -1,22 +1,24 @@
 ---
 title: Azure PowerBIDedicated client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-powerbidedicated, powerbidedicated
-ms.date: 02/03/2023
+ms.date: 07/16/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: powerbidedicated
 ---
-# Azure PowerBIDedicated client library for JavaScript - version 4.0.1 
+# Azure PowerBIDedicated client library for JavaScript - version 5.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure PowerBIDedicated client.
 
 PowerBI Dedicated Web API provides a RESTful set of web services that enables users to create, retrieve, update, and delete Power BI dedicated capacities
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_4.0.1/sdk/powerbidedicated/arm-powerbidedicated) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-powerbidedicated) |
-[API reference documentation](/javascript/api/@azure/arm-powerbidedicated) |
-[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_5.0.0/sdk/powerbidedicated/arm-powerbidedicated)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-powerbidedicated)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-powerbidedicated?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_5.0.0/sdk/powerbidedicated/arm-powerbidedicated/samples)
 
 ## Getting started
 
@@ -25,7 +27,7 @@ PowerBI Dedicated Web API provides a RESTful set of web services that enables us
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-powerbidedicated_4.0.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-powerbidedicated_5.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -44,7 +46,7 @@ npm install @azure/arm-powerbidedicated
 To create a client object to access the Azure PowerBIDedicated API, you will need the `endpoint` of your Azure PowerBIDedicated resource and a `credential`. The Azure PowerBIDedicated client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure PowerBIDedicated resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-powerbidedicated_4.0.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-powerbidedicated_5.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -53,24 +55,31 @@ npm install @azure/identity
 ```
 
 You will also need to **register a new AAD application and grant access to Azure PowerBIDedicated** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
-Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
-For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
+For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
 
-```javascript
-const { PowerBIDedicated } = require("@azure/arm-powerbidedicated");
-const { DefaultAzureCredential } = require("@azure/identity");
-// For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
+Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
+
+```ts snippet:ReadmeSampleCreateClient_Node
+import { PowerBIDedicated } from "@azure/arm-powerbidedicated";
+import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new PowerBIDedicated(new DefaultAzureCredential(), subscriptionId);
+```
 
-// For client-side applications running in the browser, use this code instead:
-// const credential = new InteractiveBrowserCredential({
-//   tenantId: "<YOUR_TENANT_ID>",
-//   clientId: "<YOUR_CLIENT_ID>"
-// });
-// const client = new PowerBIDedicated(credential, subscriptionId);
+For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
+
+```ts snippet:ReadmeSampleCreateClient_Browser
+import { InteractiveBrowserCredential } from "@azure/identity";
+import { PowerBIDedicated } from "@azure/arm-powerbidedicated";
+
+const credential = new InteractiveBrowserCredential({
+  tenantId: "<YOUR_TENANT_ID>",
+  clientId: "<YOUR_CLIENT_ID>",
+});
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const client = new PowerBIDedicated(credential, subscriptionId);
 ```
 
 
@@ -89,31 +98,28 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
-const { setLogLevel } = require("@azure/logger");
+```ts snippet:SetLogLevel
+import { setLogLevel } from "@azure/logger";
+
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_4.0.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_5.0.0/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure-Samples/azure-samples-js-management) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_5.0.0/sdk/powerbidedicated/arm-powerbidedicated/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-powerbidedicated_4.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-powerbidedicated_5.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-
-
-[azure_cli]: /cli/azure
-[azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_4.0.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_4.0.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_5.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-powerbidedicated_5.0.0/sdk/identity/identity#defaultazurecredential
 

@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: redhatopenshift
 ---
-# Azure Red Hat OpenShift SDK for JavaScript - preview
-## Packages - preview
+# Azure Red Hat OpenShift SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](red-hat-openshift-index.md)]

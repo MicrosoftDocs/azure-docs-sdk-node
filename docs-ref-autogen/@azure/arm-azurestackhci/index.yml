@@ -40,10 +40,12 @@ enums:
   - '@azure/arm-azurestackhci.KnownOemActivation'
   - '@azure/arm-azurestackhci.KnownOperationType'
   - '@azure/arm-azurestackhci.KnownOrigin'
+  - '@azure/arm-azurestackhci.KnownOverprovisioningRatio'
   - '@azure/arm-azurestackhci.KnownProvisioningState'
   - '@azure/arm-azurestackhci.KnownRdmaCapability'
   - '@azure/arm-azurestackhci.KnownRebootRequirement'
   - '@azure/arm-azurestackhci.KnownRemoteSupportAccessLevel'
+  - '@azure/arm-azurestackhci.KnownRemoteSupportProvisioningState'
   - '@azure/arm-azurestackhci.KnownRemoteSupportType'
   - '@azure/arm-azurestackhci.KnownSecretsType'
   - '@azure/arm-azurestackhci.KnownServiceName'
@@ -53,9 +55,11 @@ enums:
   - '@azure/arm-azurestackhci.KnownState'
   - '@azure/arm-azurestackhci.KnownStatus'
   - '@azure/arm-azurestackhci.KnownStatusLevelTypes'
+  - '@azure/arm-azurestackhci.KnownStorageType'
   - '@azure/arm-azurestackhci.KnownUpdateRunPropertiesState'
   - '@azure/arm-azurestackhci.KnownUpdateSummariesPropertiesState'
   - '@azure/arm-azurestackhci.KnownVersions'
+  - '@azure/arm-azurestackhci.KnownVolumeType'
   - '@azure/arm-azurestackhci.KnownWindowsServerSubscription'
 classes:
   - '@azure/arm-azurestackhci.AzureStackHCIClient'
@@ -82,7 +86,9 @@ interfaces:
   - '@azure/arm-azurestackhci.AssemblyInfo'
   - '@azure/arm-azurestackhci.AssemblyInfoPayload'
   - '@azure/arm-azurestackhci.AzureStackHCIClientOptionalParams'
+  - '@azure/arm-azurestackhci.CheckUpdatesRequest'
   - '@azure/arm-azurestackhci.Cluster'
+  - '@azure/arm-azurestackhci.ClusterBillingProperties'
   - '@azure/arm-azurestackhci.ClusterDesiredProperties'
   - '@azure/arm-azurestackhci.ClusterIdentityResponse'
   - '@azure/arm-azurestackhci.ClusterIdentityResponseProperties'
@@ -131,6 +137,7 @@ interfaces:
   - '@azure/arm-azurestackhci.EceDeploymentSecrets'
   - '@azure/arm-azurestackhci.EceReportedProperties'
   - '@azure/arm-azurestackhci.EdgeDevice'
+  - '@azure/arm-azurestackhci.EdgeDeviceDisks'
   - '@azure/arm-azurestackhci.EdgeDeviceJob'
   - '@azure/arm-azurestackhci.EdgeDeviceJobsCreateOrUpdateOptionalParams'
   - '@azure/arm-azurestackhci.EdgeDeviceJobsDeleteOptionalParams'
@@ -198,6 +205,7 @@ interfaces:
   - '@azure/arm-azurestackhci.LogCollectionSession'
   - '@azure/arm-azurestackhci.ManagedServiceIdentity'
   - '@azure/arm-azurestackhci.NetworkController'
+  - '@azure/arm-azurestackhci.NextBillingModel'
   - '@azure/arm-azurestackhci.NicDetail'
   - '@azure/arm-azurestackhci.Observability'
   - '@azure/arm-azurestackhci.Offer'
@@ -236,6 +244,10 @@ interfaces:
   - '@azure/arm-azurestackhci.ReportedProperties'
   - '@azure/arm-azurestackhci.Resource'
   - '@azure/arm-azurestackhci.RestorePollerOptions'
+  - '@azure/arm-azurestackhci.SanAdapterIPConfig'
+  - '@azure/arm-azurestackhci.SanAdapterProperties'
+  - '@azure/arm-azurestackhci.SanClusterNetworkConfig'
+  - '@azure/arm-azurestackhci.SanNetworks'
   - '@azure/arm-azurestackhci.SbeCredentials'
   - '@azure/arm-azurestackhci.SbeDeploymentInfo'
   - '@azure/arm-azurestackhci.SbeDeploymentPackageInfo'
@@ -266,6 +278,8 @@ interfaces:
   - '@azure/arm-azurestackhci.SoftwareAssuranceProperties'
   - '@azure/arm-azurestackhci.Step'
   - '@azure/arm-azurestackhci.Storage'
+  - '@azure/arm-azurestackhci.StorageS2DConfig'
+  - '@azure/arm-azurestackhci.StorageSanConfig'
   - '@azure/arm-azurestackhci.SwitchDetail'
   - '@azure/arm-azurestackhci.SwitchExtension'
   - '@azure/arm-azurestackhci.SystemData'
@@ -285,6 +299,11 @@ interfaces:
   - '@azure/arm-azurestackhci.UpdateSummariesDeleteOptionalParams'
   - '@azure/arm-azurestackhci.UpdateSummariesGetOptionalParams'
   - '@azure/arm-azurestackhci.UpdateSummariesListOptionalParams'
+  - >-
+    @azure/arm-azurestackhci.UpdateSummariesOperationGroupCheckHealthOptionalParams
+  - >-
+    @azure/arm-azurestackhci.UpdateSummariesOperationGroupCheckUpdatesOptionalParams
+  - '@azure/arm-azurestackhci.UpdateSummariesOperationGroupOperations'
   - '@azure/arm-azurestackhci.UpdateSummariesOperations'
   - '@azure/arm-azurestackhci.UpdateSummariesProperties'
   - '@azure/arm-azurestackhci.UpdateSummariesPutOptionalParams'
@@ -293,6 +312,7 @@ interfaces:
   - '@azure/arm-azurestackhci.UpdatesListOptionalParams'
   - '@azure/arm-azurestackhci.UpdatesOperations'
   - '@azure/arm-azurestackhci.UpdatesPostOptionalParams'
+  - '@azure/arm-azurestackhci.UpdatesPrepareOptionalParams'
   - '@azure/arm-azurestackhci.UpdatesPutOptionalParams'
   - '@azure/arm-azurestackhci.UploadCertificateRequest'
   - '@azure/arm-azurestackhci.UserAssignedIdentity'
@@ -311,6 +331,18 @@ interfaces:
   - >-
     @azure/arm-azurestackhci.ValidatedSolutionRecipesListBySubscriptionLocationResourceOptionalParams
   - '@azure/arm-azurestackhci.ValidatedSolutionRecipesOperations'
+variables:
+  - name: RestError
+    uid: '@azure/arm-azurestackhci.RestError'
+    package: '@azure/arm-azurestackhci'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/arm-azurestackhci.AccessLevel'
   - '@azure/arm-azurestackhci.ActionType'
@@ -352,10 +384,12 @@ typeAliases:
   - '@azure/arm-azurestackhci.OemActivation'
   - '@azure/arm-azurestackhci.OperationType'
   - '@azure/arm-azurestackhci.Origin'
+  - '@azure/arm-azurestackhci.OverprovisioningRatio'
   - '@azure/arm-azurestackhci.ProvisioningState'
   - '@azure/arm-azurestackhci.RdmaCapability'
   - '@azure/arm-azurestackhci.RebootRequirement'
   - '@azure/arm-azurestackhci.RemoteSupportAccessLevel'
+  - '@azure/arm-azurestackhci.RemoteSupportProvisioningState'
   - '@azure/arm-azurestackhci.RemoteSupportType'
   - '@azure/arm-azurestackhci.SecretsType'
   - '@azure/arm-azurestackhci.ServiceName'
@@ -365,10 +399,27 @@ typeAliases:
   - '@azure/arm-azurestackhci.State'
   - '@azure/arm-azurestackhci.Status'
   - '@azure/arm-azurestackhci.StatusLevelTypes'
+  - '@azure/arm-azurestackhci.StorageType'
   - '@azure/arm-azurestackhci.UpdateRunPropertiesState'
   - '@azure/arm-azurestackhci.UpdateSummariesPropertiesState'
+  - '@azure/arm-azurestackhci.VolumeType'
   - '@azure/arm-azurestackhci.WindowsServerSubscription'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-azurestackhci.isRestError'
+    package: '@azure/arm-azurestackhci'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: >-
       restorePoller<TResponse, TResult>(AzureStackHCIClient, string, (args:
       any[]) => PollerLike<OperationState<TResult>, TResult>,

@@ -8,6 +8,22 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: accessConnector
+    uid: '@azure/arm-databricks.Workspace.accessConnector'
+    package: '@azure/arm-databricks'
+    summary: >-
+      Access Connector Resource that is going to be associated with Databricks
+      Workspace. Not allowed in Serverless ComputeMode workspace.
+    fullName: accessConnector
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'accessConnector?: WorkspacePropertiesAccessConnector'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-databricks.WorkspacePropertiesAccessConnector"
+          />
   - name: authorizations
     uid: '@azure/arm-databricks.Workspace.authorizations'
     package: '@azure/arm-databricks'
@@ -20,6 +36,20 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-databricks.WorkspaceProviderAuthorization" />[]
+  - name: computeMode
+    uid: '@azure/arm-databricks.Workspace.computeMode'
+    package: '@azure/arm-databricks'
+    summary: >-
+      The workspace compute mode. Required on create, cannot be changed.
+      Possible values include: 'Serverless', 'Hybrid'
+    fullName: computeMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'computeMode: string'
+      return:
+        description: ''
+        type: string
   - name: createdBy
     uid: '@azure/arm-databricks.Workspace.createdBy'
     package: '@azure/arm-databricks'
@@ -37,11 +67,7 @@ properties:
   - name: createdDateTime
     uid: '@azure/arm-databricks.Workspace.createdDateTime'
     package: '@azure/arm-databricks'
-    summary: >-
-      Specifies the date and time when the workspace is created.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Specifies the date and time when the workspace is created.
     fullName: createdDateTime
     remarks: ''
     isDeprecated: false
@@ -50,14 +76,40 @@ properties:
       return:
         description: ''
         type: Date
+  - name: defaultCatalog
+    uid: '@azure/arm-databricks.Workspace.defaultCatalog'
+    package: '@azure/arm-databricks'
+    summary: >-
+      Properties for Default Catalog configuration during workspace creation.
+      Not allowed in Serverless ComputeMode workspace.
+    fullName: defaultCatalog
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'defaultCatalog?: DefaultCatalogProperties'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-databricks.DefaultCatalogProperties" />
+  - name: defaultStorageFirewall
+    uid: '@azure/arm-databricks.Workspace.defaultStorageFirewall'
+    package: '@azure/arm-databricks'
+    summary: >-
+      Gets or Sets Default Storage Firewall configuration information. Not
+      allowed in Serverless ComputeMode workspace.
+    fullName: defaultStorageFirewall
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'defaultStorageFirewall?: string'
+      return:
+        description: ''
+        type: string
   - name: diskEncryptionSetId
     uid: '@azure/arm-databricks.Workspace.diskEncryptionSetId'
     package: '@azure/arm-databricks'
     summary: >-
-      The resource Id of the managed disk encryption set.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      The resource Id of the managed disk encryption set. Not allowed in
+      Serverless ComputeMode workspace.
     fullName: diskEncryptionSetId
     remarks: ''
     isDeprecated: false
@@ -69,7 +121,9 @@ properties:
   - name: encryption
     uid: '@azure/arm-databricks.Workspace.encryption'
     package: '@azure/arm-databricks'
-    summary: Encryption properties for databricks workspace
+    summary: >-
+      Encryption properties for databricks workspace. Supported in both
+      Serverless and Hybrid ComputeMode workspace.
     fullName: encryption
     remarks: ''
     isDeprecated: false
@@ -78,12 +132,42 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-databricks.WorkspacePropertiesEncryption" />
+  - name: enhancedSecurityCompliance
+    uid: '@azure/arm-databricks.Workspace.enhancedSecurityCompliance'
+    package: '@azure/arm-databricks'
+    summary: >-
+      Contains settings related to the Enhanced Security and Compliance Add-On.
+      Supported in both Serverless and Hybrid ComputeMode workspace.
+    fullName: enhancedSecurityCompliance
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'enhancedSecurityCompliance?: EnhancedSecurityComplianceDefinition'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-databricks.EnhancedSecurityComplianceDefinition"
+          />
+  - name: isUcEnabled
+    uid: '@azure/arm-databricks.Workspace.isUcEnabled'
+    package: '@azure/arm-databricks'
+    summary: >-
+      Indicates whether unity catalog enabled for the workspace or not. Set as
+      true in Serverless ComputeMode workspace.
+    fullName: isUcEnabled
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isUcEnabled?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: managedDiskIdentity
     uid: '@azure/arm-databricks.Workspace.managedDiskIdentity'
     package: '@azure/arm-databricks'
     summary: >-
       The details of Managed Identity of Disk Encryption Set used for Managed
-      Disk Encryption
+      Disk Encryption. Only returned in Hybrid ComputeMode workspace.
     fullName: managedDiskIdentity
     remarks: ''
     isDeprecated: false
@@ -95,12 +179,14 @@ properties:
   - name: managedResourceGroupId
     uid: '@azure/arm-databricks.Workspace.managedResourceGroupId'
     package: '@azure/arm-databricks'
-    summary: The managed resource group Id.
+    summary: >-
+      The managed resource group Id. Required in Hybrid ComputeMode workspace.
+      Not allowed in Serverless ComputeMode workspace.
     fullName: managedResourceGroupId
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'managedResourceGroupId: string'
+      content: 'managedResourceGroupId?: string'
       return:
         description: ''
         type: string
@@ -120,10 +206,8 @@ properties:
     uid: '@azure/arm-databricks.Workspace.privateEndpointConnections'
     package: '@azure/arm-databricks'
     summary: >-
-      Private endpoint connections created on the workspace
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      Private endpoint connections created on the workspace. Supported in both
+      Serverless and Hybrid ComputeMode workspace.
     fullName: privateEndpointConnections
     remarks: ''
     isDeprecated: false
@@ -135,11 +219,7 @@ properties:
   - name: provisioningState
     uid: '@azure/arm-databricks.Workspace.provisioningState'
     package: '@azure/arm-databricks'
-    summary: >-
-      The workspace provisioning state.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The workspace provisioning state.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -153,7 +233,8 @@ properties:
     package: '@azure/arm-databricks'
     summary: >-
       The network access type for accessing workspace. Set value to disabled to
-      access workspace only via private link.
+      access workspace only via private link. Used to configure front-end only
+      private link for Serverless ComputeMode workspace.
     fullName: publicNetworkAccess
     remarks: ''
     isDeprecated: false
@@ -169,7 +250,7 @@ properties:
       Gets or sets a value indicating whether data plane (clusters) to control
       plane communication happen over private endpoint. Supported values are
       'AllRules' and 'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is
-      for internal use only.
+      for internal use only. Not allowed in Serverless ComputeMode workspace.
     fullName: requiredNsgRules
     remarks: ''
     isDeprecated: false
@@ -193,7 +274,9 @@ properties:
   - name: storageAccountIdentity
     uid: '@azure/arm-databricks.Workspace.storageAccountIdentity'
     package: '@azure/arm-databricks'
-    summary: The details of Managed Identity of Storage Account
+    summary: >-
+      The details of Managed Identity of Storage Account. Only returned in
+      Hybrid ComputeMode workspace.
     fullName: storageAccountIdentity
     remarks: ''
     isDeprecated: false
@@ -202,22 +285,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-databricks.ManagedIdentityConfiguration" />
-  - name: systemData
-    uid: '@azure/arm-databricks.Workspace.systemData'
-    package: '@azure/arm-databricks'
-    summary: >-
-      The system metadata relating to this resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
-    fullName: systemData
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'systemData?: SystemData'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-databricks.SystemData" />
   - name: uiDefinitionUri
     uid: '@azure/arm-databricks.Workspace.uiDefinitionUri'
     package: '@azure/arm-databricks'
@@ -250,9 +317,6 @@ properties:
     summary: >-
       The unique identifier of the databricks workspace in databricks control
       plane.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: workspaceId
     remarks: ''
     isDeprecated: false
@@ -267,9 +331,6 @@ properties:
     summary: >-
       The workspace URL which is of the format
       'adb-{workspaceId}.{random}.azuredatabricks.net'
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: workspaceUrl
     remarks: ''
     isDeprecated: false
@@ -283,11 +344,8 @@ inheritedProperties:
     uid: '@azure/arm-databricks.Workspace.id'
     package: '@azure/arm-databricks'
     summary: >-
-      Fully qualified resource Id for the resource. Ex -
+      Fully qualified resource ID for the resource. Ex -
       /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -317,11 +375,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-databricks.Workspace.name'
     package: '@azure/arm-databricks'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -333,6 +387,23 @@ inheritedProperties:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.name](xref:@azure/arm-databricks.TrackedResource.name)
+  - name: systemData
+    uid: '@azure/arm-databricks.Workspace.systemData'
+    package: '@azure/arm-databricks'
+    summary: >-
+      Azure Resource Manager metadata containing createdBy and modifiedBy
+      information.
+    fullName: systemData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'systemData?: SystemData'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-databricks.SystemData" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [TrackedResource.systemData](xref:@azure/arm-databricks.TrackedResource.systemData)
   - name: tags
     uid: '@azure/arm-databricks.Workspace.tags'
     package: '@azure/arm-databricks'
@@ -341,10 +412,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [TrackedResource.tags](xref:@azure/arm-databricks.TrackedResource.tags)
@@ -352,11 +423,8 @@ inheritedProperties:
     uid: '@azure/arm-databricks.Workspace.type'
     package: '@azure/arm-databricks'
     summary: >-
-      The type of the resource. Ex- Microsoft.Compute/virtualMachines or
-      Microsoft.Storage/storageAccounts.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+      The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+      "Microsoft.Storage/storageAccounts"
     fullName: type
     remarks: ''
     isDeprecated: false

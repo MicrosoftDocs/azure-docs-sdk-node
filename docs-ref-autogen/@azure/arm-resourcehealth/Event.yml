@@ -35,12 +35,37 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-resourcehealth.EventPropertiesArticle" />
+  - name: billingId
+    uid: '@azure/arm-resourcehealth.Event.billingId'
+    package: '@azure/arm-resourcehealth'
+    summary: Billing identifier information.
+    fullName: billingId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'billingId?: string'
+      return:
+        description: ''
+        type: string
+  - name: currencyType
+    uid: '@azure/arm-resourcehealth.Event.currencyType'
+    package: '@azure/arm-resourcehealth'
+    summary: 'Billing currency type information. Example: USD, CAD'
+    fullName: currencyType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'currencyType?: string'
+      return:
+        description: ''
+        type: string
   - name: description
     uid: '@azure/arm-resourcehealth.Event.description'
     package: '@azure/arm-resourcehealth'
     summary: >-
       Contains the communication message for the event, that could include
-      summary, root cause and other details.
+      summary, root cause and other details. Use fetchEventDetails endpoint to
+      get description of sensitive events.
     fullName: description
     remarks: ''
     isDeprecated: false
@@ -109,6 +134,50 @@ properties:
       return:
         description: ''
         type: string
+  - name: eventSubType
+    uid: '@azure/arm-resourcehealth.Event.eventSubType'
+    package: '@azure/arm-resourcehealth'
+    summary: Sub-type of event.
+    fullName: eventSubType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'eventSubType?: string'
+      return:
+        description: ''
+        type: string
+  - name: eventTags
+    uid: '@azure/arm-resourcehealth.Event.eventTags'
+    package: '@azure/arm-resourcehealth'
+    summary: >-
+      A list of metadata tags associated with the event. Possible values
+      include:
+
+      -Action Recommended: Action may be required by you to avoid possible
+      disruptions or mitigate risks for your services. It is recommended to
+      evaluate these actions and the potential impact on your services.
+
+      - False Positive: After investigation, we've determined your service is
+      healthy and service issues did not impact your services as originally
+      communicated.
+
+      - Preliminary PIR: For our largest, most impactful service issues a
+      Preliminary Post Incident Review (PIR) is published generally within 72
+      hours of mitigation, to summarize what we have learned so far from the
+      still-in-progress investigation.
+
+      - Final PIR: For service issues, a Final Post Incident Review (PIR) may be
+      published to provide additional details or learnings. Sometimes this
+      requires us to complete an internal retrospective, generally within 14
+      days of mitigation.
+    fullName: eventTags
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'eventTags?: string[]'
+      return:
+        description: ''
+        type: string[]
   - name: eventType
     uid: '@azure/arm-resourcehealth.Event.eventType'
     package: '@azure/arm-resourcehealth'
@@ -217,6 +286,21 @@ properties:
       return:
         description: ''
         type: string
+  - name: isEventSensitive
+    uid: '@azure/arm-resourcehealth.Event.isEventSensitive'
+    package: '@azure/arm-resourcehealth'
+    summary: >-
+      If true the event may contains sensitive data. Use the post
+      events/{trackingId}/fetchEventDetails endpoint to fetch sensitive data see
+      https://learn.microsoft.com/en-us/azure/service-health/security-advisories-elevated-access
+    fullName: isEventSensitive
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'isEventSensitive?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: isHIR
     uid: '@azure/arm-resourcehealth.Event.isHIR'
     package: '@azure/arm-resourcehealth'
@@ -267,6 +351,30 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-resourcehealth.Link" />[]
+  - name: newRate
+    uid: '@azure/arm-resourcehealth.Event.newRate'
+    package: '@azure/arm-resourcehealth'
+    summary: Billing rate change information - new rate
+    fullName: newRate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'newRate?: number'
+      return:
+        description: ''
+        type: number
+  - name: oldRate
+    uid: '@azure/arm-resourcehealth.Event.oldRate'
+    package: '@azure/arm-resourcehealth'
+    summary: Billing rate change information - old rate
+    fullName: oldRate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'oldRate?: number'
+      return:
+        description: ''
+        type: number
   - name: platformInitiated
     uid: '@azure/arm-resourcehealth.Event.platformInitiated'
     package: '@azure/arm-resourcehealth'
@@ -337,7 +445,9 @@ properties:
   - name: summary
     uid: '@azure/arm-resourcehealth.Event.summary'
     package: '@azure/arm-resourcehealth'
-    summary: Summary text of event.
+    summary: >-
+      Summary text of event. Use fetchEventDetails endpoint to get summary of
+      sensitive events.
     fullName: summary
     remarks: ''
     isDeprecated: false
@@ -365,9 +475,6 @@ inheritedProperties:
     summary: >-
       Fully qualified resource ID for the resource. Ex -
       /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: id
     remarks: ''
     isDeprecated: false
@@ -382,11 +489,7 @@ inheritedProperties:
   - name: name
     uid: '@azure/arm-resourcehealth.Event.name'
     package: '@azure/arm-resourcehealth'
-    summary: >-
-      The name of the resource
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The name of the resource
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -404,9 +507,6 @@ inheritedProperties:
     summary: >-
       Azure Resource Manager metadata containing createdBy and modifiedBy
       information.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: systemData
     remarks: ''
     isDeprecated: false
@@ -424,9 +524,6 @@ inheritedProperties:
     summary: >-
       The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
       "Microsoft.Storage/storageAccounts"
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: type
     remarks: ''
     isDeprecated: false

@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-express, web-pubsub
-ms.date: 02/28/2025
+ms.date: 07/20/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
@@ -16,7 +16,7 @@ When a WebSocket connection connects, the Web PubSub service transforms the conn
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.6/sdk/web-pubsub/web-pubsub-express) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.1.0/sdk/web-pubsub/web-pubsub-express) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub-express) |
 [API reference documentation](https://aka.ms/awps/sdk/js) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -144,6 +144,54 @@ import express from "express";
 const handler = new WebPubSubEventHandler("chat", {
   onConnected: (connectedRequest) => {
     // Your onConnected logic goes here
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `onGroupJoined` request
+
+```ts snippet:ReadmeSampleGroupJoined
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  onGroupJoined: (groupJoinedRequest) => {
+    console.log(
+      `Connection ${groupJoinedRequest.context.connectionId} joined group ${groupJoinedRequest.group}`,
+    );
+  },
+  allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
+});
+
+const app = express();
+
+app.use(handler.getMiddleware());
+
+app.listen(3000, () =>
+  console.log(`Azure WebPubSub Upstream ready at http://localhost:3000${handler.path}`),
+);
+```
+
+### Handle the `onGroupLeft` request
+
+```ts snippet:ReadmeSampleGroupLeft
+import { WebPubSubEventHandler } from "@azure/web-pubsub-express";
+import express from "express";
+
+const handler = new WebPubSubEventHandler("chat", {
+  onGroupLeft: (groupLeftRequest) => {
+    console.log(
+      `Connection ${groupLeftRequest.context.connectionId} left group ${groupLeftRequest.group}`,
+    );
   },
   allowedEndpoints: ["https://<yourAllowedService>.webpubsub.azure.com"],
 });
@@ -370,7 +418,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.0.6/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.1.0/sdk/core/logger).
 
 ### Live Trace
 
@@ -384,7 +432,7 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.6/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

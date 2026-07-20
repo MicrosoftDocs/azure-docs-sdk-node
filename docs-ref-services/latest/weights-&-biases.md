@@ -1,7 +1,7 @@
 ---
 title: Azure Weights & Biases SDK for JavaScript
 description: Reference for Azure Weights & Biases SDK for JavaScript
-ms.date: 07/17/2026
+ms.date: 07/20/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: weights&biases

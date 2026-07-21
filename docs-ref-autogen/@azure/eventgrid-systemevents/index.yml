@@ -5,6 +5,9 @@ summary: ''
 type: package
 enums:
   - '@azure/eventgrid-systemevents.KnownAcsCallEndedByKind'
+  - '@azure/eventgrid-systemevents.KnownAcsCallParticipantKind'
+  - '@azure/eventgrid-systemevents.KnownAcsChatRetentionPolicyKind'
+  - '@azure/eventgrid-systemevents.KnownAcsChatThreadDeletedReasonType'
   - '@azure/eventgrid-systemevents.KnownAcsEmailDeliveryReportStatus'
   - '@azure/eventgrid-systemevents.KnownAcsInteractiveReplyKind'
   - '@azure/eventgrid-systemevents.KnownAcsMessageChannelKind'
@@ -28,6 +31,7 @@ enums:
   - '@azure/eventgrid-systemevents.KnownHealthcareFhirResourceType'
   - '@azure/eventgrid-systemevents.KnownStampKind'
   - '@azure/eventgrid-systemevents.KnownStorageBlobAccessTier'
+  - '@azure/eventgrid-systemevents.KnownStorageLifecycleCompletionStatus'
   - '@azure/eventgrid-systemevents.KnownStorageTaskAssignmentCompletedStatus'
   - '@azure/eventgrid-systemevents.KnownStorageTaskCompletedStatus'
 interfaces:
@@ -60,6 +64,7 @@ interfaces:
   - '@azure/eventgrid-systemevents.AcsChatParticipantRemovedFromThreadEventData'
   - >-
     @azure/eventgrid-systemevents.AcsChatParticipantRemovedFromThreadWithUserEventData
+  - '@azure/eventgrid-systemevents.AcsChatRetentionPolicy'
   - '@azure/eventgrid-systemevents.AcsChatThreadCreatedEventData'
   - '@azure/eventgrid-systemevents.AcsChatThreadCreatedWithUserEventData'
   - '@azure/eventgrid-systemevents.AcsChatThreadDeletedEventData'
@@ -290,6 +295,8 @@ interfaces:
   - '@azure/eventgrid-systemevents.ResourceDeleteSuccessEventData'
   - '@azure/eventgrid-systemevents.ResourceHttpRequest'
   - >-
+    @azure/eventgrid-systemevents.ResourceNotificationsContainerServiceEventResourcesScheduledEventData
+  - >-
     @azure/eventgrid-systemevents.ResourceNotificationsHealthResourcesAnnotatedEventData
   - >-
     @azure/eventgrid-systemevents.ResourceNotificationsHealthResourcesAvailabilityStatusChangedEventData
@@ -328,6 +335,7 @@ interfaces:
   - '@azure/eventgrid-systemevents.StorageDirectoryRenamedEventData'
   - '@azure/eventgrid-systemevents.StorageLifecyclePolicyActionSummaryDetail'
   - '@azure/eventgrid-systemevents.StorageLifecyclePolicyCompletedEventData'
+  - '@azure/eventgrid-systemevents.StorageLifecyclePolicyRunSummary'
   - '@azure/eventgrid-systemevents.StorageTaskAssignmentCompletedEventData'
   - '@azure/eventgrid-systemevents.StorageTaskAssignmentQueuedEventData'
   - '@azure/eventgrid-systemevents.StorageTaskCompletedEventData'
@@ -350,9 +358,23 @@ interfaces:
   - '@azure/eventgrid-systemevents.WebSlotSwapStartedEventData'
   - '@azure/eventgrid-systemevents.WebSlotSwapWithPreviewCancelledEventData'
   - '@azure/eventgrid-systemevents.WebSlotSwapWithPreviewStartedEventData'
+variables:
+  - name: RestError
+    uid: '@azure/eventgrid-systemevents.RestError'
+    package: '@azure/eventgrid-systemevents'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/eventgrid-systemevents.AcsCallEndedByKind'
   - '@azure/eventgrid-systemevents.AcsCallParticipantKind'
+  - '@azure/eventgrid-systemevents.AcsChatRetentionPolicyKind'
+  - '@azure/eventgrid-systemevents.AcsChatThreadDeletedReasonType'
   - '@azure/eventgrid-systemevents.AcsEmailDeliveryReportStatus'
   - '@azure/eventgrid-systemevents.AcsInteractiveReplyKind'
   - '@azure/eventgrid-systemevents.AcsMessageChannelKind'
@@ -377,9 +399,25 @@ typeAliases:
   - '@azure/eventgrid-systemevents.KnownSystemEventTypes'
   - '@azure/eventgrid-systemevents.StampKind'
   - '@azure/eventgrid-systemevents.StorageBlobAccessTier'
+  - '@azure/eventgrid-systemevents.StorageLifecycleCompletionStatus'
   - '@azure/eventgrid-systemevents.StorageTaskAssignmentCompletedStatus'
   - '@azure/eventgrid-systemevents.StorageTaskCompletedStatus'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/eventgrid-systemevents.isRestError'
+    package: '@azure/eventgrid-systemevents'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: isSystemEvent<T>(T, EventGridEvent<unknown>)
     uid: '@azure/eventgrid-systemevents.isSystemEvent'
     package: '@azure/eventgrid-systemevents'

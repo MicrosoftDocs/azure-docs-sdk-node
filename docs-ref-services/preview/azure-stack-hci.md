@@ -1,7 +1,7 @@
 ---
 title: Azure Azure Stack HCI SDK for JavaScript
 description: Reference for Azure Azure Stack HCI SDK for JavaScript
-ms.date: 07/20/2026
+ms.date: 07/21/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azurestackhci

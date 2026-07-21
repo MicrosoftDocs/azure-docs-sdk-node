@@ -1,12 +1,12 @@
 ---
 title: Azure Cosmos DB client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/cosmos, cosmosdb
-ms.date: 04/20/2026
+ms.date: 07/21/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cosmosdb
 ---
-# Azure Cosmos DB client library for JavaScript - version 4.9.3 
+# Azure Cosmos DB client library for JavaScript - version 4.10.0 
 /TypeScript
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]
@@ -609,6 +609,62 @@ const iterator = container.items.getChangeFeedIterator({
 const response = await iterator.readNext();
 ```
 
+## Preview features
+
+Some in-development capabilities are available behind the `enablePreviewFeatures` option on `CosmosClientOptions`. Preview features are opt-in, may change in backward-incompatible ways between releases, and are not recommended for production use.
+
+Currently supported preview features:
+
+| Feature            | `enablePreviewFeatures` key | Requirements                          |
+| ------------------ | --------------------------- | ------------------------------------- |
+| Semantic reranking | `semanticRerank`            | AAD authentication (`aadCredentials`) |
+
+### Semantic reranking
+
+`Container.semanticRerank(rerankContext, documents, options)` scores and reorders a set of documents by their relevance to a query, using the Cosmos DB Inference Service. Enable it by setting the `semanticRerank` key under `enablePreviewFeatures`:
+
+- `inferenceEndpoint` (required) — the inference service endpoint for your account.
+- `inferenceRequestTimeout` (optional, milliseconds; default `5000`) — a single-attempt timeout with no retries; a slower response fails with HTTP `408`.
+
+Semantic reranking requires AAD authentication, so pass `aadCredentials` when constructing the client. The result and any thrown error carry `CosmosDiagnostics` for the operation.
+
+```ts snippet:ContainerSemanticRerank
+import { DefaultAzureCredential } from "@azure/identity";
+import { CosmosClient } from "@azure/cosmos";
+
+const endpoint = "https://your-account.documents.azure.com";
+const aadCredentials = new DefaultAzureCredential();
+const client = new CosmosClient({
+  endpoint,
+  aadCredentials,
+  enablePreviewFeatures: {
+    semanticRerank: {
+      inferenceEndpoint: "https://your-account.<region>.dbinference.azure.com",
+    },
+  },
+});
+
+const { database } = await client.databases.createIfNotExists({ id: "Test Database" });
+const { container } = await database.containers.createIfNotExists({ id: "Test Container" });
+
+const queryResults = ["doc1 JSON", "doc2 JSON", "doc3 JSON"];
+const result = await container.semanticRerank(
+  "most economical with multiple adjustments",
+  queryResults,
+  { return_documents: true, top_k: 10, sort: true },
+);
+// Access the top-ranked document
+if (result.rerankScores.length > 0) {
+  const topResult = result.rerankScores[0];
+  const topScore = topResult.score;
+  const topDocument = topResult.document;
+  if (topDocument) {
+    console.log("Top-ranked document:", topDocument);
+  }
+  console.log("Top score:", topScore);
+}
+```
+
 ## Error Handling
 
 The SDK generates various types of errors that can occur during an operation.
@@ -693,7 +749,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.10.0/sdk/core/logger).
 
 ### Diagnostics
 
@@ -881,7 +937,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 - [Welcome to Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/community)
 - [Quick start](https://learn.microsoft.com/azure/cosmos-db/sql-api-nodejs-get-started)
 - [Tutorial](https://learn.microsoft.com/azure/cosmos-db/sql-api-nodejs-application)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.3/sdk/cosmosdb/cosmos/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.10.0/sdk/cosmosdb/cosmos/samples)
 - [Introduction to Resource Model of Azure Cosmos DB Service](https://learn.microsoft.com/azure/cosmos-db/sql-api-resources)
 - [Introduction to SQL API of Azure Cosmos DB Service](https://learn.microsoft.com/azure/cosmos-db/sql-api-sql-query)
 - [Partitioning](https://learn.microsoft.com/azure/cosmos-db/sql-api-partition-data)
@@ -889,7 +945,7 @@ For more extensive documentation on the Cosmos DB service, see the [Azure Cosmos
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.9.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/cosmos_4.10.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 
@@ -909,7 +965,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [cosmos_item]: https://learn.microsoft.com/azure/cosmos-db/databases-containers-items#azure-cosmos-items
 [cosmos_request_units]: https://learn.microsoft.com/azure/cosmos-db/request-units
 [cosmos_resources]: https://learn.microsoft.com/azure/cosmos-db/databases-containers-items
-[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.9.3/sdk/cosmosdb/cosmos/samples
+[cosmos_samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/cosmos_4.10.0/sdk/cosmosdb/cosmos/samples
 [cosmos_sql_queries]: https://learn.microsoft.com/azure/cosmos-db/how-to-sql-query
 [cosmos_ttl]: https://learn.microsoft.com/azure/cosmos-db/time-to-live
 [npm]: https://www.npmjs.com/package/@azure/cosmos

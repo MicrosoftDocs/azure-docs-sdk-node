@@ -1,12 +1,12 @@
 ---
 title: Azure BillingTrust client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-billing-trust, billingtrust
-ms.date: 07/10/2026
+ms.date: 07/24/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: billingtrust
 ---
-# Azure BillingTrust client library for JavaScript - version 1.0.0-beta.1 
+# Azure BillingTrust client library for JavaScript - version 1.0.0-alpha.20260724.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure BillingTrust client.
@@ -15,10 +15,10 @@ Microsoft.BillingTrust resource provider. Provides Assessment and Rule resources
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-billing-trust_1.0.0-beta.1/sdk/billingtrust/arm-billing-trust)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/billingtrust/arm-billing-trust)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/arm-billing-trust)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-billing-trust?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-billing-trust_1.0.0-beta.1/sdk/billingtrust/arm-billing-trust/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/billingtrust/arm-billing-trust/samples)
 
 ## Getting started
 
@@ -27,7 +27,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-billing-trust_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ npm install @azure/arm-billing-trust
 To create a client object to access the Azure BillingTrust API, you will need the `endpoint` of your Azure BillingTrust resource and a `credential`. The Azure BillingTrust client can use Microsoft Entra credentials to authenticate.
 You can find the endpoint for your Azure BillingTrust resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Microsoft Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing Microsoft Entra token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-billing-trust_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Microsoft Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing Microsoft Entra token](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -102,15 +102,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-billing-trust_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-billing-trust_1.0.0-beta.1/sdk/billingtrust/arm-billing-trust/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/billingtrust/arm-billing-trust/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-billing-trust_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -118,6 +118,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-billing-trust_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-billing-trust_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

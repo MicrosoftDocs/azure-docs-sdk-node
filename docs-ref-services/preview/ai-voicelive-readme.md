@@ -1,12 +1,12 @@
 ---
 title: Azure VoiceLive client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-voicelive, voicelive
-ms.date: 05/29/2026
+ms.date: 07/24/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: voicelive
 ---
-# Azure VoiceLive client library for JavaScript - version 1.1.0-beta.1 
+# Azure VoiceLive client library for JavaScript - version 1.1.0-alpha.20260724.1 
 
 
 Azure VoiceLive is a managed service that enables low-latency, high-quality speech-to-speech interactions for voice agents. The service consolidates speech recognition, generative AI, and text-to-speech functionalities into a single, unified interface, providing an end-to-end solution for creating seamless voice-driven experiences.
@@ -150,7 +150,7 @@ const session = await client.startSession({
 
 ## Authenticating with Azure Active Directory
 
-The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.1.0-beta.1/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The VoiceLive service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 To interact with the Azure VoiceLive service, you need to create an instance of the `VoiceLiveClient` class, a **service endpoint** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][defaultazurecredential], which is appropriate for most scenarios, including local development and production environments. We recommend using a [managed identity][managed_identity] for authentication in production environments.
 
@@ -192,6 +192,7 @@ The following sections provide code snippets that cover some of the common tasks
 - [Creating a basic voice assistant](#creating-a-basic-voice-assistant)
 - [Creating an agent-powered voice assistant](#creating-an-agent-powered-voice-assistant)
 - [Configuring session options](#configuring-session-options)
+- [Streaming text input](#streaming-text-input)
 - [Handling real-time events](#handling-real-time-events)
 - [Implementing function calling](#implementing-function-calling)
 
@@ -320,6 +321,47 @@ await session.updateSession({
     name: "ava",
   },
 });
+```
+
+### Streaming text input
+
+Instead of sending audio, you can stream text into a conversation item incrementally with `input_text.delta` events and finish with a single `input_text.done` event. This is useful when the text itself is produced token-by-token (for example, forwarded from another model):
+
+```ts snippet:ReadmeSampleStreamInputText
+import { DefaultAzureCredential } from "@azure/identity";
+import { VoiceLiveClient } from "@azure/ai-voicelive";
+
+const credential = new DefaultAzureCredential();
+const endpoint = "https://your-resource.cognitiveservices.azure.com";
+const client = new VoiceLiveClient(endpoint, credential);
+const session = await client.startSession("gpt-realtime-mini");
+
+// Create the conversation item that the streamed text is appended to
+const itemId = "user-message-1";
+await session.addConversationItem({
+  type: "message",
+  role: "user",
+  id: itemId,
+  content: [{ type: "input_text", text: "" }],
+});
+
+// Stream the text in chunks as `input_text.delta` events
+for (const chunk of ["Tell me ", "a fun fact ", "about the ocean."]) {
+  await session.sendEvent({
+    type: "input_text.delta",
+    id: itemId,
+    delta: chunk,
+  });
+}
+
+// Signal that the streamed text is complete with a single `input_text.done` event
+await session.sendEvent({
+  type: "input_text.done",
+  id: itemId,
+});
+
+// Ask the model to respond to the streamed text
+await session.sendEvent({ type: "response.create" });
 ```
 
 ### Handling real-time events
@@ -539,8 +581,8 @@ useInstrumenter({
 This produces spans identical to the CommonJS bridge.
 
 > Complete, runnable samples:
-> - **Node.js (ESM):** [`samples/telemetry/`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.1.0-beta.1/sdk/voicelive/ai-voicelive/samples/telemetry/README.md) — console exporter and Azure Monitor variant.
-> - **Browser (Vite):** [`samples/telemetry-browser/`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.1.0-beta.1/sdk/voicelive/ai-voicelive/samples/telemetry-browser/README.md) — in-page span viewer.
+> - **Node.js (ESM):** [`samples/telemetry/`](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/voicelive/ai-voicelive/samples/telemetry/README.md) — console exporter and Azure Monitor variant.
+> - **Browser (Vite):** [`samples/telemetry-browser/`](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/voicelive/ai-voicelive/samples/telemetry-browser/README.md) — in-page span viewer.
 
 #### Span attributes
 
@@ -571,7 +613,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-voicelive_1.1.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -582,7 +624,7 @@ You can find more code samples through the following links:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-voicelive_1.1.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [defaultazurecredential]: https://learn.microsoft.com/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest
 [managed_identity]: https://learn.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview

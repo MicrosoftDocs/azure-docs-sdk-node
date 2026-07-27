@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|[Resource Management - Compute-Bulkactions](arm-compute-bulkactions-readme.md)|[@azure/arm-compute-bulkactions](https://www.npmjs.com/package/@azure/arm-compute-bulkactions)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/compute/arm-compute-bulkactions)|

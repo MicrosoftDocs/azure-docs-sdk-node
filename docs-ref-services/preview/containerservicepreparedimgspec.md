@@ -1,7 +1,7 @@
 ---
 title: Azure Containerservicepreparedimgspec SDK for JavaScript
 description: Reference for Azure Containerservicepreparedimgspec SDK for JavaScript
-ms.date: 07/27/2026
+ms.date: 07/28/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: containerservicepreparedimgspec

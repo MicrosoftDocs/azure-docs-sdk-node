@@ -1,0 +1,11 @@
+---
+title: Azure Elastic SAN SDK for JavaScript
+description: Reference for Azure Elastic SAN SDK for JavaScript
+ms.date: 07/29/2026
+ms.topic: reference
+ms.devlang: javascript
+ms.service: elasticsan
+---
+# Azure Elastic SAN SDK for JavaScript - latest
+## Packages - latest
+[!INCLUDE [packages](elastic-san-index.md)]

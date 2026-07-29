@@ -1,7 +1,7 @@
 ---
-title: Azure Managedops SDK for JavaScript
-description: Reference for Azure Managedops SDK for JavaScript
-ms.date: 07/28/2026
+title: Azure ManagedOps SDK for JavaScript
+description: Reference for Azure ManagedOps SDK for JavaScript
+ms.date: 07/29/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: managedops

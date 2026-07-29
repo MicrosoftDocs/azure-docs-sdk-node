@@ -1,7 +1,7 @@
 ---
-title: Azure Providerhub SDK for JavaScript
-description: Reference for Azure Providerhub SDK for JavaScript
-ms.date: 07/28/2026
+title: Azure ProviderHub SDK for JavaScript
+description: Reference for Azure ProviderHub SDK for JavaScript
+ms.date: 07/29/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: providerhub

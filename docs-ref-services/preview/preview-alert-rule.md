@@ -1,7 +1,7 @@
 ---
 title: Azure Preview Alert Rule SDK for JavaScript
 description: Reference for Azure Preview Alert Rule SDK for JavaScript
-ms.date: 07/29/2026
+ms.date: 07/30/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: previewalertrule

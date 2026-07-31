@@ -1,7 +1,7 @@
 ---
 title: Azure Alert Processing Rules SDK for JavaScript
 description: Reference for Azure Alert Processing Rules SDK for JavaScript
-ms.date: 07/30/2026
+ms.date: 07/31/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: alertprocessingrules

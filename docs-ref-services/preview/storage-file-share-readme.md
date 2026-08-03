@@ -1,12 +1,12 @@
 ---
 title: Azure Storage File Share client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-file-share, storage
-ms.date: 05/09/2026
+ms.date: 08/03/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage File Share client library for JavaScript - version 12.32.0-beta.1 
+# Azure Storage File Share client library for JavaScript - version 12.33.0-beta.1 
 
 
 Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol. Azure file shares can be mounted concurrently by cloud or on-premises deployments of Windows, Linux, and macOS. Additionally, Azure file shares can be cached on Windows Servers with Azure File Sync for fast access near where the data is being used.
@@ -26,11 +26,11 @@ Use the client libraries in this package to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/storage-file-share)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share)
 - [Package (npm)](https://www.npmjs.com/package/@azure/storage-file-share/)
 - [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/storage-file-share)
 - [Product documentation](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/storage-file-share/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples)
 - [Azure Storage File REST APIs](https://learn.microsoft.com/rest/api/storageservices/file-service-rest-api)
 
 ## Getting started
@@ -40,7 +40,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.32.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -304,6 +304,75 @@ await fileClient.uploadRange(content, 0, content.length);
 console.log(`Upload file range "${content}" to ${fileName} successfully`);
 ```
 
+### List ranges of a file
+
+Use `ShareFileClient.listRanges()` to enumerate the valid byte ranges of a file as a paginated
+async iterable. Each item is a `ShareFileRange` with `start`, `end`, and `isClear`. Use
+`ShareFileClient.listRangesDiff()` to list the ranges that changed since a previous share snapshot;
+cleared ranges are returned with `isClear` set to `true`.
+
+```ts snippet:ReadmeSampleListRanges
+import { StorageSharedKeyCredential, ShareServiceClient } from "@azure/storage-file-share";
+
+const account = "<account>";
+const accountKey = "<accountkey>";
+
+const credential = new StorageSharedKeyCredential(account, accountKey);
+const serviceClient = new ShareServiceClient(
+  `https://${account}.file.core.windows.net`,
+  credential,
+);
+
+const shareName = "<share name>";
+const fileName = "<file name>";
+const fileClient = serviceClient
+  .getShareClient(shareName)
+  .rootDirectoryClient.getFileClient(fileName);
+
+// Each item is a ShareFileRange with start, end, and isClear
+for await (const range of fileClient.listRanges()) {
+  console.log(`Range: ${range.start}-${range.end}, isClear: ${range.isClear}`);
+}
+```
+
+Use `.byPage()` to control the page size and resume from a continuation token:
+
+```ts snippet:ReadmeSampleListRanges_ByPage
+import { StorageSharedKeyCredential, ShareServiceClient } from "@azure/storage-file-share";
+
+const account = "<account>";
+const accountKey = "<accountkey>";
+
+const credential = new StorageSharedKeyCredential(account, accountKey);
+const serviceClient = new ShareServiceClient(
+  `https://${account}.file.core.windows.net`,
+  credential,
+);
+
+const shareName = "<share name>";
+const fileName = "<file name>";
+const fileClient = serviceClient
+  .getShareClient(shareName)
+  .rootDirectoryClient.getFileClient(fileName);
+
+// Get the first page of ranges
+let iterator = fileClient.listRanges().byPage({ maxPageSize: 1 });
+let response = (await iterator.next()).value;
+for (const range of response.ranges || []) {
+  console.log(`Range: ${range.start}-${range.end}`);
+}
+
+// Gets next marker
+const marker = response.continuationToken;
+
+// Passing next marker as continuationToken
+iterator = fileClient.listRanges().byPage({ continuationToken: marker, maxPageSize: 2 });
+response = (await iterator.next()).value;
+for (const range of response.ranges || []) {
+  console.log(`Range: ${range.start}-${range.end}`);
+}
+```
+
 ### List files and directories under a directory
 
 Use `DirectoryClient.listFilesAndDirectories()` to iterator over files and directories,
@@ -369,12 +438,13 @@ while (!done) {
 }
 ```
 
-For a complete sample on iterating please see [samples/v12/typescript/src/listFilesAndDirectories.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/listFilesAndDirectories.ts).
+For a complete sample on iterating please see [samples/v12/typescript/src/listFilesAndDirectories.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/listFilesAndDirectories.ts).
 
 ### Download a file and convert it to a string (Node.js)
 
 ```ts snippet:ReadmeSampleDownloadFileAndConvertToString_Node
 import { StorageSharedKeyCredential, ShareServiceClient } from "@azure/storage-file-share";
+import { buffer } from "node:stream/consumers";
 
 const account = "<account>";
 const accountKey = "<accountkey>";
@@ -395,22 +465,10 @@ const fileClient = serviceClient
 // In Node.js, get downloaded data by accessing downloadFileResponse.readableStreamBody
 const downloadFileResponse = await fileClient.download();
 if (downloadFileResponse.readableStreamBody) {
-  const buffer = await streamToBuffer(downloadFileResponse.readableStreamBody);
-  console.log(`Downloaded file content: ${buffer.toString()}`);
-}
-
-// [Node.js only] A helper method used to read a Node.js readable stream into a Buffer
-async function streamToBuffer(readableStream: NodeJS.ReadableStream): Promise<Buffer> {
-  return new Promise((resolve, reject) => {
-    const chunks: Buffer[] = [];
-    readableStream.on("data", (data) => {
-      chunks.push(data instanceof Buffer ? data : Buffer.from(data));
-    });
-    readableStream.on("end", () => {
-      resolve(Buffer.concat(chunks));
-    });
-    readableStream.on("error", reject);
-  });
+  // Download the raw bytes of the file. Use `text` from "node:stream/consumers"
+  // instead if you want to read the content as a string directly.
+  const downloaded = await buffer(downloadFileResponse.readableStreamBody);
+  console.log(`Downloaded file content: ${downloaded.toString()}`);
 }
 ```
 
@@ -440,7 +498,7 @@ if (downloadFileResponse.blobBody) {
 }
 ```
 
-A complete example of simple `ShareServiceClient` scenarios is at [samples/v12/typescript/src/shareSerivceClient.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/shareServiceClient.ts).
+A complete example of simple `ShareServiceClient` scenarios is at [samples/v12/typescript/src/shareSerivceClient.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/shareServiceClient.ts).
 
 ## Troubleshooting
 
@@ -456,13 +514,13 @@ setLogLevel("info");
 
 More code samples
 
-- [File Share Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/storage-file-share/samples/v12/javascript)
-- [File Share Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript)
-- [File Share Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/storage-file-share/test)
+- [File Share Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/javascript)
+- [File Share Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript)
+- [File Share Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/test)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.32.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.32.0-beta.1/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
+Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 

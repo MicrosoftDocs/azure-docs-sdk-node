@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, communication
-ms.date: 06/03/2026
+ms.date: 08/04/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Common client library for JavaScript - version 2.4.2 
+# Azure Communication Common client library for JavaScript - version 2.5.0 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -120,6 +120,52 @@ const tokenCredential = new AzureCommunicationTokenCredential({
 });
 ```
 
+### Create a credential for an encrypted or opaque access token
+
+Some access tokens — such as those issued to enterprise Entra users — are encrypted and can't be decoded on the client, so the credential cannot read their expiry. The recommended approach is to return an `AccessToken` (`{ token, expiresOnTimestamp }`) from your `tokenRefresher` (or pass one as the initial `token`), setting `expiresOnTimestamp` from the token response's `expires_in`. This keeps proactive refresh scheduling accurate.
+
+```ts snippet:ReadmeSampleCredentialEncryptedToken
+import { AzureCommunicationTokenCredential } from "@azure/communication-common";
+
+// Some access tokens (e.g. for enterprise Entra users) are encrypted and cannot be
+// decoded on the client. Return an AccessToken with an explicit expiry so proactive
+// refresh scheduling stays accurate; derive expiresOnTimestamp from the response's expires_in.
+async function fetchEncryptedTokenForUser(user: string): Promise<{
+  token: string;
+  expiresOnTimestamp: number;
+}> {
+  const response = { token: "some-encrypted-token-for-" + user, expiresInSeconds: 8 * 60 * 60 };
+  return {
+    token: response.token,
+    expiresOnTimestamp: Date.now() + response.expiresInSeconds * 1000,
+  };
+}
+
+const tokenCredential = new AzureCommunicationTokenCredential({
+  tokenRefresher: async () => fetchEncryptedTokenForUser("bob@contoso.com"),
+  refreshProactively: true,
+});
+```
+
+If you can only provide the token string, the credential accepts it and assumes a fallback lifetime. Set `undecodableTokenExpiryIntervalInSeconds` to your tokens' actual lifetime so they aren't refreshed more often than needed; it defaults to 600 seconds.
+
+```ts snippet:ReadmeSampleCredentialUndecodableTokenInterval
+import { AzureCommunicationTokenCredential } from "@azure/communication-common";
+
+function fetchOpaqueTokenForUser(user: string): Promise<string> {
+  // Your custom implementation returns an opaque token string that can't be decoded.
+  return Promise.resolve("some-opaque-token-for-" + user);
+}
+
+const tokenCredential = new AzureCommunicationTokenCredential({
+  tokenRefresher: async () => fetchOpaqueTokenForUser("bob@contoso.com"),
+  refreshProactively: true,
+  // When the token can't be decoded and no explicit expiry is provided, assume this
+  // lifetime (in seconds) instead of the 600s default — set it to your tokens' real lifetime.
+  undecodableTokenExpiryIntervalInSeconds: 3600,
+});
+```
+
 ### Create a credential with a token credential capable of obtaining an Entra user token
 
 For scenarios where an Entra user can be used with Communication Services, you need to initialize any implementation of [TokenCredential interface](https://learn.microsoft.com/es-mx/javascript/api/@azure/core-auth/tokencredential?view=azure-node-latest) and provide it to the ``EntraCommunicationTokenCredentialOptions``.
@@ -197,7 +243,7 @@ setLogLevel("info");
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.4.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.5.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

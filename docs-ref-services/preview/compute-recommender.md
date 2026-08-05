@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: computerecommender
 ---
-# Azure Compute Recommender SDK for JavaScript - latest
-## Packages - latest
+# Azure Compute Recommender SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](compute-recommender-index.md)]

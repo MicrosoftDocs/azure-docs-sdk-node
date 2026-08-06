@@ -106,6 +106,9 @@ The following sections provide several code snippets covering some of the most c
 - [CRUD on Container with hierarchical partition key](#container-hierarchical-partition-key)
 - [Using Excluded Locations](#using-excluded-locations)
 
+> [!IMPORTANT]
+> Management operations like creating a database or a container will not be available if role-based access control (RBAC) is used to authenticate instead of using a key as described above. For more details on using RBAC, see [Permissions model](https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac#permission-model).
+
 ### Create a database
 
 After authenticating your [CosmosClient](https://learn.microsoft.com/javascript/api/@azure/cosmos/cosmosclient?view=azure-node-latest), you can work with any resource in the account. The code snippet below creates a NOSQL API database.

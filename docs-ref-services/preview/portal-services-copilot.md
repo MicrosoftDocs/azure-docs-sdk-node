@@ -1,7 +1,7 @@
 ---
 title: Azure Portal Services Copilot SDK for JavaScript
 description: Reference for Azure Portal Services Copilot SDK for JavaScript
-ms.date: 08/05/2026
+ms.date: 08/06/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: portalservicescopilot

@@ -1,7 +1,7 @@
 ---
 title: Azure Alert Rule Recommendations SDK for JavaScript
 description: Reference for Azure Alert Rule Recommendations SDK for JavaScript
-ms.date: 08/07/2026
+ms.date: 08/10/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: alertrulerecommendations

@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: search
 ---
-# Azure AI Search client library for JavaScript - version 13.1.0-alpha.20260811.3 
+# Azure AI Search client library for JavaScript - version 13.1.0-alpha.20260811.4 
 
 
 [Azure AI Search](https://learn.microsoft.com/azure/search/) (formerly known as "Azure Cognitive Search") is an AI-powered information retrieval platform that helps developers build rich search experiences and generative AI apps that combine large language models with enterprise data.

@@ -1,51 +1,93 @@
 ---
-title: Azure Device Update for IoT Hub client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/iot-device-update,
-ms.date: 03/04/2021
+title: Azure DeviceUpdate client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/iot-device-update, deviceupdate
+ms.date: 08/12/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: iot-hub-device-update
+ms.service: deviceupdate
 ---
-# Azure Device Update for IoT Hub client library for JavaScript - version 1.0.0-beta.1 
+# Azure DeviceUpdate client library for JavaScript - version 1.1.0-alpha.20260811.1 
 
 
-The library provides access to the Device Update for IoT Hub service that enables customers to publish updates for their IoT devices to the cloud, and then deploy these updates to their devices (approve updates to groups of devices managed and provisioned in IoT Hub).
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DeviceUpdate client.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/iot-device-update_1.0.0-beta.1/sdk) | [Product documentation](https://docs.microsoft.com/azure/iot-hub-device-update/understand-device-update)
+Device Update for IoT Hub is an Azure service that enables customers to publish updates for their IoT devices to the cloud, and then deploy that update to their devices (approve updates to groups of devices managed and provisioned in IoT Hub). It leverages the proven security and reliability of the Windows Update platform, optimized for IoT devices. It works globally and knows when and how to update devices, enabling customers to focus on their business goals and let Device Update for IoT Hub handle the updates.
+
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/deviceupdate/iot-device-update)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/iot-device-update)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/iot-device-update?view=azure-node-preview)
 
 ## Getting started
 
 ### Currently supported environments
 
-- Node.js version 8.x.x or higher
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
+- Latest versions of Safari, Chrome, Edge and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
-- Microsoft Azure Subscription: To call Microsoft Azure services, you need to create an [Azure subscription](https://azure.microsoft.com/free/)
-- Device Update for IoT Hub instance
-- Azure IoT Hub instance
+- An [Azure subscription][azure_sub].
 
 ### Install the `@azure/iot-device-update` package
 
-Install the Azure Device Update for IoT Hub client library for JavaScript with `npm`:
+Install the Azure DeviceUpdate client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure/iot-device-update
 ```
 
+### Create and authenticate a `DeviceUpdateClient`
+
+To create a client object to access the Azure DeviceUpdate API, you will need the `endpoint` of your Azure DeviceUpdate resource and a `credential`. The Azure DeviceUpdate client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your Azure DeviceUpdate resource in the [Azure Portal][azure_portal].
+
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+
+To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
+
+```bash
+npm install @azure/identity
+```
+
+You will also need to **register a new AAD application and grant access to Azure DeviceUpdate** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+
+For more information about how to create an Azure AD Application check out [this guide](https://learn.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
+
+Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
+
+```ts snippet:ReadmeSampleCreateClient_Node
+import { DeviceUpdateClient } from "@azure/iot-device-update";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const client = new DeviceUpdateClient("<endpoint>", new DefaultAzureCredential(), "<instanceId>");
+```
+
+For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
+
+```ts snippet:ReadmeSampleCreateClient_Browser
+import { InteractiveBrowserCredential } from "@azure/identity";
+import { DeviceUpdateClient } from "@azure/iot-device-update";
+
+const credential = new InteractiveBrowserCredential({
+  tenantId: "<YOUR_TENANT_ID>",
+  clientId: "<YOUR_CLIENT_ID>",
+});
+const client = new DeviceUpdateClient("<endpoint>", credential, "<instanceId>");
+```
+
+
+### JavaScript Bundle
+To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+
 ## Key concepts
 
-Device Update for IoT Hub is a managed service that enables you to deploy over-the-air updates for your IoT devices. The client library has three main components:
+### DeviceUpdateClient
 
-- **Updates**: update management (import, enumerate, delete, etc.)
-- **Devices**: device management (enumerate devices and retrieve device properties)
-- **Deployments**: deployment management (start and monitor update deployments to a set of devices)
-
-You can learn more about Device Update for IoT Hub by visiting [Device Update for IoT Hub](https://github.com/azure/iot-hub-device-update).
-
-## Examples
-
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/iot-device-update_1.0.0-beta.1/sdk/deviceupdate/iot-device-update/samples).
+`DeviceUpdateClient` is the primary interface for developers using the Azure DeviceUpdate client library. Explore the methods on this client object to understand the different features of the Azure DeviceUpdate service that you can access.
 
 ## Troubleshooting
 
@@ -53,25 +95,25 @@ You can familiarize yourself with different APIs using [Samples](https://github.
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-```javascript
+```ts snippet:SetLogLevel
 import { setLogLevel } from "@azure/logger";
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/iot-device-update_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
-## Next steps
-
-Get started with our [Device Update for IoT Hub samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/iot-device-update_1.0.0-beta.1/sdk/deviceupdate/iot-device-update/samples)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/iot-device-update_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
-- [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
+- [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-
+[azure_sub]: https://azure.microsoft.com/free/
+[azure_portal]: https://portal.azure.com
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

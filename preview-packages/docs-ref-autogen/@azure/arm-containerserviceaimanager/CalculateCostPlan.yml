@@ -1,0 +1,160 @@
+### YamlMime:TSType
+name: CalculateCostPlan
+uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan'
+package: '@azure/arm-containerserviceaimanager'
+summary: >-
+  A GPU SKU pricing plan returned by the `calculateCost` action. Describes the
+  cost of running a single model replica on the specified `vmSize`. To estimate
+  the cost of running multiple replicas, scale `totalHourlyPrice` by the desired
+  replica count, bounded by `maxAvailableReplicas`.
+fullName: CalculateCostPlan
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: feasible
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.feasible'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: >-
+      Whether the caller can actually deploy this plan today (region
+      availability, GPU quota, model fit, etc.). This field gates the mutually
+      exclusive properties on this model:
+
+      - When `feasible` is `true`: `totalHourlyPrice` is set and
+      `infeasibilityReason` is omitted.
+
+      - When `feasible` is `false`: `infeasibilityReason` is set and
+      `totalHourlyPrice` is omitted.
+    fullName: feasible
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'feasible: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: infeasibilityReason
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.infeasibilityReason'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: >-
+      Reason explaining why the plan is not deployable. This is a per-plan
+      annotation, not an ARM error envelope.
+    fullName: infeasibilityReason
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'infeasibilityReason?: InfeasibilityReason'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-containerserviceaimanager.InfeasibilityReason"
+          />
+  - name: maxAvailableReplicas
+    uid: >-
+      @azure/arm-containerserviceaimanager.CalculateCostPlan.maxAvailableReplicas
+    package: '@azure/arm-containerserviceaimanager'
+    summary: >-
+      Maximum number of replicas the caller's subscription can deploy on this
+      SKU today, computed from the available GPU quota in the target region.
+    fullName: maxAvailableReplicas
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxAvailableReplicas: number'
+      return:
+        description: ''
+        type: number
+  - name: priceAsOf
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.priceAsOf'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: UTC timestamp of the price snapshot used for this plan.
+    fullName: priceAsOf
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'priceAsOf?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: quantization
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.quantization'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: Resolved quantization on this SKU.
+    fullName: quantization
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'quantization?: string'
+      return:
+        description: ''
+        type: string
+  - name: servingPerformanceEstimation
+    uid: >-
+      @azure/arm-containerserviceaimanager.CalculateCostPlan.servingPerformanceEstimation
+    package: '@azure/arm-containerserviceaimanager'
+    summary: >-
+      Estimated relative inference performance of a single model replica on this
+      SKU. Omitted when an estimate is unavailable.
+    fullName: servingPerformanceEstimation
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'servingPerformanceEstimation?: ServingPerformanceEstimation'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/arm-containerserviceaimanager.ServingPerformanceEstimation"
+          />
+  - name: totalHourlyPrice
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.totalHourlyPrice'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: >-
+      Projected hourly cost for one replica (`vmsPerReplica` VMs), in
+      `currency`.
+    fullName: totalHourlyPrice
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'totalHourlyPrice?: number'
+      return:
+        description: ''
+        type: number
+  - name: vmHourlyPrice
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.vmHourlyPrice'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: On-demand hourly price for a single VM of this SKU, in `currency`.
+    fullName: vmHourlyPrice
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vmHourlyPrice: number'
+      return:
+        description: ''
+        type: number
+  - name: vmSize
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.vmSize'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: >-
+      Azure VM SKU, e.g. "Standard_ND96isr_H100_v5". Matches the value accepted
+      by `ModelDeploymentProperties.vmSize`.
+    fullName: vmSize
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vmSize: string'
+      return:
+        description: ''
+        type: string
+  - name: vmsPerReplica
+    uid: '@azure/arm-containerserviceaimanager.CalculateCostPlan.vmsPerReplica'
+    package: '@azure/arm-containerserviceaimanager'
+    summary: Number of VMs required to host one replica on this SKU.
+    fullName: vmsPerReplica
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'vmsPerReplica: number'
+      return:
+        description: ''
+        type: number

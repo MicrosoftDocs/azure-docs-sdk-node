@@ -28,29 +28,76 @@ properties:
   - name: token
     uid: '@azure/communication-common.CommunicationTokenRefreshOptions.token'
     package: '@azure/communication-common'
-    summary: Optional token to initialize.
+    summary: >-
+      Optional token to initialize. May be a `string` or an `AccessToken`
+      carrying
+
+      an explicit expiry.
     fullName: token
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'token?: string'
+      content: 'token?: string | AccessToken'
       return:
         description: ''
-        type: string
+        type: string | <xref uid="@azure/core-auth.AccessToken" />
   - name: tokenRefresher
     uid: >-
       @azure/communication-common.CommunicationTokenRefreshOptions.tokenRefresher
     package: '@azure/communication-common'
     summary: >-
-      Callback function that returns a string JWT token acquired from the
-      Communication Identity API.
+      Callback that returns a token acquired from the Communication Identity
+      API.
 
       The returned token must be valid (expiration date must be in the future).
+
+
+      Return a `string` to have the expiry read from the JWT, or an
+      `AccessToken`
+
+      to supply the expiry explicitly (required for encrypted access tokens that
+
+      cannot be decoded).
     fullName: tokenRefresher
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tokenRefresher: (abortSignal?: AbortSignalLike) => Promise<string>'
+      content: >-
+        tokenRefresher: (abortSignal?: AbortSignalLike) => Promise<string |
+        AccessToken>
       return:
         description: ''
-        type: '(abortSignal?: AbortSignalLike) =&gt; Promise&lt;string&gt;'
+        type: >-
+          (abortSignal?: AbortSignalLike) =&gt; Promise&lt;string |
+          AccessToken&gt;
+  - name: undecodableTokenExpiryIntervalInSeconds
+    uid: >-
+      @azure/communication-common.CommunicationTokenRefreshOptions.undecodableTokenExpiryIntervalInSeconds
+    package: '@azure/communication-common'
+    summary: >-
+      Lifetime, in seconds, assumed for a returned token that cannot be decoded
+      and
+
+      carries no explicit expiry (e.g. an encrypted access token). Defaults to
+      600 (10 minutes).
+
+
+      Set this to your tokens' real lifetime. It is not capped: a value larger
+      than the token's
+
+      actual lifetime means the credential refreshes later than it should and
+      the service will
+
+      reject the expired token. To avoid guessing, prefer returning an
+      `AccessToken` with an
+
+      explicit `expiresOnTimestamp` (e.g. derived from the token response's
+      `expires_in`).
+    fullName: undecodableTokenExpiryIntervalInSeconds
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'undecodableTokenExpiryIntervalInSeconds?: number'
+      return:
+        description: ''
+        type: number

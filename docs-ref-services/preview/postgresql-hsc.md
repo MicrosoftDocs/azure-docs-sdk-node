@@ -1,7 +1,7 @@
 ---
 title: Azure PostgreSQL HSC SDK for JavaScript
 description: Reference for Azure PostgreSQL HSC SDK for JavaScript
-ms.date: 08/12/2026
+ms.date: 08/13/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: postgresqlhsc

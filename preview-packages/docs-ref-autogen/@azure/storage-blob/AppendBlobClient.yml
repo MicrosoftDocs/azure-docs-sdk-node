@@ -49,7 +49,7 @@ constructors:
           description: ''
   - name: >-
       AppendBlobClient(string, StorageSharedKeyCredential | AnonymousCredential
-      | TokenCredential, BlobClientOptions)
+      | TokenCredential, AppendBlobClientOptions)
     uid: '@azure/storage-blob.AppendBlobClient.constructor_1'
     package: '@azure/storage-blob'
     summary: >-
@@ -67,7 +67,8 @@ constructors:
     syntax:
       content: >-
         new AppendBlobClient(url: string, credential: StorageSharedKeyCredential
-        | AnonymousCredential | TokenCredential, options?: BlobClientOptions)
+        | AnonymousCredential | TokenCredential, options?:
+        AppendBlobClientOptions)
       parameters:
         - id: url
           type: string
@@ -92,9 +93,9 @@ constructors:
             implements the TokenCredential interface. If not specified,
             AnonymousCredential is used.
         - id: options
-          type: <xref uid="@azure/storage-blob.BlobClientOptions" />
+          type: <xref uid="@azure/storage-blob.AppendBlobClientOptions" />
           description: Optional. Options to configure the HTTP pipeline.
-  - name: AppendBlobClient(string, string, string, BlobClientOptions)
+  - name: AppendBlobClient(string, string, string, AppendBlobClientOptions)
     uid: '@azure/storage-blob.AppendBlobClient.constructor'
     package: '@azure/storage-blob'
     summary: Creates an instance of AppendBlobClient.
@@ -103,7 +104,7 @@ constructors:
     syntax:
       content: >-
         new AppendBlobClient(connectionString: string, containerName: string,
-        blobName: string, options?: BlobClientOptions)
+        blobName: string, options?: AppendBlobClientOptions)
       parameters:
         - id: connectionString
           type: string
@@ -122,7 +123,7 @@ constructors:
           type: string
           description: Blob name.
         - id: options
-          type: <xref uid="@azure/storage-blob.BlobClientOptions" />
+          type: <xref uid="@azure/storage-blob.AppendBlobClientOptions" />
           description: Optional. Options to configure the HTTP pipeline.
 properties:
   - name: containerName
@@ -551,6 +552,8 @@ inheritedMethods:
 
             import { DefaultAzureCredential } from "@azure/identity";
 
+            import { buffer } from "node:stream/consumers";
+
 
             const account = "<account>";
 
@@ -578,24 +581,10 @@ inheritedMethods:
             const downloadBlockBlobResponse = await blobClient.download();
 
             if (downloadBlockBlobResponse.readableStreamBody) {
-              const downloaded = await streamToString(downloadBlockBlobResponse.readableStreamBody);
-              console.log(`Downloaded blob content: ${downloaded}`);
-            }
-
-
-            async function streamToString(stream: NodeJS.ReadableStream):
-            Promise<string> {
-              const result = await new Promise<Buffer<ArrayBuffer>>((resolve, reject) => {
-                const chunks: Buffer[] = [];
-                stream.on("data", (data) => {
-                  chunks.push(Buffer.isBuffer(data) ? data : Buffer.from(data));
-                });
-                stream.on("end", () => {
-                  resolve(Buffer.concat(chunks));
-                });
-                stream.on("error", reject);
-              });
-              return result.toString();
+              // Download the raw bytes of the blob. Use `text` from "node:stream/consumers"
+              // instead if you want to read the content as a string directly.
+              const downloaded = await buffer(downloadBlockBlobResponse.readableStreamBody);
+              console.log(`Downloaded blob content: ${downloaded.toString()}`);
             }
 
             ```

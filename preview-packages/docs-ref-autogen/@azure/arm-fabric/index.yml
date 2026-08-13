@@ -4,19 +4,26 @@ name: '@azure/arm-fabric'
 summary: ''
 type: package
 enums:
+  - '@azure/arm-fabric.AzureClouds'
   - '@azure/arm-fabric.KnownActionType'
+  - '@azure/arm-fabric.KnownCapacityOverageState'
   - '@azure/arm-fabric.KnownCheckNameAvailabilityReason'
   - '@azure/arm-fabric.KnownCreatedByType'
   - '@azure/arm-fabric.KnownOrigin'
   - '@azure/arm-fabric.KnownProvisioningState'
   - '@azure/arm-fabric.KnownResourceState'
   - '@azure/arm-fabric.KnownRpSkuTier'
+  - '@azure/arm-fabric.KnownVersions'
 classes:
   - '@azure/arm-fabric.FabricClient'
 interfaces:
   - '@azure/arm-fabric.CapacityAdministration'
+  - '@azure/arm-fabric.CapacityOverageProperties'
   - '@azure/arm-fabric.CheckNameAvailabilityRequest'
   - '@azure/arm-fabric.CheckNameAvailabilityResponse'
+  - '@azure/arm-fabric.ErrorAdditionalInfo'
+  - '@azure/arm-fabric.ErrorDetail'
+  - '@azure/arm-fabric.ErrorResponse'
   - '@azure/arm-fabric.FabricCapacitiesCheckNameAvailabilityOptionalParams'
   - '@azure/arm-fabric.FabricCapacitiesCreateOrUpdateOptionalParams'
   - '@azure/arm-fabric.FabricCapacitiesDeleteOptionalParams'
@@ -25,6 +32,7 @@ interfaces:
   - '@azure/arm-fabric.FabricCapacitiesListBySubscriptionOptionalParams'
   - '@azure/arm-fabric.FabricCapacitiesListSkusForCapacityOptionalParams'
   - '@azure/arm-fabric.FabricCapacitiesListSkusOptionalParams'
+  - '@azure/arm-fabric.FabricCapacitiesListUsagesOptionalParams'
   - '@azure/arm-fabric.FabricCapacitiesOperations'
   - '@azure/arm-fabric.FabricCapacitiesResumeOptionalParams'
   - '@azure/arm-fabric.FabricCapacitiesSuspendOptionalParams'
@@ -40,6 +48,8 @@ interfaces:
   - '@azure/arm-fabric.OperationsOperations'
   - '@azure/arm-fabric.PageSettings'
   - '@azure/arm-fabric.PagedAsyncIterableIterator'
+  - '@azure/arm-fabric.Quota'
+  - '@azure/arm-fabric.QuotaName'
   - '@azure/arm-fabric.Resource'
   - '@azure/arm-fabric.RestorePollerOptions'
   - '@azure/arm-fabric.RpSku'
@@ -47,8 +57,22 @@ interfaces:
   - '@azure/arm-fabric.RpSkuDetailsForNewResource'
   - '@azure/arm-fabric.SystemData'
   - '@azure/arm-fabric.TrackedResource'
+variables:
+  - name: RestError
+    uid: '@azure/arm-fabric.RestError'
+    package: '@azure/arm-fabric'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/arm-fabric.ActionType'
+  - '@azure/arm-fabric.AzureSupportedClouds'
+  - '@azure/arm-fabric.CapacityOverageState'
   - '@azure/arm-fabric.CheckNameAvailabilityReason'
   - '@azure/arm-fabric.ContinuablePage'
   - '@azure/arm-fabric.CreatedByType'
@@ -57,6 +81,21 @@ typeAliases:
   - '@azure/arm-fabric.ResourceState'
   - '@azure/arm-fabric.RpSkuTier'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-fabric.isRestError'
+    package: '@azure/arm-fabric'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: >-
       restorePoller<TResponse, TResult>(FabricClient, string, (args: any[]) =>
       PollerLike<OperationState<TResult>, TResult>,

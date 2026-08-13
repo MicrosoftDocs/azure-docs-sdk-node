@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: lambdatesthyperexecute
 ---
-# Azure HyperExecute client library for JavaScript - version 1.0.1-alpha.20260812.1 
+# Azure HyperExecute client library for JavaScript - version 1.0.1-alpha.20260813.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure HyperExecute client.

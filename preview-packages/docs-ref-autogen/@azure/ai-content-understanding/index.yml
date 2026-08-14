@@ -14,15 +14,19 @@ interfaces:
   - '@azure/ai-content-understanding.AnalysisOperationState'
   - '@azure/ai-content-understanding.AnalysisResult'
   - '@azure/ai-content-understanding.AnalysisResultPoller'
+  - '@azure/ai-content-understanding.AnalyzeBinaryInlineOptionalParams'
   - '@azure/ai-content-understanding.AnalyzeBinaryOptionalParams'
+  - '@azure/ai-content-understanding.AnalyzeInlineOptionalParams'
   - '@azure/ai-content-understanding.AnalyzeOptionalParams'
   - '@azure/ai-content-understanding.ArrayField'
   - '@azure/ai-content-understanding.AudioVisualContent'
   - '@azure/ai-content-understanding.AudioVisualContentSegment'
   - '@azure/ai-content-understanding.BooleanField'
+  - '@azure/ai-content-understanding.ChunkingStrategy'
   - '@azure/ai-content-understanding.ContentAnalyzer'
   - '@azure/ai-content-understanding.ContentAnalyzerAnalyzeOperationStatus'
   - '@azure/ai-content-understanding.ContentAnalyzerConfig'
+  - '@azure/ai-content-understanding.ContentAnalyzerInlineResponse'
   - '@azure/ai-content-understanding.ContentAnalyzerOperationStatus'
   - '@azure/ai-content-understanding.ContentCategoryDefinition'
   - '@azure/ai-content-understanding.ContentField'
@@ -42,6 +46,7 @@ interfaces:
   - '@azure/ai-content-understanding.DocumentBarcode'
   - '@azure/ai-content-understanding.DocumentCaption'
   - '@azure/ai-content-understanding.DocumentChartFigure'
+  - '@azure/ai-content-understanding.DocumentChunk'
   - '@azure/ai-content-understanding.DocumentContent'
   - '@azure/ai-content-understanding.DocumentContentSegment'
   - '@azure/ai-content-understanding.DocumentFigure'
@@ -53,6 +58,7 @@ interfaces:
   - '@azure/ai-content-understanding.DocumentPage'
   - '@azure/ai-content-understanding.DocumentParagraph'
   - '@azure/ai-content-understanding.DocumentSection'
+  - '@azure/ai-content-understanding.DocumentSignature'
   - '@azure/ai-content-understanding.DocumentTable'
   - '@azure/ai-content-understanding.DocumentTableCell'
   - '@azure/ai-content-understanding.DocumentWord'
@@ -72,6 +78,7 @@ interfaces:
   - '@azure/ai-content-understanding.PageSettings'
   - '@azure/ai-content-understanding.PagedAsyncIterableIterator'
   - '@azure/ai-content-understanding.RecordMergePatchUpdate'
+  - '@azure/ai-content-understanding.SemanticChunkingStrategy'
   - '@azure/ai-content-understanding.StringField'
   - '@azure/ai-content-understanding.SupportedModels'
   - '@azure/ai-content-understanding.TimeField'
@@ -81,12 +88,27 @@ interfaces:
   - '@azure/ai-content-understanding.UpdateAnalyzerOptionalParams'
   - '@azure/ai-content-understanding.UpdateDefaultsOptionalParams'
   - '@azure/ai-content-understanding.UsageDetails'
+variables:
+  - name: RestError
+    uid: '@azure/ai-content-understanding.RestError'
+    package: '@azure/ai-content-understanding'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/ai-content-understanding.AnalysisContentKind'
   - '@azure/ai-content-understanding.AnalysisContentUnion'
   - '@azure/ai-content-understanding.AnnotationFormat'
   - '@azure/ai-content-understanding.ChartFormat'
+  - '@azure/ai-content-understanding.ChunkingStrategyKind'
+  - '@azure/ai-content-understanding.ChunkingStrategyUnion'
   - '@azure/ai-content-understanding.ContentAnalyzerStatus'
+  - '@azure/ai-content-understanding.ContentAnalyzerWorkflow'
   - '@azure/ai-content-understanding.ContentFieldType'
   - '@azure/ai-content-understanding.ContentFieldUnion'
   - '@azure/ai-content-understanding.ContinuablePage'
@@ -105,6 +127,21 @@ typeAliases:
   - '@azure/ai-content-understanding.SemanticRole'
   - '@azure/ai-content-understanding.TableFormat'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/ai-content-understanding.isRestError'
+    package: '@azure/ai-content-understanding'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: toLlmInput(AnalysisResult, ToLlmInputOptions)
     uid: '@azure/ai-content-understanding.toLlmInput'
     package: '@azure/ai-content-understanding'
@@ -121,7 +158,13 @@ functions:
 
       The YAML front matter may include:
 
-      - `contentType` — document, audioVisual
+      - `mimeType` — detected content MIME type (e.g. `application/pdf`,
+      `audio/mpeg`, `video/mp4`)
+
+      - `customMetadata` — caller-supplied key-value pairs from
+      `options.customMetadata`
+
+      - `metadata` — analysis-result metadata from `AnalysisContent.metadata`
 
       - `pages` — page number or range (e.g. `1` or `1-3`)
 
@@ -131,9 +174,7 @@ functions:
 
       - `fields` — extracted structured fields as YAML
 
-      - `rai_warnings` — content safety flags
-
-      - any caller-supplied `metadata` entries
+      - `warnings` — content safety flags
 
 
       The markdown body contains the extracted text with page-break markers

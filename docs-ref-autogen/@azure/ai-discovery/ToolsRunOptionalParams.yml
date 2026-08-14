@@ -1,0 +1,215 @@
+### YamlMime:TSType
+name: ToolsRunOptionalParams
+uid: '@azure/ai-discovery.ToolsRunOptionalParams'
+package: '@azure/ai-discovery'
+summary: Optional parameters.
+fullName: ToolsRunOptionalParams
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: command
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.command'
+    package: '@azure/ai-discovery'
+    summary: >-
+      Command to pass to tool container entrypoint.
+
+
+      If the tool has multiple containers defined, this command is executed on
+      all of them.
+
+
+      If omitted, all containers execute their raw entrypoints.
+
+
+      This command is parsed into an argument list which is passed to the
+      underlying container runtime.
+
+      For example, if the command is "python /code/wrapper.py --input
+      /inputs/abcdef-input-1/input.txt --output /outputs/abcdef-output-1",
+
+      then the container runtime will receive the following argument list:
+
+      ["python", "/code/wrapper.py", "--input",
+      "/inputs/abcdef-input-1/input.txt", "--output",
+      "/outputs/abcdef-output-1"]
+
+
+      The container's entrypoint is not overridden. In Docker terminology, the
+      above argument list becomes
+
+      the CMD, not the ENTRYPOINT of the launched container.
+
+
+      Our parsing includes the following limited interpretation of special
+      characters:
+
+      - The only special characters are " ' and \.
+
+      - Backslashes `\` escape the next character if that character is a special
+      character, preserving its literal value.
+
+      - Double quotes `"` preserve everything inside them literally, with the
+      exception of the characters " and \, which must be escaped with a
+      backslash ``. Unmatched quotes will throw an error.
+
+      - Single quotes `'` preserve everything inside them literally. A
+      single-quote cannot occur within single-quotes. Unmatched quotes will
+      throw an error.
+
+
+      If you wish to run a command that relies on shell features such as
+      globbing or output redirection, you either need to:
+
+      - use a container with an entrypoint that is a shell (e.g. `/bin/sh` or
+      `/bin/bash`) and pass a command which is valid for that shell e.g.
+
+      `-c 'python /code/wrapper.py --input /inputs/abcdef-input-1/* --output
+      /outputs/abcdef-output-1'`
+
+      - use a container which has a shell installed, and include the shell in
+      the command, e.g.
+
+      `sh -c "python /code/wrapper.py --input /inputs/abcdef-input-1/* --output
+      /outputs/abcdef-output-1"`
+    fullName: command
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'command?: string'
+      return:
+        description: ''
+        type: string
+  - name: environmentVariables
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.environmentVariables'
+    package: '@azure/ai-discovery'
+    summary: >-
+      Optional environment variables to set in the tool container. This must not
+      contain any secrets.
+    fullName: environmentVariables
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'environmentVariables?: { name: string, value?: string }[]'
+      return:
+        description: ''
+        type: '{ name: string, value?: string }[]'
+  - name: infraOverrides
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.infraOverrides'
+    package: '@azure/ai-discovery'
+    summary: Override the infrastructure requirements in the tool definitions.
+    fullName: infraOverrides
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'infraOverrides?: InfraOverrides'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-discovery.InfraOverrides" />
+  - name: inlineFiles
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.inlineFiles'
+    package: '@azure/ai-discovery'
+    summary: >-
+      Encoded inline files to be mounted into the container, e.g. for generated
+      code.
+    fullName: inlineFiles
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'inlineFiles?: InlineFile[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-discovery.InlineFile" />[]
+  - name: inputData
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.inputData'
+    package: '@azure/ai-discovery'
+    summary: Input data references and mount paths.
+    fullName: inputData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'inputData?: InputDataMount[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-discovery.InputDataMount" />[]
+  - name: outputData
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.outputData'
+    package: '@azure/ai-discovery'
+    summary: Output data references and mount paths.
+    fullName: outputData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'outputData?: OutputDataMount[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-discovery.OutputDataMount" />[]
+  - name: updateIntervalInMs
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.updateIntervalInMs'
+    package: '@azure/ai-discovery'
+    summary: Delay to wait until next poll, in milliseconds.
+    fullName: updateIntervalInMs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'updateIntervalInMs?: number'
+      return:
+        description: ''
+        type: number
+inheritedProperties:
+  - name: abortSignal
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.abortSignal'
+    package: '@azure/ai-discovery'
+    summary: The signal which can be used to abort requests.
+    fullName: abortSignal
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'abortSignal?: AbortSignalLike'
+      return:
+        description: ''
+        type: <xref uid="@azure/abort-controller.AbortSignalLike" />
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.abortSignal
+  - name: onResponse
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.onResponse'
+    package: '@azure/ai-discovery'
+    summary: |-
+      A function to be called each time a response is received from the server
+      while performing the requested operation.
+      May be called multiple times.
+    fullName: onResponse
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'onResponse?: RawResponseCallback'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/core-client.RawResponseCallback" />
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.onResponse
+  - name: requestOptions
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.requestOptions'
+    package: '@azure/ai-discovery'
+    summary: Options used when creating and sending HTTP requests for this operation.
+    fullName: requestOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'requestOptions?: OperationRequestOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/core-client.OperationRequestOptions" />
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.requestOptions
+  - name: tracingOptions
+    uid: '@azure/ai-discovery.ToolsRunOptionalParams.tracingOptions'
+    package: '@azure/ai-discovery'
+    summary: Options used when tracing is enabled.
+    fullName: tracingOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'tracingOptions?: OperationTracingOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-tracing.OperationTracingOptions" />
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.tracingOptions
+extends: <xref uid="@azure-rest/core-client.OperationOptions" />

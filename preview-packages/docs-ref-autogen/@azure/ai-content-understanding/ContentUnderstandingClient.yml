@@ -73,16 +73,52 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/ai-content-understanding.AnalysisResultPoller" />
-  - name: analyzeBinary(string, Uint8Array, string, AnalyzeBinaryOptionalParams)
+  - name: analyzeBinary(string, Uint8Array, AnalyzeBinaryOptionalParams)
     uid: '@azure/ai-content-understanding.ContentUnderstandingClient.analyzeBinary'
     package: '@azure/ai-content-understanding'
-    summary: Extract content and fields from input.
+    summary: Extract content and fields from binary input.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function analyzeBinary(analyzerId: string, binaryInput: Uint8Array,
-        contentType?: string, options?: AnalyzeBinaryOptionalParams):
+        options?: AnalyzeBinaryOptionalParams): AnalysisResultPoller
+      parameters:
+        - id: analyzerId
+          type: string
+          description: The analyzer to use (e.g. `"prebuilt-documentSearch"`).
+        - id: binaryInput
+          type: Uint8Array
+          description: The raw bytes to analyze.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-content-understanding.AnalyzeBinaryOptionalParams" />
+          description: |-
+            Optional operation parameters, including `contentType` (MIME type),
+                             `contentRange`, `allowInputTruncation`, `updateIntervalInMs`, etc.
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-content-understanding.AnalysisResultPoller" />
+  - name: >-
+      analyzeBinary(string, Uint8Array, undefined | string,
+      AnalyzeBinaryOptionalParams)
+    uid: '@azure/ai-content-understanding.ContentUnderstandingClient.analyzeBinary_1'
+    package: '@azure/ai-content-understanding'
+    summary: >-
+      Extract content and fields from binary input (deprecated positional
+      shape).
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: |-
+      Prefer the options-bag overload
+        `analyzeBinary(analyzerId, binaryInput, { contentType, ... })`. When both this
+        positional argument and `options.contentType` are provided with different values,
+        a `TypeError` is thrown before any request is sent.
+    syntax:
+      content: >-
+        function analyzeBinary(analyzerId: string, binaryInput: Uint8Array,
+        contentType: undefined | string, options?: AnalyzeBinaryOptionalParams):
         AnalysisResultPoller
       parameters:
         - id: analyzerId
@@ -92,7 +128,7 @@ methods:
           type: Uint8Array
           description: ''
         - id: contentType
-          type: string
+          type: undefined | string
           description: ''
         - id: options
           type: >-
@@ -102,6 +138,71 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/ai-content-understanding.AnalysisResultPoller" />
+  - name: analyzeBinaryInline(string, Uint8Array, AnalyzeBinaryInlineOptionalParams)
+    uid: >-
+      @azure/ai-content-understanding.ContentUnderstandingClient.analyzeBinaryInline
+    package: '@azure/ai-content-understanding'
+    summary: >-
+      Extract content and fields from binary input inline (synchronous, no
+      polling).
+    remarks: >-
+      Available only when the client is configured for service API version
+      `2026-06-01-preview`.
+    isDeprecated: false
+    syntax:
+      content: >-
+        function analyzeBinaryInline(analyzerId: string, binaryInput:
+        Uint8Array, options?: AnalyzeBinaryInlineOptionalParams):
+        Promise<AnalysisResult>
+      parameters:
+        - id: analyzerId
+          type: string
+          description: The analyzer to use (e.g. `"prebuilt-layout"`).
+        - id: binaryInput
+          type: Uint8Array
+          description: The raw bytes to analyze.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-content-understanding.AnalyzeBinaryInlineOptionalParams"
+            />
+          description: |-
+            Optional operation parameters, including `contentType` (MIME type),
+                             `contentRange`, `allowInputTruncation`, etc.
+      return:
+        description: The analysis result returned directly by the service.
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-content-understanding.AnalysisResult"
+          />&gt;
+  - name: analyzeInline(string, AnalysisInput[], AnalyzeInlineOptionalParams)
+    uid: '@azure/ai-content-understanding.ContentUnderstandingClient.analyzeInline'
+    package: '@azure/ai-content-understanding'
+    summary: Extract content and fields from input inline (synchronous, no polling).
+    remarks: >-
+      Available only when the client is configured for service API version
+      `2026-06-01-preview`.
+    isDeprecated: false
+    syntax:
+      content: >-
+        function analyzeInline(analyzerId: string, inputs: AnalysisInput[],
+        options?: AnalyzeInlineOptionalParams): Promise<AnalysisResult>
+      parameters:
+        - id: analyzerId
+          type: string
+          description: The analyzer to use (e.g. `"prebuilt-layout"`).
+        - id: inputs
+          type: <xref uid="@azure/ai-content-understanding.AnalysisInput" />[]
+          description: The URL-based inputs to analyze.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-content-understanding.AnalyzeInlineOptionalParams" />
+          description: Optional operation parameters.
+      return:
+        description: The analysis result returned directly by the service.
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-content-understanding.AnalysisResult"
+          />&gt;
   - name: copyAnalyzer(string, string, CopyAnalyzerOptionalParams)
     uid: '@azure/ai-content-understanding.ContentUnderstandingClient.copyAnalyzer'
     package: '@azure/ai-content-understanding'

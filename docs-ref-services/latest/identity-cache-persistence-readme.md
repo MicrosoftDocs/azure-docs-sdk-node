@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/identity-cache-persistence, entra-id
-ms.date: 04/09/2026
+ms.date: 08/18/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: entra-id
@@ -10,7 +10,7 @@ ms.service: entra-id
 
 This package provides a plugin to the Azure Identity library for JavaScript ([`@azure/identity`](https://npmjs.com/package/@azure/identity)) that enables persistent token caching. Token cache persistence allows the built-in token cache to persist across sessions using a secure storage system provided by the local operating system.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-cache-persistence_1.3.0/sdk/identity/identity-cache-persistence) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.3.0/sdk/identity/identity-cache-persistence/samples-dev)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity-cache-persistence_1.3.1/sdk/identity/identity-cache-persistence) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.3.1/sdk/identity/identity-cache-persistence/samples-dev)
 
 ## Getting started
 
@@ -33,7 +33,7 @@ Azure Identity plugins for JavaScript support stable (even numbered) versions of
 
 ## Key concepts
 
-If this is your first time using `@azure/identity` or Microsoft Entra ID, we recommend that you read [Using `@azure/identity` with Microsoft Entra ID](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.3.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
+If this is your first time using `@azure/identity` or Microsoft Entra ID, we recommend that you read [Using `@azure/identity` with Microsoft Entra ID](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.3.1/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
 
 ### Azure Identity Plugins
 
@@ -88,5 +88,5 @@ If you encounter bugs or have suggestions, please [open an issue](https://github
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity-cache-persistence_1.3.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 

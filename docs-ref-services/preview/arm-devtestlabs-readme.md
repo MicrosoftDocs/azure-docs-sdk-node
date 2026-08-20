@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: devtest-lab
 ---
-# Azure DevTestLabs client library for JavaScript - version 4.1.2-alpha.20260819.1 
+# Azure DevTestLabs client library for JavaScript - version 4.1.2-alpha.20260820.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DevTestLabs client.

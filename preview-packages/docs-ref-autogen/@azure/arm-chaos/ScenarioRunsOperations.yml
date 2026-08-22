@@ -19,17 +19,30 @@ properties:
       content: >-
         cancel: (resourceGroupName: string, workspaceName: string, scenarioName:
         string, runId: string, options?: ScenarioRunsCancelOptionalParams) =>
-        Promise<void>
+        PollerLike<OperationState<ScenarioRun>, ScenarioRun>
       return:
         description: ''
         type: >-
           (resourceGroupName: string, workspaceName: string, scenarioName:
           string, runId: string, options?: ScenarioRunsCancelOptionalParams)
-          =&gt; Promise&lt;void&gt;
+          =&gt; PollerLike&lt;OperationState&lt;ScenarioRun&gt;, ScenarioRun&gt;
   - name: get
     uid: '@azure/arm-chaos.ScenarioRunsOperations.get'
     package: '@azure/arm-chaos'
-    summary: Get a scenario run.
+    summary: >-
+      Get a scenario run.
+
+
+      This endpoint is also the polling target for
+      ScenarioConfigurations.execute
+
+      and ScenarioRuns.cancel (final-state-via: location). While the run is in
+
+      progress the service returns 202 with a Location header pointing back to
+
+      this URL; clients must keep polling until they receive 200, which carries
+
+      the final ScenarioRun body.
     fullName: get
     remarks: ''
     isDeprecated: false

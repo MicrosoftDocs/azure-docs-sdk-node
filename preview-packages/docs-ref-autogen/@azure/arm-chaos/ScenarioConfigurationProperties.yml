@@ -8,32 +8,6 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: exclusions
-    uid: '@azure/arm-chaos.ScenarioConfigurationProperties.exclusions'
-    package: '@azure/arm-chaos'
-    summary: Exclusion criteria for protecting resources from fault injection.
-    fullName: exclusions
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'exclusions?: ConfigurationExclusions'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-chaos.ConfigurationExclusions" />
-  - name: filters
-    uid: '@azure/arm-chaos.ScenarioConfigurationProperties.filters'
-    package: '@azure/arm-chaos'
-    summary: >-
-      Filter criteria used to constrain which discovered resources participate
-      in fault injection.
-    fullName: filters
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'filters?: ConfigurationFilters'
-      return:
-        description: ''
-        type: <xref uid="@azure/arm-chaos.ConfigurationFilters" />
   - name: parameters
     uid: '@azure/arm-chaos.ScenarioConfigurationProperties.parameters'
     package: '@azure/arm-chaos'
@@ -60,6 +34,38 @@ properties:
       return:
         description: ''
         type: string
+  - name: resourceTargeting
+    uid: '@azure/arm-chaos.ScenarioConfigurationProperties.resourceTargeting'
+    package: '@azure/arm-chaos'
+    summary: >-
+      Unified resource targeting policy that controls which discovered resources
+      participate
+
+      in fault injection. Replaces the separate `exclusions` and `filters`
+      properties with
+
+      symmetric include/exclude criteria.
+
+
+      Include uses AND logic — a resource must match ALL active include
+      dimensions.
+
+      Exclude uses OR logic — a resource is removed if it matches ANY exclude
+      dimension.
+
+      When include and exclude conflict on the same resource, exclude wins.
+
+
+      Null or omitted means all discovered resources participate (no targeting
+      constraints).
+    fullName: resourceTargeting
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'resourceTargeting?: ResourceTargeting'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-chaos.ResourceTargeting" />
   - name: scenarioId
     uid: '@azure/arm-chaos.ScenarioConfigurationProperties.scenarioId'
     package: '@azure/arm-chaos'

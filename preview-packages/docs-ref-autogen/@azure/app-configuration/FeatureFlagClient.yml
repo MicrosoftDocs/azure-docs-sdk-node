@@ -1,0 +1,401 @@
+### YamlMime:TSType
+name: FeatureFlagClient
+uid: '@azure/app-configuration.FeatureFlagClient'
+package: '@azure/app-configuration'
+summary: |-
+  Client for managing feature flags through the dedicated feature flag endpoint
+  of the Azure App Configuration service.
+
+  This requires the `2026-05-01-preview` API version or later.
+fullName: FeatureFlagClient
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: FeatureFlagClient(string, FeatureFlagClientOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.constructor'
+    package: '@azure/app-configuration'
+    summary: Initializes a new instance of the FeatureFlagClient class.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new FeatureFlagClient(connectionString: string, options?:
+        FeatureFlagClientOptions)
+      parameters:
+        - id: connectionString
+          type: string
+          description: The connection string of the App Configuration service.
+        - id: options
+          type: <xref uid="@azure/app-configuration.FeatureFlagClientOptions" />
+          description: Options for the FeatureFlagClient.
+  - name: FeatureFlagClient(string, TokenCredential, FeatureFlagClientOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.constructor_1'
+    package: '@azure/app-configuration'
+    summary: >-
+      Initializes a new instance of the FeatureFlagClient class using a
+      TokenCredential.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        new FeatureFlagClient(endpoint: string, tokenCredential:
+        TokenCredential, options?: FeatureFlagClientOptions)
+      parameters:
+        - id: endpoint
+          type: string
+          description: >-
+            The endpoint of the App Configuration service (ex:
+            https://sample.azconfig.io).
+        - id: tokenCredential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: >-
+            An object that implements the `TokenCredential` interface used to
+            authenticate requests to the service. Use the @azure/identity
+            package to create a credential that suits your needs.
+        - id: options
+          type: <xref uid="@azure/app-configuration.FeatureFlagClientOptions" />
+          description: Options for the FeatureFlagClient.
+methods:
+  - name: addFeatureFlag(FeatureFlagParam, AddFeatureFlagOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.addFeatureFlag'
+    package: '@azure/app-configuration'
+    summary: >-
+      Adds a feature flag through the dedicated feature flag endpoint, failing
+      if the
+
+      feature flag already exists.
+
+
+      Example usage:
+
+      ```ts snippet:AddFeatureFlag
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { FeatureFlagClient } from "@azure/app-configuration";
+
+
+      const endpoint = "https://example.azconfig.io";
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new FeatureFlagClient(endpoint, credential);
+
+
+      const result = await client.addFeatureFlag({
+        name: "MyFeatureFlag",
+        enabled: true,
+      });
+
+      console.log(`Feature flag ${result.name} is enabled: ${result.enabled}`);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addFeatureFlag(featureFlag: FeatureFlagParam, options?:
+        AddFeatureFlagOptions): Promise<AddFeatureFlagResponse>
+      parameters:
+        - id: featureFlag
+          type: <xref uid="@azure/app-configuration.FeatureFlagParam" />
+          description: >-
+            The feature flag to add. Its `name` and `label` identify the
+            resource.
+        - id: options
+          type: <xref uid="@azure/app-configuration.AddFeatureFlagOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.AddFeatureFlagResponse"
+          />&gt;
+  - name: deleteFeatureFlag(FeatureFlagId, DeleteFeatureFlagOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.deleteFeatureFlag'
+    package: '@azure/app-configuration'
+    summary: |-
+      Delete a feature flag through the dedicated feature flag endpoint.
+
+      Example usage:
+      ```ts snippet:DeleteFeatureFlag
+      import { DefaultAzureCredential } from "@azure/identity";
+      import { FeatureFlagClient } from "@azure/app-configuration";
+
+      const endpoint = "https://example.azconfig.io";
+      const credential = new DefaultAzureCredential();
+      const client = new FeatureFlagClient(endpoint, credential);
+
+      await client.deleteFeatureFlag({ name: "MyFeatureFlag" });
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteFeatureFlag(id: FeatureFlagId, options?:
+        DeleteFeatureFlagOptions): Promise<DeleteFeatureFlagResponse>
+      parameters:
+        - id: id
+          type: <xref uid="@azure/app-configuration.FeatureFlagId" />
+          description: The id of the feature flag to delete.
+        - id: options
+          type: <xref uid="@azure/app-configuration.DeleteFeatureFlagOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/app-configuration.DeleteFeatureFlagResponse" />&gt;
+  - name: getFeatureFlag(FeatureFlagId, GetFeatureFlagOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.getFeatureFlag'
+    package: '@azure/app-configuration'
+    summary: >-
+      Get a feature flag through the dedicated feature flag endpoint.
+
+
+      Example usage:
+
+      ```ts snippet:GetFeatureFlag
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { FeatureFlagClient } from "@azure/app-configuration";
+
+
+      const endpoint = "https://example.azconfig.io";
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new FeatureFlagClient(endpoint, credential);
+
+
+      const featureFlag = await client.getFeatureFlag({ name: "MyFeatureFlag"
+      });
+
+      console.log(`Feature flag ${featureFlag.name} is enabled:
+      ${featureFlag.enabled}`);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getFeatureFlag(id: FeatureFlagId, options?:
+        GetFeatureFlagOptions): Promise<GetFeatureFlagResponse>
+      parameters:
+        - id: id
+          type: <xref uid="@azure/app-configuration.FeatureFlagId" />
+          description: The id of the feature flag to retrieve.
+        - id: options
+          type: <xref uid="@azure/app-configuration.GetFeatureFlagOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.GetFeatureFlagResponse"
+          />&gt;
+  - name: listFeatureFlagRevisions(ListFeatureFlagRevisionsOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.listFeatureFlagRevisions'
+    package: '@azure/app-configuration'
+    summary: >-
+      List revisions of a feature flag through the dedicated feature flag
+      endpoint.
+
+
+      Example usage:
+
+      ```ts snippet:ListFeatureFlagRevisions
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { FeatureFlagClient } from "@azure/app-configuration";
+
+
+      const endpoint = "https://example.azconfig.io";
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new FeatureFlagClient(endpoint, credential);
+
+
+      for await (const featureFlag of client.listFeatureFlagRevisions({
+        nameFilter: "MyFeatureFlag",
+      })) {
+        console.log(`Revision last modified: ${featureFlag.lastModified}`);
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listFeatureFlagRevisions(options?:
+        ListFeatureFlagRevisionsOptions):
+        PagedAsyncIterableIterator<FeatureFlag, ListFeatureFlagRevisionsPage,
+        PageSettings>
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@azure/app-configuration.ListFeatureFlagRevisionsOptions"
+            />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/app-configuration.FeatureFlag" />, <xref
+          uid="@azure/app-configuration.ListFeatureFlagRevisionsPage" />, <xref
+          uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: listFeatureFlags(ListFeatureFlagsOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.listFeatureFlags'
+    package: '@azure/app-configuration'
+    summary: >-
+      List feature flags through the dedicated feature flag endpoint.
+
+
+      Example usage:
+
+      ```ts snippet:ListFeatureFlags
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { FeatureFlagClient } from "@azure/app-configuration";
+
+
+      const endpoint = "https://example.azconfig.io";
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new FeatureFlagClient(endpoint, credential);
+
+
+      for await (const featureFlag of client.listFeatureFlags()) {
+        console.log(`Feature flag: ${featureFlag.name}`);
+      }
+
+      ```
+
+
+      To conditionally retrieve pages, pass a `pageEtags` array (one etag per
+      page). Each etag is sent
+
+      as an `If-None-Match` header, and unchanged pages are returned as empty
+      pages with their `etag`
+
+      preserved, mirroring `AppConfigurationClient.listConfigurationSettings`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listFeatureFlags(options?: ListFeatureFlagsOptions):
+        PagedAsyncIterableIterator<FeatureFlag, ListFeatureFlagPage,
+        PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/app-configuration.ListFeatureFlagsOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/app-configuration.FeatureFlag" />, <xref
+          uid="@azure/app-configuration.ListFeatureFlagPage" />, <xref
+          uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: listLabels(ListLabelsOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.listLabels'
+    package: '@azure/app-configuration'
+    summary: >-
+      List the labels used by feature flags through the dedicated feature flag
+      endpoint.
+
+
+      Example usage:
+
+      ```ts snippet:ListFeatureFlagLabels
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { FeatureFlagClient } from "@azure/app-configuration";
+
+
+      const endpoint = "https://example.azconfig.io";
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new FeatureFlagClient(endpoint, credential);
+
+
+      for await (const label of client.listLabels()) {
+        console.log(`Found label: ${label.name}`);
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listLabels(options?: ListLabelsOptions):
+        PagedAsyncIterableIterator<SettingLabel, ListLabelsPage, PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/app-configuration.ListLabelsOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
+          uid="@azure/app-configuration.SettingLabel" />, <xref
+          uid="@azure/app-configuration.ListLabelsPage" />, <xref
+          uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: setFeatureFlag(FeatureFlagParam, SetFeatureFlagOptions)
+    uid: '@azure/app-configuration.FeatureFlagClient.setFeatureFlag'
+    package: '@azure/app-configuration'
+    summary: >-
+      Adds or updates a feature flag through the dedicated feature flag
+      endpoint.
+
+
+      Example usage:
+
+      ```ts snippet:SetFeatureFlag
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { FeatureFlagClient } from "@azure/app-configuration";
+
+
+      const endpoint = "https://example.azconfig.io";
+
+      const credential = new DefaultAzureCredential();
+
+      const client = new FeatureFlagClient(endpoint, credential);
+
+
+      const result = await client.setFeatureFlag({
+        name: "MyFeatureFlag",
+        enabled: true,
+      });
+
+      console.log(`Feature flag ${result.name} is enabled: ${result.enabled}`);
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setFeatureFlag(featureFlag: FeatureFlagParam, options?:
+        SetFeatureFlagOptions): Promise<SetFeatureFlagResponse>
+      parameters:
+        - id: featureFlag
+          type: <xref uid="@azure/app-configuration.FeatureFlagParam" />
+          description: >-
+            The feature flag to add or update. Its `name` and `label` identify
+            the resource.
+        - id: options
+          type: <xref uid="@azure/app-configuration.SetFeatureFlagOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.SetFeatureFlagResponse"
+          />&gt;

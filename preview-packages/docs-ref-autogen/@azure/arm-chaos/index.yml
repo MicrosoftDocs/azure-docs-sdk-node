@@ -9,6 +9,8 @@ enums:
   - '@azure/arm-chaos.KnownActionKind'
   - '@azure/arm-chaos.KnownActionLifecycle'
   - '@azure/arm-chaos.KnownActionType'
+  - '@azure/arm-chaos.KnownConnectionKind'
+  - '@azure/arm-chaos.KnownConnectionStatus'
   - '@azure/arm-chaos.KnownCreatedByType'
   - '@azure/arm-chaos.KnownExperimentActionType'
   - '@azure/arm-chaos.KnownFilterType'
@@ -28,6 +30,7 @@ enums:
   - '@azure/arm-chaos.KnownSelectorType'
   - '@azure/arm-chaos.KnownTargetReferenceType'
   - '@azure/arm-chaos.KnownVersions'
+  - '@azure/arm-chaos.KnownWorkspaceDiscoveryStatus'
   - '@azure/arm-chaos.KnownWorkspaceEvaluationStatus'
   - '@azure/arm-chaos.KnownZoneResolutionMode'
 classes:
@@ -69,8 +72,13 @@ interfaces:
   - '@azure/arm-chaos.ChaosTargetSelector'
   - '@azure/arm-chaos.ChaosTargetSimpleFilter'
   - '@azure/arm-chaos.ChaosTargetSimpleFilterParameters'
-  - '@azure/arm-chaos.ConfigurationExclusions'
-  - '@azure/arm-chaos.ConfigurationFilters'
+  - '@azure/arm-chaos.Connection'
+  - '@azure/arm-chaos.ConnectionProperties'
+  - '@azure/arm-chaos.ConnectionsCreateOrUpdateOptionalParams'
+  - '@azure/arm-chaos.ConnectionsDeleteOptionalParams'
+  - '@azure/arm-chaos.ConnectionsGetOptionalParams'
+  - '@azure/arm-chaos.ConnectionsListAllOptionalParams'
+  - '@azure/arm-chaos.ConnectionsOperations'
   - '@azure/arm-chaos.ContinuousAction'
   - '@azure/arm-chaos.CustomerDataStorageProperties'
   - '@azure/arm-chaos.DelayAction'
@@ -151,6 +159,8 @@ interfaces:
   - '@azure/arm-chaos.Recommendation'
   - '@azure/arm-chaos.Resource'
   - '@azure/arm-chaos.ResourceStateError'
+  - '@azure/arm-chaos.ResourceTargeting'
+  - '@azure/arm-chaos.ResourceTargetingCriteria'
   - '@azure/arm-chaos.RestorePollerOptions'
   - '@azure/arm-chaos.RoleAssignmentError'
   - '@azure/arm-chaos.RoleAssignmentResult'
@@ -168,7 +178,6 @@ interfaces:
   - '@azure/arm-chaos.ScenarioConfigurationsOperations'
   - '@azure/arm-chaos.ScenarioConfigurationsValidateOptionalParams'
   - '@azure/arm-chaos.ScenarioErrors'
-  - '@azure/arm-chaos.ScenarioEvaluationResultItem'
   - '@azure/arm-chaos.ScenarioParameter'
   - '@azure/arm-chaos.ScenarioProperties'
   - '@azure/arm-chaos.ScenarioRun'
@@ -198,25 +207,41 @@ interfaces:
   - '@azure/arm-chaos.TargetsGetOptionalParams'
   - '@azure/arm-chaos.TargetsListOptionalParams'
   - '@azure/arm-chaos.TargetsOperations'
+  - '@azure/arm-chaos.TemplateEvaluationResultItem'
   - '@azure/arm-chaos.TrackedResource'
   - '@azure/arm-chaos.UserAssignedIdentity'
   - '@azure/arm-chaos.Validation'
   - '@azure/arm-chaos.ValidationProperties'
   - '@azure/arm-chaos.Workspace'
+  - '@azure/arm-chaos.WorkspaceDiscovery'
+  - '@azure/arm-chaos.WorkspaceDiscoveryProperties'
   - '@azure/arm-chaos.WorkspaceEvaluation'
   - '@azure/arm-chaos.WorkspaceEvaluationProperties'
   - '@azure/arm-chaos.WorkspaceProperties'
   - '@azure/arm-chaos.WorkspaceUpdate'
   - '@azure/arm-chaos.WorkspacesCreateOrUpdateOptionalParams'
   - '@azure/arm-chaos.WorkspacesDeleteOptionalParams'
+  - '@azure/arm-chaos.WorkspacesDiscoverOptionalParams'
+  - '@azure/arm-chaos.WorkspacesEvaluateOptionalParams'
   - '@azure/arm-chaos.WorkspacesGetOptionalParams'
   - '@azure/arm-chaos.WorkspacesListAllOptionalParams'
   - '@azure/arm-chaos.WorkspacesListOptionalParams'
   - '@azure/arm-chaos.WorkspacesOperations'
-  - '@azure/arm-chaos.WorkspacesRefreshRecommendationsOptionalParams'
   - '@azure/arm-chaos.WorkspacesUpdateOptionalParams'
   - '@azure/arm-chaos.ZoneResolutionInfo'
   - '@azure/arm-chaos.ZoneResolutionMapping'
+variables:
+  - name: RestError
+    uid: '@azure/arm-chaos.RestError'
+    package: '@azure/arm-chaos'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/arm-chaos.ActionDependencyType'
   - '@azure/arm-chaos.ActionKind'
@@ -226,6 +251,8 @@ typeAliases:
   - '@azure/arm-chaos.ChaosExperimentActionUnion'
   - '@azure/arm-chaos.ChaosTargetFilterUnion'
   - '@azure/arm-chaos.ChaosTargetSelectorUnion'
+  - '@azure/arm-chaos.ConnectionKind'
+  - '@azure/arm-chaos.ConnectionStatus'
   - '@azure/arm-chaos.ContinuablePage'
   - '@azure/arm-chaos.CreatedByType'
   - '@azure/arm-chaos.ExperimentActionType'
@@ -245,9 +272,25 @@ typeAliases:
   - '@azure/arm-chaos.ScenarioValidationState'
   - '@azure/arm-chaos.SelectorType'
   - '@azure/arm-chaos.TargetReferenceType'
+  - '@azure/arm-chaos.WorkspaceDiscoveryStatus'
   - '@azure/arm-chaos.WorkspaceEvaluationStatus'
   - '@azure/arm-chaos.ZoneResolutionMode'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-chaos.isRestError'
+    package: '@azure/arm-chaos'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: >-
       restorePoller<TResponse, TResult>(ChaosManagementClient, string, (args:
       any[]) => PollerLike<OperationState<TResult>, TResult>,

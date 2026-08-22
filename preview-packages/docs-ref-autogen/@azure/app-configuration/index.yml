@@ -5,14 +5,22 @@ summary: ''
 type: package
 enums:
   - '@azure/app-configuration.KnownAppConfigAudience'
+  - '@azure/app-configuration.KnownAppConfigurationApiVersion'
   - '@azure/app-configuration.KnownConfigurationSnapshotStatus'
+  - '@azure/app-configuration.KnownFeatureFlagApiVersion'
+  - '@azure/app-configuration.KnownRequirementType'
   - '@azure/app-configuration.KnownSnapshotComposition'
+  - '@azure/app-configuration.KnownStatusOverride'
 classes:
   - '@azure/app-configuration.AppConfigurationClient'
+  - '@azure/app-configuration.FeatureFlagClient'
 interfaces:
   - '@azure/app-configuration.AddConfigurationSettingOptions'
   - '@azure/app-configuration.AddConfigurationSettingResponse'
+  - '@azure/app-configuration.AddFeatureFlagOptions'
+  - '@azure/app-configuration.AddFeatureFlagResponse'
   - '@azure/app-configuration.AppConfigurationClientOptions'
+  - '@azure/app-configuration.CheckConfigurationSettingsOptions'
   - '@azure/app-configuration.ConfigurationSettingId'
   - '@azure/app-configuration.ConfigurationSettingsFilter'
   - '@azure/app-configuration.ConfigurationSnapshot'
@@ -20,13 +28,24 @@ interfaces:
   - '@azure/app-configuration.CreateSnapshotResponse'
   - '@azure/app-configuration.DeleteConfigurationSettingOptions'
   - '@azure/app-configuration.DeleteConfigurationSettingResponse'
+  - '@azure/app-configuration.DeleteFeatureFlagOptions'
+  - '@azure/app-configuration.DeleteFeatureFlagResponse'
   - '@azure/app-configuration.EtagEntity'
+  - '@azure/app-configuration.FeatureFilter'
+  - '@azure/app-configuration.FeatureFlagAllocation'
+  - '@azure/app-configuration.FeatureFlagClientOptions'
+  - '@azure/app-configuration.FeatureFlagConditions'
+  - '@azure/app-configuration.FeatureFlagId'
+  - '@azure/app-configuration.FeatureFlagTelemetryConfiguration'
   - '@azure/app-configuration.FeatureFlagValue'
+  - '@azure/app-configuration.FeatureFlagVariantDefinition'
   - '@azure/app-configuration.GetConfigurationHeaders'
   - '@azure/app-configuration.GetConfigurationSettingOptions'
   - '@azure/app-configuration.GetConfigurationSettingResponse'
+  - '@azure/app-configuration.GetFeatureFlagOptions'
   - '@azure/app-configuration.GetSnapshotOptions'
   - '@azure/app-configuration.GetSnapshotResponse'
+  - '@azure/app-configuration.GroupAllocation'
   - '@azure/app-configuration.HttpOnlyIfChangedField'
   - '@azure/app-configuration.HttpOnlyIfUnchangedField'
   - '@azure/app-configuration.HttpResponseField'
@@ -34,6 +53,10 @@ interfaces:
   - '@azure/app-configuration.ListConfigurationSettingPage'
   - '@azure/app-configuration.ListConfigurationSettingsForSnapshotOptions'
   - '@azure/app-configuration.ListConfigurationSettingsOptions'
+  - '@azure/app-configuration.ListFeatureFlagPage'
+  - '@azure/app-configuration.ListFeatureFlagRevisionsOptions'
+  - '@azure/app-configuration.ListFeatureFlagRevisionsPage'
+  - '@azure/app-configuration.ListFeatureFlagsOptions'
   - '@azure/app-configuration.ListLabelsOptions'
   - '@azure/app-configuration.ListLabelsPage'
   - '@azure/app-configuration.ListRevisionsOptions'
@@ -46,27 +69,36 @@ interfaces:
   - '@azure/app-configuration.OptionalLabelsFields'
   - '@azure/app-configuration.OptionalSnapshotFields'
   - '@azure/app-configuration.PageSettings'
+  - '@azure/app-configuration.PercentileAllocation'
   - '@azure/app-configuration.RetryOptions'
   - '@azure/app-configuration.SecretReferenceValue'
   - '@azure/app-configuration.SetConfigurationSettingOptions'
   - '@azure/app-configuration.SetConfigurationSettingResponse'
+  - '@azure/app-configuration.SetFeatureFlagOptions'
+  - '@azure/app-configuration.SetFeatureFlagResponse'
   - '@azure/app-configuration.SetReadOnlyOptions'
   - '@azure/app-configuration.SetReadOnlyResponse'
   - '@azure/app-configuration.SettingLabel'
+  - '@azure/app-configuration.SimplePollerLike'
   - '@azure/app-configuration.SnapshotInfo'
+  - '@azure/app-configuration.SnapshotReferenceValue'
   - '@azure/app-configuration.SnapshotResponse'
   - '@azure/app-configuration.SyncTokenHeaderField'
   - '@azure/app-configuration.UpdateSnapshotOptions'
   - '@azure/app-configuration.UpdateSnapshotResponse'
-typeAliases:
-  - '@azure/app-configuration.AddConfigurationSettingParam'
-  - '@azure/app-configuration.ConfigurationSetting'
-  - '@azure/app-configuration.ConfigurationSettingParam'
-  - '@azure/app-configuration.ConfigurationSettingResponse'
-  - '@azure/app-configuration.ConfigurationSnapshotStatus'
-  - '@azure/app-configuration.SetConfigurationSettingParam'
-  - '@azure/app-configuration.SnapshotComposition'
+  - '@azure/app-configuration.UserAllocation'
 variables:
+  - name: RestError
+    uid: '@azure/app-configuration.RestError'
+    package: '@azure/app-configuration'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
   - name: featureFlagContentType
     uid: '@azure/app-configuration.featureFlagContentType'
     package: '@azure/app-configuration'
@@ -108,6 +140,37 @@ variables:
         type: >-
           "<xref uid="application/vnd.microsoft.appconfig.keyvaultref"
           />+json;charset=utf-8"
+  - name: snapshotReferenceContentType
+    uid: '@azure/app-configuration.snapshotReferenceContentType'
+    package: '@azure/app-configuration'
+    summary: content-type for the snapshot reference.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        snapshotReferenceContentType: "application/json;
+        profile="https://azconfig.io/mime-profiles/snapshot-ref"; charset=utf-8"
+      return:
+        description: ''
+        type: >-
+          "application/json; profile="https:<xref
+          uid="//azconfig.io/mime-profiles/snapshot-ref" />"; charset=utf-8"
+typeAliases:
+  - '@azure/app-configuration.AddConfigurationSettingParam'
+  - '@azure/app-configuration.AddFeatureFlagParam'
+  - '@azure/app-configuration.ConfigurationSetting'
+  - '@azure/app-configuration.ConfigurationSettingParam'
+  - '@azure/app-configuration.ConfigurationSettingResponse'
+  - '@azure/app-configuration.ConfigurationSnapshotStatus'
+  - '@azure/app-configuration.FeatureFlag'
+  - '@azure/app-configuration.FeatureFlagFields'
+  - '@azure/app-configuration.FeatureFlagParam'
+  - '@azure/app-configuration.GetFeatureFlagResponse'
+  - '@azure/app-configuration.RequirementType'
+  - '@azure/app-configuration.SetConfigurationSettingParam'
+  - '@azure/app-configuration.SetFeatureFlagParam'
+  - '@azure/app-configuration.SnapshotComposition'
+  - '@azure/app-configuration.StatusOverride'
 functions:
   - name: isFeatureFlag(ConfigurationSetting)
     uid: '@azure/app-configuration.isFeatureFlag'
@@ -129,6 +192,21 @@ functions:
       return:
         description: ''
         type: setting
+  - name: isRestError(unknown)
+    uid: '@azure/app-configuration.isRestError'
+    package: '@azure/app-configuration'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e
   - name: isSecretReference(ConfigurationSetting)
     uid: '@azure/app-configuration.isSecretReference'
     package: '@azure/app-configuration'
@@ -142,6 +220,28 @@ functions:
     isDeprecated: false
     syntax:
       content: 'function isSecretReference(setting: ConfigurationSetting): setting'
+      parameters:
+        - id: setting
+          type: <xref uid="@azure/app-configuration.ConfigurationSetting" />
+          description: ''
+      return:
+        description: ''
+        type: setting
+  - name: isSnapshotReference(ConfigurationSetting)
+    uid: '@azure/app-configuration.isSnapshotReference'
+    package: '@azure/app-configuration'
+    summary: >-
+      Lets you know if the ConfigurationSetting is a snapshot reference.
+
+
+      [Checks if the content type is snapshotReferenceContentType
+      `"application/json;
+      profile=\"https://azconfig.io/mime-profiles/snapshot-ref\";
+      charset=utf-8"`]
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isSnapshotReference(setting: ConfigurationSetting): setting'
       parameters:
         - id: setting
           type: <xref uid="@azure/app-configuration.ConfigurationSetting" />
@@ -191,3 +291,24 @@ functions:
         type: >-
           <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
           uid="@azure/app-configuration.SecretReferenceValue" />&gt;
+  - name: parseSnapshotReference(ConfigurationSetting)
+    uid: '@azure/app-configuration.parseSnapshotReference'
+    package: '@azure/app-configuration'
+    summary: >-
+      Takes the ConfigurationSetting as input and returns the
+      ConfigurationSetting<SnapshotReferenceValue> by parsing the value string.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function parseSnapshotReference(setting: ConfigurationSetting):
+        ConfigurationSetting<SnapshotReferenceValue>
+      parameters:
+        - id: setting
+          type: <xref uid="@azure/app-configuration.ConfigurationSetting" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
+          uid="@azure/app-configuration.SnapshotReferenceValue" />&gt;

@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: edgezones
 ---
-# Azure Edge Zones SDK for JavaScript - preview
-## Packages - preview
+# Azure Edge Zones SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](edge-zones-index.md)]

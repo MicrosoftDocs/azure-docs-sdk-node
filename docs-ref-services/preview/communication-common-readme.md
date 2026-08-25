@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, communication
-ms.date: 03/28/2025
+ms.date: 08/25/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Common client library for JavaScript - version 2.3.2-beta.1 
+# Azure Communication Common client library for JavaScript - version 2.5.0-alpha.20260825.1 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -120,48 +120,109 @@ const tokenCredential = new AzureCommunicationTokenCredential({
 });
 ```
 
+### Create a credential for an encrypted or opaque access token
+
+Some access tokens — such as those issued to enterprise Entra users — are encrypted and can't be decoded on the client, so the credential cannot read their expiry. The recommended approach is to return an `AccessToken` (`{ token, expiresOnTimestamp }`) from your `tokenRefresher` (or pass one as the initial `token`), setting `expiresOnTimestamp` from the token response's `expires_in`. This keeps proactive refresh scheduling accurate.
+
+```ts snippet:ReadmeSampleCredentialEncryptedToken
+import { AzureCommunicationTokenCredential } from "@azure/communication-common";
+
+// Some access tokens (e.g. for enterprise Entra users) are encrypted and cannot be
+// decoded on the client. Return an AccessToken with an explicit expiry so proactive
+// refresh scheduling stays accurate; derive expiresOnTimestamp from the response's expires_in.
+async function fetchEncryptedTokenForUser(user: string): Promise<{
+  token: string;
+  expiresOnTimestamp: number;
+}> {
+  const response = { token: "some-encrypted-token-for-" + user, expiresInSeconds: 8 * 60 * 60 };
+  return {
+    token: response.token,
+    expiresOnTimestamp: Date.now() + response.expiresInSeconds * 1000,
+  };
+}
+
+const tokenCredential = new AzureCommunicationTokenCredential({
+  tokenRefresher: async () => fetchEncryptedTokenForUser("bob@contoso.com"),
+  refreshProactively: true,
+});
+```
+
+If you can only provide the token string, the credential accepts it and assumes a fallback lifetime. Set `undecodableTokenExpiryIntervalInSeconds` to your tokens' actual lifetime so they aren't refreshed more often than needed; it defaults to 600 seconds.
+
+```ts snippet:ReadmeSampleCredentialUndecodableTokenInterval
+import { AzureCommunicationTokenCredential } from "@azure/communication-common";
+
+function fetchOpaqueTokenForUser(user: string): Promise<string> {
+  // Your custom implementation returns an opaque token string that can't be decoded.
+  return Promise.resolve("some-opaque-token-for-" + user);
+}
+
+const tokenCredential = new AzureCommunicationTokenCredential({
+  tokenRefresher: async () => fetchOpaqueTokenForUser("bob@contoso.com"),
+  refreshProactively: true,
+  // When the token can't be decoded and no explicit expiry is provided, assume this
+  // lifetime (in seconds) instead of the 600s default — set it to your tokens' real lifetime.
+  undecodableTokenExpiryIntervalInSeconds: 3600,
+});
+```
+
 ### Create a credential with a token credential capable of obtaining an Entra user token
 
 For scenarios where an Entra user can be used with Communication Services, you need to initialize any implementation of [TokenCredential interface](https://learn.microsoft.com/es-mx/javascript/api/@azure/core-auth/tokencredential?view=azure-node-latest) and provide it to the ``EntraCommunicationTokenCredentialOptions``.
 Along with this, you must provide the URI of the Azure Communication Services resource and the scopes required for the Entra user token. These scopes determine the permissions granted to the token.
-If the scopes are not provided, by default, it sets the scopes to `https://communication.azure.com/clients/.default`.
 
-```typescript 
-const options: InteractiveBrowserCredentialInBrowserOptions = {
-      tenantId: "<your-tenant-id>",
-      clientId: "<your-client-id>",
-      redirectUri: "<your-redirect-uri>",
-    };
+This approach needs to be used for authorizing an Entra user with a Teams license to use Teams Phone Extensibility features through your Azure Communication Services resource.
+This requires providing the `https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls` scope. For the GCCH cloud environment, use `https://auth.msft.communication.azure.us/TeamsExtension.ManageCalls`.
+
+```ts snippet:ReadmeSampleCredentialEntraUserTeamsPhoneExtensibility 
+import { InteractiveBrowserCredential } from "@azure/identity";
+import {
+  EntraCommunicationTokenCredentialOptions,
+  AzureCommunicationTokenCredential,
+} from "@azure/communication-common";
+
+const options = {
+  tenantId: "<your-tenant-id>",
+  clientId: "<your-client-id>",
+  redirectUri: "<your-redirect-uri>",
+};
 const entraTokenCredential = new InteractiveBrowserCredential(options);
 
 const entraTokenCredentialOptions: EntraCommunicationTokenCredentialOptions = {
-    resourceEndpoint: "https://<your-resource>.communication.azure.com",
-    tokenCredential: entraTokenCredential,
-    scopes: ["https://communication.azure.com/clients/VoIP"]
-  };
+  resourceEndpoint: "https://<your-resource>.communication.azure.com",
+  tokenCredential: entraTokenCredential,
+  scopes: ["https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls"],
+};
 
 const credential = new AzureCommunicationTokenCredential(entraTokenCredentialOptions);
 ```
 
-The same approach can be used for authorizing an Entra user with a Teams license to use Teams Phone Extensibility features through your Azure Communication Services resource.
-This requires providing the `https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls` scope.
+Other scenarios for Entra users to utilize Azure Communication Services are currently in the **preview stage only and should not be used in production**.
+The scopes for these scenarios follow the format `https://communication.azure.com/clients/<ACS Scope>`. If specific scopes are not provided, the default scopes will be set to `https://communication.azure.com/clients/.default`.
 
-```typescript 
-const options: InteractiveBrowserCredentialInBrowserOptions = {
-      tenantId: "<your-tenant-id>",
-      clientId: "<your-client-id>",
-      redirectUri: "<your-redirect-uri>",
-    };
+```ts snippet:ReadmeSampleCredentialEntraUser 
+import { InteractiveBrowserCredential } from "@azure/identity";
+import {
+  EntraCommunicationTokenCredentialOptions,
+  AzureCommunicationTokenCredential,
+} from "@azure/communication-common";
+
+const options = {
+  tenantId: "<your-tenant-id>",
+  clientId: "<your-client-id>",
+  redirectUri: "<your-redirect-uri>",
+};
 const entraTokenCredential = new InteractiveBrowserCredential(options);
 
 const entraTokenCredentialOptions: EntraCommunicationTokenCredentialOptions = {
-    resourceEndpoint: "https://<your-resource>.communication.azure.com",
-    tokenCredential: entraTokenCredential,
-    scopes: ["https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls"]
-  };
+  resourceEndpoint: "https://<your-resource>.communication.azure.com",
+  tokenCredential: entraTokenCredential,
+  scopes: ["https://communication.azure.com/clients/VoIP"],
+};
 
 const credential = new AzureCommunicationTokenCredential(entraTokenCredentialOptions);
 ```
+
 ## Troubleshooting
 
 - **Invalid token specified**: Make sure the token you are passing to the `AzureCommunicationTokenCredential` constructor or to the `tokenRefresher` callback is a bare JWT token string. E.g. if you're using the [Azure Communication Identity library][invalid_token_sdk] or [REST API][invalid_token_rest] to obtain the token, make sure you're passing just the `token` part of the response object.
@@ -182,7 +243,7 @@ setLogLevel("info");
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.3.2-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

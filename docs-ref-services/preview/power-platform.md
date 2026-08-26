@@ -1,7 +1,7 @@
 ---
 title: Azure Power Platform SDK for JavaScript
 description: Reference for Azure Power Platform SDK for JavaScript
-ms.date: 08/25/2026
+ms.date: 08/26/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: powerplatform

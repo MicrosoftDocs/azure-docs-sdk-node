@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: purestorageblock
 ---
-# Azure Pure Storage Block SDK for JavaScript - latest
-## Packages - latest
+# Azure Pure Storage Block SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](pure-storage-block-index.md)]

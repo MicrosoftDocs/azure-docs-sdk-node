@@ -1,7 +1,7 @@
 ---
 title: Azure Edge Order SDK for JavaScript
 description: Reference for Azure Edge Order SDK for JavaScript
-ms.date: 08/27/2026
+ms.date: 08/28/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: edgeorder

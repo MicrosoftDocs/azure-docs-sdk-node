@@ -1,7 +1,7 @@
 ---
 title: Azure Discovery SDK for JavaScript
 description: Reference for Azure Discovery SDK for JavaScript
-ms.date: 08/28/2026
+ms.date: 08/31/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: discovery

@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: enclave
 ---
-# Azure Enclave SDK for JavaScript - preview
-## Packages - preview
+# Azure Enclave SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](enclave-index.md)]

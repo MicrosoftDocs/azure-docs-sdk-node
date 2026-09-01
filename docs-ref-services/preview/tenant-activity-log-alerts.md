@@ -1,7 +1,7 @@
 ---
 title: Azure Tenant Activity Log Alerts SDK for JavaScript
 description: Reference for Azure Tenant Activity Log Alerts SDK for JavaScript
-ms.date: 08/31/2026
+ms.date: 09/01/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: tenantactivitylogalerts

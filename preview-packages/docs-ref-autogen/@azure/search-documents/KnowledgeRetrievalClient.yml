@@ -109,7 +109,9 @@ methods:
   - name: retrieve(KnowledgeBaseRetrievalRequest, RetrieveOptions)
     uid: '@azure/search-documents.KnowledgeRetrievalClient.retrieve'
     package: '@azure/search-documents'
-    summary: ''
+    summary: >-
+      Retrieves relevant data from the backing stores configured by the
+      knowledge base.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -119,12 +121,87 @@ methods:
       parameters:
         - id: retrievalRequest
           type: <xref uid="@azure/search-documents.KnowledgeBaseRetrievalRequest" />
-          description: ''
+          description: The retrieval request to process.
         - id: options
           type: <xref uid="@azure/search-documents.RetrieveOptions" />
-          description: ''
+          description: Options to the retrieve operation.
       return:
-        description: ''
+        description: The completed retrieval response.
         type: >-
           Promise&lt;<xref
           uid="@azure/search-documents.KnowledgeBaseRetrievalResponse" />&gt;
+  - name: retrieveStream(KnowledgeBaseRetrievalRequest, RetrieveStreamOptions)
+    uid: '@azure/search-documents.KnowledgeRetrievalClient.retrieveStream'
+    package: '@azure/search-documents'
+    summary: >+
+      Retrieves relevant data from the backing stores, streaming progress and
+      results as
+
+      server-sent events as they become available instead of waiting for the
+      full retrieval to
+
+      complete.
+
+
+      The returned async iterable yields events until the terminal
+      `response.completed` event, or
+
+      an `error` event if the retrieval fails after the stream has started.
+      Narrow on the `event`
+
+      property to access the typed payload.
+
+
+      **Example**
+
+
+      Iterate typed retrieval events.
+
+      ```ts snippet:ReadmeSampleRetrieveKnowledgeStream
+
+      import { KnowledgeRetrievalClient, AzureKeyCredential } from
+      "@azure/search-documents";
+
+
+      const client = new KnowledgeRetrievalClient(
+        "<endpoint>",
+        "<knowledgeBaseName>",
+        new AzureKeyCredential("<apiKey>"),
+      );
+
+
+      for await (const event of await client.retrieveStream({
+        intents: [{ type: "semantic", search: "Summarize the indexed information." }],
+        includeActivity: true,
+      })) {
+        if (event.event === "activity.completed") {
+          console.log(`Activity ${event.data.id} took ${event.data.elapsedInMs}ms`);
+        } else if (event.event === "response.completed") {
+          console.log(event.data.response.response);
+        } else if (event.event === "error") {
+          throw new Error(event.data.error.message);
+        }
+      }
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function retrieveStream(retrievalRequest: KnowledgeBaseRetrievalRequest,
+        options?: RetrieveStreamOptions):
+        Promise<AsyncIterable<KnowledgeBaseRetrievalStreamEvent>>
+      parameters:
+        - id: retrievalRequest
+          type: <xref uid="@azure/search-documents.KnowledgeBaseRetrievalRequest" />
+          description: The retrieval request to process.
+        - id: options
+          type: <xref uid="@azure/search-documents.RetrieveStreamOptions" />
+          description: Options to the retrieve stream operation.
+      return:
+        description: An async iterable of typed server-sent events.
+        type: >-
+          Promise&lt;AsyncIterable&lt;<xref
+          uid="@azure/search-documents.KnowledgeBaseRetrievalStreamEvent"
+          />&gt;&gt;

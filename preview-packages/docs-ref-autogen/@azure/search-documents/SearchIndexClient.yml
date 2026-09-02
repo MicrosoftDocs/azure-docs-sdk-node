@@ -242,7 +242,7 @@ methods:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
   - name: >-
-      createOrUpdateKnowledgeBase(string, KnowledgeBase,
+      createOrUpdateKnowledgeBase(KnowledgeBase,
       CreateOrUpdateKnowledgeBaseOptions)
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateKnowledgeBase'
     package: '@azure/search-documents'
@@ -253,13 +253,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdateKnowledgeBase(knowledgeBaseName: string,
-        knowledgeBase: KnowledgeBase, options?:
-        CreateOrUpdateKnowledgeBaseOptions): Promise<KnowledgeBase>
+        function createOrUpdateKnowledgeBase(knowledgeBase: KnowledgeBase,
+        options?: CreateOrUpdateKnowledgeBaseOptions): Promise<KnowledgeBase>
       parameters:
-        - id: knowledgeBaseName
-          type: string
-          description: name of the knowledge base to create or update.
         - id: knowledgeBase
           type: <xref uid="@azure/search-documents.KnowledgeBase" />
           description: definition of the knowledge base to create or update.
@@ -268,6 +264,37 @@ methods:
             <xref
             uid="@azure/search-documents.CreateOrUpdateKnowledgeBaseOptions" />
           description: options parameters.
+      return:
+        description: The created or updated knowledge base.
+        type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeBase" />&gt;
+  - name: >-
+      createOrUpdateKnowledgeBase(string, KnowledgeBase,
+      CreateOrUpdateKnowledgeBaseOptions)
+    uid: '@azure/search-documents.SearchIndexClient.createOrUpdateKnowledgeBase_1'
+    package: '@azure/search-documents'
+    summary: Creates or updates a knowledge base using an explicit name.
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Pass the knowledge base model first; its `name` property identifies the
+      resource.
+    syntax:
+      content: >-
+        function createOrUpdateKnowledgeBase(knowledgeBaseName: string,
+        knowledgeBase: KnowledgeBase, options?:
+        CreateOrUpdateKnowledgeBaseOptions): Promise<KnowledgeBase>
+      parameters:
+        - id: knowledgeBaseName
+          type: string
+          description: ''
+        - id: knowledgeBase
+          type: <xref uid="@azure/search-documents.KnowledgeBase" />
+          description: ''
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/search-documents.CreateOrUpdateKnowledgeBaseOptions" />
+          description: ''
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeBase" />&gt;
@@ -773,47 +800,49 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
-  - name: listAliases(OperationOptions)
+  - name: listAliases(ListAliasesOptions)
     uid: '@azure/search-documents.SearchIndexClient.listAliases'
     package: '@azure/search-documents'
     summary: Lists all aliases available for a search service.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function listAliases(options?: OperationOptions): AliasIterator'
+      content: 'function listAliases(options?: ListAliasesOptions): AliasIterator'
       parameters:
         - id: options
-          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          type: <xref uid="@azure/search-documents.ListAliasesOptions" />
           description: The options parameters.
       return:
         description: ''
         type: <xref uid="@azure/search-documents.AliasIterator" />
-  - name: listIndexes(OperationOptions)
+  - name: listIndexes(ResourceListingOptions)
     uid: '@azure/search-documents.SearchIndexClient.listIndexes'
     package: '@azure/search-documents'
     summary: Retrieves a list of existing indexes in the service.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function listIndexes(options?: OperationOptions): IndexIterator'
+      content: 'function listIndexes(options?: ResourceListingOptions): IndexIterator'
       parameters:
         - id: options
-          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          type: <xref uid="@azure/search-documents.ResourceListingOptions" />
           description: Options to the list index operation.
       return:
         description: ''
         type: <xref uid="@azure/search-documents.IndexIterator" />
-  - name: listIndexesNames(OperationOptions)
+  - name: listIndexesNames(ResourceListingOptions)
     uid: '@azure/search-documents.SearchIndexClient.listIndexesNames'
     package: '@azure/search-documents'
     summary: Retrieves a list of names of existing indexes in the service.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function listIndexesNames(options?: OperationOptions): IndexNameIterator'
+      content: >-
+        function listIndexesNames(options?: ResourceListingOptions):
+        IndexNameIterator
       parameters:
         - id: options
-          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          type: <xref uid="@azure/search-documents.ResourceListingOptions" />
           description: Options to the list index operation.
       return:
         description: ''
@@ -902,7 +931,7 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/search-documents.KnowledgeSourceIterator" />
-  - name: listSynonymMaps(OperationOptions)
+  - name: listSynonymMaps(ResourceListingOptions)
     uid: '@azure/search-documents.SearchIndexClient.listSynonymMaps'
     package: '@azure/search-documents'
     summary: Retrieves a list of existing SynonymMaps in the service.
@@ -910,16 +939,16 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listSynonymMaps(options?: OperationOptions):
+        function listSynonymMaps(options?: ResourceListingOptions):
         Promise<SynonymMap[]>
       parameters:
         - id: options
-          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          type: <xref uid="@azure/search-documents.ResourceListingOptions" />
           description: Options to the list SynonymMaps operation.
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />[]&gt;
-  - name: listSynonymMapsNames(OperationOptions)
+  - name: listSynonymMapsNames(ResourceListingOptions)
     uid: '@azure/search-documents.SearchIndexClient.listSynonymMapsNames'
     package: '@azure/search-documents'
     summary: Retrieves a list of names of existing SynonymMaps in the service.
@@ -927,15 +956,85 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listSynonymMapsNames(options?: OperationOptions):
+        function listSynonymMapsNames(options?: ResourceListingOptions):
         Promise<string[]>
       parameters:
         - id: options
-          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          type: <xref uid="@azure/search-documents.ResourceListingOptions" />
           description: Options to the list SynonymMaps operation.
       return:
         description: ''
         type: Promise&lt;string[]&gt;
+  - name: >-
+      updateKnowledgeSourceFile(string, string,
+      UpdateKnowledgeSourceFileRequest, UpdateKnowledgeSourceFileOptions)
+    uid: '@azure/search-documents.SearchIndexClient.updateKnowledgeSourceFile'
+    package: '@azure/search-documents'
+    summary: >+
+      Replaces an existing file and its metadata in a File knowledge source.
+
+
+      **Example**
+
+
+      Upload and update a File knowledge source file.
+
+      ```ts snippet:ReadmeSampleManageKnowledgeSourceFile
+
+      import { SearchIndexClient, AzureKeyCredential } from
+      "@azure/search-documents";
+
+
+      const client = new SearchIndexClient("<endpoint>", new
+      AzureKeyCredential("<apiKey>"));
+
+      const body = {
+        metadata: { fileName: "manuals/example.txt", metadata: { category: "manual" } },
+        content: { contents: new Uint8Array([1, 2, 3]), contentType: "text/plain" },
+      };
+
+
+      const uploaded = await
+      client.uploadKnowledgeSourceFileMultipart("<knowledgeSourceName>", body);
+
+
+      await client.updateKnowledgeSourceFile("<knowledgeSourceName>",
+      uploaded.fileId!, {
+        ...body,
+        metadata: { ...body.metadata, metadata: { category: "updated-manual" } },
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateKnowledgeSourceFile(name: string, fileId: string, body:
+        UpdateKnowledgeSourceFileRequest, options?:
+        UpdateKnowledgeSourceFileOptions): Promise<KnowledgeSourceFile>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the knowledge source.
+        - id: fileId
+          type: string
+          description: The file identifier.
+        - id: body
+          type: >-
+            <xref uid="@azure/search-documents.UpdateKnowledgeSourceFileRequest"
+            />
+          description: The replacement file content and metadata.
+        - id: options
+          type: >-
+            <xref uid="@azure/search-documents.UpdateKnowledgeSourceFileOptions"
+            />
+          description: The options parameters.
+      return:
+        description: Updated metadata for the file.
+        type: >-
+          Promise&lt;<xref uid="@azure/search-documents.KnowledgeSourceFile"
+          />&gt;
   - name: >-
       uploadKnowledgeSourceFile(string, Uint8Array, string,
       UploadKnowledgeSourceFileOptions)
@@ -967,7 +1066,79 @@ methods:
             />
           description: The options parameters.
       return:
-        description: ''
+        description: Metadata for the uploaded file.
+        type: >-
+          Promise&lt;<xref uid="@azure/search-documents.KnowledgeSourceFile"
+          />&gt;
+  - name: >-
+      uploadKnowledgeSourceFileMultipart(string,
+      UploadKnowledgeSourceFileMultipartRequest,
+      UploadKnowledgeSourceFileMultipartOptions)
+    uid: >-
+      @azure/search-documents.SearchIndexClient.uploadKnowledgeSourceFileMultipart
+    package: '@azure/search-documents'
+    summary: >+
+      Uploads a file and its metadata to a File knowledge source using multipart
+      form data.
+
+
+      **Example**
+
+
+      Upload a file with structured metadata.
+
+      ```ts snippet:ReadmeSampleManageKnowledgeSourceFile
+
+      import { SearchIndexClient, AzureKeyCredential } from
+      "@azure/search-documents";
+
+
+      const client = new SearchIndexClient("<endpoint>", new
+      AzureKeyCredential("<apiKey>"));
+
+      const body = {
+        metadata: { fileName: "manuals/example.txt", metadata: { category: "manual" } },
+        content: { contents: new Uint8Array([1, 2, 3]), contentType: "text/plain" },
+      };
+
+
+      const uploaded = await
+      client.uploadKnowledgeSourceFileMultipart("<knowledgeSourceName>", body);
+
+
+      await client.updateKnowledgeSourceFile("<knowledgeSourceName>",
+      uploaded.fileId!, {
+        ...body,
+        metadata: { ...body.metadata, metadata: { category: "updated-manual" } },
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uploadKnowledgeSourceFileMultipart(name: string, body:
+        UploadKnowledgeSourceFileMultipartRequest, options?:
+        UploadKnowledgeSourceFileMultipartOptions): Promise<KnowledgeSourceFile>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the knowledge source.
+        - id: body
+          type: >-
+            <xref
+            uid="@azure/search-documents.UploadKnowledgeSourceFileMultipartRequest"
+            />
+          description: The file content and metadata.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/search-documents.UploadKnowledgeSourceFileMultipartOptions"
+            />
+          description: The options parameters.
+      return:
+        description: Metadata for the uploaded file.
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.KnowledgeSourceFile"
           />&gt;

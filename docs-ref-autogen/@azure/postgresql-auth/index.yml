@@ -1,0 +1,148 @@
+### YamlMime:TSPackage
+uid: '@azure/postgresql-auth'
+name: '@azure/postgresql-auth'
+summary: ''
+type: package
+interfaces:
+  - '@azure/postgresql-auth.ConfigureEntraAuthenticationOptions'
+  - '@azure/postgresql-auth.EntraTokenProviderOptions'
+  - '@azure/postgresql-auth.SequelizeBeforeConnectHook'
+functions:
+  - name: >-
+      configureEntraAuthentication(SequelizeBeforeConnectHook, TokenCredential,
+      ConfigureEntraAuthenticationOptions)
+    uid: '@azure/postgresql-auth.configureEntraAuthentication'
+    package: '@azure/postgresql-auth'
+    summary: >+
+      Configures a Sequelize instance to use Entra ID authentication.
+
+
+      This function registers a `beforeConnect` hook on the Sequelize instance
+      that
+
+      automatically acquires an Entra ID token before each new database
+      connection.
+
+      The hook extracts the username from the JWT token claims (`upn` or
+      `appid`)
+
+      and sets both the username and password on the connection config.
+
+
+      **Example**
+
+
+      ```ts snippet:configureEntraAuthentication
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const { configureEntraAuthentication } = await
+      import("@azure/postgresql-auth");
+
+      const { Sequelize } = await import("sequelize");
+
+      const sequelize = new Sequelize({
+        dialect: "postgres",
+        host: process.env.PGHOST,
+        port: Number(process.env.PGPORT || 5432),
+        database: process.env.PGDATABASE,
+      });
+
+      const credential = new DefaultAzureCredential();
+
+      configureEntraAuthentication(sequelize, credential);
+
+      await sequelize.authenticate();
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function configureEntraAuthentication(sequelizeInstance:
+        SequelizeBeforeConnectHook, credential: TokenCredential, options?:
+        ConfigureEntraAuthenticationOptions)
+      parameters:
+        - id: sequelizeInstance
+          type: <xref uid="@azure/postgresql-auth.SequelizeBeforeConnectHook" />
+          description: |-
+            The Sequelize instance to configure. Must support the
+              `beforeConnect` lifecycle hook.
+        - id: credential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: |-
+            An Azure <xref:TokenCredential> used to acquire tokens
+              (e.g., `DefaultAzureCredential`).
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/postgresql-auth.ConfigureEntraAuthenticationOptions" />
+          description: Optional configuration for the authentication behavior.
+  - name: entraTokenProvider(TokenCredential, EntraTokenProviderOptions)
+    uid: '@azure/postgresql-auth.entraTokenProvider'
+    package: '@azure/postgresql-auth'
+    summary: >+
+      Creates a password provider function that acquires an Entra ID access
+      token
+
+      suitable for use as a PostgreSQL password.
+
+
+      This function returns a callback that, when invoked, requests a token from
+      the
+
+      provided <xref:TokenCredential> using the Azure Database for PostgreSQL
+      scope.
+
+      The returned callback can be passed directly as the `password` option for
+
+      `pg.Client`, `pg.Pool`, or similar PostgreSQL client configurations.
+
+
+      **Example**
+
+
+      ```ts snippet:entraTokenProvider
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+
+      const { entraTokenProvider } = await import("@azure/postgresql-auth");
+
+      const pg = await import("pg");
+
+      const credential = new DefaultAzureCredential();
+
+      const pool = new pg.Pool({
+        host: process.env.PGHOST,
+        port: Number(process.env.PGPORT || 5432),
+        database: process.env.PGDATABASE,
+        user: process.env.PGUSER,
+        password: entraTokenProvider(credential),
+        ssl: { rejectUnauthorized: true },
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function entraTokenProvider(credential: TokenCredential, options?:
+        EntraTokenProviderOptions): () => Promise<string>
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: |-
+            An Azure <xref:TokenCredential> used to acquire tokens
+              (e.g., `DefaultAzureCredential`).
+        - id: options
+          type: <xref uid="@azure/postgresql-auth.EntraTokenProviderOptions" />
+          description: Optional settings such as a custom OAuth scope.
+      return:
+        description: >-
+          A function that, when called, returns a promise resolving to the
+          access token string.
+        type: () =&gt; Promise&lt;string&gt;

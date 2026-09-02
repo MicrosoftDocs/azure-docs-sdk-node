@@ -1,7 +1,7 @@
 ---
 title: Azure Kubernetes Configuration - Flux Configurations SDK for JavaScript
 description: Reference for Azure Kubernetes Configuration - Flux Configurations SDK for JavaScript
-ms.date: 09/01/2026
+ms.date: 09/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: kubernetesconfiguration-fluxconfigurations

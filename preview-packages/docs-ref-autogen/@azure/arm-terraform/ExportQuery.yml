@@ -2,16 +2,42 @@
 name: ExportQuery
 uid: '@azure/arm-terraform.ExportQuery'
 package: '@azure/arm-terraform'
-summary: Export parameter for resources queried by ARG (Azure Resource Graph)
+summary: Uses ARG (Azure Resource Graph) query to choose resources to be exported.
 fullName: ExportQuery
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: authorizationScopeFilter
+    uid: '@azure/arm-terraform.ExportQuery.authorizationScopeFilter'
+    package: '@azure/arm-terraform'
+    summary: The ARG Scope Filter parameter.
+    fullName: authorizationScopeFilter
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'authorizationScopeFilter?: string'
+      return:
+        description: ''
+        type: string
+  - name: includeResourceGroup
+    uid: '@azure/arm-terraform.ExportQuery.includeResourceGroup'
+    package: '@azure/arm-terraform'
+    summary: >-
+      Includes the resource group in the exported Terraform resources. Defaults
+      to `false`.
+    fullName: includeResourceGroup
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'includeResourceGroup?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: namePattern
     uid: '@azure/arm-terraform.ExportQuery.namePattern'
     package: '@azure/arm-terraform'
-    summary: The name pattern of the Terraform resources
+    summary: The id prefix for the exported Terraform resources. Defaults to `res-`.
     fullName: namePattern
     remarks: ''
     isDeprecated: false
@@ -24,9 +50,10 @@ properties:
     uid: '@azure/arm-terraform.ExportQuery.query'
     package: '@azure/arm-terraform'
     summary: >-
-      The ARG where predicate. Note that you can combine multiple conditions in
-      one `where` predicate, e.g. `resourceGroup =~ "my-rg" and type =~
-      "microsoft.network/virtualnetworks"`
+      The ARG where predicate. Multiple predicates can be combined using `and`
+      operator. Example: `resourceGroup =~ "my-rg" and type =~
+      "microsoft.network/virtualnetworks"`. The default ARG table is
+      `Resources`, use 'table' property to query a different table.
     fullName: query
     remarks: ''
     isDeprecated: false
@@ -38,7 +65,7 @@ properties:
   - name: recursive
     uid: '@azure/arm-terraform.ExportQuery.recursive'
     package: '@azure/arm-terraform'
-    summary: Whether to recursively list child resources of the query result
+    summary: Recursively includes child resources. Defaults to `false`.
     fullName: recursive
     remarks: ''
     isDeprecated: false
@@ -47,10 +74,22 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: table
+    uid: '@azure/arm-terraform.ExportQuery.table'
+    package: '@azure/arm-terraform'
+    summary: The ARG table name. Defaults to 'Resources'.
+    fullName: table
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'table?: string'
+      return:
+        description: ''
+        type: string
   - name: type
     uid: '@azure/arm-terraform.ExportQuery.type'
     package: '@azure/arm-terraform'
-    summary: The parameter type
+    summary: Has to be `ExportQuery` to distinguish from other types.
     fullName: type
     remarks: ''
     isDeprecated: false
@@ -60,12 +99,48 @@ properties:
         description: ''
         type: '"ExportQuery"'
 inheritedProperties:
+  - name: excludeAzureResource
+    uid: '@azure/arm-terraform.ExportQuery.excludeAzureResource'
+    package: '@azure/arm-terraform'
+    summary: >-
+      Excludes specified Azure Resource Ids. Case-insensitive Azure Resource ID
+      regular expression. Example:
+      `["/subscriptions/[0-9a-f-]+/resourceGroups/my-rg.*"]`.
+    fullName: excludeAzureResource
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'excludeAzureResource?: string[]'
+      return:
+        description: ''
+        type: string[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BaseExportModel.excludeAzureResource](xref:@azure/arm-terraform.BaseExportModel.excludeAzureResource)
+  - name: excludeTerraformResource
+    uid: '@azure/arm-terraform.ExportQuery.excludeTerraformResource'
+    package: '@azure/arm-terraform'
+    summary: >-
+      Excludes specified Terraform resource types. Example:
+      `["azurerm_virtual_network"]`.
+    fullName: excludeTerraformResource
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'excludeTerraformResource?: string[]'
+      return:
+        description: ''
+        type: string[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BaseExportModel.excludeTerraformResource](xref:@azure/arm-terraform.BaseExportModel.excludeTerraformResource)
   - name: fullProperties
     uid: '@azure/arm-terraform.ExportQuery.fullProperties'
     package: '@azure/arm-terraform'
     summary: >-
       Whether to output all non-computed properties in the generated Terraform
-      configuration? This probably needs manual modifications to make it valid
+      configuration. If set to `false` empty-valued properties will be omitted
+      from the configuration. Defaults to `true`.
     fullName: fullProperties
     remarks: ''
     isDeprecated: false
@@ -77,10 +152,64 @@ inheritedProperties:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [BaseExportModel.fullProperties](xref:@azure/arm-terraform.BaseExportModel.fullProperties)
+  - name: includeExtensions
+    uid: '@azure/arm-terraform.ExportQuery.includeExtensions'
+    package: '@azure/arm-terraform'
+    summary: >-
+      Include extension resource types directly associated to the resources
+      exported
+    fullName: includeExtensions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'includeExtensions?: string[]'
+      return:
+        description: ''
+        type: string[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BaseExportModel.includeExtensions](xref:@azure/arm-terraform.BaseExportModel.includeExtensions)
+  - name: includeManagedResource
+    uid: '@azure/arm-terraform.ExportQuery.includeManagedResource'
+    package: '@azure/arm-terraform'
+    summary: >-
+      Whether to include internal resources managed by Azure in the exported
+      configuration. Defaults to `false`.
+    fullName: includeManagedResource
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'includeManagedResource?: boolean'
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BaseExportModel.includeManagedResource](xref:@azure/arm-terraform.BaseExportModel.includeManagedResource)
+  - name: includeRoleAssignment
+    uid: '@azure/arm-terraform.ExportQuery.includeRoleAssignment'
+    package: '@azure/arm-terraform'
+    summary: >-
+      Whether to include role assignments assigned to the resources exported.
+      Defaults to `false`. This is deprecated in favor of `includeExtensions`
+      (with `role-assignments` specified).
+    fullName: includeRoleAssignment
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'includeRoleAssignment?: boolean'
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [BaseExportModel.includeRoleAssignment](xref:@azure/arm-terraform.BaseExportModel.includeRoleAssignment)
   - name: maskSensitive
     uid: '@azure/arm-terraform.ExportQuery.maskSensitive'
     package: '@azure/arm-terraform'
-    summary: Mask sensitive attributes in the Terraform configuration
+    summary: >-
+      Mask sensitive attributes in the Terraform configuration. Defaults to
+      `true`.
     fullName: maskSensitive
     remarks: ''
     isDeprecated: false
@@ -95,7 +224,7 @@ inheritedProperties:
   - name: targetProvider
     uid: '@azure/arm-terraform.ExportQuery.targetProvider'
     package: '@azure/arm-terraform'
-    summary: The target Azure Terraform Provider
+    summary: The target Azure Terraform provider. Defaults to `azurerm`.
     fullName: targetProvider
     remarks: ''
     isDeprecated: false

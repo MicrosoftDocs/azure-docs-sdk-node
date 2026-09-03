@@ -1,7 +1,7 @@
 ---
 title: Azure Container Service Safeguards SDK for JavaScript
 description: Reference for Azure Container Service Safeguards SDK for JavaScript
-ms.date: 09/02/2026
+ms.date: 09/03/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: containerservicesafeguards

@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-ms.date: 07/29/2026
+ms.date: 09/04/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.44 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-alpha.20260904.1 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
@@ -23,7 +23,7 @@ This exporter package assumes your application is [already instrumented](https:/
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.44/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for browser environments.
 
@@ -113,6 +113,42 @@ const loggerProvider = new LoggerProvider({
 logs.setGlobalLoggerProvider(loggerProvider);
 ```
 
+#### Availability results
+
+After registering the logger provider, emit an OpenTelemetry log record with the availability attributes below. The exporter converts the record to Application Insights availability telemetry.
+
+```ts snippet:ReadmeSampleAvailability
+import { logs } from "@opentelemetry/api-logs";
+
+const logger = logs.getLogger("availability");
+logger.emit({
+  body: "Homepage availability test completed.",
+  attributes: {
+    "microsoft.availability.id": "availability-test-run-123",
+    "microsoft.availability.name": "Homepage",
+    "microsoft.availability.duration": "00:00:00.250",
+    "microsoft.availability.success": true,
+    "microsoft.availability.runLocation": "westus2",
+    "microsoft.availability.message": "HTTP 200",
+  },
+});
+```
+
+The following attributes are required:
+
+| Attribute | Description |
+| --- | --- |
+| `microsoft.availability.id` | Identifier for this test run. |
+| `microsoft.availability.name` | Name of the availability test. |
+| `microsoft.availability.duration` | Test duration, for example `00:00:00.250`. |
+| `microsoft.availability.success` | Whether the test succeeded. |
+
+`microsoft.availability.runLocation` and `microsoft.availability.message` are optional. If the message attribute is omitted, the log body is used as the availability message. The availability result timestamp comes from the OpenTelemetry log record.
+
+Availability records use the same correlation context as other OpenTelemetry logs. When a record is emitted with an active span (or an explicit OpenTelemetry context), the span trace ID and span ID populate the Application Insights operation ID and parent ID. These values are authoritative and cannot be overridden by log attributes. The availability test-run ID remains separate from the operation ID.
+
+If any required attribute is missing or empty, the exporter sends the record as regular message telemetry instead. Exception and custom event attributes take precedence over availability attributes.
+
 ### Sampling
 
 You can enable sampling to limit the amount of telemetry records you receive. In order to enable correct sampling in Application Insights, use the `ApplicationInsightsSampler` as shown below.
@@ -138,7 +174,7 @@ provider.register();
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.44/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
 
 ## Key concepts
 
@@ -173,7 +209,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.44/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -187,5 +223,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.44/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 

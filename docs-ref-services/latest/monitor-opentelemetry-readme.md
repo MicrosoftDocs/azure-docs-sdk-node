@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry, monitor
-ms.date: 07/29/2026
+ms.date: 09/04/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -24,7 +24,7 @@ ms.service: monitor
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for web and browser scenarios.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.19.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.20.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -48,6 +48,7 @@ useAzureMonitor(options);
 ```
 
 - Connection String can be set via `APPLICATIONINSIGHTS_CONNECTION_STRING`.
+- Batch span processing can be configured with the standard OpenTelemetry environment variables `OTEL_BSP_MAX_QUEUE_SIZE`, `OTEL_BSP_MAX_EXPORT_BATCH_SIZE`, `OTEL_BSP_SCHEDULE_DELAY`, and `OTEL_BSP_EXPORT_TIMEOUT`.
 - Sampler can be set via the OpenTelemetry env vars `OTEL_TRACES_SAMPLER` and `OTEL_TRACES_SAMPLER_ARG` (takes precedence over the `samplingRatio` option). Supported sampler values: `microsoft.rate_limited`, `microsoft.fixed_percentage`, `always_on`, `always_off`, `trace_id_ratio`, `parentbased_always_on`, `parentbased_always_off`, `parentbased_trace_id_ratio`. For `microsoft.rate_limited`, the arg is spans per second; for `trace_id_ratio`/parentbased, the arg is a probability in [0,1]. When the arg is omitted, defaults apply (rate limit disabled; probability defaults to 1). See the upstream OpenTelemetry environment variable spec for full context: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/.
 - To use the **fixed percentage sampler** (instead of the default rate-limited sampler), you can either:
   - Set the environment variable `OTEL_TRACES_SAMPLER=microsoft.fixed_percentage` with an optional `OTEL_TRACES_SAMPLER_ARG` for the sampling probability (e.g., `0.5` for 50%).
@@ -94,6 +95,7 @@ For CommonJS applications, no additional flags are needed - the loader is automa
 ```ts snippet:ReadmeSampleConfiguration
 import { resourceFromAttributes } from "@opentelemetry/resources";
 import { AzureMonitorOpenTelemetryOptions, useAzureMonitor } from "@azure/monitor-opentelemetry";
+import { SeverityNumber } from "@opentelemetry/api-logs";
 
 const resource = resourceFromAttributes({ testAttribute: "testValue" });
 const options: AzureMonitorOpenTelemetryOptions = {
@@ -119,8 +121,10 @@ const options: AzureMonitorOpenTelemetryOptions = {
     // Instrumentations generating logs
     bunyan: { enabled: true },
     winston: { enabled: true },
-    // Console log collection is opt-in (disabled by default)
-    console: { enabled: false },
+    // Console log collection is opt-in (disabled by default).
+    // `logSeverity` takes precedence over the
+    // APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL environment variable.
+    console: { enabled: false, logSeverity: SeverityNumber.WARN },
   },
   enableLiveMetrics: true,
   enableStandardMetrics: true,
@@ -144,7 +148,7 @@ useAzureMonitor(options);
   </tr>
   <tr>
     <td><code>azureMonitorExporterOptions</code></td>
-    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.19.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
+    <td>Azure Monitor OpenTelemetry Exporter Configuration. <a href="https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.20.0/sdk/monitor/monitor-opentelemetry-exporter">More info here</a></td>
     <td></td>
   </tr>
   <tr>
@@ -271,7 +275,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 - [Postgres](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-pg)
 - [Redis](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis)
 - [Redis-4](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-redis-4)
-- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.19.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
+- [Azure SDK](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.20.0/sdk/instrumentation/opentelemetry-instrumentation-azure-sdk)
 - [Azure Functions](https://github.com/Azure/azure-functions-nodejs-opentelemetry)
 
 ### Metrics
@@ -286,7 +290,7 @@ The following OpenTelemetry Instrumentation libraries are included as part of Az
 
 - [Console](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages/instrumentation-console) (disabled by default; enable with `instrumentationOptions: { console: { enabled: true } }`)
 
-  Once enabled, the set of `console` methods collected is filtered by the `APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL` environment variable (`NONE`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `VERBOSE`, `ALL`; see [Self-diagnostics](#self-diagnostics)). For example, `WARN` collects only `console.warn` and `console.error`, while `NONE` disables collection of `console` (and all other) logs entirely.
+  Once enabled, the set of `console` methods collected is filtered by the `logSeverity` value on the `console` instrumentation options, falling back to the `APPLICATIONINSIGHTS_INSTRUMENTATION_LOGGING_LEVEL` environment variable (`NONE`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `VERBOSE`, `ALL`; see [Self-diagnostics](#self-diagnostics)) when `logSeverity` is not set. For example, `WARN` collects only `console.warn` and `console.error`, while `NONE` disables collection of `console` (and all other) logs entirely.
 
 Other OpenTelemetry Instrumentations are available [here](https://github.com/open-telemetry/opentelemetry-js-contrib/tree/main/packages) and could be added using TracerProvider in AzureMonitorOpenTelemetryClient.
 
@@ -607,7 +611,7 @@ Logs could be put into local file using `APPLICATIONINSIGHTS_LOG_DESTINATION` en
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.19.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry_1.20.0/sdk/monitor/monitor-opentelemetry/samples-dev/) folder.
 
 ## Key concepts
 
@@ -621,5 +625,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.19.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry_1.20.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 

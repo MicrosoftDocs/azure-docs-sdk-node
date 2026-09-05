@@ -32,6 +32,31 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-containerservicefleet.GateConfiguration" />[]
+  - name: maxAllowedFailures
+    uid: '@azure/arm-containerservicefleet.UpdateGroup.maxAllowedFailures'
+    package: '@azure/arm-containerservicefleet'
+    summary: >-
+      Limits the number of member (cluster) upgrade failures tolerated within
+      this group.
+
+      Failures are evaluated over members within this group only.
+
+      Accepts either:
+        • A fixed count n, where n >= 0
+        • A percentage p%, where 0 <= p <= 100
+          Percentage resolves at stage start using: resolvedThreshold = ceil(p * N),
+          where p is the percentage as a decimal and N is the number of members in this group at scope start.
+      Examples:
+        • "3"   --> up to 3 member upgrade failures are tolerated within this group. The 4th failure causes the group to fail.
+        • "25%" --> up to 25% of the members in this group can fail their upgrade before the group is considered failed.
+    fullName: maxAllowedFailures
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxAllowedFailures?: string'
+      return:
+        description: ''
+        type: string
   - name: maxConcurrency
     uid: '@azure/arm-containerservicefleet.UpdateGroup.maxConcurrency'
     package: '@azure/arm-containerservicefleet'
@@ -66,6 +91,23 @@ properties:
       return:
         description: ''
         type: string
+  - name: memberSelector
+    uid: '@azure/arm-containerservicefleet.UpdateGroup.memberSelector'
+    package: '@azure/arm-containerservicefleet'
+    summary: |-
+      Select the members of the group.
+        * If specified, label-based selection will override group name based selection,
+          and Name is only used as an identifier.
+        * If not specified, group name based selection will be used, and Name must match a
+          group name of an existing fleet member.
+    fullName: memberSelector
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'memberSelector?: MemberSelector'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-containerservicefleet.MemberSelector" />
   - name: name
     uid: '@azure/arm-containerservicefleet.UpdateGroup.name'
     package: '@azure/arm-containerservicefleet'

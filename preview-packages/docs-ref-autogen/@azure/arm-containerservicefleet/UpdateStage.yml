@@ -62,6 +62,32 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-containerservicefleet.UpdateGroup" />[]
+  - name: maxAllowedFailures
+    uid: '@azure/arm-containerservicefleet.UpdateStage.maxAllowedFailures'
+    package: '@azure/arm-containerservicefleet'
+    summary: >-
+      Limits the number of member (cluster) upgrade failures tolerated within
+      this stage.
+
+      Failures are evaluated over all members within all groups within this
+      stage.
+
+      Accepts either:
+        • A fixed count n, where n >= 0
+        • A percentage p%, where 0 <= p <= 100
+          Percentage resolves at stage start using: resolvedThreshold = ceil(p * N),
+          where p is the percentage as a decimal and N is the number of members in this stage at scope start.
+      Examples:
+        • "3"   --> up to 3 member upgrade failures are tolerated within this stage. The 4th failure would cause the entire stage to fail.
+        • "25%" --> up to 25% of the members in this stage can fail their upgrade before the stage is considered failed.
+    fullName: maxAllowedFailures
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxAllowedFailures?: string'
+      return:
+        description: ''
+        type: string
   - name: maxConcurrency
     uid: '@azure/arm-containerservicefleet.UpdateStage.maxConcurrency'
     package: '@azure/arm-containerservicefleet'
@@ -93,6 +119,22 @@ properties:
       return:
         description: ''
         type: string
+  - name: memberSelector
+    uid: '@azure/arm-containerservicefleet.UpdateStage.memberSelector'
+    package: '@azure/arm-containerservicefleet'
+    summary: |-
+      Select the members of the stage.
+        * If specified without UpdateGroup, one implicit group containing the selected members will be created.
+        * If specified with UpdateGroup, members will be pre-filtered before group-level selection logic is applied.
+        * If not specified, group-level selection logic will be used.
+    fullName: memberSelector
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'memberSelector?: MemberSelector'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-containerservicefleet.MemberSelector" />
   - name: name
     uid: '@azure/arm-containerservicefleet.UpdateStage.name'
     package: '@azure/arm-containerservicefleet'

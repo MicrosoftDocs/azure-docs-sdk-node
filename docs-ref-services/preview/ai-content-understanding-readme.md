@@ -1,12 +1,12 @@
 ---
 title: Azure AI Content Understanding client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-content-understanding, contentunderstanding
-ms.date: 08/13/2026
+ms.date: 09/05/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: contentunderstanding
 ---
-# Azure AI Content Understanding client library for JavaScript - version 1.2.0-beta.3 
+# Azure AI Content Understanding client library for JavaScript - version 1.2.0-alpha.20260902.3 
 
 
 Azure AI Content Understanding is a multimodal AI service that extracts semantic content from documents, video, audio, and image files. It transforms unstructured content into structured, machine-readable data optimized for retrieval-augmented generation (RAG) and automated workflows.
@@ -59,7 +59,7 @@ If you have encountered issues or want to suggest features, please [file an issu
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-content-understanding_1.2.0-beta.3/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -580,7 +580,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Testing
 
@@ -781,8 +781,8 @@ node analyzeBinary.js
 
 For full setup instructions and available samples, see:
 
-- [TypeScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples/v1/typescript/README.md)
-- [JavaScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples/v1/javascript/README.md)
+- [TypeScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples/v1/typescript/README.md)
+- [JavaScript samples README](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples/v1/javascript/README.md)
 
 ## GitHub Copilot Skills
 
@@ -825,7 +825,7 @@ If Copilot does not use the expected skill, try the following:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-content-understanding_1.2.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -835,12 +835,12 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding
 [npm_package]: https://www.npmjs.com/package/@azure/ai-content-understanding
 [api_reference]: https://learn.microsoft.com/javascript/api/@azure/ai-content-understanding
-[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/CHANGELOG.md
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/identity/identity#defaultazurecredential
+[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/contentunderstanding/ai-content-understanding/CHANGELOG.md
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [product_docs]: https://learn.microsoft.com/azure/ai-services/content-understanding/
 [cu_quickstart]: https://learn.microsoft.com/azure/ai-services/content-understanding/quickstart/use-rest-api?tabs=portal%2Cdocument
 [cu_region_support]: https://learn.microsoft.com/azure/ai-services/content-understanding/language-region-support
@@ -849,18 +849,18 @@ If you'd like to contribute to this library, please read the [contributing guide
 [supported_generative_models]: https://learn.microsoft.com/azure/ai-services/content-understanding/service-limits#supported-generative-models
 [deploy_models_docs]: https://learn.microsoft.com/azure/ai-studio/how-to/deploy-models-openai
 [prebuilt_analyzers_docs]: https://learn.microsoft.com/azure/ai-services/content-understanding/concepts/prebuilt-analyzers
-[samples_directory]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples
-[js_cu_sample_to_llm_input]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/toLlmInput.ts
-[sample_update_defaults]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/updateDefaults.ts
-[sample_analyze_inline]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeInline.ts
-[sample_analyze_binary_inline]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeBinaryInline.ts
-[sample_analyze_chunking]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeChunking.ts
-[sample_create_analyzer_workflow]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/createAnalyzerWorkflow.ts
-[sample_analyze_configs]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeConfigs.ts
-[sample_detect_signatures]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/detectSignatures.ts
-[sample_classify_in_page_segments]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/classifyInPageSegments.ts
-[sample_extract_document_metadata]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/extractDocumentMetadata.ts
-[sample_to_llm_input]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/samples-dev/toLlmInput.ts
+[samples_directory]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples
+[js_cu_sample_to_llm_input]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/toLlmInput.ts
+[sample_update_defaults]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/updateDefaults.ts
+[sample_analyze_inline]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeInline.ts
+[sample_analyze_binary_inline]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeBinaryInline.ts
+[sample_analyze_chunking]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeChunking.ts
+[sample_create_analyzer_workflow]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/createAnalyzerWorkflow.ts
+[sample_analyze_configs]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/analyzeConfigs.ts
+[sample_detect_signatures]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/detectSignatures.ts
+[sample_classify_in_page_segments]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/classifyInPageSegments.ts
+[sample_extract_document_metadata]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/extractDocumentMetadata.ts
+[sample_to_llm_input]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/samples-dev/toLlmInput.ts
 [client_options]: https://learn.microsoft.com/javascript/api/@azure/core-rest-pipeline/pipelineoptions?view=azure-node-latest
 [accessing_response]: https://learn.microsoft.com/javascript/api/@azure/core-rest-pipeline/pipelineresponse?view=azure-node-latest
 [long_running_operations]: https://learn.microsoft.com/javascript/api/@azure/core-lro?view=azure-node-latest
@@ -868,8 +868,8 @@ If you'd like to contribute to this library, please read the [contributing guide
 [diagnostics]: https://learn.microsoft.com/javascript/api/@azure/logger?view=azure-node-latest
 [client_lifetime]: https://learn.microsoft.com/azure/developer/javascript/sdk/use-azure-sdk
 [github_copilot]: https://github.com/features/copilot
-[cu_sdk_setup_skill]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/.github/skills/cu-sdk-setup
-[cu_sdk_sample_run_skill]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/.github/skills/cu-sdk-sample-run
-[cu_sdk_common_knowledge_skill]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-content-understanding_1.2.0-beta.3/sdk/contentunderstanding/ai-content-understanding/.github/skills/cu-sdk-common-knowledge
+[cu_sdk_setup_skill]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/.github/skills/cu-sdk-setup
+[cu_sdk_sample_run_skill]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/.github/skills/cu-sdk-sample-run
+[cu_sdk_common_knowledge_skill]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/contentunderstanding/ai-content-understanding/.github/skills/cu-sdk-common-knowledge
 [file_issue]: https://github.com/Azure/azure-sdk-for-js/issues/new?labels=Cognitive%20-%20Content%20Understanding&title=[ContentUnderstanding]%20&body=%23%23%20Library%20Version%0A%0A%23%23%20Repro%20Steps%0A%0A%23%23%20Expected%20Result%0A%0A%23%23%20Actual%20Result
 

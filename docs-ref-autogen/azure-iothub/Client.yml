@@ -240,7 +240,7 @@ inheritedMethods:
     syntax:
       content: >-
         function addListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): Client
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -250,7 +250,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.addListener
   - name: emit<K>(string | symbol, AnyRest)
     uid: azure-iothub.Client.emit
@@ -356,14 +356,12 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function eventNames(): (string | symbol)[]'
+      content: 'function eventNames(): Array<(string | symbol) & Key2<unknown, T>>'
       return:
         description: ''
-        type: (string | symbol)[]
+        type: Array&lt;(string | symbol) & Key2&lt;unknown, T&gt;&gt;
     inheritanceDescription: <b>Inherited From</b> EventEmitter.eventNames
-  - name: >-
-      getEventListeners(EventEmitter<DefaultEventMap> | EventTarget, string |
-      symbol)
+  - name: getEventListeners(EventEmitter | EventTarget, string | symbol)
     uid: azure-iothub.Client.getEventListeners
     package: azure-iothub
     summary: >-
@@ -405,11 +403,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function getEventListeners(emitter: EventEmitter<DefaultEventMap>
-        | EventTarget, name: string | symbol): Function[]
+        static function getEventListeners(emitter: EventEmitter | EventTarget,
+        name: string | symbol): Function[]
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt; | EventTarget
+          type: EventEmitter | EventTarget
           description: ''
         - id: name
           type: string | symbol
@@ -426,7 +424,7 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:EventEmitter.defaultMaxListeners>.
+      [EventEmitter.defaultMaxListeners](xref:azure-iothub.Client.defaultMaxListeners).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -435,7 +433,7 @@ inheritedMethods:
         description: ''
         type: number
     inheritanceDescription: <b>Inherited From</b> EventEmitter.getMaxListeners
-  - name: getMaxListeners(EventEmitter<DefaultEventMap> | EventTarget)
+  - name: getMaxListeners(EventEmitter | EventTarget)
     uid: azure-iothub.Client.getMaxListeners_1
     package: azure-iothub
     summary: >-
@@ -482,17 +480,17 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function getMaxListeners(emitter: EventEmitter<DefaultEventMap> |
-        EventTarget): number
+        static function getMaxListeners(emitter: EventEmitter | EventTarget):
+        number
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt; | EventTarget
+          type: EventEmitter | EventTarget
           description: ''
       return:
         description: ''
         type: number
     inheritanceDescription: <b>Inherited From</b> EventEmitter.getMaxListeners
-  - name: listenerCount(EventEmitter<DefaultEventMap>, string | symbol)
+  - name: listenerCount(EventEmitter, string | symbol)
     uid: azure-iothub.Client.listenerCount_1
     package: azure-iothub
     summary: >-
@@ -521,11 +519,11 @@ inheritedMethods:
     customDeprecatedMessage: Since v3.2.0 - Use `listenerCount` instead.
     syntax:
       content: >-
-        static function listenerCount(emitter: EventEmitter<DefaultEventMap>,
-        eventName: string | symbol): number
+        static function listenerCount(emitter: EventEmitter, eventName: string |
+        symbol): number
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter
           description: The emitter to query
         - id: eventName
           type: string | symbol
@@ -595,7 +593,7 @@ inheritedMethods:
     syntax:
       content: >-
         function off<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): Client
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -605,11 +603,9 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.off
-  - name: >-
-      on(EventEmitter<DefaultEventMap>, string | symbol,
-      StaticEventEmitterIteratorOptions)
+  - name: on(EventEmitter, string | symbol, StaticEventEmitterIteratorOptions)
     uid: azure-iothub.Client.on_1
     package: azure-iothub
     summary: >-
@@ -725,12 +721,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function on(emitter: EventEmitter<DefaultEventMap>, eventName:
-        string | symbol, options?: StaticEventEmitterIteratorOptions):
-        AsyncIterator<any[], any, any>
+        static function on(emitter: EventEmitter, eventName: string | symbol,
+        options?: StaticEventEmitterIteratorOptions): AsyncIterator<any[]>
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter
           description: ''
         - id: eventName
           type: string | symbol
@@ -742,7 +737,7 @@ inheritedMethods:
         description: >-
           An `AsyncIterator` that iterates `eventName` events emitted by the
           `emitter`
-        type: AsyncIterator&lt;any[], any, any&gt;
+        type: AsyncIterator&lt;any[]&gt;
     inheritanceDescription: <b>Inherited From</b> EventEmitter.on
   - name: on(EventTarget, string, StaticEventEmitterIteratorOptions)
     uid: azure-iothub.Client.on_2
@@ -753,7 +748,7 @@ inheritedMethods:
     syntax:
       content: >-
         static function on(emitter: EventTarget, eventName: string, options?:
-        StaticEventEmitterIteratorOptions): AsyncIterator<any[], any, any>
+        StaticEventEmitterIteratorOptions): AsyncIterator<any[]>
       parameters:
         - id: emitter
           type: EventTarget
@@ -766,7 +761,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: AsyncIterator&lt;any[], any, any&gt;
+        type: AsyncIterator&lt;any[]&gt;
     inheritanceDescription: <b>Inherited From</b> EventEmitter.on
   - name: 'on<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.on
@@ -826,7 +821,7 @@ inheritedMethods:
     syntax:
       content: >-
         function on<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): Client
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -836,11 +831,9 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.on
-  - name: >-
-      once(EventEmitter<DefaultEventMap>, string | symbol,
-      StaticEventEmitterOptions)
+  - name: once(EventEmitter, string | symbol, StaticEventEmitterOptions)
     uid: azure-iothub.Client.once_1
     package: azure-iothub
     summary: >-
@@ -967,11 +960,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function once(emitter: EventEmitter<DefaultEventMap>, eventName:
-        string | symbol, options?: StaticEventEmitterOptions): Promise<any[]>
+        static function once(emitter: EventEmitter, eventName: string | symbol,
+        options?: StaticEventEmitterOptions): Promise<any[]>
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter
           description: ''
         - id: eventName
           type: string | symbol
@@ -1061,7 +1054,7 @@ inheritedMethods:
     syntax:
       content: >-
         function once<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): Client
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1071,7 +1064,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.once
   - name: 'prependListener<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.prependListener
@@ -1104,7 +1097,7 @@ inheritedMethods:
     syntax:
       content: >-
         function prependListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): Client
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1114,7 +1107,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.prependListener
   - name: 'prependOnceListener<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.prependOnceListener
@@ -1142,7 +1135,7 @@ inheritedMethods:
     syntax:
       content: >-
         function prependOnceListener<K>(eventName: string | symbol, listener:
-        (args: any[]) => void): Client
+        (args: any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1152,7 +1145,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.prependOnceListener
   - name: rawListeners<K>(string | symbol)
     uid: azure-iothub.Client.rawListeners
@@ -1211,14 +1204,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function removeAllListeners(eventName?: string | symbol): Client'
+      content: 'function removeAllListeners(eventName?: string | symbol): this'
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.removeAllListeners
   - name: 'removeListener<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.removeListener
@@ -1371,7 +1364,7 @@ inheritedMethods:
     syntax:
       content: >-
         function removeListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): Client
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1381,7 +1374,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.removeListener
   - name: setMaxListeners(number)
     uid: azure-iothub.Client.setMaxListeners
@@ -1403,16 +1396,16 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number): Client'
+      content: 'function setMaxListeners(n: number): this'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.setMaxListeners
-  - name: setMaxListeners(number, (EventEmitter<DefaultEventMap> | EventTarget)[])
+  - name: setMaxListeners(number, (EventEmitter | EventTarget)[])
     uid: azure-iothub.Client.setMaxListeners_1
     package: azure-iothub
     summary: |-
@@ -1428,8 +1421,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function setMaxListeners(n?: number, eventTargets:
-        (EventEmitter<DefaultEventMap> | EventTarget)[])
+        static function setMaxListeners(n?: number, eventTargets: (EventEmitter
+        | EventTarget)[])
       parameters:
         - id: 'n'
           type: number
@@ -1437,7 +1430,7 @@ inheritedMethods:
             A non-negative number. The maximum number of listeners per
             `EventTarget` event.
         - id: eventTargets
-          type: (EventEmitter&lt;DefaultEventMap&gt; | EventTarget)[]
+          type: (EventEmitter | EventTarget)[]
           description: >-
             Zero or more {EventTarget} or {EventEmitter} instances. If none are
             specified, `n` is set as the default max for all newly created
@@ -1465,7 +1458,7 @@ inheritedMethods:
         - id: args
           type: AnyRest
           description: ''
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.__@captureRejectionSymbol@118
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.[captureRejectionSymbol]
 methods:
   - name: close()
     uid: azure-iothub.Client.close_1
@@ -1807,7 +1800,7 @@ methods:
           description: |-
             The body of the message to send to the device.
                                          If `message` is not of type
-                                         [Message](xref:azure-iot-common.Message),
+                                         [module:azure-iot-common.Message|Message](xref:__global.module),
                                          it will be converted.
         - id: done
           type: IncomingMessageCallback&lt;MessageEnqueued&gt;

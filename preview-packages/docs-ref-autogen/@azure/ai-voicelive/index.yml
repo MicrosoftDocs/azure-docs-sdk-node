@@ -341,14 +341,16 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isAgentSessionTarget(target: SessionTarget): target'
+      content: >-
+        function isAgentSessionTarget(target: SessionTarget): target is { agent:
+        AgentSessionConfig, model?: undefined }
       parameters:
         - id: target
           type: <xref uid="@azure/ai-voicelive.SessionTarget" />
           description: The session target to check
       return:
         description: True if the target specifies an agent session
-        type: target
+        type: 'target is { agent: AgentSessionConfig, model?: undefined }'
   - name: isModelSessionTarget(SessionTarget)
     uid: '@azure/ai-voicelive.isModelSessionTarget'
     package: '@azure/ai-voicelive'
@@ -356,14 +358,16 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isModelSessionTarget(target: SessionTarget): target'
+      content: >-
+        function isModelSessionTarget(target: SessionTarget): target is {
+        agent?: undefined, model: string }
       parameters:
         - id: target
           type: <xref uid="@azure/ai-voicelive.SessionTarget" />
           description: The session target to check
       return:
         description: True if the target specifies a model session
-        type: target
+        type: 'target is { agent?: undefined, model: string }'
   - name: isRestError(unknown)
     uid: '@azure/ai-voicelive.isRestError'
     package: '@azure/ai-voicelive'
@@ -371,11 +375,11 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isRestError(e: unknown): e'
+      content: 'function isRestError(e: unknown): e is RestError'
       parameters:
         - id: e
           type: unknown
           description: Something caught by a catch clause.
       return:
         description: ''
-        type: e
+        type: e is RestError

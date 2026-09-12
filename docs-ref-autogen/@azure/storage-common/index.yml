@@ -12,7 +12,6 @@ classes:
   - '@azure/storage-common.BufferScheduler'
   - '@azure/storage-common.Credential'
   - '@azure/storage-common.CredentialPolicy'
-  - '@azure/storage-common.Readable'
   - '@azure/storage-common.StorageBrowserPolicy'
   - '@azure/storage-common.StorageBrowserPolicyFactory'
   - '@azure/storage-common.StorageCRC64Calculator'
@@ -23,6 +22,7 @@ classes:
   - '@azure/storage-common.UserDelegationKeyCredential'
 interfaces:
   - '@azure/storage-common.NodeJSReadableStream'
+  - '@azure/storage-common.Readable'
   - '@azure/storage-common.StorageRetryOptions'
   - '@azure/storage-common.StorageSharedKeyCredentialPolicyOptions'
   - '@azure/storage-common.StructuredMessageDecodingStreamOptions'
@@ -120,23 +120,6 @@ variables:
         description: ''
         type: '"storageSharedKeyCredentialPolicy"'
 functions:
-  - name: NewRetryPolicyFactory(StorageRetryOptions)
-    uid: '@azure/storage-common.NewRetryPolicyFactory'
-    package: '@azure/storage-common'
-    summary: A factory method used to generated a RetryPolicy factory.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function NewRetryPolicyFactory(retryOptions?: StorageRetryOptions):
-        RequestPolicyFactory
-      parameters:
-        - id: retryOptions
-          type: <xref uid="@azure/storage-common.StorageRetryOptions" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http-compat.RequestPolicyFactory" />
   - name: allocBuffer(number)
     uid: '@azure/storage-common.allocBuffer'
     package: '@azure/storage-common'
@@ -175,7 +158,7 @@ functions:
       return:
         description: ''
         type: NodeBuffer
-  - name: createBlobFromData(Blob | ArrayBuffer | ArrayBufferView)
+  - name: createBlobFromData(ArrayBuffer | Blob | ArrayBufferView)
     uid: '@azure/storage-common.createBlobFromData'
     package: '@azure/storage-common'
     summary: >-
@@ -189,26 +172,26 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createBlobFromData(data: Blob | ArrayBuffer | ArrayBufferView):
+        function createBlobFromData(data: ArrayBuffer | Blob | ArrayBufferView):
         Blob
       parameters:
         - id: data
-          type: Blob | ArrayBuffer | ArrayBufferView
+          type: ArrayBuffer | Blob | ArrayBufferView
           description: ''
       return:
         description: ''
         type: Blob
-  - name: getBufferLength(Buffer)
+  - name: getBufferLength(NodeBuffer)
     uid: '@azure/storage-common.getBufferLength'
     package: '@azure/storage-common'
     summary: Returns the byte length of a buffer.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function getBufferLength(buffer: Buffer): number'
+      content: 'function getBufferLength(buffer: NodeBuffer): number'
       parameters:
         - id: buffer
-          type: Buffer
+          type: NodeBuffer
           description: ''
       return:
         description: ''
@@ -231,14 +214,31 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isBuffer(value: unknown): value'
+      content: 'function isBuffer(value: unknown): value is NodeBuffer'
       parameters:
         - id: value
           type: unknown
           description: ''
       return:
         description: ''
-        type: value
+        type: value is NodeBuffer
+  - name: NewRetryPolicyFactory(StorageRetryOptions)
+    uid: '@azure/storage-common.NewRetryPolicyFactory'
+    package: '@azure/storage-common'
+    summary: A factory method used to generated a RetryPolicy factory.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function NewRetryPolicyFactory(retryOptions?: StorageRetryOptions):
+        RequestPolicyFactory
+      parameters:
+        - id: retryOptions
+          type: <xref uid="@azure/storage-common.StorageRetryOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-http-compat.RequestPolicyFactory" />
   - name: storageBrowserPolicy()
     uid: '@azure/storage-common.storageBrowserPolicy'
     package: '@azure/storage-common'
@@ -363,7 +363,7 @@ functions:
     syntax:
       content: >-
         function structuredMessageDecodingStream(source: ReadableStream,
-        options: StructuredMessageDecodingStreamOptions): NodeJS.ReadableStream
+        options: StructuredMessageDecodingStreamOptions): ReadableStream
       parameters:
         - id: source
           type: ReadableStream
@@ -376,7 +376,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: <xref uid="NodeJS.ReadableStream" />
+        type: ReadableStream
   - name: structuredMessageEncoding(RequestBodyType, number)
     uid: '@azure/storage-common.structuredMessageEncoding'
     package: '@azure/storage-common'
@@ -388,7 +388,7 @@ functions:
     syntax:
       content: >-
         function structuredMessageEncoding(source: RequestBodyType,
-        contentLength: number): Promise<{ body: HttpRequestBody,
+        contentLength: number): Promise<{ body: RequestBodyType,
         encodedContentLength: number }>
       parameters:
         - id: source
@@ -399,4 +399,4 @@ functions:
           description: ''
       return:
         description: ''
-        type: 'Promise&lt;{ body: HttpRequestBody, encodedContentLength: number }&gt;'
+        type: 'Promise&lt;{ body: RequestBodyType, encodedContentLength: number }&gt;'

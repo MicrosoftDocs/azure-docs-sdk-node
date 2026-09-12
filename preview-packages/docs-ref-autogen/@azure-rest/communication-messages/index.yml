@@ -265,6 +265,55 @@ typeAliases:
   - '@azure-rest/communication-messages.WhatsAppMessageButtonSubType'
   - '@azure-rest/communication-messages.WhatsAppMessageButtonSubTypeOutput'
 functions:
+  - name: createClient(string, ClientOptions)
+    uid: '@azure-rest/communication-messages.createClient'
+    package: '@azure-rest/communication-messages'
+    summary: Initialize a new instance of `MessagesServiceClient`
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createClient(connectionString: string, options?:
+        ClientOptions): MessagesServiceClient
+      parameters:
+        - id: connectionString
+          type: string
+          description: The connectionString or url of your Communication Services resource.
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: the parameter for all optional parameters
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure-rest/communication-messages.MessagesServiceClient"
+          />
+  - name: createClient(string, KeyCredential | TokenCredential, ClientOptions)
+    uid: '@azure-rest/communication-messages.createClient_1'
+    package: '@azure-rest/communication-messages'
+    summary: Initialize a new instance of `MessagesServiceClient`
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createClient(endpoint: string, credential: KeyCredential |
+        TokenCredential, options?: ClientOptions): MessagesServiceClient
+      parameters:
+        - id: endpoint
+          type: string
+          description: The endpoint of your Communication Services resource.
+        - id: credential
+          type: >-
+            <xref uid="@azure/core-auth.KeyCredential" /> | <xref
+            uid="@azure/core-auth.TokenCredential" />
+          description: The key or token credential.
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: the parameter for all optional parameters
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure-rest/communication-messages.MessagesServiceClient"
+          />
   - name: >-
       createConversationEventListener(string, CommunicationTokenCredential,
       MessagesServiceClientOptions)
@@ -298,55 +347,6 @@ functions:
         type: >-
           <xref
           uid="@azure-rest/communication-messages.ConversationEventListener" />
-  - name: default(string, ClientOptions)
-    uid: '@azure-rest/communication-messages.default'
-    package: '@azure-rest/communication-messages'
-    summary: Initialize a new instance of `MessagesServiceClient`
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function default(connectionString: string, options?: ClientOptions):
-        MessagesServiceClient
-      parameters:
-        - id: connectionString
-          type: string
-          description: The connectionString or url of your Communication Services resource.
-        - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: the parameter for all optional parameters
-      return:
-        description: ''
-        type: >-
-          <xref uid="@azure-rest/communication-messages.MessagesServiceClient"
-          />
-  - name: default(string, KeyCredential | TokenCredential, ClientOptions)
-    uid: '@azure-rest/communication-messages.default_1'
-    package: '@azure-rest/communication-messages'
-    summary: Initialize a new instance of `MessagesServiceClient`
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function default(endpoint: string, credential: KeyCredential |
-        TokenCredential, options?: ClientOptions): MessagesServiceClient
-      parameters:
-        - id: endpoint
-          type: string
-          description: The endpoint of your Communication Services resource.
-        - id: credential
-          type: >-
-            <xref uid="@azure/core-auth.KeyCredential" /> | <xref
-            uid="@azure/core-auth.TokenCredential" />
-          description: The key or token credential.
-        - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: the parameter for all optional parameters
-      return:
-        description: ''
-        type: >-
-          <xref uid="@azure-rest/communication-messages.MessagesServiceClient"
-          />
   - name: isUnexpected(GetMedia200Response | GetMediaDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected'
     package: '@azure-rest/communication-messages'
@@ -356,7 +356,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetMedia200Response |
-        GetMediaDefaultResponse): response
+        GetMediaDefaultResponse): response is GetMediaDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -366,7 +366,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetMediaDefaultResponse
   - name: isUnexpected(Send202Response | SendDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_1'
     package: '@azure-rest/communication-messages'
@@ -376,7 +376,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: Send202Response | SendDefaultResponse):
-        response
+        response is SendDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -386,7 +386,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is SendDefaultResponse
   - name: isUnexpected(ListTemplates200Response | ListTemplatesDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_2'
     package: '@azure-rest/communication-messages'
@@ -396,7 +396,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: ListTemplates200Response |
-        ListTemplatesDefaultResponse): response
+        ListTemplatesDefaultResponse): response is ListTemplatesDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -408,7 +408,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is ListTemplatesDefaultResponse
   - name: isUnexpected(AddParticipants207Response | AddParticipantsDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_3'
     package: '@azure-rest/communication-messages'
@@ -418,7 +418,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: AddParticipants207Response |
-        AddParticipantsDefaultResponse): response
+        AddParticipantsDefaultResponse): response is
+        AddParticipantsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -430,7 +431,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is AddParticipantsDefaultResponse
   - name: >-
       isUnexpected(RemoveParticipants207Response |
       RemoveParticipantsDefaultResponse)
@@ -442,7 +443,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: RemoveParticipants207Response |
-        RemoveParticipantsDefaultResponse): response
+        RemoveParticipantsDefaultResponse): response is
+        RemoveParticipantsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -454,7 +456,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is RemoveParticipantsDefaultResponse
   - name: >-
       isUnexpected(ListConversations200Response |
       ListConversationsDefaultResponse)
@@ -466,7 +468,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: ListConversations200Response |
-        ListConversationsDefaultResponse): response
+        ListConversationsDefaultResponse): response is
+        ListConversationsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -478,7 +481,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is ListConversationsDefaultResponse
   - name: >-
       isUnexpected(CreateConversation201Response |
       CreateConversationDefaultResponse)
@@ -490,7 +493,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: CreateConversation201Response |
-        CreateConversationDefaultResponse): response
+        CreateConversationDefaultResponse): response is
+        CreateConversationDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -502,7 +506,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is CreateConversationDefaultResponse
   - name: isUnexpected(ListMessages200Response | ListMessagesDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_7'
     package: '@azure-rest/communication-messages'
@@ -512,7 +516,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: ListMessages200Response |
-        ListMessagesDefaultResponse): response
+        ListMessagesDefaultResponse): response is ListMessagesDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -524,7 +528,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is ListMessagesDefaultResponse
   - name: isUnexpected(SendMessage200Response | SendMessageDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_8'
     package: '@azure-rest/communication-messages'
@@ -534,7 +538,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: SendMessage200Response |
-        SendMessageDefaultResponse): response
+        SendMessageDefaultResponse): response is SendMessageDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -546,7 +550,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is SendMessageDefaultResponse
   - name: >-
       isUnexpected(AnalyzeConversation200Response |
       AnalyzeConversationDefaultResponse)
@@ -558,7 +562,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: AnalyzeConversation200Response |
-        AnalyzeConversationDefaultResponse): response
+        AnalyzeConversationDefaultResponse): response is
+        AnalyzeConversationDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -570,7 +575,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is AnalyzeConversationDefaultResponse
   - name: isUnexpected(GetConversation200Response | GetConversationDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_10'
     package: '@azure-rest/communication-messages'
@@ -580,7 +585,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetConversation200Response |
-        GetConversationDefaultResponse): response
+        GetConversationDefaultResponse): response is
+        GetConversationDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -592,7 +598,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetConversationDefaultResponse
   - name: >-
       isUnexpected(DeleteConversation204Response |
       DeleteConversationDefaultResponse)
@@ -604,7 +610,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: DeleteConversation204Response |
-        DeleteConversationDefaultResponse): response
+        DeleteConversationDefaultResponse): response is
+        DeleteConversationDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -616,7 +623,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is DeleteConversationDefaultResponse
   - name: >-
       isUnexpected(TerminateConversation200Response |
       TerminateConversationDefaultResponse)
@@ -628,7 +635,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: TerminateConversation200Response |
-        TerminateConversationDefaultResponse): response
+        TerminateConversationDefaultResponse): response is
+        TerminateConversationDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -640,7 +648,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is TerminateConversationDefaultResponse
   - name: paginate<TResponse>(Client, TResponse, PagingOptions<TResponse>)
     uid: '@azure-rest/communication-messages.paginate'
     package: '@azure-rest/communication-messages'
@@ -653,7 +661,8 @@ functions:
       content: >-
         function paginate<TResponse>(client: Client, initialResponse: TResponse,
         options?: PagingOptions<TResponse>):
-        PagedAsyncIterableIterator<PaginateReturn<TResponse>>
+        PagedAsyncIterableIterator<PaginateReturn<TResponse>,
+        PaginateReturn<TResponse>[], PageSettings>
       parameters:
         - id: client
           type: <xref uid="@azure-rest/core-client.Client" />
@@ -674,4 +683,6 @@ functions:
           <xref
           uid="@azure-rest/communication-messages.PagedAsyncIterableIterator"
           />&lt;<xref uid="@azure-rest/communication-messages.PaginateReturn"
-          />&lt;TResponse&gt;&gt;
+          />&lt;TResponse&gt;, <xref
+          uid="@azure-rest/communication-messages.PaginateReturn"
+          />&lt;TResponse&gt;[], PageSettings&gt;

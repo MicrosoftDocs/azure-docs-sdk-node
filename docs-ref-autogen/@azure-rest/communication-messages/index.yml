@@ -76,16 +76,16 @@ typeAliases:
   - '@azure-rest/communication-messages.SendParameters'
   - '@azure-rest/communication-messages.WhatsAppMessageButtonSubType'
 functions:
-  - name: default(string, ClientOptions)
-    uid: '@azure-rest/communication-messages.default'
+  - name: createClient(string, ClientOptions)
+    uid: '@azure-rest/communication-messages.createClient'
     package: '@azure-rest/communication-messages'
     summary: Initialize a new instance of `MessagesServiceClient`
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function default(connectionString: string, options?: ClientOptions):
-        MessagesServiceClient
+        function createClient(connectionString: string, options?:
+        ClientOptions): MessagesServiceClient
       parameters:
         - id: connectionString
           type: string
@@ -98,15 +98,15 @@ functions:
         type: >-
           <xref uid="@azure-rest/communication-messages.MessagesServiceClient"
           />
-  - name: default(string, KeyCredential | TokenCredential, ClientOptions)
-    uid: '@azure-rest/communication-messages.default_1'
+  - name: createClient(string, KeyCredential | TokenCredential, ClientOptions)
+    uid: '@azure-rest/communication-messages.createClient_1'
     package: '@azure-rest/communication-messages'
     summary: Initialize a new instance of `MessagesServiceClient`
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function default(endpoint: string, credential: KeyCredential |
+        function createClient(endpoint: string, credential: KeyCredential |
         TokenCredential, options?: ClientOptions): MessagesServiceClient
       parameters:
         - id: endpoint
@@ -125,7 +125,7 @@ functions:
         type: >-
           <xref uid="@azure-rest/communication-messages.MessagesServiceClient"
           />
-  - name: isUnexpected(GetMedia200Response | GetMediaDefaultResponse)
+  - name: isUnexpected(GetMediaDefaultResponse | GetMedia200Response)
     uid: '@azure-rest/communication-messages.isUnexpected'
     package: '@azure-rest/communication-messages'
     summary: ''
@@ -133,18 +133,19 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isUnexpected(response: GetMedia200Response |
-        GetMediaDefaultResponse): response
+        function isUnexpected(response: GetMediaDefaultResponse |
+        GetMedia200Response): response is GetMediaDefaultResponse
       parameters:
         - id: response
           type: >-
-            <xref uid="@azure-rest/communication-messages.GetMedia200Response"
-            /> | <xref
+            <xref
             uid="@azure-rest/communication-messages.GetMediaDefaultResponse" />
+            | <xref uid="@azure-rest/communication-messages.GetMedia200Response"
+            />
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetMediaDefaultResponse
   - name: isUnexpected(Send202Response | SendDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_1'
     package: '@azure-rest/communication-messages'
@@ -154,7 +155,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: Send202Response | SendDefaultResponse):
-        response
+        response is SendDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -164,7 +165,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is SendDefaultResponse
   - name: isUnexpected(ListTemplates200Response | ListTemplatesDefaultResponse)
     uid: '@azure-rest/communication-messages.isUnexpected_2'
     package: '@azure-rest/communication-messages'
@@ -174,7 +175,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: ListTemplates200Response |
-        ListTemplatesDefaultResponse): response
+        ListTemplatesDefaultResponse): response is ListTemplatesDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -186,7 +187,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is ListTemplatesDefaultResponse
   - name: paginate<TResponse>(Client, TResponse, PagingOptions<TResponse>)
     uid: '@azure-rest/communication-messages.paginate'
     package: '@azure-rest/communication-messages'
@@ -199,7 +200,8 @@ functions:
       content: >-
         function paginate<TResponse>(client: Client, initialResponse: TResponse,
         options?: PagingOptions<TResponse>):
-        PagedAsyncIterableIterator<PaginateReturn<TResponse>>
+        PagedAsyncIterableIterator<PaginateReturn<TResponse>,
+        PaginateReturn<TResponse>[], PageSettings>
       parameters:
         - id: client
           type: <xref uid="@azure-rest/core-client.Client" />
@@ -219,4 +221,7 @@ functions:
         type: >-
           <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
           uid="@azure-rest/communication-messages.PaginateReturn"
-          />&lt;TResponse&gt;&gt;
+          />&lt;TResponse&gt;, <xref
+          uid="@azure-rest/communication-messages.PaginateReturn"
+          />&lt;TResponse&gt;[], <xref uid="@azure/core-paging.PageSettings"
+          />&gt;

@@ -171,119 +171,6 @@ functions:
       return:
         description: The composed batch request.
         type: <xref uid="@azure-rest/maps-route.BatchRequest" />
-  - name: default(AzureKeyCredential, ClientOptions)
-    uid: '@azure-rest/maps-route.default'
-    package: '@azure-rest/maps-route'
-    summary: |+
-      Creates an instance of MapsRouteClient from a subscription key.
-
-      **Example**
-
-      ```ts snippet:ReadmeSampleCreateClient_SubscriptionKey
-      import { AzureKeyCredential } from "@azure/core-auth";
-      import MapsRoute from "@azure-rest/maps-route";
-
-      const credential = new AzureKeyCredential("<subscription-key>");
-      const client = MapsRoute(credential);
-      ```
-
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function default(credential: AzureKeyCredential, options?:
-        ClientOptions): MapsRouteClient
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/core-auth.AzureKeyCredential" />
-          description: >-
-            An AzureKeyCredential instance used to authenticate requests to the
-            service
-        - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: Options used to configure the Route Client
-      return:
-        description: ''
-        type: <xref uid="@azure-rest/maps-route.MapsRouteClient" />
-  - name: default(TokenCredential, string, ClientOptions)
-    uid: '@azure-rest/maps-route.default_1'
-    package: '@azure-rest/maps-route'
-    summary: |+
-      Creates an instance of MapsRoute from an Azure Identity `TokenCredential`.
-
-      **Example**
-
-      ```ts snippet:ReadmeSampleCreateClient_TokenCredential
-      import { DefaultAzureCredential } from "@azure/identity";
-      import MapsRoute from "@azure-rest/maps-route";
-
-      const credential = new DefaultAzureCredential();
-      const client = MapsRoute(credential, "<maps-account-client-id>");
-      ```
-
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function default(credential: TokenCredential, mapsAccountClientId:
-        string, options?: ClientOptions): MapsRouteClient
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/core-auth.TokenCredential" />
-          description: >-
-            An TokenCredential instance used to authenticate requests to the
-            service
-        - id: mapsAccountClientId
-          type: string
-          description: The Azure Maps client id of a specific map resource
-        - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: Options used to configure the Route Client
-      return:
-        description: ''
-        type: <xref uid="@azure-rest/maps-route.MapsRouteClient" />
-  - name: default(AzureSASCredential, ClientOptions)
-    uid: '@azure-rest/maps-route.default_2'
-    package: '@azure-rest/maps-route'
-    summary: >+
-      Creates an instance of MapsRoute from an Azure Identity
-      `AzureSASCredential`.
-
-
-      **Example**
-
-
-      ```ts snippet:ReadmeSampleCreateClient_SASToken
-
-      import { AzureSASCredential } from "@azure/core-auth";
-
-      import MapsRoute from "@azure-rest/maps-route";
-
-
-      const credential = new AzureSASCredential("<SAS Token>");
-
-      const client = MapsRoute(credential);
-
-      ```
-
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function default(credential: AzureSASCredential, options?:
-        ClientOptions): MapsRouteClient
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/core-auth.AzureSASCredential" />
-          description: >-
-            An AzureSASCredential instance used to authenticate requests to the
-            service
-        - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: Options used to configure the Route Client
-      return:
-        description: ''
-        type: <xref uid="@azure-rest/maps-route.MapsRouteClient" />
   - name: >-
       getLongRunningPoller<TResult>(Client, TResult,
       CreateHttpPollerOptions<TResult, OperationState<TResult>>)
@@ -333,7 +220,8 @@ functions:
       content: >-
         function isUnexpected(response: RouteRequestRouteMatrixSync200Response |
         RouteRequestRouteMatrixSync408Response |
-        RouteRequestRouteMatrixSyncDefaultResponse): response
+        RouteRequestRouteMatrixSyncDefaultResponse): response is
+        RouteRequestRouteMatrixSync408Response
       parameters:
         - id: response
           type: >-
@@ -347,7 +235,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is RouteRequestRouteMatrixSync408Response
   - name: >-
       isUnexpected(RouteGetRouteDirections200Response |
       RouteGetRouteDirectionsDefaultResponse)
@@ -359,7 +247,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: RouteGetRouteDirections200Response |
-        RouteGetRouteDirectionsDefaultResponse): response
+        RouteGetRouteDirectionsDefaultResponse): response is
+        RouteGetRouteDirectionsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -371,7 +260,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is RouteGetRouteDirectionsDefaultResponse
   - name: >-
       isUnexpected(RouteGetRouteDirectionsWithAdditionalParameters200Response |
       RouteGetRouteDirectionsWithAdditionalParametersDefaultResponse)
@@ -385,7 +274,8 @@ functions:
         function isUnexpected(response:
         RouteGetRouteDirectionsWithAdditionalParameters200Response |
         RouteGetRouteDirectionsWithAdditionalParametersDefaultResponse):
-        response
+        response is
+        RouteGetRouteDirectionsWithAdditionalParametersDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -397,7 +287,9 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: >-
+          response is
+          RouteGetRouteDirectionsWithAdditionalParametersDefaultResponse
   - name: >-
       isUnexpected(RouteGetRouteRange200Response |
       RouteGetRouteRangeDefaultResponse)
@@ -409,7 +301,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: RouteGetRouteRange200Response |
-        RouteGetRouteRangeDefaultResponse): response
+        RouteGetRouteRangeDefaultResponse): response is
+        RouteGetRouteRangeDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -419,7 +312,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is RouteGetRouteRangeDefaultResponse
   - name: >-
       isUnexpected(RouteRequestRouteDirectionsBatchSync200Response |
       RouteRequestRouteDirectionsBatchSync408Response |
@@ -434,7 +327,8 @@ functions:
         function isUnexpected(response:
         RouteRequestRouteDirectionsBatchSync200Response |
         RouteRequestRouteDirectionsBatchSync408Response |
-        RouteRequestRouteDirectionsBatchSyncDefaultResponse): response
+        RouteRequestRouteDirectionsBatchSyncDefaultResponse): response is
+        RouteRequestRouteDirectionsBatchSync408Response
       parameters:
         - id: response
           type: >-
@@ -448,7 +342,120 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is RouteRequestRouteDirectionsBatchSync408Response
+  - name: MapsRoute(AzureKeyCredential, ClientOptions)
+    uid: '@azure-rest/maps-route.MapsRoute'
+    package: '@azure-rest/maps-route'
+    summary: |+
+      Creates an instance of MapsRouteClient from a subscription key.
+
+      **Example**
+
+      ```ts snippet:ReadmeSampleCreateClient_SubscriptionKey
+      import { AzureKeyCredential } from "@azure/core-auth";
+      import MapsRoute from "@azure-rest/maps-route";
+
+      const credential = new AzureKeyCredential("<subscription-key>");
+      const client = MapsRoute(credential);
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function MapsRoute(credential: AzureKeyCredential, options?:
+        ClientOptions): MapsRouteClient
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/core-auth.AzureKeyCredential" />
+          description: >-
+            An AzureKeyCredential instance used to authenticate requests to the
+            service
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: Options used to configure the Route Client
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/maps-route.MapsRouteClient" />
+  - name: MapsRoute(TokenCredential, string, ClientOptions)
+    uid: '@azure-rest/maps-route.MapsRoute_1'
+    package: '@azure-rest/maps-route'
+    summary: |+
+      Creates an instance of MapsRoute from an Azure Identity `TokenCredential`.
+
+      **Example**
+
+      ```ts snippet:ReadmeSampleCreateClient_TokenCredential
+      import { DefaultAzureCredential } from "@azure/identity";
+      import MapsRoute from "@azure-rest/maps-route";
+
+      const credential = new DefaultAzureCredential();
+      const client = MapsRoute(credential, "<maps-account-client-id>");
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function MapsRoute(credential: TokenCredential, mapsAccountClientId:
+        string, options?: ClientOptions): MapsRouteClient
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/core-auth.TokenCredential" />
+          description: >-
+            An TokenCredential instance used to authenticate requests to the
+            service
+        - id: mapsAccountClientId
+          type: string
+          description: The Azure Maps client id of a specific map resource
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: Options used to configure the Route Client
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/maps-route.MapsRouteClient" />
+  - name: MapsRoute(AzureSASCredential, ClientOptions)
+    uid: '@azure-rest/maps-route.MapsRoute_2'
+    package: '@azure-rest/maps-route'
+    summary: >+
+      Creates an instance of MapsRoute from an Azure Identity
+      `AzureSASCredential`.
+
+
+      **Example**
+
+
+      ```ts snippet:ReadmeSampleCreateClient_SASToken
+
+      import { AzureSASCredential } from "@azure/core-auth";
+
+      import MapsRoute from "@azure-rest/maps-route";
+
+
+      const credential = new AzureSASCredential("<SAS Token>");
+
+      const client = MapsRoute(credential);
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function MapsRoute(credential: AzureSASCredential, options?:
+        ClientOptions): MapsRouteClient
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/core-auth.AzureSASCredential" />
+          description: >-
+            An AzureSASCredential instance used to authenticate requests to the
+            service
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: Options used to configure the Route Client
+      return:
+        description: ''
+        type: <xref uid="@azure-rest/maps-route.MapsRouteClient" />
   - name: toColonDelimitedLatLonString(LatLon[])
     uid: '@azure-rest/maps-route.toColonDelimitedLatLonString'
     package: '@azure-rest/maps-route'

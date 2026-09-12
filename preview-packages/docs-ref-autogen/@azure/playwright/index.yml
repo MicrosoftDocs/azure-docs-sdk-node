@@ -47,8 +47,7 @@ variables:
       return:
         description: ''
         type: '{ LINUX: "linux", WINDOWS: "windows" }'
-functions:
-  - name: getConnectOptions(PlaywrightServiceAdditionalOptions)
+  - name: getConnectOptions
     uid: '@azure/playwright.getConnectOptions'
     package: '@azure/playwright'
     summary: >+
@@ -86,16 +85,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function getConnectOptions(options?:
-        PlaywrightServiceAdditionalOptions): Promise<BrowserConnectOptions>
-      parameters:
-        - id: options
-          type: <xref uid="@azure/playwright.PlaywrightServiceAdditionalOptions" />
-          description: additional options for the service
+        getConnectOptions: (options?: PlaywrightServiceAdditionalOptions) =>
+        Promise<BrowserConnectOptions>
       return:
-        description: BrowserConnectOptions
-        type: Promise&lt;<xref uid="@azure/playwright.BrowserConnectOptions" />&gt;
-  - name: getServiceConfig(PlaywrightTestConfig, PlaywrightServiceAdditionalOptions)
+        description: ''
+        type: >-
+          (options?: PlaywrightServiceAdditionalOptions) =&gt;
+          Promise&lt;BrowserConnectOptions&gt;
+  - name: getServiceConfig
     uid: '@azure/playwright.getServiceConfig'
     package: '@azure/playwright'
     summary: >+
@@ -146,15 +143,18 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function getServiceConfig(config: PlaywrightTestConfig, options?:
-        PlaywrightServiceAdditionalOptions): PlaywrightTestConfig
-      parameters:
-        - id: config
-          type: PlaywrightTestConfig
-          description: base playwright configuration
-        - id: options
-          type: <xref uid="@azure/playwright.PlaywrightServiceAdditionalOptions" />
-          description: additional options for the service
+        getServiceConfig: (config: PlaywrightTestConfig<PlaywrightTestOptions &
+        CustomProperties<{}>, PlaywrightWorkerOptions & CustomProperties<{}>>,
+        options?: PlaywrightServiceAdditionalOptions) =>
+        PlaywrightTestConfig<PlaywrightTestOptions & CustomProperties<{}>,
+        PlaywrightWorkerOptions & CustomProperties<{}>>
       return:
-        description: PlaywrightConfig
-        type: PlaywrightTestConfig
+        description: ''
+        type: >-
+          (config: PlaywrightTestConfig&lt;PlaywrightTestOptions &
+          CustomProperties&lt;{}&gt;, PlaywrightWorkerOptions &
+          CustomProperties&lt;{}&gt;&gt;, options?:
+          PlaywrightServiceAdditionalOptions) =&gt;
+          PlaywrightTestConfig&lt;PlaywrightTestOptions &
+          CustomProperties&lt;{}&gt;, PlaywrightWorkerOptions &
+          CustomProperties&lt;{}&gt;&gt;

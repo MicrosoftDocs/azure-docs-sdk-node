@@ -17,7 +17,7 @@ inheritedMethods:
     syntax:
       content: >-
         function addListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): ServiceReceiver
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -27,7 +27,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.addListener
   - name: emit<K>(string | symbol, AnyRest)
     uid: azure-iothub.Client.ServiceReceiver.emit
@@ -133,10 +133,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function eventNames(): (string | symbol)[]'
+      content: 'function eventNames(): Array<(string | symbol) & Key2<unknown, T>>'
       return:
         description: ''
-        type: (string | symbol)[]
+        type: Array&lt;(string | symbol) & Key2&lt;unknown, T&gt;&gt;
     inheritanceDescription: <b>Inherited From</b> Receiver.eventNames
   - name: getMaxListeners()
     uid: azure-iothub.Client.ServiceReceiver.getMaxListeners
@@ -146,7 +146,7 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:EventEmitter.defaultMaxListeners>.
+      [EventEmitter.defaultMaxListeners](xref:azure-iothub.Client.defaultMaxListeners).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -216,7 +216,7 @@ inheritedMethods:
     syntax:
       content: >-
         function off<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): ServiceReceiver
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -226,7 +226,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.off
   - name: 'on("errorReceived", (err: Error) => void)'
     uid: azure-iothub.Client.ServiceReceiver.on_1
@@ -235,9 +235,7 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function on(type: "errorReceived", func: (err: Error) => void):
-        ServiceReceiver
+      content: 'function on(type: "errorReceived", func: (err: Error) => void): this'
       parameters:
         - id: type
           type: '"errorReceived"'
@@ -247,18 +245,65 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.on
   - name: 'on("message", (msg: Message) => void)'
     uid: azure-iothub.Client.ServiceReceiver.on
     package: azure-iothub
-    summary: ''
+    summary: >-
+      Adds the `listener` function to the end of the listeners array for the
+      event
+
+      named `eventName`. No checks are made to see if the `listener` has already
+
+      been added. Multiple calls passing the same combination of `eventName` and
+
+      `listener` will result in the `listener` being added, and called, multiple
+      times.
+
+
+      ```js
+
+      server.on('connection', (stream) => {
+        console.log('someone connected!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+
+
+      By default, event listeners are invoked in the order they are added. The
+      `emitter.prependListener()` method can be used as an alternative to add
+      the
+
+      event listener to the beginning of the listeners array.
+
+
+      ```js
+
+      import { EventEmitter } from 'node:events';
+
+      const myEE = new EventEmitter();
+
+      myEE.on('foo', () => console.log('a'));
+
+      myEE.prependListener('foo', () => console.log('b'));
+
+      myEE.emit('foo');
+
+      // Prints:
+
+      //   b
+
+      //   a
+
+      ```
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function on(type: "message", func: (msg: Message) => void):
-        ServiceReceiver
+      content: 'function on(type: "message", func: (msg: Message) => void): this'
       parameters:
         - id: type
           type: '"message"'
@@ -268,7 +313,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.on
   - name: on(string, Function)
     uid: azure-iothub.Client.ServiceReceiver.on_2
@@ -277,7 +322,7 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function on(type: string, func: Function): ServiceReceiver'
+      content: 'function on(type: string, func: Function): this'
       parameters:
         - id: type
           type: string
@@ -287,7 +332,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.on
   - name: 'once<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.ServiceReceiver.once
@@ -343,7 +388,7 @@ inheritedMethods:
     syntax:
       content: >-
         function once<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): ServiceReceiver
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -353,7 +398,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.once
   - name: 'prependListener<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.ServiceReceiver.prependListener
@@ -386,7 +431,7 @@ inheritedMethods:
     syntax:
       content: >-
         function prependListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): ServiceReceiver
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -396,7 +441,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.prependListener
   - name: 'prependOnceListener<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.ServiceReceiver.prependOnceListener
@@ -424,7 +469,7 @@ inheritedMethods:
     syntax:
       content: >-
         function prependOnceListener<K>(eventName: string | symbol, listener:
-        (args: any[]) => void): ServiceReceiver
+        (args: any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -434,7 +479,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.prependOnceListener
   - name: rawListeners<K>(string | symbol)
     uid: azure-iothub.Client.ServiceReceiver.rawListeners
@@ -493,16 +538,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function removeAllListeners(eventName?: string | symbol):
-        ServiceReceiver
+      content: 'function removeAllListeners(eventName?: string | symbol): this'
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.removeAllListeners
   - name: 'removeListener<K>(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.ServiceReceiver.removeListener
@@ -655,7 +698,7 @@ inheritedMethods:
     syntax:
       content: >-
         function removeListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): ServiceReceiver
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -665,7 +708,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.removeListener
   - name: setMaxListeners(number)
     uid: azure-iothub.Client.ServiceReceiver.setMaxListeners
@@ -687,14 +730,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number): ServiceReceiver'
+      content: 'function setMaxListeners(n: number): this'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iothub.Client.ServiceReceiver" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> Receiver.setMaxListeners
   - name: '[captureRejectionSymbol]<K>(Error, string | symbol, AnyRest)'
     uid: azure-iothub.Client.ServiceReceiver.[captureRejectionSymbol]
@@ -716,7 +759,7 @@ inheritedMethods:
         - id: args
           type: AnyRest
           description: ''
-    inheritanceDescription: <b>Inherited From</b> Receiver.__@captureRejectionSymbol@118
+    inheritanceDescription: <b>Inherited From</b> Receiver.[captureRejectionSymbol]
 methods:
   - name: abandon(Message, Callback<MessageAbandoned>)
     uid: azure-iothub.Client.ServiceReceiver.abandon

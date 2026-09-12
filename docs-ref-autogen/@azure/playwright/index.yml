@@ -48,10 +48,7 @@ variables:
       return:
         description: ''
         type: '{ LINUX: "linux", WINDOWS: "windows" }'
-functions:
-  - name: >-
-      createAzurePlaywrightConfig(PlaywrightTestConfig,
-      PlaywrightServiceAdditionalOptions)
+  - name: createAzurePlaywrightConfig
     uid: '@azure/playwright.createAzurePlaywrightConfig'
     package: '@azure/playwright'
     summary: >+
@@ -106,19 +103,23 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createAzurePlaywrightConfig(baseConfig: PlaywrightTestConfig,
-        options?: PlaywrightServiceAdditionalOptions): PlaywrightTestConfig
-      parameters:
-        - id: baseConfig
-          type: PlaywrightTestConfig
-          description: base playwright configuration
-        - id: options
-          type: <xref uid="@azure/playwright.PlaywrightServiceAdditionalOptions" />
-          description: additional options for the service
+        createAzurePlaywrightConfig: (baseConfig:
+        PlaywrightTestConfig<PlaywrightTestOptions & CustomProperties<{}>,
+        PlaywrightWorkerOptions & CustomProperties<{}>>, options?:
+        PlaywrightServiceAdditionalOptions) =>
+        PlaywrightTestConfig<PlaywrightTestOptions & CustomProperties<{}>,
+        PlaywrightWorkerOptions & CustomProperties<{}>>
       return:
-        description: PlaywrightConfig
-        type: PlaywrightTestConfig
-  - name: getConnectOptions(PlaywrightServiceAdditionalOptions)
+        description: ''
+        type: >-
+          (baseConfig: PlaywrightTestConfig&lt;PlaywrightTestOptions &
+          CustomProperties&lt;{}&gt;, PlaywrightWorkerOptions &
+          CustomProperties&lt;{}&gt;&gt;, options?:
+          PlaywrightServiceAdditionalOptions) =&gt;
+          PlaywrightTestConfig&lt;PlaywrightTestOptions &
+          CustomProperties&lt;{}&gt;, PlaywrightWorkerOptions &
+          CustomProperties&lt;{}&gt;&gt;
+  - name: getConnectOptions
     uid: '@azure/playwright.getConnectOptions'
     package: '@azure/playwright'
     summary: >+
@@ -156,12 +157,10 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function getConnectOptions(options?:
-        PlaywrightServiceAdditionalOptions): Promise<BrowserConnectOptions>
-      parameters:
-        - id: options
-          type: <xref uid="@azure/playwright.PlaywrightServiceAdditionalOptions" />
-          description: additional options for the service
+        getConnectOptions: (options?: PlaywrightServiceAdditionalOptions) =>
+        Promise<BrowserConnectOptions>
       return:
-        description: BrowserConnectOptions
-        type: Promise&lt;<xref uid="@azure/playwright.BrowserConnectOptions" />&gt;
+        description: ''
+        type: >-
+          (options?: PlaywrightServiceAdditionalOptions) =&gt;
+          Promise&lt;BrowserConnectOptions&gt;

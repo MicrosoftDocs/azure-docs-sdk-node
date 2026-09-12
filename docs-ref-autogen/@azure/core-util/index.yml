@@ -304,21 +304,21 @@ functions:
       return:
         description: ''
         type: number
-  - name: isDefined<T>(undefined | null | T)
+  - name: isDefined<T>(T | null | undefined)
     uid: '@azure/core-util.isDefined'
     package: '@azure/core-util'
     summary: Helper TypeGuard that checks if something is defined or not.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isDefined<T>(thing: undefined | null | T): thing'
+      content: 'function isDefined<T>(thing: T | null | undefined): thing is T'
       parameters:
         - id: thing
-          type: undefined | null | T
+          type: T | null | undefined
           description: Anything
       return:
         description: ''
-        type: thing
+        type: thing is T
   - name: isError(unknown)
     uid: '@azure/core-util.isError'
     package: '@azure/core-util'
@@ -326,14 +326,14 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isError(e: unknown): e'
+      content: 'function isError(e: unknown): e is Error'
       parameters:
         - id: e
           type: unknown
           description: Something caught by a catch clause.
       return:
         description: ''
-        type: e
+        type: e is Error
   - name: isObject(unknown)
     uid: '@azure/core-util.isObject'
     package: '@azure/core-util'
@@ -341,7 +341,7 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isObject(input: unknown): input'
+      content: 'function isObject(input: unknown): input is UnknownObject'
       parameters:
         - id: input
           type: unknown
@@ -350,7 +350,7 @@ functions:
         description: >-
           true when input is an object type that is not null, Array, RegExp, or
           Date.
-        type: input
+        type: input is UnknownObject
   - name: isObjectWithProperties<Thing, PropertyName>(Thing, PropertyName[])
     uid: '@azure/core-util.isObjectWithProperties'
     package: '@azure/core-util'
@@ -362,7 +362,8 @@ functions:
     syntax:
       content: >-
         function isObjectWithProperties<Thing, PropertyName>(thing: Thing,
-        properties: PropertyName[]): thing
+        properties: PropertyName[]): thing is Thing & Record<PropertyName,
+        unknown>
       parameters:
         - id: thing
           type: Thing
@@ -372,7 +373,7 @@ functions:
           description: The name of the properties that should appear in the object.
       return:
         description: ''
-        type: thing
+        type: thing is Thing & Record&lt;PropertyName, unknown&gt;
   - name: objectHasProperty<Thing, PropertyName>(Thing, PropertyName)
     uid: '@azure/core-util.objectHasProperty'
     package: '@azure/core-util'
@@ -384,7 +385,7 @@ functions:
     syntax:
       content: >-
         function objectHasProperty<Thing, PropertyName>(thing: Thing, property:
-        PropertyName): thing
+        PropertyName): thing is Thing & Record<PropertyName, unknown>
       parameters:
         - id: thing
           type: Thing
@@ -394,7 +395,7 @@ functions:
           description: The name of the property that should appear in the object.
       return:
         description: ''
-        type: thing
+        type: thing is Thing & Record&lt;PropertyName, unknown&gt;
   - name: randomUUID()
     uid: '@azure/core-util.randomUUID'
     package: '@azure/core-util'

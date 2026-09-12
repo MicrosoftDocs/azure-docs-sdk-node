@@ -256,7 +256,7 @@ inheritedMethods:
     syntax:
       content: >-
         function addListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): IotEdgeAuthenticationProvider
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -266,7 +266,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.addListener](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.addListener)
@@ -376,10 +376,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function eventNames(): (string | symbol)[]'
+      content: 'function eventNames(): Array<(string | symbol) & Key2<unknown, T>>'
       return:
         description: ''
-        type: (string | symbol)[]
+        type: Array&lt;(string | symbol) & Key2&lt;unknown, T&gt;&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.eventNames](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.eventNames)
@@ -453,9 +453,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.getDeviceCredentials](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.getDeviceCredentials)
-  - name: >-
-      getEventListeners(EventEmitter<DefaultEventMap> | EventTarget, string |
-      symbol)
+  - name: getEventListeners(EventEmitter | EventTarget, string | symbol)
     uid: azure-iot-device.IotEdgeAuthenticationProvider.getEventListeners
     package: azure-iot-device
     summary: >-
@@ -497,11 +495,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function getEventListeners(emitter: EventEmitter<DefaultEventMap>
-        | EventTarget, name: string | symbol): Function[]
+        static function getEventListeners(emitter: EventEmitter | EventTarget,
+        name: string | symbol): Function[]
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt; | EventTarget
+          type: EventEmitter | EventTarget
           description: ''
         - id: name
           type: string | symbol
@@ -520,7 +518,7 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:EventEmitter.defaultMaxListeners>.
+      [EventEmitter.defaultMaxListeners](xref:azure-iot-device.Client.defaultMaxListeners).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -531,7 +529,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.getMaxListeners](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.getMaxListeners)
-  - name: getMaxListeners(EventEmitter<DefaultEventMap> | EventTarget)
+  - name: getMaxListeners(EventEmitter | EventTarget)
     uid: azure-iot-device.IotEdgeAuthenticationProvider.getMaxListeners_1
     package: azure-iot-device
     summary: >-
@@ -578,11 +576,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function getMaxListeners(emitter: EventEmitter<DefaultEventMap> |
-        EventTarget): number
+        static function getMaxListeners(emitter: EventEmitter | EventTarget):
+        number
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt; | EventTarget
+          type: EventEmitter | EventTarget
           description: ''
       return:
         description: ''
@@ -590,7 +588,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.getMaxListeners](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.getMaxListeners)
-  - name: listenerCount(EventEmitter<DefaultEventMap>, string | symbol)
+  - name: listenerCount(EventEmitter, string | symbol)
     uid: azure-iot-device.IotEdgeAuthenticationProvider.listenerCount_1
     package: azure-iot-device
     summary: >-
@@ -619,11 +617,11 @@ inheritedMethods:
     customDeprecatedMessage: Since v3.2.0 - Use `listenerCount` instead.
     syntax:
       content: >-
-        static function listenerCount(emitter: EventEmitter<DefaultEventMap>,
-        eventName: string | symbol): number
+        static function listenerCount(emitter: EventEmitter, eventName: string |
+        symbol): number
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter
           description: The emitter to query
         - id: eventName
           type: string | symbol
@@ -699,7 +697,7 @@ inheritedMethods:
     syntax:
       content: >-
         function off<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): IotEdgeAuthenticationProvider
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -709,13 +707,11 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.off](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.off)
-  - name: >-
-      on(EventEmitter<DefaultEventMap>, string | symbol,
-      StaticEventEmitterIteratorOptions)
+  - name: on(EventEmitter, string | symbol, StaticEventEmitterIteratorOptions)
     uid: azure-iot-device.IotEdgeAuthenticationProvider.on_1
     package: azure-iot-device
     summary: >-
@@ -831,12 +827,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function on(emitter: EventEmitter<DefaultEventMap>, eventName:
-        string | symbol, options?: StaticEventEmitterIteratorOptions):
-        AsyncIterator<any[], any, any>
+        static function on(emitter: EventEmitter, eventName: string | symbol,
+        options?: StaticEventEmitterIteratorOptions): AsyncIterator<any[]>
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter
           description: ''
         - id: eventName
           type: string | symbol
@@ -848,7 +843,7 @@ inheritedMethods:
         description: >-
           An `AsyncIterator` that iterates `eventName` events emitted by the
           `emitter`
-        type: AsyncIterator&lt;any[], any, any&gt;
+        type: AsyncIterator&lt;any[]&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.on](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.on)
@@ -861,7 +856,7 @@ inheritedMethods:
     syntax:
       content: >-
         static function on(emitter: EventTarget, eventName: string, options?:
-        StaticEventEmitterIteratorOptions): AsyncIterator<any[], any, any>
+        StaticEventEmitterIteratorOptions): AsyncIterator<any[]>
       parameters:
         - id: emitter
           type: EventTarget
@@ -874,7 +869,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: AsyncIterator&lt;any[], any, any&gt;
+        type: AsyncIterator&lt;any[]&gt;
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.on](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.on)
@@ -936,7 +931,7 @@ inheritedMethods:
     syntax:
       content: >-
         function on<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): IotEdgeAuthenticationProvider
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -946,13 +941,11 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.on](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.on)
-  - name: >-
-      once(EventEmitter<DefaultEventMap>, string | symbol,
-      StaticEventEmitterOptions)
+  - name: once(EventEmitter, string | symbol, StaticEventEmitterOptions)
     uid: azure-iot-device.IotEdgeAuthenticationProvider.once_1
     package: azure-iot-device
     summary: >-
@@ -1079,11 +1072,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function once(emitter: EventEmitter<DefaultEventMap>, eventName:
-        string | symbol, options?: StaticEventEmitterOptions): Promise<any[]>
+        static function once(emitter: EventEmitter, eventName: string | symbol,
+        options?: StaticEventEmitterOptions): Promise<any[]>
       parameters:
         - id: emitter
-          type: EventEmitter&lt;DefaultEventMap&gt;
+          type: EventEmitter
           description: ''
         - id: eventName
           type: string | symbol
@@ -1177,7 +1170,7 @@ inheritedMethods:
     syntax:
       content: >-
         function once<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): IotEdgeAuthenticationProvider
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1187,7 +1180,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.once](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.once)
@@ -1222,7 +1215,7 @@ inheritedMethods:
     syntax:
       content: >-
         function prependListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): IotEdgeAuthenticationProvider
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1232,7 +1225,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.prependListener](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.prependListener)
@@ -1262,7 +1255,7 @@ inheritedMethods:
     syntax:
       content: >-
         function prependOnceListener<K>(eventName: string | symbol, listener:
-        (args: any[]) => void): IotEdgeAuthenticationProvider
+        (args: any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1272,7 +1265,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.prependOnceListener](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.prependOnceListener)
@@ -1335,16 +1328,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function removeAllListeners(eventName?: string | symbol):
-        IotEdgeAuthenticationProvider
+      content: 'function removeAllListeners(eventName?: string | symbol): this'
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.removeAllListeners](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.removeAllListeners)
@@ -1499,7 +1490,7 @@ inheritedMethods:
     syntax:
       content: >-
         function removeListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): IotEdgeAuthenticationProvider
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1509,7 +1500,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.removeListener](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.removeListener)
@@ -1533,18 +1524,18 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number): IotEdgeAuthenticationProvider'
+      content: 'function setMaxListeners(n: number): this'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
         description: ''
-        type: <xref uid="azure-iot-device.IotEdgeAuthenticationProvider" />
+        type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
       [SharedAccessKeyAuthenticationProvider.setMaxListeners](xref:azure-iot-device.SharedAccessKeyAuthenticationProvider.setMaxListeners)
-  - name: setMaxListeners(number, (EventEmitter<DefaultEventMap> | EventTarget)[])
+  - name: setMaxListeners(number, (EventEmitter | EventTarget)[])
     uid: azure-iot-device.IotEdgeAuthenticationProvider.setMaxListeners_1
     package: azure-iot-device
     summary: |-
@@ -1560,8 +1551,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function setMaxListeners(n?: number, eventTargets:
-        (EventEmitter<DefaultEventMap> | EventTarget)[])
+        static function setMaxListeners(n?: number, eventTargets: (EventEmitter
+        | EventTarget)[])
       parameters:
         - id: 'n'
           type: number
@@ -1569,7 +1560,7 @@ inheritedMethods:
             A non-negative number. The maximum number of listeners per
             `EventTarget` event.
         - id: eventTargets
-          type: (EventEmitter&lt;DefaultEventMap&gt; | EventTarget)[]
+          type: (EventEmitter | EventTarget)[]
           description: >-
             Zero or more {EventTarget} or {EventEmitter} instances. If none are
             specified, `n` is set as the default max for all newly created

@@ -110,16 +110,17 @@ typeAliases:
   - '@azure-rest/health-deidentification.PhiCategoryOutput'
   - '@azure-rest/health-deidentification.TextEncodingType'
 functions:
-  - name: default(string, TokenCredential, DeidentificationClientOptions)
-    uid: '@azure-rest/health-deidentification.default'
+  - name: createClient(string, TokenCredential, DeidentificationClientOptions)
+    uid: '@azure-rest/health-deidentification.createClient'
     package: '@azure-rest/health-deidentification'
     summary: Initialize a new instance of `DeidentificationClient`
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function default(endpointParam: string, credentials: TokenCredential,
-        options?: DeidentificationClientOptions): DeidentificationClient
+        function createClient(endpointParam: string, credentials:
+        TokenCredential, options?: DeidentificationClientOptions):
+        DeidentificationClient
       parameters:
         - id: endpointParam
           type: string
@@ -193,7 +194,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetJob200Response |
-        GetJobDefaultResponse): response
+        GetJobDefaultResponse): response is GetJobDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -203,7 +204,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetJobDefaultResponse
   - name: >-
       isUnexpected(DeidentifyDocuments200Response |
       DeidentifyDocuments201Response | DeidentifyDocumentsDefaultResponse |
@@ -217,7 +218,8 @@ functions:
       content: >-
         function isUnexpected(response: DeidentifyDocuments200Response |
         DeidentifyDocuments201Response | DeidentifyDocumentsDefaultResponse |
-        DeidentifyDocumentsLogicalResponse): response
+        DeidentifyDocumentsLogicalResponse): response is
+        DeidentifyDocumentsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -233,7 +235,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is DeidentifyDocumentsDefaultResponse
   - name: isUnexpected(DeleteJob204Response | DeleteJobDefaultResponse)
     uid: '@azure-rest/health-deidentification.isUnexpected_2'
     package: '@azure-rest/health-deidentification'
@@ -243,7 +245,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: DeleteJob204Response |
-        DeleteJobDefaultResponse): response
+        DeleteJobDefaultResponse): response is DeleteJobDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -254,7 +256,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is DeleteJobDefaultResponse
   - name: isUnexpected(ListJobs200Response | ListJobsDefaultResponse)
     uid: '@azure-rest/health-deidentification.isUnexpected_3'
     package: '@azure-rest/health-deidentification'
@@ -264,7 +266,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: ListJobs200Response |
-        ListJobsDefaultResponse): response
+        ListJobsDefaultResponse): response is ListJobsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -274,7 +276,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is ListJobsDefaultResponse
   - name: >-
       isUnexpected(ListJobDocuments200Response |
       ListJobDocumentsDefaultResponse)
@@ -286,7 +288,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: ListJobDocuments200Response |
-        ListJobDocumentsDefaultResponse): response
+        ListJobDocumentsDefaultResponse): response is
+        ListJobDocumentsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -298,7 +301,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is ListJobDocumentsDefaultResponse
   - name: isUnexpected(CancelJob200Response | CancelJobDefaultResponse)
     uid: '@azure-rest/health-deidentification.isUnexpected_5'
     package: '@azure-rest/health-deidentification'
@@ -308,7 +311,7 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: CancelJob200Response |
-        CancelJobDefaultResponse): response
+        CancelJobDefaultResponse): response is CancelJobDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -319,7 +322,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is CancelJobDefaultResponse
   - name: isUnexpected(DeidentifyText200Response | DeidentifyTextDefaultResponse)
     uid: '@azure-rest/health-deidentification.isUnexpected_6'
     package: '@azure-rest/health-deidentification'
@@ -329,7 +332,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: DeidentifyText200Response |
-        DeidentifyTextDefaultResponse): response
+        DeidentifyTextDefaultResponse): response is
+        DeidentifyTextDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -341,7 +345,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is DeidentifyTextDefaultResponse
   - name: paginate<TResponse>(Client, TResponse, PagingOptions<TResponse>)
     uid: '@azure-rest/health-deidentification.paginate'
     package: '@azure-rest/health-deidentification'
@@ -354,7 +358,8 @@ functions:
       content: >-
         function paginate<TResponse>(client: Client, initialResponse: TResponse,
         options?: PagingOptions<TResponse>):
-        PagedAsyncIterableIterator<PaginateReturn<TResponse>>
+        PagedAsyncIterableIterator<PaginateReturn<TResponse>,
+        PaginateReturn<TResponse>[], PageSettings>
       parameters:
         - id: client
           type: <xref uid="@azure-rest/core-client.Client" />
@@ -375,4 +380,6 @@ functions:
           <xref
           uid="@azure-rest/health-deidentification.PagedAsyncIterableIterator"
           />&lt;<xref uid="@azure-rest/health-deidentification.PaginateReturn"
-          />&lt;TResponse&gt;&gt;
+          />&lt;TResponse&gt;, <xref
+          uid="@azure-rest/health-deidentification.PaginateReturn"
+          />&lt;TResponse&gt;[], PageSettings&gt;

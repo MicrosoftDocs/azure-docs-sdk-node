@@ -3,7 +3,7 @@ name: OperationsListResult
 uid: >-
   @azure/arm-appinsights.ApplicationInsightsManagementModels.OperationsListResult
 package: '@azure/arm-appinsights'
-summary: ''
+summary: Result of the List Operations operation
 fullName: OperationsListResult
 remarks: ''
 isDeprecated: false
@@ -50,11 +50,11 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '[unscopables]: { [unscopables]?: boolean, length?: boolean }'
+      content: '[unscopables]: {[key: number]: boolean | undefined}'
       return:
         description: ''
-        type: '{ [unscopables]?: boolean, length?: boolean }'
-    inheritanceDescription: <b>Inherited From</b> Array.__@unscopables@969
+        type: '{[key: number]: boolean | undefined}'
+    inheritanceDescription: <b>Inherited From</b> Array.[unscopables]
 inheritedMethods:
   - name: at(number)
     uid: >-
@@ -64,7 +64,7 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function at(index: number): undefined | OperationLive'
+      content: 'function at(index: number): OperationLive | undefined'
       parameters:
         - id: index
           type: number
@@ -72,9 +72,9 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-appinsights.ApplicationInsightsManagementModels.OperationLive"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.at
   - name: concat((OperationLive | ConcatArray<OperationLive>)[])
     uid: >-
@@ -180,10 +180,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function entries(): IterableIterator<[number, OperationLive]>'
+      content: 'function entries(): ArrayIterator<[number, OperationLive]>'
       return:
         description: ''
-        type: IterableIterator&lt;[number, OperationLive]&gt;
+        type: ArrayIterator&lt;[number, OperationLive]&gt;
     inheritanceDescription: <b>Inherited From</b> Array.entries
   - name: >-
       every((value: OperationLive, index: number, array: OperationLive[]) =>
@@ -225,7 +225,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: >-
       every<S>((value: OperationLive, index: number, array: OperationLive[]) =>
-      value, any)
+      value is S, any)
     uid: >-
       @azure/arm-appinsights.ApplicationInsightsManagementModels.OperationsListResult.every
     package: '@azure/arm-appinsights'
@@ -235,12 +235,12 @@ inheritedMethods:
     syntax:
       content: >-
         function every<S>(predicate: (value: OperationLive, index: number,
-        array: OperationLive[]) => value, thisArg?: any): this
+        array: OperationLive[]) => value is S, thisArg?: any): this is S[]
       parameters:
         - id: predicate
           type: >-
             (value: OperationLive, index: number, array: OperationLive[]) =&gt;
-            value
+            value is S
           description: >-
             A function that accepts up to three arguments. The every method
             calls
@@ -259,7 +259,7 @@ inheritedMethods:
             If thisArg is omitted, undefined is used as the this value.
       return:
         description: ''
-        type: this
+        type: this is S[]
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: fill(OperationLive, number, number)
     uid: >-
@@ -340,7 +340,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.filter
   - name: >-
       filter<S>((value: OperationLive, index: number, array: OperationLive[]) =>
-      value, any)
+      value is S, any)
     uid: >-
       @azure/arm-appinsights.ApplicationInsightsManagementModels.OperationsListResult.filter
     package: '@azure/arm-appinsights'
@@ -352,12 +352,12 @@ inheritedMethods:
     syntax:
       content: >-
         function filter<S>(predicate: (value: OperationLive, index: number,
-        array: OperationLive[]) => value, thisArg?: any): S[]
+        array: OperationLive[]) => value is S, thisArg?: any): S[]
       parameters:
         - id: predicate
           type: >-
             (value: OperationLive, index: number, array: OperationLive[]) =&gt;
-            value
+            value is S
           description: >-
             A function that accepts up to three arguments. The filter method
             calls the predicate function one time for each element in the array.
@@ -383,7 +383,7 @@ inheritedMethods:
     syntax:
       content: >-
         function find(predicate: (value: OperationLive, index: number, obj:
-        OperationLive[]) => unknown, thisArg?: any): undefined | OperationLive
+        OperationLive[]) => unknown, thisArg?: any): OperationLive | undefined
       parameters:
         - id: predicate
           type: >-
@@ -396,13 +396,13 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-appinsights.ApplicationInsightsManagementModels.OperationLive"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       find<S>((value: OperationLive, index: number, obj: OperationLive[]) =>
-      value, any)
+      value is S, any)
     uid: >-
       @azure/arm-appinsights.ApplicationInsightsManagementModels.OperationsListResult.find
     package: '@azure/arm-appinsights'
@@ -416,12 +416,12 @@ inheritedMethods:
     syntax:
       content: >-
         function find<S>(predicate: (value: OperationLive, index: number, obj:
-        OperationLive[]) => value, thisArg?: any): undefined | S
+        OperationLive[]) => value is S, thisArg?: any): S | undefined
       parameters:
         - id: predicate
           type: >-
             (value: OperationLive, index: number, obj: OperationLive[]) =&gt;
-            value
+            value is S
           description: >-
             find calls predicate once for each element of the array, in
             ascending
@@ -440,7 +440,7 @@ inheritedMethods:
             predicate. If it is not provided, undefined is used instead.
       return:
         description: ''
-        type: undefined | S
+        type: S | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       findIndex((value: OperationLive, index: number, obj: OperationLive[]) =>
@@ -665,10 +665,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function keys(): IterableIterator<number>'
+      content: 'function keys(): ArrayIterator<number>'
       return:
         description: ''
-        type: IterableIterator&lt;number&gt;
+        type: ArrayIterator&lt;number&gt;
     inheritanceDescription: <b>Inherited From</b> Array.keys
   - name: lastIndexOf(OperationLive, number)
     uid: >-
@@ -744,13 +744,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | OperationLive'
+      content: 'function pop(): OperationLive | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-appinsights.ApplicationInsightsManagementModels.OperationLive"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.pop
   - name: push(OperationLive[])
     uid: >-
@@ -1013,13 +1013,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function shift(): undefined | OperationLive'
+      content: 'function shift(): OperationLive | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-appinsights.ApplicationInsightsManagementModels.OperationLive"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.shift
   - name: slice(number, number)
     uid: >-
@@ -1119,7 +1119,7 @@ inheritedMethods:
             argument, zero if they're equal, and a positive
 
             value otherwise. If omitted, the elements are sorted in ascending,
-            ASCII character order.
+            UTF-16 code unit order.
 
             ```ts
 
@@ -1152,7 +1152,15 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. Omitting this argument will remove
+            all elements from the start
+
+            paramater location to end of the array. If value of this argument is
+            either a negative number, zero, undefined, or a type
+
+            that cannot be converted to an integer, the function will evaluate
+            the argument as zero and not remove any elements.
       return:
         description: An array containing the elements that were deleted.
         type: >-
@@ -1181,7 +1189,14 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. If value of this argument is
+            either a negative number, zero,
+
+            undefined, or a type that cannot be converted to an integer, the
+            function will evaluate the argument as zero and
+
+            not remove any elements.
         - id: items
           type: >-
             <xref
@@ -1206,6 +1221,30 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: 'function toLocaleString(): string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Array.toLocaleString
+  - name: >-
+      toLocaleString(string | string[], NumberFormatOptions &
+      DateTimeFormatOptions)
+    uid: >-
+      @azure/arm-appinsights.ApplicationInsightsManagementModels.OperationsListResult.toLocaleString_1
+    package: '@azure/arm-appinsights'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toLocaleString(locales: string | string[], options?:
+        NumberFormatOptions & DateTimeFormatOptions): string
+      parameters:
+        - id: locales
+          type: string | string[]
+          description: ''
+        - id: options
+          type: NumberFormatOptions & DateTimeFormatOptions
+          description: ''
       return:
         description: ''
         type: string
@@ -1253,11 +1292,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function values(): IterableIterator<OperationLive>'
+      content: 'function values(): ArrayIterator<OperationLive>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-appinsights.ApplicationInsightsManagementModels.OperationLive"
           />&gt;
     inheritanceDescription: <b>Inherited From</b> Array.values
@@ -1269,14 +1308,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function [iterator](): IterableIterator<OperationLive>'
+      content: 'function [iterator](): ArrayIterator<OperationLive>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-appinsights.ApplicationInsightsManagementModels.OperationLive"
           />&gt;
-    inheritanceDescription: <b>Inherited From</b> Array.__@iterator@967
+    inheritanceDescription: <b>Inherited From</b> Array.[iterator]
 extends: >-
   Array&lt;<xref
   uid="@azure/arm-appinsights.ApplicationInsightsManagementModels.OperationLive"

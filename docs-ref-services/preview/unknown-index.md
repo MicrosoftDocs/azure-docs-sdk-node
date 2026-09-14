@@ -1,4 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[unknown](planetarycomputer-readme.md)|[@azure/planetarycomputer](https://www.npmjs.com/package/@azure/planetarycomputer)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/planetarycomputer/planetarycomputer)|
-|[unknown](postgresql-auth-readme.md)|[@azure/postgresql-auth](https://www.npmjs.com/package/@azure/postgresql-auth)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/postgresql/postgresql-auth)|
+|[unknown](web-pubsub-chat-readme.md)|[@azure/web-pubsub-chat](https://www.npmjs.com/package/@azure/web-pubsub-chat)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/web-pubsub/web-pubsub-chat)|

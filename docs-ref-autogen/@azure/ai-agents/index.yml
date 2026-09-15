@@ -4,6 +4,7 @@ name: '@azure/ai-agents'
 summary: ''
 type: package
 enums:
+  - '@azure/ai-agents.connectionToolType'
   - '@azure/ai-agents.DoneEvent'
   - '@azure/ai-agents.ErrorEvent'
   - '@azure/ai-agents.KnownVersions'
@@ -12,7 +13,6 @@ enums:
   - '@azure/ai-agents.RunStreamEvent'
   - '@azure/ai-agents.ThreadStreamEvent'
   - '@azure/ai-agents.VectorStoreDataSourceAssetType'
-  - '@azure/ai-agents.connectionToolType'
 classes:
   - '@azure/ai-agents.AgentsClient'
   - '@azure/ai-agents.ToolSet'
@@ -285,7 +285,7 @@ typeAliases:
   - '@azure/ai-agents.VectorStoreStatus'
 functions:
   - name: >-
-      isOutputOfType<T>(ToolDefinitionUnion | RequiredAction | RequiredToolCall,
+      isOutputOfType<T>(RequiredAction | RequiredToolCall | ToolDefinitionUnion,
       string)
     uid: '@azure/ai-agents.isOutputOfType'
     package: '@azure/ai-agents'
@@ -294,14 +294,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isOutputOfType<T>(output: ToolDefinitionUnion | RequiredAction
-        | RequiredToolCall, type: string): output
+        function isOutputOfType<T>(output: RequiredAction | RequiredToolCall |
+        ToolDefinitionUnion, type: string): output is T
       parameters:
         - id: output
           type: >-
-            <xref uid="@azure/ai-agents.ToolDefinitionUnion" /> | <xref
-            uid="@azure/ai-agents.RequiredAction" /> | <xref
-            uid="@azure/ai-agents.RequiredToolCall" />
+            <xref uid="@azure/ai-agents.RequiredAction" /> | <xref
+            uid="@azure/ai-agents.RequiredToolCall" /> | <xref
+            uid="@azure/ai-agents.ToolDefinitionUnion" />
           description: >-
             The action to check, which can be of type `RequiredAction`,
             `RequiredToolCall`, or `ToolDefinitionUnion`.
@@ -310,4 +310,4 @@ functions:
           description: The type to check the action against.
       return:
         description: A boolean indicating whether the action is of the specified type.
-        type: output
+        type: output is T

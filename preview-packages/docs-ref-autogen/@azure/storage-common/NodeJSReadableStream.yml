@@ -22,7 +22,7 @@ inheritedProperties:
         type: boolean
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.readable
 inheritedMethods:
-  - name: 'addListener<K>(string | symbol, (args: any[]) => void)'
+  - name: 'addListener<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.addListener'
     package: '@azure/storage-common'
     summary: Alias for `emitter.on(eventName, listener)`.
@@ -30,8 +30,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function addListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): NodeJSReadableStream
+        function addListener<E>(eventName: string | symbol, listener: (args:
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -41,13 +41,14 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.addListener
-  - name: emit<K>(string | symbol, AnyRest)
+  - name: emit<E>(string | symbol, any[])
     uid: '@azure/storage-common.NodeJSReadableStream.emit'
     package: '@azure/storage-common'
     summary: >-
       Synchronously calls each of the listeners registered for the event named
+
       `eventName`, in the order they were registered, passing the supplied
       arguments
 
@@ -112,13 +113,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function emit<K>(eventName: string | symbol, args: AnyRest): boolean'
+      content: 'function emit<E>(eventName: string | symbol, args: any[]): boolean'
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
         - id: args
-          type: AnyRest
+          type: any[]
           description: ''
       return:
         description: ''
@@ -129,7 +130,7 @@ inheritedMethods:
     package: '@azure/storage-common'
     summary: |-
       Returns an array listing the events for which the emitter has registered
-      listeners. The values in the array are strings or `Symbol`s.
+      listeners.
 
       ```js
       import { EventEmitter } from 'node:events';
@@ -160,7 +161,8 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:EventEmitter.defaultMaxListeners>.
+
+      `events.defaultMaxListeners`.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -181,7 +183,7 @@ inheritedMethods:
         description: ''
         type: boolean
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.isPaused
-  - name: listenerCount<K>(string | symbol, Function)
+  - name: 'listenerCount<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.listenerCount'
     package: '@azure/storage-common'
     summary: >-
@@ -195,20 +197,20 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function listenerCount<K>(eventName: string | symbol, listener?:
-        Function): number
+        function listenerCount<E>(eventName: string | symbol, listener?: (args:
+        any[]) => void): number
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event being listened for
         - id: listener
-          type: Function
+          type: '(args: any[]) =&gt; void'
           description: The event handler function
       return:
         description: ''
         type: number
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.listenerCount
-  - name: listeners<K>(string | symbol)
+  - name: listeners<E>(string | symbol)
     uid: '@azure/storage-common.NodeJSReadableStream.listeners'
     package: '@azure/storage-common'
     summary: |-
@@ -224,16 +226,18 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function listeners<K>(eventName: string | symbol): Function[]'
+      content: >-
+        function listeners<E>(eventName: string | symbol): (args: any[]) =>
+        void[]
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: Function[]
+        type: '(args: any[]) =&gt; void[]'
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.listeners
-  - name: 'off<K>(string | symbol, (args: any[]) => void)'
+  - name: 'off<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.off'
     package: '@azure/storage-common'
     summary: Alias for `emitter.removeListener()`.
@@ -241,8 +245,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function off<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): NodeJSReadableStream
+        function off<E>(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -252,20 +256,22 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.off
-  - name: 'on<K>(string | symbol, (args: any[]) => void)'
+  - name: 'on<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.on'
     package: '@azure/storage-common'
     summary: >-
       Adds the `listener` function to the end of the listeners array for the
-      event
 
-      named `eventName`. No checks are made to see if the `listener` has already
+      event named `eventName`. No checks are made to see if the `listener` has
 
-      been added. Multiple calls passing the same combination of `eventName` and
+      already been added. Multiple calls passing the same combination of
+      `eventName`
 
-      `listener` will result in the `listener` being added, and called, multiple
+      and `listener` will result in the `listener` being added, and called,
+      multiple
+
       times.
 
 
@@ -282,6 +288,7 @@ inheritedMethods:
 
 
       By default, event listeners are invoked in the order they are added. The
+
       `emitter.prependListener()` method can be used as an alternative to add
       the
 
@@ -311,8 +318,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function on<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): NodeJSReadableStream
+        function on<E>(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -322,9 +329,9 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.on
-  - name: 'once<K>(string | symbol, (args: any[]) => void)'
+  - name: 'once<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.once'
     package: '@azure/storage-common'
     summary: >-
@@ -348,6 +355,7 @@ inheritedMethods:
 
 
       By default, event listeners are invoked in the order they are added. The
+
       `emitter.prependOnceListener()` method can be used as an alternative to
       add the
 
@@ -377,8 +385,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function once<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): NodeJSReadableStream
+        function once<E>(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -388,7 +396,7 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.once
   - name: pause()
     uid: '@azure/storage-common.NodeJSReadableStream.pause'
@@ -397,10 +405,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pause(): NodeJSReadableStream'
+      content: 'function pause(): this'
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.pause
   - name: 'pipe<T>(T, { end?: boolean })'
     uid: '@azure/storage-common.NodeJSReadableStream.pipe'
@@ -421,7 +429,7 @@ inheritedMethods:
         description: ''
         type: T
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.pipe
-  - name: 'prependListener<K>(string | symbol, (args: any[]) => void)'
+  - name: 'prependListener<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.prependListener'
     package: '@azure/storage-common'
     summary: >-
@@ -434,7 +442,9 @@ inheritedMethods:
       `eventName`
 
       and `listener` will result in the `listener` being added, and called,
-      multiple times.
+      multiple
+
+      times.
 
 
       ```js
@@ -451,8 +461,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function prependListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): NodeJSReadableStream
+        function prependListener<E>(eventName: string | symbol, listener: (args:
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -462,14 +472,16 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.prependListener
-  - name: 'prependOnceListener<K>(string | symbol, (args: any[]) => void)'
+  - name: 'prependOnceListener<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.prependOnceListener'
     package: '@azure/storage-common'
     summary: >-
-      Adds a **one-time**`listener` function for the event named `eventName` to
-      the _beginning_ of the listeners array. The next time `eventName` is
+      Adds a **one-time** `listener` function for the event named `eventName` to
+      the
+
+      _beginning_ of the listeners array. The next time `eventName` is
       triggered, this
 
       listener is removed, and then invoked.
@@ -489,8 +501,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function prependOnceListener<K>(eventName: string | symbol, listener:
-        (args: any[]) => void): NodeJSReadableStream
+        function prependOnceListener<E>(eventName: string | symbol, listener:
+        (args: any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -500,9 +512,9 @@ inheritedMethods:
           description: The callback function
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.prependOnceListener
-  - name: rawListeners<K>(string | symbol)
+  - name: rawListeners<E>(string | symbol)
     uid: '@azure/storage-common.NodeJSReadableStream.rawListeners'
     package: '@azure/storage-common'
     summary: |-
@@ -536,14 +548,16 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function rawListeners<K>(eventName: string | symbol): Function[]'
+      content: >-
+        function rawListeners<E>(eventName: string | symbol): (args: any[]) =>
+        void[]
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: Function[]
+        type: '(args: any[]) =&gt; void[]'
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.rawListeners
   - name: read(number)
     uid: '@azure/storage-common.NodeJSReadableStream.read'
@@ -561,7 +575,7 @@ inheritedMethods:
         description: ''
         type: string | Buffer
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.read
-  - name: removeAllListeners(string | symbol)
+  - name: removeAllListeners<E>(string | symbol)
     uid: '@azure/storage-common.NodeJSReadableStream.removeAllListeners'
     package: '@azure/storage-common'
     summary: |-
@@ -575,23 +589,23 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function removeAllListeners(eventName?: string | symbol):
-        NodeJSReadableStream
+      content: 'function removeAllListeners<E>(eventName?: string | symbol): this'
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.removeAllListeners
-  - name: 'removeListener<K>(string | symbol, (args: any[]) => void)'
+  - name: 'removeListener<E>(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.NodeJSReadableStream.removeListener'
     package: '@azure/storage-common'
     summary: >-
       Removes the specified `listener` from the listener array for the event
-      named `eventName`.
+      named
+
+      `eventName`.
 
 
       ```js
@@ -624,11 +638,12 @@ inheritedMethods:
       Once an event is emitted, all listeners attached to it at the
 
       time of emitting are called in order. This implies that any
-      `removeListener()` or `removeAllListeners()` calls _after_ emitting and
-      _before_ the last listener finishes execution
 
-      will not remove them from`emit()` in progress. Subsequent events behave as
-      expected.
+      `removeListener()` or `removeAllListeners()` calls _after_ emitting and
+
+      _before_ the last listener finishes execution will not remove them from
+
+      `emit()` in progress. Subsequent events behave as expected.
 
 
       ```js
@@ -685,7 +700,7 @@ inheritedMethods:
 
       Because listeners are managed using an internal array, calling this will
 
-      change the position indices of any listener registered _after_ the
+      change the position indexes of any listener registered _after_ the
       listener
 
       being removed. This will not impact the order in which listeners are
@@ -701,8 +716,9 @@ inheritedMethods:
 
       event (as in the example below), `removeListener()` will remove the most
 
-      recently added instance. In the example the `once('ping')` listener is
-      removed:
+      recently added instance. In the example the `once('ping')`
+
+      listener is removed:
 
 
       ```js
@@ -736,8 +752,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function removeListener<K>(eventName: string | symbol, listener: (args:
-        any[]) => void): NodeJSReadableStream
+        function removeListener<E>(eventName: string | symbol, listener: (args:
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -747,7 +763,7 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.removeListener
   - name: resume()
     uid: '@azure/storage-common.NodeJSReadableStream.resume'
@@ -756,10 +772,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function resume(): NodeJSReadableStream'
+      content: 'function resume(): this'
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.resume
   - name: setEncoding(BufferEncoding)
     uid: '@azure/storage-common.NodeJSReadableStream.setEncoding'
@@ -768,14 +784,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function setEncoding(encoding: BufferEncoding): NodeJSReadableStream'
+      content: 'function setEncoding(encoding: BufferEncoding): this'
       parameters:
         - id: encoding
           type: BufferEncoding
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.setEncoding
   - name: setMaxListeners(number)
     uid: '@azure/storage-common.NodeJSReadableStream.setMaxListeners'
@@ -790,21 +806,23 @@ inheritedMethods:
       be
 
       modified for this specific `EventEmitter` instance. The value can be set
-      to `Infinity` (or `0`) to indicate an unlimited number of listeners.
+      to
+
+      `Infinity` (or `0`) to indicate an unlimited number of listeners.
 
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number): NodeJSReadableStream'
+      content: 'function setMaxListeners(n: number): this'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.setMaxListeners
   - name: unpipe(WritableStream)
     uid: '@azure/storage-common.NodeJSReadableStream.unpipe'
@@ -813,14 +831,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function unpipe(destination?: WritableStream): NodeJSReadableStream'
+      content: 'function unpipe(destination?: WritableStream): this'
       parameters:
         - id: destination
           type: WritableStream
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.unpipe
   - name: unshift(string | Uint8Array, BufferEncoding)
     uid: '@azure/storage-common.NodeJSReadableStream.unshift'
@@ -845,14 +863,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function wrap(oldStream: ReadableStream): NodeJSReadableStream'
+      content: 'function wrap(oldStream: ReadableStream): this'
       parameters:
         - id: oldStream
           type: ReadableStream
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
     inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.wrap
   - name: '[asyncIterator]()'
     uid: '@azure/storage-common.NodeJSReadableStream.[asyncIterator]'
@@ -865,17 +883,41 @@ inheritedMethods:
       return:
         description: ''
         type: AsyncIterableIterator&lt;string | Buffer&gt;
-    inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.__@asyncIterator@156
-  - name: '[captureRejectionSymbol]<K>(Error, string | symbol, AnyRest)'
+    inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.[asyncIterator]
+  - name: '[captureRejectionSymbol](Error, string | symbol, any[])'
     uid: '@azure/storage-common.NodeJSReadableStream.[captureRejectionSymbol]'
     package: '@azure/storage-common'
-    summary: ''
+    summary: |-
+      The `Symbol.for('nodejs.rejection')` method is called in case a
+      promise rejection happens when emitting an event and
+      `captureRejections` is enabled on the emitter.
+      It is possible to use `events.captureRejectionSymbol` in
+      place of `Symbol.for('nodejs.rejection')`.
+
+      ```js
+      import { EventEmitter, captureRejectionSymbol } from 'node:events';
+
+      class MyClass extends EventEmitter {
+        constructor() {
+          super({ captureRejections: true });
+        }
+
+        [captureRejectionSymbol](err, event, ...args) {
+          console.log('rejection happened for', event, 'with', err, ...args);
+          this.destroy(err);
+        }
+
+        destroy(err) {
+          // Tear the resource down here.
+        }
+      }
+      ```
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function [captureRejectionSymbol]<K>(error: Error, event: string |
-        symbol, args: AnyRest)
+        function [captureRejectionSymbol](error: Error, event: string | symbol,
+        args: any[])
       parameters:
         - id: error
           type: Error
@@ -884,9 +926,9 @@ inheritedMethods:
           type: string | symbol
           description: ''
         - id: args
-          type: AnyRest
+          type: any[]
           description: ''
-    inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.__@captureRejectionSymbol@173
+    inheritanceDescription: <b>Inherited From</b> NodeJS.ReadableStream.[captureRejectionSymbol]
 methods:
   - name: destroy(Error)
     uid: '@azure/storage-common.NodeJSReadableStream.destroy'
@@ -898,12 +940,12 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function destroy(error?: Error): NodeJSReadableStream'
+      content: 'function destroy(error?: Error): this'
       parameters:
         - id: error
           type: Error
           description: ''
       return:
         description: ''
-        type: <xref uid="@azure/storage-common.NodeJSReadableStream" />
+        type: this
 extends: ReadableStream

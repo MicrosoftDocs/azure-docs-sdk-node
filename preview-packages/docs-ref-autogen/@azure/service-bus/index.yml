@@ -93,7 +93,7 @@ functions:
     syntax:
       content: >-
         function delay<T>(delayInMs: number, abortSignal?: AbortSignalLike,
-        abortErrorMsg?: string, value?: T): Promise<T | void>
+        abortErrorMsg?: string, value?: T): Promise<void | T>
       parameters:
         - id: delayInMs
           type: number
@@ -109,7 +109,7 @@ functions:
           description: The value to be resolved with after a timeout of t milliseconds.
       return:
         description: '- Resolved promise'
-        type: Promise&lt;T | void&gt;
+        type: Promise&lt;void | T&gt;
   - name: isRestError(unknown)
     uid: '@azure/service-bus.isRestError'
     package: '@azure/service-bus'
@@ -117,14 +117,14 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isRestError(e: unknown): e'
+      content: 'function isRestError(e: unknown): e is RestError'
       parameters:
         - id: e
           type: unknown
           description: Something caught by a catch clause.
       return:
         description: ''
-        type: e
+        type: e is RestError
   - name: isServiceBusError(unknown)
     uid: '@azure/service-bus.isServiceBusError'
     package: '@azure/service-bus'
@@ -132,14 +132,14 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isServiceBusError(err: unknown): err'
+      content: 'function isServiceBusError(err: unknown): err is ServiceBusError'
       parameters:
         - id: err
           type: unknown
           description: An error to check to see if it's of type ServiceBusError
       return:
         description: ''
-        type: err
+        type: err is ServiceBusError
   - name: parseServiceBusConnectionString(string)
     uid: '@azure/service-bus.parseServiceBusConnectionString'
     package: '@azure/service-bus'

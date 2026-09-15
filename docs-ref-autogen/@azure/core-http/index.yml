@@ -125,23 +125,23 @@ variables:
     isDeprecated: false
     syntax:
       content: >-
-        Constants: { ALL_PROXY: string, HTTP: string, HTTPS: string,
-        HTTPS_PROXY: string, HTTP_PROXY: string, HeaderConstants: {
-        AUTHORIZATION: string, AUTHORIZATION_SCHEME: string, RETRY_AFTER:
-        string, USER_AGENT: string }, HttpConstants: { HttpVerbs: { DELETE:
-        string, GET: string, HEAD: string, MERGE: string, PATCH: string, POST:
-        string, PUT: string }, StatusCodes: { ServiceUnavailable: number,
-        TooManyRequests: number } }, NO_PROXY: string, coreHttpVersion: string }
+        Constants: { ALL_PROXY: string, coreHttpVersion: string,
+        HeaderConstants: { AUTHORIZATION: string, AUTHORIZATION_SCHEME: string,
+        RETRY_AFTER: string, USER_AGENT: string }, HTTP: string, HTTP_PROXY:
+        string, HttpConstants: { HttpVerbs: { DELETE: string, GET: string, HEAD:
+        string, MERGE: string, PATCH: string, POST: string, PUT: string },
+        StatusCodes: { ServiceUnavailable: number, TooManyRequests: number } },
+        HTTPS: string, HTTPS_PROXY: string, NO_PROXY: string }
       return:
         description: ''
         type: >-
-          { ALL_PROXY: string, HTTP: string, HTTPS: string, HTTPS_PROXY: string,
-          HTTP_PROXY: string, HeaderConstants: { AUTHORIZATION: string,
-          AUTHORIZATION_SCHEME: string, RETRY_AFTER: string, USER_AGENT: string
-          }, HttpConstants: { HttpVerbs: { DELETE: string, GET: string, HEAD:
+          { ALL_PROXY: string, coreHttpVersion: string, HeaderConstants: {
+          AUTHORIZATION: string, AUTHORIZATION_SCHEME: string, RETRY_AFTER:
+          string, USER_AGENT: string }, HTTP: string, HTTP_PROXY: string,
+          HttpConstants: { HttpVerbs: { DELETE: string, GET: string, HEAD:
           string, MERGE: string, PATCH: string, POST: string, PUT: string },
           StatusCodes: { ServiceUnavailable: number, TooManyRequests: number }
-          }, NO_PROXY: string, coreHttpVersion: string }
+          }, HTTPS: string, HTTPS_PROXY: string, NO_PROXY: string }
   - name: XML_ATTRKEY
     uid: '@azure/core-http.XML_ATTRKEY'
     package: '@azure/core-http'
@@ -413,7 +413,7 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-  - name: flattenResponse(HttpOperationResponse, undefined | OperationResponse)
+  - name: flattenResponse(HttpOperationResponse, OperationResponse | undefined)
     uid: '@azure/core-http.flattenResponse'
     package: '@azure/core-http'
     summary: >-
@@ -426,13 +426,13 @@ functions:
     syntax:
       content: >-
         function flattenResponse(_response: HttpOperationResponse, responseSpec:
-        undefined | OperationResponse): RestResponse
+        OperationResponse | undefined): RestResponse
       parameters:
         - id: _response
           type: <xref uid="@azure/core-http.HttpOperationResponse" />
           description: Wrapper object for http response.
         - id: responseSpec
-          type: undefined | <xref uid="@azure/core-http.OperationResponse" />
+          type: <xref uid="@azure/core-http.OperationResponse" /> | undefined
           description: Mappers for how to parse the response properties.
       return:
         description: '- A normalized response object.'
@@ -524,14 +524,16 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isTokenCredential(credential: unknown): credential'
+      content: >-
+        function isTokenCredential(credential: unknown): credential is
+        TokenCredential
       parameters:
         - id: credential
           type: unknown
           description: The assumed TokenCredential to be tested.
       return:
         description: ''
-        type: credential
+        type: credential is TokenCredential
   - name: isValidUuid(string)
     uid: '@azure/core-http.isValidUuid'
     package: '@azure/core-http'

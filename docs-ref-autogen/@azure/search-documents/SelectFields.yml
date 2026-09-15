@@ -8,38 +8,13 @@ summary: |-
 fullName: SelectFields<TModel>
 remarks: ''
 isDeprecated: false
-syntax: |
-  type SelectFields<TModel> = () => (
-    T extends TModel ? true : false
-  ) extends () => T extends never ? true : false
-    ? string
-    : () => (T extends TModel ? true : false) extends () => T extends any
-        ? true
-        : false
-        ? string
-        : () => (T extends TModel ? true : false) extends () => T extends object
-            ? true
-            : false
-            ? string
-            : TModel extends Elem[]
-            ? Elem extends object
-              ? SelectFields<Elem>
-              : never
-            : {
-                [Key in keyof TModel]: Key extends string
-                  ? NonNullable<TModel[Key]> extends object
-                    ? NonNullable<TModel[Key]> extends ExcludedODataTypes
-                      ? Key
-                      : SelectFields<NonNullable<TModel[Key]>> extends NextPaths
-                      ? () => (
-                          T extends NextPaths ? true : false
-                        ) extends () => T extends never ? true : false
-                          ? Key
-                          : NextPaths extends string
-                          ? Key | Object
-                          : Key
-                      : never
-                    : Key
-                  : never
-              }[keyof TModel & string] &
-                string
+syntax: >-
+  type SelectFields<TModel> = (() => (T extends TModel ? true : false) extends
+  () => (T extends never ? true : false) ? string : (() => (T extends TModel ?
+  true : false) extends () => (T extends any ? true : false) ? string : (() =>
+  (T extends TModel ? true : false) extends () => (T extends object ? true :
+  false) ? string : (TModel extends Elem[] ? (Elem extends object ?
+  SelectFields<Elem> : never) : {[Key in keyof TModel]: (Key extends string ?
+  (NonNullable<...[...]> extends object ? (NonNullable<...> extends
+  ExcludedODataTypes ? Key : (... extends ... ? ... : ...)) : Key) :
+  never);}[(keyof TModel) & string] & string))))

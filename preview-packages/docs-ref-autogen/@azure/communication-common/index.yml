@@ -25,8 +25,8 @@ interfaces:
 typeAliases:
   - '@azure/communication-common.CommunicationIdentifier'
   - '@azure/communication-common.CommunicationIdentifierKind'
-functions:
-  - name: createIdentifierFromRawId(string)
+variables:
+  - name: createIdentifierFromRawId
     uid: '@azure/communication-common.createIdentifierFromRawId'
     package: '@azure/communication-common'
     summary: >-
@@ -37,16 +37,12 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createIdentifierFromRawId(rawId: string):
+        createIdentifierFromRawId: (rawId: string) =>
         CommunicationIdentifierKind
-      parameters:
-        - id: rawId
-          type: string
-          description: The rawId to be translated to its identifier representation.
       return:
         description: ''
-        type: <xref uid="@azure/communication-common.CommunicationIdentifierKind" />
-  - name: getIdentifierKind(CommunicationIdentifier)
+        type: '(rawId: string) =&gt; CommunicationIdentifierKind'
+  - name: getIdentifierKind
     uid: '@azure/communication-common.getIdentifierKind'
     package: '@azure/communication-common'
     summary: >-
@@ -57,16 +53,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function getIdentifierKind(identifier: CommunicationIdentifier):
+        getIdentifierKind: (identifier: CommunicationIdentifier) =>
         CommunicationIdentifierKind
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The identifier whose kind is to be inferred.
       return:
         description: ''
-        type: <xref uid="@azure/communication-common.CommunicationIdentifierKind" />
-  - name: getIdentifierRawId(CommunicationIdentifier)
+        type: >-
+          (identifier: CommunicationIdentifier) =&gt;
+          CommunicationIdentifierKind
+  - name: getIdentifierRawId
     uid: '@azure/communication-common.getIdentifierRawId'
     package: '@azure/communication-common'
     summary: >-
@@ -75,15 +69,11 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function getIdentifierRawId(identifier: CommunicationIdentifier): string'
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The identifier to be translated to its rawId.
+      content: 'getIdentifierRawId: (identifier: CommunicationIdentifier) => string'
       return:
         description: ''
-        type: string
-  - name: isCommunicationUserIdentifier(CommunicationIdentifier)
+        type: '(identifier: CommunicationIdentifier) =&gt; string'
+  - name: isCommunicationUserIdentifier
     uid: '@azure/communication-common.isCommunicationUserIdentifier'
     package: '@azure/communication-common'
     summary: >-
@@ -93,31 +83,25 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isCommunicationUserIdentifier(identifier:
-        CommunicationIdentifier): identifier
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The assumed CommunicationUserIdentifier to be tested.
+        isCommunicationUserIdentifier: (identifier: CommunicationIdentifier) =>
+        identifier is CommunicationUserIdentifier
       return:
         description: ''
-        type: identifier
-  - name: isKeyCredential(unknown)
+        type: >-
+          (identifier: CommunicationIdentifier) =&gt; identifier is
+          CommunicationUserIdentifier
+  - name: isKeyCredential
     uid: '@azure/communication-common.isKeyCredential'
     package: '@azure/communication-common'
     summary: Checks whether a value is a KeyCredential.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isKeyCredential(credential: unknown): credential'
-      parameters:
-        - id: credential
-          type: unknown
-          description: The credential being checked.
+      content: 'isKeyCredential: (credential: unknown) => credential is KeyCredential'
       return:
         description: ''
-        type: credential
-  - name: isMicrosoftTeamsAppIdentifier(CommunicationIdentifier)
+        type: '(credential: unknown) =&gt; credential is KeyCredential'
+  - name: isMicrosoftTeamsAppIdentifier
     uid: '@azure/communication-common.isMicrosoftTeamsAppIdentifier'
     package: '@azure/communication-common'
     summary: >-
@@ -127,16 +111,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isMicrosoftTeamsAppIdentifier(identifier:
-        CommunicationIdentifier): identifier
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The assumed available to be tested.
+        isMicrosoftTeamsAppIdentifier: (identifier: CommunicationIdentifier) =>
+        identifier is MicrosoftTeamsAppIdentifier
       return:
         description: ''
-        type: identifier
-  - name: isMicrosoftTeamsUserIdentifier(CommunicationIdentifier)
+        type: >-
+          (identifier: CommunicationIdentifier) =&gt; identifier is
+          MicrosoftTeamsAppIdentifier
+  - name: isMicrosoftTeamsUserIdentifier
     uid: '@azure/communication-common.isMicrosoftTeamsUserIdentifier'
     package: '@azure/communication-common'
     summary: >-
@@ -146,16 +128,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isMicrosoftTeamsUserIdentifier(identifier:
-        CommunicationIdentifier): identifier
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The assumed available to be tested.
+        isMicrosoftTeamsUserIdentifier: (identifier: CommunicationIdentifier) =>
+        identifier is MicrosoftTeamsUserIdentifier
       return:
         description: ''
-        type: identifier
-  - name: isPhoneNumberIdentifier(CommunicationIdentifier)
+        type: >-
+          (identifier: CommunicationIdentifier) =&gt; identifier is
+          MicrosoftTeamsUserIdentifier
+  - name: isPhoneNumberIdentifier
     uid: '@azure/communication-common.isPhoneNumberIdentifier'
     package: '@azure/communication-common'
     summary: >-
@@ -165,16 +145,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isPhoneNumberIdentifier(identifier: CommunicationIdentifier):
-        identifier
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The assumed PhoneNumberIdentifier to be tested.
+        isPhoneNumberIdentifier: (identifier: CommunicationIdentifier) =>
+        identifier is PhoneNumberIdentifier
       return:
         description: ''
-        type: identifier
-  - name: isTeamsExtensionUserIdentifier(CommunicationIdentifier)
+        type: >-
+          (identifier: CommunicationIdentifier) =&gt; identifier is
+          PhoneNumberIdentifier
+  - name: isTeamsExtensionUserIdentifier
     uid: '@azure/communication-common.isTeamsExtensionUserIdentifier'
     package: '@azure/communication-common'
     summary: >-
@@ -184,16 +162,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isTeamsExtensionUserIdentifier(identifier:
-        CommunicationIdentifier): identifier
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The assumed available to be tested.
+        isTeamsExtensionUserIdentifier: (identifier: CommunicationIdentifier) =>
+        identifier is TeamsExtensionUserIdentifier
       return:
         description: ''
-        type: identifier
-  - name: isUnknownIdentifier(CommunicationIdentifier)
+        type: >-
+          (identifier: CommunicationIdentifier) =&gt; identifier is
+          TeamsExtensionUserIdentifier
+  - name: isUnknownIdentifier
     uid: '@azure/communication-common.isUnknownIdentifier'
     package: '@azure/communication-common'
     summary: Tests an Identifier to determine whether it implements UnknownIdentifier.
@@ -201,12 +177,10 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isUnknownIdentifier(identifier: CommunicationIdentifier):
-        identifier
-      parameters:
-        - id: identifier
-          type: <xref uid="@azure/communication-common.CommunicationIdentifier" />
-          description: The assumed UnknownIdentifier to be tested.
+        isUnknownIdentifier: (identifier: CommunicationIdentifier) => identifier
+        is UnknownIdentifier
       return:
         description: ''
-        type: identifier
+        type: >-
+          (identifier: CommunicationIdentifier) =&gt; identifier is
+          UnknownIdentifier

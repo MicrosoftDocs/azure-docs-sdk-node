@@ -1,7 +1,7 @@
 ---
 title: Azure Edge Actions SDK for JavaScript
 description: Reference for Azure Edge Actions SDK for JavaScript
-ms.date: 09/14/2026
+ms.date: 09/15/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: edgeactions

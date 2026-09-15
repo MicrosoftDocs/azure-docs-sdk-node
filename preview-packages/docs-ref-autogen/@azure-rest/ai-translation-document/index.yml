@@ -95,6 +95,37 @@ typeAliases:
   - '@azure-rest/ai-translation-document.StorageSource'
   - '@azure-rest/ai-translation-document.TranslationErrorCodeOutput'
 functions:
+  - name: createClient(string, TokenCredential | KeyCredential, ClientOptions)
+    uid: '@azure-rest/ai-translation-document.createClient'
+    package: '@azure-rest/ai-translation-document'
+    summary: Initialize a new instance of `DocumentTranslationClient`
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createClient(endpointParam: string, credentials:
+        TokenCredential | KeyCredential, options?: ClientOptions):
+        DocumentTranslationClient
+      parameters:
+        - id: endpointParam
+          type: string
+          description: >-
+            Supported document Translation endpoint, protocol and hostname, for
+            example:
+            https://{TranslatorResourceName}.cognitiveservices.azure.com/translator.
+        - id: credentials
+          type: >-
+            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
+            uid="@azure/core-auth.KeyCredential" />
+          description: uniquely identify client credential
+        - id: options
+          type: <xref uid="@azure-rest/core-client.ClientOptions" />
+          description: the parameter for all optional parameters
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure-rest/ai-translation-document.DocumentTranslationClient" />
   - name: createFile(Uint8Array, string, CreateFileOptions)
     uid: '@azure-rest/ai-translation-document.createFile'
     package: '@azure-rest/ai-translation-document'
@@ -134,8 +165,8 @@ functions:
         description: ''
         type: File
   - name: >-
-      createFileFromStream(() => ReadableStream | WebReadableStream<Uint8Array>,
-      string, CreateFileFromStreamOptions)
+      createFileFromStream(() => ReadableStream<Uint8Array> |
+      WebReadableStream<Uint8Array>, string, CreateFileFromStreamOptions)
     uid: '@azure-rest/ai-translation-document.createFileFromStream'
     package: '@azure-rest/ai-translation-document'
     summary: >-
@@ -159,12 +190,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createFileFromStream(stream: () => ReadableStream |
+        function createFileFromStream(stream: () => ReadableStream<Uint8Array> |
         WebReadableStream<Uint8Array>, name: string, options?:
         CreateFileFromStreamOptions): File
       parameters:
         - id: stream
-          type: () =&gt; ReadableStream | WebReadableStream&lt;Uint8Array&gt;
+          type: >-
+            () =&gt; ReadableStream&lt;Uint8Array&gt; |
+            WebReadableStream&lt;Uint8Array&gt;
           description: >-
             the content of the file as a callback returning a stream. When a
             File object made using createFile is
@@ -185,36 +218,6 @@ functions:
       return:
         description: ''
         type: File
-  - name: default(string, TokenCredential | KeyCredential, ClientOptions)
-    uid: '@azure-rest/ai-translation-document.default'
-    package: '@azure-rest/ai-translation-document'
-    summary: Initialize a new instance of `DocumentTranslationClient`
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function default(endpointParam: string, credentials: TokenCredential |
-        KeyCredential, options?: ClientOptions): DocumentTranslationClient
-      parameters:
-        - id: endpointParam
-          type: string
-          description: >-
-            Supported document Translation endpoint, protocol and hostname, for
-            example:
-            https://{TranslatorResourceName}.cognitiveservices.azure.com/translator.
-        - id: credentials
-          type: >-
-            <xref uid="@azure/core-auth.TokenCredential" /> | <xref
-            uid="@azure/core-auth.KeyCredential" />
-          description: uniquely identify client credential
-        - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: the parameter for all optional parameters
-      return:
-        description: ''
-        type: >-
-          <xref
-          uid="@azure-rest/ai-translation-document.DocumentTranslationClient" />
   - name: >-
       getLongRunningPoller<TResult>(Client, StartTranslationDefaultResponse |
       StartTranslation202Response, CreateHttpPollerOptions<TResult,
@@ -259,8 +262,8 @@ functions:
           uid="@azure/core-lro.OperationState" />&lt;TResult&gt;,
           TResult&gt;&gt;
   - name: >-
-      isUnexpected(DocumentTranslate200Response |
-      DocumentTranslateDefaultResponse)
+      isUnexpected(DocumentTranslateDefaultResponse |
+      DocumentTranslate200Response)
     uid: '@azure-rest/ai-translation-document.isUnexpected'
     package: '@azure-rest/ai-translation-document'
     summary: ''
@@ -268,20 +271,21 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function isUnexpected(response: DocumentTranslate200Response |
-        DocumentTranslateDefaultResponse): response
+        function isUnexpected(response: DocumentTranslateDefaultResponse |
+        DocumentTranslate200Response): response is
+        DocumentTranslateDefaultResponse
       parameters:
         - id: response
           type: >-
             <xref
-            uid="@azure-rest/ai-translation-document.DocumentTranslate200Response"
-            /> | <xref
             uid="@azure-rest/ai-translation-document.DocumentTranslateDefaultResponse"
+            /> | <xref
+            uid="@azure-rest/ai-translation-document.DocumentTranslate200Response"
             />
           description: ''
       return:
         description: ''
-        type: response
+        type: response is DocumentTranslateDefaultResponse
   - name: >-
       isUnexpected(StartTranslationLogicalResponse |
       StartTranslationDefaultResponse | StartTranslation202Response)
@@ -294,6 +298,7 @@ functions:
       content: >-
         function isUnexpected(response: StartTranslationLogicalResponse |
         StartTranslationDefaultResponse | StartTranslation202Response): response
+        is StartTranslationDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -307,7 +312,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is StartTranslationDefaultResponse
   - name: >-
       isUnexpected(GetTranslationsStatus200Response |
       GetTranslationsStatusDefaultResponse)
@@ -319,7 +324,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetTranslationsStatus200Response |
-        GetTranslationsStatusDefaultResponse): response
+        GetTranslationsStatusDefaultResponse): response is
+        GetTranslationsStatusDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -331,7 +337,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetTranslationsStatusDefaultResponse
   - name: >-
       isUnexpected(GetDocumentStatus200Response |
       GetDocumentStatusDefaultResponse)
@@ -343,7 +349,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetDocumentStatus200Response |
-        GetDocumentStatusDefaultResponse): response
+        GetDocumentStatusDefaultResponse): response is
+        GetDocumentStatusDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -355,7 +362,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetDocumentStatusDefaultResponse
   - name: >-
       isUnexpected(GetTranslationStatus200Response |
       GetTranslationStatusDefaultResponse)
@@ -367,7 +374,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetTranslationStatus200Response |
-        GetTranslationStatusDefaultResponse): response
+        GetTranslationStatusDefaultResponse): response is
+        GetTranslationStatusDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -379,7 +387,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetTranslationStatusDefaultResponse
   - name: >-
       isUnexpected(CancelTranslation200Response |
       CancelTranslationDefaultResponse)
@@ -391,7 +399,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: CancelTranslation200Response |
-        CancelTranslationDefaultResponse): response
+        CancelTranslationDefaultResponse): response is
+        CancelTranslationDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -403,7 +412,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is CancelTranslationDefaultResponse
   - name: >-
       isUnexpected(GetDocumentsStatus200Response |
       GetDocumentsStatusDefaultResponse)
@@ -415,7 +424,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetDocumentsStatus200Response |
-        GetDocumentsStatusDefaultResponse): response
+        GetDocumentsStatusDefaultResponse): response is
+        GetDocumentsStatusDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -427,7 +437,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetDocumentsStatusDefaultResponse
   - name: >-
       isUnexpected(GetSupportedFormats200Response |
       GetSupportedFormatsDefaultResponse)
@@ -439,7 +449,8 @@ functions:
     syntax:
       content: >-
         function isUnexpected(response: GetSupportedFormats200Response |
-        GetSupportedFormatsDefaultResponse): response
+        GetSupportedFormatsDefaultResponse): response is
+        GetSupportedFormatsDefaultResponse
       parameters:
         - id: response
           type: >-
@@ -451,7 +462,7 @@ functions:
           description: ''
       return:
         description: ''
-        type: response
+        type: response is GetSupportedFormatsDefaultResponse
   - name: paginate<TResponse>(Client, TResponse, PagingOptions<TResponse>)
     uid: '@azure-rest/ai-translation-document.paginate'
     package: '@azure-rest/ai-translation-document'
@@ -464,7 +475,8 @@ functions:
       content: >-
         function paginate<TResponse>(client: Client, initialResponse: TResponse,
         options?: PagingOptions<TResponse>):
-        PagedAsyncIterableIterator<PaginateReturn<TResponse>>
+        PagedAsyncIterableIterator<PaginateReturn<TResponse>,
+        PaginateReturn<TResponse>[], PageSettings>
       parameters:
         - id: client
           type: <xref uid="@azure-rest/core-client.Client" />
@@ -484,4 +496,7 @@ functions:
         type: >-
           <xref uid="@azure/core-paging.PagedAsyncIterableIterator" />&lt;<xref
           uid="@azure-rest/ai-translation-document.PaginateReturn"
-          />&lt;TResponse&gt;&gt;
+          />&lt;TResponse&gt;, <xref
+          uid="@azure-rest/ai-translation-document.PaginateReturn"
+          />&lt;TResponse&gt;[], <xref uid="@azure/core-paging.PageSettings"
+          />&gt;

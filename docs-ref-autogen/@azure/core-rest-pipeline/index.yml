@@ -396,8 +396,8 @@ functions:
         description: ''
         type: File
   - name: >-
-      createFileFromStream(() => ReadableStream | WebReadableStream<Uint8Array>,
-      string, CreateFileFromStreamOptions)
+      createFileFromStream(() => ReadableStream<Uint8Array> |
+      WebReadableStream<Uint8Array>, string, CreateFileFromStreamOptions)
     uid: '@azure/core-rest-pipeline.createFileFromStream'
     package: '@azure/core-rest-pipeline'
     summary: >-
@@ -421,12 +421,14 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createFileFromStream(stream: () => ReadableStream |
+        function createFileFromStream(stream: () => ReadableStream<Uint8Array> |
         WebReadableStream<Uint8Array>, name: string, options?:
         CreateFileFromStreamOptions): File
       parameters:
         - id: stream
-          type: () =&gt; ReadableStream | WebReadableStream&lt;Uint8Array&gt;
+          type: >-
+            () =&gt; ReadableStream&lt;Uint8Array&gt; |
+            WebReadableStream&lt;Uint8Array&gt;
           description: >-
             the content of the file as a callback returning a stream. When a
             File object made using createFile is
@@ -606,14 +608,14 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isRestError(e: unknown): e'
+      content: 'function isRestError(e: unknown): e is RestError'
       parameters:
         - id: e
           type: unknown
           description: Something caught by a catch clause.
       return:
         description: ''
-        type: e
+        type: e is RestError
   - name: logPolicy(LogPolicyOptions)
     uid: '@azure/core-rest-pipeline.logPolicy'
     package: '@azure/core-rest-pipeline'

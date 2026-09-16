@@ -48,11 +48,11 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '[unscopables]: { [unscopables]?: boolean, length?: boolean }'
+      content: '[unscopables]: {[key: number]: boolean | undefined}'
       return:
         description: ''
-        type: '{ [unscopables]?: boolean, length?: boolean }'
-    inheritanceDescription: <b>Inherited From</b> Array.__@unscopables@13
+        type: '{[key: number]: boolean | undefined}'
+    inheritanceDescription: <b>Inherited From</b> Array.[unscopables]
 inheritedMethods:
   - name: at(number)
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.at'
@@ -61,7 +61,7 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function at(index: number): undefined | MetricsAdvisorDataFeed'
+      content: 'function at(index: number): MetricsAdvisorDataFeed | undefined'
       parameters:
         - id: index
           type: number
@@ -69,8 +69,8 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
-          uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />
+          <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" /> |
+          undefined
     inheritanceDescription: <b>Inherited From</b> Array.at
   - name: concat((MetricsAdvisorDataFeed | ConcatArray<MetricsAdvisorDataFeed>)[])
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.concat_1'
@@ -162,10 +162,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function entries(): IterableIterator<[number, MetricsAdvisorDataFeed]>'
+      content: 'function entries(): ArrayIterator<[number, MetricsAdvisorDataFeed]>'
       return:
         description: ''
-        type: IterableIterator&lt;[number, MetricsAdvisorDataFeed]&gt;
+        type: ArrayIterator&lt;[number, MetricsAdvisorDataFeed]&gt;
     inheritanceDescription: <b>Inherited From</b> Array.entries
   - name: >-
       every((value: MetricsAdvisorDataFeed, index: number, array:
@@ -206,7 +206,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: >-
       every<S>((value: MetricsAdvisorDataFeed, index: number, array:
-      MetricsAdvisorDataFeed[]) => value, any)
+      MetricsAdvisorDataFeed[]) => value is S, any)
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.every'
     package: '@azure/ai-metrics-advisor'
     summary: Determines whether all the members of an array satisfy the specified test.
@@ -215,12 +215,13 @@ inheritedMethods:
     syntax:
       content: >-
         function every<S>(predicate: (value: MetricsAdvisorDataFeed, index:
-        number, array: MetricsAdvisorDataFeed[]) => value, thisArg?: any): this
+        number, array: MetricsAdvisorDataFeed[]) => value is S, thisArg?: any):
+        this is S[]
       parameters:
         - id: predicate
           type: >-
             (value: MetricsAdvisorDataFeed, index: number, array:
-            MetricsAdvisorDataFeed[]) =&gt; value
+            MetricsAdvisorDataFeed[]) =&gt; value is S
           description: >-
             A function that accepts up to three arguments. The every method
             calls
@@ -239,7 +240,7 @@ inheritedMethods:
             If thisArg is omitted, undefined is used as the this value.
       return:
         description: ''
-        type: this
+        type: this is S[]
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: fill(MetricsAdvisorDataFeed, number, number)
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.fill'
@@ -310,7 +311,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.filter
   - name: >-
       filter<S>((value: MetricsAdvisorDataFeed, index: number, array:
-      MetricsAdvisorDataFeed[]) => value, any)
+      MetricsAdvisorDataFeed[]) => value is S, any)
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.filter'
     package: '@azure/ai-metrics-advisor'
     summary: >-
@@ -321,12 +322,13 @@ inheritedMethods:
     syntax:
       content: >-
         function filter<S>(predicate: (value: MetricsAdvisorDataFeed, index:
-        number, array: MetricsAdvisorDataFeed[]) => value, thisArg?: any): S[]
+        number, array: MetricsAdvisorDataFeed[]) => value is S, thisArg?: any):
+        S[]
       parameters:
         - id: predicate
           type: >-
             (value: MetricsAdvisorDataFeed, index: number, array:
-            MetricsAdvisorDataFeed[]) =&gt; value
+            MetricsAdvisorDataFeed[]) =&gt; value is S
           description: >-
             A function that accepts up to three arguments. The filter method
             calls the predicate function one time for each element in the array.
@@ -351,8 +353,8 @@ inheritedMethods:
     syntax:
       content: >-
         function find(predicate: (value: MetricsAdvisorDataFeed, index: number,
-        obj: MetricsAdvisorDataFeed[]) => unknown, thisArg?: any): undefined |
-        MetricsAdvisorDataFeed
+        obj: MetricsAdvisorDataFeed[]) => unknown, thisArg?: any):
+        MetricsAdvisorDataFeed | undefined
       parameters:
         - id: predicate
           type: >-
@@ -365,12 +367,12 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
-          uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />
+          <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" /> |
+          undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       find<S>((value: MetricsAdvisorDataFeed, index: number, obj:
-      MetricsAdvisorDataFeed[]) => value, any)
+      MetricsAdvisorDataFeed[]) => value is S, any)
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.find'
     package: '@azure/ai-metrics-advisor'
     summary: >-
@@ -383,13 +385,13 @@ inheritedMethods:
     syntax:
       content: >-
         function find<S>(predicate: (value: MetricsAdvisorDataFeed, index:
-        number, obj: MetricsAdvisorDataFeed[]) => value, thisArg?: any):
-        undefined | S
+        number, obj: MetricsAdvisorDataFeed[]) => value is S, thisArg?: any): S
+        | undefined
       parameters:
         - id: predicate
           type: >-
             (value: MetricsAdvisorDataFeed, index: number, obj:
-            MetricsAdvisorDataFeed[]) =&gt; value
+            MetricsAdvisorDataFeed[]) =&gt; value is S
           description: >-
             find calls predicate once for each element of the array, in
             ascending
@@ -408,7 +410,7 @@ inheritedMethods:
             predicate. If it is not provided, undefined is used instead.
       return:
         description: ''
-        type: undefined | S
+        type: S | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       findIndex((value: MetricsAdvisorDataFeed, index: number, obj:
@@ -620,10 +622,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function keys(): IterableIterator<number>'
+      content: 'function keys(): ArrayIterator<number>'
       return:
         description: ''
-        type: IterableIterator&lt;number&gt;
+        type: ArrayIterator&lt;number&gt;
     inheritanceDescription: <b>Inherited From</b> Array.keys
   - name: lastIndexOf(MetricsAdvisorDataFeed, number)
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.lastIndexOf'
@@ -693,12 +695,12 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | MetricsAdvisorDataFeed'
+      content: 'function pop(): MetricsAdvisorDataFeed | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
-          uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />
+          <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" /> |
+          undefined
     inheritanceDescription: <b>Inherited From</b> Array.pop
   - name: push(MetricsAdvisorDataFeed[])
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.push'
@@ -939,12 +941,12 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function shift(): undefined | MetricsAdvisorDataFeed'
+      content: 'function shift(): MetricsAdvisorDataFeed | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
-          uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />
+          <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" /> |
+          undefined
     inheritanceDescription: <b>Inherited From</b> Array.shift
   - name: slice(number, number)
     uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.slice'
@@ -1038,7 +1040,7 @@ inheritedMethods:
             argument, zero if they're equal, and a positive
 
             value otherwise. If omitted, the elements are sorted in ascending,
-            ASCII character order.
+            UTF-16 code unit order.
 
             ```ts
 
@@ -1069,7 +1071,15 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. Omitting this argument will remove
+            all elements from the start
+
+            paramater location to end of the array. If value of this argument is
+            either a negative number, zero, undefined, or a type
+
+            that cannot be converted to an integer, the function will evaluate
+            the argument as zero and not remove any elements.
       return:
         description: An array containing the elements that were deleted.
         type: <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />[]
@@ -1094,7 +1104,14 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. If value of this argument is
+            either a negative number, zero,
+
+            undefined, or a type that cannot be converted to an integer, the
+            function will evaluate the argument as zero and
+
+            not remove any elements.
         - id: items
           type: <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />[]
           description: Elements to insert into the array in place of the deleted elements.
@@ -1112,6 +1129,29 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: 'function toLocaleString(): string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Array.toLocaleString
+  - name: >-
+      toLocaleString(string | string[], NumberFormatOptions &
+      DateTimeFormatOptions)
+    uid: '@azure/ai-metrics-advisor.DataFeedsPageResponse.toLocaleString_1'
+    package: '@azure/ai-metrics-advisor'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toLocaleString(locales: string | string[], options?:
+        NumberFormatOptions & DateTimeFormatOptions): string
+      parameters:
+        - id: locales
+          type: string | string[]
+          description: ''
+        - id: options
+          type: NumberFormatOptions & DateTimeFormatOptions
+          description: ''
       return:
         description: ''
         type: string
@@ -1153,11 +1193,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function values(): IterableIterator<MetricsAdvisorDataFeed>'
+      content: 'function values(): ArrayIterator<MetricsAdvisorDataFeed>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />&gt;
     inheritanceDescription: <b>Inherited From</b> Array.values
   - name: '[iterator]()'
@@ -1167,11 +1207,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function [iterator](): IterableIterator<MetricsAdvisorDataFeed>'
+      content: 'function [iterator](): ArrayIterator<MetricsAdvisorDataFeed>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />&gt;
-    inheritanceDescription: <b>Inherited From</b> Array.__@iterator@11
+    inheritanceDescription: <b>Inherited From</b> Array.[iterator]
 extends: Array&lt;<xref uid="@azure/ai-metrics-advisor.MetricsAdvisorDataFeed" />&gt;

@@ -410,14 +410,14 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isRestError(e: unknown): e'
+      content: 'function isRestError(e: unknown): e is RestError'
       parameters:
         - id: e
           type: unknown
           description: Something caught by a catch clause.
       return:
         description: ''
-        type: e
+        type: e is RestError
   - name: isSystemEvent<T>(T, EventGridEvent<unknown>)
     uid: '@azure/eventgrid-systemevents.isSystemEvent'
     package: '@azure/eventgrid-systemevents'
@@ -434,7 +434,7 @@ functions:
     syntax:
       content: >-
         function isSystemEvent<T>(eventType: T, event: EventGridEvent<unknown>):
-        event
+        event is EventGridEvent<SystemEventNameToEventData[T]>
       parameters:
         - id: eventType
           type: T
@@ -448,7 +448,7 @@ functions:
           description: The event to test.
       return:
         description: ''
-        type: event
+        type: event is EventGridEvent&lt;SystemEventNameToEventData[T]&gt;
   - name: isSystemEvent<T>(T, CloudEvent<unknown>)
     uid: '@azure/eventgrid-systemevents.isSystemEvent_1'
     package: '@azure/eventgrid-systemevents'
@@ -465,7 +465,7 @@ functions:
     syntax:
       content: >-
         function isSystemEvent<T>(eventType: T, event: CloudEvent<unknown>):
-        event
+        event is CloudEvent<SystemEventNameToEventData[T]>
       parameters:
         - id: eventType
           type: T
@@ -479,4 +479,4 @@ functions:
           description: The event to test.
       return:
         description: ''
-        type: event
+        type: event is CloudEvent&lt;SystemEventNameToEventData[T]&gt;

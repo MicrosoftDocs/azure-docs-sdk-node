@@ -3,7 +3,11 @@ name: StorageContainerListResult
 uid: >-
   @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainerListResult
 package: '@azure/arm-datalake-analytics'
-summary: ''
+summary: >-
+  The list of blob containers associated with the storage account attached to
+  the Data Lake
+
+  Analytics account.
 fullName: StorageContainerListResult
 remarks: ''
 isDeprecated: false
@@ -54,11 +58,11 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '[unscopables]: { [unscopables]?: boolean, length?: boolean }'
+      content: '[unscopables]: {[key: number]: boolean | undefined}'
       return:
         description: ''
-        type: '{ [unscopables]?: boolean, length?: boolean }'
-    inheritanceDescription: <b>Inherited From</b> Array.__@unscopables@749
+        type: '{[key: number]: boolean | undefined}'
+    inheritanceDescription: <b>Inherited From</b> Array.[unscopables]
 inheritedMethods:
   - name: at(number)
     uid: >-
@@ -68,7 +72,7 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function at(index: number): undefined | StorageContainer'
+      content: 'function at(index: number): StorageContainer | undefined'
       parameters:
         - id: index
           type: number
@@ -76,9 +80,9 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainer"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.at
   - name: concat((StorageContainer | ConcatArray<StorageContainer>)[])
     uid: >-
@@ -186,10 +190,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function entries(): IterableIterator<[number, StorageContainer]>'
+      content: 'function entries(): ArrayIterator<[number, StorageContainer]>'
       return:
         description: ''
-        type: IterableIterator&lt;[number, StorageContainer]&gt;
+        type: ArrayIterator&lt;[number, StorageContainer]&gt;
     inheritanceDescription: <b>Inherited From</b> Array.entries
   - name: >-
       every((value: StorageContainer, index: number, array: StorageContainer[])
@@ -231,7 +235,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: >-
       every<S>((value: StorageContainer, index: number, array:
-      StorageContainer[]) => value, any)
+      StorageContainer[]) => value is S, any)
     uid: >-
       @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainerListResult.every
     package: '@azure/arm-datalake-analytics'
@@ -241,12 +245,12 @@ inheritedMethods:
     syntax:
       content: >-
         function every<S>(predicate: (value: StorageContainer, index: number,
-        array: StorageContainer[]) => value, thisArg?: any): this
+        array: StorageContainer[]) => value is S, thisArg?: any): this is S[]
       parameters:
         - id: predicate
           type: >-
             (value: StorageContainer, index: number, array: StorageContainer[])
-            =&gt; value
+            =&gt; value is S
           description: >-
             A function that accepts up to three arguments. The every method
             calls
@@ -265,7 +269,7 @@ inheritedMethods:
             If thisArg is omitted, undefined is used as the this value.
       return:
         description: ''
-        type: this
+        type: this is S[]
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: fill(StorageContainer, number, number)
     uid: >-
@@ -347,7 +351,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.filter
   - name: >-
       filter<S>((value: StorageContainer, index: number, array:
-      StorageContainer[]) => value, any)
+      StorageContainer[]) => value is S, any)
     uid: >-
       @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainerListResult.filter
     package: '@azure/arm-datalake-analytics'
@@ -359,12 +363,12 @@ inheritedMethods:
     syntax:
       content: >-
         function filter<S>(predicate: (value: StorageContainer, index: number,
-        array: StorageContainer[]) => value, thisArg?: any): S[]
+        array: StorageContainer[]) => value is S, thisArg?: any): S[]
       parameters:
         - id: predicate
           type: >-
             (value: StorageContainer, index: number, array: StorageContainer[])
-            =&gt; value
+            =&gt; value is S
           description: >-
             A function that accepts up to three arguments. The filter method
             calls the predicate function one time for each element in the array.
@@ -390,8 +394,8 @@ inheritedMethods:
     syntax:
       content: >-
         function find(predicate: (value: StorageContainer, index: number, obj:
-        StorageContainer[]) => unknown, thisArg?: any): undefined |
-        StorageContainer
+        StorageContainer[]) => unknown, thisArg?: any): StorageContainer |
+        undefined
       parameters:
         - id: predicate
           type: >-
@@ -404,13 +408,13 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainer"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       find<S>((value: StorageContainer, index: number, obj: StorageContainer[])
-      => value, any)
+      => value is S, any)
     uid: >-
       @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainerListResult.find
     package: '@azure/arm-datalake-analytics'
@@ -424,12 +428,12 @@ inheritedMethods:
     syntax:
       content: >-
         function find<S>(predicate: (value: StorageContainer, index: number,
-        obj: StorageContainer[]) => value, thisArg?: any): undefined | S
+        obj: StorageContainer[]) => value is S, thisArg?: any): S | undefined
       parameters:
         - id: predicate
           type: >-
             (value: StorageContainer, index: number, obj: StorageContainer[])
-            =&gt; value
+            =&gt; value is S
           description: >-
             find calls predicate once for each element of the array, in
             ascending
@@ -448,7 +452,7 @@ inheritedMethods:
             predicate. If it is not provided, undefined is used instead.
       return:
         description: ''
-        type: undefined | S
+        type: S | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       findIndex((value: StorageContainer, index: number, obj:
@@ -673,10 +677,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function keys(): IterableIterator<number>'
+      content: 'function keys(): ArrayIterator<number>'
       return:
         description: ''
-        type: IterableIterator&lt;number&gt;
+        type: ArrayIterator&lt;number&gt;
     inheritanceDescription: <b>Inherited From</b> Array.keys
   - name: lastIndexOf(StorageContainer, number)
     uid: >-
@@ -752,13 +756,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | StorageContainer'
+      content: 'function pop(): StorageContainer | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainer"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.pop
   - name: push(StorageContainer[])
     uid: >-
@@ -1027,13 +1031,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function shift(): undefined | StorageContainer'
+      content: 'function shift(): StorageContainer | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainer"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.shift
   - name: slice(number, number)
     uid: >-
@@ -1133,7 +1137,7 @@ inheritedMethods:
             argument, zero if they're equal, and a positive
 
             value otherwise. If omitted, the elements are sorted in ascending,
-            ASCII character order.
+            UTF-16 code unit order.
 
             ```ts
 
@@ -1166,7 +1170,15 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. Omitting this argument will remove
+            all elements from the start
+
+            paramater location to end of the array. If value of this argument is
+            either a negative number, zero, undefined, or a type
+
+            that cannot be converted to an integer, the function will evaluate
+            the argument as zero and not remove any elements.
       return:
         description: An array containing the elements that were deleted.
         type: >-
@@ -1195,7 +1207,14 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. If value of this argument is
+            either a negative number, zero,
+
+            undefined, or a type that cannot be converted to an integer, the
+            function will evaluate the argument as zero and
+
+            not remove any elements.
         - id: items
           type: >-
             <xref
@@ -1220,6 +1239,30 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: 'function toLocaleString(): string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Array.toLocaleString
+  - name: >-
+      toLocaleString(string | string[], NumberFormatOptions &
+      DateTimeFormatOptions)
+    uid: >-
+      @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainerListResult.toLocaleString_1
+    package: '@azure/arm-datalake-analytics'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toLocaleString(locales: string | string[], options?:
+        NumberFormatOptions & DateTimeFormatOptions): string
+      parameters:
+        - id: locales
+          type: string | string[]
+          description: ''
+        - id: options
+          type: NumberFormatOptions & DateTimeFormatOptions
+          description: ''
       return:
         description: ''
         type: string
@@ -1267,11 +1310,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function values(): IterableIterator<StorageContainer>'
+      content: 'function values(): ArrayIterator<StorageContainer>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainer"
           />&gt;
     inheritanceDescription: <b>Inherited From</b> Array.values
@@ -1283,14 +1326,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function [iterator](): IterableIterator<StorageContainer>'
+      content: 'function [iterator](): ArrayIterator<StorageContainer>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainer"
           />&gt;
-    inheritanceDescription: <b>Inherited From</b> Array.__@iterator@747
+    inheritanceDescription: <b>Inherited From</b> Array.[iterator]
 extends: >-
   Array&lt;<xref
   uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.StorageContainer"

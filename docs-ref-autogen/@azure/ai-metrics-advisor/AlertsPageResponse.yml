@@ -48,11 +48,11 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '[unscopables]: { [unscopables]?: boolean, length?: boolean }'
+      content: '[unscopables]: {[key: number]: boolean | undefined}'
       return:
         description: ''
-        type: '{ [unscopables]?: boolean, length?: boolean }'
-    inheritanceDescription: <b>Inherited From</b> Array.__@unscopables@13
+        type: '{[key: number]: boolean | undefined}'
+    inheritanceDescription: <b>Inherited From</b> Array.[unscopables]
 inheritedMethods:
   - name: at(number)
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.at'
@@ -61,14 +61,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function at(index: number): undefined | AnomalyAlert'
+      content: 'function at(index: number): AnomalyAlert | undefined'
       parameters:
         - id: index
           type: number
           description: ''
       return:
         description: ''
-        type: undefined | <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />
+        type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.at
   - name: concat((AnomalyAlert | ConcatArray<AnomalyAlert>)[])
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.concat_1'
@@ -158,10 +158,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function entries(): IterableIterator<[number, AnomalyAlert]>'
+      content: 'function entries(): ArrayIterator<[number, AnomalyAlert]>'
       return:
         description: ''
-        type: IterableIterator&lt;[number, AnomalyAlert]&gt;
+        type: ArrayIterator&lt;[number, AnomalyAlert]&gt;
     inheritanceDescription: <b>Inherited From</b> Array.entries
   - name: >-
       every((value: AnomalyAlert, index: number, array: AnomalyAlert[]) =>
@@ -202,7 +202,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: >-
       every<S>((value: AnomalyAlert, index: number, array: AnomalyAlert[]) =>
-      value, any)
+      value is S, any)
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.every'
     package: '@azure/ai-metrics-advisor'
     summary: Determines whether all the members of an array satisfy the specified test.
@@ -211,12 +211,12 @@ inheritedMethods:
     syntax:
       content: >-
         function every<S>(predicate: (value: AnomalyAlert, index: number, array:
-        AnomalyAlert[]) => value, thisArg?: any): this
+        AnomalyAlert[]) => value is S, thisArg?: any): this is S[]
       parameters:
         - id: predicate
           type: >-
             (value: AnomalyAlert, index: number, array: AnomalyAlert[]) =&gt;
-            value
+            value is S
           description: >-
             A function that accepts up to three arguments. The every method
             calls
@@ -235,7 +235,7 @@ inheritedMethods:
             If thisArg is omitted, undefined is used as the this value.
       return:
         description: ''
-        type: this
+        type: this is S[]
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: fill(AnomalyAlert, number, number)
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.fill'
@@ -305,7 +305,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.filter
   - name: >-
       filter<S>((value: AnomalyAlert, index: number, array: AnomalyAlert[]) =>
-      value, any)
+      value is S, any)
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.filter'
     package: '@azure/ai-metrics-advisor'
     summary: >-
@@ -316,12 +316,12 @@ inheritedMethods:
     syntax:
       content: >-
         function filter<S>(predicate: (value: AnomalyAlert, index: number,
-        array: AnomalyAlert[]) => value, thisArg?: any): S[]
+        array: AnomalyAlert[]) => value is S, thisArg?: any): S[]
       parameters:
         - id: predicate
           type: >-
             (value: AnomalyAlert, index: number, array: AnomalyAlert[]) =&gt;
-            value
+            value is S
           description: >-
             A function that accepts up to three arguments. The filter method
             calls the predicate function one time for each element in the array.
@@ -346,7 +346,7 @@ inheritedMethods:
     syntax:
       content: >-
         function find(predicate: (value: AnomalyAlert, index: number, obj:
-        AnomalyAlert[]) => unknown, thisArg?: any): undefined | AnomalyAlert
+        AnomalyAlert[]) => unknown, thisArg?: any): AnomalyAlert | undefined
       parameters:
         - id: predicate
           type: >-
@@ -358,11 +358,11 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: undefined | <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />
+        type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
-      find<S>((value: AnomalyAlert, index: number, obj: AnomalyAlert[]) =>
-      value, any)
+      find<S>((value: AnomalyAlert, index: number, obj: AnomalyAlert[]) => value
+      is S, any)
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.find'
     package: '@azure/ai-metrics-advisor'
     summary: >-
@@ -375,12 +375,12 @@ inheritedMethods:
     syntax:
       content: >-
         function find<S>(predicate: (value: AnomalyAlert, index: number, obj:
-        AnomalyAlert[]) => value, thisArg?: any): undefined | S
+        AnomalyAlert[]) => value is S, thisArg?: any): S | undefined
       parameters:
         - id: predicate
           type: >-
             (value: AnomalyAlert, index: number, obj: AnomalyAlert[]) =&gt;
-            value
+            value is S
           description: >-
             find calls predicate once for each element of the array, in
             ascending
@@ -399,7 +399,7 @@ inheritedMethods:
             predicate. If it is not provided, undefined is used instead.
       return:
         description: ''
-        type: undefined | S
+        type: S | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       findIndex((value: AnomalyAlert, index: number, obj: AnomalyAlert[]) =>
@@ -610,10 +610,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function keys(): IterableIterator<number>'
+      content: 'function keys(): ArrayIterator<number>'
       return:
         description: ''
-        type: IterableIterator&lt;number&gt;
+        type: ArrayIterator&lt;number&gt;
     inheritanceDescription: <b>Inherited From</b> Array.keys
   - name: lastIndexOf(AnomalyAlert, number)
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.lastIndexOf'
@@ -681,10 +681,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | AnomalyAlert'
+      content: 'function pop(): AnomalyAlert | undefined'
       return:
         description: ''
-        type: undefined | <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />
+        type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.pop
   - name: push(AnomalyAlert[])
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.push'
@@ -913,10 +913,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function shift(): undefined | AnomalyAlert'
+      content: 'function shift(): AnomalyAlert | undefined'
       return:
         description: ''
-        type: undefined | <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />
+        type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.shift
   - name: slice(number, number)
     uid: '@azure/ai-metrics-advisor.AlertsPageResponse.slice'
@@ -1010,7 +1010,7 @@ inheritedMethods:
             argument, zero if they're equal, and a positive
 
             value otherwise. If omitted, the elements are sorted in ascending,
-            ASCII character order.
+            UTF-16 code unit order.
 
             ```ts
 
@@ -1039,7 +1039,15 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. Omitting this argument will remove
+            all elements from the start
+
+            paramater location to end of the array. If value of this argument is
+            either a negative number, zero, undefined, or a type
+
+            that cannot be converted to an integer, the function will evaluate
+            the argument as zero and not remove any elements.
       return:
         description: An array containing the elements that were deleted.
         type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />[]
@@ -1064,7 +1072,14 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. If value of this argument is
+            either a negative number, zero,
+
+            undefined, or a type that cannot be converted to an integer, the
+            function will evaluate the argument as zero and
+
+            not remove any elements.
         - id: items
           type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />[]
           description: Elements to insert into the array in place of the deleted elements.
@@ -1082,6 +1097,29 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: 'function toLocaleString(): string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Array.toLocaleString
+  - name: >-
+      toLocaleString(string | string[], NumberFormatOptions &
+      DateTimeFormatOptions)
+    uid: '@azure/ai-metrics-advisor.AlertsPageResponse.toLocaleString_1'
+    package: '@azure/ai-metrics-advisor'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toLocaleString(locales: string | string[], options?:
+        NumberFormatOptions & DateTimeFormatOptions): string
+      parameters:
+        - id: locales
+          type: string | string[]
+          description: ''
+        - id: options
+          type: NumberFormatOptions & DateTimeFormatOptions
+          description: ''
       return:
         description: ''
         type: string
@@ -1123,11 +1161,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function values(): IterableIterator<AnomalyAlert>'
+      content: 'function values(): ArrayIterator<AnomalyAlert>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref uid="@azure/ai-metrics-advisor.AnomalyAlert"
+          ArrayIterator&lt;<xref uid="@azure/ai-metrics-advisor.AnomalyAlert"
           />&gt;
     inheritanceDescription: <b>Inherited From</b> Array.values
   - name: '[iterator]()'
@@ -1137,11 +1175,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function [iterator](): IterableIterator<AnomalyAlert>'
+      content: 'function [iterator](): ArrayIterator<AnomalyAlert>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref uid="@azure/ai-metrics-advisor.AnomalyAlert"
+          ArrayIterator&lt;<xref uid="@azure/ai-metrics-advisor.AnomalyAlert"
           />&gt;
-    inheritanceDescription: <b>Inherited From</b> Array.__@iterator@11
+    inheritanceDescription: <b>Inherited From</b> Array.[iterator]
 extends: Array&lt;<xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />&gt;

@@ -48,11 +48,11 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '[unscopables]: { [unscopables]?: boolean, length?: boolean }'
+      content: '[unscopables]: {[key: number]: boolean | undefined}'
       return:
         description: ''
-        type: '{ [unscopables]?: boolean, length?: boolean }'
-    inheritanceDescription: <b>Inherited From</b> Array.__@unscopables@254
+        type: '{[key: number]: boolean | undefined}'
+    inheritanceDescription: <b>Inherited From</b> Array.[unscopables]
 inheritedMethods:
   - name: at(number)
     uid: '@azure/container-registry.RepositoryPageResponse.at'
@@ -61,14 +61,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function at(index: number): undefined | string'
+      content: 'function at(index: number): string | undefined'
       parameters:
         - id: index
           type: number
           description: ''
       return:
         description: ''
-        type: undefined | string
+        type: string | undefined
     inheritanceDescription: <b>Inherited From</b> Array.at
   - name: concat((string | ConcatArray<string>)[])
     uid: '@azure/container-registry.RepositoryPageResponse.concat_1'
@@ -151,10 +151,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function entries(): IterableIterator<[number, string]>'
+      content: 'function entries(): ArrayIterator<[number, string]>'
       return:
         description: ''
-        type: IterableIterator&lt;[number, string]&gt;
+        type: ArrayIterator&lt;[number, string]&gt;
     inheritanceDescription: <b>Inherited From</b> Array.entries
   - name: 'every((value: string, index: number, array: string[]) => unknown, any)'
     uid: '@azure/container-registry.RepositoryPageResponse.every_1'
@@ -189,7 +189,9 @@ inheritedMethods:
         description: ''
         type: boolean
     inheritanceDescription: <b>Inherited From</b> Array.every
-  - name: 'every<S>((value: string, index: number, array: string[]) => value, any)'
+  - name: >-
+      every<S>((value: string, index: number, array: string[]) => value is S,
+      any)
     uid: '@azure/container-registry.RepositoryPageResponse.every'
     package: '@azure/container-registry'
     summary: Determines whether all the members of an array satisfy the specified test.
@@ -198,10 +200,10 @@ inheritedMethods:
     syntax:
       content: >-
         function every<S>(predicate: (value: string, index: number, array:
-        string[]) => value, thisArg?: any): this
+        string[]) => value is S, thisArg?: any): this is S[]
       parameters:
         - id: predicate
-          type: '(value: string, index: number, array: string[]) =&gt; value'
+          type: '(value: string, index: number, array: string[]) =&gt; value is S'
           description: >-
             A function that accepts up to three arguments. The every method
             calls
@@ -220,7 +222,7 @@ inheritedMethods:
             If thisArg is omitted, undefined is used as the this value.
       return:
         description: ''
-        type: this
+        type: this is S[]
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: fill(string, number, number)
     uid: '@azure/container-registry.RepositoryPageResponse.fill'
@@ -284,7 +286,9 @@ inheritedMethods:
         description: ''
         type: string[]
     inheritanceDescription: <b>Inherited From</b> Array.filter
-  - name: 'filter<S>((value: string, index: number, array: string[]) => value, any)'
+  - name: >-
+      filter<S>((value: string, index: number, array: string[]) => value is S,
+      any)
     uid: '@azure/container-registry.RepositoryPageResponse.filter'
     package: '@azure/container-registry'
     summary: >-
@@ -295,10 +299,10 @@ inheritedMethods:
     syntax:
       content: >-
         function filter<S>(predicate: (value: string, index: number, array:
-        string[]) => value, thisArg?: any): S[]
+        string[]) => value is S, thisArg?: any): S[]
       parameters:
         - id: predicate
-          type: '(value: string, index: number, array: string[]) =&gt; value'
+          type: '(value: string, index: number, array: string[]) =&gt; value is S'
           description: >-
             A function that accepts up to three arguments. The filter method
             calls the predicate function one time for each element in the array.
@@ -321,7 +325,7 @@ inheritedMethods:
     syntax:
       content: >-
         function find(predicate: (value: string, index: number, obj: string[])
-        => unknown, thisArg?: any): undefined | string
+        => unknown, thisArg?: any): string | undefined
       parameters:
         - id: predicate
           type: '(value: string, index: number, obj: string[]) =&gt; unknown'
@@ -331,9 +335,9 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: undefined | string
+        type: string | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
-  - name: 'find<S>((value: string, index: number, obj: string[]) => value, any)'
+  - name: 'find<S>((value: string, index: number, obj: string[]) => value is S, any)'
     uid: '@azure/container-registry.RepositoryPageResponse.find'
     package: '@azure/container-registry'
     summary: >-
@@ -346,10 +350,10 @@ inheritedMethods:
     syntax:
       content: >-
         function find<S>(predicate: (value: string, index: number, obj:
-        string[]) => value, thisArg?: any): undefined | S
+        string[]) => value is S, thisArg?: any): S | undefined
       parameters:
         - id: predicate
-          type: '(value: string, index: number, obj: string[]) =&gt; value'
+          type: '(value: string, index: number, obj: string[]) =&gt; value is S'
           description: >-
             find calls predicate once for each element of the array, in
             ascending
@@ -368,7 +372,7 @@ inheritedMethods:
             predicate. If it is not provided, undefined is used instead.
       return:
         description: ''
-        type: undefined | S
+        type: S | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: 'findIndex((value: string, index: number, obj: string[]) => unknown, any)'
     uid: '@azure/container-registry.RepositoryPageResponse.findIndex'
@@ -566,10 +570,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function keys(): IterableIterator<number>'
+      content: 'function keys(): ArrayIterator<number>'
       return:
         description: ''
-        type: IterableIterator&lt;number&gt;
+        type: ArrayIterator&lt;number&gt;
     inheritanceDescription: <b>Inherited From</b> Array.keys
   - name: lastIndexOf(string, number)
     uid: '@azure/container-registry.RepositoryPageResponse.lastIndexOf'
@@ -633,10 +637,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | string'
+      content: 'function pop(): string | undefined'
       return:
         description: ''
-        type: undefined | string
+        type: string | undefined
     inheritanceDescription: <b>Inherited From</b> Array.pop
   - name: push(string[])
     uid: '@azure/container-registry.RepositoryPageResponse.push'
@@ -859,10 +863,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function shift(): undefined | string'
+      content: 'function shift(): string | undefined'
       return:
         description: ''
-        type: undefined | string
+        type: string | undefined
     inheritanceDescription: <b>Inherited From</b> Array.shift
   - name: slice(number, number)
     uid: '@azure/container-registry.RepositoryPageResponse.slice'
@@ -952,7 +956,7 @@ inheritedMethods:
             argument, zero if they're equal, and a positive
 
             value otherwise. If omitted, the elements are sorted in ascending,
-            ASCII character order.
+            UTF-16 code unit order.
 
             ```ts
 
@@ -981,7 +985,15 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. Omitting this argument will remove
+            all elements from the start
+
+            paramater location to end of the array. If value of this argument is
+            either a negative number, zero, undefined, or a type
+
+            that cannot be converted to an integer, the function will evaluate
+            the argument as zero and not remove any elements.
       return:
         description: An array containing the elements that were deleted.
         type: string[]
@@ -1006,7 +1018,14 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. If value of this argument is
+            either a negative number, zero,
+
+            undefined, or a type that cannot be converted to an integer, the
+            function will evaluate the argument as zero and
+
+            not remove any elements.
         - id: items
           type: string[]
           description: Elements to insert into the array in place of the deleted elements.
@@ -1024,6 +1043,29 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: 'function toLocaleString(): string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Array.toLocaleString
+  - name: >-
+      toLocaleString(string | string[], NumberFormatOptions &
+      DateTimeFormatOptions)
+    uid: '@azure/container-registry.RepositoryPageResponse.toLocaleString_1'
+    package: '@azure/container-registry'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toLocaleString(locales: string | string[], options?:
+        NumberFormatOptions & DateTimeFormatOptions): string
+      parameters:
+        - id: locales
+          type: string | string[]
+          description: ''
+        - id: options
+          type: NumberFormatOptions & DateTimeFormatOptions
+          description: ''
       return:
         description: ''
         type: string
@@ -1065,10 +1107,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function values(): IterableIterator<string>'
+      content: 'function values(): ArrayIterator<string>'
       return:
         description: ''
-        type: IterableIterator&lt;string&gt;
+        type: ArrayIterator&lt;string&gt;
     inheritanceDescription: <b>Inherited From</b> Array.values
   - name: '[iterator]()'
     uid: '@azure/container-registry.RepositoryPageResponse.[iterator]'
@@ -1077,9 +1119,9 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function [iterator](): IterableIterator<string>'
+      content: 'function [iterator](): ArrayIterator<string>'
       return:
         description: ''
-        type: IterableIterator&lt;string&gt;
-    inheritanceDescription: <b>Inherited From</b> Array.__@iterator@252
+        type: ArrayIterator&lt;string&gt;
+    inheritanceDescription: <b>Inherited From</b> Array.[iterator]
 extends: Array&lt;string&gt;

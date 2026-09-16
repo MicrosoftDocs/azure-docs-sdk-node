@@ -3,7 +3,7 @@ name: ComputePolicyListResult
 uid: >-
   @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicyListResult
 package: '@azure/arm-datalake-analytics'
-summary: ''
+summary: The list of compute policies in the account.
 fullName: ComputePolicyListResult
 remarks: ''
 isDeprecated: false
@@ -54,11 +54,11 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '[unscopables]: { [unscopables]?: boolean, length?: boolean }'
+      content: '[unscopables]: {[key: number]: boolean | undefined}'
       return:
         description: ''
-        type: '{ [unscopables]?: boolean, length?: boolean }'
-    inheritanceDescription: <b>Inherited From</b> Array.__@unscopables@749
+        type: '{[key: number]: boolean | undefined}'
+    inheritanceDescription: <b>Inherited From</b> Array.[unscopables]
 inheritedMethods:
   - name: at(number)
     uid: >-
@@ -68,7 +68,7 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function at(index: number): undefined | ComputePolicy'
+      content: 'function at(index: number): ComputePolicy | undefined'
       parameters:
         - id: index
           type: number
@@ -76,9 +76,9 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicy"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.at
   - name: concat((ComputePolicy | ConcatArray<ComputePolicy>)[])
     uid: >-
@@ -184,10 +184,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function entries(): IterableIterator<[number, ComputePolicy]>'
+      content: 'function entries(): ArrayIterator<[number, ComputePolicy]>'
       return:
         description: ''
-        type: IterableIterator&lt;[number, ComputePolicy]&gt;
+        type: ArrayIterator&lt;[number, ComputePolicy]&gt;
     inheritanceDescription: <b>Inherited From</b> Array.entries
   - name: >-
       every((value: ComputePolicy, index: number, array: ComputePolicy[]) =>
@@ -229,7 +229,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: >-
       every<S>((value: ComputePolicy, index: number, array: ComputePolicy[]) =>
-      value, any)
+      value is S, any)
     uid: >-
       @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicyListResult.every
     package: '@azure/arm-datalake-analytics'
@@ -239,12 +239,12 @@ inheritedMethods:
     syntax:
       content: >-
         function every<S>(predicate: (value: ComputePolicy, index: number,
-        array: ComputePolicy[]) => value, thisArg?: any): this
+        array: ComputePolicy[]) => value is S, thisArg?: any): this is S[]
       parameters:
         - id: predicate
           type: >-
             (value: ComputePolicy, index: number, array: ComputePolicy[]) =&gt;
-            value
+            value is S
           description: >-
             A function that accepts up to three arguments. The every method
             calls
@@ -263,7 +263,7 @@ inheritedMethods:
             If thisArg is omitted, undefined is used as the this value.
       return:
         description: ''
-        type: this
+        type: this is S[]
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: fill(ComputePolicy, number, number)
     uid: >-
@@ -344,7 +344,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.filter
   - name: >-
       filter<S>((value: ComputePolicy, index: number, array: ComputePolicy[]) =>
-      value, any)
+      value is S, any)
     uid: >-
       @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicyListResult.filter
     package: '@azure/arm-datalake-analytics'
@@ -356,12 +356,12 @@ inheritedMethods:
     syntax:
       content: >-
         function filter<S>(predicate: (value: ComputePolicy, index: number,
-        array: ComputePolicy[]) => value, thisArg?: any): S[]
+        array: ComputePolicy[]) => value is S, thisArg?: any): S[]
       parameters:
         - id: predicate
           type: >-
             (value: ComputePolicy, index: number, array: ComputePolicy[]) =&gt;
-            value
+            value is S
           description: >-
             A function that accepts up to three arguments. The filter method
             calls the predicate function one time for each element in the array.
@@ -387,7 +387,7 @@ inheritedMethods:
     syntax:
       content: >-
         function find(predicate: (value: ComputePolicy, index: number, obj:
-        ComputePolicy[]) => unknown, thisArg?: any): undefined | ComputePolicy
+        ComputePolicy[]) => unknown, thisArg?: any): ComputePolicy | undefined
       parameters:
         - id: predicate
           type: >-
@@ -400,13 +400,13 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicy"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       find<S>((value: ComputePolicy, index: number, obj: ComputePolicy[]) =>
-      value, any)
+      value is S, any)
     uid: >-
       @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicyListResult.find
     package: '@azure/arm-datalake-analytics'
@@ -420,12 +420,12 @@ inheritedMethods:
     syntax:
       content: >-
         function find<S>(predicate: (value: ComputePolicy, index: number, obj:
-        ComputePolicy[]) => value, thisArg?: any): undefined | S
+        ComputePolicy[]) => value is S, thisArg?: any): S | undefined
       parameters:
         - id: predicate
           type: >-
             (value: ComputePolicy, index: number, obj: ComputePolicy[]) =&gt;
-            value
+            value is S
           description: >-
             find calls predicate once for each element of the array, in
             ascending
@@ -444,7 +444,7 @@ inheritedMethods:
             predicate. If it is not provided, undefined is used instead.
       return:
         description: ''
-        type: undefined | S
+        type: S | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       findIndex((value: ComputePolicy, index: number, obj: ComputePolicy[]) =>
@@ -669,10 +669,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function keys(): IterableIterator<number>'
+      content: 'function keys(): ArrayIterator<number>'
       return:
         description: ''
-        type: IterableIterator&lt;number&gt;
+        type: ArrayIterator&lt;number&gt;
     inheritanceDescription: <b>Inherited From</b> Array.keys
   - name: lastIndexOf(ComputePolicy, number)
     uid: >-
@@ -748,13 +748,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | ComputePolicy'
+      content: 'function pop(): ComputePolicy | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicy"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.pop
   - name: push(ComputePolicy[])
     uid: >-
@@ -1017,13 +1017,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function shift(): undefined | ComputePolicy'
+      content: 'function shift(): ComputePolicy | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicy"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.shift
   - name: slice(number, number)
     uid: >-
@@ -1123,7 +1123,7 @@ inheritedMethods:
             argument, zero if they're equal, and a positive
 
             value otherwise. If omitted, the elements are sorted in ascending,
-            ASCII character order.
+            UTF-16 code unit order.
 
             ```ts
 
@@ -1156,7 +1156,15 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. Omitting this argument will remove
+            all elements from the start
+
+            paramater location to end of the array. If value of this argument is
+            either a negative number, zero, undefined, or a type
+
+            that cannot be converted to an integer, the function will evaluate
+            the argument as zero and not remove any elements.
       return:
         description: An array containing the elements that were deleted.
         type: >-
@@ -1185,7 +1193,14 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. If value of this argument is
+            either a negative number, zero,
+
+            undefined, or a type that cannot be converted to an integer, the
+            function will evaluate the argument as zero and
+
+            not remove any elements.
         - id: items
           type: >-
             <xref
@@ -1210,6 +1225,30 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: 'function toLocaleString(): string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Array.toLocaleString
+  - name: >-
+      toLocaleString(string | string[], NumberFormatOptions &
+      DateTimeFormatOptions)
+    uid: >-
+      @azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicyListResult.toLocaleString_1
+    package: '@azure/arm-datalake-analytics'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toLocaleString(locales: string | string[], options?:
+        NumberFormatOptions & DateTimeFormatOptions): string
+      parameters:
+        - id: locales
+          type: string | string[]
+          description: ''
+        - id: options
+          type: NumberFormatOptions & DateTimeFormatOptions
+          description: ''
       return:
         description: ''
         type: string
@@ -1257,11 +1296,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function values(): IterableIterator<ComputePolicy>'
+      content: 'function values(): ArrayIterator<ComputePolicy>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicy"
           />&gt;
     inheritanceDescription: <b>Inherited From</b> Array.values
@@ -1273,14 +1312,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function [iterator](): IterableIterator<ComputePolicy>'
+      content: 'function [iterator](): ArrayIterator<ComputePolicy>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicy"
           />&gt;
-    inheritanceDescription: <b>Inherited From</b> Array.__@iterator@747
+    inheritanceDescription: <b>Inherited From</b> Array.[iterator]
 extends: >-
   Array&lt;<xref
   uid="@azure/arm-datalake-analytics.DataLakeAnalyticsAccountManagementModels.ComputePolicy"

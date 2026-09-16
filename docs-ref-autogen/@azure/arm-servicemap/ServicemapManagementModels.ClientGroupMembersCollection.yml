@@ -2,7 +2,7 @@
 name: ClientGroupMembersCollection
 uid: '@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMembersCollection'
 package: '@azure/arm-servicemap'
-summary: ''
+summary: Collection of ClientGroupMember resources.
 fullName: ClientGroupMembersCollection
 remarks: ''
 isDeprecated: false
@@ -49,11 +49,11 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: '[unscopables]: { [unscopables]?: boolean, length?: boolean }'
+      content: '[unscopables]: {[key: number]: boolean | undefined}'
       return:
         description: ''
-        type: '{ [unscopables]?: boolean, length?: boolean }'
-    inheritanceDescription: <b>Inherited From</b> Array.__@unscopables@855
+        type: '{[key: number]: boolean | undefined}'
+    inheritanceDescription: <b>Inherited From</b> Array.[unscopables]
 inheritedMethods:
   - name: at(number)
     uid: >-
@@ -63,7 +63,7 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function at(index: number): undefined | ClientGroupMember'
+      content: 'function at(index: number): ClientGroupMember | undefined'
       parameters:
         - id: index
           type: number
@@ -71,9 +71,9 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMember"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.at
   - name: concat((ClientGroupMember | ConcatArray<ClientGroupMember>)[])
     uid: >-
@@ -181,10 +181,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function entries(): IterableIterator<[number, ClientGroupMember]>'
+      content: 'function entries(): ArrayIterator<[number, ClientGroupMember]>'
       return:
         description: ''
-        type: IterableIterator&lt;[number, ClientGroupMember]&gt;
+        type: ArrayIterator&lt;[number, ClientGroupMember]&gt;
     inheritanceDescription: <b>Inherited From</b> Array.entries
   - name: >-
       every((value: ClientGroupMember, index: number, array:
@@ -226,7 +226,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: >-
       every<S>((value: ClientGroupMember, index: number, array:
-      ClientGroupMember[]) => value, any)
+      ClientGroupMember[]) => value is S, any)
     uid: >-
       @azure/arm-servicemap.ServicemapManagementModels.ClientGroupMembersCollection.every
     package: '@azure/arm-servicemap'
@@ -236,12 +236,12 @@ inheritedMethods:
     syntax:
       content: >-
         function every<S>(predicate: (value: ClientGroupMember, index: number,
-        array: ClientGroupMember[]) => value, thisArg?: any): this
+        array: ClientGroupMember[]) => value is S, thisArg?: any): this is S[]
       parameters:
         - id: predicate
           type: >-
             (value: ClientGroupMember, index: number, array:
-            ClientGroupMember[]) =&gt; value
+            ClientGroupMember[]) =&gt; value is S
           description: >-
             A function that accepts up to three arguments. The every method
             calls
@@ -260,7 +260,7 @@ inheritedMethods:
             If thisArg is omitted, undefined is used as the this value.
       return:
         description: ''
-        type: this
+        type: this is S[]
     inheritanceDescription: <b>Inherited From</b> Array.every
   - name: fill(ClientGroupMember, number, number)
     uid: >-
@@ -342,7 +342,7 @@ inheritedMethods:
     inheritanceDescription: <b>Inherited From</b> Array.filter
   - name: >-
       filter<S>((value: ClientGroupMember, index: number, array:
-      ClientGroupMember[]) => value, any)
+      ClientGroupMember[]) => value is S, any)
     uid: >-
       @azure/arm-servicemap.ServicemapManagementModels.ClientGroupMembersCollection.filter
     package: '@azure/arm-servicemap'
@@ -354,12 +354,12 @@ inheritedMethods:
     syntax:
       content: >-
         function filter<S>(predicate: (value: ClientGroupMember, index: number,
-        array: ClientGroupMember[]) => value, thisArg?: any): S[]
+        array: ClientGroupMember[]) => value is S, thisArg?: any): S[]
       parameters:
         - id: predicate
           type: >-
             (value: ClientGroupMember, index: number, array:
-            ClientGroupMember[]) =&gt; value
+            ClientGroupMember[]) =&gt; value is S
           description: >-
             A function that accepts up to three arguments. The filter method
             calls the predicate function one time for each element in the array.
@@ -385,8 +385,8 @@ inheritedMethods:
     syntax:
       content: >-
         function find(predicate: (value: ClientGroupMember, index: number, obj:
-        ClientGroupMember[]) => unknown, thisArg?: any): undefined |
-        ClientGroupMember
+        ClientGroupMember[]) => unknown, thisArg?: any): ClientGroupMember |
+        undefined
       parameters:
         - id: predicate
           type: >-
@@ -399,13 +399,13 @@ inheritedMethods:
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMember"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       find<S>((value: ClientGroupMember, index: number, obj:
-      ClientGroupMember[]) => value, any)
+      ClientGroupMember[]) => value is S, any)
     uid: >-
       @azure/arm-servicemap.ServicemapManagementModels.ClientGroupMembersCollection.find
     package: '@azure/arm-servicemap'
@@ -419,12 +419,12 @@ inheritedMethods:
     syntax:
       content: >-
         function find<S>(predicate: (value: ClientGroupMember, index: number,
-        obj: ClientGroupMember[]) => value, thisArg?: any): undefined | S
+        obj: ClientGroupMember[]) => value is S, thisArg?: any): S | undefined
       parameters:
         - id: predicate
           type: >-
             (value: ClientGroupMember, index: number, obj: ClientGroupMember[])
-            =&gt; value
+            =&gt; value is S
           description: >-
             find calls predicate once for each element of the array, in
             ascending
@@ -443,7 +443,7 @@ inheritedMethods:
             predicate. If it is not provided, undefined is used instead.
       return:
         description: ''
-        type: undefined | S
+        type: S | undefined
     inheritanceDescription: <b>Inherited From</b> Array.find
   - name: >-
       findIndex((value: ClientGroupMember, index: number, obj:
@@ -668,10 +668,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function keys(): IterableIterator<number>'
+      content: 'function keys(): ArrayIterator<number>'
       return:
         description: ''
-        type: IterableIterator&lt;number&gt;
+        type: ArrayIterator&lt;number&gt;
     inheritanceDescription: <b>Inherited From</b> Array.keys
   - name: lastIndexOf(ClientGroupMember, number)
     uid: >-
@@ -747,13 +747,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pop(): undefined | ClientGroupMember'
+      content: 'function pop(): ClientGroupMember | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMember"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.pop
   - name: push(ClientGroupMember[])
     uid: >-
@@ -1022,13 +1022,13 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function shift(): undefined | ClientGroupMember'
+      content: 'function shift(): ClientGroupMember | undefined'
       return:
         description: ''
         type: >-
-          undefined | <xref
+          <xref
           uid="@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMember"
-          />
+          /> | undefined
     inheritanceDescription: <b>Inherited From</b> Array.shift
   - name: slice(number, number)
     uid: >-
@@ -1128,7 +1128,7 @@ inheritedMethods:
             argument, zero if they're equal, and a positive
 
             value otherwise. If omitted, the elements are sorted in ascending,
-            ASCII character order.
+            UTF-16 code unit order.
 
             ```ts
 
@@ -1163,7 +1163,15 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. Omitting this argument will remove
+            all elements from the start
+
+            paramater location to end of the array. If value of this argument is
+            either a negative number, zero, undefined, or a type
+
+            that cannot be converted to an integer, the function will evaluate
+            the argument as zero and not remove any elements.
       return:
         description: An array containing the elements that were deleted.
         type: >-
@@ -1192,7 +1200,14 @@ inheritedMethods:
             elements.
         - id: deleteCount
           type: number
-          description: The number of elements to remove.
+          description: >-
+            The number of elements to remove. If value of this argument is
+            either a negative number, zero,
+
+            undefined, or a type that cannot be converted to an integer, the
+            function will evaluate the argument as zero and
+
+            not remove any elements.
         - id: items
           type: >-
             <xref
@@ -1217,6 +1232,30 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: 'function toLocaleString(): string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Array.toLocaleString
+  - name: >-
+      toLocaleString(string | string[], NumberFormatOptions &
+      DateTimeFormatOptions)
+    uid: >-
+      @azure/arm-servicemap.ServicemapManagementModels.ClientGroupMembersCollection.toLocaleString_1
+    package: '@azure/arm-servicemap'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function toLocaleString(locales: string | string[], options?:
+        NumberFormatOptions & DateTimeFormatOptions): string
+      parameters:
+        - id: locales
+          type: string | string[]
+          description: ''
+        - id: options
+          type: NumberFormatOptions & DateTimeFormatOptions
+          description: ''
       return:
         description: ''
         type: string
@@ -1264,11 +1303,11 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function values(): IterableIterator<ClientGroupMember>'
+      content: 'function values(): ArrayIterator<ClientGroupMember>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMember"
           />&gt;
     inheritanceDescription: <b>Inherited From</b> Array.values
@@ -1280,14 +1319,14 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function [iterator](): IterableIterator<ClientGroupMember>'
+      content: 'function [iterator](): ArrayIterator<ClientGroupMember>'
       return:
         description: ''
         type: >-
-          IterableIterator&lt;<xref
+          ArrayIterator&lt;<xref
           uid="@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMember"
           />&gt;
-    inheritanceDescription: <b>Inherited From</b> Array.__@iterator@853
+    inheritanceDescription: <b>Inherited From</b> Array.[iterator]
 extends: >-
   Array&lt;<xref
   uid="@azure/arm-servicemap.ServicemapManagementModels.ClientGroupMember"

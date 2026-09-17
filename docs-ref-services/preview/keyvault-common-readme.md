@@ -1,12 +1,12 @@
 ---
 title: Azure Key Vault Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-common, keyvault
-ms.date: 09/16/2026
+ms.date: 09/17/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: keyvault
 ---
-# Azure Key Vault Common client library for JavaScript - version 2.1.1-alpha.20260902.2 
+# Azure Key Vault Common client library for JavaScript - version 2.1.1-alpha.20260916.1 
 
 
 An internal support library for the various Azure Key Vault client libraries.

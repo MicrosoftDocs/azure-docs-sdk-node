@@ -1,7 +1,7 @@
 ---
 title: Azure Redhatopenshifthcp SDK for JavaScript
 description: Reference for Azure Redhatopenshifthcp SDK for JavaScript
-ms.date: 09/16/2026
+ms.date: 09/17/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: redhatopenshifthcp

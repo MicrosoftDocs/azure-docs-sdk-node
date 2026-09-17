@@ -32,6 +32,7 @@ enums:
   - '@azure/arm-avs.KnownHcxEnterpriseSiteProvisioningState'
   - '@azure/arm-avs.KnownHcxEnterpriseSiteStatus'
   - '@azure/arm-avs.KnownHostKind'
+  - '@azure/arm-avs.KnownHostLicenseKind'
   - '@azure/arm-avs.KnownHostMaintenance'
   - '@azure/arm-avs.KnownHostProvisioningState'
   - '@azure/arm-avs.KnownInternetEnum'
@@ -39,7 +40,9 @@ enums:
   - '@azure/arm-avs.KnownLicenseKind'
   - '@azure/arm-avs.KnownLicenseName'
   - '@azure/arm-avs.KnownLicenseProvisioningState'
+  - '@azure/arm-avs.KnownMaintenanceActivityKind'
   - '@azure/arm-avs.KnownMaintenanceCheckType'
+  - '@azure/arm-avs.KnownMaintenanceGroupKind'
   - '@azure/arm-avs.KnownMaintenanceManagementOperationKind'
   - '@azure/arm-avs.KnownMaintenanceProvisioningState'
   - '@azure/arm-avs.KnownMaintenanceReadinessRefreshOperationStatus'
@@ -173,10 +176,14 @@ interfaces:
   - '@azure/arm-avs.HcxEnterpriseSitesListOptionalParams'
   - '@azure/arm-avs.HcxEnterpriseSitesOperations'
   - '@azure/arm-avs.Host'
+  - '@azure/arm-avs.HostLicense'
   - '@azure/arm-avs.HostProperties'
+  - '@azure/arm-avs.HostUpdate'
+  - '@azure/arm-avs.HostUpdateProperties'
   - '@azure/arm-avs.HostsGetOptionalParams'
   - '@azure/arm-avs.HostsListOptionalParams'
   - '@azure/arm-avs.HostsOperations'
+  - '@azure/arm-avs.HostsUpdateOptionalParams'
   - '@azure/arm-avs.IdentitySource'
   - '@azure/arm-avs.ImpactedMaintenanceResource'
   - '@azure/arm-avs.ImpactedMaintenanceResourceError'
@@ -200,14 +207,19 @@ interfaces:
   - '@azure/arm-avs.LocationsCheckTrialAvailabilityOptionalParams'
   - '@azure/arm-avs.LocationsOperations'
   - '@azure/arm-avs.Maintenance'
+  - '@azure/arm-avs.MaintenanceActivity'
   - '@azure/arm-avs.MaintenanceFailedCheck'
+  - '@azure/arm-avs.MaintenanceGroup'
   - '@azure/arm-avs.MaintenanceManagementOperation'
   - '@azure/arm-avs.MaintenanceProperties'
   - '@azure/arm-avs.MaintenanceReadiness'
   - '@azure/arm-avs.MaintenanceReadinessRefreshOperation'
+  - '@azure/arm-avs.MaintenanceRecommendation'
+  - '@azure/arm-avs.MaintenanceRelationships'
   - '@azure/arm-avs.MaintenanceReschedule'
   - '@azure/arm-avs.MaintenanceSchedule'
   - '@azure/arm-avs.MaintenanceState'
+  - '@azure/arm-avs.MaintenanceWindowRecommendation'
   - '@azure/arm-avs.MaintenancesGetOptionalParams'
   - '@azure/arm-avs.MaintenancesInitiateChecksOptionalParams'
   - '@azure/arm-avs.MaintenancesListOptionalParams'
@@ -266,6 +278,7 @@ interfaces:
   - '@azure/arm-avs.Quota'
   - '@azure/arm-avs.RescheduleOperation'
   - '@azure/arm-avs.RescheduleOperationConstraint'
+  - '@azure/arm-avs.ReschedulingWindowConstraint'
   - '@azure/arm-avs.Resource'
   - '@azure/arm-avs.ResourceSku'
   - '@azure/arm-avs.ResourceSkuCapabilities'
@@ -318,6 +331,9 @@ interfaces:
   - '@azure/arm-avs.VmHostPlacementPolicyProperties'
   - '@azure/arm-avs.VmPlacementPolicyProperties'
   - '@azure/arm-avs.VmwareFirewallLicenseProperties'
+  - '@azure/arm-avs.WeekendReschedulingConstraint'
+  - '@azure/arm-avs.WeekendSchedulingConstraint'
+  - '@azure/arm-avs.WindowsServerLicense'
   - '@azure/arm-avs.WorkloadNetwork'
   - '@azure/arm-avs.WorkloadNetworkDhcp'
   - '@azure/arm-avs.WorkloadNetworkDhcpEntity'
@@ -383,6 +399,18 @@ interfaces:
   - '@azure/arm-avs.WorkloadNetworksUpdatePortMirroringOptionalParams'
   - '@azure/arm-avs.WorkloadNetworksUpdateSegmentsOptionalParams'
   - '@azure/arm-avs.WorkloadNetworksUpdateVMGroupOptionalParams'
+variables:
+  - name: RestError
+    uid: '@azure/arm-avs.RestError'
+    package: '@azure/arm-avs'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/arm-avs.ActionType'
   - '@azure/arm-avs.AddonPropertiesUnion'
@@ -414,6 +442,8 @@ typeAliases:
   - '@azure/arm-avs.HcxEnterpriseSiteProvisioningState'
   - '@azure/arm-avs.HcxEnterpriseSiteStatus'
   - '@azure/arm-avs.HostKind'
+  - '@azure/arm-avs.HostLicenseKind'
+  - '@azure/arm-avs.HostLicenseUnion'
   - '@azure/arm-avs.HostMaintenance'
   - '@azure/arm-avs.HostPropertiesUnion'
   - '@azure/arm-avs.HostProvisioningState'
@@ -423,7 +453,9 @@ typeAliases:
   - '@azure/arm-avs.LicenseName'
   - '@azure/arm-avs.LicensePropertiesUnion'
   - '@azure/arm-avs.LicenseProvisioningState'
+  - '@azure/arm-avs.MaintenanceActivityKind'
   - '@azure/arm-avs.MaintenanceCheckType'
+  - '@azure/arm-avs.MaintenanceGroupKind'
   - '@azure/arm-avs.MaintenanceManagementOperationKind'
   - '@azure/arm-avs.MaintenanceManagementOperationUnion'
   - '@azure/arm-avs.MaintenanceProvisioningState'
@@ -484,6 +516,21 @@ typeAliases:
   - '@azure/arm-avs.WorkloadNetworkSegmentProvisioningState'
   - '@azure/arm-avs.WorkloadNetworkVMGroupProvisioningState'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-avs.isRestError'
+    package: '@azure/arm-avs'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e is RestError'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e is RestError
   - name: >-
       restorePoller<TResponse, TResult>(AzureVMwareSolutionAPI, string, (args:
       any[]) => PollerLike<OperationState<TResult>, TResult>,

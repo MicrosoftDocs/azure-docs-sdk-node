@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/identity-cache-persistence, entra-id
-ms.date: 09/16/2026
+ms.date: 09/17/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: entra-id

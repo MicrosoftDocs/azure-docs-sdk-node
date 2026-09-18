@@ -38,10 +38,10 @@ properties:
     uid: '@azure/arm-sql.ManagedInstanceUpdate.administrators'
     package: '@azure/arm-sql'
     summary: >-
-      The Azure Active Directory administrator of the instance. This can only be
-      used at instance create time. If used for instance update, it will be
-      ignored or it will result in an error. For updates individual APIs will
-      need to be used.
+      The Azure Active Directory administrator can be utilized during instance
+      creation and for instance updates, except for the
+      azureADOnlyAuthentication property. To update the
+      azureADOnlyAuthentication property, individual API must be used.
     fullName: administrators
     remarks: ''
     isDeprecated: false
@@ -80,9 +80,6 @@ properties:
     summary: >-
       Specifies the point in time (ISO8601 format) of the Managed Instance
       creation.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: createTime
     remarks: ''
     isDeprecated: false
@@ -98,9 +95,6 @@ properties:
       The storage account type used to store backups for this instance. The
       options are Local (LocallyRedundantStorage), Zone (ZoneRedundantStorage),
       Geo (GeoRedundantStorage) and GeoZone(GeoZoneRedundantStorage)
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: currentBackupStorageRedundancy
     remarks: ''
     isDeprecated: false
@@ -126,11 +120,7 @@ properties:
   - name: dnsZone
     uid: '@azure/arm-sql.ManagedInstanceUpdate.dnsZone'
     package: '@azure/arm-sql'
-    summary: >-
-      The Dns Zone that the managed instance is in.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The Dns Zone that the managed instance is in.
     fullName: dnsZone
     remarks: ''
     isDeprecated: false
@@ -156,11 +146,7 @@ properties:
   - name: externalGovernanceStatus
     uid: '@azure/arm-sql.ManagedInstanceUpdate.externalGovernanceStatus'
     package: '@azure/arm-sql'
-    summary: >-
-      Status of external governance.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Status of external governance.
     fullName: externalGovernanceStatus
     remarks: ''
     isDeprecated: false
@@ -172,11 +158,7 @@ properties:
   - name: fullyQualifiedDomainName
     uid: '@azure/arm-sql.ManagedInstanceUpdate.fullyQualifiedDomainName'
     package: '@azure/arm-sql'
-    summary: >-
-      The fully qualified domain name of the managed instance.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The fully qualified domain name of the managed instance.
     fullName: fullyQualifiedDomainName
     remarks: ''
     isDeprecated: false
@@ -207,9 +189,6 @@ properties:
       does not meet the requirements to use the secondary as Passive DR) and
       'Passive' (customer meets the requirements to use the secondary as Passive
       DR).
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
     fullName: hybridSecondaryUsageDetected
     remarks: ''
     isDeprecated: false
@@ -314,6 +293,21 @@ properties:
       return:
         description: ''
         type: string
+  - name: memorySizeInGB
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.memorySizeInGB'
+    package: '@azure/arm-sql'
+    summary: >-
+      Memory size in GB. Minimum value: 28. Maximum value: 870. Minimum and
+      maximum value depend on the number of vCores and service tier. Read more
+      about resource limits: https://aka.ms/mi-resource-limits-api.
+    fullName: memorySizeInGB
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'memorySizeInGB?: number'
+      return:
+        description: ''
+        type: number
   - name: minimalTlsVersion
     uid: '@azure/arm-sql.ManagedInstanceUpdate.minimalTlsVersion'
     package: '@azure/arm-sql'
@@ -329,7 +323,7 @@ properties:
   - name: pricingModel
     uid: '@azure/arm-sql.ManagedInstanceUpdate.pricingModel'
     package: '@azure/arm-sql'
-    summary: Weather or not Managed Instance is freemium.
+    summary: Pricing model of Managed Instance.
     fullName: pricingModel
     remarks: ''
     isDeprecated: false
@@ -353,11 +347,7 @@ properties:
   - name: privateEndpointConnections
     uid: '@azure/arm-sql.ManagedInstanceUpdate.privateEndpointConnections'
     package: '@azure/arm-sql'
-    summary: >-
-      List of private endpoint connections on a managed instance.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: List of private endpoint connections on a managed instance.
     fullName: privateEndpointConnections
     remarks: ''
     isDeprecated: false
@@ -369,11 +359,7 @@ properties:
   - name: provisioningState
     uid: '@azure/arm-sql.ManagedInstanceUpdate.provisioningState'
     package: '@azure/arm-sql'
-    summary: >-
-      Provisioning state of managed instance.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Provisioning state of managed instance.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -419,6 +405,18 @@ properties:
     isDeprecated: false
     syntax:
       content: 'requestedBackupStorageRedundancy?: string'
+      return:
+        description: ''
+        type: string
+  - name: requestedLogicalAvailabilityZone
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.requestedLogicalAvailabilityZone'
+    package: '@azure/arm-sql'
+    summary: Specifies the logical availability zone Managed Instance is pinned to.
+    fullName: requestedLogicalAvailabilityZone
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'requestedLogicalAvailabilityZone?: string'
       return:
         description: ''
         type: string
@@ -477,11 +475,7 @@ properties:
   - name: state
     uid: '@azure/arm-sql.ManagedInstanceUpdate.state'
     package: '@azure/arm-sql'
-    summary: >-
-      The state of the managed instance.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: The state of the managed instance.
     fullName: state
     remarks: ''
     isDeprecated: false
@@ -509,7 +503,7 @@ properties:
     uid: '@azure/arm-sql.ManagedInstanceUpdate.storageSizeInGB'
     package: '@azure/arm-sql'
     summary: >-
-      Storage size in GB. Minimum value: 32. Maximum value: 16384. Increments of
+      Storage size in GB. Minimum value: 32. Maximum value: 32768. Increments of
       32 GB allowed only. Maximum value depends on the selected hardware family
       and number of vCores.
     fullName: storageSizeInGB
@@ -554,10 +548,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags?: {[propertyName: string]: string}'
+      content: 'tags?: Record<string, string>'
       return:
         description: ''
-        type: '{[propertyName: string]: string}'
+        type: Record&lt;string, string&gt;
   - name: timezoneId
     uid: '@azure/arm-sql.ManagedInstanceUpdate.timezoneId'
     package: '@azure/arm-sql'
@@ -588,7 +582,10 @@ properties:
   - name: vCores
     uid: '@azure/arm-sql.ManagedInstanceUpdate.vCores'
     package: '@azure/arm-sql'
-    summary: 'The number of vCores. Allowed values: 8, 16, 24, 32, 40, 64, 80.'
+    summary: >-
+      The number of vCores. Allowed values: 4, 6, 8, 10, 12, 16, 20, 24, 32, 40,
+      48, 56, 64, 80, 96, 128. Supported vCores depends on the selected hardware
+      family and service tier.
     fullName: vCores
     remarks: ''
     isDeprecated: false
@@ -600,11 +597,7 @@ properties:
   - name: virtualClusterId
     uid: '@azure/arm-sql.ManagedInstanceUpdate.virtualClusterId'
     package: '@azure/arm-sql'
-    summary: >-
-      Virtual cluster resource id for the Managed Instance.
-
-      NOTE: This property will not be serialized. It can only be populated by
-      the server.
+    summary: Virtual cluster resource id for the Managed Instance.
     fullName: virtualClusterId
     remarks: ''
     isDeprecated: false
@@ -616,7 +609,7 @@ properties:
   - name: zoneRedundant
     uid: '@azure/arm-sql.ManagedInstanceUpdate.zoneRedundant'
     package: '@azure/arm-sql'
-    summary: Whether or not the multi-az is enabled.
+    summary: Whether or not the zone-redundancy is enabled.
     fullName: zoneRedundant
     remarks: ''
     isDeprecated: false

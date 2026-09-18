@@ -106,7 +106,7 @@ properties:
     package: '@azure/storage-common'
     summary: >-
       Becomes `true` when
-      [`'end'`](https://nodejs.org/docs/latest-v22.x/api/stream.html#event-end)
+      [`'end'`](https://nodejs.org/docs/latest-v26.x/api/stream.html#event-end)
       event is emitted.
     fullName: readableEnded
     remarks: ''
@@ -124,7 +124,7 @@ properties:
       described
 
       in the [Three
-      states](https://nodejs.org/docs/latest-v22.x/api/stream.html#three-states)
+      states](https://nodejs.org/docs/latest-v26.x/api/stream.html#three-states)
       section.
     fullName: readableFlowing
     remarks: ''
@@ -174,37 +174,12 @@ properties:
         description: ''
         type: boolean
 inheritedMethods:
-  - name: >-
-      compose<T>(T | ComposeFnParam | Iterable<T, any, any> | AsyncIterable<T,
-      any, any>, { signal: AbortSignal })
-    uid: '@azure/storage-common.Readable.compose'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function compose<T>(stream: T | ComposeFnParam | Iterable<T, any, any> |
-        AsyncIterable<T, any, any>, options?: { signal: AbortSignal }): T
-      parameters:
-        - id: stream
-          type: >-
-            T | ComposeFnParam | Iterable&lt;T, any, any&gt; |
-            AsyncIterable&lt;T, any, any&gt;
-          description: ''
-        - id: options
-          type: '{ signal: AbortSignal }'
-          description: ''
-      return:
-        description: ''
-        type: T
-    inheritanceDescription: <b>Inherited From</b> Stream.compose
   - name: eventNames()
     uid: '@azure/storage-common.Readable.eventNames'
     package: '@azure/storage-common'
     summary: |-
       Returns an array listing the events for which the emitter has registered
-      listeners. The values in the array are strings or `Symbol`s.
+      listeners.
 
       ```js
       import { EventEmitter } from 'node:events';
@@ -235,7 +210,8 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:EventEmitter.defaultMaxListeners>.
+
+      `events.defaultMaxListeners`.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -244,164 +220,25 @@ inheritedMethods:
         description: ''
         type: number
     inheritanceDescription: <b>Inherited From</b> Stream.getMaxListeners
-  - name: listenerCount<K>(string | symbol, Function)
-    uid: '@azure/storage-common.Readable.listenerCount'
-    package: '@azure/storage-common'
-    summary: >-
-      Returns the number of listeners listening for the event named `eventName`.
-
-      If `listener` is provided, it will return how many times the listener is
-      found
-
-      in the list of the listeners of the event.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listenerCount<K>(eventName: string | symbol, listener?:
-        Function): number
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event being listened for
-        - id: listener
-          type: Function
-          description: The event handler function
-      return:
-        description: ''
-        type: number
-    inheritanceDescription: <b>Inherited From</b> Stream.listenerCount
-  - name: listeners<K>(string | symbol)
-    uid: '@azure/storage-common.Readable.listeners'
-    package: '@azure/storage-common'
-    summary: |-
-      Returns a copy of the array of listeners for the event named `eventName`.
-
-      ```js
-      server.on('connection', (stream) => {
-        console.log('someone connected!');
-      });
-      console.log(util.inspect(server.listeners('connection')));
-      // Prints: [ [Function] ]
-      ```
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function listeners<K>(eventName: string | symbol): Function[]'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-      return:
-        description: ''
-        type: Function[]
-    inheritanceDescription: <b>Inherited From</b> Stream.listeners
-  - name: 'off<K>(string | symbol, (args: any[]) => void)'
-    uid: '@azure/storage-common.Readable.off'
-    package: '@azure/storage-common'
-    summary: Alias for `emitter.removeListener()`.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function off<K>(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> Stream.off
-  - name: 'pipe<T>(T, { end?: boolean })'
+  - name: pipe<T>(T, PipeOptions)
     uid: '@azure/storage-common.Readable.pipe'
     package: '@azure/storage-common'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function pipe<T>(destination: T, options?: { end?: boolean }): T'
+      content: 'function pipe<T>(destination: T, options?: PipeOptions): T'
       parameters:
         - id: destination
           type: T
           description: ''
         - id: options
-          type: '{ end?: boolean }'
+          type: PipeOptions
           description: ''
       return:
         description: ''
         type: T
     inheritanceDescription: <b>Inherited From</b> Stream.pipe
-  - name: rawListeners<K>(string | symbol)
-    uid: '@azure/storage-common.Readable.rawListeners'
-    package: '@azure/storage-common'
-    summary: |-
-      Returns a copy of the array of listeners for the event named `eventName`,
-      including any wrappers (such as those created by `.once()`).
-
-      ```js
-      import { EventEmitter } from 'node:events';
-      const emitter = new EventEmitter();
-      emitter.once('log', () => console.log('log once'));
-
-      // Returns a new Array with a function `onceWrapper` which has a property
-      // `listener` which contains the original listener bound above
-      const listeners = emitter.rawListeners('log');
-      const logFnWrapper = listeners[0];
-
-      // Logs "log once" to the console and does not unbind the `once` event
-      logFnWrapper.listener();
-
-      // Logs "log once" to the console and removes the listener
-      logFnWrapper();
-
-      emitter.on('log', () => console.log('log persistently'));
-      // Will return a new Array with a single function bound by `.on()` above
-      const newListeners = emitter.rawListeners('log');
-
-      // Logs "log persistently" twice
-      newListeners[0]();
-      emitter.emit('log');
-      ```
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function rawListeners<K>(eventName: string | symbol): Function[]'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-      return:
-        description: ''
-        type: Function[]
-    inheritanceDescription: <b>Inherited From</b> Stream.rawListeners
-  - name: removeAllListeners(string | symbol)
-    uid: '@azure/storage-common.Readable.removeAllListeners'
-    package: '@azure/storage-common'
-    summary: |-
-      Removes all listeners, or those of the specified `eventName`.
-
-      It is bad practice to remove listeners added elsewhere in the code,
-      particularly when the `EventEmitter` instance was created by some other
-      component or module (e.g. sockets or file streams).
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function removeAllListeners(eventName?: string | symbol): this'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-      return:
-        description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> Stream.removeAllListeners
   - name: setMaxListeners(number)
     uid: '@azure/storage-common.Readable.setMaxListeners'
     package: '@azure/storage-common'
@@ -415,7 +252,9 @@ inheritedMethods:
       be
 
       modified for this specific `EventEmitter` instance. The value can be set
-      to `Infinity` (or `0`) to indicate an unlimited number of listeners.
+      to
+
+      `Infinity` (or `0`) to indicate an unlimited number of listeners.
 
 
       Returns a reference to the `EventEmitter`, so that calls can be chained.
@@ -431,16 +270,40 @@ inheritedMethods:
         description: ''
         type: this
     inheritanceDescription: <b>Inherited From</b> Stream.setMaxListeners
-  - name: '[captureRejectionSymbol]<K>(Error, string | symbol, AnyRest)'
+  - name: '[captureRejectionSymbol](Error, string | symbol, any[])'
     uid: '@azure/storage-common.Readable.[captureRejectionSymbol]'
     package: '@azure/storage-common'
-    summary: ''
+    summary: |-
+      The `Symbol.for('nodejs.rejection')` method is called in case a
+      promise rejection happens when emitting an event and
+      `captureRejections` is enabled on the emitter.
+      It is possible to use `events.captureRejectionSymbol` in
+      place of `Symbol.for('nodejs.rejection')`.
+
+      ```js
+      import { EventEmitter, captureRejectionSymbol } from 'node:events';
+
+      class MyClass extends EventEmitter {
+        constructor() {
+          super({ captureRejections: true });
+        }
+
+        [captureRejectionSymbol](err, event, ...args) {
+          console.log('rejection happened for', event, 'with', err, ...args);
+          this.destroy(err);
+        }
+
+        destroy(err) {
+          // Tear the resource down here.
+        }
+      }
+      ```
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function [captureRejectionSymbol]<K>(error: Error, event: string |
-        symbol, args: AnyRest)
+        function [captureRejectionSymbol](error: Error, event: string | symbol,
+        args: any[])
       parameters:
         - id: error
           type: Error
@@ -449,38 +312,11 @@ inheritedMethods:
           type: string | symbol
           description: ''
         - id: args
-          type: AnyRest
+          type: any[]
           description: ''
     inheritanceDescription: <b>Inherited From</b> Stream.[captureRejectionSymbol]
 methods:
-  - name: addListener("close", () => void)
-    uid: '@azure/storage-common.Readable.addListener'
-    package: '@azure/storage-common'
-    summary: |-
-      Event emitter
-      The defined events on documents including:
-      1. close
-      2. data
-      3. end
-      4. error
-      5. pause
-      6. readable
-      7. resume
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function addListener(event: "close", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"close"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'addListener("data", (chunk: any) => void)'
+  - name: 'addListener(string | symbol, (args: any[]) => void)'
     uid: '@azure/storage-common.Readable.addListener_1'
     package: '@azure/storage-common'
     summary: ''
@@ -488,122 +324,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function addListener(event: "data", listener: (chunk: any) => void):
-        this
+        function addListener(eventName: string | symbol, listener: (args: any[])
+        => void): this
       parameters:
-        - id: event
-          type: '"data"'
-          description: ''
-        - id: listener
-          type: '(chunk: any) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: addListener("end", () => void)
-    uid: '@azure/storage-common.Readable.addListener_2'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function addListener(event: "end", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"end"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'addListener("error", (err: Error) => void)'
-    uid: '@azure/storage-common.Readable.addListener_3'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function addListener(event: "error", listener: (err: Error) => void):
-        this
-      parameters:
-        - id: event
-          type: '"error"'
-          description: ''
-        - id: listener
-          type: '(err: Error) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: addListener("pause", () => void)
-    uid: '@azure/storage-common.Readable.addListener_4'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function addListener(event: "pause", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"pause"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: addListener("readable", () => void)
-    uid: '@azure/storage-common.Readable.addListener_5'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function addListener(event: "readable", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"readable"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: addListener("resume", () => void)
-    uid: '@azure/storage-common.Readable.addListener_6'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function addListener(event: "resume", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"resume"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'addListener(string | symbol, (args: any[]) => void)'
-    uid: '@azure/storage-common.Readable.addListener_7'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function addListener(event: string | symbol, listener: (args: any[]) =>
-        void): this
-      parameters:
-        - id: event
+        - id: eventName
           type: string | symbol
           description: ''
         - id: listener
@@ -612,28 +336,90 @@ methods:
       return:
         description: ''
         type: this
-  - name: asIndexedPairs(Pick<ArrayOptions, "signal">)
-    uid: '@azure/storage-common.Readable.asIndexedPairs'
+  - name: 'addListener<E>(E, (args: ReadableEventMap[E]) => void)'
+    uid: '@azure/storage-common.Readable.addListener'
     package: '@azure/storage-common'
-    summary: >-
-      This method returns a new stream with chunks of the underlying stream
-      paired with a counter
-
-      in the form `[index, chunk]`. The first index value is `0` and it
-      increases by 1 for each chunk produced.
+    summary: Alias for `emitter.on(eventName, listener)`.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function asIndexedPairs(options?: Pick<ArrayOptions, "signal">):
-        Readable
+        function addListener<E>(eventName: E, listener: (args:
+        ReadableEventMap[E]) => void): this
       parameters:
-        - id: options
-          type: Pick&lt;ArrayOptions, "signal"&gt;
+        - id: eventName
+          type: E
+          description: ''
+        - id: listener
+          type: '(args: ReadableEventMap[E]) =&gt; void'
           description: ''
       return:
-        description: a stream of indexed pairs.
-        type: <xref uid="@azure/storage-common.Readable" />
+        description: ''
+        type: this
+  - name: >-
+      compose(WritableStream | WritableStream | TransformStream | (source: any)
+      => void, Abortable)
+    uid: '@azure/storage-common.Readable.compose'
+    package: '@azure/storage-common'
+    summary: >-
+      ```js
+
+      import { Readable } from 'node:stream';
+
+
+      async function* splitToWords(source) {
+        for await (const chunk of source) {
+          const words = String(chunk).split(' ');
+
+          for (const word of words) {
+            yield word;
+          }
+        }
+      }
+
+
+      const wordsStream = Readable.from(['text passed through', 'composed
+      stream']).compose(splitToWords);
+
+      const words = await wordsStream.toArray();
+
+
+      console.log(words); // prints ['text', 'passed', 'through', 'composed',
+      'stream']
+
+      ```
+
+
+      `readable.compose(s)` is equivalent to `stream.compose(readable, s)`.
+
+
+      This method also allows for an `AbortSignal` to be provided, which will
+      destroy
+
+      the composed stream when aborted.
+
+
+      See
+      [`stream.compose(...streams)`](https://nodejs.org/docs/latest-v26.x/api/stream.html#streamcomposestreams)
+      for more information.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function compose(stream: WritableStream | WritableStream |
+        TransformStream | (source: any) => void, options?: Abortable): Duplex
+      parameters:
+        - id: stream
+          type: >-
+            WritableStream | WritableStream | TransformStream | (source: any)
+            =&gt; void
+          description: ''
+        - id: options
+          type: Abortable
+          description: ''
+      return:
+        description: a stream composed with the stream `stream`.
+        type: Duplex
   - name: destroy(Error)
     uid: '@azure/storage-common.Readable.destroy'
     package: '@azure/storage-common'
@@ -664,7 +450,7 @@ methods:
       return:
         description: ''
         type: this
-  - name: drop(number, Pick<ArrayOptions, "signal">)
+  - name: drop(number, Abortable)
     uid: '@azure/storage-common.Readable.drop'
     package: '@azure/storage-common'
     summary: >-
@@ -673,24 +459,41 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function drop(limit: number, options?: Pick<ArrayOptions, "signal">):
-        Readable
+      content: 'function drop(limit: number, options?: Abortable): Readable'
       parameters:
         - id: limit
           type: number
           description: the number of chunks to drop from the readable.
         - id: options
-          type: Pick&lt;ArrayOptions, "signal"&gt;
+          type: Abortable
           description: ''
       return:
         description: a stream with *limit* chunks dropped from the start.
         type: <xref uid="@azure/storage-common.Readable" />
-  - name: emit("close")
+  - name: emit(string | symbol, any[])
+    uid: '@azure/storage-common.Readable.emit_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function emit(eventName: string | symbol, args: any[]): boolean'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: args
+          type: any[]
+          description: ''
+      return:
+        description: ''
+        type: boolean
+  - name: emit<E>(E, ReadableEventMap[E])
     uid: '@azure/storage-common.Readable.emit'
     package: '@azure/storage-common'
     summary: >-
       Synchronously calls each of the listeners registered for the event named
+
       `eventName`, in the order they were registered, passing the supplied
       arguments
 
@@ -755,131 +558,20 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function emit(event: "close"): boolean'
+      content: 'function emit<E>(eventName: E, args: ReadableEventMap[E]): boolean'
       parameters:
-        - id: event
-          type: '"close"'
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: emit("data", any)
-    uid: '@azure/storage-common.Readable.emit_1'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: "data", chunk: any): boolean'
-      parameters:
-        - id: event
-          type: '"data"'
-          description: ''
-        - id: chunk
-          type: any
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: emit("end")
-    uid: '@azure/storage-common.Readable.emit_2'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: "end"): boolean'
-      parameters:
-        - id: event
-          type: '"end"'
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: emit("error", Error)
-    uid: '@azure/storage-common.Readable.emit_3'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: "error", err: Error): boolean'
-      parameters:
-        - id: event
-          type: '"error"'
-          description: ''
-        - id: err
-          type: Error
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: emit("pause")
-    uid: '@azure/storage-common.Readable.emit_4'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: "pause"): boolean'
-      parameters:
-        - id: event
-          type: '"pause"'
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: emit("readable")
-    uid: '@azure/storage-common.Readable.emit_5'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: "readable"): boolean'
-      parameters:
-        - id: event
-          type: '"readable"'
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: emit("resume")
-    uid: '@azure/storage-common.Readable.emit_6'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: "resume"): boolean'
-      parameters:
-        - id: event
-          type: '"resume"'
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: emit(string | symbol, any[])
-    uid: '@azure/storage-common.Readable.emit_7'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function emit(event: string | symbol, args: any[]): boolean'
-      parameters:
-        - id: event
-          type: string | symbol
+        - id: eventName
+          type: E
           description: ''
         - id: args
-          type: any[]
+          type: ReadableEventMap[E]
           description: ''
       return:
         description: ''
         type: boolean
   - name: >-
-      every((data: any, options?: Pick<ArrayOptions, "signal">) => boolean |
-      Promise<boolean>, ArrayOptions)
+      every((data: any, options?: Abortable) => boolean | Promise<boolean>,
+      Pick<ReadableOperatorOptions, "concurrency" | "signal">)
     uid: '@azure/storage-common.Readable.every'
     package: '@azure/storage-common'
     summary: >-
@@ -898,16 +590,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function every(fn: (data: any, options?: Pick<ArrayOptions, "signal">)
-        => boolean | Promise<boolean>, options?: ArrayOptions): Promise<boolean>
+        function every(fn: (data: any, options?: Abortable) => boolean |
+        Promise<boolean>, options?: Pick<ReadableOperatorOptions, "concurrency"
+        | "signal">): Promise<boolean>
       parameters:
         - id: fn
           type: >-
-            (data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt;
-            boolean | Promise&lt;boolean&gt;
+            (data: any, options?: Abortable) =&gt; boolean |
+            Promise&lt;boolean&gt;
           description: a function to call on each chunk of the stream. Async or not.
         - id: options
-          type: ArrayOptions
+          type: Pick&lt;ReadableOperatorOptions, "concurrency" | "signal"&gt;
           description: ''
       return:
         description: >-
@@ -915,8 +608,8 @@ methods:
           every one of the chunks.
         type: Promise&lt;boolean&gt;
   - name: >-
-      filter((data: any, options?: Pick<ArrayOptions, "signal">) => boolean |
-      Promise<boolean>, ArrayOptions)
+      filter((data: any, options?: Abortable) => boolean | Promise<boolean>,
+      ReadableOperatorOptions)
     uid: '@azure/storage-common.Readable.filter'
     package: '@azure/storage-common'
     summary: >-
@@ -931,23 +624,23 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function filter(fn: (data: any, options?: Pick<ArrayOptions, "signal">)
-        => boolean | Promise<boolean>, options?: ArrayOptions): Readable
+        function filter(fn: (data: any, options?: Abortable) => boolean |
+        Promise<boolean>, options?: ReadableOperatorOptions): Readable
       parameters:
         - id: fn
           type: >-
-            (data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt;
-            boolean | Promise&lt;boolean&gt;
+            (data: any, options?: Abortable) =&gt; boolean |
+            Promise&lt;boolean&gt;
           description: a function to filter chunks from the stream. Async or not.
         - id: options
-          type: ArrayOptions
+          type: ReadableOperatorOptions
           description: ''
       return:
         description: a stream filtered with the predicate *fn*.
         type: <xref uid="@azure/storage-common.Readable" />
   - name: >-
-      find((data: any, options?: Pick<ArrayOptions, "signal">) => boolean |
-      Promise<boolean>, ArrayOptions)
+      find((data: any, options?: Abortable) => boolean | Promise<boolean>,
+      Pick<ReadableOperatorOptions, "concurrency" | "signal">)
     uid: '@azure/storage-common.Readable.find_1'
     package: '@azure/storage-common'
     summary: ''
@@ -955,23 +648,24 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function find(fn: (data: any, options?: Pick<ArrayOptions, "signal">) =>
-        boolean | Promise<boolean>, options?: ArrayOptions): Promise<any>
+        function find(fn: (data: any, options?: Abortable) => boolean |
+        Promise<boolean>, options?: Pick<ReadableOperatorOptions, "concurrency"
+        | "signal">): Promise<any>
       parameters:
         - id: fn
           type: >-
-            (data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt;
-            boolean | Promise&lt;boolean&gt;
+            (data: any, options?: Abortable) =&gt; boolean |
+            Promise&lt;boolean&gt;
           description: ''
         - id: options
-          type: ArrayOptions
+          type: Pick&lt;ReadableOperatorOptions, "concurrency" | "signal"&gt;
           description: ''
       return:
         description: ''
         type: Promise&lt;any&gt;
   - name: >-
-      find<T>((data: any, options?: Pick<ArrayOptions, "signal">) => data is T,
-      ArrayOptions)
+      find<T>((data: any, options?: Abortable) => data is T,
+      Pick<ReadableOperatorOptions, "concurrency" | "signal">)
     uid: '@azure/storage-common.Readable.find'
     package: '@azure/storage-common'
     summary: >-
@@ -990,16 +684,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function find<T>(fn: (data: any, options?: Pick<ArrayOptions, "signal">)
-        => data is T, options?: ArrayOptions): Promise<T | undefined>
+        function find<T>(fn: (data: any, options?: Abortable) => data is T,
+        options?: Pick<ReadableOperatorOptions, "concurrency" | "signal">):
+        Promise<T | undefined>
       parameters:
         - id: fn
-          type: >-
-            (data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt; data
-            is T
+          type: '(data: any, options?: Abortable) =&gt; data is T'
           description: a function to call on each chunk of the stream. Async or not.
         - id: options
-          type: ArrayOptions
+          type: Pick&lt;ReadableOperatorOptions, "concurrency" | "signal"&gt;
           description: ''
       return:
         description: >-
@@ -1009,8 +702,8 @@ methods:
           or `undefined` if no element was found.
         type: Promise&lt;T | undefined&gt;
   - name: >-
-      flatMap((data: any, options?: Pick<ArrayOptions, "signal">) => any,
-      ArrayOptions)
+      flatMap((data: any, options?: Abortable) => any,
+      Pick<ReadableOperatorOptions, "concurrency" | "signal">)
     uid: '@azure/storage-common.Readable.flatMap'
     package: '@azure/storage-common'
     summary: >-
@@ -1028,23 +721,23 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function flatMap(fn: (data: any, options?: Pick<ArrayOptions, "signal">)
-        => any, options?: ArrayOptions): Readable
+        function flatMap(fn: (data: any, options?: Abortable) => any, options?:
+        Pick<ReadableOperatorOptions, "concurrency" | "signal">): Readable
       parameters:
         - id: fn
-          type: '(data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt; any'
+          type: '(data: any, options?: Abortable) =&gt; any'
           description: >-
             a function to map over every chunk in the stream. May be async. May
             be a stream or generator.
         - id: options
-          type: ArrayOptions
+          type: Pick&lt;ReadableOperatorOptions, "concurrency" | "signal"&gt;
           description: ''
       return:
         description: a stream flat-mapped with the function *fn*.
         type: <xref uid="@azure/storage-common.Readable" />
   - name: >-
-      forEach((data: any, options?: Pick<ArrayOptions, "signal">) => void |
-      Promise<void>, ArrayOptions)
+      forEach((data: any, options?: Abortable) => void | Promise<void>,
+      Pick<ReadableOperatorOptions, "concurrency" | "signal">)
     uid: '@azure/storage-common.Readable.forEach'
     package: '@azure/storage-common'
     summary: >-
@@ -1075,16 +768,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function forEach(fn: (data: any, options?: Pick<ArrayOptions, "signal">)
-        => void | Promise<void>, options?: ArrayOptions): Promise<void>
+        function forEach(fn: (data: any, options?: Abortable) => void |
+        Promise<void>, options?: Pick<ReadableOperatorOptions, "concurrency" |
+        "signal">): Promise<void>
       parameters:
         - id: fn
-          type: >-
-            (data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt; void
-            | Promise&lt;void&gt;
+          type: '(data: any, options?: Abortable) =&gt; void | Promise&lt;void&gt;'
           description: a function to call on each chunk of the stream. Async or not.
         - id: options
-          type: ArrayOptions
+          type: Pick&lt;ReadableOperatorOptions, "concurrency" | "signal"&gt;
           description: ''
       return:
         description: a promise for when the stream has finished.
@@ -1126,7 +818,7 @@ methods:
       return:
         description: ''
         type: boolean
-  - name: 'iterator({ destroyOnReturn?: boolean })'
+  - name: iterator(ReadableIteratorOptions)
     uid: '@azure/storage-common.Readable.iterator'
     package: '@azure/storage-common'
     summary: >-
@@ -1141,19 +833,102 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function iterator(options?: { destroyOnReturn?: boolean }):
-        AsyncIterator<any>
+      content: 'function iterator(options?: ReadableIteratorOptions): AsyncIterator<any>'
       parameters:
         - id: options
-          type: '{ destroyOnReturn?: boolean }'
+          type: ReadableIteratorOptions
           description: ''
       return:
         description: ''
         type: AsyncIterator&lt;any&gt;
-  - name: >-
-      map((data: any, options?: Pick<ArrayOptions, "signal">) => any,
-      ArrayOptions)
+  - name: 'listenerCount(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-common.Readable.listenerCount_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listenerCount(eventName: string | symbol, listener?: (args:
+        any[]) => void): number
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: number
+  - name: 'listenerCount<E>(E, (args: ReadableEventMap[E]) => void)'
+    uid: '@azure/storage-common.Readable.listenerCount'
+    package: '@azure/storage-common'
+    summary: >-
+      Returns the number of listeners listening for the event named `eventName`.
+
+      If `listener` is provided, it will return how many times the listener is
+      found
+
+      in the list of the listeners of the event.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listenerCount<E>(eventName: E, listener?: (args:
+        ReadableEventMap[E]) => void): number
+      parameters:
+        - id: eventName
+          type: E
+          description: The name of the event being listened for
+        - id: listener
+          type: '(args: ReadableEventMap[E]) =&gt; void'
+          description: The event handler function
+      return:
+        description: ''
+        type: number
+  - name: listeners(string | symbol)
+    uid: '@azure/storage-common.Readable.listeners_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function listeners(eventName: string | symbol): (args: any[]) => void[]'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: '(args: any[]) =&gt; void[]'
+  - name: listeners<E>(E)
+    uid: '@azure/storage-common.Readable.listeners'
+    package: '@azure/storage-common'
+    summary: |-
+      Returns a copy of the array of listeners for the event named `eventName`.
+
+      ```js
+      server.on('connection', (stream) => {
+        console.log('someone connected!');
+      });
+      console.log(util.inspect(server.listeners('connection')));
+      // Prints: [ [Function] ]
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listeners<E>(eventName: E): (args: ReadableEventMap[E]) =>
+        void[]
+      parameters:
+        - id: eventName
+          type: E
+          description: ''
+      return:
+        description: ''
+        type: '(args: ReadableEventMap[E]) =&gt; void[]'
+  - name: 'map((data: any, options?: Abortable) => any, ReadableOperatorOptions)'
     uid: '@azure/storage-common.Readable.map'
     package: '@azure/storage-common'
     summary: >-
@@ -1166,30 +941,92 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function map(fn: (data: any, options?: Pick<ArrayOptions, "signal">) =>
-        any, options?: ArrayOptions): Readable
+        function map(fn: (data: any, options?: Abortable) => any, options?:
+        ReadableOperatorOptions): Readable
       parameters:
         - id: fn
-          type: '(data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt; any'
+          type: '(data: any, options?: Abortable) =&gt; any'
           description: a function to map over every chunk in the stream. Async or not.
         - id: options
-          type: ArrayOptions
+          type: ReadableOperatorOptions
           description: ''
       return:
         description: a stream mapped with the function *fn*.
         type: <xref uid="@azure/storage-common.Readable" />
-  - name: on("close", () => void)
+  - name: 'off(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-common.Readable.off_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function off(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'off<E>(E, (args: ReadableEventMap[E]) => void)'
+    uid: '@azure/storage-common.Readable.off'
+    package: '@azure/storage-common'
+    summary: Alias for `emitter.removeListener()`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function off<E>(eventName: E, listener: (args: ReadableEventMap[E]) =>
+        void): this
+      parameters:
+        - id: eventName
+          type: E
+          description: ''
+        - id: listener
+          type: '(args: ReadableEventMap[E]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'on(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-common.Readable.on_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'on<E>(E, (args: ReadableEventMap[E]) => void)'
     uid: '@azure/storage-common.Readable.on'
     package: '@azure/storage-common'
     summary: >-
       Adds the `listener` function to the end of the listeners array for the
-      event
 
-      named `eventName`. No checks are made to see if the `listener` has already
+      event named `eventName`. No checks are made to see if the `listener` has
 
-      been added. Multiple calls passing the same combination of `eventName` and
+      already been added. Multiple calls passing the same combination of
+      `eventName`
 
-      `listener` will result in the `listener` being added, and called, multiple
+      and `listener` will result in the `listener` being added, and called,
+      multiple
+
       times.
 
 
@@ -1206,6 +1043,7 @@ methods:
 
 
       By default, event listeners are invoked in the order they are added. The
+
       `emitter.prependListener()` method can be used as an alternative to add
       the
 
@@ -1234,137 +1072,31 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function on(event: "close", listener: () => void): this'
+      content: >-
+        function on<E>(eventName: E, listener: (args: ReadableEventMap[E]) =>
+        void): this
       parameters:
-        - id: event
-          type: '"close"'
-          description: ''
+        - id: eventName
+          type: E
+          description: The name of the event.
         - id: listener
-          type: () =&gt; void
+          type: '(args: ReadableEventMap[E]) =&gt; void'
           description: The callback function
       return:
         description: ''
         type: this
-  - name: 'on("data", (chunk: any) => void)'
-    uid: '@azure/storage-common.Readable.on_1'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function on(event: "data", listener: (chunk: any) => void): this'
-      parameters:
-        - id: event
-          type: '"data"'
-          description: ''
-        - id: listener
-          type: '(chunk: any) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: on("end", () => void)
-    uid: '@azure/storage-common.Readable.on_2'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function on(event: "end", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"end"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'on("error", (err: Error) => void)'
-    uid: '@azure/storage-common.Readable.on_3'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function on(event: "error", listener: (err: Error) => void): this'
-      parameters:
-        - id: event
-          type: '"error"'
-          description: ''
-        - id: listener
-          type: '(err: Error) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: on("pause", () => void)
-    uid: '@azure/storage-common.Readable.on_4'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function on(event: "pause", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"pause"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: on("readable", () => void)
-    uid: '@azure/storage-common.Readable.on_5'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function on(event: "readable", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"readable"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: on("resume", () => void)
-    uid: '@azure/storage-common.Readable.on_6'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function on(event: "resume", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"resume"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'on(string | symbol, (args: any[]) => void)'
-    uid: '@azure/storage-common.Readable.on_7'
+  - name: 'once(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-common.Readable.once_1'
     package: '@azure/storage-common'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function on(event: string | symbol, listener: (args: any[]) => void):
-        this
+        function once(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
       parameters:
-        - id: event
+        - id: eventName
           type: string | symbol
           description: ''
         - id: listener
@@ -1373,7 +1105,7 @@ methods:
       return:
         description: ''
         type: this
-  - name: once("close", () => void)
+  - name: 'once<E>(E, (args: ReadableEventMap[E]) => void)'
     uid: '@azure/storage-common.Readable.once'
     package: '@azure/storage-common'
     summary: >-
@@ -1397,6 +1129,7 @@ methods:
 
 
       By default, event listeners are invoked in the order they are added. The
+
       `emitter.prependOnceListener()` method can be used as an alternative to
       add the
 
@@ -1425,142 +1158,16 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function once(event: "close", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"close"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: The callback function
-      return:
-        description: ''
-        type: this
-  - name: 'once("data", (chunk: any) => void)'
-    uid: '@azure/storage-common.Readable.once_1'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function once(event: "data", listener: (chunk: any) => void): this'
-      parameters:
-        - id: event
-          type: '"data"'
-          description: ''
-        - id: listener
-          type: '(chunk: any) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: once("end", () => void)
-    uid: '@azure/storage-common.Readable.once_2'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function once(event: "end", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"end"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'once("error", (err: Error) => void)'
-    uid: '@azure/storage-common.Readable.once_3'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function once(event: "error", listener: (err: Error) => void): this'
-      parameters:
-        - id: event
-          type: '"error"'
-          description: ''
-        - id: listener
-          type: '(err: Error) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: once("pause", () => void)
-    uid: '@azure/storage-common.Readable.once_4'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function once(event: "pause", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"pause"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: once("readable", () => void)
-    uid: '@azure/storage-common.Readable.once_5'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function once(event: "readable", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"readable"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: once("resume", () => void)
-    uid: '@azure/storage-common.Readable.once_6'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function once(event: "resume", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"resume"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'once(string | symbol, (args: any[]) => void)'
-    uid: '@azure/storage-common.Readable.once_7'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
       content: >-
-        function once(event: string | symbol, listener: (args: any[]) => void):
-        this
+        function once<E>(eventName: E, listener: (args: ReadableEventMap[E]) =>
+        void): this
       parameters:
-        - id: event
-          type: string | symbol
-          description: ''
+        - id: eventName
+          type: E
+          description: The name of the event.
         - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
+          type: '(args: ReadableEventMap[E]) =&gt; void'
+          description: The callback function
       return:
         description: ''
         type: this
@@ -1601,7 +1208,27 @@ methods:
       return:
         description: ''
         type: this
-  - name: prependListener("close", () => void)
+  - name: 'prependListener(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-common.Readable.prependListener_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependListener(eventName: string | symbol, listener: (args:
+        any[]) => void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'prependListener<E>(E, (args: ReadableEventMap[E]) => void)'
     uid: '@azure/storage-common.Readable.prependListener'
     package: '@azure/storage-common'
     summary: >-
@@ -1614,7 +1241,9 @@ methods:
       `eventName`
 
       and `listener` will result in the `listener` being added, and called,
-      multiple times.
+      multiple
+
+      times.
 
 
       ```js
@@ -1630,141 +1259,31 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function prependListener(event: "close", listener: () => void): this'
+      content: >-
+        function prependListener<E>(eventName: E, listener: (args:
+        ReadableEventMap[E]) => void): this
       parameters:
-        - id: event
-          type: '"close"'
-          description: ''
+        - id: eventName
+          type: E
+          description: The name of the event.
         - id: listener
-          type: () =&gt; void
+          type: '(args: ReadableEventMap[E]) =&gt; void'
           description: The callback function
       return:
         description: ''
         type: this
-  - name: 'prependListener("data", (chunk: any) => void)'
-    uid: '@azure/storage-common.Readable.prependListener_1'
+  - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-common.Readable.prependOnceListener_1'
     package: '@azure/storage-common'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function prependListener(event: "data", listener: (chunk: any) => void):
-        this
+        function prependOnceListener(eventName: string | symbol, listener:
+        (args: any[]) => void): this
       parameters:
-        - id: event
-          type: '"data"'
-          description: ''
-        - id: listener
-          type: '(chunk: any) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependListener("end", () => void)
-    uid: '@azure/storage-common.Readable.prependListener_2'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function prependListener(event: "end", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"end"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'prependListener("error", (err: Error) => void)'
-    uid: '@azure/storage-common.Readable.prependListener_3'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependListener(event: "error", listener: (err: Error) =>
-        void): this
-      parameters:
-        - id: event
-          type: '"error"'
-          description: ''
-        - id: listener
-          type: '(err: Error) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependListener("pause", () => void)
-    uid: '@azure/storage-common.Readable.prependListener_4'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function prependListener(event: "pause", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"pause"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependListener("readable", () => void)
-    uid: '@azure/storage-common.Readable.prependListener_5'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function prependListener(event: "readable", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"readable"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependListener("resume", () => void)
-    uid: '@azure/storage-common.Readable.prependListener_6'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function prependListener(event: "resume", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"resume"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'prependListener(string | symbol, (args: any[]) => void)'
-    uid: '@azure/storage-common.Readable.prependListener_7'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependListener(event: string | symbol, listener: (args: any[])
-        => void): this
-      parameters:
-        - id: event
+        - id: eventName
           type: string | symbol
           description: ''
         - id: listener
@@ -1773,12 +1292,14 @@ methods:
       return:
         description: ''
         type: this
-  - name: prependOnceListener("close", () => void)
+  - name: 'prependOnceListener<E>(E, (args: ReadableEventMap[E]) => void)'
     uid: '@azure/storage-common.Readable.prependOnceListener'
     package: '@azure/storage-common'
     summary: >-
-      Adds a **one-time**`listener` function for the event named `eventName` to
-      the _beginning_ of the listeners array. The next time `eventName` is
+      Adds a **one-time** `listener` function for the event named `eventName` to
+      the
+
+      _beginning_ of the listeners array. The next time `eventName` is
       triggered, this
 
       listener is removed, and then invoked.
@@ -1797,150 +1318,16 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function prependOnceListener(event: "close", listener: () => void): this'
+      content: >-
+        function prependOnceListener<E>(eventName: E, listener: (args:
+        ReadableEventMap[E]) => void): this
       parameters:
-        - id: event
-          type: '"close"'
-          description: ''
+        - id: eventName
+          type: E
+          description: The name of the event.
         - id: listener
-          type: () =&gt; void
+          type: '(args: ReadableEventMap[E]) =&gt; void'
           description: The callback function
-      return:
-        description: ''
-        type: this
-  - name: 'prependOnceListener("data", (chunk: any) => void)'
-    uid: '@azure/storage-common.Readable.prependOnceListener_1'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependOnceListener(event: "data", listener: (chunk: any) =>
-        void): this
-      parameters:
-        - id: event
-          type: '"data"'
-          description: ''
-        - id: listener
-          type: '(chunk: any) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependOnceListener("end", () => void)
-    uid: '@azure/storage-common.Readable.prependOnceListener_2'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function prependOnceListener(event: "end", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"end"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'prependOnceListener("error", (err: Error) => void)'
-    uid: '@azure/storage-common.Readable.prependOnceListener_3'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependOnceListener(event: "error", listener: (err: Error) =>
-        void): this
-      parameters:
-        - id: event
-          type: '"error"'
-          description: ''
-        - id: listener
-          type: '(err: Error) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependOnceListener("pause", () => void)
-    uid: '@azure/storage-common.Readable.prependOnceListener_4'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function prependOnceListener(event: "pause", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"pause"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependOnceListener("readable", () => void)
-    uid: '@azure/storage-common.Readable.prependOnceListener_5'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependOnceListener(event: "readable", listener: () => void):
-        this
-      parameters:
-        - id: event
-          type: '"readable"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: prependOnceListener("resume", () => void)
-    uid: '@azure/storage-common.Readable.prependOnceListener_6'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependOnceListener(event: "resume", listener: () => void):
-        this
-      parameters:
-        - id: event
-          type: '"resume"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
-    uid: '@azure/storage-common.Readable.prependOnceListener_7'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependOnceListener(event: string | symbol, listener: (args:
-        any[]) => void): this
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
       return:
         description: ''
         type: this
@@ -1962,6 +1349,67 @@ methods:
       return:
         description: ''
         type: boolean
+  - name: rawListeners(string | symbol)
+    uid: '@azure/storage-common.Readable.rawListeners_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function rawListeners(eventName: string | symbol): (args: any[]) =>
+        void[]
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: '(args: any[]) =&gt; void[]'
+  - name: rawListeners<E>(E)
+    uid: '@azure/storage-common.Readable.rawListeners'
+    package: '@azure/storage-common'
+    summary: |-
+      Returns a copy of the array of listeners for the event named `eventName`,
+      including any wrappers (such as those created by `.once()`).
+
+      ```js
+      import { EventEmitter } from 'node:events';
+      const emitter = new EventEmitter();
+      emitter.once('log', () => console.log('log once'));
+
+      // Returns a new Array with a function `onceWrapper` which has a property
+      // `listener` which contains the original listener bound above
+      const listeners = emitter.rawListeners('log');
+      const logFnWrapper = listeners[0];
+
+      // Logs "log once" to the console and does not unbind the `once` event
+      logFnWrapper.listener();
+
+      // Logs "log once" to the console and removes the listener
+      logFnWrapper();
+
+      emitter.on('log', () => console.log('log persistently'));
+      // Will return a new Array with a single function bound by `.on()` above
+      const newListeners = emitter.rawListeners('log');
+
+      // Logs "log persistently" twice
+      newListeners[0]();
+      emitter.emit('log');
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function rawListeners<E>(eventName: E): (args: ReadableEventMap[E]) =>
+        void[]
+      parameters:
+        - id: eventName
+          type: E
+          description: ''
+      return:
+        description: ''
+        type: '(args: ReadableEventMap[E]) =&gt; void[]'
   - name: read(number)
     uid: '@azure/storage-common.Readable.read'
     package: '@azure/storage-common'
@@ -2104,9 +1552,7 @@ methods:
       return:
         description: ''
         type: any
-  - name: >-
-      reduce<T>((previous: any, data: any, options?: Pick<ArrayOptions,
-      "signal">) => T, undefined, Pick<ArrayOptions, "signal">)
+  - name: 'reduce<T>((previous: any, data: any, options?: Abortable) => T)'
     uid: '@azure/storage-common.Readable.reduce'
     package: '@azure/storage-common'
     summary: >-
@@ -2133,29 +1579,20 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function reduce<T>(fn: (previous: any, data: any, options?:
-        Pick<ArrayOptions, "signal">) => T, initial?: undefined, options?:
-        Pick<ArrayOptions, "signal">): Promise<T>
+        function reduce<T>(fn: (previous: any, data: any, options?: Abortable)
+        => T): Promise<T>
       parameters:
         - id: fn
-          type: >-
-            (previous: any, data: any, options?: Pick&lt;ArrayOptions,
-            "signal"&gt;) =&gt; T
+          type: '(previous: any, data: any, options?: Abortable) =&gt; T'
           description: >-
             a reducer function to call over every chunk in the stream. Async or
             not.
-        - id: initial
-          type: undefined
-          description: the initial value to use in the reduction.
-        - id: options
-          type: Pick&lt;ArrayOptions, "signal"&gt;
-          description: ''
       return:
         description: a promise for the final value of the reduction.
         type: Promise&lt;T&gt;
   - name: >-
-      reduce<T>((previous: T, data: any, options?: Pick<ArrayOptions, "signal">)
-      => T, T, Pick<ArrayOptions, "signal">)
+      reduce<T>((previous: T, data: any, options?: Abortable) => T, T,
+      Abortable)
     uid: '@azure/storage-common.Readable.reduce_1'
     package: '@azure/storage-common'
     summary: ''
@@ -2163,30 +1600,86 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function reduce<T>(fn: (previous: T, data: any, options?:
-        Pick<ArrayOptions, "signal">) => T, initial: T, options?:
-        Pick<ArrayOptions, "signal">): Promise<T>
+        function reduce<T>(fn: (previous: T, data: any, options?: Abortable) =>
+        T, initial: T, options?: Abortable): Promise<T>
       parameters:
         - id: fn
-          type: >-
-            (previous: T, data: any, options?: Pick&lt;ArrayOptions,
-            "signal"&gt;) =&gt; T
+          type: '(previous: T, data: any, options?: Abortable) =&gt; T'
           description: ''
         - id: initial
           type: T
           description: ''
         - id: options
-          type: Pick&lt;ArrayOptions, "signal"&gt;
+          type: Abortable
           description: ''
       return:
         description: ''
         type: Promise&lt;T&gt;
-  - name: removeListener("close", () => void)
+  - name: removeAllListeners(string | symbol)
+    uid: '@azure/storage-common.Readable.removeAllListeners_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function removeAllListeners(eventName?: string | symbol): this'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: removeAllListeners<E>(E)
+    uid: '@azure/storage-common.Readable.removeAllListeners'
+    package: '@azure/storage-common'
+    summary: |-
+      Removes all listeners, or those of the specified `eventName`.
+
+      It is bad practice to remove listeners added elsewhere in the code,
+      particularly when the `EventEmitter` instance was created by some other
+      component or module (e.g. sockets or file streams).
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function removeAllListeners<E>(eventName?: E): this'
+      parameters:
+        - id: eventName
+          type: E
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'removeListener(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-common.Readable.removeListener_1'
+    package: '@azure/storage-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function removeListener(eventName: string | symbol, listener: (args:
+        any[]) => void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'removeListener<E>(E, (args: ReadableEventMap[E]) => void)'
     uid: '@azure/storage-common.Readable.removeListener'
     package: '@azure/storage-common'
     summary: >-
       Removes the specified `listener` from the listener array for the event
-      named `eventName`.
+      named
+
+      `eventName`.
 
 
       ```js
@@ -2219,11 +1712,12 @@ methods:
       Once an event is emitted, all listeners attached to it at the
 
       time of emitting are called in order. This implies that any
-      `removeListener()` or `removeAllListeners()` calls _after_ emitting and
-      _before_ the last listener finishes execution
 
-      will not remove them from`emit()` in progress. Subsequent events behave as
-      expected.
+      `removeListener()` or `removeAllListeners()` calls _after_ emitting and
+
+      _before_ the last listener finishes execution will not remove them from
+
+      `emit()` in progress. Subsequent events behave as expected.
 
 
       ```js
@@ -2280,7 +1774,7 @@ methods:
 
       Because listeners are managed using an internal array, calling this will
 
-      change the position indices of any listener registered _after_ the
+      change the position indexes of any listener registered _after_ the
       listener
 
       being removed. This will not impact the order in which listeners are
@@ -2296,8 +1790,9 @@ methods:
 
       event (as in the example below), `removeListener()` will remove the most
 
-      recently added instance. In the example the `once('ping')` listener is
-      removed:
+      recently added instance. In the example the `once('ping')`
+
+      listener is removed:
 
 
       ```js
@@ -2330,145 +1825,15 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function removeListener(event: "close", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"close"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'removeListener("data", (chunk: any) => void)'
-    uid: '@azure/storage-common.Readable.removeListener_1'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
       content: >-
-        function removeListener(event: "data", listener: (chunk: any) => void):
-        this
+        function removeListener<E>(eventName: E, listener: (args:
+        ReadableEventMap[E]) => void): this
       parameters:
-        - id: event
-          type: '"data"'
+        - id: eventName
+          type: E
           description: ''
         - id: listener
-          type: '(chunk: any) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: removeListener("end", () => void)
-    uid: '@azure/storage-common.Readable.removeListener_2'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function removeListener(event: "end", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"end"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'removeListener("error", (err: Error) => void)'
-    uid: '@azure/storage-common.Readable.removeListener_3'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function removeListener(event: "error", listener: (err: Error) => void):
-        this
-      parameters:
-        - id: event
-          type: '"error"'
-          description: ''
-        - id: listener
-          type: '(err: Error) =&gt; void'
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: removeListener("pause", () => void)
-    uid: '@azure/storage-common.Readable.removeListener_4'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function removeListener(event: "pause", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"pause"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: removeListener("readable", () => void)
-    uid: '@azure/storage-common.Readable.removeListener_5'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function removeListener(event: "readable", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"readable"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: removeListener("resume", () => void)
-    uid: '@azure/storage-common.Readable.removeListener_6'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function removeListener(event: "resume", listener: () => void): this'
-      parameters:
-        - id: event
-          type: '"resume"'
-          description: ''
-        - id: listener
-          type: () =&gt; void
-          description: ''
-      return:
-        description: ''
-        type: this
-  - name: 'removeListener(string | symbol, (args: any[]) => void)'
-    uid: '@azure/storage-common.Readable.removeListener_7'
-    package: '@azure/storage-common'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function removeListener(event: string | symbol, listener: (args: any[])
-        => void): this
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
+          type: '(args: ReadableEventMap[E]) =&gt; void'
           description: ''
       return:
         description: ''
@@ -2563,8 +1928,8 @@ methods:
         description: ''
         type: this
   - name: >-
-      some((data: any, options?: Pick<ArrayOptions, "signal">) => boolean |
-      Promise<boolean>, ArrayOptions)
+      some((data: any, options?: Abortable) => boolean | Promise<boolean>,
+      Pick<ReadableOperatorOptions, "concurrency" | "signal">)
     uid: '@azure/storage-common.Readable.some'
     package: '@azure/storage-common'
     summary: >-
@@ -2583,43 +1948,42 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function some(fn: (data: any, options?: Pick<ArrayOptions, "signal">) =>
-        boolean | Promise<boolean>, options?: ArrayOptions): Promise<boolean>
+        function some(fn: (data: any, options?: Abortable) => boolean |
+        Promise<boolean>, options?: Pick<ReadableOperatorOptions, "concurrency"
+        | "signal">): Promise<boolean>
       parameters:
         - id: fn
           type: >-
-            (data: any, options?: Pick&lt;ArrayOptions, "signal"&gt;) =&gt;
-            boolean | Promise&lt;boolean&gt;
+            (data: any, options?: Abortable) =&gt; boolean |
+            Promise&lt;boolean&gt;
           description: a function to call on each chunk of the stream. Async or not.
         - id: options
-          type: ArrayOptions
+          type: Pick&lt;ReadableOperatorOptions, "concurrency" | "signal"&gt;
           description: ''
       return:
         description: >-
           a promise evaluating to `true` if *fn* returned a truthy value for at
           least one of the chunks.
         type: Promise&lt;boolean&gt;
-  - name: take(number, Pick<ArrayOptions, "signal">)
+  - name: take(number, Abortable)
     uid: '@azure/storage-common.Readable.take'
     package: '@azure/storage-common'
     summary: This method returns a new stream with the first *limit* chunks.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function take(limit: number, options?: Pick<ArrayOptions, "signal">):
-        Readable
+      content: 'function take(limit: number, options?: Abortable): Readable'
       parameters:
         - id: limit
           type: number
           description: the number of chunks to take from the readable.
         - id: options
-          type: Pick&lt;ArrayOptions, "signal"&gt;
+          type: Abortable
           description: ''
       return:
         description: a stream with *limit* chunks taken.
         type: <xref uid="@azure/storage-common.Readable" />
-  - name: toArray(Pick<ArrayOptions, "signal">)
+  - name: toArray(Abortable)
     uid: '@azure/storage-common.Readable.toArray'
     package: '@azure/storage-common'
     summary: >-
@@ -2634,10 +1998,10 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function toArray(options?: Pick<ArrayOptions, "signal">): Promise<any[]>'
+      content: 'function toArray(options?: Abortable): Promise<any[]>'
       parameters:
         - id: options
-          type: Pick&lt;ArrayOptions, "signal"&gt;
+          type: Abortable
           description: ''
       return:
         description: a promise containing an array with the contents of the stream.
@@ -2785,7 +2149,7 @@ methods:
       This can cause unexpected results if `readable.unshift()` is called during
       a
 
-      read (i.e. from within a [_read](xref:427) implementation on a
+      read (i.e. from within a [_read](xref:436) implementation on a
 
       custom stream). Following the call to `readable.unshift()` with an
       immediate [push](xref:@azure/storage-common.Readable.push) will reset the
@@ -2871,9 +2235,9 @@ methods:
   - name: '[asyncDispose]()'
     uid: '@azure/storage-common.Readable.[asyncDispose]'
     package: '@azure/storage-common'
-    summary: >-
-      Calls `readable.destroy()` with an `AbortError` and returns a promise that
-      fulfills when the stream is finished.
+    summary: |-
+      Calls `readable.destroy()` with an `AbortError` and returns
+      a promise that fulfills when the stream is finished.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -2890,6 +2254,67 @@ methods:
     syntax:
       content: 'function [asyncIterator](): AsyncIterator<any>'
       return:
-        description: ''
+        description: '`AsyncIterator` to fully consume the stream.'
         type: AsyncIterator&lt;any&gt;
+  - name: '[toAsyncStreamable]()'
+    uid: '@azure/storage-common.Readable.[toAsyncStreamable]'
+    package: '@azure/storage-common'
+    summary: >-
+      When the `--experimental-stream-iter` flag is enabled, `Readable` streams
+
+      implement the `Stream.toAsyncStreamable` protocol, enabling efficient
+
+      consumption by the `stream/iter` API.
+
+
+      This provides a batched async iterator that drains the stream's internal
+
+      buffer into `Uint8Array[]` batches, amortizing the per-chunk Promise
+      overhead
+
+      of the standard `Symbol.asyncIterator` path. For byte-mode streams, chunks
+
+      are yielded directly as `Buffer` instances (which are `Uint8Array`
+      subclasses).
+
+      For object-mode or encoded streams, each chunk is normalized to
+      `Uint8Array`
+
+      before batching.
+
+
+      The returned iterator is tagged as a validated source, so `from()`
+
+      passes it through without additional normalization.
+
+
+      ```js
+
+      import { Readable } from 'node:stream';
+
+      import { text, from } from 'node:stream/iter';
+
+
+      const readable = new Readable({
+        read() { this.push('hello'); this.push(null); },
+      });
+
+
+      // Readable is automatically consumed via toAsyncStreamable
+
+      console.log(await text(from(readable))); // 'hello'
+
+      ```
+
+
+      Without the `--experimental-stream-iter` flag, calling this method throws
+
+      `ERR_STREAM_ITER_MISSING_FLAG`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function [toAsyncStreamable](): ByteReadableStream'
+      return:
+        description: ''
+        type: ByteReadableStream
 extends: Stream

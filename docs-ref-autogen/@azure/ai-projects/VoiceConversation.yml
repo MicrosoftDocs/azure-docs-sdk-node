@@ -1,0 +1,125 @@
+### YamlMime:TSType
+name: VoiceConversation
+uid: '@azure/ai-projects.VoiceConversation'
+package: '@azure/ai-projects'
+summary: >-
+  A persisted voice conversation. The Foundry envelope that owns a voice agent's
+  stored
+
+  transcript, responses, per-turn metrics, and audio. It is the parent,
+  retention, and delete boundary:
+
+  deleting it cascades to its responses, items, metrics, and audio. When
+  finalization fails, any partial persisted
+
+  responses, items, and item audio remain readable.
+fullName: VoiceConversation
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: completed_at
+    uid: '@azure/ai-projects.VoiceConversation.completed_at'
+    package: '@azure/ai-projects'
+    summary: >-
+      The Unix timestamp (in seconds) for when session and persistence
+      finalization reached the terminal `completed` or `failed` status. Absent
+      while `status` is `in_progress`.
+    fullName: completed_at
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'completed_at?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: created_at
+    uid: '@azure/ai-projects.VoiceConversation.created_at'
+    package: '@azure/ai-projects'
+    summary: The Unix timestamp (in seconds) for when the conversation was created.
+    fullName: created_at
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'created_at: Date'
+      return:
+        description: ''
+        type: Date
+  - name: id
+    uid: '@azure/ai-projects.VoiceConversation.id'
+    package: '@azure/ai-projects'
+    summary: The unique id of the conversation.
+    fullName: id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'id: string'
+      return:
+        description: ''
+        type: string
+  - name: last_error
+    uid: '@azure/ai-projects.VoiceConversation.last_error'
+    package: '@azure/ai-projects'
+    summary: >-
+      The terminal error that prevented persistence finalization. Present only
+      when `status` is `failed`.
+    fullName: last_error
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'last_error?: ErrorModel'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.ErrorModel" />
+  - name: metadata
+    uid: '@azure/ai-projects.VoiceConversation.metadata'
+    package: '@azure/ai-projects'
+    summary: A set of key-value pairs attached to the conversation.
+    fullName: metadata
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'metadata?: Record<string, string>'
+      return:
+        description: ''
+        type: Record&lt;string, string&gt;
+  - name: object
+    uid: '@azure/ai-projects.VoiceConversation.object'
+    package: '@azure/ai-projects'
+    summary: The object type. Always `voice.conversation`.
+    fullName: object
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'object: "voice.conversation"'
+      return:
+        description: ''
+        type: '"<xref uid="voice.conversation" />"'
+  - name: status
+    uid: '@azure/ai-projects.VoiceConversation.status'
+    package: '@azure/ai-projects'
+    summary: The lifecycle status of the conversation.
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'status: VoiceConversationStatus'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.VoiceConversationStatus" />
+  - name: usage
+    uid: '@azure/ai-projects.VoiceConversation.usage'
+    package: '@azure/ai-projects'
+    summary: >-
+      Final aggregate token usage across all responses in this conversation.
+      Absent while `status` is `in_progress` and populated after successful
+      `completed` finalization; it may be absent when `status` is `failed`, and
+      values are not guaranteed to be reported incrementally.
+    fullName: usage
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'usage?: RealtimeResponseUsage'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.RealtimeResponseUsage" />

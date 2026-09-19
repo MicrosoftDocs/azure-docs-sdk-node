@@ -1,0 +1,287 @@
+### YamlMime:TSType
+name: VoiceAgentConnection
+uid: '@azure/ai-projects.VoiceAgentConnection'
+package: '@azure/ai-projects'
+summary: >-
+  A connected, bidirectional voice-agent stream.
+
+
+  Supports exactly one `for await` iteration over server events; a second
+  attempt throws.
+
+  Exiting the loop early (`break`, `return`, or an uncaught error in the loop
+  body) closes
+
+  the connection as a side effect.
+
+  Unrecognized server event types are delivered as
+  [VoiceAgentUnknownEvent](xref:@azure/ai-projects.VoiceAgentUnknownEvent)
+  without
+
+  interrupting the stream. Malformed events still fail the iteration with a
+  protocol error.
+fullName: VoiceAgentConnection
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: closed
+    uid: '@azure/ai-projects.VoiceAgentConnection.closed'
+    package: '@azure/ai-projects'
+    summary: Resolves once the connection is closed.
+    fullName: closed
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'closed: Promise<VoiceAgentCloseResult>'
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/ai-projects.VoiceAgentCloseResult" />&gt;
+  - name: state
+    uid: '@azure/ai-projects.VoiceAgentConnection.state'
+    package: '@azure/ai-projects'
+    summary: Current connection state.
+    fullName: state
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'state: VoiceAgentConnectionState'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.VoiceAgentConnectionState" />
+inheritedMethods:
+  - name: '[asyncIterator]()'
+    uid: '@azure/ai-projects.VoiceAgentConnection.[asyncIterator]'
+    package: '@azure/ai-projects'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function [asyncIterator](): AsyncIterator<VoiceAgentRealtimeEvent, any,
+        any>
+      return:
+        description: ''
+        type: >-
+          AsyncIterator&lt;<xref
+          uid="@azure/ai-projects.VoiceAgentRealtimeEvent" />, any, any&gt;
+    inheritanceDescription: <b>Inherited From</b> AsyncIterable.[asyncIterator]
+methods:
+  - name: cancelResponse(VoiceAgentCancelResponseOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.cancelResponse'
+    package: '@azure/ai-projects'
+    summary: Cancels an in-progress response.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function cancelResponse(options?: VoiceAgentCancelResponseOptions):
+        Promise<void>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentCancelResponseOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: clearInputAudio(VoiceAgentEventOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.clearInputAudio'
+    package: '@azure/ai-projects'
+    summary: Clears buffered input audio.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function clearInputAudio(options?: VoiceAgentEventOptions):
+        Promise<void>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentEventOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: clearOutputAudio(VoiceAgentEventOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.clearOutputAudio'
+    package: '@azure/ai-projects'
+    summary: Clears pending output audio at the service.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function clearOutputAudio(options?: VoiceAgentEventOptions):
+        Promise<void>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentEventOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: close(number, string)
+    uid: '@azure/ai-projects.VoiceAgentConnection.close'
+    package: '@azure/ai-projects'
+    summary: Gracefully closes the WebSocket connection.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function close(code?: number, reason?: string): Promise<void>'
+      parameters:
+        - id: code
+          type: number
+          description: ''
+        - id: reason
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: commitAudio(VoiceAgentEventOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.commitAudio'
+    package: '@azure/ai-projects'
+    summary: Commits buffered input audio.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function commitAudio(options?: VoiceAgentEventOptions): Promise<void>'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentEventOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: >-
+      configureSession(VoiceAgentSessionUpdateConfig,
+      VoiceAgentSessionUpdateOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.configureSession'
+    package: '@azure/ai-projects'
+    summary: Updates supported live-session settings.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function configureSession(session: VoiceAgentSessionUpdateConfig,
+        options?: VoiceAgentSessionUpdateOptions): Promise<void>
+      parameters:
+        - id: session
+          type: <xref uid="@azure/ai-projects.VoiceAgentSessionUpdateConfig" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentSessionUpdateOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: dispose()
+    uid: '@azure/ai-projects.VoiceAgentConnection.dispose'
+    package: '@azure/ai-projects'
+    summary: Releases the connection. Equivalent to close().
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function dispose(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: requestResponse(VoiceAgentResponseOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.requestResponse'
+    package: '@azure/ai-projects'
+    summary: Requests a new response.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function requestResponse(options?: VoiceAgentResponseOptions):
+        Promise<void>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentResponseOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: sendAudio(ArrayBuffer | Uint8Array, VoiceAgentEventOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.sendAudio'
+    package: '@azure/ai-projects'
+    summary: Appends base64-encoded audio bytes to the input buffer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendAudio(audio: ArrayBuffer | Uint8Array, options?:
+        VoiceAgentEventOptions): Promise<void>
+      parameters:
+        - id: audio
+          type: ArrayBuffer | Uint8Array
+          description: ''
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentEventOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: sendEvent(VoiceAgentClientEvent, VoiceAgentSendOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.sendEvent'
+    package: '@azure/ai-projects'
+    summary: Sends any generated client protocol event.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendEvent(event: VoiceAgentClientEvent, options?:
+        VoiceAgentSendOptions): Promise<void>
+      parameters:
+        - id: event
+          type: <xref uid="@azure/ai-projects.VoiceAgentClientEvent" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentSendOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: sendText(string, VoiceAgentSendTextOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.sendText'
+    package: '@azure/ai-projects'
+    summary: Adds a user text item and, by default, requests a response.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendText(text: string, options?: VoiceAgentSendTextOptions):
+        Promise<void>
+      parameters:
+        - id: text
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentSendTextOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: sendToolOutput(string, string, VoiceAgentSendToolOutputOptions)
+    uid: '@azure/ai-projects.VoiceAgentConnection.sendToolOutput'
+    package: '@azure/ai-projects'
+    summary: Returns a client-executed function result to the agent.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendToolOutput(callId: string, output: string, options?:
+        VoiceAgentSendToolOutputOptions): Promise<void>
+      parameters:
+        - id: callId
+          type: string
+          description: ''
+        - id: output
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/ai-projects.VoiceAgentSendToolOutputOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+extends: AsyncIterable&lt;<xref uid="@azure/ai-projects.VoiceAgentRealtimeEvent" />&gt;

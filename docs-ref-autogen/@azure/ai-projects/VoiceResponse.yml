@@ -1,0 +1,231 @@
+### YamlMime:TSType
+name: VoiceResponse
+uid: '@azure/ai-projects.VoiceResponse'
+package: '@azure/ai-projects'
+summary: >-
+  A persisted voice response representing one model inference turn within a
+  conversation. In list results the
+
+  `output` projection may be omitted; retrieve the
+
+  full response (`GET .../responses/{response_id}`) or the paged response-items
+  route
+
+  (`GET .../responses/{response_id}/items`) for its output items.
+  `created_at`/`completed_at` are Foundry
+
+  durable ordering extensions.
+fullName: VoiceResponse
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: audio
+    uid: '@azure/ai-projects.VoiceResponse.audio'
+    package: '@azure/ai-projects'
+    summary: >-
+      The audio configuration used for the response, including the voice and
+      audio format used for output.
+    fullName: audio
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'audio?: VoiceResponseAudio'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.VoiceResponseAudio" />
+  - name: completed_at
+    uid: '@azure/ai-projects.VoiceResponse.completed_at'
+    package: '@azure/ai-projects'
+    summary: The Unix timestamp (in seconds) for when the response completed.
+    fullName: completed_at
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'completed_at?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: conversation_id
+    uid: '@azure/ai-projects.VoiceResponse.conversation_id'
+    package: '@azure/ai-projects'
+    summary: The id of the conversation this response belongs to.
+    fullName: conversation_id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'conversation_id: string'
+      return:
+        description: ''
+        type: string
+  - name: created_at
+    uid: '@azure/ai-projects.VoiceResponse.created_at'
+    package: '@azure/ai-projects'
+    summary: The Unix timestamp (in seconds) for when the response was created.
+    fullName: created_at
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'created_at?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: id
+    uid: '@azure/ai-projects.VoiceResponse.id'
+    package: '@azure/ai-projects'
+    summary: The unique id of the response.
+    fullName: id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'id: string'
+      return:
+        description: ''
+        type: string
+  - name: metadata
+    uid: '@azure/ai-projects.VoiceResponse.metadata'
+    package: '@azure/ai-projects'
+    summary: A set of key-value pairs attached to the response.
+    fullName: metadata
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'metadata?: Record<string, string>'
+      return:
+        description: ''
+        type: Record&lt;string, string&gt;
+  - name: output
+    uid: '@azure/ai-projects.VoiceResponse.output'
+    package: '@azure/ai-projects'
+    summary: >-
+      The output items produced by the response. May be omitted in list results;
+      retrieve the full response (GET .../responses/{response_id}) or use the
+      paged response-items route (GET .../responses/{response_id}/items) for its
+      output items. Each item's `response_id` also links it back to this
+      response in the conversation-level items list.
+    fullName: output
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'output?: RealtimeConversationItemUnion[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.RealtimeConversationItemUnion" />[]
+  - name: temperature
+    uid: '@azure/ai-projects.VoiceResponse.temperature'
+    package: '@azure/ai-projects'
+    summary: The sampling temperature used for the response.
+    fullName: temperature
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'temperature?: number'
+      return:
+        description: ''
+        type: number
+inheritedProperties:
+  - name: max_output_tokens
+    uid: '@azure/ai-projects.VoiceResponse.max_output_tokens'
+    package: '@azure/ai-projects'
+    summary: |-
+      Maximum number of output tokens for a single assistant response,
+        inclusive of tool calls, that was used in this response.
+    fullName: max_output_tokens
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'max_output_tokens?: number | "inf"'
+      return:
+        description: ''
+        type: number | "inf"
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceResponseBase.max_output_tokens](xref:@azure/ai-projects.VoiceResponseBase.max_output_tokens)
+  - name: object
+    uid: '@azure/ai-projects.VoiceResponse.object'
+    package: '@azure/ai-projects'
+    summary: The object type, must be `realtime.response`.
+    fullName: object
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'object?: "realtime.response"'
+      return:
+        description: ''
+        type: '"<xref uid="realtime.response" />"'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceResponseBase.object](xref:@azure/ai-projects.VoiceResponseBase.object)
+  - name: output_modalities
+    uid: '@azure/ai-projects.VoiceResponse.output_modalities'
+    package: '@azure/ai-projects'
+    summary: >-
+      The set of modalities the model used to respond, currently the only
+      possible values are
+        `[\"audio\"]`, `[\"text\"]`. Audio output always include a text transcript. Setting the
+        output to mode `text` will disable audio output from the model.
+    fullName: output_modalities
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'output_modalities?: ("text" | "audio")[]'
+      return:
+        description: ''
+        type: ("text" | "audio")[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceResponseBase.output_modalities](xref:@azure/ai-projects.VoiceResponseBase.output_modalities)
+  - name: status
+    uid: '@azure/ai-projects.VoiceResponse.status'
+    package: '@azure/ai-projects'
+    summary: |-
+      The final status of the response (`completed`, `cancelled`, `failed`, or
+        `incomplete`, `in_progress`).
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        status?: "failed" | "in_progress" | "cancelled" | "completed" |
+        "incomplete"
+      return:
+        description: ''
+        type: '"failed" | "in_progress" | "cancelled" | "completed" | "incomplete"'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceResponseBase.status](xref:@azure/ai-projects.VoiceResponseBase.status)
+  - name: status_details
+    uid: '@azure/ai-projects.VoiceResponse.status_details'
+    package: '@azure/ai-projects'
+    summary: Additional details about the status.
+    fullName: status_details
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'status_details?: RealtimeResponseStatusDetails'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.RealtimeResponseStatusDetails" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceResponseBase.status_details](xref:@azure/ai-projects.VoiceResponseBase.status_details)
+  - name: usage
+    uid: '@azure/ai-projects.VoiceResponse.usage'
+    package: '@azure/ai-projects'
+    summary: |-
+      Usage statistics for the Response, this will correspond to billing. A
+        Realtime API session will maintain a conversation context and append new
+        Items to the Conversation, thus output from previous turns (text and
+        audio tokens) will become the input for later turns.
+    fullName: usage
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'usage?: RealtimeResponseUsage'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.RealtimeResponseUsage" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceResponseBase.usage](xref:@azure/ai-projects.VoiceResponseBase.usage)
+extends: <xref uid="@azure/ai-projects.VoiceResponseBase" />

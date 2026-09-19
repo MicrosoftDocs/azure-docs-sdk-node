@@ -1,0 +1,118 @@
+### YamlMime:TSType
+name: VoiceRecording
+uid: '@azure/ai-projects.VoiceRecording'
+package: '@azure/ai-projects'
+summary: >-
+  Metadata for the merged, whole-call stereo recording of a voice conversation
+  (user audio on the left channel,
+
+  agent audio on the right). Built once from the per-turn segments after the
+  session ends and durably cached.
+
+  The common metadata (format, sample rate, channels, channel layout, duration)
+  is returned for both
+
+  Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the
+  response also includes `blob_uri`,
+
+  the URI of the recording in the customer's own storage (no SAS token), which
+  the customer downloads using their
+
+  own storage credentials. For Foundry-managed storage `blob_uri` is absent and
+  the bytes are streamed via the
+
+  `/audio/content` route instead.
+fullName: VoiceRecording
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: blob_uri
+    uid: '@azure/ai-projects.VoiceRecording.blob_uri'
+    package: '@azure/ai-projects'
+    summary: >-
+      For bring-your-own-storage (BYOS) recordings only: the URI of the
+      recording in the customer's own storage, without a SAS token. The customer
+      downloads it using their own storage credentials. Absent for
+      Foundry-managed storage, where the bytes are streamed via the
+      `/audio/content` route instead.
+    fullName: blob_uri
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'blob_uri?: string'
+      return:
+        description: ''
+        type: string
+  - name: channels
+    uid: '@azure/ai-projects.VoiceRecording.channels'
+    package: '@azure/ai-projects'
+    summary: The number of audio channels. The merged recording is stereo (`2`).
+    fullName: channels
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'channels: number'
+      return:
+        description: ''
+        type: number
+  - name: channel_layout
+    uid: '@azure/ai-projects.VoiceRecording.channel_layout'
+    package: '@azure/ai-projects'
+    summary: The role assigned to each stereo channel.
+    fullName: channel_layout
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'channel_layout: VoiceRecordingChannelLayout'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.VoiceRecordingChannelLayout" />
+  - name: conversation_id
+    uid: '@azure/ai-projects.VoiceRecording.conversation_id'
+    package: '@azure/ai-projects'
+    summary: The id of the conversation this recording belongs to.
+    fullName: conversation_id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'conversation_id: string'
+      return:
+        description: ''
+        type: string
+  - name: duration_ms
+    uid: '@azure/ai-projects.VoiceRecording.duration_ms'
+    package: '@azure/ai-projects'
+    summary: The total duration of the recording.
+    fullName: duration_ms
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'duration_ms: number'
+      return:
+        description: ''
+        type: number
+  - name: format
+    uid: '@azure/ai-projects.VoiceRecording.format'
+    package: '@azure/ai-projects'
+    summary: The container format of the recording.
+    fullName: format
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'format: "wav"'
+      return:
+        description: ''
+        type: '"wav"'
+  - name: sample_rate
+    uid: '@azure/ai-projects.VoiceRecording.sample_rate'
+    package: '@azure/ai-projects'
+    summary: The sample rate of the recording in Hz, e.g. 24000.
+    fullName: sample_rate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sample_rate: number'
+      return:
+        description: ''
+        type: number

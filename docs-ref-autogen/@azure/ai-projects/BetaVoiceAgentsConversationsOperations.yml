@@ -1,0 +1,448 @@
+### YamlMime:TSType
+name: BetaVoiceAgentsConversationsOperations
+uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations'
+package: '@azure/ai-projects'
+summary: Operations for managing voice agent conversations.
+fullName: BetaVoiceAgentsConversationsOperations
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: delete
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.delete'
+    package: '@azure/ai-projects'
+    summary: >-
+      Deletes a conversation and all of its stored data — responses, items, and
+      any audio (cascade). This is
+
+      the customer's explicit data-deletion control for voice conversations.
+    fullName: delete
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        delete: (agentName: string, conversationId: string, options?:
+        BetaVoiceAgentsConversationsDeleteOptionalParams) => Promise<void>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, options?:
+          BetaVoiceAgentsConversationsDeleteOptionalParams) =&gt;
+          Promise&lt;void&gt;
+  - name: downloadAudio
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.downloadAudio'
+    package: '@azure/ai-projects'
+    summary: >-
+      Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte
+      stream through the service
+
+      (no SAS URL). This route serves Foundry-managed storage only. For
+      bring-your-own-storage (BYOS)
+
+      recordings the bytes are not proxied — the caller must download directly
+      from customer storage using the
+
+      `blob_uri` returned by the metadata route — so this route returns `409
+      Conflict` for BYOS recordings.
+
+      While the conversation is `in_progress`, this route returns retriable `409
+      Conflict` with
+
+      `error.code = recording_not_ready` and a `Retry-After` header when retry
+      guidance is available. When the
+
+      conversation is `failed`, it returns terminal `409 Conflict` with
+      `error.code = recording_unavailable`.
+
+      For a `completed` conversation, content is available subject to the
+      existing BYOS behavior. A conversation
+
+      without persisted audio (`store = false`) returns `404`.
+    fullName: downloadAudio
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        downloadAudio: (agentName: string, conversationId: string, options?:
+        BetaVoiceAgentsConversationsDownloadAudioOptionalParams) =>
+        Promise<BetaVoiceAgentsConversationsDownloadAudioResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, options?:
+          BetaVoiceAgentsConversationsDownloadAudioOptionalParams) =&gt;
+          Promise&lt;BetaVoiceAgentsConversationsDownloadAudioResponse&gt;
+  - name: downloadAudioItem
+    uid: >-
+      @azure/ai-projects.BetaVoiceAgentsConversationsOperations.downloadAudioItem
+    package: '@azure/ai-projects'
+    summary: >-
+      Streams a single conversation item's audio as a WAV (`audio/wav`) byte
+      stream through the service (no SAS
+
+      URL). This route serves Foundry-managed storage only. For
+      bring-your-own-storage (BYOS) recordings the
+
+      bytes are not proxied — the caller must download directly from customer
+      storage using the `blob_uri`
+
+      returned by the item's `/audio` metadata route — so this route returns
+      `409 Conflict` for BYOS recordings.
+
+      Returns `404` when the conversation, item, or its audio was not persisted
+      (`store = false`).
+    fullName: downloadAudioItem
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        downloadAudioItem: (agentName: string, conversationId: string, itemId:
+        string, options?:
+        BetaVoiceAgentsConversationsDownloadAudioItemOptionalParams) =>
+        Promise<BetaVoiceAgentsConversationsDownloadAudioItemResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, itemId: string, options?:
+          BetaVoiceAgentsConversationsDownloadAudioItemOptionalParams) =&gt;
+          Promise&lt;BetaVoiceAgentsConversationsDownloadAudioItemResponse&gt;
+  - name: downloadGeneratedAudioItem
+    uid: >-
+      @azure/ai-projects.BetaVoiceAgentsConversationsOperations.downloadGeneratedAudioItem
+    package: '@azure/ai-projects'
+    summary: >-
+      Streams a conversation item's generated audio as a WAV (`audio/wav`) byte
+      stream through the service. This
+
+      subordinate artifact exists only when playback was interrupted and the
+      service rendered more audio than the
+
+      listener heard, including when the response ends as cancelled. This route
+      serves Foundry-managed storage only.
+
+      For bring-your-own-storage (BYOS) recordings the bytes are not proxied, so
+      this route returns `409 Conflict`.
+
+      Returns `404` when the conversation or item was not persisted, or when no
+      generated audio exists beyond the
+
+      heard segment.
+    fullName: downloadGeneratedAudioItem
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        downloadGeneratedAudioItem: (agentName: string, conversationId: string,
+        itemId: string, options?:
+        BetaVoiceAgentsConversationsDownloadGeneratedAudioItemOptionalParams) =>
+        Promise<BetaVoiceAgentsConversationsDownloadGeneratedAudioItemResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, itemId: string, options?:
+          BetaVoiceAgentsConversationsDownloadGeneratedAudioItemOptionalParams)
+          =&gt;
+          Promise&lt;BetaVoiceAgentsConversationsDownloadGeneratedAudioItemResponse&gt;
+  - name: get
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.get'
+    package: '@azure/ai-projects'
+    summary: >-
+      Retrieves a single conversation recorded for the specified voice agent
+      endpoint by its id.
+
+      Returns `404` when the conversation was not persisted (`store = false`) or
+      does not exist.
+    fullName: get
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        get: (agentName: string, conversationId: string, options?:
+        BetaVoiceAgentsConversationsGetOptionalParams) =>
+        Promise<VoiceConversation>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, options?:
+          BetaVoiceAgentsConversationsGetOptionalParams) =&gt;
+          Promise&lt;VoiceConversation&gt;
+  - name: getAudio
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.getAudio'
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns metadata for the whole-call merged stereo recording (user audio on
+      the left channel, agent audio
+
+      on the right). The common metadata (format, sample rate, channels, channel
+      layout, duration) is returned
+
+      for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for
+      BYOS the response additionally
+
+      includes `blob_uri`, the URI of the recording in the customer's own
+      storage (no SAS) that the customer downloads
+
+      with their own credentials. The recording is built once from the per-turn
+      segments after persistence
+
+      finalization succeeds. While the conversation is `in_progress`, this route
+      returns retriable `409 Conflict`
+
+      with `error.code = recording_not_ready` and a `Retry-After` header when
+      retry guidance is available. When the
+
+      conversation is `failed`, it returns terminal `409 Conflict` with
+      `error.code = recording_unavailable`.
+
+      For a `completed` conversation, metadata is available subject to the
+      existing BYOS behavior. Requires the
+
+      conversation to have persisted audio (`store = true`); otherwise returns
+      `404`.
+    fullName: getAudio
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getAudio: (agentName: string, conversationId: string, options?:
+        BetaVoiceAgentsConversationsGetAudioOptionalParams) =>
+        Promise<VoiceRecording>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, options?:
+          BetaVoiceAgentsConversationsGetAudioOptionalParams) =&gt;
+          Promise&lt;VoiceRecording&gt;
+  - name: getAudioItem
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.getAudioItem'
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns metadata for a single conversation item's audio segment, including
+      the common playback facts
+
+      (role, format/codec, sample rate, channels, offset, duration) for both
+      Foundry-managed and
+
+      bring-your-own-storage (BYOS) recordings; for BYOS the response
+      additionally includes `blob_uri`, the URI
+
+      of the recording in the customer's own storage (no SAS) that the customer
+      downloads with their own credentials.
+
+      Requires the conversation to have persisted audio (`store = true`);
+      returns `404` when the conversation,
+
+      item, or its audio was not persisted.
+    fullName: getAudioItem
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getAudioItem: (agentName: string, conversationId: string, itemId:
+        string, options?:
+        BetaVoiceAgentsConversationsGetAudioItemOptionalParams) =>
+        Promise<VoiceAudioItem>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, itemId: string, options?:
+          BetaVoiceAgentsConversationsGetAudioItemOptionalParams) =&gt;
+          Promise&lt;VoiceAudioItem&gt;
+  - name: getGeneratedAudioItem
+    uid: >-
+      @azure/ai-projects.BetaVoiceAgentsConversationsOperations.getGeneratedAudioItem
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns metadata for a conversation item's generated audio. This
+      subordinate artifact is separate from the
+
+      canonical heard-audio segment and exists only when playback was
+      interrupted and the service rendered more audio
+
+      than the listener heard, including when the response ends as cancelled.
+      Returns `404` when the conversation or
+
+      item was not persisted, or when no generated audio exists beyond the heard
+      segment.
+    fullName: getGeneratedAudioItem
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getGeneratedAudioItem: (agentName: string, conversationId: string,
+        itemId: string, options?:
+        BetaVoiceAgentsConversationsGetGeneratedAudioItemOptionalParams) =>
+        Promise<VoiceGeneratedAudioItem>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, itemId: string, options?:
+          BetaVoiceAgentsConversationsGetGeneratedAudioItemOptionalParams) =&gt;
+          Promise&lt;VoiceGeneratedAudioItem&gt;
+  - name: getItem
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.getItem'
+    package: '@azure/ai-projects'
+    summary: >-
+      Retrieves a single item from the specified conversation by its id,
+      including its transcript. An
+
+      `input_audio`/`output_audio` content part indicates that audio is
+      available for the item; the canonical per-item
+
+      audio metadata is the `/items/{item_id}/audio` resource, and the bytes are
+      streamed by
+
+      `/items/{item_id}/audio/content`. Returns `404` when the conversation or
+      item was not persisted
+
+      (`store = false`).
+    fullName: getItem
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getItem: (agentName: string, conversationId: string, itemId: string,
+        options?: BetaVoiceAgentsConversationsGetItemOptionalParams) =>
+        Promise<RealtimeConversationItemUnion>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, itemId: string, options?:
+          BetaVoiceAgentsConversationsGetItemOptionalParams) =&gt;
+          Promise&lt;RealtimeConversationItemUnion&gt;
+  - name: getResponse
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.getResponse'
+    package: '@azure/ai-projects'
+    summary: >-
+      Retrieves a single response from the specified conversation by its id,
+      including its `output` items,
+
+      `usage`, and status. Returns `404` when the conversation or response was
+      not persisted (`store = false`).
+    fullName: getResponse
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getResponse: (agentName: string, conversationId: string, responseId:
+        string, options?: BetaVoiceAgentsConversationsGetResponseOptionalParams)
+        => Promise<VoiceResponse>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, responseId: string,
+          options?: BetaVoiceAgentsConversationsGetResponseOptionalParams) =&gt;
+          Promise&lt;VoiceResponse&gt;
+  - name: list
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.list'
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns the conversations persisted for the specified voice agent
+      endpoint.
+
+      Conversations are present when the session's effective `store` setting is
+      `true`, whether inherited from the
+
+      agent definition or enabled by the WebSocket session override.
+    fullName: list
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        list: (agentName: string, options?:
+        BetaVoiceAgentsConversationsListOptionalParams) =>
+        PagedAsyncIterableIterator<VoiceConversation, VoiceConversation[],
+        PageSettings>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, options?:
+          BetaVoiceAgentsConversationsListOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;VoiceConversation, VoiceConversation[],
+          PageSettings&gt;
+  - name: listItems
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.listItems'
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns a paged collection of items — the complete ordered conversation
+      history, including user input,
+
+      assistant output, and client-created tool outputs (transcripts + tool
+      events). Returns `404` when the
+
+      conversation was not persisted (`store = false`).
+    fullName: listItems
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listItems: (agentName: string, conversationId: string, options?:
+        BetaVoiceAgentsConversationsListItemsOptionalParams) =>
+        PagedAsyncIterableIterator<RealtimeConversationItemUnion,
+        RealtimeConversationItemUnion[], PageSettings>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, options?:
+          BetaVoiceAgentsConversationsListItemsOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;RealtimeConversationItemUnion,
+          RealtimeConversationItemUnion[], PageSettings&gt;
+  - name: listResponseItems
+    uid: >-
+      @azure/ai-projects.BetaVoiceAgentsConversationsOperations.listResponseItems
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns a paged collection of the output items produced by a specific
+      response (the response's output
+
+      projection). For the complete ordered conversation history — including
+      user input and client-created
+
+      tool outputs — use the conversation items route instead. Returns `404`
+      when the conversation or
+
+      response was not persisted (`store = false`).
+    fullName: listResponseItems
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listResponseItems: (agentName: string, conversationId: string,
+        responseId: string, options?:
+        BetaVoiceAgentsConversationsListResponseItemsOptionalParams) =>
+        PagedAsyncIterableIterator<RealtimeConversationItemUnion,
+        RealtimeConversationItemUnion[], PageSettings>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, responseId: string,
+          options?: BetaVoiceAgentsConversationsListResponseItemsOptionalParams)
+          =&gt; PagedAsyncIterableIterator&lt;RealtimeConversationItemUnion,
+          RealtimeConversationItemUnion[], PageSettings&gt;
+  - name: listResponses
+    uid: '@azure/ai-projects.BetaVoiceAgentsConversationsOperations.listResponses'
+    package: '@azure/ai-projects'
+    summary: >-
+      Returns a paged collection of the responses (model inference turns)
+      recorded for the specified
+
+      conversation. The per-response `output` projection may be omitted here;
+      use the response-items route
+
+      for the canonical paged output. Returns `404` when the conversation was
+      not persisted (`store = false`).
+    fullName: listResponses
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listResponses: (agentName: string, conversationId: string, options?:
+        BetaVoiceAgentsConversationsListResponsesOptionalParams) =>
+        PagedAsyncIterableIterator<VoiceResponse, VoiceResponse[], PageSettings>
+      return:
+        description: ''
+        type: >-
+          (agentName: string, conversationId: string, options?:
+          BetaVoiceAgentsConversationsListResponsesOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;VoiceResponse, VoiceResponse[],
+          PageSettings&gt;

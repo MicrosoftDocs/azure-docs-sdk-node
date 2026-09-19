@@ -1,0 +1,70 @@
+### YamlMime:TSType
+name: RealtimeClientEventConversationItemCreate
+uid: '@azure/ai-projects.RealtimeClientEventConversationItemCreate'
+package: '@azure/ai-projects'
+summary: |-
+  Add a new Item to the Conversation's context, including messages, function
+  calls, and function call responses. This event can be used both to populate a
+  "history" of the conversation and to add new items mid-stream, but has the
+  current limitation that it cannot populate assistant audio messages.
+  If successful, the server will respond with a `conversation.item.created`
+  event, otherwise an `error` event will be sent.
+fullName: RealtimeClientEventConversationItemCreate
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: event_id
+    uid: '@azure/ai-projects.RealtimeClientEventConversationItemCreate.event_id'
+    package: '@azure/ai-projects'
+    summary: Optional client-generated ID used to identify this event.
+    fullName: event_id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'event_id?: string'
+      return:
+        description: ''
+        type: string
+  - name: item
+    uid: '@azure/ai-projects.RealtimeClientEventConversationItemCreate.item'
+    package: '@azure/ai-projects'
+    summary: The message, function call, or function result to add to the conversation.
+    fullName: item
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'item: RealtimeConversationItemUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.RealtimeConversationItemUnion" />
+  - name: previous_item_id
+    uid: >-
+      @azure/ai-projects.RealtimeClientEventConversationItemCreate.previous_item_id
+    package: '@azure/ai-projects'
+    summary: >-
+      The ID of the preceding item after which the new item will be inserted. If
+      not set, the new item will be appended to the end of the conversation.
+        If set to `root`, the new item will be added to the beginning of the conversation.
+        If set to an existing ID, it allows an item to be inserted mid-conversation. If the ID cannot be found, an error will be returned and the item will not be added.
+    fullName: previous_item_id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'previous_item_id?: string'
+      return:
+        description: ''
+        type: string
+  - name: type
+    uid: '@azure/ai-projects.RealtimeClientEventConversationItemCreate.type'
+    package: '@azure/ai-projects'
+    summary: The event type, must be `conversation.item.create`.
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "conversation.item.create"'
+      return:
+        description: ''
+        type: '"<xref uid="conversation.item.create" />"'
+extends: <xref uid="@azure/ai-projects.RealtimeClientEvent" />

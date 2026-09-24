@@ -62,15 +62,18 @@ interfaces:
   - '@azure/app-configuration.SyncTokenHeaderField'
   - '@azure/app-configuration.UpdateSnapshotOptions'
   - '@azure/app-configuration.UpdateSnapshotResponse'
-typeAliases:
-  - '@azure/app-configuration.AddConfigurationSettingParam'
-  - '@azure/app-configuration.ConfigurationSetting'
-  - '@azure/app-configuration.ConfigurationSettingParam'
-  - '@azure/app-configuration.ConfigurationSettingResponse'
-  - '@azure/app-configuration.ConfigurationSnapshotStatus'
-  - '@azure/app-configuration.SetConfigurationSettingParam'
-  - '@azure/app-configuration.SnapshotComposition'
 variables:
+  - name: RestError
+    uid: '@azure/app-configuration.RestError'
+    package: '@azure/app-configuration'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
   - name: featureFlagContentType
     uid: '@azure/app-configuration.featureFlagContentType'
     package: '@azure/app-configuration'
@@ -127,6 +130,14 @@ variables:
         type: >-
           "application/json; profile="https:<xref
           uid="//azconfig.io/mime-profiles/snapshot-ref" />"; charset=utf-8"
+typeAliases:
+  - '@azure/app-configuration.AddConfigurationSettingParam'
+  - '@azure/app-configuration.ConfigurationSetting'
+  - '@azure/app-configuration.ConfigurationSettingParam'
+  - '@azure/app-configuration.ConfigurationSettingResponse'
+  - '@azure/app-configuration.ConfigurationSnapshotStatus'
+  - '@azure/app-configuration.SetConfigurationSettingParam'
+  - '@azure/app-configuration.SnapshotComposition'
 functions:
   - name: isFeatureFlag(ConfigurationSetting)
     uid: '@azure/app-configuration.isFeatureFlag'
@@ -157,6 +168,21 @@ functions:
           description?: string, tags?: {[propertyName: string]: string} } & {
           value?: string } & { isReadOnly: boolean, lastModified?: Date } &
           Required&lt;Pick&lt;ConfigurationSetting, "value"&gt;&gt;
+  - name: isRestError(unknown)
+    uid: '@azure/app-configuration.isRestError'
+    package: '@azure/app-configuration'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e is RestError'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e is RestError
   - name: isSecretReference(ConfigurationSetting)
     uid: '@azure/app-configuration.isSecretReference'
     package: '@azure/app-configuration'

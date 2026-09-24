@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: relationships
 ---
-# Azure Relationships SDK for JavaScript - preview
-## Packages - preview
+# Azure Relationships SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](relationships-index.md)]

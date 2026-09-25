@@ -1,24 +1,24 @@
 ---
-title: Azure Compute client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-compute-bulkactions, compute
+title: Azure WorkloadManager client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/arm-computeworkloadmanager, compute
 ms.date: 09/25/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: compute
 ---
-# Azure Compute client library for JavaScript - version 1.0.0-alpha.20260924.2 
+# Azure WorkloadManager client library for JavaScript - version 1.0.0-alpha.20260924.2 
 
 
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Compute client.
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure WorkloadManager client.
 
 
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/compute/arm-compute-bulkactions)
-- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-compute-bulkactions)
-- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-compute-bulkactions?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/compute/arm-compute-bulkactions/samples)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/compute/arm-computeworkloadmanager)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/arm-computeworkloadmanager)
+- [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/arm-computeworkloadmanager?view=azure-node-preview)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/compute/arm-computeworkloadmanager/samples)
 
 ## Getting started
 
@@ -33,18 +33,18 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-compute-bulkactions` package
+### Install the `@azure/arm-computeworkloadmanager` package
 
-Install the Azure Compute client library for JavaScript with `npm`:
+Install the Azure WorkloadManager client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-compute-bulkactions
+npm install @azure/arm-computeworkloadmanager
 ```
 
-### Create and authenticate a `ComputeClient`
+### Create and authenticate a `WorkloadManagerClient`
 
-To create a client object to access the Azure Compute API, you will need the `endpoint` of your Azure Compute resource and a `credential`. The Azure Compute client can use Microsoft Entra credentials to authenticate.
-You can find the endpoint for your Azure Compute resource in the [Azure Portal][azure_portal].
+To create a client object to access the Azure WorkloadManager API, you will need the `endpoint` of your Azure WorkloadManager resource and a `credential`. The Azure WorkloadManager client can use Microsoft Entra credentials to authenticate.
+You can find the endpoint for your Azure WorkloadManager resource in the [Azure Portal][azure_portal].
 
 You can authenticate with Microsoft Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing Microsoft Entra token](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
@@ -54,32 +54,32 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new Microsoft Entra application and grant access to Azure Compute** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new Microsoft Entra application and grant access to Azure WorkloadManager** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 
 For more information about how to create a Microsoft Entra application check out [this guide](https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal).
 
 Using Node.js and Node-like environments, you can use the `DefaultAzureCredential` class to authenticate the client.
 
 ```ts snippet:ReadmeSampleCreateClient_Node
-import { ComputeClient } from "@azure/arm-compute-bulkactions";
+import { WorkloadManagerClient } from "@azure/arm-computeworkloadmanager";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new ComputeClient(new DefaultAzureCredential(), subscriptionId);
+const client = new WorkloadManagerClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
 For browser environments, use the `InteractiveBrowserCredential` from the `@azure/identity` package to authenticate.
 
 ```ts snippet:ReadmeSampleCreateClient_Browser
 import { InteractiveBrowserCredential } from "@azure/identity";
-import { ComputeClient } from "@azure/arm-compute-bulkactions";
+import { WorkloadManagerClient } from "@azure/arm-computeworkloadmanager";
 
 const credential = new InteractiveBrowserCredential({
   tenantId: "<YOUR_TENANT_ID>",
   clientId: "<YOUR_CLIENT_ID>",
 });
 const subscriptionId = "00000000-0000-0000-0000-000000000000";
-const client = new ComputeClient(credential, subscriptionId);
+const client = new WorkloadManagerClient(credential, subscriptionId);
 ```
 
 
@@ -88,9 +88,9 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ## Key concepts
 
-### ComputeClient
+### WorkloadManagerClient
 
-`ComputeClient` is the primary interface for developers using the Azure Compute client library. Explore the methods on this client object to understand the different features of the Azure Compute service that you can access.
+`WorkloadManagerClient` is the primary interface for developers using the Azure WorkloadManager client library. Explore the methods on this client object to understand the different features of the Azure WorkloadManager service that you can access.
 
 ## Troubleshooting
 
@@ -108,7 +108,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/compute/arm-compute-bulkactions/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/compute/arm-computeworkloadmanager/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 

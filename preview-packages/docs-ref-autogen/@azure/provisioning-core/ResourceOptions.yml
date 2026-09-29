@@ -1,0 +1,55 @@
+### YamlMime:TSType
+name: ResourceOptions
+uid: '@azure/provisioning-core.ResourceOptions'
+package: '@azure/provisioning-core'
+summary: |-
+  Optional third-argument bag passed to every resource constructor. Holds
+  authoring flags that affect how the resource declaration is emitted but are
+  not ARM-modeled properties of the resource body.
+
+  Fields:
+  - `condition` — an `if(...)` guard on the declaration. A boolean
+    expression (typically produced by `fn.eq`, `fn.and`, etc.) or a
+    plain `boolean`. Bind it to a `const` to reuse the same predicate
+    across multiple resources.
+
+  `existing` is deliberately **not** an option — it is the discriminant of
+  the generated props union (`{ existing?: false } | { existing: true }`)
+  and lives on `props`. Routing it through options too would allow
+  contradictory settings between the two channels.
+
+  `namingRules` is deliberately **not** an option either — it is
+  per-resource-type metadata declared as a `protected static namingRules`
+  field on each concrete `Resource` subclass and consumed by the base
+  constructor reflectively, so it stays off the user-facing surface.
+fullName: ResourceOptions
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: condition
+    uid: '@azure/provisioning-core.ResourceOptions.condition'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: condition
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'condition?: ExpressionOrValue<boolean>'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/provisioning-core.ExpressionOrValue"
+          />&lt;boolean&gt;
+  - name: dependsOn
+    uid: '@azure/provisioning-core.ResourceOptions.dependsOn'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: dependsOn
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'dependsOn?: readonly ResourceDeclaration<string>[]'
+      return:
+        description: ''
+        type: readonly ResourceDeclaration&lt;string&gt;[]

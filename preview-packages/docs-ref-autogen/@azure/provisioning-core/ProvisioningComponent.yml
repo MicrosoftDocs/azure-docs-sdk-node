@@ -1,0 +1,211 @@
+### YamlMime:TSType
+name: ProvisioningComponent
+uid: '@azure/provisioning-core.ProvisioningComponent'
+package: '@azure/provisioning-core'
+summary: |+
+  Base class for all tree nodes in the library object model.
+
+  **Example**
+
+  ```typescript snippet:ignore
+  import { ProvisioningComponent } from "@azure/provisioning-core";
+  import { KeyVault, Secret } from "@azure/provisioning-keyvault";
+
+  class DataTier extends ProvisioningComponent {
+    readonly vault: KeyVault;
+    readonly secret: Secret;
+
+    constructor(parent: ProvisioningComponent, tenantId: string, secretValue: string) {
+      super(parent);
+      this.vault = new KeyVault(this, {
+        name: "kv-my-app",
+        location: "eastus",
+        properties: { tenantId, sku: { family: "A", name: "standard" } },
+      });
+      this.secret = new Secret(this.vault, {
+        name: "database-password",
+        properties: { value: secretValue },
+      });
+    }
+  }
+  ```
+
+fullName: ProvisioningComponent
+remarks: >-
+  Both `Stack` and `Resource` extend `ProvisioningComponent`. It provides
+  parent-child
+
+  tree tracking and deployment context lookup — walking up the tree to find
+
+  the nearest context set by a `Stack` or `ResourceGroup`.
+
+
+  Subclass `ProvisioningComponent` directly to create reusable groupings of
+  resources
+
+  that don't correspond to an ARM resource. For ARM resources, extend
+
+  `Resource` instead.
+isDeprecated: false
+type: class
+constructors:
+  - name: ProvisioningComponent(ProvisioningComponent)
+    uid: '@azure/provisioning-core.ProvisioningComponent.constructor'
+    package: '@azure/provisioning-core'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new ProvisioningComponent(parent?: ProvisioningComponent)'
+      parameters:
+        - id: parent
+          type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />
+          description: ''
+properties:
+  - name: children
+    uid: '@azure/provisioning-core.ProvisioningComponent.children'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: children
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'children: ProvisioningComponent[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />[]
+  - name: deploymentContext
+    uid: '@azure/provisioning-core.ProvisioningComponent.deploymentContext'
+    package: '@azure/provisioning-core'
+    summary: >-
+      The effective deployment context **inherited from ancestors**, resolved
+
+      by walking up the parent chain (this node's own local contribution is
+
+      intentionally excluded — a node's contribution flows to its descendants,
+
+      not to itself). Each field is resolved per its own rule:
+
+
+      - `location`: nearest ancestor with a value wins.
+
+      - `namingPolicy`: nearest ancestor with a value wins.
+
+      - `tags`: flat-merged across all ancestors; innermost wins on key
+      conflict.
+
+
+      Returns an object whose fields may all be `undefined` if no ancestor
+
+      contributed anything.
+    fullName: deploymentContext
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: DeploymentContext deploymentContext
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.DeploymentContext" />
+  - name: parent
+    uid: '@azure/provisioning-core.ProvisioningComponent.parent'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: parent
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'parent: ProvisioningComponent | undefined'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/provisioning-core.ProvisioningComponent" /> |
+          undefined
+  - name: self
+    uid: '@azure/provisioning-core.ProvisioningComponent.self'
+    package: '@azure/provisioning-core'
+    summary: Public identity for this node.
+    fullName: self
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: this self
+      return:
+        description: ''
+        type: this
+methods:
+  - name: isChildOf(ProvisioningComponent)
+    uid: '@azure/provisioning-core.ProvisioningComponent.isChildOf'
+    package: '@azure/provisioning-core'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isChildOf(component: ProvisioningComponent): boolean'
+      parameters:
+        - id: component
+          type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />
+          description: ''
+      return:
+        description: ''
+        type: boolean
+  - name: 'transform((component: ProvisioningComponent) => void)'
+    uid: '@azure/provisioning-core.ProvisioningComponent.transform'
+    package: '@azure/provisioning-core'
+    summary: |-
+      Applies a callback to every descendant component/resource that matches the
+      given constructor, including `this` when it matches.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function transform(callback: (component: ProvisioningComponent) =>
+        void): this
+      parameters:
+        - id: callback
+          type: '(component: ProvisioningComponent) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: >-
+      transform<TComponent>(ProvisioningComponentConstructor<TComponent>,
+      (component: TComponent) => void)
+    uid: '@azure/provisioning-core.ProvisioningComponent.transform_1'
+    package: '@azure/provisioning-core'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function transform<TComponent>(ctor:
+        ProvisioningComponentConstructor<TComponent>, callback: (component:
+        TComponent) => void): this
+      parameters:
+        - id: ctor
+          type: >-
+            <xref
+            uid="@azure/provisioning-core.ProvisioningComponentConstructor"
+            />&lt;TComponent&gt;
+          description: ''
+        - id: callback
+          type: '(component: TComponent) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'visit((component: ProvisioningComponent) => boolean | void)'
+    uid: '@azure/provisioning-core.ProvisioningComponent.visit'
+    package: '@azure/provisioning-core'
+    summary: |-
+      Depth-first visit of this node and all descendants.
+      Return `false` from the callback to skip visiting that node's children.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function visit(callback: (component: ProvisioningComponent) => boolean |
+        void)
+      parameters:
+        - id: callback
+          type: '(component: ProvisioningComponent) =&gt; boolean | void'
+          description: ''

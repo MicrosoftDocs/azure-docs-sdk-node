@@ -1,0 +1,311 @@
+### YamlMime:TSType
+name: ResourceDeclaration
+uid: '@azure/provisioning-core.ResourceDeclaration'
+package: '@azure/provisioning-core'
+summary: Shared base for resource declaration implementations.
+fullName: ResourceDeclaration<TType>
+remarks: |-
+  Both represent one Bicep resource declaration in the component tree and
+  share the same declaration-level state layout: identity fields
+  (`type`, `apiVersion`, `existing`), the `if(...)` guard (`condition`),
+  the optional cross-scope reference (`scope`), and the raw prop bag that
+  becomes the resource body.
+
+  This class owns the common declaration state layout, raw-handle escape
+  hatch, and identity accessors. Subclasses supply their construction and
+  access behavior.
+isDeprecated: false
+type: class
+constructors:
+  - name: >-
+      ResourceDeclaration<TType>(ProvisioningComponent, ResourceProps<TType> &
+      Record<string, unknown>, ResourceOptions, ResourceNamingRules)
+    uid: '@azure/provisioning-core.ResourceDeclaration.constructor'
+    package: '@azure/provisioning-core'
+    summary: Base constructor for every Bicep resource declaration.
+    remarks: |-
+      Responsibilities:
+      1. Register in the component tree (`super(context)`).
+      2. Enforce a deployment context ancestor.
+      3. Unwrap `context` if it's an indexed proxy from `.at(i)` /
+         `parent.at(loop.index)`, and stash `parentIndex` on `state` so the
+         serializer can emit `parent: parentSym[index]` on the child.
+      4. Inherit `condition` from the immediate parent resource
+         declaration when the caller doesn't supply one (Bicep requires
+         children of a conditional resource to share the same guard).
+      5. Populate `state` — existing arm records only identity fields;
+         deployable arm runs the naming policy and applies
+         `DeploymentContext` defaults for `location` / `tags` per the
+         shape descriptor.
+
+      Subclasses supply the last mile, including their public handle behavior.
+    isDeprecated: false
+    syntax:
+      content: >-
+        new ResourceDeclaration(context: ProvisioningComponent, props:
+        ResourceProps<TType> & Record<string, unknown>, options?:
+        ResourceOptions, namingRules?: ResourceNamingRules)
+      parameters:
+        - id: context
+          type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />
+          description: ''
+        - id: props
+          type: >-
+            <xref uid="@azure/provisioning-core.ResourceProps" />&lt;TType&gt; &
+            Record&lt;string, unknown&gt;
+          description: ''
+        - id: options
+          type: <xref uid="@azure/provisioning-core.ResourceOptions" />
+          description: ''
+        - id: namingRules
+          type: <xref uid="@azure/provisioning-core.ResourceNamingRules" />
+          description: |-
+            per-resource-type constraints for the naming
+              policy. `Resource` reads this reflectively off the concrete subclass
+              constructor; internal declaration implementations receive it from
+              the concrete resource constructor they represent.
+properties:
+  - name: apiVersion
+    uid: '@azure/provisioning-core.ResourceDeclaration.apiVersion'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: apiVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: string apiVersion
+      return:
+        description: ''
+        type: string
+  - name: condition
+    uid: '@azure/provisioning-core.ResourceDeclaration.condition'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: condition
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: ExpressionOrValue<boolean> | undefined condition
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/provisioning-core.ExpressionOrValue"
+          />&lt;boolean&gt; | undefined
+  - name: dependsOn
+    uid: '@azure/provisioning-core.ResourceDeclaration.dependsOn'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: dependsOn
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: (readonly ResourceDeclaration<string>[]) | undefined dependsOn
+      return:
+        description: ''
+        type: (readonly ResourceDeclaration&lt;string&gt;[]) | undefined
+  - name: deploymentContext
+    uid: '@azure/provisioning-core.ResourceDeclaration.deploymentContext'
+    package: '@azure/provisioning-core'
+    summary: >-
+      The effective deployment context **inherited from ancestors**, resolved
+
+      by walking up the parent chain (this node's own local contribution is
+
+      intentionally excluded — a node's contribution flows to its descendants,
+
+      not to itself). Each field is resolved per its own rule:
+
+
+      - `location`: nearest ancestor with a value wins.
+
+      - `namingPolicy`: nearest ancestor with a value wins.
+
+      - `tags`: flat-merged across all ancestors; innermost wins on key
+      conflict.
+
+
+      Returns an object whose fields may all be `undefined` if no ancestor
+
+      contributed anything.
+    fullName: deploymentContext
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: DeploymentContext deploymentContext
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.DeploymentContext" />
+  - name: existing
+    uid: '@azure/provisioning-core.ResourceDeclaration.existing'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: existing
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: boolean | undefined existing
+      return:
+        description: ''
+        type: boolean | undefined
+  - name: self
+    uid: '@azure/provisioning-core.ResourceDeclaration.self'
+    package: '@azure/provisioning-core'
+    summary: Public identity for this node.
+    fullName: self
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: this self
+      return:
+        description: ''
+        type: this
+  - name: type
+    uid: '@azure/provisioning-core.ResourceDeclaration.type'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: TType type
+      return:
+        description: ''
+        type: TType
+  - name: '[RESOURCE_DECLARATION_BRAND]'
+    uid: '@azure/provisioning-core.ResourceDeclaration.[RESOURCE_DECLARATION_BRAND]'
+    package: '@azure/provisioning-core'
+    summary: |-
+      Brand marker for cross-realm `isResourceDeclaration()` checks. Uses
+      `Symbol.for` so it survives multiple copies of `@azure/provisioning-core`.
+      Inherited by every resource declaration implementation.
+    fullName: '[RESOURCE_DECLARATION_BRAND]'
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: '[RESOURCE_DECLARATION_BRAND]: true'
+      return:
+        description: ''
+        type: 'true'
+inheritedProperties:
+  - name: children
+    uid: '@azure/provisioning-core.ResourceDeclaration.children'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: children
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'children: ProvisioningComponent[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProvisioningComponent.children](xref:@azure/provisioning-core.ProvisioningComponent.children)
+  - name: parent
+    uid: '@azure/provisioning-core.ResourceDeclaration.parent'
+    package: '@azure/provisioning-core'
+    summary: ''
+    fullName: parent
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'parent: ProvisioningComponent | undefined'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/provisioning-core.ProvisioningComponent" /> |
+          undefined
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProvisioningComponent.parent](xref:@azure/provisioning-core.ProvisioningComponent.parent)
+inheritedMethods:
+  - name: isChildOf(ProvisioningComponent)
+    uid: '@azure/provisioning-core.ResourceDeclaration.isChildOf'
+    package: '@azure/provisioning-core'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isChildOf(component: ProvisioningComponent): boolean'
+      parameters:
+        - id: component
+          type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />
+          description: ''
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProvisioningComponent.isChildOf](xref:@azure/provisioning-core.ProvisioningComponent.isChildOf)
+  - name: 'transform((component: ProvisioningComponent) => void)'
+    uid: '@azure/provisioning-core.ResourceDeclaration.transform'
+    package: '@azure/provisioning-core'
+    summary: |-
+      Applies a callback to every descendant component/resource that matches the
+      given constructor, including `this` when it matches.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function transform(callback: (component: ProvisioningComponent) =>
+        void): this
+      parameters:
+        - id: callback
+          type: '(component: ProvisioningComponent) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProvisioningComponent.transform](xref:@azure/provisioning-core.ProvisioningComponent.transform)
+  - name: >-
+      transform<TComponent>(ProvisioningComponentConstructor<TComponent>,
+      (component: TComponent) => void)
+    uid: '@azure/provisioning-core.ResourceDeclaration.transform_1'
+    package: '@azure/provisioning-core'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function transform<TComponent>(ctor:
+        ProvisioningComponentConstructor<TComponent>, callback: (component:
+        TComponent) => void): this
+      parameters:
+        - id: ctor
+          type: >-
+            <xref
+            uid="@azure/provisioning-core.ProvisioningComponentConstructor"
+            />&lt;TComponent&gt;
+          description: ''
+        - id: callback
+          type: '(component: TComponent) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProvisioningComponent.transform](xref:@azure/provisioning-core.ProvisioningComponent.transform)
+  - name: 'visit((component: ProvisioningComponent) => boolean | void)'
+    uid: '@azure/provisioning-core.ResourceDeclaration.visit'
+    package: '@azure/provisioning-core'
+    summary: |-
+      Depth-first visit of this node and all descendants.
+      Return `false` from the callback to skip visiting that node's children.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function visit(callback: (component: ProvisioningComponent) => boolean |
+        void)
+      parameters:
+        - id: callback
+          type: '(component: ProvisioningComponent) =&gt; boolean | void'
+          description: ''
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [ProvisioningComponent.visit](xref:@azure/provisioning-core.ProvisioningComponent.visit)
+extends: <xref uid="@azure/provisioning-core.ProvisioningComponent" />

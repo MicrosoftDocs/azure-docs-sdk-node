@@ -1,0 +1,25 @@
+### YamlMime:TSTypeAlias
+name: ResourceCtor
+uid: '@azure/provisioning-core.ResourceCtor'
+package: '@azure/provisioning-core'
+summary: |-
+  A `Resource` class that's eligible to live in the registry.
+
+  - The construct signature uses `any` for both `context` and `props`
+    because concrete classes narrow these (child resources require a
+    specific parent class as context; each resource has its own `Props`
+    shape). TypeScript's parameter contravariance would reject any
+    concrete parameter types here. The deserializer is the sole caller
+    of resolved constructors and forwards already-correct values it
+    built from the wire document.
+  - The two static fields `resourceType` and `apiVersion` form the
+    registry key and are always present on emitter-generated classes
+    (and on the hand-maintained `ResourceGroup`).
+  - The generic `T` propagates the instance type — used by the query
+    API (`stack.getResources(KeyVault)` → `KeyVault[]`) to narrow
+    return types without needing a separate descriptor object.
+fullName: ResourceCtor<T>
+remarks: ''
+isDeprecated: false
+syntax: |
+  type ResourceCtor<T> = (context: any, props: any, options?: any) => T

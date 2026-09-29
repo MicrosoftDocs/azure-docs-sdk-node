@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: servicegroups
 ---
-# Azure Service Groups SDK for JavaScript - preview
-## Packages - preview
+# Azure Service Groups SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](service-groups-index.md)]

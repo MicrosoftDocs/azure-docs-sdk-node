@@ -1,7 +1,7 @@
 ---
 title: Azure Carbon Optimization SDK for JavaScript
 description: Reference for Azure Carbon Optimization SDK for JavaScript
-ms.date: 09/29/2026
+ms.date: 09/30/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: carbonoptimization

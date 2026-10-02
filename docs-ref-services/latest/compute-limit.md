@@ -1,7 +1,7 @@
 ---
 title: Azure Compute Limit SDK for JavaScript
 description: Reference for Azure Compute Limit SDK for JavaScript
-ms.date: 10/01/2026
+ms.date: 10/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: computelimit

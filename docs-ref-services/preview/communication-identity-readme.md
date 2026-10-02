@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Identity client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-identity, communication
-ms.date: 06/20/2025
+ms.date: 10/02/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Identity client library for JavaScript - version 1.4.0-beta.1 
+# Azure Communication Identity client library for JavaScript - version 2.0.0-alpha.20261002.1 
 
 
 The identity library is used for managing users and tokens for Azure Communication Services.
@@ -97,23 +97,6 @@ const credential = new DefaultAzureCredential();
 const client = new CommunicationIdentityClient(endpoint, credential);
 
 const user = await client.createUser();
-```
-
-### Creating a new user with customId and get user
-
-Use the `createUser` method to create a new user with `customId`. This `customId` can be used to map your application's user identities with Azure Communication Services identities. If you call the `CreateUser` method again with the same `customId`, it will return the same `user.Id`. Therefore, you do not need to store this mapping yourself.
-
-```ts snippet:ReadmeSampleCreateUser_CustomId
-import { DefaultAzureCredential } from "@azure/identity";
-import { CommunicationIdentityClient } from "@azure/communication-identity";
-
-const endpoint = "https://contoso.eastus.communications.azure.net";
-
-const credential = new DefaultAzureCredential();
-const client = new CommunicationIdentityClient(endpoint, credential);
-
-const user = await client.createUser({ customId: "alice@contoso.com" });
-const getResult = await client.getUser(user);
 ```
 
 ### Creating and refreshing a user token
@@ -286,12 +269,12 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.4.0-beta.1/sdk/communication/communication-identity/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-identity/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.4.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

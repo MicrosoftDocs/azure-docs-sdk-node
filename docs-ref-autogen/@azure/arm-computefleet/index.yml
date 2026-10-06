@@ -4,11 +4,13 @@ name: '@azure/arm-computefleet'
 summary: ''
 type: package
 enums:
+  - '@azure/arm-computefleet.AzureClouds'
   - '@azure/arm-computefleet.KnownAcceleratorManufacturer'
   - '@azure/arm-computefleet.KnownAcceleratorType'
   - '@azure/arm-computefleet.KnownActionType'
   - '@azure/arm-computefleet.KnownArchitectureType'
   - '@azure/arm-computefleet.KnownCachingTypes'
+  - '@azure/arm-computefleet.KnownCapacityType'
   - '@azure/arm-computefleet.KnownCpuManufacturer'
   - '@azure/arm-computefleet.KnownCreatedByType'
   - '@azure/arm-computefleet.KnownDeleteOptions'
@@ -19,6 +21,7 @@ enums:
   - '@azure/arm-computefleet.KnownDiskDeleteOptionTypes'
   - '@azure/arm-computefleet.KnownDomainNameLabelScopeTypes'
   - '@azure/arm-computefleet.KnownEvictionPolicy'
+  - '@azure/arm-computefleet.KnownFleetMode'
   - '@azure/arm-computefleet.KnownIPVersion'
   - '@azure/arm-computefleet.KnownLinuxPatchAssessmentMode'
   - >-
@@ -42,8 +45,10 @@ enums:
   - '@azure/arm-computefleet.KnownSettingNames'
   - '@azure/arm-computefleet.KnownSpotAllocationStrategy'
   - '@azure/arm-computefleet.KnownStorageAccountTypes'
+  - '@azure/arm-computefleet.KnownVersions'
   - '@azure/arm-computefleet.KnownVMAttributeSupport'
   - '@azure/arm-computefleet.KnownVMCategory'
+  - '@azure/arm-computefleet.KnownVMOperationStatus'
   - '@azure/arm-computefleet.KnownWindowsPatchAssessmentMode'
   - >-
     @azure/arm-computefleet.KnownWindowsVMGuestPatchAutomaticByPlatformRebootSetting
@@ -67,6 +72,9 @@ interfaces:
   - '@azure/arm-computefleet.DiffDiskSettings'
   - '@azure/arm-computefleet.DiskEncryptionSetParameters'
   - '@azure/arm-computefleet.EncryptionIdentity'
+  - '@azure/arm-computefleet.ErrorAdditionalInfo'
+  - '@azure/arm-computefleet.ErrorDetail'
+  - '@azure/arm-computefleet.ErrorResponse'
   - '@azure/arm-computefleet.Fleet'
   - '@azure/arm-computefleet.FleetProperties'
   - '@azure/arm-computefleet.FleetUpdate'
@@ -76,6 +84,7 @@ interfaces:
   - '@azure/arm-computefleet.FleetsListByResourceGroupOptionalParams'
   - '@azure/arm-computefleet.FleetsListBySubscriptionOptionalParams'
   - '@azure/arm-computefleet.FleetsListVirtualMachineScaleSetsOptionalParams'
+  - '@azure/arm-computefleet.FleetsListVirtualMachinesOptionalParams'
   - '@azure/arm-computefleet.FleetsOperations'
   - '@azure/arm-computefleet.FleetsUpdateOptionalParams'
   - '@azure/arm-computefleet.ImageReference'
@@ -124,6 +133,7 @@ interfaces:
   - '@azure/arm-computefleet.VaultCertificate'
   - '@azure/arm-computefleet.VaultSecretGroup'
   - '@azure/arm-computefleet.VirtualHardDisk'
+  - '@azure/arm-computefleet.VirtualMachine'
   - '@azure/arm-computefleet.VirtualMachineScaleSet'
   - '@azure/arm-computefleet.VirtualMachineScaleSetDataDisk'
   - '@azure/arm-computefleet.VirtualMachineScaleSetExtension'
@@ -152,12 +162,26 @@ interfaces:
   - '@azure/arm-computefleet.WinRMListener'
   - '@azure/arm-computefleet.WindowsConfiguration'
   - '@azure/arm-computefleet.WindowsVMGuestPatchAutomaticByPlatformSettings'
+variables:
+  - name: RestError
+    uid: '@azure/arm-computefleet.RestError'
+    package: '@azure/arm-computefleet'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/arm-computefleet.AcceleratorManufacturer'
   - '@azure/arm-computefleet.AcceleratorType'
   - '@azure/arm-computefleet.ActionType'
   - '@azure/arm-computefleet.ArchitectureType'
+  - '@azure/arm-computefleet.AzureSupportedClouds'
   - '@azure/arm-computefleet.CachingTypes'
+  - '@azure/arm-computefleet.CapacityType'
   - '@azure/arm-computefleet.ContinuablePage'
   - '@azure/arm-computefleet.CpuManufacturer'
   - '@azure/arm-computefleet.CreatedByType'
@@ -169,6 +193,7 @@ typeAliases:
   - '@azure/arm-computefleet.DiskDeleteOptionTypes'
   - '@azure/arm-computefleet.DomainNameLabelScopeTypes'
   - '@azure/arm-computefleet.EvictionPolicy'
+  - '@azure/arm-computefleet.FleetMode'
   - '@azure/arm-computefleet.IPVersion'
   - '@azure/arm-computefleet.LinuxPatchAssessmentMode'
   - '@azure/arm-computefleet.LinuxVMGuestPatchAutomaticByPlatformRebootSetting'
@@ -193,10 +218,26 @@ typeAliases:
   - '@azure/arm-computefleet.StorageAccountTypes'
   - '@azure/arm-computefleet.VMAttributeSupport'
   - '@azure/arm-computefleet.VMCategory'
+  - '@azure/arm-computefleet.VMOperationStatus'
   - '@azure/arm-computefleet.WindowsPatchAssessmentMode'
   - '@azure/arm-computefleet.WindowsVMGuestPatchAutomaticByPlatformRebootSetting'
   - '@azure/arm-computefleet.WindowsVMGuestPatchMode'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-computefleet.isRestError'
+    package: '@azure/arm-computefleet'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e is RestError'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e is RestError
   - name: >-
       restorePoller<TResponse, TResult>(AzureFleetClient, string, (args: any[])
       => PollerLike<OperationState<TResult>, TResult>,

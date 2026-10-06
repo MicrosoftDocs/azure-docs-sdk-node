@@ -1,7 +1,7 @@
 ---
 title: Azure Compute Bulk Actions SDK for JavaScript
 description: Reference for Azure Compute Bulk Actions SDK for JavaScript
-ms.date: 10/05/2026
+ms.date: 10/06/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: computebulkactions

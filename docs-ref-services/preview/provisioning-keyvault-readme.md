@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/provisioning-keyvault, keyvault
-ms.date: 09/28/2026
+ms.date: 10/06/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: keyvault

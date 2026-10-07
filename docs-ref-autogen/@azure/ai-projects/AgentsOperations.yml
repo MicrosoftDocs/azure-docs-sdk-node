@@ -8,6 +8,46 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: cancelOptimizationJob
+    uid: '@azure/ai-projects.AgentsOperations.cancelOptimizationJob'
+    package: '@azure/ai-projects'
+    summary: >-
+      Requests cancellation of a running or queued job. Returns 409 Conflict if
+      the job is already in a terminal state.
+    fullName: cancelOptimizationJob
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        cancelOptimizationJob: (jobId: string, options?:
+        AgentsCancelOptimizationJobOptionalParams) =>
+        Promise<AgentOptimizationJob>
+      return:
+        description: ''
+        type: >-
+          (jobId: string, options?: AgentsCancelOptimizationJobOptionalParams)
+          =&gt; Promise&lt;AgentOptimizationJob&gt;
+  - name: createOptimizationJob
+    uid: '@azure/ai-projects.AgentsOperations.createOptimizationJob'
+    package: '@azure/ai-projects'
+    summary: >-
+      Creates an optimization job and returns the queued job. Honors
+      `Operation-Id` for idempotent retry. Clients poll the URL in
+      `Operation-Location` by using the get operation.
+    fullName: createOptimizationJob
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        createOptimizationJob: (job: AgentOptimizationJob, options?:
+        AgentsCreateOptimizationJobOptionalParams) =>
+        JobPoller<AgentOptimizationJobResult>
+      return:
+        description: ''
+        type: >-
+          (job: AgentOptimizationJob, options?:
+          AgentsCreateOptimizationJobOptionalParams) =&gt;
+          JobPoller&lt;AgentOptimizationJobResult&gt;
   - name: createSession
     uid: '@azure/ai-projects.AgentsOperations.createSession'
     package: '@azure/ai-projects'
@@ -88,6 +128,22 @@ properties:
         type: >-
           (agentName: string, options?: AgentsDeleteOptionalParams) =&gt;
           Promise&lt;DeleteAgentResponse&gt;
+  - name: deleteOptimizationJob
+    uid: '@azure/ai-projects.AgentsOperations.deleteOptimizationJob'
+    package: '@azure/ai-projects'
+    summary: Cancels active work, then deletes the job and its candidate artifacts.
+    fullName: deleteOptimizationJob
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        deleteOptimizationJob: (jobId: string, options?:
+        AgentsDeleteOptimizationJobOptionalParams) => Promise<void>
+      return:
+        description: ''
+        type: >-
+          (jobId: string, options?: AgentsDeleteOptimizationJobOptionalParams)
+          =&gt; Promise&lt;void&gt;
   - name: deleteSession
     uid: '@azure/ai-projects.AgentsOperations.deleteSession'
     package: '@azure/ai-projects'
@@ -242,6 +298,26 @@ properties:
         type: >-
           (agentName: string, options?: AgentsEnableOptionalParams) =&gt;
           Promise&lt;void&gt;
+  - name: estimateOptimizationJob
+    uid: '@azure/ai-projects.AgentsOperations.estimateOptimizationJob'
+    package: '@azure/ai-projects'
+    summary: >-
+      Estimates validation-set rows, per-stage model call volumes, and cost
+      bands without submitting the job.
+    fullName: estimateOptimizationJob
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        estimateOptimizationJob: (inputs: AgentOptimizationEstimateInputs,
+        options?: AgentsEstimateOptimizationJobOptionalParams) =>
+        Promise<AgentOptimizationEstimateResult>
+      return:
+        description: ''
+        type: >-
+          (inputs: AgentOptimizationEstimateInputs, options?:
+          AgentsEstimateOptimizationJobOptionalParams) =&gt;
+          Promise&lt;AgentOptimizationEstimateResult&gt;
   - name: get
     uid: '@azure/ai-projects.AgentsOperations.get'
     package: '@azure/ai-projects'
@@ -304,6 +380,40 @@ properties:
           (agentName: string, options?:
           GetMicrosoft365PublishDefaultsOptionalParams) =&gt;
           Promise&lt;Microsoft365PublishDefaults&gt;
+  - name: getOptimizationCandidate
+    uid: '@azure/ai-projects.AgentsOperations.getOptimizationCandidate'
+    package: '@azure/ai-projects'
+    summary: Retrieves a single candidate. Mutation values are always included.
+    fullName: getOptimizationCandidate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getOptimizationCandidate: (jobId: string, candidateId: string, options?:
+        AgentsGetOptimizationCandidateOptionalParams) =>
+        Promise<AgentOptimizationCandidate>
+      return:
+        description: ''
+        type: >-
+          (jobId: string, candidateId: string, options?:
+          AgentsGetOptimizationCandidateOptionalParams) =&gt;
+          Promise&lt;AgentOptimizationCandidate&gt;
+  - name: getOptimizationJob
+    uid: '@azure/ai-projects.AgentsOperations.getOptimizationJob'
+    package: '@azure/ai-projects'
+    summary: Retrieves an optimization job by its identifier.
+    fullName: getOptimizationJob
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        getOptimizationJob: (jobId: string, options?:
+        AgentsGetOptimizationJobOptionalParams) => Promise<AgentOptimizationJob>
+      return:
+        description: ''
+        type: >-
+          (jobId: string, options?: AgentsGetOptimizationJobOptionalParams)
+          =&gt; Promise&lt;AgentOptimizationJob&gt;
   - name: getSession
     uid: '@azure/ai-projects.AgentsOperations.getSession'
     package: '@azure/ai-projects'
@@ -426,6 +536,51 @@ properties:
         type: >-
           (options?: AgentsListOptionalParams) =&gt;
           PagedAsyncIterableIterator&lt;Agent, Agent[], PageSettings&gt;
+  - name: listOptimizationCandidates
+    uid: '@azure/ai-projects.AgentsOperations.listOptimizationCandidates'
+    package: '@azure/ai-projects'
+    summary: >-
+      Lists candidates for the given optimization job with cursor pagination,
+      including the original baseline and generated candidates. Each
+      `output.mutations` item identifies a changed attribute by `type`; mutation
+      `value` fields are omitted unless the client passes `expand=mutations`.
+    fullName: listOptimizationCandidates
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listOptimizationCandidates: (jobId: string, options?:
+        AgentsListOptimizationCandidatesOptionalParams) =>
+        PagedAsyncIterableIterator<AgentOptimizationCandidate,
+        AgentOptimizationCandidate[], PageSettings>
+      return:
+        description: ''
+        type: >-
+          (jobId: string, options?:
+          AgentsListOptimizationCandidatesOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;AgentOptimizationCandidate,
+          AgentOptimizationCandidate[], PageSettings&gt;
+  - name: listOptimizationJobs
+    uid: '@azure/ai-projects.AgentsOperations.listOptimizationJobs'
+    package: '@azure/ai-projects'
+    summary: >-
+      Lists optimization jobs with cursor pagination and optional status or
+      agent name filters.
+    fullName: listOptimizationJobs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        listOptimizationJobs: (options?:
+        AgentsListOptimizationJobsOptionalParams) =>
+        PagedAsyncIterableIterator<AgentOptimizationJob, AgentOptimizationJob[],
+        PageSettings>
+      return:
+        description: ''
+        type: >-
+          (options?: AgentsListOptimizationJobsOptionalParams) =&gt;
+          PagedAsyncIterableIterator&lt;AgentOptimizationJob,
+          AgentOptimizationJob[], PageSettings&gt;
   - name: listSessionFiles
     uid: '@azure/ai-projects.AgentsOperations.listSessionFiles'
     package: '@azure/ai-projects'
@@ -506,6 +661,29 @@ properties:
         type: >-
           (agentName: string, options?: AgentsUpdateAgentObjectOptionalParams)
           =&gt; Promise&lt;Agent&gt;
+  - name: promoteOptimizationCandidate
+    uid: '@azure/ai-projects.AgentsOperations.promoteOptimizationCandidate'
+    package: '@azure/ai-projects'
+    summary: >-
+      Promotes a candidate to the Foundry agent stored in the parent job's
+      target configuration. Promotion is unavailable when the job omitted
+      target_configuration. Prompt-agent promotion creates a new agent version.
+      Hosted-agent promotion currently records promotion metadata without
+      deploying a new hosted-agent version.
+    fullName: promoteOptimizationCandidate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        promoteOptimizationCandidate: (jobId: string, candidateId: string,
+        options?: AgentsPromoteOptimizationCandidateOptionalParams) =>
+        Promise<AgentOptimizationCandidate>
+      return:
+        description: ''
+        type: >-
+          (jobId: string, candidateId: string, options?:
+          AgentsPromoteOptimizationCandidateOptionalParams) =&gt;
+          Promise&lt;AgentOptimizationCandidate&gt;
   - name: publishToMicrosoft365
     uid: '@azure/ai-projects.AgentsOperations.publishToMicrosoft365'
     package: '@azure/ai-projects'

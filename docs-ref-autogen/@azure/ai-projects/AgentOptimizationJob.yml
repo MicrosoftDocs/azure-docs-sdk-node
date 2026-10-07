@@ -3,9 +3,8 @@ name: AgentOptimizationJob
 uid: '@azure/ai-projects.AgentOptimizationJob'
 package: '@azure/ai-projects'
 summary: >-
-  Agent optimization job resource — a long-running job that optimizes an agent's
-  configuration (instructions, model, skills, tools) to maximize evaluation
-  scores. On success, the result contains scored candidates.
+  Agent optimization job resource — a long-running job that produces candidate
+  changes to a Foundry agent configuration.
 fullName: AgentOptimizationJob
 remarks: ''
 isDeprecated: false
@@ -19,10 +18,24 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'created_at: Date'
+      content: 'created_at?: Date'
       return:
         description: ''
         type: Date
+  - name: display_name
+    uid: '@azure/ai-projects.AgentOptimizationJob.display_name'
+    package: '@azure/ai-projects'
+    summary: >-
+      Human-readable label. Omitted when no label is needed; it has no
+      uniqueness, routing, or idempotency semantics.
+    fullName: display_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'display_name?: string'
+      return:
+        description: ''
+        type: string
   - name: error
     uid: '@azure/ai-projects.AgentOptimizationJob.error'
     package: '@azure/ai-projects'
@@ -43,36 +56,38 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'id: string'
+      content: 'id?: string'
       return:
         description: ''
         type: string
-  - name: inputs
-    uid: '@azure/ai-projects.AgentOptimizationJob.inputs'
+  - name: optimization_configuration
+    uid: '@azure/ai-projects.AgentOptimizationJob.optimization_configuration'
     package: '@azure/ai-projects'
-    summary: Caller-supplied inputs.
-    fullName: inputs
+    summary: Type-specific optimization configuration.
+    fullName: optimization_configuration
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'inputs?: AgentOptimizationJobInputs'
+      content: 'optimization_configuration: AgentOptimizationConfigurationBaseUnion'
       return:
         description: ''
-        type: <xref uid="@azure/ai-projects.AgentOptimizationJobInputs" />
-  - name: progress
-    uid: '@azure/ai-projects.AgentOptimizationJob.progress'
+        type: >-
+          <xref uid="@azure/ai-projects.AgentOptimizationConfigurationBaseUnion"
+          />
+  - name: optimization_model_configuration
+    uid: '@azure/ai-projects.AgentOptimizationJob.optimization_model_configuration'
     package: '@azure/ai-projects'
     summary: >-
-      Progress snapshot. May be present in terminal states reflecting last-known
-      progress.
-    fullName: progress
+      Model used to generate candidate changes. An existing deployment name is
+      also accepted.
+    fullName: optimization_model_configuration
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'progress?: AgentOptimizationJobProgress'
+      content: 'optimization_model_configuration: AgentOptimizationModelConfiguration'
       return:
         description: ''
-        type: <xref uid="@azure/ai-projects.AgentOptimizationJobProgress" />
+        type: <xref uid="@azure/ai-projects.AgentOptimizationModelConfiguration" />
   - name: result
     uid: '@azure/ai-projects.AgentOptimizationJob.result'
     package: '@azure/ai-projects'
@@ -85,6 +100,18 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.AgentOptimizationJobResult" />
+  - name: run_duration_ms
+    uid: '@azure/ai-projects.AgentOptimizationJob.run_duration_ms'
+    package: '@azure/ai-projects'
+    summary: Duration for which the job has been running, in milliseconds.
+    fullName: run_duration_ms
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'run_duration_ms?: number'
+      return:
+        description: ''
+        type: number
   - name: status
     uid: '@azure/ai-projects.AgentOptimizationJob.status'
     package: '@azure/ai-projects'
@@ -93,10 +120,26 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'status: JobStatus'
+      content: 'status?: JobStatus'
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.JobStatus" />
+  - name: target_configuration
+    uid: '@azure/ai-projects.AgentOptimizationJob.target_configuration'
+    package: '@azure/ai-projects'
+    summary: >-
+      Foundry agent whose configuration is optimized. Omitted when the workflow
+      does not target a registered Foundry agent.
+    fullName: target_configuration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'target_configuration?: AgentOptimizationTargetConfigurationUnion'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/ai-projects.AgentOptimizationTargetConfigurationUnion" />
   - name: updated_at
     uid: '@azure/ai-projects.AgentOptimizationJob.updated_at'
     package: '@azure/ai-projects'
@@ -105,14 +148,16 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'updated_at: Date'
+      content: 'updated_at?: Date'
       return:
         description: ''
         type: Date
   - name: warnings
     uid: '@azure/ai-projects.AgentOptimizationJob.warnings'
     package: '@azure/ai-projects'
-    summary: Non-fatal warnings emitted at any point during optimization.
+    summary: >-
+      Non-fatal warnings emitted during optimization. Omitted when no warnings
+      were produced.
     fullName: warnings
     remarks: ''
     isDeprecated: false

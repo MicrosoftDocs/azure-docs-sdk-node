@@ -152,14 +152,14 @@ To Test Token Augmentation, please do the following.
 ```json
 {
     "type": "microsoft.graph.authenticationEvent.tokenIssuanceStart",
-    "source": "/tenants/00000001-0000-0ff1-ce00-000000000000/applications/ef9e995c-efdb-4e76-97a9-8cdfc6e06afc",
+    "source": "/tenants/aaaabbbb-0000-cccc-1111-dddd2222eeee/applications/00001111-aaaa-2222-bbbb-3333cccc4444",
     "data": {
         "@odata.type": "microsoft.graph.onTokenIssuanceStartCalloutData",
-        "tenantId": "00000001-0000-0ff1-ce00-000000000000",
+        "tenantId": "aaaabbbb-0000-cccc-1111-dddd2222eeee",
         "authenticationEventListenerId": "f2390d57-9664-4dde-b625-f0115925e1e2",
         "customAuthenticationExtensionId": "9cc1c1ed-5f04-4fdf-85c0-94a7c6ea819c",
         "authenticationContext": {
-            "correlationId": "f4bd1870-b774-4fa5-ba78-e08ac6be14c0",
+            "correlationId": "aaaa0000-bb11-2222-33cc-444444dddddd",
             "client": {
                 "ip": "127.0.0.1",
                 "locale": "en-us",
@@ -168,13 +168,13 @@ To Test Token Augmentation, please do the following.
             "protocol": "OAUTH2.0",
             "clientServicePrincipal": {
                 "id": "eedfddb9-304e-4d62-aa83-24700a0bcf0e",
-                "appId": "ef9e995c-efdb-4e76-97a9-8cdfc6e06afc",
+                "appId": "00001111-aaaa-2222-bbbb-3333cccc4444",
                 "appDisplayName": "",
                 "displayName": "Test application"
             },
             "resourceServicePrincipal": {
                 "id": "eedfddb9-304e-4d62-aa83-24700a0bcf0e",
-                "appId": "ef9e995c-efdb-4e76-97a9-8cdfc6e06afc",
+                "appId": "00001111-aaaa-2222-bbbb-3333cccc4444",
                 "appDisplayName": "",
                 "displayName": "Test application"
             },
@@ -263,4 +263,3 @@ more information see the [Code of Conduct FAQ][coc_faq] or contact
 [cg]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-

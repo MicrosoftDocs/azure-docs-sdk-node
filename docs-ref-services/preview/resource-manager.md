@@ -1,7 +1,7 @@
 ---
 title: Azure Resource Manager SDK for JavaScript
 description: Reference for Azure Resource Manager SDK for JavaScript
-ms.date: 10/07/2026
+ms.date: 10/08/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: resourcemanager

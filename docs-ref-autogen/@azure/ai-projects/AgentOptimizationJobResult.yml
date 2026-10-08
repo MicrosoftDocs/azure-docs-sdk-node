@@ -2,45 +2,68 @@
 name: AgentOptimizationJobResult
 uid: '@azure/ai-projects.AgentOptimizationJobResult'
 package: '@azure/ai-projects'
-summary: Terminal-state result body. Populated when status is succeeded or failed.
+summary: Partial or terminal result produced by an agent optimization job.
 fullName: AgentOptimizationJobResult
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: baseline
-    uid: '@azure/ai-projects.AgentOptimizationJobResult.baseline'
+  - name: candidate_summary
+    uid: '@azure/ai-projects.AgentOptimizationJobResult.candidate_summary'
     package: '@azure/ai-projects'
-    summary: Candidate ID of the original (un-optimized) baseline evaluation.
-    fullName: baseline
+    summary: >-
+      Summary of candidates produced by the job. Omitted until candidate
+      processing begins.
+    fullName: candidate_summary
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'baseline?: string'
+      content: 'candidate_summary?: AgentOptimizationResultCandidateSummary'
       return:
         description: ''
-        type: string
-  - name: best
-    uid: '@azure/ai-projects.AgentOptimizationJobResult.best'
+        type: >-
+          <xref uid="@azure/ai-projects.AgentOptimizationResultCandidateSummary"
+          />
+  - name: latency_metrics
+    uid: '@azure/ai-projects.AgentOptimizationJobResult.latency_metrics'
     package: '@azure/ai-projects'
-    summary: Candidate ID of the highest-scoring candidate found during optimization.
-    fullName: best
+    summary: >-
+      Aggregate latency per stage and model. Always present; empty when no
+      server-measured latency is available.
+    fullName: latency_metrics
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'best?: string'
+      content: 'latency_metrics: AgentOptimizationJobLatency[]'
       return:
         description: ''
-        type: string
-  - name: candidates
-    uid: '@azure/ai-projects.AgentOptimizationJobResult.candidates'
+        type: <xref uid="@azure/ai-projects.AgentOptimizationJobLatency" />[]
+  - name: termination_reason
+    uid: '@azure/ai-projects.AgentOptimizationJobResult.termination_reason'
     package: '@azure/ai-projects'
-    summary: All evaluated candidates including baseline.
-    fullName: candidates
+    summary: >-
+      Reason the candidate search terminated. Omitted for jobs that do not
+      comparatively evaluate candidates and until the job reaches a terminal
+      state.
+    fullName: termination_reason
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'candidates?: AgentOptimizationCandidate[]'
+      content: 'termination_reason?: AgentOptimizationTerminationReason'
       return:
         description: ''
-        type: <xref uid="@azure/ai-projects.AgentOptimizationCandidate" />[]
+        type: <xref uid="@azure/ai-projects.AgentOptimizationTerminationReason" />
+  - name: token_usage
+    uid: '@azure/ai-projects.AgentOptimizationJobResult.token_usage'
+    package: '@azure/ai-projects'
+    summary: >-
+      Aggregate token usage per stage and model. Always present; empty array
+      when no calls were measured.
+    fullName: token_usage
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'token_usage: AgentOptimizationJobTokenUsage[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.AgentOptimizationJobTokenUsage" />[]

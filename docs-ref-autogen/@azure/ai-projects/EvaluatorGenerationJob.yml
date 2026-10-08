@@ -37,6 +37,63 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.ErrorModel" />
+  - name: evaluator_description
+    uid: '@azure/ai-projects.EvaluatorGenerationJob.evaluator_description'
+    package: '@azure/ai-projects'
+    summary: >-
+      Optional human-friendly description for the resulting evaluator. Surfaced
+      as `EvaluatorVersion.description` on the persisted evaluator. Typically
+      collected from the UI alongside `evaluator_display_name`. The `evaluator_`
+      prefix disambiguates this from any other description fields on related
+      models.
+    fullName: evaluator_description
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluator_description?: string'
+      return:
+        description: ''
+        type: string
+  - name: evaluator_display_name
+    uid: '@azure/ai-projects.EvaluatorGenerationJob.evaluator_display_name'
+    package: '@azure/ai-projects'
+    summary: >-
+      Optional human-friendly display name for the resulting evaluator. Surfaced
+      as `EvaluatorVersion.display_name` on the persisted evaluator. When
+      omitted, the service uses `evaluator_name` as the display name. The
+      `evaluator_` prefix disambiguates this from the immutable `evaluator_name`
+      identifier.
+    fullName: evaluator_display_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluator_display_name?: string'
+      return:
+        description: ''
+        type: string
+  - name: evaluator_name
+    uid: '@azure/ai-projects.EvaluatorGenerationJob.evaluator_name'
+    package: '@azure/ai-projects'
+    summary: >-
+      The evaluator name (immutable identifier). 1-256 characters; allowed
+      characters are ASCII letters, digits, underscore (`_`), period (`.`),
+      tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for
+      system-managed evaluators and is rejected by the service. If an evaluator
+      with this name already exists in the project (and is rubric-subtype), the
+      service creates a new version under the same name and uses the prior
+      version's `dimensions` as context for incremental improvement (foundation
+      of the post-//build adaptive loop). Old versions remain queryable via
+      `get_version(name, version)`. If the existing evaluator is not a
+      rubric-subtype evaluator (built-in, prompt-based, code-based), the request
+      is rejected with `400 Bad Request`.
+    fullName: evaluator_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluator_name: string'
+      return:
+        description: ''
+        type: string
   - name: finished_at
     uid: '@azure/ai-projects.EvaluatorGenerationJob.finished_at'
     package: '@azure/ai-projects'
@@ -63,18 +120,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: inputs
-    uid: '@azure/ai-projects.EvaluatorGenerationJob.inputs'
-    package: '@azure/ai-projects'
-    summary: Caller-supplied inputs.
-    fullName: inputs
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'inputs?: EvaluatorGenerationInputs'
-      return:
-        description: ''
-        type: <xref uid="@azure/ai-projects.EvaluatorGenerationInputs" />
   - name: input_quality_warnings
     uid: '@azure/ai-projects.EvaluatorGenerationJob.input_quality_warnings'
     package: '@azure/ai-projects'
@@ -94,6 +139,21 @@ properties:
         type: >-
           <xref uid="@azure/ai-projects.RubricGenerationInputQualityWarning"
           />[]
+  - name: model
+    uid: '@azure/ai-projects.EvaluatorGenerationJob.model'
+    package: '@azure/ai-projects'
+    summary: >-
+      The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required —
+      users must provide their own model rather than relying on service-owned
+      capacity.
+    fullName: model
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'model: string'
+      return:
+        description: ''
+        type: string
   - name: result
     uid: '@azure/ai-projects.EvaluatorGenerationJob.result'
     package: '@azure/ai-projects'
@@ -106,6 +166,21 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.EvaluatorVersion" />
+  - name: sources
+    uid: '@azure/ai-projects.EvaluatorGenerationJob.sources'
+    package: '@azure/ai-projects'
+    summary: >-
+      Source materials for generation — agent descriptions, prompts, traces, or
+      datasets. Each entry is an `EvaluatorGenerationJobSource` variant
+      discriminated by `type`.
+    fullName: sources
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sources: EvaluatorGenerationJobSourceUnion[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.EvaluatorGenerationJobSourceUnion" />[]
   - name: status
     uid: '@azure/ai-projects.EvaluatorGenerationJob.status'
     package: '@azure/ai-projects'

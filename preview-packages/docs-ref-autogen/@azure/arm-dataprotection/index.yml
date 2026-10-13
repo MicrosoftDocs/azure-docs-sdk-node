@@ -9,6 +9,7 @@ enums:
   - '@azure/arm-dataprotection.KnownActionType'
   - '@azure/arm-dataprotection.KnownAKSVolumeTypes'
   - '@azure/arm-dataprotection.KnownAlertsState'
+  - '@azure/arm-dataprotection.KnownBackupSolutionType'
   - '@azure/arm-dataprotection.KnownBcdrSecurityLevel'
   - '@azure/arm-dataprotection.KnownBlobBackupPatternType'
   - '@azure/arm-dataprotection.KnownBlobBackupRuleMode'
@@ -22,8 +23,10 @@ enums:
   - '@azure/arm-dataprotection.KnownExistingResourcePolicy'
   - '@azure/arm-dataprotection.KnownFeatureSupportStatus'
   - '@azure/arm-dataprotection.KnownFeatureType'
+  - '@azure/arm-dataprotection.KnownGranularityLevel'
   - '@azure/arm-dataprotection.KnownIdentityType'
   - '@azure/arm-dataprotection.KnownImmutabilityState'
+  - '@azure/arm-dataprotection.KnownImmutabilityType'
   - '@azure/arm-dataprotection.KnownInfrastructureEncryptionState'
   - '@azure/arm-dataprotection.KnownMonth'
   - '@azure/arm-dataprotection.KnownOrigin'
@@ -144,6 +147,7 @@ interfaces:
   - '@azure/arm-dataprotection.CmkKeyVaultProperties'
   - '@azure/arm-dataprotection.CopyOnExpiryOption'
   - '@azure/arm-dataprotection.CopyOption'
+  - '@azure/arm-dataprotection.CostManagementSettings'
   - '@azure/arm-dataprotection.CrossRegionRestoreDetails'
   - '@azure/arm-dataprotection.CrossRegionRestoreJobRequest'
   - '@azure/arm-dataprotection.CrossRegionRestoreJobsRequest'
@@ -208,8 +212,11 @@ interfaces:
   - '@azure/arm-dataprotection.FetchSecondaryRPsRequestParameters'
   - '@azure/arm-dataprotection.FetchSecondaryRecoveryPointsListOptionalParams'
   - '@azure/arm-dataprotection.FetchSecondaryRecoveryPointsOperations'
+  - '@azure/arm-dataprotection.GenericBackupDatasourceParameters'
+  - '@azure/arm-dataprotection.GenericRestoreDatasourceCriteria'
   - '@azure/arm-dataprotection.IdentityDetails'
   - '@azure/arm-dataprotection.ImmediateCopyOption'
+  - '@azure/arm-dataprotection.ImmutabilityConfiguration'
   - '@azure/arm-dataprotection.ImmutabilitySettings'
   - '@azure/arm-dataprotection.InnerError'
   - '@azure/arm-dataprotection.ItemLevelRestoreCriteria'
@@ -248,10 +255,12 @@ interfaces:
   - '@azure/arm-dataprotection.PatchResourceRequestInput'
   - '@azure/arm-dataprotection.PolicyInfo'
   - '@azure/arm-dataprotection.PolicyParameters'
+  - '@azure/arm-dataprotection.PostgreSqlFlexibleServerBackupDatasourceParameters'
   - '@azure/arm-dataprotection.ProtectionStatusDetails'
   - '@azure/arm-dataprotection.ProxyResource'
   - '@azure/arm-dataprotection.RangeBasedItemLevelRestoreCriteria'
   - '@azure/arm-dataprotection.RecoveryPointDataStoreDetails'
+  - '@azure/arm-dataprotection.RecoveryPointImmutabilityProperties'
   - '@azure/arm-dataprotection.RecoveryPointsGetOptionalParams'
   - '@azure/arm-dataprotection.RecoveryPointsListOptionalParams'
   - '@azure/arm-dataprotection.RecoveryPointsOperations'
@@ -296,6 +305,7 @@ interfaces:
   - '@azure/arm-dataprotection.ResourceGuardsOperations'
   - '@azure/arm-dataprotection.ResourceGuardsPatchOptionalParams'
   - '@azure/arm-dataprotection.ResourceGuardsPutOptionalParams'
+  - '@azure/arm-dataprotection.ResourceListSelectionCriteria'
   - '@azure/arm-dataprotection.ResourceMoveDetails'
   - '@azure/arm-dataprotection.RestorableTimeRange'
   - '@azure/arm-dataprotection.RestorableTimeRangesFindOptionalParams'
@@ -334,6 +344,18 @@ interfaces:
   - '@azure/arm-dataprotection.ValidateForBackupRequest'
   - '@azure/arm-dataprotection.ValidateForModifyBackupRequest'
   - '@azure/arm-dataprotection.ValidateRestoreRequestObject'
+variables:
+  - name: RestError
+    uid: '@azure/arm-dataprotection.RestError'
+    package: '@azure/arm-dataprotection'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
 typeAliases:
   - '@azure/arm-dataprotection.AKSVolumeTypes'
   - '@azure/arm-dataprotection.AbsoluteMarker'
@@ -347,6 +369,7 @@ typeAliases:
   - '@azure/arm-dataprotection.BackupCriteriaUnion'
   - '@azure/arm-dataprotection.BackupDatasourceParametersUnion'
   - '@azure/arm-dataprotection.BackupParametersUnion'
+  - '@azure/arm-dataprotection.BackupSolutionType'
   - '@azure/arm-dataprotection.BaseBackupPolicyUnion'
   - '@azure/arm-dataprotection.BasePolicyRuleUnion'
   - '@azure/arm-dataprotection.BaseResourcePropertiesUnion'
@@ -371,8 +394,10 @@ typeAliases:
   - '@azure/arm-dataprotection.FeatureType'
   - '@azure/arm-dataprotection.FeatureValidationRequestBaseUnion'
   - '@azure/arm-dataprotection.FeatureValidationResponseBaseUnion'
+  - '@azure/arm-dataprotection.GranularityLevel'
   - '@azure/arm-dataprotection.IdentityType'
   - '@azure/arm-dataprotection.ImmutabilityState'
+  - '@azure/arm-dataprotection.ImmutabilityType'
   - '@azure/arm-dataprotection.InfrastructureEncryptionState'
   - '@azure/arm-dataprotection.ItemLevelRestoreCriteriaUnion'
   - '@azure/arm-dataprotection.Month'
@@ -401,6 +426,21 @@ typeAliases:
   - '@azure/arm-dataprotection.ValidationType'
   - '@azure/arm-dataprotection.WeekNumber'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/arm-dataprotection.isRestError'
+    package: '@azure/arm-dataprotection'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e is RestError'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e is RestError
   - name: >-
       restorePoller<TResponse, TResult>(DataProtectionClient, string, (args:
       any[]) => PollerLike<OperationState<TResult>, TResult>,

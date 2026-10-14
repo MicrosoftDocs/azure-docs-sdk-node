@@ -1,7 +1,7 @@
 ---
 title: Azure Standby Pool SDK for JavaScript
 description: Reference for Azure Standby Pool SDK for JavaScript
-ms.date: 10/13/2026
+ms.date: 10/14/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: standbypool

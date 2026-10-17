@@ -35,7 +35,7 @@ properties:
   - name: datasetId
     uid: '@azure/arm-cognitiveservices.WorkbenchProperties.datasetId'
     package: '@azure/arm-cognitiveservices'
-    summary: The dataset ID to mount for the workbench.
+    summary: The dataset ID to mount for the workbench. Set only during creation.
     fullName: datasetId
     remarks: ''
     isDeprecated: false
@@ -56,6 +56,23 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-cognitiveservices.ErrorDetail" />[]
+  - name: gpuCount
+    uid: '@azure/arm-cognitiveservices.WorkbenchProperties.gpuCount'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8,
+      or a positive multiple of 8. A full-node Azure VM size permits partition
+      selection; omission uses the full node. For an exact Singularity instance
+      type, a supplied count must match that type; the Singularity.D4_v3
+      fallback accepts 4.
+    fullName: gpuCount
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'gpuCount?: number'
+      return:
+        description: ''
+        type: number
   - name: idleTimeBeforeShutdown
     uid: '@azure/arm-cognitiveservices.WorkbenchProperties.idleTimeBeforeShutdown'
     package: '@azure/arm-cognitiveservices'
@@ -73,7 +90,9 @@ properties:
   - name: imageLink
     uid: '@azure/arm-cognitiveservices.WorkbenchProperties.imageLink'
     package: '@azure/arm-cognitiveservices'
-    summary: Container image URI (e.g., MCR or ACR image path) for the workbench.
+    summary: >-
+      Container image URI (e.g., MCR or ACR image path) for the workbench.
+      Immutable after creation.
     fullName: imageLink
     remarks: ''
     isDeprecated: false
@@ -82,10 +101,28 @@ properties:
       return:
         description: ''
         type: string
+  - name: instanceType
+    uid: '@azure/arm-cognitiveservices.WorkbenchProperties.instanceType'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      For virtual clusters, an exact Singularity instance type or a full-node
+      Azure VM size. If omitted on creation, defaults to Singularity.D4_v3.
+      Foundry Compute ignores this override and uses the pool configuration.
+      Changing the instance type requires the workbench to be stopped.
+    fullName: instanceType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'instanceType?: string'
+      return:
+        description: ''
+        type: string
   - name: provisioningState
     uid: '@azure/arm-cognitiveservices.WorkbenchProperties.provisioningState'
     package: '@azure/arm-cognitiveservices'
-    summary: Provisioning state of the workbench resource.
+    summary: >-
+      Provisioning state of the workbench resource, independent of runtime
+      lifecycle status.
     fullName: provisioningState
     remarks: ''
     isDeprecated: false
@@ -97,7 +134,9 @@ properties:
   - name: sshSettings
     uid: '@azure/arm-cognitiveservices.WorkbenchProperties.sshSettings'
     package: '@azure/arm-cognitiveservices'
-    summary: SSH configuration for remote access to the workbench.
+    summary: >-
+      SSH configuration for remote access to the workbench. Set only during
+      creation.
     fullName: sshSettings
     remarks: ''
     isDeprecated: false
@@ -106,10 +145,27 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-cognitiveservices.SshSettings" />
+  - name: status
+    uid: '@azure/arm-cognitiveservices.WorkbenchProperties.status'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      Runtime lifecycle status of the workbench. Independent of resource
+      provisioning; start, stop, restart, and runtime health changes do not
+      change provisioningState.
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'status?: string'
+      return:
+        description: ''
+        type: string
   - name: targetClusterId
     uid: '@azure/arm-cognitiveservices.WorkbenchProperties.targetClusterId'
     package: '@azure/arm-cognitiveservices'
-    summary: ARM resource ID of the parent cluster that hosts this workbench.
+    summary: >-
+      Resource ID of the Foundry Compute or virtual cluster that hosts this
+      workbench. Changing the cluster requires the workbench to be stopped.
     fullName: targetClusterId
     remarks: ''
     isDeprecated: false

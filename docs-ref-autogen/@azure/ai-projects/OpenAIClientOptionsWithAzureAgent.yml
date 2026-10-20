@@ -46,9 +46,10 @@ inheritedProperties:
 
       - Defaults to process.env['OPENAI_API_KEY'].
 
-      - When a function is provided, it is invoked before each request so you
-      can rotate
-        or refresh credentials at runtime.
+      - When a function is provided, it is invoked when building bearer
+      authentication
+        headers for each attempt, including retries and direct `buildRequest()` calls.
+        Each invocation's result is used for its own request.
       - The function must return a non-empty string; otherwise an OpenAIError is
       thrown.
 
@@ -83,6 +84,21 @@ inheritedProperties:
         description: ''
         type: string | null
     inheritanceDescription: <b>Inherited From</b> OpenAIClientOptions.baseURL
+  - name: credential
+    uid: '@azure/ai-projects.OpenAIClientOptionsWithAzureAgent.credential'
+    package: '@azure/ai-projects'
+    summary: >-
+      First-class certificate credential created with `fromX509` from
+      `openai/auth/x509-transport`.
+    fullName: credential
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'credential?: X509Credential'
+      return:
+        description: ''
+        type: X509Credential
+    inheritanceDescription: <b>Inherited From</b> OpenAIClientOptions.credential
   - name: dangerouslyAllowBrowser
     uid: >-
       @azure/ai-projects.OpenAIClientOptionsWithAzureAgent.dangerouslyAllowBrowser
@@ -102,6 +118,28 @@ inheritedProperties:
         description: ''
         type: boolean
     inheritanceDescription: <b>Inherited From</b> OpenAIClientOptions.dangerouslyAllowBrowser
+  - name: dataResidency
+    uid: '@azure/ai-projects.OpenAIClientOptionsWithAzureAgent.dataResidency'
+    package: '@azure/ai-projects'
+    summary: >-
+      Select an OpenAI regional endpoint. This overrides an inherited or
+      environment
+
+      base URL and is mutually exclusive with an explicit `baseURL` or
+      `provider`.
+
+      Availability depends on your project and model; no fallback is performed.
+
+      `null` and `undefined` leave ordinary base URL resolution unchanged.
+    fullName: dataResidency
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'dataResidency?: DataResidency | null'
+      return:
+        description: ''
+        type: DataResidency | null
+    inheritanceDescription: <b>Inherited From</b> OpenAIClientOptions.dataResidency
   - name: defaultHeaders
     uid: '@azure/ai-projects.OpenAIClientOptionsWithAzureAgent.defaultHeaders'
     package: '@azure/ai-projects'
@@ -271,6 +309,33 @@ inheritedProperties:
       scenario you may wait
 
       much longer than this timeout before the promise succeeds or fails.
+
+
+      Node.js fetch enforces independent response-header and body-inactivity
+      timeouts, typically
+
+      defaulting to five minutes, even when this timeout is longer. To increase
+      them, install
+
+      `undici` and configure an Agent with the matching fetch implementation:
+
+
+      ```ts
+
+      import { Agent, fetch } from 'undici';
+
+
+      const timeout = 20 * 60 * 1000;
+
+      const client = new OpenAI({
+        timeout,
+        fetch,
+        fetchOptions: {
+          dispatcher: new Agent({ headersTimeout: timeout, bodyTimeout: timeout }),
+        },
+      });
+
+      ```
     fullName: timeout
     remarks: ''
     isDeprecated: false
@@ -303,9 +368,24 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'workloadIdentity?: WorkloadIdentity'
+      content: 'workloadIdentity?: WorkloadIdentity | X509WorkloadIdentity'
       return:
         description: ''
-        type: WorkloadIdentity
+        type: WorkloadIdentity | X509WorkloadIdentity
     inheritanceDescription: <b>Inherited From</b> OpenAIClientOptions.workloadIdentity
+  - name: x509Transport
+    uid: '@azure/ai-projects.OpenAIClientOptionsWithAzureAgent.x509Transport'
+    package: '@azure/ai-projects'
+    summary: >-
+      Approved, frozen Node.js certificate transport required only for X.509
+      workload identity.
+    fullName: x509Transport
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'x509Transport?: X509Transport'
+      return:
+        description: ''
+        type: X509Transport
+    inheritanceDescription: <b>Inherited From</b> OpenAIClientOptions.x509Transport
 extends: ClientOptions

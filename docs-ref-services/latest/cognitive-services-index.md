@@ -18,7 +18,6 @@
 |[Face](cognitiveservices-face-readme.md)|[@azure/cognitiveservices-face](https://www.npmjs.com/package/@azure/cognitiveservices-face)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |LUIS Authoring|[@azure/cognitiveservices-luis-authoring](https://www.npmjs.com/package/@azure/cognitiveservices-luis-authoring)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |LUIS Runtime|[@azure/cognitiveservices-luis-runtime](https://www.npmjs.com/package/@azure/cognitiveservices-luis-runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
-|Personalizer|[@azure/cognitiveservices-personalizer](https://www.npmjs.com/package/@azure/cognitiveservices-personalizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |Question Answering|[@azure/cognitiveservices-qnamaker](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |Question Answering|[@azure/cognitiveservices-qnamaker-runtime](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker-runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|
 |[Spell Check](cognitiveservices-spellcheck-readme.md)|[@azure/cognitiveservices-spellcheck](https://www.npmjs.com/package/@azure/cognitiveservices-spellcheck)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/)|

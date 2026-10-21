@@ -1,22 +1,22 @@
 ---
 title: Azure Event Hubs Checkpoint Store client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/eventhubs-checkpointstore-blob, azure-event-hubs
-ms.date: 02/12/2025
+ms.date: 10/21/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: azure-event-hubs
 ---
-# Azure Event Hubs Checkpoint Store client library for JavaScript - version 2.0.0-beta.1 
+# Azure Event Hubs Checkpoint Store client library for JavaScript - version 2.0.2-alpha.20261021.1 
 
 
 An Azure Blob storage based solution to store checkpoints and to aid in load balancing when using `EventHubConsumerClient` from the [@azure/event-hubs](https://www.npmjs.com/package/@azure/event-hubs) library
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventhubs-checkpointstore-blob_2.0.0-beta.1/sdk/eventhub/eventhubs-checkpointstore-blob)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/eventhubs-checkpointstore-blob)
 - [Package (npm)](https://www.npmjs.com/package/@azure/eventhubs-checkpointstore-blob)
 - [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/eventhubs-checkpointstore-blob/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventhubs-checkpointstore-blob_2.0.0-beta.1/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
 
 ## Getting started
 
@@ -25,7 +25,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventhubs-checkpointstore-blob_2.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -218,10 +218,10 @@ export DEBUG=azure:eventhubs-checkpointstore-blob:info
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventhubs-checkpointstore-blob_2.0.0-beta.1/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
 directory for detailed example.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventhubs-checkpointstore-blob_2.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 

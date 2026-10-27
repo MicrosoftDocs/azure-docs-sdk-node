@@ -1,0 +1,217 @@
+### YamlMime:TSType
+name: AgentPoolUpgradeInsightProperties
+uid: '@azure/arm-containerservice.AgentPoolUpgradeInsightProperties'
+package: '@azure/arm-containerservice'
+summary: Properties for a single agent pool Kubernetes version upgrade insight.
+fullName: AgentPoolUpgradeInsightProperties
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: agentPoolName
+    uid: >-
+      @azure/arm-containerservice.AgentPoolUpgradeInsightProperties.agentPoolName
+    package: '@azure/arm-containerservice'
+    summary: The name of the agent pool this insight applies to.
+    fullName: agentPoolName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'agentPoolName?: string'
+      return:
+        description: ''
+        type: string
+  - name: context
+    uid: '@azure/arm-containerservice.AgentPoolUpgradeInsightProperties.context'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      Contextual information about how this upgrade is managed, such as the
+      upgrade strategy, next maintenance window, and last successful upgrade
+      time.
+    fullName: context
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'context?: UpgradeContext'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-containerservice.UpgradeContext" />
+  - name: currentKubernetesVersion
+    uid: >-
+      @azure/arm-containerservice.AgentPoolUpgradeInsightProperties.currentKubernetesVersion
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The Kubernetes version the scope was evaluated from (the upgrade source
+      version the scope is currently running). Lets consumers read the result as
+      "from X to targetKubernetesVersion" and detect a stale cached record by
+      comparing against the live cluster version. Populated for Kubernetes
+      version upgrades.
+    fullName: currentKubernetesVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'currentKubernetesVersion?: string'
+      return:
+        description: ''
+        type: string
+  - name: evaluation
+    uid: '@azure/arm-containerservice.AgentPoolUpgradeInsightProperties.evaluation'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The evaluation result, including overall status, evaluation time, and any
+      detected issues.
+    fullName: evaluation
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluation?: UpgradeInsightEvaluation'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-containerservice.UpgradeInsightEvaluation" />
+  - name: kubernetesVersionEndOfSupportDate
+    uid: >-
+      @azure/arm-containerservice.AgentPoolUpgradeInsightProperties.kubernetesVersionEndOfSupportDate
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The date on which support ends for the Kubernetes version the scope is
+      currently
+
+      running (its end-of-support date). Returned as an absolute date so clients
+      can apply
+
+      their own "approaching end of support" threshold and compute the remaining
+      days against
+
+      the current time; a precomputed remaining-days value is intentionally not
+      returned so
+
+      that cached results do not go stale. Populated for Kubernetes version
+      upgrades.
+    fullName: kubernetesVersionEndOfSupportDate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'kubernetesVersionEndOfSupportDate?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: kubernetesVersionSupportStatus
+    uid: >-
+      @azure/arm-containerservice.AgentPoolUpgradeInsightProperties.kubernetesVersionSupportStatus
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The support status of the Kubernetes version the scope is currently
+      running (not the target version). Populated for Kubernetes version
+      upgrades.
+    fullName: kubernetesVersionSupportStatus
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'kubernetesVersionSupportStatus?: string'
+      return:
+        description: ''
+        type: string
+  - name: targetKubernetesVersion
+    uid: >-
+      @azure/arm-containerservice.AgentPoolUpgradeInsightProperties.targetKubernetesVersion
+    package: '@azure/arm-containerservice'
+    summary: The target Kubernetes version that was evaluated.
+    fullName: targetKubernetesVersion
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetKubernetesVersion?: string'
+      return:
+        description: ''
+        type: string
+  - name: upgradeType
+    uid: '@azure/arm-containerservice.AgentPoolUpgradeInsightProperties.upgradeType'
+    package: '@azure/arm-containerservice'
+    summary: The type of upgrade this insight evaluates.
+    fullName: upgradeType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'upgradeType: "AgentPool"'
+      return:
+        description: ''
+        type: '"AgentPool"'
+inheritedProperties:
+  - name: expiresAt
+    uid: '@azure/arm-containerservice.AgentPoolUpgradeInsightProperties.expiresAt'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The UTC time at which this stored upgrade insight expires and is removed
+      from the
+
+      data store (currently `lastEvaluatedAt` plus a 14-day retention window).
+      After this
+
+      time a GET for the resource returns 404 Not Found and it no longer appears
+      in the
+
+      list, indicating the caller should call the compute operation to produce a
+      fresh
+
+      evaluation. Exposing the expiry lets clients decide when to recompute
+      without
+
+      hardcoding the retention period.
+    fullName: expiresAt
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'expiresAt?: Date'
+      return:
+        description: ''
+        type: Date
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [UpgradeInsightProperties.expiresAt](xref:@azure/arm-containerservice.UpgradeInsightProperties.expiresAt)
+  - name: lastEvaluatedAt
+    uid: >-
+      @azure/arm-containerservice.AgentPoolUpgradeInsightProperties.lastEvaluatedAt
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The UTC time at which this upgrade insight was last computed (the last
+      time the
+
+      compute operation ran for this resource). This is the resource-level "last
+      run"
+
+      marker and, for a cached record, indicates how stale the stored evaluation
+      is. For
+
+      a combined evaluation it is the umbrella run time across all scopes,
+      whereas each
+
+      scope's `evaluation.evaluatedAt` records when that specific snapshot was
+      produced.
+    fullName: lastEvaluatedAt
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lastEvaluatedAt?: Date'
+      return:
+        description: ''
+        type: Date
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [UpgradeInsightProperties.lastEvaluatedAt](xref:@azure/arm-containerservice.UpgradeInsightProperties.lastEvaluatedAt)
+  - name: provisioningState
+    uid: >-
+      @azure/arm-containerservice.AgentPoolUpgradeInsightProperties.provisioningState
+    package: '@azure/arm-containerservice'
+    summary: The provisioning state of the upgrade insight evaluation.
+    fullName: provisioningState
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'provisioningState?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [UpgradeInsightProperties.provisioningState](xref:@azure/arm-containerservice.UpgradeInsightProperties.provisioningState)
+extends: <xref uid="@azure/arm-containerservice.UpgradeInsightProperties" />

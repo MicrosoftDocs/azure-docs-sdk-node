@@ -1,0 +1,101 @@
+### YamlMime:TSType
+name: UpgradeInsightProperties
+uid: '@azure/arm-containerservice.UpgradeInsightProperties'
+package: '@azure/arm-containerservice'
+summary: >-
+  The base properties of an upgrade insight. The concrete shape is determined by
+
+  `upgradeType`, which is encoded in the resource name: single-scope evaluations
+
+  (`ControlPlane`, `AgentPool`, `NodeImage`) carry a flat per-scope result,
+  while a
+
+  combined evaluation (`ControlPlaneAndAgentPools`) carries a nested control
+  plane
+
+  result plus a per-agent-pool array.
+fullName: UpgradeInsightProperties
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: expiresAt
+    uid: '@azure/arm-containerservice.UpgradeInsightProperties.expiresAt'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The UTC time at which this stored upgrade insight expires and is removed
+      from the
+
+      data store (currently `lastEvaluatedAt` plus a 14-day retention window).
+      After this
+
+      time a GET for the resource returns 404 Not Found and it no longer appears
+      in the
+
+      list, indicating the caller should call the compute operation to produce a
+      fresh
+
+      evaluation. Exposing the expiry lets clients decide when to recompute
+      without
+
+      hardcoding the retention period.
+    fullName: expiresAt
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'expiresAt?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: lastEvaluatedAt
+    uid: '@azure/arm-containerservice.UpgradeInsightProperties.lastEvaluatedAt'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The UTC time at which this upgrade insight was last computed (the last
+      time the
+
+      compute operation ran for this resource). This is the resource-level "last
+      run"
+
+      marker and, for a cached record, indicates how stale the stored evaluation
+      is. For
+
+      a combined evaluation it is the umbrella run time across all scopes,
+      whereas each
+
+      scope's `evaluation.evaluatedAt` records when that specific snapshot was
+      produced.
+    fullName: lastEvaluatedAt
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lastEvaluatedAt?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: provisioningState
+    uid: '@azure/arm-containerservice.UpgradeInsightProperties.provisioningState'
+    package: '@azure/arm-containerservice'
+    summary: The provisioning state of the upgrade insight evaluation.
+    fullName: provisioningState
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'provisioningState?: string'
+      return:
+        description: ''
+        type: string
+  - name: upgradeType
+    uid: '@azure/arm-containerservice.UpgradeInsightProperties.upgradeType'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      The discriminator possible values: ControlPlane, AgentPool, NodeImage,
+      ControlPlaneAndAgentPools
+    fullName: upgradeType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'upgradeType: string'
+      return:
+        description: ''
+        type: string

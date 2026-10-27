@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-ms.date: 10/06/2026
+ms.date: 10/27/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.46 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-alpha.20261022.1 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
@@ -23,7 +23,7 @@ This exporter package assumes your application is [already instrumented](https:/
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for browser environments.
 
@@ -174,7 +174,7 @@ provider.register();
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
 
 ## Key concepts
 
@@ -183,6 +183,14 @@ For more information on the OpenTelemetry project, please review the [**OpenTele
 ### Custom Dimensions Size Limit
 
 By default, custom dimension values are truncated to 64KB. This protects against unexpectedly large payloads.
+
+### Request compression
+
+The exporter automatically gzip-compresses telemetry sent over HTTPS to Azure Monitor ingestion endpoints, including internal Statsbeat and customer SDK Stats. Compression applies to `/v2/track` and `/v2.1/track` on recognized Azure Monitor domains in the public, US Government, and China clouds. Custom ingestion endpoints and reverse proxies outside those domains continue to receive uncompressed JSON.
+
+Compression happens after pipeline policies run. A custom `httpClient` receives the compressed body with `Content-Encoding: gzip` and the compressed `Content-Length`. Requests with an existing `Content-Encoding` are left unchanged. Offline telemetry is stored as envelopes and compressed only when sent or replayed. This does not change Live Metrics, OTLP exporters, or other Azure SDK clients.
+
+If gzip compression fails, the exporter logs a diagnostic warning and sends the original uncompressed request. Normal retry and offline storage behavior still applies if sending that request fails.
 
 ## Troubleshooting
 
@@ -209,7 +217,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -223,5 +231,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 

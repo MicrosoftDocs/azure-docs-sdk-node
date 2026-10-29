@@ -92,6 +92,68 @@ methods:
     isDeprecated: false
     syntax:
       content: function close()
+  - name: commit(number)
+    uid: microsoft-cognitiveservices-speech-sdk.PushAudioInputStream.commit
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: >-
+      Requests that the audio written so far be finalized as a completed
+
+      segment, without ending or restarting the current recognition turn.
+
+
+      The call is non-blocking. The commit is anchored to the audio written
+      before the call,
+
+      so write the audio for the segment first, then call this method.
+
+
+      The request is advisory. A token is issued as soon as the request is
+      recorded, but there
+
+      is no guarantee that it will be acknowledged: the service may not support
+      inline commit,
+
+      or the session may end first. Applications must tolerate a token that is
+      never echoed.
+
+      A commit not yet delivered when the stream is closed is discarded, since
+      end of audio
+
+      finalizes the same audio.
+
+
+      Supported with SpeechRecognizer, TranslationRecognizer and
+      ConversationTranscriber,
+
+      for PCM, A-law and mu-law audio.
+
+
+      Throws if the stream has been closed, or if channelId is not an integer
+      from 0 to
+
+      4294967295.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function commit(channelId?: number): number'
+      parameters:
+        - id: channelId
+          type: number
+          description: |-
+            Optional 0-based index of the channel to commit on
+            multichannel input. If omitted, the commit applies to all channels.
+      return:
+        description: >-
+          A token greater than 0 that the recognition result acknowledging
+
+          the commit carries in its commitToken property, or 0 if the request
+          was rejected:
+
+          more than one commit within 100 ms on this stream, or an audio format
+          that does not
+
+          support commit.
+        type: number
   - name: create(AudioStreamFormat)
     uid: microsoft-cognitiveservices-speech-sdk.PushAudioInputStream.create
     package: microsoft-cognitiveservices-speech-sdk

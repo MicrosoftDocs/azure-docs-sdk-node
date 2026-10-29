@@ -31,10 +31,18 @@ interfaces:
   - '@azure/keyvault-secrets.SecretProperties'
   - '@azure/keyvault-secrets.SetSecretOptions'
   - '@azure/keyvault-secrets.UpdateSecretPropertiesOptions'
-typeAliases:
-  - '@azure/keyvault-secrets.ContentType'
-  - '@azure/keyvault-secrets.DeletionRecoveryLevel'
 variables:
+  - name: RestError
+    uid: '@azure/keyvault-secrets.RestError'
+    package: '@azure/keyvault-secrets'
+    summary: A custom error type for failed pipeline requests.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'RestError: RestErrorConstructor'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.RestErrorConstructor" />
   - name: logger
     uid: '@azure/keyvault-secrets.logger'
     package: '@azure/keyvault-secrets'
@@ -46,7 +54,25 @@ variables:
       return:
         description: ''
         type: <xref uid="@azure/logger.AzureLogger" />
+typeAliases:
+  - '@azure/keyvault-secrets.ContentType'
+  - '@azure/keyvault-secrets.DeletionRecoveryLevel'
 functions:
+  - name: isRestError(unknown)
+    uid: '@azure/keyvault-secrets.isRestError'
+    package: '@azure/keyvault-secrets'
+    summary: Typeguard for RestError
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isRestError(e: unknown): e is RestError'
+      parameters:
+        - id: e
+          type: unknown
+          description: Something caught by a catch clause.
+      return:
+        description: ''
+        type: e is RestError
   - name: parseKeyVaultSecretIdentifier(string)
     uid: '@azure/keyvault-secrets.parseKeyVaultSecretIdentifier'
     package: '@azure/keyvault-secrets'

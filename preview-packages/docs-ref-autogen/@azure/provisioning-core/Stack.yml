@@ -2,52 +2,39 @@
 name: Stack
 uid: '@azure/provisioning-core.Stack'
 package: '@azure/provisioning-core'
-summary: >+
-  A Stack defines a deployment unit.
-
-
-  **Example**
-
-
-  ```typescript snippet:ignore
-
-  import { Stack, ResourceGroup } from "@azure/provisioning-core";
-
-  import { KeyVault } from "@azure/provisioning-keyvault";
-
-
-  const stack = new Stack("my-app");
-
-  const rg = new ResourceGroup(stack, { name: "rg-my-app", location: "eastus"
-  });
-
-  const vault = new KeyVault(rg, {
-    name: "kv-my-app",
-    properties: {
-      tenantId: "11111111-1111-1111-1111-111111111111",
-      sku: { family: "A", name: "standard" },
-    },
-  });
-
-  ```
-
+summary: A Stack defines a deployment unit.
 fullName: Stack
-remarks: |-
+remarks: >-
   Each stack produces one or more Bicep files — resources at different
+
   scopes (subscription vs. resource group) are split into separate files
+
   linked by module references.
 
+
   Resources register themselves by passing the stack (or a child component)
+
   as their first constructor argument. `Stack.add()` is available as a
+
   convenience for creating child components with the stack as parent.
 
+
   The `targetScope` option controls the Bicep target scope. Default is
+
   `"subscription"`, which requires explicit `ResourceGroup` instances.
+
   Set `"resourceGroup"` to deploy resources directly into an existing
+
   resource group.
 
+
   Every stack registers itself in `Stack.roots` for collection by tools
+
   like the playground and CLI.
+
+
+  [Key Vault getting started
+  example](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/keyvault/provisioning-keyvault#getting-started)
 isDeprecated: false
 type: class
 constructors:

@@ -23,12 +23,17 @@ remarks: |-
   Resources created with a `ResourceGroup` as their parent inherit its
   location, tags, and naming policy, and deploy at resource-group scope
   in the generated Bicep.
+
+  The parent may be a Stack or an ordinary component, with no resource
+  declarations in its ancestry. New groups require a subscription-scoped Stack.
+  Existing groups may be referenced from other Stack scopes with an appropriate
+  lookup scope.
 isDeprecated: false
 type: class
 constructors:
   - name: >-
       ResourceGroup(ProvisioningComponent, (ResourceGroupProps & { existing?:
-      false }) | (ExistingResourceProps & { existing: true }))
+      false }) | (ExistingResourceProps<string> & { existing: true }))
     uid: '@azure/provisioning-core.ResourceGroup.constructor'
     package: '@azure/provisioning-core'
     summary: ''
@@ -37,8 +42,8 @@ constructors:
     syntax:
       content: >-
         new ResourceGroup(context: ProvisioningComponent, props:
-        (ResourceGroupProps & { existing?: false }) | (ExistingResourceProps & {
-        existing: true }))
+        (ResourceGroupProps & { existing?: false }) |
+        (ExistingResourceProps<string> & { existing: true }))
       parameters:
         - id: context
           type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />
@@ -47,8 +52,8 @@ constructors:
           type: >-
             (<xref uid="@azure/provisioning-core.ResourceGroupProps" /> & {
             existing?: false }) | (<xref
-            uid="@azure/provisioning-core.ExistingResourceProps" /> & {
-            existing: true })
+            uid="@azure/provisioning-core.ExistingResourceProps"
+            />&lt;string&gt; & { existing: true })
           description: ''
 properties:
   - name: apiVersion

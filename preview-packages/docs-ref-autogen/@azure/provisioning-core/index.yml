@@ -54,7 +54,6 @@ interfaces:
   - '@azure/provisioning-core.RecordShape'
   - '@azure/provisioning-core.ResourceGroupProps'
   - '@azure/provisioning-core.ResourceNamingRules'
-  - '@azure/provisioning-core.ResourceNamingValidCharacters'
   - '@azure/provisioning-core.ResourceOptions'
   - '@azure/provisioning-core.ResourceProps'
   - '@azure/provisioning-core.ResourceState'
@@ -103,7 +102,6 @@ typeAliases:
   - '@azure/provisioning-core.OutputValueFor'
   - '@azure/provisioning-core.Parameter'
   - '@azure/provisioning-core.ParameterOptions'
-  - '@azure/provisioning-core.ParameterValue'
   - '@azure/provisioning-core.PrimitiveTypeName'
   - '@azure/provisioning-core.PropertySegment'
   - '@azure/provisioning-core.ProvisioningComponentConstructor'
@@ -114,7 +112,6 @@ typeAliases:
   - '@azure/provisioning-core.TargetScope'
   - '@azure/provisioning-core.TerminalValueShape'
   - '@azure/provisioning-core.UnaryOperator'
-  - '@azure/provisioning-core.ValueEncodingDescriptor'
   - '@azure/provisioning-core.ValueShape'
   - '@azure/provisioning-core.Variable'
   - '@azure/provisioning-core.VariableOptions'
@@ -171,36 +168,48 @@ functions:
   - name: asDiscriminator<L>(ExpressionOrValue<L>)
     uid: '@azure/provisioning-core.asDiscriminator'
     package: '@azure/provisioning-core'
-    summary: |-
+    summary: >-
       Asserts that a deploy-time expression resolves to a specific literal,
+
       so it can be used where a discriminator is expected.
 
+
       Discriminator properties on a `@discriminator` model are typed as bare
+
       literals (`kind: "cache"`) rather than `ExpressionOrValue<"cache">`.
+
       That is deliberate: TypeScript only treats a property as a discriminant
+
       when its type is a *unit* type in every constituent of the union, and a
+
       single widened arm disables narrowing for the whole union — completions
+
       then offer every variant's properties and excess-property checking
+
       degrades to "allowed if the property exists in any variant".
 
-      When the discriminator genuinely isn't known until deployment, wrap the
-      expression with this to state which variant you mean:
 
-      ```ts snippet:ignore
-      widget.properties.primaryRule = {
-        kind: asDiscriminator(kindParam),
-        cacheKind: "long",
-        days: 7,
-      };
-      ```
+      When the discriminator genuinely isn't known until deployment, wrap the
+
+      expression with this to state which variant you mean. See the
+
+      [deploy-time discriminator
+      example](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/provisioning-core#deploy-time-discriminators).
+
 
       Every other property is still fully checked — only the discriminator's
+
       type safety is waived. Note that the runtime cannot dispatch on a
+
       non-literal discriminator, so serialization falls back to structural
+
       variant inference; prefer a literal wherever possible.
 
+
       The literal is inferred from the expression's own type argument. If the
+
       expression is loosely typed (`Expression<string>`), name the variant
+
       explicitly: `asDiscriminator<"cache">(param)`.
     remarks: ''
     isDeprecated: false

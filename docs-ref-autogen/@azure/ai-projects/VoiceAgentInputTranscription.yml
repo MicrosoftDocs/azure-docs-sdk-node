@@ -3,11 +3,21 @@ name: VoiceAgentInputTranscription
 uid: '@azure/ai-projects.VoiceAgentInputTranscription'
 package: '@azure/ai-projects'
 summary: >-
-  Asynchronous input-audio transcription configuration. Extends the OpenAI
-  Realtime transcription
+  Settings for transcribing input audio, including the transcription model,
+  Custom Speech deployments,
 
-  options with the Azure and MAI transcription models, custom speech models, and
-  phrase hints.
+  and phrase hints.
+
+  When `model` is `azure-speech-streaming`, transcription is supported for
+  cascaded text-model
+
+  conversations only (not realtime speech-to-speech models), requires a nonempty
+  `language` such as
+
+  `en-US` (comma-separated locales are supported), and supports `custom_speech`,
+  `phrase_list`, and
+
+  `profanity_filter`.
 fullName: VoiceAgentInputTranscription
 remarks: ''
 isDeprecated: false
@@ -36,10 +46,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'delay?: "low" | "medium" | "high" | "minimal" | "xhigh"'
+      content: 'delay?: "low" | "medium" | "high" | "xhigh" | "minimal"'
       return:
         description: ''
-        type: '"low" | "medium" | "high" | "minimal" | "xhigh"'
+        type: '"low" | "medium" | "high" | "xhigh" | "minimal"'
   - name: keywords
     uid: '@azure/ai-projects.VoiceAgentInputTranscription.keywords'
     package: '@azure/ai-projects'
@@ -57,10 +67,19 @@ properties:
   - name: language
     uid: '@azure/ai-projects.VoiceAgentInputTranscription.language'
     package: '@azure/ai-projects'
-    summary: |-
+    summary: >-
       The language of the input audio. Supplying the input language in
-        [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `en`) format
-        will improve accuracy and latency.
+
+      [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g.
+      `en`) format
+
+      will improve accuracy and latency. Optional for other transcription
+      models; required and must be
+
+      nonempty when `model` is `azure-speech-streaming` (such as `en-US`;
+      comma-separated locales are
+
+      supported).
     fullName: language
     remarks: ''
     isDeprecated: false
@@ -89,7 +108,11 @@ properties:
     package: '@azure/ai-projects'
     summary: >-
       The transcription model identifier. Configure customer custom speech
-      deployments in `custom_speech`.
+      deployments in `custom_speech`. `azure-speech-streaming` is for cascaded
+      text-model conversations only (not realtime speech-to-speech models),
+      requires a nonempty `language` such as `en-US` (comma-separated locales
+      are supported), and supports `custom_speech`, `phrase_list`, and
+      `profanity_filter`.
     fullName: model
     remarks: ''
     isDeprecated: false
@@ -110,13 +133,43 @@ properties:
       return:
         description: ''
         type: string[]
+  - name: profanity_filter
+    uid: '@azure/ai-projects.VoiceAgentInputTranscription.profanity_filter'
+    package: '@azure/ai-projects'
+    summary: >-
+      Controls how profanity is handled in input transcripts. Supported only
+      with managed Azure Speech
+
+      (`azure-speech` and `azure-speech-streaming`), including Custom Speech.
+
+      Set this property before the session starts. If omitted, the transcription
+      provider's default applies.
+
+      You cannot change the mode during a session.
+
+      Filtering affects transcript events and the text sent to cascaded models.
+      It does not change input
+
+      audio, voice activity detection, or assistant speech; audio-native models
+      still receive the original
+
+      audio. Mandatory service masking policies apply even when you select
+      `unfiltered`.
+    fullName: profanity_filter
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'profanity_filter?: VoiceAgentProfanityFilterMode'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.VoiceAgentProfanityFilterMode" />
   - name: prompt
     uid: '@azure/ai-projects.VoiceAgentInputTranscription.prompt'
     package: '@azure/ai-projects'
     summary: |-
       An optional text to guide the model's style or continue a previous audio
         segment.
-        For `whisper-1`, the [prompt is a list of keywords](/docs/guides/speech-to-text#prompting).
+        For `whisper-1`, the [prompt is a list of keywords](https://developers.openai.com/api/docs/guides/speech-to-text#prompting).
         For `gpt-4o-transcribe` models (excluding `gpt-4o-transcribe-diarize`), the prompt is a free text string, for example "expect words related to technology".
         Prompt is not supported with `gpt-realtime-whisper` in GA Realtime sessions.
     fullName: prompt

@@ -6,7 +6,10 @@ Conceptual documentation has been moved to https://github.com/microsoftdocs/azur
 
 Reference documentation is generated from a CI job located [here.](https://apidrop.visualstudio.com/Content%20CI/_build?definitionId=3452&_a=summary).
 
-Package targeting is established in the `ci-configs` directory.
+Package targeting is established in the [ci-configs](./ci-configs) directory. When manually onboarding or updating a package, keep its package metadata and pinned CI entry in sync:
+
+- Latest: [metadata/latest](./metadata/latest) and [packages-latest.json](./ci-configs/packages-latest.json).
+- Preview: [metadata/preview](./metadata/preview) and [packages-preview.json](./ci-configs/packages-preview.json).
 
 ### Legal Notices
 

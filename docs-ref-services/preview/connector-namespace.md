@@ -1,7 +1,7 @@
 ---
 title: Azure Connector Namespace SDK for JavaScript
 description: Reference for Azure Connector Namespace SDK for JavaScript
-ms.date: 11/02/2026
+ms.date: 11/03/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: connectornamespace

@@ -1,0 +1,121 @@
+### YamlMime:TSPackage
+uid: '@azure/functions-extensions-connectors'
+name: '@azure/functions-extensions-connectors'
+summary: ''
+type: package
+interfaces:
+  - '@azure/functions-extensions-connectors.BuildCompletedTriggerContext'
+  - '@azure/functions-extensions-connectors.CalendarChangedEventTriggerContext'
+  - '@azure/functions-extensions-connectors.CalendarEventTriggerContext'
+  - '@azure/functions-extensions-connectors.ChannelMessageTriggerContext'
+  - '@azure/functions-extensions-connectors.ConnectorTriggerContext'
+  - '@azure/functions-extensions-connectors.ConnectorTriggerOptions'
+  - '@azure/functions-extensions-connectors.ConnectorTriggers'
+  - '@azure/functions-extensions-connectors.DataflowRefreshTriggerContext'
+  - '@azure/functions-extensions-connectors.DataflowsTriggers'
+  - '@azure/functions-extensions-connectors.DeletedItemTriggerContext'
+  - '@azure/functions-extensions-connectors.EmailTriggerContext'
+  - '@azure/functions-extensions-connectors.FileTriggerContext'
+  - '@azure/functions-extensions-connectors.GitPullRequestTriggerContext'
+  - '@azure/functions-extensions-connectors.GitPushTriggerContext'
+  - '@azure/functions-extensions-connectors.KustoTriggers'
+  - '@azure/functions-extensions-connectors.Office365Triggers'
+  - '@azure/functions-extensions-connectors.OneDriveFileTriggerContext'
+  - '@azure/functions-extensions-connectors.OneDriveForBusinessTriggers'
+  - '@azure/functions-extensions-connectors.PlannerTaskTriggerContext'
+  - '@azure/functions-extensions-connectors.PlannerTriggers'
+  - '@azure/functions-extensions-connectors.QueryResultTriggerContext'
+  - '@azure/functions-extensions-connectors.SalesforceRecordTriggerContext'
+  - '@azure/functions-extensions-connectors.SalesforceTriggers'
+  - '@azure/functions-extensions-connectors.SharepointItemTriggerContext'
+  - '@azure/functions-extensions-connectors.SharepointTriggers'
+  - '@azure/functions-extensions-connectors.TeamMemberTriggerContext'
+  - '@azure/functions-extensions-connectors.TeamsTriggers'
+  - '@azure/functions-extensions-connectors.TfvcChangesetTriggerContext'
+  - '@azure/functions-extensions-connectors.TriggerCallbackBody'
+  - '@azure/functions-extensions-connectors.TriggerCallbackPayload'
+  - '@azure/functions-extensions-connectors.VstsTriggers'
+  - '@azure/functions-extensions-connectors.WorkItemTriggerContext'
+typeAliases:
+  - '@azure/functions-extensions-connectors.ConnectorTriggerHandler'
+  - '@azure/functions-extensions-connectors.ConnectorTriggerRegistration'
+  - >-
+    @azure/functions-extensions-connectors.DataflowsOnRefreshCompleteTriggerPayload
+variables:
+  - name: KustoRow
+    uid: '@azure/functions-extensions-connectors.KustoRow'
+    package: '@azure/functions-extensions-connectors'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'KustoRow: any'
+      return:
+        description: ''
+        type: any
+  - name: connectors
+    uid: '@azure/functions-extensions-connectors.connectors'
+    package: '@azure/functions-extensions-connectors'
+    summary: >+
+      First-class connector trigger registrations.
+
+
+      **Example**
+
+
+      ```typescript
+
+      import { connectors, GraphClientReceiveMessage } from
+      '@azure/functions-extensions-connectors';
+
+
+      connectors.office365.onNewEmail('OnNewEmail', {
+          handler: async (context, invocationContext) => {
+              // context.emails is GraphClientReceiveMessage[] — fully typed, no cast needed
+              for (const email of context.emails) {
+                  invocationContext.log(`Subject: '${email.subject}'.`);
+              }
+          },
+      });
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'connectors: ConnectorTriggers'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/functions-extensions-connectors.ConnectorTriggers"
+          />
+functions:
+  - name: >-
+      connectorTrigger<TItem>(string, ConnectorTriggerOptions<TItem,
+      ConnectorTriggerContext<TItem>>)
+    uid: '@azure/functions-extensions-connectors.connectorTrigger'
+    package: '@azure/functions-extensions-connectors'
+    summary: >-
+      Registers a connector trigger function with the Azure Functions app.
+
+
+      This wraps <xref:app.connectorTrigger> with a strongly-typed
+      [ConnectorTriggerContext](xref:@azure/functions-extensions-connectors.ConnectorTriggerContext)
+
+      that normalises the raw host payload into a consistent `items` array.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function connectorTrigger<TItem>(name: string, options:
+        ConnectorTriggerOptions<TItem, ConnectorTriggerContext<TItem>>)
+      parameters:
+        - id: name
+          type: string
+          description: The function name used for registration and routing.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/functions-extensions-connectors.ConnectorTriggerOptions"
+            />&lt;TItem, ConnectorTriggerContext&lt;TItem&gt;&gt;
+          description: The trigger configuration including handler and optional bindings.

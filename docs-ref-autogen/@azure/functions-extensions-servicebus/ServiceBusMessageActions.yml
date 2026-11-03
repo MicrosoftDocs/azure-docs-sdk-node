@@ -1,0 +1,196 @@
+### YamlMime:TSType
+name: ServiceBusMessageActions
+uid: '@azure/functions-extensions-servicebus.ServiceBusMessageActions'
+package: '@azure/functions-extensions-servicebus'
+summary: >-
+  Provides actions for settling and managing messages in Azure Service Bus via
+  gRPC.
+
+
+  This class wraps gRPC client calls to perform message settlement operations
+  such as complete, abandon, deadletter, defer,
+
+  as well as session management operations like renewing locks, setting session
+  state, and releasing sessions.
+fullName: ServiceBusMessageActions
+remarks: >-
+  - Requires a gRPC server implementing the Settlement service as defined in the
+  proto file.
+
+  - All methods throw if the required parameters are missing or if the gRPC call
+  fails.
+isDeprecated: false
+type: class
+methods:
+  - name: abandon(ServiceBusReceivedMessage, Record<string, any>)
+    uid: '@azure/functions-extensions-servicebus.ServiceBusMessageActions.abandon'
+    package: '@azure/functions-extensions-servicebus'
+    summary: Abandons the specified message, making it available again for processing.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function abandon(message: ServiceBusReceivedMessage,
+        propertiesToModify?: Record<string, any>): Promise<void>
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: The received Service Bus message to abandon.
+        - id: propertiesToModify
+          type: Record&lt;string, any&gt;
+          description: Optional properties to modify on the message.
+      return:
+        description: A promise that resolves when the operation is successful.
+        type: Promise&lt;void&gt;
+  - name: complete(ServiceBusReceivedMessage)
+    uid: '@azure/functions-extensions-servicebus.ServiceBusMessageActions.complete'
+    package: '@azure/functions-extensions-servicebus'
+    summary: >-
+      Completes (settles) the specified message, removing it from the queue or
+      subscription.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function complete(message: ServiceBusReceivedMessage): Promise<void>'
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: The received Service Bus message to complete.
+      return:
+        description: A promise that resolves when the operation is successful.
+        type: Promise&lt;void&gt;
+  - name: deadletter(ServiceBusReceivedMessage, Record<string, any>, string, string)
+    uid: '@azure/functions-extensions-servicebus.ServiceBusMessageActions.deadletter'
+    package: '@azure/functions-extensions-servicebus'
+    summary: Deadletters the specified message, moving it to the dead-letter queue.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deadletter(message: ServiceBusReceivedMessage,
+        propertiesToModify?: Record<string, any>, deadletterReason?: string,
+        deadletterErrorDescription?: string): Promise<void>
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: The received Service Bus message to deadletter.
+        - id: propertiesToModify
+          type: Record&lt;string, any&gt;
+          description: Optional properties to modify on the message.
+        - id: deadletterReason
+          type: string
+          description: Optional reason for deadlettering the message.
+        - id: deadletterErrorDescription
+          type: string
+          description: Optional error description for deadlettering.
+      return:
+        description: A promise that resolves when the operation is successful.
+        type: Promise&lt;void&gt;
+  - name: defer(ServiceBusReceivedMessage, Record<string, any>)
+    uid: '@azure/functions-extensions-servicebus.ServiceBusMessageActions.defer'
+    package: '@azure/functions-extensions-servicebus'
+    summary: >-
+      Defers the specified message, making it invisible until retrieved by
+      sequence number.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function defer(message: ServiceBusReceivedMessage, propertiesToModify?:
+        Record<string, any>): Promise<void>
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: The received Service Bus message to defer.
+        - id: propertiesToModify
+          type: Record&lt;string, any&gt;
+          description: Optional properties to modify on the message.
+      return:
+        description: A promise that resolves when the operation is successful.
+        type: Promise&lt;void&gt;
+  - name: getInstance()
+    uid: >-
+      @azure/functions-extensions-servicebus.ServiceBusMessageActions.getInstance
+    package: '@azure/functions-extensions-servicebus'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static function getInstance(): ServiceBusMessageActions'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/functions-extensions-servicebus.ServiceBusMessageActions"
+          />
+  - name: releaseSession(string)
+    uid: >-
+      @azure/functions-extensions-servicebus.ServiceBusMessageActions.releaseSession
+    package: '@azure/functions-extensions-servicebus'
+    summary: Releases the specified session, making it available for other receivers.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function releaseSession(sessionId: string): Promise<void>'
+      parameters:
+        - id: sessionId
+          type: string
+          description: The session ID to release.
+      return:
+        description: A promise that resolves when the operation is successful.
+        type: Promise&lt;void&gt;
+  - name: renewMessageLock(ServiceBusReceivedMessage)
+    uid: >-
+      @azure/functions-extensions-servicebus.ServiceBusMessageActions.renewMessageLock
+    package: '@azure/functions-extensions-servicebus'
+    summary: Renews the lock on the specified message, extending its lock duration.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function renewMessageLock(message: ServiceBusReceivedMessage):
+        Promise<void>
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: The received Service Bus message whose lock should be renewed.
+      return:
+        description: A promise that resolves when the operation is successful.
+        type: Promise&lt;void&gt;
+  - name: renewSessionLock(string)
+    uid: >-
+      @azure/functions-extensions-servicebus.ServiceBusMessageActions.renewSessionLock
+    package: '@azure/functions-extensions-servicebus'
+    summary: Renews the lock on the specified session, extending its lock duration.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function renewSessionLock(sessionId: string): Promise<Date>'
+      parameters:
+        - id: sessionId
+          type: string
+          description: The session ID whose lock should be renewed.
+      return:
+        description: A promise that resolves to the new locked-until date.
+        type: Promise&lt;Date&gt;
+  - name: setSessionState(string, Uint8Array)
+    uid: >-
+      @azure/functions-extensions-servicebus.ServiceBusMessageActions.setSessionState
+    package: '@azure/functions-extensions-servicebus'
+    summary: Sets the state for the specified session.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setSessionState(sessionId: string, sessionState: Uint8Array):
+        Promise<void>
+      parameters:
+        - id: sessionId
+          type: string
+          description: The session ID for which to set the state.
+        - id: sessionState
+          type: Uint8Array
+          description: The state to set for the session.
+      return:
+        description: A promise that resolves when the operation is successful.
+        type: Promise&lt;void&gt;

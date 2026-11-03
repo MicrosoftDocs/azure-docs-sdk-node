@@ -1,20 +1,22 @@
 ### YamlMime:TSPackage
 uid: '@azure/functions.app'
 name: app
+summary: ''
 type: module
 package: '@azure/functions'
-summary: ''
 functions:
-  - name: cosmosDB(string, CosmosDBFunctionOptions)
-    uid: '@azure/functions.app.cosmosDB'
+  - name: connectorTrigger<T>(string, ConnectorTriggerFunctionOptions<T>)
+    uid: '@azure/functions.app.connectorTrigger'
     package: '@azure/functions'
     summary: >-
-      Registers a Cosmos DB function in your app that will be triggered whenever
-      inserts and updates occur (not deletions)
+      Registers a connector trigger function in your app that will be triggered
+      by Azure Logic Apps connector events.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function cosmosDB(name: string, options: CosmosDBFunctionOptions)'
+      content: >-
+        function connectorTrigger<T>(name: string, options:
+        ConnectorTriggerFunctionOptions<T>)
       parameters:
         - id: name
           type: string
@@ -22,7 +24,36 @@ functions:
             The name of the function. The name must be unique within your app
             and will mostly be used for your own tracking purposes
         - id: options
-          type: <xref uid="@azure/functions.CosmosDBFunctionOptions" />
+          type: >-
+            <xref uid="@azure/functions.ConnectorTriggerFunctionOptions"
+            />&lt;T&gt;
+          description: >-
+            Configuration options describing the connector, connection, trigger
+            operation, and handler for this function
+  - name: cosmosDB<T>(string, CosmosDBFunctionOptions<T>)
+    uid: '@azure/functions.app.cosmosDB'
+    package: '@azure/functions'
+    summary: >-
+      Registers a Cosmos DB function in your app that will be triggered by
+      container changes.
+
+      By default, this trigger processes latest document versions. To include
+      delete events and
+
+      intermediate mutations, set `changeFeedMode` to
+      `CosmosDBv4ChangeFeedMode.AllVersionsAndDeletes`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function cosmosDB<T>(name: string, options: CosmosDBFunctionOptions<T>)'
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.CosmosDBFunctionOptions" />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
@@ -66,7 +97,7 @@ functions:
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
-  - name: eventGrid(string, EventGridFunctionOptions)
+  - name: eventGrid<T>(string, EventGridFunctionOptions<T>)
     uid: '@azure/functions.app.eventGrid'
     package: '@azure/functions'
     summary: >-
@@ -75,7 +106,9 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function eventGrid(name: string, options: EventGridFunctionOptions)'
+      content: >-
+        function eventGrid<T>(name: string, options:
+        EventGridFunctionOptions<T>)
       parameters:
         - id: name
           type: string
@@ -83,11 +116,11 @@ functions:
             The name of the function. The name must be unique within your app
             and will mostly be used for your own tracking purposes
         - id: options
-          type: <xref uid="@azure/functions.EventGridFunctionOptions" />
+          type: <xref uid="@azure/functions.EventGridFunctionOptions" />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
-  - name: eventHub(string, EventHubFunctionOptions)
+  - name: eventHub<T>(string, EventHubFunctionOptions<T>)
     uid: '@azure/functions.app.eventHub'
     package: '@azure/functions'
     summary: >-
@@ -96,7 +129,7 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function eventHub(name: string, options: EventHubFunctionOptions)'
+      content: 'function eventHub<T>(name: string, options: EventHubFunctionOptions<T>)'
       parameters:
         - id: name
           type: string
@@ -104,7 +137,7 @@ functions:
             The name of the function. The name must be unique within your app
             and will mostly be used for your own tracking purposes
         - id: options
-          type: <xref uid="@azure/functions.EventHubFunctionOptions" />
+          type: <xref uid="@azure/functions.EventHubFunctionOptions" />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
@@ -190,6 +223,92 @@ functions:
             explicitly configured in the `HttpTriggerOptions`
         - id: options
           type: <xref uid="@azure/functions.HttpFunctionOptions" />
+          description: >-
+            Configuration options describing the inputs, outputs, and handler
+            for this function
+  - name: mcpPrompt<T>(string, McpPromptFunctionOptions<T>)
+    uid: '@azure/functions.app.mcpPrompt'
+    package: '@azure/functions'
+    summary: >-
+      Registers an MCP Prompt function in your app that will be triggered when
+      an MCP client requests the prompt.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function mcpPrompt<T>(name: string, options:
+        McpPromptFunctionOptions<T>)
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.McpPromptFunctionOptions" />&lt;T&gt;
+          description: >-
+            Configuration options describing the prompt, its arguments, and the
+            handler for this function
+  - name: mcpResource<T>(string, McpResourceFunctionOptions<T>)
+    uid: '@azure/functions.app.mcpResource'
+    package: '@azure/functions'
+    summary: >-
+      Registers an MCP Resource function in your app that can be read by MCP
+      clients.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function mcpResource<T>(name: string, options:
+        McpResourceFunctionOptions<T>)
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.McpResourceFunctionOptions" />&lt;T&gt;
+          description: >-
+            Configuration options describing the inputs, outputs, and handler
+            for this function
+  - name: mcpTool<T>(string, McpToolFunctionOptions<T>)
+    uid: '@azure/functions.app.mcpTool'
+    package: '@azure/functions'
+    summary: Registers an MCP Tool function in your app
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function mcpTool<T>(name: string, options: McpToolFunctionOptions<T>)'
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.McpToolFunctionOptions" />&lt;T&gt;
+          description: >-
+            Configuration options describing the inputs, outputs, and handler
+            for this function
+  - name: mySql<T>(string, MySqlFunctionOptions<T>)
+    uid: '@azure/functions.app.mySql'
+    package: '@azure/functions'
+    summary: >-
+      Registers a MySql function in your app that will be triggered when a row
+      is created or updated
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function mySql<T>(name: string, options: MySqlFunctionOptions<T>)'
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.MySqlFunctionOptions" />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
@@ -313,7 +432,7 @@ functions:
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
-  - name: serviceBusQueue(string, ServiceBusQueueFunctionOptions)
+  - name: serviceBusQueue<T>(string, ServiceBusQueueFunctionOptions<T>)
     uid: '@azure/functions.app.serviceBusQueue'
     package: '@azure/functions'
     summary: >-
@@ -323,8 +442,8 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function serviceBusQueue(name: string, options:
-        ServiceBusQueueFunctionOptions)
+        function serviceBusQueue<T>(name: string, options:
+        ServiceBusQueueFunctionOptions<T>)
       parameters:
         - id: name
           type: string
@@ -332,11 +451,13 @@ functions:
             The name of the function. The name must be unique within your app
             and will mostly be used for your own tracking purposes
         - id: options
-          type: <xref uid="@azure/functions.ServiceBusQueueFunctionOptions" />
+          type: >-
+            <xref uid="@azure/functions.ServiceBusQueueFunctionOptions"
+            />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
-  - name: serviceBusTopic(string, ServiceBusTopicFunctionOptions)
+  - name: serviceBusTopic<T>(string, ServiceBusTopicFunctionOptions<T>)
     uid: '@azure/functions.app.serviceBusTopic'
     package: '@azure/functions'
     summary: >-
@@ -346,8 +467,8 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function serviceBusTopic(name: string, options:
-        ServiceBusTopicFunctionOptions)
+        function serviceBusTopic<T>(name: string, options:
+        ServiceBusTopicFunctionOptions<T>)
       parameters:
         - id: name
           type: string
@@ -355,11 +476,52 @@ functions:
             The name of the function. The name must be unique within your app
             and will mostly be used for your own tracking purposes
         - id: options
-          type: <xref uid="@azure/functions.ServiceBusTopicFunctionOptions" />
+          type: >-
+            <xref uid="@azure/functions.ServiceBusTopicFunctionOptions"
+            />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
-  - name: storageBlob(string, StorageBlobFunctionOptions)
+  - name: setup(SetupOptions)
+    uid: '@azure/functions.app.setup'
+    package: '@azure/functions'
+    summary: >-
+      Optional method to configure the behavior of your app.
+
+      This can only be done during app startup, before invocations occur.
+
+      If called multiple times, options will be merged with the previous options
+      specified.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function setup(options: SetupOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/functions.SetupOptions" />
+          description: ''
+  - name: sql<T>(string, SqlFunctionOptions<T>)
+    uid: '@azure/functions.app.sql'
+    package: '@azure/functions'
+    summary: >-
+      Registers a SQL function in your app that will be triggered when a row is
+      created, updated, or deleted
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function sql<T>(name: string, options: SqlFunctionOptions<T>)'
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.SqlFunctionOptions" />&lt;T&gt;
+          description: >-
+            Configuration options describing the inputs, outputs, and handler
+            for this function
+  - name: storageBlob<T>(string, StorageBlobFunctionOptions<T>)
     uid: '@azure/functions.app.storageBlob'
     package: '@azure/functions'
     summary: >-
@@ -368,7 +530,9 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function storageBlob(name: string, options: StorageBlobFunctionOptions)'
+      content: >-
+        function storageBlob<T>(name: string, options:
+        StorageBlobFunctionOptions<T>)
       parameters:
         - id: name
           type: string
@@ -376,11 +540,11 @@ functions:
             The name of the function. The name must be unique within your app
             and will mostly be used for your own tracking purposes
         - id: options
-          type: <xref uid="@azure/functions.StorageBlobFunctionOptions" />
+          type: <xref uid="@azure/functions.StorageBlobFunctionOptions" />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
-  - name: storageQueue(string, StorageQueueFunctionOptions)
+  - name: storageQueue<T>(string, StorageQueueFunctionOptions<T>)
     uid: '@azure/functions.app.storageQueue'
     package: '@azure/functions'
     summary: >-
@@ -390,8 +554,8 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function storageQueue(name: string, options:
-        StorageQueueFunctionOptions)
+        function storageQueue<T>(name: string, options:
+        StorageQueueFunctionOptions<T>)
       parameters:
         - id: name
           type: string
@@ -399,7 +563,7 @@ functions:
             The name of the function. The name must be unique within your app
             and will mostly be used for your own tracking purposes
         - id: options
-          type: <xref uid="@azure/functions.StorageQueueFunctionOptions" />
+          type: <xref uid="@azure/functions.StorageQueueFunctionOptions" />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function
@@ -421,6 +585,64 @@ functions:
             and will mostly be used for your own tracking purposes
         - id: options
           type: <xref uid="@azure/functions.TimerFunctionOptions" />
+          description: >-
+            Configuration options describing the inputs, outputs, and handler
+            for this function
+  - name: warmup(string, WarmupFunctionOptions)
+    uid: '@azure/functions.app.warmup'
+    package: '@azure/functions'
+    summary: >-
+      Registers a function in your app that will be triggered when an instance
+      is added to scale a running function app.
+
+      The warmup trigger is only called during scale-out operations, not during
+      restarts or other non-scale startups.
+
+      Make sure your logic can load all required dependencies without relying on
+      the warmup trigger.
+
+      Lazy loading is a good pattern to achieve this goal.
+
+      The warmup trigger isn't available to apps running on the Consumption
+      plan.
+
+      For more information, please see the [Azure Functions warmup trigger
+      documentation](https://learn.microsoft.com/azure/azure-functions/functions-bindings-warmup?tabs=isolated-process&pivots=programming-language-javascript).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function warmup(name: string, options: WarmupFunctionOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.WarmupFunctionOptions" />
+          description: >-
+            Configuration options describing the inputs, outputs, and handler
+            for this function
+  - name: webPubSub<T>(string, WebPubSubFunctionOptions<T>)
+    uid: '@azure/functions.app.webPubSub'
+    package: '@azure/functions'
+    summary: >-
+      Registers a WebPubSub function in your app that will be triggered by
+      WebPubSub events
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function webPubSub<T>(name: string, options:
+        WebPubSubFunctionOptions<T>)
+      parameters:
+        - id: name
+          type: string
+          description: >-
+            The name of the function. The name must be unique within your app
+            and will mostly be used for your own tracking purposes
+        - id: options
+          type: <xref uid="@azure/functions.WebPubSubFunctionOptions" />&lt;T&gt;
           description: >-
             Configuration options describing the inputs, outputs, and handler
             for this function

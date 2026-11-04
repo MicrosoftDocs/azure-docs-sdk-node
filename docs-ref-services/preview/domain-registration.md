@@ -1,7 +1,7 @@
 ---
 title: Azure Domain Registration SDK for JavaScript
 description: Reference for Azure Domain Registration SDK for JavaScript
-ms.date: 11/03/2026
+ms.date: 11/04/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: domainregistration

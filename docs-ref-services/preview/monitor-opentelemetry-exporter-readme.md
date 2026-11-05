@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-ms.date: 10/06/2026
+ms.date: 11/05/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.46 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.47 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
@@ -23,7 +23,7 @@ This exporter package assumes your application is [already instrumented](https:/
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/SUPPORT.md) for more details.
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for browser environments.
 
@@ -174,7 +174,7 @@ provider.register();
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
 
 ## Key concepts
 
@@ -182,7 +182,39 @@ For more information on the OpenTelemetry project, please review the [**OpenTele
 
 ### Custom Dimensions Size Limit
 
-By default, custom dimension values are truncated to 64KB. This protects against unexpectedly large payloads.
+Attributes exported as custom dimensions are limited individually by their UTF-8 byte length. This includes custom dimensions from spans, span events, logs, metrics, and resources. Attributes mapped to other telemetry fields are not governed by these limits. Non-string values are serialized before truncation, and truncation preserves complete UTF-8 characters.
+
+| Attributes | Default limit | With GenAI message limit opt-in |
+| --- | --- | --- |
+| `gen_ai.input.messages`, `gen_ai.output.messages` | 256 KiB | 4 MiB |
+| `gen_ai.system_instructions`, `gen_ai.tool.definitions`, `gen_ai.tool.call.arguments`, `gen_ai.tool.call.result`, `gen_ai.evaluation.explanation` | 256 KiB | 256 KiB |
+| All other custom dimensions | 8 KiB | 8 KiB |
+
+See [GenAI message size limit](#genai-message-size-limit) for opt-in instructions.
+
+### Experimental features
+
+Use `APPLICATIONINSIGHTS_EXPERIMENTAL_FEATURES` to opt in to named experimental features before constructing exporters. Feature names are comma-separated, case-insensitive, and trimmed of surrounding whitespace. An unset or empty value enables no experimental features. Unknown names are ignored. Experimental features may change or be removed in future releases.
+
+#### GenAI message size limit
+
+Enable `gen_ai_input_output_limit_increase` to raise the custom dimension limit for `gen_ai.input.messages` and `gen_ai.output.messages` from 256 KiB to 4 MiB. All other limits remain unchanged.
+
+```powershell
+$env:APPLICATIONINSIGHTS_EXPERIMENTAL_FEATURES = "gen_ai_input_output_limit_increase"
+```
+
+Each exporter reads this setting once during construction. Changes to the environment variable do not affect existing exporters.
+
+Multimodal messages containing base64-encoded images or audio can produce large telemetry items. When using `BatchSpanProcessor` or `BatchLogRecordProcessor`, consider reducing `maxExportBatchSize` or increasing `exportTimeoutMillis`. You can also limit captured content at the source. Truncated structured values may no longer be valid JSON.
+
+### Request compression
+
+The exporter automatically gzip-compresses telemetry sent over HTTPS to Azure Monitor ingestion endpoints, including internal Statsbeat and customer SDK Stats. Compression applies to `/v2/track` and `/v2.1/track` on recognized Azure Monitor domains in the public, US Government, and China clouds. Custom ingestion endpoints and reverse proxies outside those domains continue to receive uncompressed JSON.
+
+Compression happens after pipeline policies run. A custom `httpClient` receives the compressed body with `Content-Encoding: gzip` and the compressed `Content-Length`. Requests with an existing `Content-Encoding` are left unchanged. Offline telemetry is stored as envelopes and compressed only when sent or replayed. This does not change Live Metrics, OTLP exporters, or other Azure SDK clients.
+
+If gzip compression fails, the exporter logs a diagnostic warning and sends the original uncompressed request. Normal retry and offline storage behavior still applies if sending that request fails.
 
 ## Troubleshooting
 
@@ -209,7 +241,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/sdk/core/logger).
 
 ## Next steps
 
@@ -223,5 +255,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.46/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/CONTRIBUTING.md) to learn more about how to build and test the code.
 

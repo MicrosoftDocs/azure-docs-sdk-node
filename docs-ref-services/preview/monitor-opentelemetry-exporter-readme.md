@@ -1,12 +1,12 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-ms.date: 11/05/2026
+ms.date: 11/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.47 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-alpha.20261111.1 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
@@ -21,26 +21,34 @@ This exporter package assumes your application is [already instrumented](https:/
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule), starting with Node.js 22.15.0.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 > _Warning:_ This SDK only works for Node.js environments. Use the [Application Insights JavaScript SDK](https://github.com/microsoft/ApplicationInsights-JS) for browser environments.
 
 ### Prerequisites
 
+- OpenTelemetry SDK 3.x with `@opentelemetry/api` 1.10.0 or later. Instrumentation packages use the matching 0.300.x release line. See the [OpenTelemetry 3.x migration guide](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/3.x/migration-guide.md) when upgrading from SDK 2.x.
 - An [Azure subscription](https://azure.microsoft.com/free/)
 - An [Application Insights workspace](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview/)
 
 ### Distributed Tracing
 
-Add the exporter to your existing OpenTelemetry Tracer Provider (`NodeTracerProvider` / `BasicTracerProvider`)
+Add the exporter to your existing OpenTelemetry `TracerProvider`. SDK 3.x requires explicit registration of the context manager and propagators, as shown below.
 
 ```ts snippet:ReadmeSampleDistributedTracing
 import { AzureMonitorTraceExporter } from "@azure/monitor-opentelemetry-exporter";
-import { NodeTracerProvider, BatchSpanProcessor } from "@opentelemetry/sdk-trace-node";
+import { TracerProvider, BatchSpanProcessor } from "@opentelemetry/sdk-trace";
 import { resourceFromAttributes } from "@opentelemetry/resources";
 import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
+import { trace, context, propagation } from "@opentelemetry/api";
+import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
+import {
+  CompositePropagator,
+  W3CTraceContextPropagator,
+  W3CBaggagePropagator,
+} from "@opentelemetry/core";
 
 // Create an exporter instance
 const exporter = new AzureMonitorTraceExporter({
@@ -48,20 +56,27 @@ const exporter = new AzureMonitorTraceExporter({
 });
 
 // Create and configure the Node Tracer provider
-const tracerProvider = new NodeTracerProvider({
+const tracerProvider = new TracerProvider({
   resource: resourceFromAttributes({
     [ATTR_SERVICE_NAME]: "basic-service",
   }),
   spanProcessors: [
-    new BatchSpanProcessor(exporter, {
+    new BatchSpanProcessor({
+      exporter,
       exportTimeoutMillis: 15000,
       maxQueueSize: 1000,
     }),
   ],
 });
 
-// Register Tracer Provider as global
-tracerProvider.register();
+// Register tracing, asynchronous context, and W3C propagation
+trace.setGlobalTracerProvider(tracerProvider);
+context.setGlobalContextManager(new AsyncLocalStorageContextManager().enable());
+propagation.setGlobalPropagator(
+  new CompositePropagator({
+    propagators: [new W3CTraceContextPropagator(), new W3CBaggagePropagator()],
+  }),
+);
 ```
 
 ### Metrics
@@ -97,7 +112,7 @@ Add the Log Exporter to your existing OpenTelemetry Logger Provider (`LoggerProv
 ```ts snippet:ReadmeSampleLogs
 import { AzureMonitorLogExporter } from "@azure/monitor-opentelemetry-exporter";
 import { BatchLogRecordProcessor, LoggerProvider } from "@opentelemetry/sdk-logs";
-import { logs } from "@opentelemetry/api-logs";
+import { logs } from "@opentelemetry/api";
 
 // Add the Log exporter into the logRecordProcessor and register it with the LoggerProvider
 const exporter = new AzureMonitorLogExporter({
@@ -118,7 +133,7 @@ logs.setGlobalLoggerProvider(loggerProvider);
 After registering the logger provider, emit an OpenTelemetry log record with the availability attributes below. The exporter converts the record to Application Insights availability telemetry.
 
 ```ts snippet:ReadmeSampleAvailability
-import { logs } from "@opentelemetry/api-logs";
+import { logs } from "@opentelemetry/api";
 
 const logger = logs.getLogger("availability");
 logger.emit({
@@ -155,26 +170,39 @@ You can enable sampling to limit the amount of telemetry records you receive. In
 
 ```ts snippet:ReadmeSampleSampling
 import { ApplicationInsightsSampler } from "@azure/monitor-opentelemetry-exporter";
-import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
+import { TracerProvider } from "@opentelemetry/sdk-trace";
 import { resourceFromAttributes } from "@opentelemetry/resources";
 import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
+import { trace, context, propagation } from "@opentelemetry/api";
+import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
+import {
+  CompositePropagator,
+  W3CTraceContextPropagator,
+  W3CBaggagePropagator,
+} from "@opentelemetry/core";
 
 // Sampler expects a sample rate of between 0 and 1 inclusive
 // A rate of 0.75 means approximately 75 % of your traces will be sent
 const aiSampler = new ApplicationInsightsSampler(0.75);
-const provider = new NodeTracerProvider({
+const provider = new TracerProvider({
   sampler: aiSampler,
   resource: resourceFromAttributes({
     [ATTR_SERVICE_NAME]: "basic-service",
   }),
 });
 
-provider.register();
+trace.setGlobalTracerProvider(provider);
+context.setGlobalContextManager(new AsyncLocalStorageContextManager().enable());
+propagation.setGlobalPropagator(
+  new CompositePropagator({
+    propagators: [new W3CTraceContextPropagator(), new W3CBaggagePropagator()],
+  }),
+);
 ```
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
 
 ## Key concepts
 
@@ -223,12 +251,31 @@ If gzip compression fails, the exporter logs a diagnostic warning and sends the 
 You can enable debug logging by changing the logging level of your provider.
 
 ```ts snippet:EnableDebugLogging
-import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
-import { diag, DiagConsoleLogger, DiagLogLevel } from "@opentelemetry/api";
+import { TracerProvider } from "@opentelemetry/sdk-trace";
+import {
+  diag,
+  DiagConsoleLogger,
+  DiagLogLevel,
+  trace,
+  context,
+  propagation,
+} from "@opentelemetry/api";
+import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
+import {
+  CompositePropagator,
+  W3CTraceContextPropagator,
+  W3CBaggagePropagator,
+} from "@opentelemetry/core";
 
-const provider = new NodeTracerProvider();
+const provider = new TracerProvider();
 diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ALL);
-provider.register();
+trace.setGlobalTracerProvider(provider);
+context.setGlobalContextManager(new AsyncLocalStorageContextManager().enable());
+propagation.setGlobalPropagator(
+  new CompositePropagator({
+    propagators: [new W3CTraceContextPropagator(), new W3CBaggagePropagator()],
+  }),
+);
 ```
 
 ### Logging
@@ -241,7 +288,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -255,5 +302,5 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.47/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 

@@ -1,12 +1,12 @@
 ---
 title: Azure Storage File Share client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-file-share, storage
-ms.date: 08/03/2026
+ms.date: 11/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage File Share client library for JavaScript - version 12.33.0-beta.1 
+# Azure Storage File Share client library for JavaScript - version 12.34.0-beta.1 
 
 
 Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol. Azure file shares can be mounted concurrently by cloud or on-premises deployments of Windows, Linux, and macOS. Additionally, Azure file shares can be cached on Windows Servers with Azure File Sync for fast access near where the data is being used.
@@ -26,11 +26,11 @@ Use the client libraries in this package to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/storage-file-share)
 - [Package (npm)](https://www.npmjs.com/package/@azure/storage-file-share/)
 - [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/storage-file-share)
 - [Product documentation](https://learn.microsoft.com/azure/storage/files/storage-files-introduction)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/storage-file-share/samples)
 - [Azure Storage File REST APIs](https://learn.microsoft.com/rest/api/storageservices/file-service-rest-api)
 
 ## Getting started
@@ -40,7 +40,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.34.0-beta.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -135,6 +135,7 @@ The following components and their corresponding client libraries make up the Az
 - [Create a new share and a directory](#create-a-new-share-and-a-directory)
 - [Create an azure file then upload to it](#create-an-azure-file-then-upload-to-it)
 - [List files and directories under a directory](#list-files-and-directories-under-a-directory)
+- [Get a file's properties and hard links by its file ID](#get-a-files-properties-and-hard-links-by-its-file-id)
 - [Download a file and convert it to a string (Node.js)](#download-a-file-and-convert-it-to-a-string-nodejs)
 - [Download a file and convert it to a string (Browsers)](#download-a-file-and-convert-it-to-a-string-browsers)
 
@@ -438,7 +439,45 @@ while (!done) {
 }
 ```
 
-For a complete sample on iterating please see [samples/v12/typescript/src/listFilesAndDirectories.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/listFilesAndDirectories.ts).
+For a complete sample on iterating please see [samples/v12/typescript/src/listFilesAndDirectories.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/listFilesAndDirectories.ts).
+
+### Get a file's properties and hard links by its file ID
+
+A file or directory in an SMB file share can be addressed by its file ID, the `fileId` returned by operations such as
+`getProperties()`, instead of its path. Use `ShareClient.getShareFileClient()` or
+`ShareClient.getShareDirectoryClient()` to create such a client. A file client supports `getProperties()`,
+`getFileLinks()` (which returns the file's properties and its hard links) and `withShareSnapshot()`; a directory
+client supports only `getProperties()`. Their other methods throw an error, and `getFileLinks()` throws on a client
+that addresses the file by its path. In an SMB file share, a file has a single link: its own name in the directory
+that contains it.
+
+```ts snippet:ReadmeSampleGetFileByFileId
+import { StorageSharedKeyCredential, ShareServiceClient } from "@azure/storage-file-share";
+
+const account = "<account>";
+const accountKey = "<accountkey>";
+
+const credential = new StorageSharedKeyCredential(account, accountKey);
+const serviceClient = new ShareServiceClient(
+  `https://${account}.file.core.windows.net`,
+  credential,
+);
+
+const shareName = "<share name>";
+const fileId = "<file id>";
+const fileClient = serviceClient.getShareClient(shareName).getShareFileClient(fileId);
+
+const properties = await fileClient.getProperties();
+// The file name is returned percent-encoded
+const name = properties.fileName && decodeURIComponent(properties.fileName);
+console.log(`File ${name} has ${properties.contentLength} bytes`);
+
+// Each link has the name of the file and the file ID of the directory that contains it
+const { links } = await fileClient.getFileLinks();
+for (const link of links) {
+  console.log(`Link: ${link.name} in directory ${link.parentId}`);
+}
+```
 
 ### Download a file and convert it to a string (Node.js)
 
@@ -498,7 +537,7 @@ if (downloadFileResponse.blobBody) {
 }
 ```
 
-A complete example of simple `ShareServiceClient` scenarios is at [samples/v12/typescript/src/shareSerivceClient.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/shareServiceClient.ts).
+A complete example of simple `ShareServiceClient` scenarios is at [samples/v12/typescript/src/shareSerivceClient.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript/src/shareServiceClient.ts).
 
 ## Troubleshooting
 
@@ -514,13 +553,13 @@ setLogLevel("info");
 
 More code samples
 
-- [File Share Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/javascript)
-- [File Share Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript)
-- [File Share Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/storage-file-share/test)
+- [File Share Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/storage-file-share/samples/v12/javascript)
+- [File Share Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/storage-file-share/samples/v12/typescript)
+- [File Share Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/storage-file-share/test)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.34.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.33.0-beta.1/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
+Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.34.0-beta.1/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 

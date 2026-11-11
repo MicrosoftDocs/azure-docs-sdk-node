@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/provisioning-webpubsub, web-pubsub
-ms.date: 11/06/2026
+ms.date: 11/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
@@ -42,7 +42,7 @@ new WebPubSub(stack, {
 });
 ```
 
-See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/provisioning-webpubsub_1.0.0-beta.1/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
+See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
 
 ## Resource types
 

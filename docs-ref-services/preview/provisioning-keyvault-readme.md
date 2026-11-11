@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/provisioning-keyvault, keyvault
-ms.date: 11/06/2026
+ms.date: 11/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: keyvault
@@ -43,7 +43,7 @@ new Secret(vault, {
 2. Import resource classes from `@azure/provisioning-keyvault` and add them to your definition with their required properties.
 3. Serialize the definition using `@azure/provisioning-core/serialization`.
 
-See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/provisioning-keyvault_1.0.0-beta.2/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
+See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
 
 ## Resource types
 

@@ -1,12 +1,12 @@
 ---
 title: Azure Storage Blob client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-blob, storage
-ms.date: 08/03/2026
+ms.date: 11/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage Blob client library for JavaScript - version 12.34.0-beta.1 
+# Azure Storage Blob client library for JavaScript - version 12.35.0-beta.1 
 
 
 Azure Storage Blob is Microsoft's object storage solution for the cloud. Blob storage is optimized for storing massive amounts of unstructured data. Unstructured data is data that does not adhere to a particular data model or definition, such as text or binary data.
@@ -23,11 +23,11 @@ Use the client libraries in this package to:
 
 Key links
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob)
 - [Package (npm)](https://www.npmjs.com/package/@azure/storage-blob/)
 - [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/storage-blob)
 - [Product documentation](https://learn.microsoft.com/azure/storage/blobs/storage-blobs-overview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/samples)
 - [Azure Storage Blob REST APIs](https://learn.microsoft.com/rest/api/storageservices/blob-service-rest-api)
 
 ## Getting started
@@ -37,7 +37,7 @@ Key links
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -62,7 +62,7 @@ Azure Storage supports several ways to authenticate. In order to interact with t
 
 #### Azure Active Directory
 
-The Azure Blob Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/sdk/identity/identity/README.md) for more details and samples to get you started.
+The Azure Blob Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/sdk/identity/identity/README.md) for more details and samples to get you started.
 
 ### Compatibility
 
@@ -202,7 +202,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
+See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
 
 [Note - Above steps are only for Node.js]
 
@@ -335,7 +335,7 @@ for await (const page of blobServiceClient.listContainers().byPage({ maxPageSize
 }
 ```
 
-For a complete sample on iterating containers please see [samples/v12/typescript/src/listContainers.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript/src/listContainers.ts).
+For a complete sample on iterating containers please see [samples/v12/typescript/src/listContainers.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript/src/listContainers.ts).
 
 ### Create a blob by uploading data
 
@@ -385,11 +385,11 @@ for await (const blob of blobs) {
 }
 ```
 
-For a complete sample on iterating blobs please see [samples/v12/typescript/src/listBlobsFlat.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript/src/listBlobsFlat.ts).
+For a complete sample on iterating blobs please see [samples/v12/typescript/src/listBlobsFlat.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript/src/listBlobsFlat.ts).
 
 ### List blobs using the Apache Arrow response format
 
-Request the listing as Apache Arrow with `responseFormat`. The service falls back to XML for accounts that don't support Apache Arrow, and the parsed blob items are identical either way.
+`listBlobsFlat` and `listBlobsByHierarchy` use the Apache Arrow response format by default; set `responseFormat` to choose it explicitly, or set it to `StorageResponseFormat.Xml` to request XML. The service falls back to XML for accounts that don't support Apache Arrow, and the parsed blob items are identical either way.
 
 ```ts snippet:ReadmeSampleListBlobs_ApacheArrow
 import { BlobServiceClient, StorageResponseFormat } from "@azure/storage-blob";
@@ -473,7 +473,70 @@ if (blobBody) {
 }
 ```
 
-A complete example of simple scenarios is at [samples/v12/typescript/src/sharedKeyAuth.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript/src/sharedKeyAuth.ts).
+A complete example of simple scenarios is at [samples/v12/typescript/src/sharedKeyAuth.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript/src/sharedKeyAuth.ts).
+
+### Authenticate downloads with a session token (Node.js)
+
+When you authenticate with a `TokenCredential`, you can opt in to session token authentication. Eligible blob downloads are then signed with a container-scoped session token instead of a bearer token, which avoids a token exchange on every request.
+
+Sessions are disabled by default. Set `sessionOptions.mode` to `"enabled"` to opt in.
+[ONLY AVAILABLE IN NODE.JS RUNTIME]
+
+Only `GET` blob download requests are eligible; container and service operations, and any request using a structured message body, continue to use a bearer token. If a session cannot be created because the account does not have the feature enabled, the client logs a warning and falls back to bearer tokens rather than failing the download.
+
+In browsers and React Native, `sessionOptions` is accepted for type compatibility but has no effect, because signing a session requires Shared Key, which is unavailable outside Node.js.
+
+```ts snippet:ReadmeSampleSessionAuthentication
+import { BlobServiceClient } from "@azure/storage-blob";
+import { DefaultAzureCredential } from "@azure/identity";
+import { buffer } from "node:stream/consumers";
+
+const account = "<account>";
+
+// Session token authentication is only available in the Node.js runtime. In browsers and
+// React Native these options are ignored and requests keep using a bearer token.
+const blobServiceClient = new BlobServiceClient(
+  `https://${account}.blob.core.windows.net`,
+  new DefaultAzureCredential(),
+  { sessionOptions: { mode: "enabled" } },
+);
+
+// Only the download below is signed with a container-scoped session token. Container and
+// service operations continue to use a bearer token.
+const containerClient = blobServiceClient.getContainerClient("<container name>");
+const blobClient = containerClient.getBlobClient("<blob name>");
+const downloadBlockBlobResponse = await blobClient.download();
+if (downloadBlockBlobResponse.readableStreamBody) {
+  const downloaded = await buffer(downloadBlockBlobResponse.readableStreamBody);
+  console.log(`Downloaded blob content: ${downloaded.toString()}`);
+}
+```
+
+If your endpoint URL is not in the standard `https://<account>.blob.core.windows.net` form, the account name cannot be derived from it. Set `sessionOptions.accountName` explicitly in that case.
+
+### Read blobs from the endpoints that store them (Node.js)
+
+The service can describe a blob's _layout_: which storage endpoint holds each range of the blob. When the first block that `downloadToBuffer` reads comes back with a hint that the blob has a layout, the client can fetch the layout and read the remaining blocks directly from those endpoints, rather than having the account endpoint relay them. This is off by default; set `layoutAwareRouting` to `"enabled"` to opt in. The requests stay authenticated as, and addressed to, your account. When the account doesn't support it, the blob is read from the account endpoint as usual.
+[ONLY AVAILABLE IN NODE.JS RUNTIME]
+
+```ts snippet:ReadmeSampleLayoutAwareRouting
+import { BlobServiceClient } from "@azure/storage-blob";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const account = "<account>";
+const blobServiceClient = new BlobServiceClient(
+  `https://${account}.blob.core.windows.net`,
+  new DefaultAzureCredential(),
+);
+const containerClient = blobServiceClient.getContainerClient("<container name>");
+const blobClient = containerClient.getBlobClient("<blob name>");
+
+// Routing is off by default. Opt in to read blocks from the endpoints that hold them.
+const downloaded = await blobClient.downloadToBuffer(0, undefined, {
+  layoutAwareRouting: "enabled",
+});
+console.log(`Downloaded ${downloaded.length} bytes`);
+```
 
 ## Troubleshooting
 
@@ -489,13 +552,13 @@ setLogLevel("info");
 
 More code samples:
 
-- [Blob Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript)
-- [Blob Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript)
-- [Blob Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.34.0-beta.1/sdk/storage/storage-blob/test/)
+- [Blob Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript)
+- [Blob Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/samples/v12/typescript)
+- [Blob Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.35.0-beta.1/sdk/storage/storage-blob/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.34.0-beta.1/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
+Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.35.0-beta.1/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 

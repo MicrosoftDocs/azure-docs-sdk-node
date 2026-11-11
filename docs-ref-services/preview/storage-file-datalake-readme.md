@@ -1,12 +1,12 @@
 ---
 title: Azure Storage File Data Lake client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/storage-file-datalake, storage
-ms.date: 05/09/2026
+ms.date: 11/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage File Data Lake client library for JavaScript - version 12.31.0-beta.1 
+# Azure Storage File Data Lake client library for JavaScript - version 12.32.0-beta.1 
 
 
 Azure Data Lake Storage (ADLS) includes all the capabilities required to make it easy for developers, data scientists, and analysts to store data of any size, shape, and speed, and do all types of processing and analytics across platforms and languages. It removes the complexities of ingesting and storing all of your data while making it faster to get up and running with batch, streaming, and interactive analytics.
@@ -20,11 +20,11 @@ Use the client libraries in this package to:
 
 key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.31.0-beta.1/sdk/storage/storage-file-datalake)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.32.0-beta.1/sdk/storage/storage-file-datalake)
 - [Package (npm)](https://www.npmjs.com/package/@azure/storage-file-datalake)
 - [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/storage-file-datalake)
 - [Product documentation](https://learn.microsoft.com/azure/storage/blobs/data-lake-storage-introduction?toc=%2fazure%2fstorage%2fblobs%2ftoc.json)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.31.0-beta.1/sdk/storage/storage-file-datalake/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.32.0-beta.1/sdk/storage/storage-file-datalake/samples)
 - [Azure Storage Data Lake REST APIs](https://learn.microsoft.com/rest/api/storageservices/data-lake-storage-gen2)
 
 ## Getting started
@@ -34,7 +34,7 @@ key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.31.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.32.0-beta.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -59,7 +59,7 @@ Azure Storage supports several ways to authenticate. In order to interact with t
 
 #### Azure Active Directory
 
-The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.31.0-beta.1/sdk/identity/identity/README.md) for more details and samples to get you started.
+The Azure Data Lake Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.32.0-beta.1/sdk/identity/identity/README.md) for more details and samples to get you started.
 
 ### Compatibility
 
@@ -222,7 +222,7 @@ const datalakeServiceClient = new DataLakeServiceClient(
 );
 ```
 
-See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.31.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
+See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.32.0-beta.1/sdk/storage/storage-blob/samples/v12/javascript/azureAdAuth.js) for a complete example using this method.
 
 [Note - Above steps are only for Node.js]
 
@@ -432,6 +432,7 @@ for await (const path of paths) {
 ```ts snippet:ReadmeSampleDownloadFile_Node
 import { DataLakeServiceClient } from "@azure/storage-file-datalake";
 import { DefaultAzureCredential } from "@azure/identity";
+import { buffer } from "node:stream/consumers";
 
 const account = "<account>";
 const datalakeServiceClient = new DataLakeServiceClient(
@@ -448,22 +449,10 @@ const fileClient = fileSystemClient.getFileClient(fileName);
 // In Node.js, get downloaded data by accessing downloadResponse.readableStreamBody
 const downloadResponse = await fileClient.read();
 if (downloadResponse.readableStreamBody) {
-  const downloaded = await streamToBuffer(downloadResponse.readableStreamBody);
+  // Download the raw bytes of the file. Use `text` from "node:stream/consumers"
+  // instead if you want to read the content as a string directly.
+  const downloaded = await buffer(downloadResponse.readableStreamBody);
   console.log("Downloaded file content:", downloaded.toString());
-}
-
-// [Node.js only] A helper method used to read a Node.js readable stream into a Buffer.
-async function streamToBuffer(readableStream: NodeJS.ReadableStream): Promise<Buffer> {
-  return new Promise((resolve, reject) => {
-    const chunks: Buffer[] = [];
-    readableStream.on("data", (data) => {
-      chunks.push(data instanceof Buffer ? data : Buffer.from(data));
-    });
-    readableStream.on("end", () => {
-      resolve(Buffer.concat(chunks));
-    });
-    readableStream.on("error", reject);
-  });
 }
 ```
 
@@ -493,6 +482,65 @@ if (downloadResponse.contentAsBlob) {
 }
 ```
 
+### Authenticate file reads with a session token (Node.js)
+
+When you authenticate with a `TokenCredential`, you can opt in to the session token authentication provided by `@azure/storage-blob`. Sessions are disabled by default; set `sessionOptions.mode` to `"enabled"` to opt in.
+[ONLY AVAILABLE IN NODE.JS RUNTIME]
+
+A session only signs eligible blob download requests, so within Data Lake this affects file reads: `read`, `readToBuffer`, and `readToFile`. Every other operation continues to use a bearer token, including the file system calls that are served by the blob endpoint rather than by DFS.
+
+In browsers and React Native, `sessionOptions` is accepted for type compatibility but has no effect, because signing a session requires Shared Key, which is unavailable outside Node.js.
+
+```ts snippet:ReadmeSampleSessionAuthentication
+import { DataLakeServiceClient } from "@azure/storage-file-datalake";
+import { DefaultAzureCredential } from "@azure/identity";
+import { buffer } from "node:stream/consumers";
+
+const account = "<account>";
+
+// Session token authentication is only available in the Node.js runtime. In browsers and
+// React Native these options are ignored and requests keep using a bearer token.
+const datalakeServiceClient = new DataLakeServiceClient(
+  `https://${account}.dfs.core.windows.net`,
+  new DefaultAzureCredential(),
+  { sessionOptions: { mode: "enabled" } },
+);
+
+// A session can only sign file-download requests: `read`, `readToBuffer`, and `readToFile`.
+// Every other Data Lake operation uses a bearer token.
+const fileSystemClient = datalakeServiceClient.getFileSystemClient("<file system name>");
+const fileClient = fileSystemClient.getFileClient("<file name>");
+const downloadResponse = await fileClient.read();
+if (downloadResponse.readableStreamBody) {
+  const downloaded = await buffer(downloadResponse.readableStreamBody);
+  console.log("Downloaded file content:", downloaded.toString());
+}
+```
+
+### Read files from the endpoints that store them (Node.js)
+
+File reads can use the layout-aware routing provided by `@azure/storage-blob`. When the first chunk that `readToBuffer` reads comes back with a hint that the file has a layout, the remaining chunks can be read directly from the storage endpoints that hold them, rather than having the account endpoint relay them. This is off by default; set `layoutAwareRouting` to `"enabled"` to opt in. When the account doesn't support it, the file is read from the account endpoint as usual.
+[ONLY AVAILABLE IN NODE.JS RUNTIME]
+
+```ts snippet:ReadmeSampleLayoutAwareRouting
+import { DataLakeServiceClient } from "@azure/storage-file-datalake";
+import { DefaultAzureCredential } from "@azure/identity";
+
+const account = "<account>";
+const datalakeServiceClient = new DataLakeServiceClient(
+  `https://${account}.dfs.core.windows.net`,
+  new DefaultAzureCredential(),
+);
+const fileSystemClient = datalakeServiceClient.getFileSystemClient("<file system name>");
+const fileClient = fileSystemClient.getFileClient("<file name>");
+
+// Routing is off by default. Opt in to read chunks from the endpoints that hold them.
+const downloaded = await fileClient.readToBuffer(0, undefined, {
+  layoutAwareRouting: "enabled",
+});
+console.log(`Downloaded ${downloaded.length} bytes`);
+```
+
 ## Troubleshooting
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
@@ -507,11 +555,11 @@ setLogLevel("info");
 
 More code samples:
 
-- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.31.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/javascript)
-- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.31.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/typescript)
-- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.31.0-beta.1/sdk/storage/storage-file-datalake/test/)
+- [DataLake Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.32.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/javascript)
+- [DataLake Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.32.0-beta.1/sdk/storage/storage-file-datalake/samples/v12/typescript)
+- [DataLake Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.32.0-beta.1/sdk/storage/storage-file-datalake/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.31.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.32.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 

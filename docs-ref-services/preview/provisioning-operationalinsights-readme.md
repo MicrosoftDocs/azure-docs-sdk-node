@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/provisioning-operationalinsights, operationalinsights
-ms.date: 11/06/2026
+ms.date: 11/11/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: operationalinsights
@@ -44,7 +44,7 @@ stack.outputs.add("workspaceId", "string", workspace.id);
 console.log(JSON.stringify(serialize(stack), null, 2));
 ```
 
-See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/provisioning-operationalinsights_1.0.0-beta.1/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
+See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
 
 ## Resource types
 

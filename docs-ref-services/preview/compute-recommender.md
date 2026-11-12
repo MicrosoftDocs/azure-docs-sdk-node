@@ -1,7 +1,7 @@
 ---
 title: Azure Compute Recommender SDK for JavaScript
 description: Reference for Azure Compute Recommender SDK for JavaScript
-ms.date: 11/11/2026
+ms.date: 11/12/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: computerecommender

@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/provisioning-cognitiveservices, cognitiveservices
-ms.date: 11/06/2026
+ms.date: 11/12/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitiveservices
@@ -50,7 +50,7 @@ console.log(JSON.stringify(serialize(stack), null, 2));
 
 This only produces an infrastructure definition; it does not deploy resources to Azure.
 
-See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/provisioning-cognitiveservices_1.0.0-beta.1/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
+See the [core library documentation](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/provisioning-core/README.md) for the authoring model and serialization APIs.
 
 ## Resource types
 

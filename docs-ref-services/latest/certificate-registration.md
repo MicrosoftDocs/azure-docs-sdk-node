@@ -1,7 +1,7 @@
 ---
 title: Azure Certificate Registration SDK for JavaScript
 description: Reference for Azure Certificate Registration SDK for JavaScript
-ms.date: 11/12/2026
+ms.date: 11/13/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: certificateregistration

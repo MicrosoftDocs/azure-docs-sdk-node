@@ -1,7 +1,7 @@
 ---
 title: Azure Pure Storage Block SDK for JavaScript
 description: Reference for Azure Pure Storage Block SDK for JavaScript
-ms.date: 11/12/2026
+ms.date: 11/13/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: purestorageblock

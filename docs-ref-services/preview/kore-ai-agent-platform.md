@@ -1,7 +1,7 @@
 ---
 title: Azure Kore AI Agent Platform SDK for JavaScript
 description: Reference for Azure Kore AI Agent Platform SDK for JavaScript
-ms.date: 11/16/2026
+ms.date: 11/17/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: koreaiagentplatform

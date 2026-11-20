@@ -1,0 +1,167 @@
+### YamlMime:TSType
+name: AgentFabricProperties
+uid: '@azure/arm-networksecurity.AgentFabricProperties'
+package: '@azure/arm-networksecurity'
+summary: AgentFabric properties
+fullName: AgentFabricProperties
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: contentInspectionProfile
+    uid: '@azure/arm-networksecurity.AgentFabricProperties.contentInspectionProfile'
+    package: '@azure/arm-networksecurity'
+    summary: >-
+      The connection to the customer's Azure Content Safety account. For a new
+
+      fabric created with API version `2026-10-07-preview` or later, omitting
+      this profile or supplying {}
+
+      requests no inspection capability and uses no platform-owned account or
+      shared-key fallback.
+
+
+      For an existing fabric, omitting the profile from PUT, including requests
+      from older clients,
+
+      or supplying {} preserves its customer-owned connection, legacy regional
+      connection, or absence
+
+      of connection. The empty object is a request for no connection change, not
+      a stored replacement
+
+      profile. Neither omission nor {} removes, probes, or creates a connection
+      or cancels a pending
+
+      connection update. Other Fabric fields and policy compatibility rules
+      still apply.
+
+      A nonempty request profile requires both endpoint and apiKey, even at the
+      unchanged endpoint.
+
+      PUT can rotate the key or replace the endpoint by supplying the complete
+      pair. Tags- or
+
+      identity-only PATCH requests cannot change this profile.
+
+
+      Existing legacy fabrics without a profile retain their regional Content
+      Safety endpoint and
+
+      authentication path. Omission or {} triggers no connection probe,
+      account-management call, key
+
+      retrieval, or credential requirement. Supplying a complete profile
+      explicitly configures a
+
+      customer-owned connection; there is no automatic conversion or
+      failed-connection fallback
+
+      to regional credentials.
+
+
+      The customer owns, pays for, and operates the account. The service does
+      not create, reserve,
+
+      manage, or delete it. The service validates new or changed
+      endpoint/credential configuration
+
+      and the required Content Safety API before activation; configuration alone
+      does not indicate
+
+      readiness or active policy enforcement. Unchanged configuration, GET, and
+      list do not trigger
+
+      a new validation request. A failed replacement preserves the existing
+      connection and credential,
+
+      including a legacy regional connection.
+    fullName: contentInspectionProfile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'contentInspectionProfile?: ContentInspectionProfile'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-networksecurity.ContentInspectionProfile" />
+  - name: defaultPolicyGroups
+    uid: '@azure/arm-networksecurity.AgentFabricProperties.defaultPolicyGroups'
+    package: '@azure/arm-networksecurity'
+    summary: >-
+      The default policy groups to apply to all members of this fabric. A fabric
+      without a configured
+
+      inspection connection cannot reference a group containing any
+      ContentInspection policy,
+
+      even when that policy's selectors currently match no traffic.
+
+      For an existing fabric, compatibility uses the stored configuration when
+      PUT omits
+
+      contentInspectionProfile or supplies an empty object. Existing legacy
+      fabrics retain their regional
+
+      Content Safety connection, which satisfies the inspection prerequisite
+      without new probes.
+
+      A connection still being validated is not an absent connection. Removing a
+      group
+
+      reference remains allowed, subject to other validation.
+    fullName: defaultPolicyGroups
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'defaultPolicyGroups?: string[]'
+      return:
+        description: ''
+        type: string[]
+  - name: provisioningState
+    uid: '@azure/arm-networksecurity.AgentFabricProperties.provisioningState'
+    package: '@azure/arm-networksecurity'
+    summary: The provisioning state of the resource.
+    fullName: provisioningState
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'provisioningState?: string'
+      return:
+        description: ''
+        type: string
+  - name: resourceGuid
+    uid: '@azure/arm-networksecurity.AgentFabricProperties.resourceGuid'
+    package: '@azure/arm-networksecurity'
+    summary: >-
+      The unique identifier (GUID) assigned to the agent fabric by the resource
+      provider when it is created.
+    fullName: resourceGuid
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'resourceGuid?: string'
+      return:
+        description: ''
+        type: string
+  - name: trustDomain
+    uid: '@azure/arm-networksecurity.AgentFabricProperties.trustDomain'
+    package: '@azure/arm-networksecurity'
+    summary: >-
+      The trust domain that scopes this fabric's member identities. It is the
+      leading component of
+
+      each member's identity, which takes the form
+      `<trustDomain>/<agentFabricName>/<memberName>`.
+
+      Set at creation and immutable thereafter; when omitted, the shared default
+      trust domain
+
+      `microsoft.agentfabric` is used.
+    fullName: trustDomain
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'trustDomain?: string'
+      return:
+        description: ''
+        type: string

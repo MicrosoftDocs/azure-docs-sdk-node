@@ -58,6 +58,20 @@ properties:
       return:
         description: ''
         type: number
+  - name: foundryFeatures
+    uid: '@azure/ai-projects.VoiceAgentRealtimeClientConnectOptions.foundryFeatures'
+    package: '@azure/ai-projects'
+    summary: >-
+      Opts into Handoff, SIP transfer destinations, or post-call preview
+      features. Omit for GA agents.
+    fullName: foundryFeatures
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'foundryFeatures?: "VoiceAgents=V1Preview"'
+      return:
+        description: ''
+        type: '"VoiceAgents=V1Preview"'
   - name: onConnectionStateChange
     uid: >-
       @azure/ai-projects.VoiceAgentRealtimeClientConnectOptions.onConnectionStateChange
@@ -77,28 +91,16 @@ properties:
     uid: '@azure/ai-projects.VoiceAgentRealtimeClientConnectOptions.query'
     package: '@azure/ai-projects'
     summary: >-
-      Additional query parameters for this connection's WebSocket upgrade URL.
-
-      Provide a plain object, including a null-prototype object.
-
-      Values override matching endpoint query parameters; `undefined` removes a
+      Custom URL query parameters. Values are URL-encoded; undefined removes a
       parameter.
 
-      Values are URL-encoded automatically. Numbers must be finite.
+      Realtime connections accept an explicit structured_inputs JSON-object
+      string instead of
 
-      SDK-managed parameters, authentication parameters, and names starting with
-      `h-` are
+      structuredInputs. Other SDK/authentication, structured-input, and h-* keys
+      are reserved.
 
-      reserved (case-insensitively) and cause a `TypeError`. Use the
-      corresponding typed
-
-      options for session, version, storage, transport, and structured prompt
-      inputs instead.
-
-      Both `structured_input` and `structured_inputs` are reserved.
-
-      Do not include secrets: query parameters can appear in server or proxy
-      logs.
+      Never include sensitive values; URLs may be logged.
     fullName: query
     remarks: ''
     isDeprecated: false
@@ -124,9 +126,16 @@ properties:
   - name: structuredInputs
     uid: '@azure/ai-projects.VoiceAgentRealtimeClientConnectOptions.structuredInputs'
     package: '@azure/ai-projects'
-    summary: |-
-      Values used to render the agent's structured prompt inputs.
-      Serialized when `connect()` is called, before authentication.
+    summary: >-
+      Prompt-variable values captured when connect() is called. Realtime
+      connections use
+
+      a header in Node.js and the URL query in browsers. GPT Live uses the URL
+      query.
+
+      For explicit Realtime URL transport, use query.structured_inputs instead.
+
+      Do not put sensitive data in URL-carried inputs.
     fullName: structuredInputs
     remarks: ''
     isDeprecated: false
@@ -139,17 +148,12 @@ properties:
     uid: '@azure/ai-projects.VoiceAgentRealtimeClientConnectOptions.transport'
     package: '@azure/ai-projects'
     summary: >-
-      Selects the transport used for the realtime connection. Defaults to
-      `"websocket"`. Set to
+      Connection transport. Defaults to "websocket".
 
-      `"webrtc"` to negotiate a WebRTC peer connection instead; the caller is
-      responsible for
+      Use "webrtc" only if your app handles the SDP offer/answer exchange
+      through
 
-      completing the SDP offer/answer exchange using the `rtc.call.sdp.create`
-      and
-
-      `rtc.call.sdp.created` events (see
-      [VoiceAgentRealtimeEvent](xref:@azure/ai-projects.VoiceAgentRealtimeEvent)).
+      the rtc.call.sdp.create and rtc.call.sdp.created events.
     fullName: transport
     remarks: ''
     isDeprecated: false

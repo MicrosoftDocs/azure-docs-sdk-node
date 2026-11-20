@@ -179,10 +179,19 @@ properties:
     uid: '@azure/arm-cognitiveservices.AccountProperties.costControlConnections'
     package: '@azure/arm-cognitiveservices'
     summary: >-
-      The account-level connections used to publish cost control telemetry and
-      events. Application Insights is optional for attachment, accounting, and
-      enforcement and can be configured later. Event Grid must be configured
-      before attaching a cost control with an alert threshold.
+      Account-level cost-control telemetry connections. Application Insights is
+      optional.
+
+      Budget notifications use their own Event Grid connection IDs;
+      account-level Event Grid configuration is not exposed or accepted by this
+      API version.
+
+      Set this object to null in an account update to clear the Application
+      Insights connection. Existing legacy Event Grid configuration is
+      preserved.
+
+      This property is available independently of
+      Microsoft.CognitiveServices/CostControls subscription registration.
     fullName: costControlConnections
     remarks: ''
     isDeprecated: false
@@ -191,22 +200,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-cognitiveservices.CostControlConnections" />
-  - name: costControlIds
-    uid: '@azure/arm-cognitiveservices.AccountProperties.costControlIds'
-    package: '@azure/arm-cognitiveservices'
-    summary: >-
-      The full resource IDs of cost controls directly attached to this account.
-
-      At the moment the service only supports a single cost control. This will
-      be expanded in future API versions.
-    fullName: costControlIds
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'costControlIds?: string[]'
-      return:
-        description: ''
-        type: string[]
   - name: customSubDomainName
     uid: '@azure/arm-cognitiveservices.AccountProperties.customSubDomainName'
     package: '@azure/arm-cognitiveservices'
@@ -532,6 +525,25 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: trustedCertificateSources
+    uid: '@azure/arm-cognitiveservices.AccountProperties.trustedCertificateSources'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      Private CA trust sources for supported features in an AIServices account
+      with allowProjectManagement enabled. Supports one Azure Key Vault source
+      containing version-pinned references to secrets with PEM-encoded CA
+      certificates or certificate bundles. On PUT or PATCH, a non-null array
+      replaces the complete configuration, so include all references to retain.
+      Omit this property or send null to preserve the existing configuration;
+      send an empty array to clear it.
+    fullName: trustedCertificateSources
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'trustedCertificateSources?: TrustedCertificateSource[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-cognitiveservices.TrustedCertificateSource" />[]
   - name: userOwnedStorage
     uid: '@azure/arm-cognitiveservices.AccountProperties.userOwnedStorage'
     package: '@azure/arm-cognitiveservices'

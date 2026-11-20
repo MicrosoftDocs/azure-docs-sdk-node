@@ -1,0 +1,128 @@
+### YamlMime:TSType
+name: EcrAuthenticationUpdateProperties
+uid: '@azure/arm-containerregistry.EcrAuthenticationUpdateProperties'
+package: '@azure/arm-containerregistry'
+summary: >-
+  Partial Amazon Elastic Container Registry (ECR) authentication configuration.
+
+  When authentication is first configured, accountNumber, region, and roleName
+  must be supplied.
+fullName: EcrAuthenticationUpdateProperties
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: accountNumber
+    uid: >-
+      @azure/arm-containerregistry.EcrAuthenticationUpdateProperties.accountNumber
+    package: '@azure/arm-containerregistry'
+    summary: >-
+      The AWS account that owns the IAM role used for authentication.
+
+      The IAM role is assumed via AWS Security Token Service (STS) when
+      exchanging a
+
+      federated Entra access token for an ECR access token. The full IAM role
+      ARN is
+
+      derived from `accountNumber`, `rolePath`, and `roleName` as
+
+      `arn:aws:iam::{accountNumber}:role{rolePath}{roleName}` (the initial path
+      defaults to `/`).
+    fullName: accountNumber
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'accountNumber?: string'
+      return:
+        description: ''
+        type: string
+  - name: authenticationType
+    uid: >-
+      @azure/arm-containerregistry.EcrAuthenticationUpdateProperties.authenticationType
+    package: '@azure/arm-containerregistry'
+    summary: >-
+      The discriminator possible values: GoogleArtifactRegistry,
+      AwsElasticContainerRegistry, EntraFederatedIdentityCredential
+    fullName: authenticationType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'authenticationType: "AwsElasticContainerRegistry"'
+      return:
+        description: ''
+        type: '"AwsElasticContainerRegistry"'
+  - name: region
+    uid: '@azure/arm-containerregistry.EcrAuthenticationUpdateProperties.region'
+    package: '@azure/arm-containerregistry'
+    summary: >-
+      The AWS region of the upstream Elastic Container Registry (e.g.
+      `us-west-2`).
+
+      Only commercial AWS regions are supported; the GovCloud (`us-gov-*`),
+      China
+
+      (`cn-*`), and Secret/Top Secret ISO (`us-iso*`) partitions are rejected.
+      The
+
+      pattern stays forward-compatible for new commercial regions without
+      requiring a
+
+      contract change.
+    fullName: region
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'region?: string'
+      return:
+        description: ''
+        type: string
+  - name: roleName
+    uid: '@azure/arm-containerregistry.EcrAuthenticationUpdateProperties.roleName'
+    package: '@azure/arm-containerregistry'
+    summary: >-
+      The name of the AWS IAM role assumed for authentication.
+
+      This is the role name only, not the full ARN; the IAM path is supplied
+      separately
+
+      via `rolePath`, so '/' is not permitted here.
+    fullName: roleName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'roleName?: string'
+      return:
+        description: ''
+        type: string
+  - name: rolePath
+    uid: '@azure/arm-containerregistry.EcrAuthenticationUpdateProperties.rolePath'
+    package: '@azure/arm-containerregistry'
+    summary: >-
+      Optional IAM path of the role (for example `/team/` or `/division/team/`).
+      The value
+
+      must be supplied in canonical form with a leading and trailing '/'; it is
+      validated
+
+      as-is and is never normalized. A non-root path must contain at least one
+      character
+
+      between the surrounding slashes. When authentication is first configured,
+      an omitted
+
+      path defaults to the root (`/`). When updating an existing authentication
+      configuration,
+
+      an omitted path retains its current value.
+    fullName: rolePath
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'rolePath?: string'
+      return:
+        description: ''
+        type: string
+extends: >-
+  <xref
+  uid="@azure/arm-containerregistry.AdditionalAuthenticationUpdateProperties" />

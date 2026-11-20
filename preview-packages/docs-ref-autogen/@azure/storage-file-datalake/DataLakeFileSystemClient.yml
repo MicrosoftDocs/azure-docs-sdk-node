@@ -38,7 +38,7 @@ constructors:
           description: ''
   - name: >-
       DataLakeFileSystemClient(string, StorageSharedKeyCredential |
-      AnonymousCredential | TokenCredential, DataLakeClientOptions)
+      AnonymousCredential | TokenCredential, DataLakeFileSystemClientOptions)
     uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.constructor'
     package: '@azure/storage-file-datalake'
     summary: Creates an instance of DataLakeFileSystemClient from url and credential.
@@ -48,7 +48,7 @@ constructors:
       content: >-
         new DataLakeFileSystemClient(url: string, credential?:
         StorageSharedKeyCredential | AnonymousCredential | TokenCredential,
-        options?: DataLakeClientOptions)
+        options?: DataLakeFileSystemClientOptions)
       parameters:
         - id: url
           type: string
@@ -69,7 +69,10 @@ constructors:
             implements the TokenCredential interface. If not specified,
             AnonymousCredential is used.
         - id: options
-          type: <xref uid="@azure/storage-file-datalake.DataLakeClientOptions" />
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.DataLakeFileSystemClientOptions"
+            />
           description: Optional. Options to configure the HTTP pipeline.
 properties:
   - name: name
@@ -144,6 +147,34 @@ methods:
       the same name already exists, the operation fails.
 
 
+      When a file system is deleted, a file system with the same name can't be
+
+      created for at least 30 seconds. The file system might not be available
+      for
+
+      more than 30 seconds if the service is still processing the request. While
+      the
+
+      file system is being deleted, attempts to create a file system of the same
+      name
+
+      fail with status code 409 (Conflict). The service indicates that the file
+
+      system is being deleted. File and directory operations through the Data
+      Lake
+
+      (DFS) endpoint fail with status code 404 (Not Found). Reads through the
+      Blob
+
+      endpoint may continue to succeed for up to 30 seconds after the delete
+      request
+
+      is accepted. After this period, all operations on the file system and its
+      paths
+
+      fail with status code 404 (Not Found).
+
+
       See https://learn.microsoft.com/rest/api/storageservices/create-container
     remarks: ''
     isDeprecated: false
@@ -170,6 +201,40 @@ methods:
       the same name already exists, it is not changed.
 
 
+      When a file system is deleted, a file system with the same name can't be
+
+      created for at least 30 seconds. The file system might not be available
+      for
+
+      more than 30 seconds if the service is still processing the request. While
+      the
+
+      file system is being deleted, attempts to create a file system of the same
+      name
+
+      fail with status code 409 (Conflict). The service indicates that the file
+
+      system is being deleted. File and directory operations through the Data
+      Lake
+
+      (DFS) endpoint fail with status code 404 (Not Found). Reads through the
+      Blob
+
+      endpoint may continue to succeed for up to 30 seconds after the delete
+      request
+
+      is accepted. After this period, all operations on the file system and its
+      paths
+
+      fail with status code 404 (Not Found).
+
+
+      If a file system with the same name is still being deleted, this method
+      throws
+
+      the 409 (Conflict) error instead of returning `succeeded: false`.
+
+
       See https://learn.microsoft.com/rest/api/storageservices/create-container
     remarks: ''
     isDeprecated: false
@@ -190,8 +255,37 @@ methods:
   - name: delete(FileSystemDeleteOptions)
     uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.delete'
     package: '@azure/storage-file-datalake'
-    summary: |-
+    summary: >-
       Delete current file system.
+
+
+      When a file system is deleted, a file system with the same name can't be
+
+      created for at least 30 seconds. The file system might not be available
+      for
+
+      more than 30 seconds if the service is still processing the request. While
+      the
+
+      file system is being deleted, attempts to create a file system of the same
+      name
+
+      fail with status code 409 (Conflict). The service indicates that the file
+
+      system is being deleted. File and directory operations through the Data
+      Lake
+
+      (DFS) endpoint fail with status code 404 (Not Found). Reads through the
+      Blob
+
+      endpoint may continue to succeed for up to 30 seconds after the delete
+      request
+
+      is accepted. After this period, all operations on the file system and its
+      paths
+
+      fail with status code 404 (Not Found).
+
 
       See https://learn.microsoft.com/rest/api/storageservices/delete-container
     remarks: ''
@@ -212,8 +306,37 @@ methods:
   - name: deleteIfExists(FileSystemDeleteOptions)
     uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.deleteIfExists'
     package: '@azure/storage-file-datalake'
-    summary: |-
+    summary: >-
       Delete current file system if it exists.
+
+
+      When a file system is deleted, a file system with the same name can't be
+
+      created for at least 30 seconds. The file system might not be available
+      for
+
+      more than 30 seconds if the service is still processing the request. While
+      the
+
+      file system is being deleted, attempts to create a file system of the same
+      name
+
+      fail with status code 409 (Conflict). The service indicates that the file
+
+      system is being deleted. File and directory operations through the Data
+      Lake
+
+      (DFS) endpoint fail with status code 404 (Not Found). Reads through the
+      Blob
+
+      endpoint may continue to succeed for up to 30 seconds after the delete
+      request
+
+      is accepted. After this period, all operations on the file system and its
+      paths
+
+      fail with status code 404 (Not Found).
+
 
       See https://learn.microsoft.com/rest/api/storageservices/delete-container
     remarks: ''

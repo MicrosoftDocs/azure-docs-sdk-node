@@ -1,0 +1,19 @@
+### YamlMime:TSTypeAlias
+name: SearchOptionsInput
+uid: '@azure/search-documents.SearchOptionsInput'
+package: '@azure/search-documents'
+summary: >-
+  Search input supporting agentic and additional vector options while preserving
+  legacy types.
+fullName: SearchOptionsInput<TModel, TFields>
+remarks: ''
+isDeprecated: false
+syntax: |
+  type SearchOptionsInput<TModel, TFields> = OperationOptions &
+    Omit<
+      BaseSearchRequestOptions<TModel, TFields>,
+      "queryType" | "vectorSearchOptions"
+    > &
+    (SearchRequestQueryTypeOptions | { queryType: "agentic" }) & {
+      vectorSearchOptions?: VectorSearchOptionsInput<TModel>
+    }

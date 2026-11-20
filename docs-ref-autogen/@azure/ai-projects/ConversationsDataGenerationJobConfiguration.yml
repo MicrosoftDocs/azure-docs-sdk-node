@@ -1,0 +1,135 @@
+### YamlMime:TSType
+name: ConversationsDataGenerationJobConfiguration
+uid: '@azure/ai-projects.ConversationsDataGenerationJobConfiguration'
+package: '@azure/ai-projects'
+summary: >-
+  The configuration for reconstructing existing traced conversations for
+  evaluation, not synthetic conversation simulation. This preview requires
+  `scenario` to be `evaluation`, sources of type `traces`, and the
+  `Foundry-Features: DataGenerationJobs=V1Preview` request header.
+  Conversation-level sampling is implicit; `sample_level` is not supported.
+  Existing trace selection, annotations, and output dataset row schemas are
+  unchanged. Create, get, and list responses preserve `type: conversations`. The
+  service enforces the scenario, source, and conditional model-options
+  requirements. Conversation-level output rows contain `test_case_id`,
+  `messages`, `tool_definitions`, and `metadata`. A successful optional
+  description adds `test_case_description`. If description generation fails, the
+  row is retained with safe row-level status and error metadata, without raw
+  provider or model error bodies.
+fullName: ConversationsDataGenerationJobConfiguration
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: generate_test_case_description
+    uid: >-
+      @azure/ai-projects.ConversationsDataGenerationJobConfiguration.generate_test_case_description
+    package: '@azure/ai-projects'
+    summary: >-
+      Whether to generate an AI-authored test-case description for each
+      reconstructed conversation. This is a preview feature. If omitted, the
+      service defaults to `false`. When true, requires a nonempty
+      `model_options.model`. Model options must be omitted when neither
+      description nor rubric generation is enabled.
+    fullName: generate_test_case_description
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'generate_test_case_description?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: generate_test_case_rubric
+    uid: >-
+      @azure/ai-projects.ConversationsDataGenerationJobConfiguration.generate_test_case_rubric
+    package: '@azure/ai-projects'
+    summary: >-
+      Whether to generate test-case rubric dimensions for each reconstructed
+      conversation. This is a preview feature. When true, requires a nonempty
+      `model_options.model`. Model options must be omitted when neither
+      description nor rubric generation is enabled.
+    fullName: generate_test_case_rubric
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'generate_test_case_rubric?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: max_samples
+    uid: '@azure/ai-projects.ConversationsDataGenerationJobConfiguration.max_samples'
+    package: '@azure/ai-projects'
+    summary: >-
+      Maximum number of whole conversations to generate, up to service-defined
+      limits. If omitted, sampling is turned off.
+    fullName: max_samples
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'max_samples?: number'
+      return:
+        description: ''
+        type: number
+  - name: model_options
+    uid: >-
+      @azure/ai-projects.ConversationsDataGenerationJobConfiguration.model_options
+    package: '@azure/ai-projects'
+    summary: >-
+      The model used to generate test-case descriptions or rubric dimensions.
+      Required with a nonempty `model` when `generate_test_case_description` or
+      `generate_test_case_rubric` is true; must be omitted otherwise.
+    fullName: model_options
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'model_options?: DataGenerationModelOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.DataGenerationModelOptions" />
+  - name: redact_private_content
+    uid: >-
+      @azure/ai-projects.ConversationsDataGenerationJobConfiguration.redact_private_content
+    package: '@azure/ai-projects'
+    summary: >-
+      Whether to redact private content from traces. When omitted or set to
+      true, private content is redacted. Set to false to opt out of redaction.
+    fullName: redact_private_content
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'redact_private_content?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: type
+    uid: '@azure/ai-projects.ConversationsDataGenerationJobConfiguration.type'
+    package: '@azure/ai-projects'
+    summary: The data generation job type, which is Conversations for this model.
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "conversations"'
+      return:
+        description: ''
+        type: '"conversations"'
+inheritedProperties:
+  - name: train_split
+    uid: '@azure/ai-projects.ConversationsDataGenerationJobConfiguration.train_split'
+    package: '@azure/ai-projects'
+    summary: >-
+      The proportion of the generated data to be used for training when the data
+      is used for fine-tuning. The rest will be used for validation. Value
+      should be between 0 and 1.
+    fullName: train_split
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'train_split?: number'
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DataGenerationJobConfiguration.train_split](xref:@azure/ai-projects.DataGenerationJobConfiguration.train_split)
+extends: <xref uid="@azure/ai-projects.DataGenerationJobConfiguration" />

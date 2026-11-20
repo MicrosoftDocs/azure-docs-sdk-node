@@ -5,6 +5,8 @@ package: '@azure/functions-extensions-connectors'
 summary: >-
   Options for registering a connector trigger function with
   [connectorTrigger](xref:@azure/functions-extensions-connectors.connectorTrigger).
+
+  Includes the polling and batching options from `@azure/functions`.
 fullName: ConnectorTriggerOptions<TItem, TContext>
 remarks: ''
 isDeprecated: false
@@ -62,3 +64,131 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/functions.FunctionOutput" />
+inheritedProperties:
+  - name: cardinality
+    uid: '@azure/functions-extensions-connectors.ConnectorTriggerOptions.cardinality'
+    package: '@azure/functions-extensions-connectors'
+    summary: >-
+      Set to `many` to enable batching. Accepts enum members or the supported
+      string values.
+
+      Defaults to `one`, which passes a single event to the function.
+
+      For batches, use an array as the handler's payload type, for example
+      `app.connectorTrigger<MyEvent[]>`.
+    fullName: cardinality
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'cardinality?: Cardinality | "many" | "one"'
+      return:
+        description: ''
+        type: <xref uid="@azure/functions.Cardinality" /> | "many" | "one"
+    inheritanceDescription: <b>Inherited From</b> Pick.cardinality
+  - name: connection
+    uid: '@azure/functions-extensions-connectors.ConnectorTriggerOptions.connection'
+    package: '@azure/functions-extensions-connectors'
+    summary: The connector connection setting. Required when `deliveryMode` is `Poll`.
+    fullName: connection
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'connection?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Pick.connection
+  - name: deliveryMode
+    uid: >-
+      @azure/functions-extensions-connectors.ConnectorTriggerOptions.deliveryMode
+    package: '@azure/functions-extensions-connectors'
+    summary: >-
+      The connector event delivery mode. Accepts enum members or the supported
+      string values.
+
+      Defaults to `Webhook` when omitted.
+    fullName: deliveryMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'deliveryMode?: DeliveryMode | "Poll" | "Webhook"'
+      return:
+        description: ''
+        type: <xref uid="@azure/functions.DeliveryMode" /> | "Poll" | "Webhook"
+    inheritanceDescription: <b>Inherited From</b> Pick.deliveryMode
+  - name: maxBatchSize
+    uid: >-
+      @azure/functions-extensions-connectors.ConnectorTriggerOptions.maxBatchSize
+    package: '@azure/functions-extensions-connectors'
+    summary: >-
+      An optional per-function override for the maximum number of events per
+      batch.
+
+      If omitted, Poll delivery uses the extension's app-wide host.json default.
+    fullName: maxBatchSize
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxBatchSize?: number'
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> Pick.maxBatchSize
+  - name: maxConcurrentCalls
+    uid: >-
+      @azure/functions-extensions-connectors.ConnectorTriggerOptions.maxConcurrentCalls
+    package: '@azure/functions-extensions-connectors'
+    summary: >-
+      An optional per-function override for the maximum number of concurrent
+      single-event invocations.
+
+      If omitted, Poll delivery uses the extension's app-wide host.json default.
+
+      Batched invocations are processed one at a time by the extension.
+    fullName: maxConcurrentCalls
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxConcurrentCalls?: number'
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> Pick.maxConcurrentCalls
+  - name: targetPendingEventThreshold
+    uid: >-
+      @azure/functions-extensions-connectors.ConnectorTriggerOptions.targetPendingEventThreshold
+    package: '@azure/functions-extensions-connectors'
+    summary: >-
+      The target number of pending events per function instance used for
+      scaling.
+    fullName: targetPendingEventThreshold
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetPendingEventThreshold?: number'
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: <b>Inherited From</b> Pick.targetPendingEventThreshold
+  - name: triggerConfigName
+    uid: >-
+      @azure/functions-extensions-connectors.ConnectorTriggerOptions.triggerConfigName
+    package: '@azure/functions-extensions-connectors'
+    summary: >-
+      The connector trigger configuration name. Supports app setting expressions
+      such as `%TriggerConfigName%`.
+
+      Required when `deliveryMode` is `Poll`.
+    fullName: triggerConfigName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'triggerConfigName?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: <b>Inherited From</b> Pick.triggerConfigName
+extends: >-
+  Pick&lt;<xref uid="@azure/functions.ConnectorTriggerOptions" />,
+  "deliveryMode" | "connection" | "triggerConfigName" | "cardinality" |
+  "maxBatchSize" | "maxConcurrentCalls" | "targetPendingEventThreshold"&gt;

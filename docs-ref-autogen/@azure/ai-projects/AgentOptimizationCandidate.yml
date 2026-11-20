@@ -34,12 +34,25 @@ properties:
       return:
         description: ''
         type: string
+  - name: error
+    uid: '@azure/ai-projects.AgentOptimizationCandidate.error'
+    package: '@azure/ai-projects'
+    summary: Primary failure or skip reason. Omitted for other candidate statuses.
+    fullName: error
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'error?: ErrorModel'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.ErrorModel" />
   - name: evaluation
     uid: '@azure/ai-projects.AgentOptimizationCandidate.evaluation'
     package: '@azure/ai-projects'
     summary: >-
-      Comparative evaluation summary. Omitted when this candidate was not
-      comparatively evaluated.
+      Evaluation summary, including reporting-only measurements for skill
+      baseline and generated candidates. Omitted when no measurements are
+      available. Missing scores do not imply success or zero.
     fullName: evaluation
     remarks: ''
     isDeprecated: false
@@ -48,6 +61,38 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.AgentOptimizationCandidateEvaluation" />
+  - name: execution_summary
+    uid: '@azure/ai-projects.AgentOptimizationCandidate.execution_summary'
+    package: '@azure/ai-projects'
+    summary: >-
+      Persisted skill execution snapshot, including partial outcomes. Populated
+      on candidate GET when available and omitted from LIST.
+    fullName: execution_summary
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'execution_summary?: AgentOptimizationSkillExecutionSummary'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/ai-projects.AgentOptimizationSkillExecutionSummary"
+          />
+  - name: files
+    uid: '@azure/ai-projects.AgentOptimizationCandidate.files'
+    package: '@azure/ai-projects'
+    summary: >-
+      Metadata for files generated for this candidate, such as trace analysis.
+      Populated on candidate GET when available and omitted from LIST. An empty
+      list means no files were generated; omission means the inventory is not
+      available. Metadata does not provide file content or a download URL.
+    fullName: files
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'files?: AgentOptimizationCandidateFile[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.AgentOptimizationCandidateFile" />[]
   - name: job_id
     uid: '@azure/ai-projects.AgentOptimizationCandidate.job_id'
     package: '@azure/ai-projects'
@@ -116,6 +161,22 @@ properties:
       return:
         description: ''
         type: string
+  - name: resolved_context
+    uid: '@azure/ai-projects.AgentOptimizationCandidate.resolved_context'
+    package: '@azure/ai-projects'
+    summary: >-
+      Frozen trace cohort and discovered agent skills for skill optimization.
+      Populated on candidate GET when available and omitted from LIST.
+    fullName: resolved_context
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'resolved_context?: AgentOptimizationSkillResolvedContext'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/ai-projects.AgentOptimizationSkillResolvedContext"
+          />
   - name: started_at
     uid: '@azure/ai-projects.AgentOptimizationCandidate.started_at'
     package: '@azure/ai-projects'

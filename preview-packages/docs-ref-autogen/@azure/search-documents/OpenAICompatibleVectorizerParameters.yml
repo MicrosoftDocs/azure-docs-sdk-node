@@ -1,0 +1,117 @@
+### YamlMime:TSType
+name: OpenAICompatibleVectorizerParameters
+uid: '@azure/search-documents.OpenAICompatibleVectorizerParameters'
+package: '@azure/search-documents'
+summary: >-
+  Connection parameters for a direct OpenAI-compatible embeddings endpoint.
+  Creation requires exactly one of nonempty headers or managedIdentityAudience.
+  Updates can omit headers to preserve credentials for an unchanged connection
+  and embedding profile.
+fullName: OpenAICompatibleVectorizerParameters
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: authIdentity
+    uid: '@azure/search-documents.OpenAICompatibleVectorizerParameters.authIdentity'
+    package: '@azure/search-documents'
+    summary: >-
+      The user-assigned managed identity used to acquire a token for
+      managedIdentityAudience. Omit to use the search service's system-assigned
+      identity. Allowed only with managedIdentityAudience.
+    fullName: authIdentity
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'authIdentity?: SearchIndexerDataIdentityUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.SearchIndexerDataIdentityUnion" />
+  - name: dimensions
+    uid: '@azure/search-documents.OpenAICompatibleVectorizerParameters.dimensions'
+    package: '@azure/search-documents'
+    summary: >-
+      The output dimensions, which must match the target vector field. Defaults
+      to 1536 for text-embedding-ada-002 and text-embedding-3-small, or 3072 for
+      text-embedding-3-large. Ada requires 1536; text-embedding-3-small supports
+      1 through 1536, and text-embedding-3-large supports 1 through 3072.
+      Preserving omitted headers on update requires the configured dimensions to
+      remain unchanged; omitting dimensions is distinct from specifying the
+      default explicitly.
+    fullName: dimensions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'dimensions?: number'
+      return:
+        description: ''
+        type: number
+  - name: headers
+    uid: '@azure/search-documents.OpenAICompatibleVectorizerParameters.headers'
+    package: '@azure/search-documents'
+    summary: >-
+      Nonempty stored HTTP headers for endpoint authentication. Both names and
+      values are secret and are never returned in responses. Empty maps are
+      invalid. Mutually exclusive with managedIdentityAudience and authIdentity.
+      On update, omitted headers are preserved only on the same resource and
+      vectorizer binding when the exact endpoint, embedding profile including
+      configured dimensions, and authentication identity are unchanged;
+      otherwise, supply fresh credentials.
+    fullName: headers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'headers?: Record<string, string>'
+      return:
+        description: ''
+        type: Record&lt;string, string&gt;
+  - name: managedIdentityAudience
+    uid: >-
+      @azure/search-documents.OpenAICompatibleVectorizerParameters.managedIdentityAudience
+    package: '@azure/search-documents'
+    summary: >-
+      The bare canonical application GUID of the customer's third-party
+      Microsoft Entra application for managed identity authentication. Do not
+      include an api:// prefix or /.default suffix. Mutually exclusive with
+      headers.
+    fullName: managedIdentityAudience
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'managedIdentityAudience?: string'
+      return:
+        description: ''
+        type: string
+  - name: modelName
+    uid: '@azure/search-documents.OpenAICompatibleVectorizerParameters.modelName'
+    package: '@azure/search-documents'
+    summary: >-
+      The embedding profile, using the same model-name enum as native Azure
+      OpenAI vectorizers. Only text-embedding-ada-002, text-embedding-3-small,
+      and text-embedding-3-large are supported at runtime; chat names in the
+      shared enum are rejected. Controls Search's limits and default dimensions;
+      the outbound body omits model, so the URI or gateway must select the
+      actual model. Arbitrary provider protocols are not supported.
+    fullName: modelName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'modelName: string'
+      return:
+        description: ''
+        type: string
+  - name: uri
+    uid: '@azure/search-documents.OpenAICompatibleVectorizerParameters.uri'
+    package: '@azure/search-documents'
+    summary: >-
+      The complete HTTPS embeddings POST URL, including any path and query
+      parameters. Sent unchanged without appending a path or API version.
+      Redirects are not followed.
+    fullName: uri
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'uri: string'
+      return:
+        description: ''
+        type: string

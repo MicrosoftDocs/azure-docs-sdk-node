@@ -1,0 +1,103 @@
+### YamlMime:TSType
+name: SkillOptimizationEvaluationConfiguration
+uid: '@azure/ai-projects.SkillOptimizationEvaluationConfiguration'
+package: '@azure/ai-projects'
+summary: >-
+  Skill-only evaluation inputs. Training-trace grading can inform single-shot
+  learning; supported before/after comparison reports impact without gating
+  publication.
+fullName: SkillOptimizationEvaluationConfiguration
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: evaluation_model
+    uid: >-
+      @azure/ai-projects.SkillOptimizationEvaluationConfiguration.evaluation_model
+    package: '@azure/ai-projects'
+    summary: >-
+      Required model configuration used for evaluation. Its model also supplies
+      evaluator-generation requests when generation is selected.
+    fullName: evaluation_model
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluation_model: EvaluationModelConfiguration'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.EvaluationModelConfiguration" />
+  - name: evaluators
+    uid: '@azure/ai-projects.SkillOptimizationEvaluationConfiguration.evaluators'
+    package: '@azure/ai-projects'
+    summary: >-
+      Existing evaluator reference. At submission, supply exactly one reference
+      or evaluator_generation_configuration, not both; the service validates
+      this combination. After preparation, contains the resolved exact evaluator
+      version used for training grading and supported baseline and
+      learned-candidate evaluation.
+    fullName: evaluators
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluators?: AgentOptimizationEvaluator[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.AgentOptimizationEvaluator" />[]
+  - name: evaluator_generation_configuration
+    uid: >-
+      @azure/ai-projects.SkillOptimizationEvaluationConfiguration.evaluator_generation_configuration
+    package: '@azure/ai-projects'
+    summary: >-
+      Alternative to an existing evaluator reference at submission. Generates an
+      evaluator using evaluation_model.model. Resolved exact versions are
+      returned in evaluators after preparation.
+    fullName: evaluator_generation_configuration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        evaluator_generation_configuration?:
+        AgentOptimizationEvaluatorGenerationConfigurationUnion
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/ai-projects.AgentOptimizationEvaluatorGenerationConfigurationUnion"
+          />
+  - name: max_concurrent_agent_runs
+    uid: >-
+      @azure/ai-projects.SkillOptimizationEvaluationConfiguration.max_concurrent_agent_runs
+    package: '@azure/ai-projects'
+    summary: >-
+      Maximum number of target-agent runs executed concurrently during each
+      target-completion evaluation, from 1 to 10. If omitted, the service
+      defaults to 1.
+    fullName: max_concurrent_agent_runs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'max_concurrent_agent_runs?: number'
+      return:
+        description: ''
+        type: number
+  - name: validation_set
+    uid: '@azure/ai-projects.SkillOptimizationEvaluationConfiguration.validation_set'
+    package: '@azure/ai-projects'
+    summary: >-
+      Optional target-completion validation data, limited to 500 inline test
+      cases. When omitted, the service generates data from the selected traces
+      and partitions it using training_split_ratio for supported before/after
+      comparison. Both comparison runs reuse the same frozen validation dataset.
+      Caller-provided validation data is reused without splitting.
+      Caller-supplied training_set is not accepted.
+    fullName: validation_set
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'validation_set?: AgentOptimizationTargetCompletionEvaluationSet'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/ai-projects.AgentOptimizationTargetCompletionEvaluationSet"
+          />

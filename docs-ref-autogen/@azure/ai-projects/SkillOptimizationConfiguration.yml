@@ -1,0 +1,84 @@
+### YamlMime:TSType
+name: SkillOptimizationConfiguration
+uid: '@azure/ai-projects.SkillOptimizationConfiguration'
+package: '@azure/ai-projects'
+summary: >-
+  Configuration for generating a single skill candidate from trace evidence. The
+  candidate can contain zero or more skill outcomes; no new learnings can
+  produce an empty skill_results array without publishing versions. Optional
+  evaluation reuses a non-generated baseline candidate.
+fullName: SkillOptimizationConfiguration
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: context
+    uid: '@azure/ai-projects.SkillOptimizationConfiguration.context'
+    package: '@azure/ai-projects'
+    summary: >-
+      At least one context item containing trace evidence, optional steering
+      guidance, and optional exact baseline references. Supply agent_traces
+      context; use separate steering_prompt and skill_references items for
+      guidance and baselines. For skill optimization only, a steering prompt
+      must be non-empty and at most 100 KiB (102,400 UTF-8 bytes), enforced by
+      the service; oversized prompts are rejected rather than truncated.
+    fullName: context
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'context: OptimizationContextUnion[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.OptimizationContextUnion" />[]
+  - name: evaluation_configuration
+    uid: '@azure/ai-projects.SkillOptimizationConfiguration.evaluation_configuration'
+    package: '@azure/ai-projects'
+    summary: >-
+      Optional historical training-trace grading and before/after comparison for
+      supported registered targets. Requires target_configuration,
+      evaluation_model, and one existing evaluator or
+      evaluator_generation_configuration. Training verdicts can inform learning;
+      separate before/after scores report impact and do not drive candidate
+      search, selection, or publication. Omitted to skip new training grading
+      and comparison.
+    fullName: evaluation_configuration
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'evaluation_configuration?: SkillOptimizationEvaluationConfiguration'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/ai-projects.SkillOptimizationEvaluationConfiguration" />
+  - name: training_split_ratio
+    uid: '@azure/ai-projects.SkillOptimizationConfiguration.training_split_ratio'
+    package: '@azure/ai-projects'
+    summary: >-
+      Fraction of generated question groups assigned to learning, strictly
+      greater than 0 and less than 1. Defaults to 0.7 when omitted. Normalized
+      questions and shared source traces stay in the same group, and every
+      generated row belongs to learning or validation. The service rejects
+      splits that leave either side empty. Caller-provided validation data is
+      not split.
+    fullName: training_split_ratio
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'training_split_ratio?: number'
+      return:
+        description: ''
+        type: number
+  - name: type
+    uid: '@azure/ai-projects.SkillOptimizationConfiguration.type'
+    package: '@azure/ai-projects'
+    summary: Skill optimization discriminator.
+    fullName: type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'type: "skill_optimization"'
+      return:
+        description: ''
+        type: '"skill_optimization"'
+extends: <xref uid="@azure/ai-projects.AgentOptimizationConfigurationBase" />

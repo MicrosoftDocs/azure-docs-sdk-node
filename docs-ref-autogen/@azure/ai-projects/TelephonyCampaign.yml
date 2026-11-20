@@ -1,0 +1,231 @@
+### YamlMime:TSType
+name: TelephonyCampaign
+uid: '@azure/ai-projects.TelephonyCampaign'
+package: '@azure/ai-projects'
+summary: >-
+  Agent-owned outbound call Campaign. Creation/replacement authorizes execution
+  after successful preparation.
+fullName: TelephonyCampaign
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: connection_name
+    uid: '@azure/ai-projects.TelephonyCampaign.connection_name'
+    package: '@azure/ai-projects'
+    summary: Human-readable name of the provider connection in the current project.
+    fullName: connection_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'connection_name: string'
+      return:
+        description: ''
+        type: string
+  - name: created_at
+    uid: '@azure/ai-projects.TelephonyCampaign.created_at'
+    package: '@azure/ai-projects'
+    summary: Creation time.
+    fullName: created_at
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'created_at: Date'
+      return:
+        description: ''
+        type: Date
+  - name: error
+    uid: '@azure/ai-projects.TelephonyCampaign.error'
+    package: '@azure/ai-projects'
+    summary: >-
+      Preparation/control failure, cleared on retry. Never includes secrets or
+      raw recipient values.
+    fullName: error
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'error?: ErrorModel'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.ErrorModel" />
+  - name: etag
+    uid: '@azure/ai-projects.TelephonyCampaign.etag'
+    package: '@azure/ai-projects'
+    summary: >-
+      Conditional-action token, not a cache validator. Changes with control
+      state, not progress.
+    fullName: etag
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'etag: string'
+      return:
+        description: ''
+        type: string
+  - name: finished_at
+    uid: '@azure/ai-projects.TelephonyCampaign.finished_at'
+    package: '@azure/ai-projects'
+    summary: >-
+      Time of terminal completion for the current round; cleared when failed
+      preparation is replaced.
+    fullName: finished_at
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'finished_at?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: locked_agent_version
+    uid: '@azure/ai-projects.TelephonyCampaign.locked_agent_version'
+    package: '@azure/ai-projects'
+    summary: >-
+      Latest Agent version pinned once per preparation and shared by
+      retries/calls. Omitted until resolved; replacement clears it. Unavailable
+      pins fail without fallback.
+    fullName: locked_agent_version
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'locked_agent_version?: string'
+      return:
+        description: ''
+        type: string
+  - name: name
+    uid: '@azure/ai-projects.TelephonyCampaign.name'
+    package: '@azure/ai-projects'
+    summary: >-
+      Immutable name supplied as campaign_name in the PUT path, not the request
+      body; echoed in responses. Unique within the project and Agent.
+    fullName: name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'name: string'
+      return:
+        description: ''
+        type: string
+  - name: operation_id
+    uid: '@azure/ai-projects.TelephonyCampaign.operation_id'
+    package: '@azure/ai-projects'
+    summary: >-
+      Latest accepted action, for discovery only. Poll the initiating response's
+      Operation-Id/Operation-Location instead.
+    fullName: operation_id
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'operation_id: string'
+      return:
+        description: ''
+        type: string
+  - name: progress
+    uid: '@azure/ai-projects.TelephonyCampaign.progress'
+    package: '@azure/ai-projects'
+    summary: Available partial accounting even when the job fails or is cancelled.
+    fullName: progress
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'progress: TelephonyCampaignProgress'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.TelephonyCampaignProgress" />
+  - name: recipients
+    uid: '@azure/ai-projects.TelephonyCampaign.recipients'
+    package: '@azure/ai-projects'
+    summary: >-
+      1-100 recipients, exclusive with recipient_dataset. The whole UTF-8
+      request is limited to 1 MiB. Omitted from reads; retain the submission for
+      row correlation.
+    fullName: recipients
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'recipients?: TelephonyRecipient[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.TelephonyRecipient" />[]
+  - name: recipient_dataset
+    uid: '@azure/ai-projects.TelephonyCampaign.recipient_dataset'
+    package: '@azure/ai-projects'
+    summary: >-
+      Same-project CSV/JSON/JSONL uri_file, exclusive with recipients. Omitted
+      version pins latest per preparation. Limits: 1-1,000,000 rows, 256 MiB
+      decoded/file, 1 MiB/row.
+    fullName: recipient_dataset
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'recipient_dataset?: TelephonyCampaignDatasetReference'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.TelephonyCampaignDatasetReference" />
+  - name: retry_policy
+    uid: '@azure/ai-projects.TelephonyCampaign.retry_policy'
+    package: '@azure/ai-projects'
+    summary: >-
+      Per-recipient retries. Omit for one attempt; generated CallJobs return
+      fixed_interval with max_attempts=1 and interval=0 seconds.
+    fullName: retry_policy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'retry_policy?: TelephonyOutboundRetryPolicyUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.TelephonyOutboundRetryPolicyUnion" />
+  - name: schedule
+    uid: '@azure/ai-projects.TelephonyCampaign.schedule'
+    package: '@azure/ai-projects'
+    summary: >-
+      Dispatch schedule; omission equals ImmediateSchedule. Every mode waits for
+      successful preparation, then follows its schedule and available capacity.
+    fullName: schedule
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'schedule?: TelephonyCampaignScheduleUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.TelephonyCampaignScheduleUnion" />
+  - name: source
+    uid: '@azure/ai-projects.TelephonyCampaign.source'
+    package: '@azure/ai-projects'
+    summary: >-
+      Typed caller address shared with generated CallJobs. The connection
+      validates source support separately from recipient support.
+    fullName: source
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'source: TelephonyAddressUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.TelephonyAddressUnion" />
+  - name: status
+    uid: '@azure/ai-projects.TelephonyCampaign.status'
+    package: '@azure/ai-projects'
+    summary: >-
+      Business execution state. Each asynchronous action has its own retained
+      operation monitor.
+    fullName: status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'status: TelephonyCampaignStatus'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.TelephonyCampaignStatus" />
+  - name: updated_at
+    uid: '@azure/ai-projects.TelephonyCampaign.updated_at'
+    package: '@azure/ai-projects'
+    summary: Last observable progress update.
+    fullName: updated_at
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'updated_at: Date'
+      return:
+        description: ''
+        type: Date

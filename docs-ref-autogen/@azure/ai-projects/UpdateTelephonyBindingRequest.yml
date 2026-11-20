@@ -10,13 +10,26 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: allowed_calling_numbers
+    uid: '@azure/ai-projects.UpdateTelephonyBindingRequest.allowed_calling_numbers'
+    package: '@azure/ai-projects'
+    summary: >-
+      SIP caller restrictions: omit to preserve, [] to clear; null is invalid.
+      Network restrictions belong to the connection.
+    fullName: allowed_calling_numbers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'allowed_calling_numbers?: string[]'
+      return:
+        description: ''
+        type: string[]
   - name: connection_name
     uid: '@azure/ai-projects.UpdateTelephonyBindingRequest.connection_name'
     package: '@azure/ai-projects'
     summary: >-
-      The replacement Foundry connection name. This property is valid only for a
-      Teams Phone extensibility binding; a Twilio binding's connection is
-      immutable.
+      Replacement same-project connection for Teams or SIP (SipInbound only);
+      immutable for Twilio. Null/blank names are invalid.
     fullName: connection_name
     remarks: ''
     isDeprecated: false
@@ -29,8 +42,8 @@ properties:
     uid: '@azure/ai-projects.UpdateTelephonyBindingRequest.label'
     package: '@azure/ai-projects'
     summary: >-
-      The replacement display label. Omit it to preserve the current value; use
-      null to clear it.
+      Replacement label: omit to preserve, null/blank to clear. Trimmed before
+      length validation.
     fullName: label
     remarks: ''
     isDeprecated: false
@@ -43,9 +56,8 @@ properties:
     uid: '@azure/ai-projects.UpdateTelephonyBindingRequest.phone_number'
     package: '@azure/ai-projects'
     summary: >-
-      The replacement Teams Phone extensibility display phone number. Omit it to
-      preserve the current value; use null to clear it. This property is valid
-      only for a Teams Phone extensibility binding.
+      Teams/SIP display number, not SIP routing. Omit to preserve;
+      null/empty/blank clears. Unsupported for Twilio.
     fullName: phone_number
     remarks: ''
     isDeprecated: false
@@ -54,15 +66,3 @@ properties:
       return:
         description: ''
         type: string
-  - name: status
-    uid: '@azure/ai-projects.UpdateTelephonyBindingRequest.status'
-    package: '@azure/ai-projects'
-    summary: The new lifecycle status.
-    fullName: status
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'status?: TelephonyBindingStatus'
-      return:
-        description: ''
-        type: <xref uid="@azure/ai-projects.TelephonyBindingStatus" />

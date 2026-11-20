@@ -92,21 +92,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.VoiceAgentSessionIncludeOption" />[]
-  - name: instructions
-    uid: '@azure/ai-projects.VoiceAgentDefinition.instructions'
-    package: '@azure/ai-projects'
-    summary: >-
-      A system (or developer) message inserted into the model's context.
-      Supports template substitution via `structured_inputs`, rendered per
-      session before the live session starts.
-    fullName: instructions
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'instructions?: string'
-      return:
-        description: ''
-        type: string
   - name: interim_response
     uid: '@azure/ai-projects.VoiceAgentDefinition.interim_response'
     package: '@azure/ai-projects'
@@ -119,18 +104,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.VoiceAgentInterimResponseConfigUnion" />
-  - name: kind
-    uid: '@azure/ai-projects.VoiceAgentDefinition.kind'
-    package: '@azure/ai-projects'
-    summary: The kind discriminator for a voice agent definition. Always `voice`.
-    fullName: kind
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'kind: "voice"'
-      return:
-        description: ''
-        type: '"voice"'
   - name: max_output_tokens
     uid: '@azure/ai-projects.VoiceAgentDefinition.max_output_tokens'
     package: '@azure/ai-projects'
@@ -202,6 +175,20 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: post_call
+    uid: '@azure/ai-projects.VoiceAgentDefinition.post_call'
+    package: '@azure/ai-projects'
+    summary: >-
+      Preview post-call delivery. Requires `VoiceAgents=V1Preview`; notifies
+      configured destinations after each session ends.
+    fullName: post_call
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'post_call?: VoiceAgentPostCallConfig'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.VoiceAgentPostCallConfig" />
   - name: soundscape
     uid: '@azure/ai-projects.VoiceAgentDefinition.soundscape'
     package: '@azure/ai-projects'
@@ -219,64 +206,32 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/ai-projects.VoiceAgentSoundscapeConfig" />
-  - name: store
-    uid: '@azure/ai-projects.VoiceAgentDefinition.store'
-    package: '@azure/ai-projects'
-    summary: >-
-      Whether conversations with this agent are persisted. A single,
-      all-or-nothing persistence switch that defaults to
-
-      `false` (privacy-safe: off by default). When `true`, Foundry persists the
-      full conversation — the transcript/event
-
-      timeline and raw audio. When `false`, nothing is persisted and no
-      conversation is surfaced. There is no separate
-
-      audio-logging control; audio is persisted only as part of this switch.
-      Latency/performance telemetry (e.g.
-
-      time-to-first-audio, inter-token latency, interruption) is
-      observability-only (customer trace / App Insights) and
-
-      is not part of the persisted conversation content.
-    fullName: store
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'store?: boolean'
-      return:
-        description: ''
-        type: boolean
-  - name: structured_inputs
-    uid: '@azure/ai-projects.VoiceAgentDefinition.structured_inputs'
-    package: '@azure/ai-projects'
-    summary: >-
-      Set of structured inputs that participate in prompt template substitution,
-      rendered per session before the live session starts.
-    fullName: structured_inputs
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'structured_inputs?: Record<string, StructuredInputDefinition>'
-      return:
-        description: ''
-        type: >-
-          Record&lt;string, <xref
-          uid="@azure/ai-projects.StructuredInputDefinition" />&gt;
   - name: subagent_config
     uid: '@azure/ai-projects.VoiceAgentDefinition.subagent_config'
     package: '@azure/ai-projects'
     summary: >-
-      Optional configuration for sibling Foundry text agents that this voice
-      agent may consult as background specialists.
+      Optional subagents. Set `subagentType` to `delegate` for GA background
+      specialists or `inline` for preview handoff.
     fullName: subagent_config
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'subagent_config?: VoiceAgentSubagentConfig'
+      content: 'subagent_config?: VoiceAgentSubagentConfigUnion'
       return:
         description: ''
-        type: <xref uid="@azure/ai-projects.VoiceAgentSubagentConfig" />
+        type: <xref uid="@azure/ai-projects.VoiceAgentSubagentConfigUnion" />
+  - name: sub_protocol
+    uid: '@azure/ai-projects.VoiceAgentDefinition.sub_protocol'
+    package: '@azure/ai-projects'
+    summary: Selects the Realtime protocol. Omission defaults to Realtime.
+    fullName: sub_protocol
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sub_protocol?: "realtime"'
+      return:
+        description: ''
+        type: '"realtime"'
   - name: tools
     uid: '@azure/ai-projects.VoiceAgentDefinition.tools'
     package: '@azure/ai-projects'
@@ -317,6 +272,38 @@ properties:
         description: ''
         type: <xref uid="@azure/ai-projects.VoiceAgentToolChoice" />
 inheritedProperties:
+  - name: instructions
+    uid: '@azure/ai-projects.VoiceAgentDefinition.instructions'
+    package: '@azure/ai-projects'
+    summary: >-
+      Frontend instructions, templated with structured_inputs. Backend
+      instructions belong in delegation.responses.
+    fullName: instructions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'instructions?: string'
+      return:
+        description: ''
+        type: string
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceAgentBaseDefinition.instructions](xref:@azure/ai-projects.VoiceAgentBaseDefinition.instructions)
+  - name: kind
+    uid: '@azure/ai-projects.VoiceAgentDefinition.kind'
+    package: '@azure/ai-projects'
+    summary: Always voice.
+    fullName: kind
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'kind: "voice"'
+      return:
+        description: ''
+        type: '"voice"'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceAgentBaseDefinition.kind](xref:@azure/ai-projects.VoiceAgentBaseDefinition.kind)
   - name: rai_config
     uid: '@azure/ai-projects.VoiceAgentDefinition.rai_config'
     package: '@azure/ai-projects'
@@ -333,5 +320,39 @@ inheritedProperties:
         type: <xref uid="@azure/ai-projects.RaiConfig" />
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [AgentDefinition.rai_config](xref:@azure/ai-projects.AgentDefinition.rai_config)
-extends: <xref uid="@azure/ai-projects.AgentDefinition" />
+      [VoiceAgentBaseDefinition.rai_config](xref:@azure/ai-projects.VoiceAgentBaseDefinition.rai_config)
+  - name: store
+    uid: '@azure/ai-projects.VoiceAgentDefinition.store'
+    package: '@azure/ai-projects'
+    summary: >-
+      Persists conversation content and audio in Foundry, not native Live
+      recordings. Defaults to false.
+    fullName: store
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'store?: boolean'
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceAgentBaseDefinition.store](xref:@azure/ai-projects.VoiceAgentBaseDefinition.store)
+  - name: structured_inputs
+    uid: '@azure/ai-projects.VoiceAgentDefinition.structured_inputs'
+    package: '@azure/ai-projects'
+    summary: Template inputs for session instructions and supported greetings.
+    fullName: structured_inputs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'structured_inputs?: Record<string, StructuredInputDefinition>'
+      return:
+        description: ''
+        type: >-
+          Record&lt;string, <xref
+          uid="@azure/ai-projects.StructuredInputDefinition" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [VoiceAgentBaseDefinition.structured_inputs](xref:@azure/ai-projects.VoiceAgentBaseDefinition.structured_inputs)
+extends: <xref uid="@azure/ai-projects.VoiceAgentBaseDefinition" />

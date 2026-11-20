@@ -3,8 +3,11 @@ name: RubricBasedEvaluatorDefinition
 uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition'
 package: '@azure/ai-projects'
 summary: >-
-  Rubric-based evaluator definition — stores dimensions produced by the generate
-  API. Used for both quality and safety evaluators.
+  Rubric evaluator definition. Ordinary quality rubrics report one aggregate.
+  Safety rubrics require Boolean scoring and an explicit allowed classification
+  on every dimension, and report disallowed_behavior_violated and
+  allowed_behavior_violated as two independent lower-is-better metrics. Safety
+  rubrics have no weights, threshold, or combined safety score.
 fullName: RubricBasedEvaluatorDefinition
 remarks: ''
 isDeprecated: false
@@ -14,10 +17,10 @@ properties:
     uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.dimensions'
     package: '@azure/ai-projects'
     summary: >-
-      The set of dimensions — the scoring blueprint used by the LLM judge.
-      Quality evaluators include a non-editable residual dimension with id
-      'general_quality' (always_applicable: true); safety evaluators include
-      'general_policy_compliance'. Both use the same Dimension structure.
+      The rubric criteria. Safety dimensions require allowed and omit weight.
+      Rating generation includes a service residual; Boolean generation does not
+      inject a generic residual. Existing ordinary and legacy definitions retain
+      their behavior.
     fullName: dimensions
     remarks: ''
     isDeprecated: false
@@ -30,11 +33,11 @@ properties:
     uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.pass_threshold'
     package: '@azure/ai-projects'
     summary: >-
-      Pass/fail threshold for the aggregate rubric score, on the same normalized
-      0.0-1.0 scale as the emitted `score`. When the runtime weighted average
-      meets or exceeds this value, the result is `pass`. Defaults to 0.5
-      (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension
-      scored 1 → fail' rule still applies regardless of this threshold.
+      Optional normalized threshold for Likert scoring, interpreted as 0.5 when
+      omitted. Ordinary Boolean scoring requires all applicable checks to pass:
+      omit this field or set it to 1; its effective threshold is 1 and other
+      values are rejected. Safety rubrics omit this field and report two
+      separate metrics without an overall threshold.
     fullName: pass_threshold
     remarks: ''
     isDeprecated: false
@@ -43,6 +46,20 @@ properties:
       return:
         description: ''
         type: number
+  - name: scoring
+    uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.scoring'
+    package: '@azure/ai-projects'
+    summary: >-
+      Simple scoring choices. Omission preserves existing legacy scoring for
+      existing clients. No policy version is required from the caller.
+    fullName: scoring
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'scoring?: RubricScoring'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.RubricScoring" />
   - name: type
     uid: '@azure/ai-projects.RubricBasedEvaluatorDefinition.type'
     package: '@azure/ai-projects'

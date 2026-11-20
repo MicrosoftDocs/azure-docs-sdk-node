@@ -8,6 +8,39 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: category
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.category'
+    package: '@azure/ai-projects'
+    summary: >-
+      Generation intent. Omission preserves the existing quality path.
+      Explicitly select safety for safety generation and regeneration. Safety
+      output uses Boolean scoring, allowed classifications, and two named
+      violation metrics.
+    fullName: category
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'category?: EvaluatorGenerationCategory'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.EvaluatorGenerationCategory" />
+  - name: dimensions
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.dimensions'
+    package: '@azure/ai-projects'
+    summary: >-
+      Caller-approved dimensions to preserve while generating other checks.
+      Omission preserves prior approved dimensions on regeneration; an explicit
+      list replaces the fixed set. Safety fixed dimensions require an explicit
+      allowed Boolean, omit weights, and preserve classification as part of
+      their policy meaning.
+    fullName: dimensions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'dimensions?: Dimension[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.Dimension" />[]
   - name: evaluator_description
     uid: '@azure/ai-projects.EvaluatorGenerationInputs.evaluator_description'
     package: '@azure/ai-projects'
@@ -69,24 +102,65 @@ properties:
     uid: '@azure/ai-projects.EvaluatorGenerationInputs.model'
     package: '@azure/ai-projects'
     summary: >-
-      The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required —
-      users must provide their own model rather than relying on service-owned
-      capacity.
+      The caller's model for quality rubric generation (e.g., 'gpt-4o').
+      Required by the service when category is quality or omitted. Safety
+      generation and regeneration use centrally managed red teaming simulation
+      capacity, ignore this field when supplied, and do not fall back to caller
+      capacity. Safety rubric scoring separately uses centrally managed red
+      teaming evaluator capacity.
     fullName: model
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'model: string'
+      content: 'model?: string'
       return:
         description: ''
         type: string
+  - name: pass_threshold
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.pass_threshold'
+    package: '@azure/ai-projects'
+    summary: >-
+      Optional normalized Likert threshold: omission uses 0.5 for fresh
+      generation and inherits the saved threshold on regeneration. For ordinary
+      Boolean generation, omit this field or set it to 1; other values are
+      rejected and its all-pass threshold is fixed at 1. Safety generation omits
+      this field because its two violation metrics have no overall threshold.
+    fullName: pass_threshold
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'pass_threshold?: number'
+      return:
+        description: ''
+        type: number
+  - name: scoring
+    uid: '@azure/ai-projects.EvaluatorGenerationInputs.scoring'
+    package: '@azure/ai-projects'
+    summary: >-
+      Scoring choices for the generated evaluator. For quality, supplied scoring
+      defaults to Likert; omitted weights on first creation yield equal
+      contribution, and regeneration preserves saved choices. Omitting scoring
+      preserves existing quality generation behavior. Safety generation resolves
+      omitted scoring to Boolean and rejects a conflicting supplied mode; its
+      dimensions use allowed rather than weights and its two metric results are
+      not combined.
+    fullName: scoring
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'scoring?: RubricScoring'
+      return:
+        description: ''
+        type: <xref uid="@azure/ai-projects.RubricScoring" />
   - name: sources
     uid: '@azure/ai-projects.EvaluatorGenerationInputs.sources'
     package: '@azure/ai-projects'
     summary: >-
-      Source materials for generation — agent descriptions, prompts, traces, or
-      datasets. Each entry is an `EvaluatorGenerationJobSource` variant
-      discriminated by `type`.
+      Source materials for generation. Safety generation requires a nonempty
+      prompt source for the objective and at least one agent or trace source for
+      application context. An arbitrary dataset cannot replace safety
+      application context. Ordinary generation keeps its existing supported
+      sources.
     fullName: sources
     remarks: ''
     isDeprecated: false

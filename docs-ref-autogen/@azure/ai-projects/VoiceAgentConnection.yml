@@ -3,23 +3,15 @@ name: VoiceAgentConnection
 uid: '@azure/ai-projects.VoiceAgentConnection'
 package: '@azure/ai-projects'
 summary: >-
-  A connected, bidirectional voice-agent stream.
+  A Realtime voice session.
 
 
-  Supports exactly one `for await` iteration over server events; a second
-  attempt throws.
+  Read server events with one `for await` loop. A second iterator throws.
 
-  Exiting the loop early (`break`, `return`, or an uncaught error in the loop
-  body) closes
+  Leaving the loop closes the connection. Unrecognized event types arrive as
 
-  the connection as a side effect.
-
-  Unrecognized server event types are delivered as
-  [VoiceAgentUnknownEvent](xref:@azure/ai-projects.VoiceAgentUnknownEvent)
-  without
-
-  interrupting the stream. Malformed events still fail the iteration with a
-  protocol error.
+  [VoiceAgentUnknownEvent](xref:@azure/ai-projects.VoiceAgentUnknownEvent);
+  malformed events fail with a protocol error.
 fullName: VoiceAgentConnection
 remarks: ''
 isDeprecated: false
@@ -156,7 +148,7 @@ methods:
       VoiceAgentSessionUpdateOptions)
     uid: '@azure/ai-projects.VoiceAgentConnection.configureSession'
     package: '@azure/ai-projects'
-    summary: Updates supported live-session settings.
+    summary: Updates supported Realtime session settings.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -204,7 +196,9 @@ methods:
   - name: sendAudio(ArrayBuffer | Uint8Array, VoiceAgentEventOptions)
     uid: '@azure/ai-projects.VoiceAgentConnection.sendAudio'
     package: '@azure/ai-projects'
-    summary: Appends base64-encoded audio bytes to the input buffer.
+    summary: >-
+      Sends raw audio bytes to the input buffer. The SDK handles base64
+      encoding.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -224,7 +218,7 @@ methods:
   - name: sendEvent(VoiceAgentClientEvent, VoiceAgentSendOptions)
     uid: '@azure/ai-projects.VoiceAgentConnection.sendEvent'
     package: '@azure/ai-projects'
-    summary: Sends any generated client protocol event.
+    summary: Sends a Realtime client event.
     remarks: ''
     isDeprecated: false
     syntax:

@@ -1,0 +1,18 @@
+### YamlMime:TSTypeAlias
+name: VoiceAgentLiveEvent
+uid: '@azure/ai-projects.VoiceAgentLiveEvent'
+package: '@azure/ai-projects'
+summary: Events received from GPT Live, including unrecognized service events.
+fullName: VoiceAgentLiveEvent
+remarks: ''
+isDeprecated: false
+syntax: |
+  type VoiceAgentLiveEvent =
+    | {
+        [K in LiveServerEventType]: K extends "decision.item.created"
+          ? Omit<Extract<LiveServerEventUnion, { type: K }>, "item"> & {
+              item: VoiceAgentLiveDecisionStoredItem
+            }
+          : Extract<LiveServerEventUnion, { type: K }>
+      }[LiveServerEventType]
+    | VoiceAgentUnknownEvent

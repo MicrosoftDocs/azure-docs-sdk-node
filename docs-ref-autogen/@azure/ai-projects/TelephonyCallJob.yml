@@ -32,6 +32,20 @@ properties:
       return:
         description: ''
         type: number
+  - name: campaign_name
+    uid: '@azure/ai-projects.TelephonyCallJob.campaign_name'
+    package: '@azure/ai-projects'
+    summary: >-
+      Owning Campaign, absent for direct calls. Instance-bound despite name
+      reuse; Campaign deletion hides then removes its jobs.
+    fullName: campaign_name
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'campaign_name?: string'
+      return:
+        description: ''
+        type: string
   - name: cancellation
     uid: '@azure/ai-projects.TelephonyCallJob.cancellation'
     package: '@azure/ai-projects'
@@ -79,10 +93,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'destination: TelephonyOutboundDestination'
+      content: 'destination: TelephonyAddressUnion'
       return:
         description: ''
-        type: <xref uid="@azure/ai-projects.TelephonyOutboundDestination" />
+        type: <xref uid="@azure/ai-projects.TelephonyAddressUnion" />
   - name: id
     uid: '@azure/ai-projects.TelephonyCallJob.id'
     package: '@azure/ai-projects'
@@ -107,18 +121,6 @@ properties:
       return:
         description: ''
         type: Date
-  - name: object
-    uid: '@azure/ai-projects.TelephonyCallJob.object'
-    package: '@azure/ai-projects'
-    summary: The object type. Always `telephony.call_job`.
-    fullName: object
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'object: "telephony.call_job"'
-      return:
-        description: ''
-        type: '"<xref uid="telephony.call_job" />"'
   - name: purpose
     uid: '@azure/ai-projects.TelephonyCallJob.purpose'
     package: '@azure/ai-projects'
@@ -171,19 +173,16 @@ properties:
     uid: '@azure/ai-projects.TelephonyCallJob.source'
     package: '@azure/ai-projects'
     summary: >-
-      The caller identity used to originate the call. For a Twilio connection,
-      provide an authorized E.164 phone number. For an Azure Communication
-      Services / Teams Phone extensibility connection, provide the Teams
-      Resource Account object ID. The identity type is inferred from the
-      connection category; originating does not change inbound routing.
+      Caller identity: phone_number for Twilio/SIP, or a teams resource-account
+      GUID for ACS/Teams Phone extensibility. No sip source URI.
     fullName: source
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'source: string'
+      content: 'source: TelephonyAddressUnion'
       return:
         description: ''
-        type: string
+        type: <xref uid="@azure/ai-projects.TelephonyAddressUnion" />
   - name: status
     uid: '@azure/ai-projects.TelephonyCallJob.status'
     package: '@azure/ai-projects'

@@ -1,0 +1,105 @@
+### YamlMime:TSType
+name: KnowledgeBaseOpenAICompatibleParameters
+uid: '@azure/search-documents.KnowledgeBaseOpenAICompatibleParameters'
+package: '@azure/search-documents'
+summary: >-
+  Connection parameters for an OpenAI-compatible Chat Completions or Responses
+  endpoint. Creation requires exactly one of nonempty headers or
+  managedIdentityAudience. Updates can omit headers to preserve credentials for
+  an unchanged connection and model profile.
+fullName: KnowledgeBaseOpenAICompatibleParameters
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: authIdentity
+    uid: >-
+      @azure/search-documents.KnowledgeBaseOpenAICompatibleParameters.authIdentity
+    package: '@azure/search-documents'
+    summary: >-
+      The user-assigned managed identity used to acquire a token for
+      managedIdentityAudience. Omit to use the search service's system-assigned
+      identity. Allowed only with managedIdentityAudience.
+    fullName: authIdentity
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'authIdentity?: SearchIndexerDataIdentityUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.SearchIndexerDataIdentityUnion" />
+  - name: headers
+    uid: '@azure/search-documents.KnowledgeBaseOpenAICompatibleParameters.headers'
+    package: '@azure/search-documents'
+    summary: >-
+      Nonempty stored HTTP headers for endpoint authentication. Both names and
+      values are secret and are never returned in responses. Empty maps are
+      invalid. Mutually exclusive with managedIdentityAudience and authIdentity.
+      On update, omitted headers are preserved only on the same resource and
+      model binding when the exact endpoint, model profile, and authentication
+      identity are unchanged; otherwise, supply fresh credentials.
+    fullName: headers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'headers?: Record<string, string>'
+      return:
+        description: ''
+        type: Record&lt;string, string&gt;
+  - name: managedIdentityAudience
+    uid: >-
+      @azure/search-documents.KnowledgeBaseOpenAICompatibleParameters.managedIdentityAudience
+    package: '@azure/search-documents'
+    summary: >-
+      The bare canonical application GUID of the customer's third-party
+      Microsoft Entra application for managed identity authentication. Do not
+      include an api:// prefix or /.default suffix. Mutually exclusive with
+      headers.
+    fullName: managedIdentityAudience
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'managedIdentityAudience?: string'
+      return:
+        description: ''
+        type: string
+  - name: modelName
+    uid: '@azure/search-documents.KnowledgeBaseOpenAICompatibleParameters.modelName'
+    package: '@azure/search-documents'
+    summary: >-
+      A supported chat model name that determines Search's capabilities and
+      limits. For knowledge source image verbalization, this is sent as the
+      model selector in the request body; the URI path selects Chat Completions
+      or Responses independently of this name. For knowledge base retrieval,
+      GPT-6 model profiles use Responses and existing model profiles use Chat
+      Completions; the endpoint must support the selected protocol, including
+      stateless tool continuation for Responses. The retrieval request body
+      omits model; the URI or gateway selects the actual model and supplies any
+      required provider model identifier. Embedding models and arbitrary
+      provider protocols are not supported.
+    fullName: modelName
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'modelName: string'
+      return:
+        description: ''
+        type: string
+  - name: uri
+    uid: '@azure/search-documents.KnowledgeBaseOpenAICompatibleParameters.uri'
+    package: '@azure/search-documents'
+    summary: >-
+      The complete HTTPS POST URL, including path and query parameters. Sent
+      unchanged without appending a path or API version; redirects are not
+      followed. For knowledge base retrieval, the endpoint must accept the model
+      profile's Chat Completions or Responses protocol. For knowledge source
+      image verbalization, the URI path must end in /chat/completions or
+      /responses; query parameters do not select the protocol.
+    fullName: uri
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'uri: string'
+      return:
+        description: ''
+        type: string

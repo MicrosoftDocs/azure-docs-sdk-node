@@ -121,6 +121,79 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.AnalyzeResult" />&gt;
+  - name: >-
+      beginIngestKnowledgeSourceFile(string,
+      UploadKnowledgeSourceFileMultipartRequest,
+      IngestKnowledgeSourceFileOptions)
+    uid: '@azure/search-documents.SearchIndexClient.beginIngestKnowledgeSourceFile'
+    package: '@azure/search-documents'
+    summary: >-
+      Begins asynchronous ingestion of a new file and returns its polling
+      operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginIngestKnowledgeSourceFile(name: string, body:
+        UploadKnowledgeSourceFileMultipartRequest, options?:
+        IngestKnowledgeSourceFileOptions): KnowledgeSourceFileIngestionPoller
+      parameters:
+        - id: name
+          type: string
+          description: The File knowledge source name.
+        - id: body
+          type: >-
+            <xref
+            uid="@azure/search-documents.UploadKnowledgeSourceFileMultipartRequest"
+            />
+          description: The file contents and metadata.
+        - id: options
+          type: >-
+            <xref uid="@azure/search-documents.IngestKnowledgeSourceFileOptions"
+            />
+          description: Polling and request options.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/search-documents.KnowledgeSourceFileIngestionPoller"
+          />
+  - name: >-
+      beginReplaceKnowledgeSourceFile(string, string,
+      UpdateKnowledgeSourceFileRequest, IngestKnowledgeSourceFileOptions)
+    uid: '@azure/search-documents.SearchIndexClient.beginReplaceKnowledgeSourceFile'
+    package: '@azure/search-documents'
+    summary: >-
+      Begins asynchronous replacement of a file and returns its polling
+      operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginReplaceKnowledgeSourceFile(name: string, fileId: string,
+        body: UpdateKnowledgeSourceFileRequest, options?:
+        IngestKnowledgeSourceFileOptions): KnowledgeSourceFileIngestionPoller
+      parameters:
+        - id: name
+          type: string
+          description: The File knowledge source name.
+        - id: fileId
+          type: string
+          description: The file to replace.
+        - id: body
+          type: >-
+            <xref uid="@azure/search-documents.UpdateKnowledgeSourceFileRequest"
+            />
+          description: The replacement file contents and metadata.
+        - id: options
+          type: >-
+            <xref uid="@azure/search-documents.IngestKnowledgeSourceFileOptions"
+            />
+          description: Polling and request options.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/search-documents.KnowledgeSourceFileIngestionPoller"
+          />
   - name: createAlias(SearchAlias, OperationOptions)
     uid: '@azure/search-documents.SearchIndexClient.createAlias'
     package: '@azure/search-documents'
@@ -141,7 +214,7 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SearchAlias" />&gt;
-  - name: createIndex(SearchIndex, OperationOptions)
+  - name: createIndex(SearchIndexInput | SearchIndex, OperationOptions)
     uid: '@azure/search-documents.SearchIndexClient.createIndex'
     package: '@azure/search-documents'
     summary: Creates a new index.
@@ -149,11 +222,13 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createIndex(index: SearchIndex, options?: OperationOptions):
-        Promise<SearchIndex>
+        function createIndex(index: SearchIndexInput | SearchIndex, options?:
+        OperationOptions): Promise<SearchIndex>
       parameters:
         - id: index
-          type: <xref uid="@azure/search-documents.SearchIndex" />
+          type: >-
+            <xref uid="@azure/search-documents.SearchIndexInput" /> | <xref
+            uid="@azure/search-documents.SearchIndex" />
           description: The information describing the index to be created.
         - id: options
           type: <xref uid="@azure-rest/core-client.OperationOptions" />
@@ -161,7 +236,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
-  - name: createKnowledgeBase(KnowledgeBase, CreateKnowledgeBaseOptions)
+  - name: >-
+      createKnowledgeBase(KnowledgeBase | KnowledgeBaseInput,
+      CreateKnowledgeBaseOptions)
     uid: '@azure/search-documents.SearchIndexClient.createKnowledgeBase'
     package: '@azure/search-documents'
     summary: Creates a new knowledgebase.
@@ -169,11 +246,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createKnowledgeBase(knowledgeBase: KnowledgeBase, options?:
-        CreateKnowledgeBaseOptions): Promise<KnowledgeBase>
+        function createKnowledgeBase(knowledgeBase: KnowledgeBase |
+        KnowledgeBaseInput, options?: CreateKnowledgeBaseOptions):
+        Promise<KnowledgeBase>
       parameters:
         - id: knowledgeBase
-          type: <xref uid="@azure/search-documents.KnowledgeBase" />
+          type: >-
+            <xref uid="@azure/search-documents.KnowledgeBase" /> | <xref
+            uid="@azure/search-documents.KnowledgeBaseInput" />
           description: definition of the knowledgebase to create.
         - id: options
           type: <xref uid="@azure/search-documents.CreateKnowledgeBaseOptions" />
@@ -181,7 +261,17 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeBase" />&gt;
-  - name: createKnowledgeSource(KnowledgeSource, CreateKnowledgeSourceOptions)
+  - name: >-
+      createKnowledgeSource(AzureBlobKnowledgeSourceInput |
+      AzureBlobKnowledgeSource | BaseKnowledgeSource |
+      IndexedOneLakeKnowledgeSourceInput | IndexedOneLakeKnowledgeSource |
+      IndexedSharePointKnowledgeSourceInput | IndexedSharePointKnowledgeSource |
+      IndexedSqlKnowledgeSourceInput | IndexedSqlKnowledgeSource |
+      FileKnowledgeSourceInput | FileKnowledgeSource |
+      RemoteSharePointKnowledgeSourceInput | FabricDataAgentKnowledgeSourceInput
+      | FabricOntologyKnowledgeSourceInput | WorkIQKnowledgeSourceInput |
+      McpServerKnowledgeSourceInput | SearchIndexKnowledgeSource |
+      WebKnowledgeSource, CreateKnowledgeSourceOptions)
     uid: '@azure/search-documents.SearchIndexClient.createKnowledgeSource'
     package: '@azure/search-documents'
     summary: Creates a new knowledge source.
@@ -189,11 +279,42 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createKnowledgeSource(knowledgeSource: KnowledgeSource,
-        options?: CreateKnowledgeSourceOptions): Promise<KnowledgeSource>
+        function createKnowledgeSource(knowledgeSource:
+        AzureBlobKnowledgeSourceInput | AzureBlobKnowledgeSource |
+        BaseKnowledgeSource | IndexedOneLakeKnowledgeSourceInput |
+        IndexedOneLakeKnowledgeSource | IndexedSharePointKnowledgeSourceInput |
+        IndexedSharePointKnowledgeSource | IndexedSqlKnowledgeSourceInput |
+        IndexedSqlKnowledgeSource | FileKnowledgeSourceInput |
+        FileKnowledgeSource | RemoteSharePointKnowledgeSourceInput |
+        FabricDataAgentKnowledgeSourceInput | FabricOntologyKnowledgeSourceInput
+        | WorkIQKnowledgeSourceInput | McpServerKnowledgeSourceInput |
+        SearchIndexKnowledgeSource | WebKnowledgeSource, options?:
+        CreateKnowledgeSourceOptions): Promise<KnowledgeSource>
       parameters:
         - id: knowledgeSource
-          type: <xref uid="@azure/search-documents.KnowledgeSource" />
+          type: >-
+            <xref uid="@azure/search-documents.AzureBlobKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.AzureBlobKnowledgeSource" /> |
+            <xref uid="@azure/search-documents.BaseKnowledgeSource" /> | <xref
+            uid="@azure/search-documents.IndexedOneLakeKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.IndexedOneLakeKnowledgeSource"
+            /> | <xref
+            uid="@azure/search-documents.IndexedSharePointKnowledgeSourceInput"
+            /> | <xref
+            uid="@azure/search-documents.IndexedSharePointKnowledgeSource" /> |
+            <xref uid="@azure/search-documents.IndexedSqlKnowledgeSourceInput"
+            /> | <xref uid="@azure/search-documents.IndexedSqlKnowledgeSource"
+            /> | <xref uid="@azure/search-documents.FileKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.FileKnowledgeSource" /> | <xref
+            uid="@azure/search-documents.RemoteSharePointKnowledgeSourceInput"
+            /> | <xref
+            uid="@azure/search-documents.FabricDataAgentKnowledgeSourceInput" />
+            | <xref
+            uid="@azure/search-documents.FabricOntologyKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.WorkIQKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.McpServerKnowledgeSourceInput"
+            /> | <xref uid="@azure/search-documents.SearchIndexKnowledgeSource"
+            /> | <xref uid="@azure/search-documents.WebKnowledgeSource" />
           description: The definition of the knowledge source to create.
         - id: options
           type: <xref uid="@azure/search-documents.CreateKnowledgeSourceOptions" />
@@ -221,7 +342,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SearchAlias" />&gt;
-  - name: createOrUpdateIndex(SearchIndex, CreateOrUpdateIndexOptions)
+  - name: >-
+      createOrUpdateIndex(SearchIndexInput | SearchIndex,
+      CreateOrUpdateIndexOptions)
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateIndex'
     package: '@azure/search-documents'
     summary: Creates a new index or modifies an existing one.
@@ -229,11 +352,13 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdateIndex(index: SearchIndex, options?:
-        CreateOrUpdateIndexOptions): Promise<SearchIndex>
+        function createOrUpdateIndex(index: SearchIndexInput | SearchIndex,
+        options?: CreateOrUpdateIndexOptions): Promise<SearchIndex>
       parameters:
         - id: index
-          type: <xref uid="@azure/search-documents.SearchIndex" />
+          type: >-
+            <xref uid="@azure/search-documents.SearchIndexInput" /> | <xref
+            uid="@azure/search-documents.SearchIndex" />
           description: The information describing the index to be created.
         - id: options
           type: <xref uid="@azure/search-documents.CreateOrUpdateIndexOptions" />
@@ -242,7 +367,7 @@ methods:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
   - name: >-
-      createOrUpdateKnowledgeBase(KnowledgeBase,
+      createOrUpdateKnowledgeBase(KnowledgeBase | KnowledgeBaseInput,
       CreateOrUpdateKnowledgeBaseOptions)
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateKnowledgeBase'
     package: '@azure/search-documents'
@@ -253,11 +378,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdateKnowledgeBase(knowledgeBase: KnowledgeBase,
-        options?: CreateOrUpdateKnowledgeBaseOptions): Promise<KnowledgeBase>
+        function createOrUpdateKnowledgeBase(knowledgeBase: KnowledgeBase |
+        KnowledgeBaseInput, options?: CreateOrUpdateKnowledgeBaseOptions):
+        Promise<KnowledgeBase>
       parameters:
         - id: knowledgeBase
-          type: <xref uid="@azure/search-documents.KnowledgeBase" />
+          type: >-
+            <xref uid="@azure/search-documents.KnowledgeBase" /> | <xref
+            uid="@azure/search-documents.KnowledgeBaseInput" />
           description: definition of the knowledge base to create or update.
         - id: options
           type: >-
@@ -268,7 +396,7 @@ methods:
         description: The created or updated knowledge base.
         type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeBase" />&gt;
   - name: >-
-      createOrUpdateKnowledgeBase(string, KnowledgeBase,
+      createOrUpdateKnowledgeBase(string, KnowledgeBase | KnowledgeBaseInput,
       CreateOrUpdateKnowledgeBaseOptions)
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateKnowledgeBase_1'
     package: '@azure/search-documents'
@@ -281,14 +409,16 @@ methods:
     syntax:
       content: >-
         function createOrUpdateKnowledgeBase(knowledgeBaseName: string,
-        knowledgeBase: KnowledgeBase, options?:
+        knowledgeBase: KnowledgeBase | KnowledgeBaseInput, options?:
         CreateOrUpdateKnowledgeBaseOptions): Promise<KnowledgeBase>
       parameters:
         - id: knowledgeBaseName
           type: string
           description: ''
         - id: knowledgeBase
-          type: <xref uid="@azure/search-documents.KnowledgeBase" />
+          type: >-
+            <xref uid="@azure/search-documents.KnowledgeBase" /> | <xref
+            uid="@azure/search-documents.KnowledgeBaseInput" />
           description: ''
         - id: options
           type: >-
@@ -299,8 +429,16 @@ methods:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeBase" />&gt;
   - name: >-
-      createOrUpdateKnowledgeSource(KnowledgeSource,
-      CreateOrUpdateKnowledgeSourceOptions)
+      createOrUpdateKnowledgeSource(AzureBlobKnowledgeSourceInput |
+      AzureBlobKnowledgeSource | BaseKnowledgeSource |
+      IndexedOneLakeKnowledgeSourceInput | IndexedOneLakeKnowledgeSource |
+      IndexedSharePointKnowledgeSourceInput | IndexedSharePointKnowledgeSource |
+      IndexedSqlKnowledgeSourceInput | IndexedSqlKnowledgeSource |
+      FileKnowledgeSourceInput | FileKnowledgeSource |
+      RemoteSharePointKnowledgeSourceInput | FabricDataAgentKnowledgeSourceInput
+      | FabricOntologyKnowledgeSourceInput | WorkIQKnowledgeSourceInput |
+      McpServerKnowledgeSourceInput | SearchIndexKnowledgeSource |
+      WebKnowledgeSource, CreateOrUpdateKnowledgeSourceOptions)
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateKnowledgeSource'
     package: '@azure/search-documents'
     summary: ''
@@ -308,12 +446,42 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdateKnowledgeSource(knowledgeSource: KnowledgeSource,
-        options?: CreateOrUpdateKnowledgeSourceOptions):
-        Promise<KnowledgeSource>
+        function createOrUpdateKnowledgeSource(knowledgeSource:
+        AzureBlobKnowledgeSourceInput | AzureBlobKnowledgeSource |
+        BaseKnowledgeSource | IndexedOneLakeKnowledgeSourceInput |
+        IndexedOneLakeKnowledgeSource | IndexedSharePointKnowledgeSourceInput |
+        IndexedSharePointKnowledgeSource | IndexedSqlKnowledgeSourceInput |
+        IndexedSqlKnowledgeSource | FileKnowledgeSourceInput |
+        FileKnowledgeSource | RemoteSharePointKnowledgeSourceInput |
+        FabricDataAgentKnowledgeSourceInput | FabricOntologyKnowledgeSourceInput
+        | WorkIQKnowledgeSourceInput | McpServerKnowledgeSourceInput |
+        SearchIndexKnowledgeSource | WebKnowledgeSource, options?:
+        CreateOrUpdateKnowledgeSourceOptions): Promise<KnowledgeSource>
       parameters:
         - id: knowledgeSource
-          type: <xref uid="@azure/search-documents.KnowledgeSource" />
+          type: >-
+            <xref uid="@azure/search-documents.AzureBlobKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.AzureBlobKnowledgeSource" /> |
+            <xref uid="@azure/search-documents.BaseKnowledgeSource" /> | <xref
+            uid="@azure/search-documents.IndexedOneLakeKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.IndexedOneLakeKnowledgeSource"
+            /> | <xref
+            uid="@azure/search-documents.IndexedSharePointKnowledgeSourceInput"
+            /> | <xref
+            uid="@azure/search-documents.IndexedSharePointKnowledgeSource" /> |
+            <xref uid="@azure/search-documents.IndexedSqlKnowledgeSourceInput"
+            /> | <xref uid="@azure/search-documents.IndexedSqlKnowledgeSource"
+            /> | <xref uid="@azure/search-documents.FileKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.FileKnowledgeSource" /> | <xref
+            uid="@azure/search-documents.RemoteSharePointKnowledgeSourceInput"
+            /> | <xref
+            uid="@azure/search-documents.FabricDataAgentKnowledgeSourceInput" />
+            | <xref
+            uid="@azure/search-documents.FabricOntologyKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.WorkIQKnowledgeSourceInput" />
+            | <xref uid="@azure/search-documents.McpServerKnowledgeSourceInput"
+            /> | <xref uid="@azure/search-documents.SearchIndexKnowledgeSource"
+            /> | <xref uid="@azure/search-documents.WebKnowledgeSource" />
           description: ''
         - id: options
           type: >-
@@ -713,6 +881,34 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/search-documents.KnowledgeSource" />&gt;
+  - name: getKnowledgeSourceFileIngestionOperation(string, string, OperationOptions)
+    uid: >-
+      @azure/search-documents.SearchIndexClient.getKnowledgeSourceFileIngestionOperation
+    package: '@azure/search-documents'
+    summary: Retrieves the status and result of a file ingestion operation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getKnowledgeSourceFileIngestionOperation(name: string,
+        operationId: string, options?: OperationOptions):
+        Promise<KnowledgeSourceFileIngestionOperation>
+      parameters:
+        - id: name
+          type: string
+          description: The File knowledge source name.
+        - id: operationId
+          type: string
+          description: The operation identifier.
+        - id: options
+          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          description: Request options.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/search-documents.KnowledgeSourceFileIngestionOperation"
+          />&gt;
   - name: getKnowledgeSourceStatus(string, GetKnowledgeSourceStatusOptions)
     uid: '@azure/search-documents.SearchIndexClient.getKnowledgeSourceStatus'
     package: '@azure/search-documents'
@@ -886,6 +1082,35 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/search-documents.KnowledgeBaseIterator" />
+  - name: listKnowledgeSourceFileIngestionOperations(string, OperationOptions)
+    uid: >-
+      @azure/search-documents.SearchIndexClient.listKnowledgeSourceFileIngestionOperations
+    package: '@azure/search-documents'
+    summary: Lists retained ingestion operations for a File knowledge source.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listKnowledgeSourceFileIngestionOperations(name: string,
+        options?: OperationOptions):
+        PagedAsyncIterableIterator<KnowledgeSourceFileIngestionOperation,
+        KnowledgeSourceFileIngestionOperation[], PageSettings>
+      parameters:
+        - id: name
+          type: string
+          description: The File knowledge source name.
+        - id: options
+          type: <xref uid="@azure-rest/core-client.OperationOptions" />
+          description: Request options.
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/search-documents.PagedAsyncIterableIterator"
+          />&lt;<xref
+          uid="@azure/search-documents.KnowledgeSourceFileIngestionOperation"
+          />, <xref
+          uid="@azure/search-documents.KnowledgeSourceFileIngestionOperation"
+          />[], PageSettings&gt;
   - name: listKnowledgeSourceFiles(string, ListKnowledgeSourceFilesOptions)
     uid: '@azure/search-documents.SearchIndexClient.listKnowledgeSourceFiles'
     package: '@azure/search-documents'
@@ -990,19 +1215,35 @@ methods:
 
       const body = {
         metadata: { fileName: "manuals/example.txt", metadata: { category: "manual" } },
-        content: { contents: new Uint8Array([1, 2, 3]), contentType: "text/plain" },
+        content: {
+          contents: new TextEncoder().encode("Azure AI Search retrieves relevant information."),
+          contentType: "text/plain",
+          filename: "example.txt",
+        },
       };
 
 
       const uploaded = await
       client.uploadKnowledgeSourceFileMultipart("<knowledgeSourceName>", body);
 
+      if (!uploaded.fileId) {
+        throw new Error("The service did not return an uploaded file ID.");
+      }
+
 
       await client.updateKnowledgeSourceFile("<knowledgeSourceName>",
-      uploaded.fileId!, {
+      uploaded.fileId, {
         ...body,
         metadata: { ...body.metadata, metadata: { category: "updated-manual" } },
       });
+
+      for await (const file of
+      client.listKnowledgeSourceFiles("<knowledgeSourceName>", {
+        prefix: "manuals/",
+        pageSize: 10,
+      })) {
+        console.log(file.fileName, file.parsingMode, file.extractionMode);
+      }
 
       ```
 
@@ -1098,19 +1339,35 @@ methods:
 
       const body = {
         metadata: { fileName: "manuals/example.txt", metadata: { category: "manual" } },
-        content: { contents: new Uint8Array([1, 2, 3]), contentType: "text/plain" },
+        content: {
+          contents: new TextEncoder().encode("Azure AI Search retrieves relevant information."),
+          contentType: "text/plain",
+          filename: "example.txt",
+        },
       };
 
 
       const uploaded = await
       client.uploadKnowledgeSourceFileMultipart("<knowledgeSourceName>", body);
 
+      if (!uploaded.fileId) {
+        throw new Error("The service did not return an uploaded file ID.");
+      }
+
 
       await client.updateKnowledgeSourceFile("<knowledgeSourceName>",
-      uploaded.fileId!, {
+      uploaded.fileId, {
         ...body,
         metadata: { ...body.metadata, metadata: { category: "updated-manual" } },
       });
+
+      for await (const file of
+      client.listKnowledgeSourceFiles("<knowledgeSourceName>", {
+        prefix: "manuals/",
+        pageSize: 10,
+      })) {
+        console.log(file.fileName, file.parsingMode, file.extractionMode);
+      }
 
       ```
 

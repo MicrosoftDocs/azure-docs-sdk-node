@@ -77,7 +77,7 @@ properties:
         type: <xref uid="@azure/core-rest-pipeline.Pipeline" />
 methods:
   - name: >-
-      createOrReplaceRole(string, ChatRoleInput,
+      createOrReplaceRole(string, ChatRoleCreateOrReplace,
       CreateOrReplaceRoleOptionalParams)
     uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.createOrReplaceRole'
     package: '@azure/web-pubsub-chat'
@@ -86,14 +86,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrReplaceRole(roleName: string, resource: ChatRoleInput,
-        options?: CreateOrReplaceRoleOptionalParams): Promise<ChatRole>
+        function createOrReplaceRole(roleName: string, role:
+        ChatRoleCreateOrReplace, options?: CreateOrReplaceRoleOptionalParams):
+        Promise<ChatRole>
       parameters:
         - id: roleName
           type: string
           description: ''
-        - id: resource
-          type: <xref uid="@azure/web-pubsub-chat.ChatRoleInput" />
+        - id: role
+          type: <xref uid="@azure/web-pubsub-chat.ChatRoleCreateOrReplace" />
           description: ''
         - id: options
           type: >-
@@ -104,7 +105,7 @@ methods:
         description: ''
         type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatRole" />&gt;
   - name: >-
-      createOrReplaceRoom(string, ChatRoomInput,
+      createOrReplaceRoom(string, ChatRoomCreateOrReplace,
       CreateOrReplaceRoomOptionalParams)
     uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.createOrReplaceRoom'
     package: '@azure/web-pubsub-chat'
@@ -113,14 +114,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrReplaceRoom(roomId: string, resource: ChatRoomInput,
-        options?: CreateOrReplaceRoomOptionalParams): Promise<ChatRoom>
+        function createOrReplaceRoom(roomId: string, room:
+        ChatRoomCreateOrReplace, options?: CreateOrReplaceRoomOptionalParams):
+        Promise<ChatRoom>
       parameters:
         - id: roomId
           type: string
           description: ''
-        - id: resource
-          type: <xref uid="@azure/web-pubsub-chat.ChatRoomInput" />
+        - id: room
+          type: <xref uid="@azure/web-pubsub-chat.ChatRoomCreateOrReplace" />
           description: ''
         - id: options
           type: >-
@@ -131,7 +133,7 @@ methods:
         description: ''
         type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatRoom" />&gt;
   - name: >-
-      createOrReplaceRoomMember(string, string, ChatRoomMemberInput,
+      createOrReplaceRoomMember(string, string, ChatRoomMemberCreateOrReplace,
       CreateOrReplaceRoomMemberOptionalParams)
     uid: >-
       @azure/web-pubsub-chat.WebPubSubChatServiceClient.createOrReplaceRoomMember
@@ -142,7 +144,7 @@ methods:
     syntax:
       content: >-
         function createOrReplaceRoomMember(roomId: string, userId: string,
-        resource: ChatRoomMemberInput, options?:
+        member: ChatRoomMemberCreateOrReplace, options?:
         CreateOrReplaceRoomMemberOptionalParams): Promise<ChatRoomMember>
       parameters:
         - id: roomId
@@ -151,8 +153,8 @@ methods:
         - id: userId
           type: string
           description: ''
-        - id: resource
-          type: <xref uid="@azure/web-pubsub-chat.ChatRoomMemberInput" />
+        - id: member
+          type: <xref uid="@azure/web-pubsub-chat.ChatRoomMemberCreateOrReplace" />
           description: ''
         - id: options
           type: >-
@@ -164,7 +166,38 @@ methods:
         description: ''
         type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatRoomMember" />&gt;
   - name: >-
-      createOrReplaceUser(string, HumanChatUserInput,
+      createOrReplaceTopic(string, string, ChatTopicCreateOrReplace,
+      CreateOrReplaceTopicOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.createOrReplaceTopic'
+    package: '@azure/web-pubsub-chat'
+    summary: Create or replace a topic with a client-specified identifier.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createOrReplaceTopic(roomId: string, topicId: string, topic:
+        ChatTopicCreateOrReplace, options?: CreateOrReplaceTopicOptionalParams):
+        Promise<ChatTopic>
+      parameters:
+        - id: roomId
+          type: string
+          description: Room containing the topic.
+        - id: topicId
+          type: string
+          description: Topic identifier, unique within the room.
+        - id: topic
+          type: <xref uid="@azure/web-pubsub-chat.ChatTopicCreateOrReplace" />
+          description: Topic title and optional lifecycle state.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/web-pubsub-chat.CreateOrReplaceTopicOptionalParams" />
+          description: Conditional headers and request options.
+      return:
+        description: The created or replaced topic.
+        type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatTopic" />&gt;
+  - name: >-
+      createOrReplaceUser(string, HumanChatUserCreateOrReplace,
       CreateOrReplaceUserOptionalParams)
     uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.createOrReplaceUser'
     package: '@azure/web-pubsub-chat'
@@ -175,15 +208,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrReplaceUser(userId: string, resource:
-        HumanChatUserInput, options?: CreateOrReplaceUserOptionalParams):
-        Promise<ChatUserUnion>
+        function createOrReplaceUser(userId: string, user:
+        HumanChatUserCreateOrReplace, options?:
+        CreateOrReplaceUserOptionalParams): Promise<ChatUserUnion>
       parameters:
         - id: userId
           type: string
           description: ''
-        - id: resource
-          type: <xref uid="@azure/web-pubsub-chat.HumanChatUserInput" />
+        - id: user
+          type: <xref uid="@azure/web-pubsub-chat.HumanChatUserCreateOrReplace" />
           description: ''
         - id: options
           type: >-
@@ -276,6 +309,29 @@ methods:
         - id: options
           type: <xref uid="@azure/web-pubsub-chat.DeleteRoomMemberOptionalParams" />
           description: ''
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: deleteTopic(string, string, DeleteTopicOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.deleteTopic'
+    package: '@azure/web-pubsub-chat'
+    summary: Soft delete a topic.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteTopic(roomId: string, topicId: string, options?:
+        DeleteTopicOptionalParams): Promise<void>
+      parameters:
+        - id: roomId
+          type: string
+          description: Room containing the topic.
+        - id: topicId
+          type: string
+          description: Topic to delete.
+        - id: options
+          type: <xref uid="@azure/web-pubsub-chat.DeleteTopicOptionalParams" />
+          description: Conditional headers and request options.
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -386,6 +442,29 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatRoom" />&gt;
+  - name: getTopic(string, string, GetTopicOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.getTopic'
+    package: '@azure/web-pubsub-chat'
+    summary: Get a topic's title, state, and conversation identifier.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getTopic(roomId: string, topicId: string, options?:
+        GetTopicOptionalParams): Promise<ChatTopic>
+      parameters:
+        - id: roomId
+          type: string
+          description: Room containing the topic.
+        - id: topicId
+          type: string
+          description: Topic to retrieve.
+        - id: options
+          type: <xref uid="@azure/web-pubsub-chat.GetTopicOptionalParams" />
+          description: Request options.
+      return:
+        description: The topic.
+        type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatTopic" />&gt;
   - name: getUser(string, GetUserOptionalParams)
     uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.getUser'
     package: '@azure/web-pubsub-chat'
@@ -411,7 +490,9 @@ methods:
   - name: listMessages(string, ListMessagesOptionalParams)
     uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.listMessages'
     package: '@azure/web-pubsub-chat'
-    summary: Query messages in a conversation from latest to earliest.
+    summary: |-
+      Message IDs are used as pagination cursors. Follow the response nextLink,
+      which contains the message ID cursor, to retrieve the next page.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -477,8 +558,95 @@ methods:
           <xref uid="@azure/web-pubsub-chat.PagedAsyncIterableIterator"
           />&lt;<xref uid="@azure/web-pubsub-chat.ChatRoomMember" />, <xref
           uid="@azure/web-pubsub-chat.ChatRoomMember" />[], PageSettings&gt;
+  - name: listRooms(ListRoomsOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.listRooms'
+    package: '@azure/web-pubsub-chat'
+    summary: List rooms in the hub.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listRooms(options?: ListRoomsOptionalParams):
+        PagedAsyncIterableIterator<ChatRoom, ChatRoom[], PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/web-pubsub-chat.ListRoomsOptionalParams" />
+          description: Pagination and request options.
+      return:
+        description: An iterator over rooms, or pages through `byPage()`.
+        type: >-
+          <xref uid="@azure/web-pubsub-chat.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure/web-pubsub-chat.ChatRoom" />, <xref
+          uid="@azure/web-pubsub-chat.ChatRoom" />[], PageSettings&gt;
+  - name: listRoomsForUser(string, ListRoomsForUserOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.listRoomsForUser'
+    package: '@azure/web-pubsub-chat'
+    summary: List rooms associated with a user.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listRoomsForUser(userId: string, options?:
+        ListRoomsForUserOptionalParams):
+        PagedAsyncIterableIterator<ChatUserRoom, ChatUserRoom[], PageSettings>
+      parameters:
+        - id: userId
+          type: string
+          description: User whose rooms to list.
+        - id: options
+          type: <xref uid="@azure/web-pubsub-chat.ListRoomsForUserOptionalParams" />
+          description: Pagination and request options.
+      return:
+        description: An iterator over rooms, or pages through `byPage()`.
+        type: >-
+          <xref uid="@azure/web-pubsub-chat.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure/web-pubsub-chat.ChatUserRoom" />, <xref
+          uid="@azure/web-pubsub-chat.ChatUserRoom" />[], PageSettings&gt;
+  - name: listTopics(string, ListTopicsOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.listTopics'
+    package: '@azure/web-pubsub-chat'
+    summary: List topics in a room.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listTopics(roomId: string, options?: ListTopicsOptionalParams):
+        PagedAsyncIterableIterator<ChatTopic, ChatTopic[], PageSettings>
+      parameters:
+        - id: roomId
+          type: string
+          description: Room whose topics to list.
+        - id: options
+          type: <xref uid="@azure/web-pubsub-chat.ListTopicsOptionalParams" />
+          description: Pagination and request options.
+      return:
+        description: An iterator over topics, or pages through `byPage()`.
+        type: >-
+          <xref uid="@azure/web-pubsub-chat.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure/web-pubsub-chat.ChatTopic" />, <xref
+          uid="@azure/web-pubsub-chat.ChatTopic" />[], PageSettings&gt;
+  - name: listUsers(ListUsersOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.listUsers'
+    package: '@azure/web-pubsub-chat'
+    summary: List users in the hub.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listUsers(options?: ListUsersOptionalParams):
+        PagedAsyncIterableIterator<ChatUserUnion, ChatUserUnion[], PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/web-pubsub-chat.ListUsersOptionalParams" />
+          description: Pagination and request options.
+      return:
+        description: An iterator over user profiles, or pages through `byPage()`.
+        type: >-
+          <xref uid="@azure/web-pubsub-chat.PagedAsyncIterableIterator"
+          />&lt;<xref uid="@azure/web-pubsub-chat.ChatUserUnion" />, <xref
+          uid="@azure/web-pubsub-chat.ChatUserUnion" />[], PageSettings&gt;
   - name: >-
-      updateMessage(string, string, ChatMessageInput,
+      updateMessage(string, string, ChatMessageUpdate,
       UpdateMessageOptionalParams)
     uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.updateMessage'
     package: '@azure/web-pubsub-chat'
@@ -488,7 +656,7 @@ methods:
     syntax:
       content: >-
         function updateMessage(conversationId: string, messageId: string,
-        resource: ChatMessageInput, options?: UpdateMessageOptionalParams):
+        message: ChatMessageUpdate, options?: UpdateMessageOptionalParams):
         Promise<ChatMessage>
       parameters:
         - id: conversationId
@@ -497,8 +665,8 @@ methods:
         - id: messageId
           type: string
           description: ''
-        - id: resource
-          type: <xref uid="@azure/web-pubsub-chat.ChatMessageInput" />
+        - id: message
+          type: <xref uid="@azure/web-pubsub-chat.ChatMessageUpdate" />
           description: ''
         - id: options
           type: <xref uid="@azure/web-pubsub-chat.UpdateMessageOptionalParams" />
@@ -506,3 +674,30 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatMessage" />&gt;
+  - name: updateTopic(string, string, ChatTopicUpdate, UpdateTopicOptionalParams)
+    uid: '@azure/web-pubsub-chat.WebPubSubChatServiceClient.updateTopic'
+    package: '@azure/web-pubsub-chat'
+    summary: Update a topic's title or lifecycle state.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateTopic(roomId: string, topicId: string, topic:
+        ChatTopicUpdate, options?: UpdateTopicOptionalParams):
+        Promise<ChatTopic>
+      parameters:
+        - id: roomId
+          type: string
+          description: Room containing the topic.
+        - id: topicId
+          type: string
+          description: Topic to update.
+        - id: topic
+          type: <xref uid="@azure/web-pubsub-chat.ChatTopicUpdate" />
+          description: Properties to change; omitted properties are unchanged.
+        - id: options
+          type: <xref uid="@azure/web-pubsub-chat.UpdateTopicOptionalParams" />
+          description: Conditional headers and request options.
+      return:
+        description: The updated topic.
+        type: Promise&lt;<xref uid="@azure/web-pubsub-chat.ChatTopic" />&gt;

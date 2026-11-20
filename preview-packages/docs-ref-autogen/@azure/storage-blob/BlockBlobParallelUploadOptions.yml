@@ -58,7 +58,9 @@ properties:
   - name: concurrency
     uid: '@azure/storage-blob.BlockBlobParallelUploadOptions.concurrency'
     package: '@azure/storage-blob'
-    summary: Concurrency of parallel uploading. Must be greater than or equal to 0.
+    summary: |-
+      Concurrency of parallel uploading. Must be greater than or equal to 0.
+      If set to 0 or undefined, it defaults to 5.
     fullName: concurrency
     remarks: ''
     isDeprecated: false
@@ -119,11 +121,21 @@ properties:
   - name: maxSingleShotSize
     uid: '@azure/storage-blob.BlockBlobParallelUploadOptions.maxSingleShotSize'
     package: '@azure/storage-blob'
-    summary: |-
+    summary: >-
       Blob size threshold in bytes to start concurrency uploading.
-      Default value is 256MB, blob size less than this option will
-      be uploaded via one I/O operation without concurrency.
-      You can customize a value less equal than the default value.
+
+      Blobs up to this size are uploaded in one request. Larger blobs are
+      uploaded in blocks, and the
+
+      service doesn't compute a Content-MD5 property for them; set
+      `blobHTTPHeaders.blobContentMD5` to
+
+      store one.
+
+      Default value is 4MB and doesn't depend on blockSize. You can customize a
+      value less than or
+
+      equal to 256MB.
     fullName: maxSingleShotSize
     remarks: ''
     isDeprecated: false

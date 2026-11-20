@@ -1,0 +1,19 @@
+### YamlMime:TSTypeAlias
+name: VoiceAgentLiveClientEvent
+uid: '@azure/ai-projects.VoiceAgentLiveClientEvent'
+package: '@azure/ai-projects'
+summary: Commands you can send after the service starts a GPT Live session.
+fullName: VoiceAgentLiveClientEvent
+remarks: ''
+isDeprecated: false
+syntax: |
+  type VoiceAgentLiveClientEvent = {
+    [K in Exclude<
+      LiveClientEventType,
+      "session.start"
+    >]: K extends "decision.item.create"
+      ? Omit<Extract<LiveClientEventUnion, { type: K }>, "item"> & {
+          item: VoiceAgentLiveDecisionItem
+        }
+      : Extract<LiveClientEventUnion, { type: K }>
+  }[Exclude<LiveClientEventType, "session.start">]

@@ -2,33 +2,151 @@
 name: CostControlProperties
 uid: '@azure/arm-cognitiveservices.CostControlProperties'
 package: '@azure/arm-cognitiveservices'
-summary: The customer-authored settings of a cost control.
+summary: >-
+  The consumption budget and its traffic selection, notifications, and
+  enforcement actions.
+
+  A cost control applies within its owner's scope.
 fullName: CostControlProperties
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
-  - name: displayName
-    uid: '@azure/arm-cognitiveservices.CostControlProperties.displayName'
+  - name: amount
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.amount'
     package: '@azure/arm-cognitiveservices'
-    summary: An optional human-readable name for the cost control.
-    fullName: displayName
+    summary: >-
+      The positive budget amount, measured in United States dollars for the Cost
+      category or in tokens for the Tokens category.
+
+      Token amounts must be whole numbers.
+    fullName: amount
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'displayName?: string'
+      content: 'amount: number'
+      return:
+        description: ''
+        type: number
+  - name: category
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.category'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      Whether the budget measures estimated cost in United States dollars or
+      token consumption. This category cannot be changed after creation.
+    fullName: category
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'category: string'
       return:
         description: ''
         type: string
-  - name: rules
-    uid: '@azure/arm-cognitiveservices.CostControlProperties.rules'
+  - name: filter
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.filter'
     package: '@azure/arm-cognitiveservices'
-    summary: The rules enforced by the cost control.
-    fullName: rules
+    summary: >-
+      Optional traffic selection. Omission selects all eligible traffic within
+      the owner's scope.
+    fullName: filter
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'rules: CostControlRule[]'
+      content: 'filter?: CostControlFilter'
       return:
         description: ''
-        type: <xref uid="@azure/arm-cognitiveservices.CostControlRule" />[]
+        type: <xref uid="@azure/arm-cognitiveservices.CostControlFilter" />
+  - name: grouping
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.grouping'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      Optional additional partitioning of consumption. Omission or an empty
+      array uses one counter for the owning account or Foundry project.
+
+      Responses omit owner-default grouping. A project-owned control cannot
+      explicitly group by project.
+    fullName: grouping
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'grouping?: CostControlGrouping[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-cognitiveservices.CostControlGrouping" />[]
+  - name: notifications
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.notifications'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      Alert notifications keyed by nonempty, case-insensitively unique names.
+      Each notification supplies its own Event Grid connection.
+
+      PUT and the complete merged PATCH result may contain at most one
+      notification, including disabled notifications.
+
+      Omission on creation creates no notifications.
+    fullName: notifications
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'notifications?: Record<string, CostControlNotification>'
+      return:
+        description: ''
+        type: >-
+          Record&lt;string, <xref
+          uid="@azure/arm-cognitiveservices.CostControlNotification" />&gt;
+  - name: provider
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.provider'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      The resource provider for this budget. Omission selects
+      Microsoft.CognitiveServices; responses return that value.
+    fullName: provider
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'provider?: "Microsoft.CognitiveServices"'
+      return:
+        description: ''
+        type: '"<xref uid="Microsoft.CognitiveServices" />"'
+  - name: providerProperties
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.providerProperties'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      Optional provider-specific enforcement settings. Omission creates no
+      blocking actions.
+    fullName: providerProperties
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'providerProperties?: CostControlProviderProperties'
+      return:
+        description: ''
+        type: >-
+          <xref uid="@azure/arm-cognitiveservices.CostControlProviderProperties"
+          />
+  - name: timeGrain
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.timeGrain'
+    package: '@azure/arm-cognitiveservices'
+    summary: >-
+      The calendar-aligned UTC interval at which consumption counters renew
+      within the validity window.
+    fullName: timeGrain
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'timeGrain: string'
+      return:
+        description: ''
+        type: string
+  - name: timePeriod
+    uid: '@azure/arm-cognitiveservices.CostControlProperties.timePeriod'
+    package: '@azure/arm-cognitiveservices'
+    summary: The finite UTC validity window during which the control applies.
+    fullName: timePeriod
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'timePeriod: CostControlTimePeriod'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-cognitiveservices.CostControlTimePeriod" />

@@ -22,6 +22,7 @@ classes:
   - '@azure/storage-common.UserDelegationKeyCredential'
 interfaces:
   - '@azure/storage-common.NodeJSReadableStream'
+  - '@azure/storage-common.Readable'
   - '@azure/storage-common.StorageRetryOptions'
   - '@azure/storage-common.StorageSharedKeyCredentialPolicyOptions'
   - '@azure/storage-common.StructuredMessageDecodingStreamOptions'
@@ -31,6 +32,17 @@ typeAliases:
   - '@azure/storage-common.CredentialPolicyCreator'
   - '@azure/storage-common.OutgoingHandler'
 variables:
+  - name: StorageResponseFormat
+    uid: '@azure/storage-common.StorageResponseFormat'
+    package: '@azure/storage-common'
+    summary: Specifies the format the service should use to return list results.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'StorageResponseFormat: { Arrow: "Arrow", Auto: "Auto", Xml: "Xml" }'
+      return:
+        description: ''
+        type: '{ Arrow: "Arrow", Auto: "Auto", Xml: "Xml" }'
   - name: storageBrowserPolicyName
     uid: '@azure/storage-common.storageBrowserPolicyName'
     package: '@azure/storage-common'
@@ -55,6 +67,19 @@ variables:
       return:
         description: ''
         type: '"StorageCorrectContentLengthPolicy"'
+  - name: storageRedirectRangeHeaderPolicyName
+    uid: '@azure/storage-common.storageRedirectRangeHeaderPolicyName'
+    package: '@azure/storage-common'
+    summary: >-
+      Redirects the "range" header to "x-ms-range" for Azure Storage requests as
+      the latter is preferred.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'storageRedirectRangeHeaderPolicyName: "storageRedirectRangeHeaderPolicy"'
+      return:
+        description: ''
+        type: '"storageRedirectRangeHeaderPolicy"'
   - name: storageRequestFailureDetailsParserPolicyName
     uid: '@azure/storage-common.storageRequestFailureDetailsParserPolicyName'
     package: '@azure/storage-common'
@@ -95,6 +120,119 @@ variables:
         description: ''
         type: '"storageSharedKeyCredentialPolicy"'
 functions:
+  - name: allocBuffer(number)
+    uid: '@azure/storage-common.allocBuffer'
+    package: '@azure/storage-common'
+    summary: Allocates a new zero-filled Buffer of the given size.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function allocBuffer(size: number): NodeBuffer'
+      parameters:
+        - id: size
+          type: number
+          description: ''
+      return:
+        description: ''
+        type: NodeBuffer
+  - name: bufferFromArrayBuffer(ArrayBuffer, number, number)
+    uid: '@azure/storage-common.bufferFromArrayBuffer'
+    package: '@azure/storage-common'
+    summary: Creates a Buffer from an ArrayBuffer, with optional offset and length.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function bufferFromArrayBuffer(ab: ArrayBuffer, byteOffset?: number,
+        length?: number): NodeBuffer
+      parameters:
+        - id: ab
+          type: ArrayBuffer
+          description: ''
+        - id: byteOffset
+          type: number
+          description: ''
+        - id: length
+          type: number
+          description: ''
+      return:
+        description: ''
+        type: NodeBuffer
+  - name: buildStorageSharedKeyStringToSign(PipelineRequest, string)
+    uid: '@azure/storage-common.buildStorageSharedKeyStringToSign'
+    package: '@azure/storage-common'
+    summary: >-
+      Builds the string to sign for the Azure Storage Shared Key authorization
+      scheme.
+
+
+      Before building it, sets the request headers that the signature covers and
+      that come from
+
+      the request itself: `x-ms-date`, and `Content-Length` for a string or
+      Buffer body. Send the
+
+      request with these headers, since the signature depends on them.
+
+
+      See
+      https://learn.microsoft.com/rest/api/storageservices/authorize-with-shared-key
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function buildStorageSharedKeyStringToSign(request: PipelineRequest,
+        accountName: string): string
+      parameters:
+        - id: request
+          type: <xref uid="@azure/core-rest-pipeline.PipelineRequest" />
+          description: |-
+            The request to sign. Its `x-ms-date` header is set, and so is its
+            `Content-Length` header when the body is a string or a Buffer.
+        - id: accountName
+          type: string
+          description: The storage account name used to build the canonicalized resource.
+      return:
+        description: The string to sign, ready to be signed with HMAC-SHA256.
+        type: string
+  - name: createBlobFromData(ArrayBuffer | Blob | ArrayBufferView)
+    uid: '@azure/storage-common.createBlobFromData'
+    package: '@azure/storage-common'
+    summary: >-
+      Creates a Blob from the given data.
+
+      Uses an indirect constructor reference to work around React Native's
+      restrictive
+
+      Blob type definitions (which only accept string | Blob, not ArrayBuffer).
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createBlobFromData(data: ArrayBuffer | Blob | ArrayBufferView):
+        Blob
+      parameters:
+        - id: data
+          type: ArrayBuffer | Blob | ArrayBufferView
+          description: ''
+      return:
+        description: ''
+        type: Blob
+  - name: getBufferLength(NodeBuffer)
+    uid: '@azure/storage-common.getBufferLength'
+    package: '@azure/storage-common'
+    summary: Returns the byte length of a buffer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getBufferLength(buffer: NodeBuffer): number'
+      parameters:
+        - id: buffer
+          type: NodeBuffer
+          description: ''
+      return:
+        description: ''
+        type: number
   - name: getCachedDefaultHttpClient()
     uid: '@azure/storage-common.getCachedDefaultHttpClient'
     package: '@azure/storage-common'
@@ -106,6 +244,21 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.HttpClient" />
+  - name: isBuffer(unknown)
+    uid: '@azure/storage-common.isBuffer'
+    package: '@azure/storage-common'
+    summary: Checks whether a value is a Node.js Buffer.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isBuffer(value: unknown): value is NodeBuffer'
+      parameters:
+        - id: value
+          type: unknown
+          description: ''
+      return:
+        description: ''
+        type: value is NodeBuffer
   - name: NewRetryPolicyFactory(StorageRetryOptions)
     uid: '@azure/storage-common.NewRetryPolicyFactory'
     package: '@azure/storage-common'
@@ -131,6 +284,9 @@ functions:
       requests
 
       and to remove cookies and explicit content-length headers.
+
+
+      In Node.js, this policy is a no-op pass-through.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -148,6 +304,17 @@ functions:
     isDeprecated: false
     syntax:
       content: 'function storageCorrectContentLengthPolicy(): PipelinePolicy'
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: storageRedirectRangeHeaderPolicy()
+    uid: '@azure/storage-common.storageRedirectRangeHeaderPolicy'
+    package: '@azure/storage-common'
+    summary: StorageRedirectRangeHeaderPolicy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function storageRedirectRangeHeaderPolicy(): PipelinePolicy'
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />

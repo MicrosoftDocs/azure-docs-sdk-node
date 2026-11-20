@@ -3,13 +3,30 @@ name: Dimension
 uid: '@azure/ai-projects.Dimension'
 package: '@azure/ai-projects'
 summary: >-
-  A single dimension — one independent, measurable quality dimension within a
-  rubric evaluator's scoring blueprint.
+  One measurable criterion within a rubric. Quality criteria may use rating
+  weights; safety criteria classify a behavior as allowed or disallowed.
 fullName: Dimension
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: allowed
+    uid: '@azure/ai-projects.Dimension.allowed'
+    package: '@azure/ai-projects'
+    summary: >-
+      Safety behavior classification: true means allowed behavior and false
+      means disallowed behavior. Required on every safety criterion instead of
+      weight. This is not an evaluation verdict. Omit for ordinary quality
+      criteria; omission never defaults a safety criterion to false. Preserved
+      through edits and regeneration.
+    fullName: allowed
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'allowed?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: always_applicable
     uid: '@azure/ai-projects.Dimension.always_applicable'
     package: '@azure/ai-projects'
@@ -41,6 +58,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: generated_weight
+    uid: '@azure/ai-projects.Dimension.generated_weight'
+    package: '@azure/ai-projects'
+    summary: >-
+      Read-only model-suggested weight (1-10) returned for unweighted Likert
+      dimensions.
+    fullName: generated_weight
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'generated_weight?: number'
+      return:
+        description: ''
+        type: number
   - name: id
     uid: '@azure/ai-projects.Dimension.id'
     package: '@azure/ai-projects'
@@ -62,14 +93,16 @@ properties:
     uid: '@azure/ai-projects.Dimension.weight'
     package: '@azure/ai-projects'
     summary: >-
-      Relative weight of this dimension (1-10). The generation pipeline assigns
-      exactly one dimension weight 8-10; all others use 1-6. User edits are not
-      constrained by this heuristic.
+      Optional configured weight for legacy or Likert scoring. For Likert, omit
+      every weight for equal contribution or supply a weight for every
+      dimension; partially weighted definitions are rejected. Boolean scoring
+      rejects every configured weight, including explicit unit weights. No
+      schema default is emitted.
     fullName: weight
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'weight: number'
+      content: 'weight?: number'
       return:
         description: ''
         type: number

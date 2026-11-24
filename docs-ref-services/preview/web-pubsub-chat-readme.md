@@ -1,22 +1,22 @@
 ---
 title: Azure Web PubSub Chat client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-chat, web-pubsub
-ms.date: 11/16/2026
+ms.date: 11/24/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
 ---
-# Azure Web PubSub Chat client library for JavaScript - version 1.0.0-beta.2 
+# Azure Web PubSub Chat client library for JavaScript - version 1.0.0-alpha.20261119.1 
 
 
 The Azure Web PubSub Chat client library enables server applications to manage chat roles, users, rooms, topics, room membership, conversations, and messages in an Azure Web PubSub Chat hub. Use it to organize discussions into room topics, discover users and their rooms, and manage chat resources from your server application.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-chat_1.0.0-beta.2/sdk/web-pubsub/web-pubsub-chat)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/web-pubsub/web-pubsub-chat)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub-chat)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/web-pubsub-chat?view=azure-node-preview)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-chat_1.0.0-beta.2/sdk/web-pubsub/web-pubsub-chat/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/web-pubsub/web-pubsub-chat/samples)
 
 ## Getting started
 
@@ -24,7 +24,7 @@ Key links:
 
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-chat_1.0.0-beta.2/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -62,7 +62,7 @@ You can find the connection string for your Azure Web PubSub resource in the [Az
 
 To authenticate with Microsoft Entra ID, you will need the `endpoint` of your Azure Web PubSub resource and a credential. You can find the endpoint in the [Azure Portal][azure_portal].
 
-You can authenticate with Microsoft Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing Microsoft Entra token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-chat_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Microsoft Entra ID using a credential from the [@azure/identity][azure_identity] library or [an existing Microsoft Entra token](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -504,18 +504,18 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-chat_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Explore the [JavaScript and TypeScript samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-chat_1.0.0-beta.2/sdk/web-pubsub/web-pubsub-chat/samples) and the [API reference](https://learn.microsoft.com/javascript/api/@azure/web-pubsub-chat?view=azure-node-preview).
+Explore the [JavaScript and TypeScript samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/web-pubsub/web-pubsub-chat/samples) and the [API reference](https://learn.microsoft.com/javascript/api/@azure/web-pubsub-chat?view=azure-node-preview).
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-chat_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-chat_1.0.0-beta.2/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-chat_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

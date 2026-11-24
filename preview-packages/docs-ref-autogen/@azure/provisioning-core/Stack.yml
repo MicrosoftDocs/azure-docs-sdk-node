@@ -2,35 +2,23 @@
 name: Stack
 uid: '@azure/provisioning-core.Stack'
 package: '@azure/provisioning-core'
-summary: A Stack defines a deployment unit.
-fullName: Stack
+summary: Defines resources and module deployments at a chosen Azure deployment scope.
+fullName: Stack<P, O>
 remarks: >-
-  Each stack produces one or more Bicep files — resources at different
+  Create resources with this stack as their parent, or use `addResource()`.
 
-  scopes (subscription vs. resource group) are split into separate files
+  Use `addModule()` for child deployments. Create reusable components with this
 
-  linked by module references.
-
-
-  Resources register themselves by passing the stack (or a child component)
-
-  as their first constructor argument. `Stack.add()` is available as a
-
-  convenience for creating child components with the stack as parent.
+  stack as their constructor's parent argument.
 
 
-  The `targetScope` option controls the Bicep target scope. Default is
+  The `targetScope` option controls the deployment scope. Default is
 
-  `"subscription"`, which requires explicit `ResourceGroup` instances.
+  `"resourceGroup"`, for resources deployed into an existing resource group.
 
-  Set `"resourceGroup"` to deploy resources directly into an existing
+  Set `"subscription"` for subscription-level resources, such as new resource
 
-  resource group.
-
-
-  Every stack registers itself in `Stack.roots` for collection by tools
-
-  like the playground and CLI.
+  groups.
 
 
   [Key Vault getting started
@@ -38,46 +26,53 @@ remarks: >-
 isDeprecated: false
 type: class
 constructors:
-  - name: Stack(string, StackOptions)
+  - name: Stack<P, O>(string, StackOptions<P, O>)
     uid: '@azure/provisioning-core.Stack.constructor'
     package: '@azure/provisioning-core'
     summary: Create a root stack.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new Stack(name: string, options?: StackOptions)'
+      content: 'new Stack(name: string, options?: StackOptions<P, O>)'
       parameters:
         - id: name
           type: string
           description: ''
         - id: options
-          type: <xref uid="@azure/provisioning-core.StackOptions" />
+          type: <xref uid="@azure/provisioning-core.StackOptions" />&lt;P, O&gt;
           description: ''
 properties:
+  - name: children
+    uid: '@azure/provisioning-core.Stack.children'
+    package: '@azure/provisioning-core'
+    summary: |-
+      The components directly contained here, in creation order.
+      Changing the returned array does not add or remove children.
+    fullName: children
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: readonly ProvisioningComponent[] children
+      return:
+        description: ''
+        type: readonly ProvisioningComponent[]
   - name: deploymentContext
     uid: '@azure/provisioning-core.Stack.deploymentContext'
     package: '@azure/provisioning-core'
     summary: >-
-      The effective deployment context **inherited from ancestors**, resolved
-
-      by walking up the parent chain (this node's own local contribution is
-
-      intentionally excluded — a node's contribution flows to its descendants,
-
-      not to itself). Each field is resolved per its own rule:
+      Resource defaults inherited from the containing components.
 
 
-      - `location`: nearest ancestor with a value wins.
+      - Location and naming policy use the closest containing override.
 
-      - `namingPolicy`: nearest ancestor with a value wins.
-
-      - `tags`: flat-merged across all ancestors; innermost wins on key
-      conflict.
+      - Tags are combined, with closer overrides taking precedence.
 
 
-      Returns an object whose fields may all be `undefined` if no ancestor
+      Defaults set on this component apply to its descendants and are not
+      included
 
-      contributed anything.
+      here. Fields are `undefined` when no containing component supplies a
+      default.
     fullName: deploymentContext
     remarks: ''
     isDeprecated: false
@@ -94,7 +89,7 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'name: string'
+      content: string name
       return:
         description: ''
         type: string
@@ -106,10 +101,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'outputs: OutputCollection'
+      content: 'outputs: OutputValues<O>'
       return:
         description: ''
-        type: <xref uid="@azure/provisioning-core.OutputCollection" />
+        type: <xref uid="@azure/provisioning-core.OutputValues" />&lt;O&gt;
   - name: parameters
     uid: '@azure/provisioning-core.Stack.parameters'
     package: '@azure/provisioning-core'
@@ -118,26 +113,14 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'parameters: ParameterCollection'
+      content: ParameterHandles<P> parameters
       return:
         description: ''
-        type: <xref uid="@azure/provisioning-core.ParameterCollection" />
-  - name: roots
-    uid: '@azure/provisioning-core.Stack.roots'
-    package: '@azure/provisioning-core'
-    summary: All root stacks created since the last call to `Stack.clearRoots()`.
-    fullName: roots
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: static readonly Stack[] roots
-      return:
-        description: ''
-        type: readonly Stack[]
+        type: <xref uid="@azure/provisioning-core.ParameterHandles" />&lt;P&gt;
   - name: self
     uid: '@azure/provisioning-core.Stack.self'
     package: '@azure/provisioning-core'
-    summary: Public identity for this node.
+    summary: The public component instance to use when creating children or references.
     fullName: self
     remarks: ''
     isDeprecated: false
@@ -154,7 +137,7 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'targetScope: TargetScope'
+      content: TargetScope targetScope
       return:
         description: ''
         type: <xref uid="@azure/provisioning-core.TargetScope" />
@@ -166,26 +149,11 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'variables: VariableCollection'
+      content: VariableCollection variables
       return:
         description: ''
         type: <xref uid="@azure/provisioning-core.VariableCollection" />
 inheritedProperties:
-  - name: children
-    uid: '@azure/provisioning-core.Stack.children'
-    package: '@azure/provisioning-core'
-    summary: ''
-    fullName: children
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'children: ProvisioningComponent[]'
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />[]
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [ProvisioningComponent.children](xref:@azure/provisioning-core.ProvisioningComponent.children)
   - name: parent
     uid: '@azure/provisioning-core.Stack.parent'
     package: '@azure/provisioning-core'
@@ -202,8 +170,140 @@ inheritedProperties:
           undefined
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [ProvisioningComponent.parent](xref:@azure/provisioning-core.ProvisioningComponent.parent)
+      [DeploymentComponent.parent](xref:@azure/provisioning-core.DeploymentComponent.parent)
 inheritedMethods:
+  - name: 'addResource<A, R>((context: this, args: A) => R, A)'
+    uid: '@azure/provisioning-core.Stack.addResource'
+    package: '@azure/provisioning-core'
+    summary: Create a resource in this component using the supplied resource class.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addResource<A, R>(ctor: (context: this, args: A) => R, args:
+        A): R
+      parameters:
+        - id: ctor
+          type: '(context: this, args: A) =&gt; R'
+          description: ''
+        - id: args
+          type: A
+          description: ''
+      return:
+        description: ''
+        type: R
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DeploymentComponent.addResource](xref:@azure/provisioning-core.DeploymentComponent.addResource)
+  - name: getModules()
+    uid: '@azure/provisioning-core.Stack.getModules'
+    package: '@azure/provisioning-core'
+    summary: Get the modules declared directly in this component, in creation order.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getModules(): AnyModule[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.AnyModule" />[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DeploymentComponent.getModules](xref:@azure/provisioning-core.DeploymentComponent.getModules)
+  - name: getOutputDefinitions()
+    uid: '@azure/provisioning-core.Stack.getOutputDefinitions'
+    package: '@azure/provisioning-core'
+    summary: Get the declared outputs, their settings, and their assigned values.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getOutputDefinitions(): readonly OutputDefinition[]'
+      return:
+        description: ''
+        type: readonly OutputDefinition[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DeploymentComponent.getOutputDefinitions](xref:@azure/provisioning-core.DeploymentComponent.getOutputDefinitions)
+  - name: getParameterDefinitions()
+    uid: '@azure/provisioning-core.Stack.getParameterDefinitions'
+    package: '@azure/provisioning-core'
+    summary: Get the declared parameters and their settings, in declaration order.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getParameterDefinitions(): readonly ParameterDefinition[]'
+      return:
+        description: ''
+        type: readonly ParameterDefinition[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DeploymentComponent.getParameterDefinitions](xref:@azure/provisioning-core.DeploymentComponent.getParameterDefinitions)
+  - name: getResource<T>(ResourceCtor<T>, string, QueryOptions)
+    uid: '@azure/provisioning-core.Stack.getResource'
+    package: '@azure/provisioning-core'
+    summary: Find the first matching literal resource name in tree order.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getResource<T>(type: ResourceCtor<T>, name: string, options?:
+        QueryOptions): T | undefined
+      parameters:
+        - id: type
+          type: <xref uid="@azure/provisioning-core.ResourceCtor" />&lt;T&gt;
+          description: ''
+        - id: name
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/provisioning-core.QueryOptions" />
+          description: ''
+      return:
+        description: ''
+        type: T | undefined
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DeploymentComponent.getResource](xref:@azure/provisioning-core.DeploymentComponent.getResource)
+  - name: getResources(QueryOptions)
+    uid: '@azure/provisioning-core.Stack.getResources'
+    package: '@azure/provisioning-core'
+    summary: Query authored resources, recursively by default.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getResources(options?: QueryOptions): Resource<string>[]'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/provisioning-core.QueryOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.Resource" />&lt;string&gt;[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DeploymentComponent.getResources](xref:@azure/provisioning-core.DeploymentComponent.getResources)
+  - name: getResources<T>(ResourceCtor<T>, QueryOptions)
+    uid: '@azure/provisioning-core.Stack.getResources_1'
+    package: '@azure/provisioning-core'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getResources<T>(type: ResourceCtor<T>, options?: QueryOptions):
+        T[]
+      parameters:
+        - id: type
+          type: <xref uid="@azure/provisioning-core.ResourceCtor" />&lt;T&gt;
+          description: ''
+        - id: options
+          type: <xref uid="@azure/provisioning-core.QueryOptions" />
+          description: ''
+      return:
+        description: ''
+        type: T[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [DeploymentComponent.getResources](xref:@azure/provisioning-core.DeploymentComponent.getResources)
   - name: isChildOf(ProvisioningComponent)
     uid: '@azure/provisioning-core.Stack.isChildOf'
     package: '@azure/provisioning-core'
@@ -221,7 +321,7 @@ inheritedMethods:
         type: boolean
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [ProvisioningComponent.isChildOf](xref:@azure/provisioning-core.ProvisioningComponent.isChildOf)
+      [DeploymentComponent.isChildOf](xref:@azure/provisioning-core.DeploymentComponent.isChildOf)
   - name: 'transform((component: ProvisioningComponent) => void)'
     uid: '@azure/provisioning-core.Stack.transform'
     package: '@azure/provisioning-core'
@@ -243,7 +343,7 @@ inheritedMethods:
         type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [ProvisioningComponent.transform](xref:@azure/provisioning-core.ProvisioningComponent.transform)
+      [DeploymentComponent.transform](xref:@azure/provisioning-core.DeploymentComponent.transform)
   - name: >-
       transform<TComponent>(ProvisioningComponentConstructor<TComponent>,
       (component: TComponent) => void)
@@ -272,13 +372,14 @@ inheritedMethods:
         type: this
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [ProvisioningComponent.transform](xref:@azure/provisioning-core.ProvisioningComponent.transform)
+      [DeploymentComponent.transform](xref:@azure/provisioning-core.DeploymentComponent.transform)
   - name: 'visit((component: ProvisioningComponent) => boolean | void)'
     uid: '@azure/provisioning-core.Stack.visit'
     package: '@azure/provisioning-core'
     summary: |-
       Depth-first visit of this node and all descendants.
       Return `false` from the callback to skip visiting that node's children.
+      Children created by the callback are visited as well.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -291,121 +392,89 @@ inheritedMethods:
           description: ''
     inheritanceDescription: >-
       <b>Inherited From</b>
-      [ProvisioningComponent.visit](xref:@azure/provisioning-core.ProvisioningComponent.visit)
+      [DeploymentComponent.visit](xref:@azure/provisioning-core.DeploymentComponent.visit)
 methods:
-  - name: 'add<T>(T, (ConstructorParameters<T> extends [any, Object] ? Rest : never))'
-    uid: '@azure/provisioning-core.Stack.add'
-    package: '@azure/provisioning-core'
-    summary: |-
-      Create a child under this stack (with the stack as its parent context),
-      as a convenience for `new Ctor(stack, ...args)`.
-
-      Constructs a single child instance and returns it.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function add<T>(ctor: T, args: (ConstructorParameters<T> extends [any,
-        Object] ? Rest : never)): InstanceType<T>
-      parameters:
-        - id: ctor
-          type: T
-          description: ''
-        - id: args
-          type: >-
-            (ConstructorParameters&lt;T&gt; extends [any, Object] ? Rest :
-            never)
-          description: ''
-      return:
-        description: ''
-        type: InstanceType&lt;T&gt;
-  - name: clearRoots()
-    uid: '@azure/provisioning-core.Stack.clearRoots'
-    package: '@azure/provisioning-core'
-    summary: |-
-      Returns all root stacks and clears the registry. Useful for collecting
-      all stacks after executing user code (e.g. in the playground or CLI).
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'static function clearRoots(): Stack[]'
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.Stack" />[]
-  - name: getResource<T>(ResourceCtor<T>, string, QueryOptions)
-    uid: '@azure/provisioning-core.Stack.getResource'
-    package: '@azure/provisioning-core'
-    summary: |-
-      Find the **first** scalar resource of `type` whose literal name equals
-      `name`, or `undefined` if none matches.
-    remarks: |-
-      Returns the first match in tree order. ARM names are unique only *per
-      resource type within a scope*, so a stack MAY legitimately contain more
-      than one resource of the same `type` and `name` (e.g. across different
-      resource groups) — this returns whichever is found first. Use
-      `getResources(type)` and filter yourself if you need all matches.
-
-      Only scalar resources are searched, and names that do not resolve to a
-      string literal are never matched. Pass `{ recursive: false }` to search
-      only the stack's direct children.
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getResource<T>(type: ResourceCtor<T>, name: string, options?:
-        QueryOptions): T | undefined
-      parameters:
-        - id: type
-          type: <xref uid="@azure/provisioning-core.ResourceCtor" />&lt;T&gt;
-          description: ''
-        - id: name
-          type: string
-          description: ''
-        - id: options
-          type: <xref uid="@azure/provisioning-core.QueryOptions" />
-          description: ''
-      return:
-        description: ''
-        type: T | undefined
-  - name: getResources(QueryOptions)
-    uid: '@azure/provisioning-core.Stack.getResources'
-    package: '@azure/provisioning-core'
-    summary: |-
-      The scalar resources in this stack. With no `type`, returns
-      every scalar resource; pass a resource class to filter and narrow to
-      that subclass. Returns a plain array — use native `.filter` / `.find` /
-      `.map` for anything further.
-
-      By default walks the whole tree; pass `{ recursive: false }` to consider
-      only the stack's direct children.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function getResources(options?: QueryOptions): Resource<string>[]'
-      parameters:
-        - id: options
-          type: <xref uid="@azure/provisioning-core.QueryOptions" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.Resource" />&lt;string&gt;[]
-  - name: getResources<T>(ResourceCtor<T>, QueryOptions)
-    uid: '@azure/provisioning-core.Stack.getResources_1'
+  - name: addModule(ExternalModuleOptions)
+    uid: '@azure/provisioning-core.Stack.addModule_1'
     package: '@azure/provisioning-core'
     summary: ''
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        function getResources<T>(type: ResourceCtor<T>, options?: QueryOptions):
-        T[]
+      content: 'function addModule(options: ExternalModuleOptions): ExternalModule'
       parameters:
-        - id: type
-          type: <xref uid="@azure/provisioning-core.ResourceCtor" />&lt;T&gt;
-          description: ''
         - id: options
-          type: <xref uid="@azure/provisioning-core.QueryOptions" />
+          type: <xref uid="@azure/provisioning-core.ExternalModuleOptions" />
           description: ''
       return:
         description: ''
-        type: T[]
-extends: <xref uid="@azure/provisioning-core.ProvisioningComponent" />
+        type: <xref uid="@azure/provisioning-core.ExternalModule" />
+  - name: addModule<I>(ModuleOptions<I>)
+    uid: '@azure/provisioning-core.Stack.addModule_2'
+    package: '@azure/provisioning-core'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function addModule<I>(options: ModuleOptions<I>): Module<P, I>'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/provisioning-core.ModuleOptions" />&lt;I&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.Module" />&lt;P, I&gt;
+  - name: addModule<S>(S, StackModuleOptions<S>)
+    uid: '@azure/provisioning-core.Stack.addModule'
+    package: '@azure/provisioning-core'
+    summary: >-
+      Create a child deployment. Pass a target stack and its deployment options
+      for
+
+      a `StackModule`, an external-template options object for an
+      `ExternalModule`,
+
+      or resource-owning module options for a `Module`.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addModule<S>(targetStack: S, options: StackModuleOptions<S>):
+        StackModule<S>
+      parameters:
+        - id: targetStack
+          type: S
+          description: ''
+        - id: options
+          type: <xref uid="@azure/provisioning-core.StackModuleOptions" />&lt;S&gt;
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.StackModule" />&lt;S&gt;
+  - name: 'onDidCreateStack((stack: Stack) => void)'
+    uid: '@azure/provisioning-core.Stack.onDidCreateStack'
+    package: '@azure/provisioning-core'
+    summary: >-
+      Observe each newly created stack. Dispose the returned subscription to
+      unsubscribe.
+
+
+      The callback runs before the stack's resources and outputs are fully
+
+      configured. Wait until authoring finishes before generating templates.
+
+      An error thrown by a listener interrupts stack creation.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function onDidCreateStack(listener: (stack: Stack) => void): {
+        dispose() => void }
+      parameters:
+        - id: listener
+          type: '(stack: Stack) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: '{ dispose() =&gt; void }'
+extends: <xref uid="@azure/provisioning-core.DeploymentComponent" />&lt;P, O&gt;

@@ -3,7 +3,7 @@ name: ProvisioningComponent
 uid: '@azure/provisioning-core.ProvisioningComponent'
 package: '@azure/provisioning-core'
 summary: |+
-  Base class for all tree nodes in the library object model.
+  A reusable grouping of resources and components in an application.
 
   **Example**
 
@@ -32,12 +32,11 @@ summary: |+
 
 fullName: ProvisioningComponent
 remarks: >-
-  Both `Stack` and `Resource` extend `ProvisioningComponent`. It provides
-  parent-child
+  Components group related resources and pass inherited resource defaults to
 
-  tree tracking and deployment context lookup — walking up the tree to find
+  their children. Create a component under a stack, resource-owning module,
 
-  the nearest context set by a `Stack` or `ResourceGroup`.
+  or another component.
 
 
   Subclass `ProvisioningComponent` directly to create reusable groupings of
@@ -65,39 +64,34 @@ properties:
   - name: children
     uid: '@azure/provisioning-core.ProvisioningComponent.children'
     package: '@azure/provisioning-core'
-    summary: ''
+    summary: |-
+      The components directly contained here, in creation order.
+      Changing the returned array does not add or remove children.
     fullName: children
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'children: ProvisioningComponent[]'
+      content: readonly ProvisioningComponent[] children
       return:
         description: ''
-        type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />[]
+        type: readonly ProvisioningComponent[]
   - name: deploymentContext
     uid: '@azure/provisioning-core.ProvisioningComponent.deploymentContext'
     package: '@azure/provisioning-core'
     summary: >-
-      The effective deployment context **inherited from ancestors**, resolved
-
-      by walking up the parent chain (this node's own local contribution is
-
-      intentionally excluded — a node's contribution flows to its descendants,
-
-      not to itself). Each field is resolved per its own rule:
+      Resource defaults inherited from the containing components.
 
 
-      - `location`: nearest ancestor with a value wins.
+      - Location and naming policy use the closest containing override.
 
-      - `namingPolicy`: nearest ancestor with a value wins.
-
-      - `tags`: flat-merged across all ancestors; innermost wins on key
-      conflict.
+      - Tags are combined, with closer overrides taking precedence.
 
 
-      Returns an object whose fields may all be `undefined` if no ancestor
+      Defaults set on this component apply to its descendants and are not
+      included
 
-      contributed anything.
+      here. Fields are `undefined` when no containing component supplies a
+      default.
     fullName: deploymentContext
     remarks: ''
     isDeprecated: false
@@ -123,7 +117,7 @@ properties:
   - name: self
     uid: '@azure/provisioning-core.ProvisioningComponent.self'
     package: '@azure/provisioning-core'
-    summary: Public identity for this node.
+    summary: The public component instance to use when creating children or references.
     fullName: self
     remarks: ''
     isDeprecated: false
@@ -199,6 +193,7 @@ methods:
     summary: |-
       Depth-first visit of this node and all descendants.
       Return `false` from the callback to skip visiting that node's children.
+      Children created by the callback are visited as well.
     remarks: ''
     isDeprecated: false
     syntax:

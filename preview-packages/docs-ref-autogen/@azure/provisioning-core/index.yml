@@ -20,6 +20,7 @@ interfaces:
   - '@azure/provisioning-core.DateShape'
   - '@azure/provisioning-core.DateTimeTextEncodingDescriptor'
   - '@azure/provisioning-core.DeferredShape'
+  - '@azure/provisioning-core.DeploymentComponentOptions'
   - '@azure/provisioning-core.DeploymentContext'
   - '@azure/provisioning-core.DiscriminatedModelShape'
   - '@azure/provisioning-core.DiscriminatorNames'
@@ -29,6 +30,7 @@ interfaces:
   - '@azure/provisioning-core.ExistingResourceProps'
   - '@azure/provisioning-core.ExpressionBrand'
   - '@azure/provisioning-core.ExpressionTag'
+  - '@azure/provisioning-core.ExternalModuleOptions'
   - '@azure/provisioning-core.FlatModelShape'
   - '@azure/provisioning-core.FlatVariantPin'
   - '@azure/provisioning-core.FunctionCallExpressionNode'
@@ -37,6 +39,8 @@ interfaces:
   - '@azure/provisioning-core.InputRecord'
   - '@azure/provisioning-core.InstanceFunctionCallExpressionNode'
   - '@azure/provisioning-core.InterpolatedStringExpressionNode'
+  - '@azure/provisioning-core.ModuleBaseOptions'
+  - '@azure/provisioning-core.ModuleOptions'
   - '@azure/provisioning-core.NamingContext'
   - '@azure/provisioning-core.NamingPolicy'
   - '@azure/provisioning-core.NamingPolicyOptions'
@@ -44,8 +48,8 @@ interfaces:
   - '@azure/provisioning-core.NumberLiteralShape'
   - '@azure/provisioning-core.NumberShape'
   - '@azure/provisioning-core.NumericStringEncodingDescriptor'
-  - '@azure/provisioning-core.OutputMetadata'
-  - '@azure/provisioning-core.ParameterMetadata'
+  - '@azure/provisioning-core.OutputDefinition'
+  - '@azure/provisioning-core.OutputOptions'
   - '@azure/provisioning-core.PlainDateEncodingDescriptor'
   - '@azure/provisioning-core.PrimitiveTypeMap'
   - '@azure/provisioning-core.PropertyAccessExpressionNode'
@@ -69,21 +73,26 @@ interfaces:
   - '@azure/provisioning-core.VariableMetadata'
 classes:
   - '@azure/provisioning-core.DefaultNamingPolicy'
-  - '@azure/provisioning-core.OutputCollection'
-  - '@azure/provisioning-core.ParameterCollection'
+  - '@azure/provisioning-core.DeploymentComponent'
+  - '@azure/provisioning-core.ExternalModule'
+  - '@azure/provisioning-core.Module'
   - '@azure/provisioning-core.ProvisioningComponent'
   - '@azure/provisioning-core.Resource'
   - '@azure/provisioning-core.ResourceDeclaration'
   - '@azure/provisioning-core.ResourceGroup'
   - '@azure/provisioning-core.Stack'
+  - '@azure/provisioning-core.StackModule'
   - '@azure/provisioning-core.VariableCollection'
 typeAliases:
+  - '@azure/provisioning-core.AnyModule'
   - '@azure/provisioning-core.ArrayAccessIndex'
   - '@azure/provisioning-core.BinaryOperator'
   - '@azure/provisioning-core.BooleanValueEncodingDescriptor'
   - '@azure/provisioning-core.BytesValueEncodingDescriptor'
+  - '@azure/provisioning-core.CheckedParameters'
   - '@azure/provisioning-core.ContainerShape'
   - '@azure/provisioning-core.DateValueEncodingDescriptor'
+  - '@azure/provisioning-core.DeploymentDependency'
   - '@azure/provisioning-core.Deref'
   - '@azure/provisioning-core.Expression'
   - '@azure/provisioning-core.ExpressionNode'
@@ -91,23 +100,31 @@ typeAliases:
   - '@azure/provisioning-core.ExpressionShape'
   - '@azure/provisioning-core.ExpressionValue'
   - '@azure/provisioning-core.FlatVariantSelector'
-  - '@azure/provisioning-core.InferParamType'
   - '@azure/provisioning-core.IntegerScalarName'
   - '@azure/provisioning-core.ModelShape'
   - '@azure/provisioning-core.NumberValueEncodingDescriptor'
   - '@azure/provisioning-core.NumericScalarName'
-  - '@azure/provisioning-core.OutputOptions'
+  - '@azure/provisioning-core.OutputOptionsMap'
   - '@azure/provisioning-core.OutputType'
   - '@azure/provisioning-core.OutputValue'
   - '@azure/provisioning-core.OutputValueFor'
-  - '@azure/provisioning-core.Parameter'
+  - '@azure/provisioning-core.OutputValues'
+  - '@azure/provisioning-core.ParameterDefinition'
+  - '@azure/provisioning-core.ParameterHandles'
   - '@azure/provisioning-core.ParameterOptions'
+  - '@azure/provisioning-core.ParameterOptionsMap'
+  - '@azure/provisioning-core.ParameterValue'
   - '@azure/provisioning-core.PrimitiveTypeName'
   - '@azure/provisioning-core.PropertySegment'
   - '@azure/provisioning-core.ProvisioningComponentConstructor'
+  - '@azure/provisioning-core.RequiredParameterKeys'
   - '@azure/provisioning-core.ResourceCtor'
   - '@azure/provisioning-core.ScalarOutputType'
   - '@azure/provisioning-core.ScopeExpression'
+  - '@azure/provisioning-core.StackModuleOptions'
+  - '@azure/provisioning-core.StackModuleOutputs'
+  - '@azure/provisioning-core.StackModuleParameterValues'
+  - '@azure/provisioning-core.StackParameterValues'
   - '@azure/provisioning-core.StringValueEncodingDescriptor'
   - '@azure/provisioning-core.TargetScope'
   - '@azure/provisioning-core.TerminalValueShape'
@@ -223,132 +240,31 @@ functions:
         description: ''
         type: L
   - name: >-
-      createOutput<T>(Stack, string, T, OutputValueFor<NoInfer<T>>,
-      OutputOptions)
-    uid: '@azure/provisioning-core.createOutput'
-    package: '@azure/provisioning-core'
-    summary: |+
-      A deployment output, compiled to a Bicep `output` declaration.
-
-      **Example**
-
-      ```typescript snippet:ignore
-      import { Stack } from "@azure/provisioning-core";
-      import { KeyVault } from "@azure/provisioning-keyvault";
-
-      const stack = new Stack("my-app", { targetScope: "resourceGroup" });
-      const vault = new KeyVault(stack, {
-        name: "kv-my-app",
-        location: "eastus",
-        properties: {
-          tenantId: "11111111-1111-1111-1111-111111111111",
-          sku: { family: "A", name: "standard" },
-        },
-      });
-      stack.outputs.add("vaultUri", "string", vault.properties.vaultUri);
-      ```
-
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createOutput<T>(stack: Stack, name: string, type: T, value:
-        OutputValueFor<NoInfer<T>>, options?: OutputOptions): OutputMetadata
-      parameters:
-        - id: stack
-          type: <xref uid="@azure/provisioning-core.Stack" />
-          description: ''
-        - id: name
-          type: string
-          description: ''
-        - id: type
-          type: T
-          description: ''
-        - id: value
-          type: >-
-            <xref uid="@azure/provisioning-core.OutputValueFor"
-            />&lt;NoInfer&lt;T&gt;&gt;
-          description: ''
-        - id: options
-          type: <xref uid="@azure/provisioning-core.OutputOptions" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.OutputMetadata" />
-  - name: createParameter<T, A>(Stack, string, T, ParameterOptions<T, A>)
-    uid: '@azure/provisioning-core.createParameter'
-    package: '@azure/provisioning-core'
-    summary: |+
-      A deploy-time input to a stack, compiled to a Bicep `param` declaration.
-
-      **Example**
-
-      ```typescript snippet:ignore
-      import { Stack, createParameter } from "@azure/provisioning-core";
-
-      const stack = new Stack("my-app", { targetScope: "resourceGroup" });
-      const env = createParameter(stack, "env", "string", {
-        allowed: ["dev", "staging", "prod"] as const,
-        defaultValue: "dev",
-      });
-      ```
-
-    remarks: |-
-      The returned value is an `Expression` that can be passed to resource
-      properties. At deploy time, the user supplies the actual value. The
-      declaration metadata is stored separately on the stack, keyed by name.
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createParameter<T, A>(stack: Stack, name: string, type: T,
-        options?: ParameterOptions<T, A>): Parameter<T, A>
-      parameters:
-        - id: stack
-          type: <xref uid="@azure/provisioning-core.Stack" />
-          description: ''
-        - id: name
-          type: string
-          description: ''
-        - id: type
-          type: T
-          description: ''
-        - id: options
-          type: <xref uid="@azure/provisioning-core.ParameterOptions" />&lt;T, A&gt;
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.Parameter" />&lt;T, A&gt;
-  - name: createVariable<TValue>(Stack, string, TValue, VariableOptions)
+      createVariable<TValue>(DeploymentComponent, string, TValue,
+      VariableOptions)
     uid: '@azure/provisioning-core.createVariable'
     package: '@azure/provisioning-core'
-    summary: >+
-      A computed value evaluated at deploy time, compiled to a Bicep `var`
-      declaration.
-
+    summary: |+
+      Defines a named value evaluated at deployment time.
 
       **Example**
 
-
       ```typescript snippet:ignore
-
       import { Stack, createVariable } from "@azure/provisioning-core";
 
-
       const stack = new Stack("my-app");
-
       const suffix = createVariable(stack, "suffix", "prod");
-
       ```
 
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function createVariable<TValue>(stack: Stack, name: string, value:
-        TValue, options?: VariableOptions): Variable<TValue>
+        function createVariable<TValue>(stack: DeploymentComponent, name:
+        string, value: TValue, options?: VariableOptions): Variable<TValue>
       parameters:
         - id: stack
-          type: <xref uid="@azure/provisioning-core.Stack" />
+          type: <xref uid="@azure/provisioning-core.DeploymentComponent" />
           description: ''
         - id: name
           type: string
@@ -396,6 +312,42 @@ functions:
       return:
         description: ''
         type: value is Expression&lt;unknown&gt;
+  - name: isExternalModule(unknown)
+    uid: '@azure/provisioning-core.isExternalModule'
+    package: '@azure/provisioning-core'
+    summary: Tests whether a value is a module that deploys an external template.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isExternalModule(value: unknown): value is ExternalModule'
+      parameters:
+        - id: value
+          type: unknown
+          description: ''
+      return:
+        description: ''
+        type: value is ExternalModule
+  - name: isModule(unknown)
+    uid: '@azure/provisioning-core.isModule'
+    package: '@azure/provisioning-core'
+    summary: Tests whether a value is a resource-owning module.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isModule(value: unknown): value is
+        Module<Readonly<Record<string, ParameterOptions>>,
+        Readonly<Record<string, OutputOptions>>>
+      parameters:
+        - id: value
+          type: unknown
+          description: ''
+      return:
+        description: ''
+        type: >-
+          value is Module&lt;Readonly&lt;Record&lt;string,
+          ParameterOptions&gt;&gt;, Readonly&lt;Record&lt;string,
+          OutputOptions&gt;&gt;&gt;
   - name: isResource(unknown)
     uid: '@azure/provisioning-core.isResource'
     package: '@azure/provisioning-core'
@@ -471,3 +423,24 @@ functions:
       return:
         description: ''
         type: x is T
+  - name: isStackModule(unknown)
+    uid: '@azure/provisioning-core.isStackModule'
+    package: '@azure/provisioning-core'
+    summary: Tests whether a value is a module that deploys a supplied stack.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function isStackModule(value: unknown): value is
+        StackModule<Stack<Readonly<Record<string, ParameterOptions>>,
+        Readonly<Record<string, OutputOptions>>>>
+      parameters:
+        - id: value
+          type: unknown
+          description: ''
+      return:
+        description: ''
+        type: >-
+          value is StackModule&lt;Stack&lt;Readonly&lt;Record&lt;string,
+          ParameterOptions&gt;&gt;, Readonly&lt;Record&lt;string,
+          OutputOptions&gt;&gt;&gt;&gt;

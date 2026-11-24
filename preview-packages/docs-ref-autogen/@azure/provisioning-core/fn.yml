@@ -202,7 +202,7 @@ functions:
   - name: deployment()
     uid: '@azure/provisioning-core.fn.deployment'
     package: '@azure/provisioning-core'
-    summary: Bicep `deployment()`. Returns information about the current deployment.
+    summary: Returns deployment-time information about the current deployment.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -276,7 +276,7 @@ functions:
   - name: environment()
     uid: '@azure/provisioning-core.fn.environment'
     package: '@azure/provisioning-core'
-    summary: Bicep `environment()`. Returns information about the Azure environment.
+    summary: Returns deployment-time information about the Azure environment.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -648,11 +648,11 @@ functions:
     uid: '@azure/provisioning-core.fn.managementGroup'
     package: '@azure/provisioning-core'
     summary: |-
-      Bicep `managementGroup()` / `managementGroup(identifier)`.
+      References the current management group or one identified by name.
 
       - Zero-arg form is only valid in management-group-scope deployments and
         returns details about the current management group.
-      - One-arg form returns a scope object for setting `scope:` on a module
+      - One-arg form returns a scope for a module
         or extension resource.
     remarks: ''
     isDeprecated: false
@@ -858,6 +858,23 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/provisioning-core.Expression" />&lt;boolean&gt;
+  - name: parameterIdentifier<T>(string)
+    uid: '@azure/provisioning-core.fn.parameterIdentifier'
+    package: '@azure/provisioning-core'
+    summary: >-
+      References a parameter by name, including within stack constructor
+      options.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function parameterIdentifier<T>(name: string): Expression<T>'
+      parameters:
+        - id: name
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/provisioning-core.Expression" />&lt;T&gt;
   - name: >-
       replace(ExpressionOrValue<string>, ExpressionOrValue<string>,
       ExpressionOrValue<string>)
@@ -894,11 +911,11 @@ functions:
     uid: '@azure/provisioning-core.fn.resourceGroup'
     package: '@azure/provisioning-core'
     summary: |-
-      Bicep `resourceGroup()` / `resourceGroup(name)` /
-      `resourceGroup(subscriptionId, name)`.
+      References the current resource group, a named group in the current
+      subscription, or a named group in another subscription.
 
       - Zero-arg form returns details about the current resource group.
-      - One- and two-arg forms return a scope object for setting `scope:` on a
+      - One- and two-arg forms return a scope for a
         module or extension resource.
     remarks: ''
     isDeprecated: false
@@ -1093,10 +1110,10 @@ functions:
     uid: '@azure/provisioning-core.fn.subscription'
     package: '@azure/provisioning-core'
     summary: |-
-      Bicep `subscription()` / `subscription(subscriptionId)`.
+      References the current subscription or a subscription identified by ID.
 
       - Zero-arg form returns details about the current subscription.
-      - One-arg form returns a scope object for setting `scope:` on a module
+      - One-arg form returns a scope for a module
         or extension resource.
     remarks: ''
     isDeprecated: false
@@ -1216,8 +1233,8 @@ functions:
     uid: '@azure/provisioning-core.fn.tenant'
     package: '@azure/provisioning-core'
     summary: |-
-      Bicep `tenant()`. Returns details about the current tenant (or a scope
-      object when placed in `scope:`). Takes no arguments.
+      Returns deployment-time tenant details or the tenant scope for a module
+      or existing resource.
     remarks: ''
     isDeprecated: false
     syntax:

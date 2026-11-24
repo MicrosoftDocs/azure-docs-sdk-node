@@ -1,0 +1,20 @@
+### YamlMime:TSTypeAlias
+name: RequiredParameterKeys
+uid: '@azure/provisioning-core.RequiredParameterKeys'
+package: '@azure/provisioning-core'
+summary: >-
+  Known names of target stack parameters that require explicitly supplied
+  values.
+fullName: RequiredParameterKeys<P>
+remarks: ''
+isDeprecated: false
+syntax: |
+  type RequiredParameterKeys<P> = string extends keyof P
+    ? never
+    : {
+        [K in keyof P]: P[K] extends { defaultValue: V }
+          ? undefined extends V
+            ? K
+            : never
+          : K
+      }[keyof P]

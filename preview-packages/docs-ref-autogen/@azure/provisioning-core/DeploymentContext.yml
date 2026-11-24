@@ -2,36 +2,18 @@
 name: DeploymentContext
 uid: '@azure/provisioning-core.DeploymentContext'
 package: '@azure/provisioning-core'
-summary: Inherited environment that flows down the component tree.
+summary: Default location, tags, and naming policy for resources in a stack or module.
 fullName: DeploymentContext
-remarks: >-
-  Each node may attach a local contribution via
-  `ProvisioningComponent._localDeploymentContext`
+remarks: |-
+  Resources inherit these settings from their containing stack, module, and
+  custom components:
 
-  (today, only `Stack` and `ResourceGroup` do). When a `Resource` reads the
+  - Location and naming policy use the closest containing override.
+  - Tags are combined, with closer overrides taking precedence.
 
-  effective context, the framework walks ancestors and resolves each field:
-
-
-  - `location`: nearest ancestor with a value wins.
-
-  - `namingPolicy`: nearest ancestor with a value wins.
-
-  - `tags`: flat-merged across **all** ancestors; innermost wins on key
-  conflict.
-
-
-  Per-resource Bicep `scope:` is not part of this — a resource's deployment
-
-  scope is determined by which file or module it lands in, which in turn is
-
-  determined by the ProvisioningComponent tree (the nearest
-  `ResourceGroup`/`Stack` ancestor).
-
-
-  The same interface describes both a node's local contribution and the
-
-  fully-resolved view returned by `ProvisioningComponent.deploymentContext`.
+  These defaults do not select the deployment scope; that is set by the stack
+  or module. Defaults inherit into child modules, but any expressions they
+  contain must be valid where the receiving resources are declared.
 isDeprecated: false
 type: interface
 properties:

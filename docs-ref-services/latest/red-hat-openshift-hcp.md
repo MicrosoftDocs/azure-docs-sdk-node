@@ -1,0 +1,11 @@
+---
+title: Azure Red Hat OpenShift HCP SDK for JavaScript
+description: Reference for Azure Red Hat OpenShift HCP SDK for JavaScript
+ms.date: 11/26/2026
+ms.topic: reference
+ms.devlang: javascript
+ms.service: redhatopenshifthcp
+---
+# Azure Red Hat OpenShift HCP SDK for JavaScript - latest
+## Packages - latest
+[!INCLUDE [packages](red-hat-openshift-hcp-index.md)]

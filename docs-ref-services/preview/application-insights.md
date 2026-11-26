@@ -1,10 +1,10 @@
 ---
 title: Azure Application Insights SDK for JavaScript
 description: Reference for Azure Application Insights SDK for JavaScript
-ms.date: 11/25/2026
+ms.date: 11/26/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-monitor
+ms.service: applicationinsights
 ---
 # Azure Application Insights SDK for JavaScript - preview
 ## Packages - preview

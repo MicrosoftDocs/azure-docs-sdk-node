@@ -1,10 +1,10 @@
 ---
-title: Azure Dell-Storage SDK for JavaScript
-description: Reference for Azure Dell-Storage SDK for JavaScript
-ms.date: 11/25/2026
+title: Azure Dell Storage SDK for JavaScript
+description: Reference for Azure Dell Storage SDK for JavaScript
+ms.date: 11/26/2026
 ms.topic: reference
 ms.devlang: javascript
-ms.service: dell-storage
+ms.service: dellstorage
 ---
 # Azure Dell-Storage SDK for JavaScript - latest
 ## Packages - latest

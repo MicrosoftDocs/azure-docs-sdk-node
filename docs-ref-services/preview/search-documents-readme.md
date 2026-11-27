@@ -1,12 +1,12 @@
 ---
 title: Azure AI Search client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/search-documents, search
-ms.date: 11/16/2026
+ms.date: 11/27/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: search
 ---
-# Azure AI Search client library for JavaScript - version 13.2.0-beta.1 
+# Azure AI Search client library for JavaScript - version 13.2.0-alpha.20261119.1 
 
 
 ## November 2026 preview
@@ -20,9 +20,9 @@ New capabilities include graph queries and diagnostics, topic-graph vector retri
 knowledge base tools, facet-derived filter hints, three-model knowledge-base inputs,
 random scoring, OpenAI-compatible vectorizer inputs, ingestion caches, and asynchronous File
 ingestion with operation diagnostics.
-See [the November preview sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_13.2.0-beta.1/sdk/search/search-documents/samples-dev/novemberPreview.ts).
+See [the November preview sample](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/search/search-documents/samples-dev/novemberPreview.ts).
 For a complete Topic Graph setup, see
-[the diverse-search walkthrough](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_13.2.0-beta.1/sdk/search/search-documents/samples-dev/topicGraphDiverseSearch.ts).
+[the diverse-search walkthrough](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/search/search-documents/samples-dev/topicGraphDiverseSearch.ts).
 It creates a corpus and sidecar with synthetic content, links them with an
 ETag-guarded update, and compares ordinary, diverse, balanced, and inherited
 search with stored and runtime knowledge-source settings. It uses real embeddings
@@ -41,7 +41,7 @@ Convenience model unions retain the October GA variants. Use `SearchIndexInput`,
 knowledge source/model/vectorizer alternatives, agentic queries, and image vector queries.
 Existing response annotations remain unchanged; protocol subpaths expose the full
 knowledge-source response models.
-See [the random scoring sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_13.2.0-beta.1/sdk/search/search-documents/samples-dev/randomScoring.ts)
+See [the random scoring sample](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/search/search-documents/samples-dev/randomScoring.ts)
 for a seeded random profile without classic `boost` or `fieldName` requirements.
 Streams require a `text/event-stream` response, close on completion or error,
 and support cancellation through `abortSignal`. Protocol index operations accept
@@ -80,12 +80,12 @@ Use the @azure/search-documents client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_13.2.0-beta.1/sdk/search/search-documents/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/search/search-documents/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/search-documents)
 - [API reference documentation](https://learn.microsoft.com/javascript/api/@azure/search-documents?view=azure-node-preview)
 - [REST API documentation](https://learn.microsoft.com/rest/api/searchservice/)
 - [Product documentation](https://learn.microsoft.com/azure/search/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_13.2.0-beta.1/sdk/search/search-documents/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples)
 
 ## Getting started
 
@@ -100,7 +100,7 @@ npm install @azure/search-documents
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Microsoft Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_13.2.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -266,7 +266,7 @@ Typically you will only wish to [show a subset of search results](https://learn.
 
 ## Examples
 
-The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_13.2.0-beta.1/sdk/search/search-documents/samples) for much more.
+The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples) for much more.
 
 - [Creating an index](#create-an-index)
 - [Retrieving a specific document from your index](#retrieve-a-specific-document-from-an-index)
@@ -885,16 +885,16 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_13.2.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_13.2.0-beta.1/sdk/search/search-documents/samples)
+- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/search/search-documents/samples)
 - [Read more about the Azure AI Search service](https://learn.microsoft.com/azure/search/search-what-is-azure-search)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_13.2.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
 

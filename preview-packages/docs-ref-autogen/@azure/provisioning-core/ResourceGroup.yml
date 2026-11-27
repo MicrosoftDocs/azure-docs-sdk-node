@@ -2,32 +2,66 @@
 name: ResourceGroup
 uid: '@azure/provisioning-core.ResourceGroup'
 package: '@azure/provisioning-core'
-summary: |+
-  An Azure resource group that establishes a deployment boundary.
+summary: >+
+  Defines an Azure resource group.
+
 
   **Example**
 
-  ```typescript snippet:ignore
-  import { Stack, ResourceGroup } from "@azure/provisioning-core";
-  import { KeyVault } from "@azure/provisioning-keyvault";
 
-  const stack = new Stack("my-app");
-  const rg = new ResourceGroup(stack, { location: "eastus" });
-  const vault = new KeyVault(rg, {
-    properties: { tenantId: "...", sku: { family: "A", name: "standard" } },
+  ```typescript snippet:ignore
+
+  import { ResourceGroup, Stack } from "@azure/provisioning-core";
+
+
+  const stack = new Stack("main", { targetScope: "subscription" });
+
+  stack.addResource(ResourceGroup, {
+    name: "my-rg",
+    location: "eastus",
   });
+
+  ```
+
+
+
+
+  **Example**
+
+
+  Select a declared group or a group that already exists as a module's scope.
+
+  Add workload resources to the resource-owning modules.
+
+  ```typescript snippet:ignore
+
+  import { fn, ResourceGroup, Stack } from "@azure/provisioning-core";
+
+
+  const stack = new Stack("main", { targetScope: "subscription" });
+
+  const rg = stack.addResource(ResourceGroup, {
+    name: "new-rg",
+    location: "eastus",
+  });
+
+  stack.addModule({ name: "new-group-resources", targetScope: "resourceGroup",
+  scope: rg });
+
+  stack.addModule({
+    name: "existing-group-resources",
+    targetScope: "resourceGroup",
+    scope: fn.resourceGroup("existing-rg"),
+  });
+
   ```
 
 fullName: ResourceGroup
 remarks: |-
-  Resources created with a `ResourceGroup` as their parent inherit its
-  location, tags, and naming policy, and deploy at resource-group scope
-  in the generated Bicep.
-
-  The parent may be a Stack or an ordinary component, with no resource
-  declarations in its ancestry. New groups require a subscription-scoped Stack.
-  Existing groups may be referenced from other Stack scopes with an appropriate
-  lookup scope.
+  Define the group's resources in a resource-group-scoped `Stack` or `Module`,
+  not as children of the group. Create new groups within a subscription-scoped
+  stack or module. Use `existing: true` with a lookup scope to refer to a group
+  that already exists.
 isDeprecated: false
 type: class
 constructors:
@@ -80,6 +114,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: children
+    uid: '@azure/provisioning-core.ResourceGroup.children'
+    package: '@azure/provisioning-core'
+    summary: |-
+      The components directly contained here, in creation order.
+      Changing the returned array does not add or remove children.
+    fullName: children
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: readonly ProvisioningComponent[] children
+      return:
+        description: ''
+        type: readonly ProvisioningComponent[]
   - name: condition
     uid: '@azure/provisioning-core.ResourceGroup.condition'
     package: '@azure/provisioning-core'
@@ -102,34 +150,27 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: (readonly ResourceDeclaration<string>[]) | undefined dependsOn
+      content: (readonly DeploymentDependency[]) | undefined dependsOn
       return:
         description: ''
-        type: (readonly ResourceDeclaration&lt;string&gt;[]) | undefined
+        type: (readonly DeploymentDependency[]) | undefined
   - name: deploymentContext
     uid: '@azure/provisioning-core.ResourceGroup.deploymentContext'
     package: '@azure/provisioning-core'
     summary: >-
-      The effective deployment context **inherited from ancestors**, resolved
-
-      by walking up the parent chain (this node's own local contribution is
-
-      intentionally excluded — a node's contribution flows to its descendants,
-
-      not to itself). Each field is resolved per its own rule:
+      Resource defaults inherited from the containing components.
 
 
-      - `location`: nearest ancestor with a value wins.
+      - Location and naming policy use the closest containing override.
 
-      - `namingPolicy`: nearest ancestor with a value wins.
-
-      - `tags`: flat-merged across all ancestors; innermost wins on key
-      conflict.
+      - Tags are combined, with closer overrides taking precedence.
 
 
-      Returns an object whose fields may all be `undefined` if no ancestor
+      Defaults set on this component apply to its descendants and are not
+      included
 
-      contributed anything.
+      here. Fields are `undefined` when no containing component supplies a
+      default.
     fullName: deploymentContext
     remarks: ''
     isDeprecated: false
@@ -189,18 +230,11 @@ properties:
   - name: name
     uid: '@azure/provisioning-core.ResourceGroup.name'
     package: '@azure/provisioning-core'
-    summary: |-
-      The Azure resource name as a Bicep symbolic-reference expression.
+    summary: >-
+      The Azure resource name as a deployment-time expression.
 
-      The value is established at construction time (either user-supplied
-      via `props.name` or filled in by the naming policy) and stored on
-      `state.name`. The setter routes through `setProperty` so post-
-      construction edits flow through the same proxy/expression machinery
-      as any other property — useful when working with a base `Resource`
-      reference and re-binding the name dynamically. Singleton subclasses
-      override this getter to narrow the return type to the literal
-      `Expression<"<singletonName>">`; non-singleton subclasses inherit
-      this accessor pair as-is.
+      Supply a name at construction or let the stack's naming policy generate
+      one.
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -224,7 +258,7 @@ properties:
   - name: self
     uid: '@azure/provisioning-core.ResourceGroup.self'
     package: '@azure/provisioning-core'
-    summary: Public identity for this node.
+    summary: The public component instance to use when creating children or references.
     fullName: self
     remarks: ''
     isDeprecated: false
@@ -263,21 +297,6 @@ properties:
         description: ''
         type: TType
 inheritedProperties:
-  - name: children
-    uid: '@azure/provisioning-core.ResourceGroup.children'
-    package: '@azure/provisioning-core'
-    summary: ''
-    fullName: children
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'children: ProvisioningComponent[]'
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />[]
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [Resource.children](xref:@azure/provisioning-core.Resource.children)
   - name: parent
     uid: '@azure/provisioning-core.ResourceGroup.parent'
     package: '@azure/provisioning-core'
@@ -298,11 +317,7 @@ inheritedProperties:
   - name: '[RESOURCE_BRAND]'
     uid: '@azure/provisioning-core.ResourceGroup.[RESOURCE_BRAND]'
     package: '@azure/provisioning-core'
-    summary: >-
-      Brand marker for cross-realm `isResource()` checks.
-
-      Uses `Symbol.for` so it survives multiple copies of
-      `@azure/provisioning-core`.
+    summary: Identifies this value as an Azure resource for resource-type checks.
     fullName: '[RESOURCE_BRAND]'
     remarks: ''
     isDeprecated: false
@@ -317,10 +332,7 @@ inheritedProperties:
   - name: '[RESOURCE_DECLARATION_BRAND]'
     uid: '@azure/provisioning-core.ResourceGroup.[RESOURCE_DECLARATION_BRAND]'
     package: '@azure/provisioning-core'
-    summary: |-
-      Brand marker for cross-realm `isResourceDeclaration()` checks. Uses
-      `Symbol.for` so it survives multiple copies of `@azure/provisioning-core`.
-      Inherited by every resource declaration implementation.
+    summary: Identifies this value as a resource declaration for resource-type checks.
     fullName: '[RESOURCE_DECLARATION_BRAND]'
     remarks: ''
     isDeprecated: false
@@ -356,20 +368,10 @@ inheritedMethods:
       FlatModelShape, FlatVariantSelector)
     uid: '@azure/provisioning-core.ResourceGroup.registerShape'
     package: '@azure/provisioning-core'
-    summary: >-
-      Register a [FlatModelShape](xref:@azure/provisioning-core.FlatModelShape)
-      for this resource class's
-
-      `(resourceType, apiVersion)` pair. Intended to be invoked from a
-
-      `static {}` initializer in generated subclasses so the registration
-
-      happens at module load.
-
-
-      The static method reads `resourceType` and `apiVersion` off `this`
-
-      (the subclass that called it), so callers don't repeat the literals.
+    summary: |-
+      Associate a property schema with this resource class and API version.
+      Service packages provide these schemas automatically. Call this when
+      defining a custom resource class to describe its supported properties.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -446,6 +448,7 @@ inheritedMethods:
     summary: |-
       Depth-first visit of this node and all descendants.
       Return `false` from the callback to skip visiting that node's children.
+      Children created by the callback are visited as well.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -459,29 +462,6 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [Resource.visit](xref:@azure/provisioning-core.Resource.visit)
-methods:
-  - name: 'add<T>(T, (ConstructorParameters<T> extends [any, Object] ? Rest : never))'
-    uid: '@azure/provisioning-core.ResourceGroup.add'
-    package: '@azure/provisioning-core'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function add<T>(ctor: T, args: (ConstructorParameters<T> extends [any,
-        Object] ? Rest : never)): InstanceType<T>
-      parameters:
-        - id: ctor
-          type: T
-          description: ''
-        - id: args
-          type: >-
-            (ConstructorParameters&lt;T&gt; extends [any, Object] ? Rest :
-            never)
-          description: ''
-      return:
-        description: ''
-        type: InstanceType&lt;T&gt;
 extends: >-
   <xref uid="@azure/provisioning-core.Resource" />&lt;"<xref
   uid="Microsoft.Resources/resourceGroups" />"&gt;

@@ -1,0 +1,21 @@
+### YamlMime:TSTypeAlias
+name: StackParameterValues
+uid: '@azure/provisioning-core.StackParameterValues'
+package: '@azure/provisioning-core'
+summary: |-
+  Values accepted for a stack's declared parameters.
+  Parameters with defaults may be omitted; supplied values must match their
+  declared types and allowed values.
+fullName: StackParameterValues<P>
+remarks: ''
+isDeprecated: false
+syntax: |
+  type StackParameterValues<P> = {
+    readonly [K in RequiredParameterKeys<P>]:
+      | ExpressionOrValue<ParameterValue<P[K]>>
+      | Extract<OutputValueFor<P[K]["type"]>, ResourceDeclaration | AnyModule>
+  } & {
+    readonly [K in Exclude<keyof P, RequiredParameterKeys<P>>]?:
+      | ExpressionOrValue<ParameterValue<P[K]>>
+      | Extract<OutputValueFor<P[K]["type"]>, ResourceDeclaration | AnyModule>
+  }

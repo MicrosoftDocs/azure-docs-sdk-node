@@ -345,6 +345,75 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+  - name: createExternalKey(string, ExternalKey, CreateKeyOptions)
+    uid: '@azure/keyvault-keys.KeyClient.createExternalKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The createExternalKey method creates a new key in Azure Key Vault that is
+      backed by a key
+
+      stored in an external key management system. If the named key already
+      exists, Azure Key Vault
+
+      creates a new version of the key. It requires the keys/create permission.
+
+
+      The key type and key size must not be specified for external keys; the
+      service derives them
+
+      from the referenced external key.
+
+
+      Example usage:
+
+      ```ts snippet:ReadmeSampleCreateExternalKey
+
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      import { KeyClient } from "@azure/keyvault-keys";
+
+
+      const credential = new DefaultAzureCredential();
+
+
+      const vaultName = "<YOUR KEYVAULT NAME>";
+
+      const url = `https://${vaultName}.managedhsm.azure.net`;
+
+
+      const client = new KeyClient(url, credential);
+
+
+      const keyName = "MyKeyName";
+
+      const result = await client.createExternalKey(keyName, { id:
+      "my-external-key-id" });
+
+      console.log("result: ", result);
+
+      ```
+
+      Creates a new key, stores it, then returns key parameters and properties
+      to the client.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createExternalKey(name: string, externalKey: ExternalKey,
+        options?: CreateKeyOptions): Promise<KeyVaultKey>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: externalKey
+          type: <xref uid="@azure/keyvault-keys.ExternalKey" />
+          description: A reference to the key stored in the external key management system.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.CreateKeyOptions" />
+          description: The optional parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
   - name: createKey(string, string, CreateKeyOptions)
     uid: '@azure/keyvault-keys.KeyClient.createKey'
     package: '@azure/keyvault-keys'

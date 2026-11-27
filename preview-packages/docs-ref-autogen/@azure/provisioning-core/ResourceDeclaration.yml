@@ -2,18 +2,9 @@
 name: ResourceDeclaration
 uid: '@azure/provisioning-core.ResourceDeclaration'
 package: '@azure/provisioning-core'
-summary: Shared base for resource declaration implementations.
+summary: A resource definition deployed once or for each item in a collection.
 fullName: ResourceDeclaration<TType>
-remarks: |-
-  Both represent one Bicep resource declaration in the component tree and
-  share the same declaration-level state layout: identity fields
-  (`type`, `apiVersion`, `existing`), the `if(...)` guard (`condition`),
-  the optional cross-scope reference (`scope`), and the raw prop bag that
-  becomes the resource body.
-
-  This class owns the common declaration state layout, raw-handle escape
-  hatch, and identity accessors. Subclasses supply their construction and
-  access behavior.
+remarks: ''
 isDeprecated: false
 type: class
 constructors:
@@ -22,23 +13,8 @@ constructors:
       Record<string, unknown>, ResourceOptions, ResourceNamingRules)
     uid: '@azure/provisioning-core.ResourceDeclaration.constructor'
     package: '@azure/provisioning-core'
-    summary: Base constructor for every Bicep resource declaration.
-    remarks: |-
-      Responsibilities:
-      1. Register in the component tree (`super(context)`).
-      2. Enforce a deployment context ancestor.
-      3. Unwrap `context` if it's an indexed proxy from `.at(i)` /
-         `parent.at(loop.index)`, and stash `parentIndex` on `state` so the
-         serializer can emit `parent: parentSym[index]` on the child.
-      4. Inherit `condition` from the immediate parent resource
-         declaration when the caller doesn't supply one (Bicep requires
-         children of a conditional resource to share the same guard).
-      5. Populate `state` — existing arm records only identity fields;
-         deployable arm runs the naming policy and applies
-         `DeploymentContext` defaults for `location` / `tags` per the
-         shape descriptor.
-
-      Subclasses supply the last mile, including their public handle behavior.
+    summary: Creates a resource declaration under the supplied parent.
+    remarks: ''
     isDeprecated: false
     syntax:
       content: >-
@@ -59,11 +35,7 @@ constructors:
           description: ''
         - id: namingRules
           type: <xref uid="@azure/provisioning-core.ResourceNamingRules" />
-          description: |-
-            per-resource-type constraints for the naming
-              policy. `Resource` reads this reflectively off the concrete subclass
-              constructor; internal declaration implementations receive it from
-              the concrete resource constructor they represent.
+          description: Resource-type constraints used to validate and generate names.
 properties:
   - name: apiVersion
     uid: '@azure/provisioning-core.ResourceDeclaration.apiVersion'
@@ -77,6 +49,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: children
+    uid: '@azure/provisioning-core.ResourceDeclaration.children'
+    package: '@azure/provisioning-core'
+    summary: |-
+      The components directly contained here, in creation order.
+      Changing the returned array does not add or remove children.
+    fullName: children
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: readonly ProvisioningComponent[] children
+      return:
+        description: ''
+        type: readonly ProvisioningComponent[]
   - name: condition
     uid: '@azure/provisioning-core.ResourceDeclaration.condition'
     package: '@azure/provisioning-core'
@@ -99,34 +85,27 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: (readonly ResourceDeclaration<string>[]) | undefined dependsOn
+      content: (readonly DeploymentDependency[]) | undefined dependsOn
       return:
         description: ''
-        type: (readonly ResourceDeclaration&lt;string&gt;[]) | undefined
+        type: (readonly DeploymentDependency[]) | undefined
   - name: deploymentContext
     uid: '@azure/provisioning-core.ResourceDeclaration.deploymentContext'
     package: '@azure/provisioning-core'
     summary: >-
-      The effective deployment context **inherited from ancestors**, resolved
-
-      by walking up the parent chain (this node's own local contribution is
-
-      intentionally excluded — a node's contribution flows to its descendants,
-
-      not to itself). Each field is resolved per its own rule:
+      Resource defaults inherited from the containing components.
 
 
-      - `location`: nearest ancestor with a value wins.
+      - Location and naming policy use the closest containing override.
 
-      - `namingPolicy`: nearest ancestor with a value wins.
-
-      - `tags`: flat-merged across all ancestors; innermost wins on key
-      conflict.
+      - Tags are combined, with closer overrides taking precedence.
 
 
-      Returns an object whose fields may all be `undefined` if no ancestor
+      Defaults set on this component apply to its descendants and are not
+      included
 
-      contributed anything.
+      here. Fields are `undefined` when no containing component supplies a
+      default.
     fullName: deploymentContext
     remarks: ''
     isDeprecated: false
@@ -150,7 +129,7 @@ properties:
   - name: self
     uid: '@azure/provisioning-core.ResourceDeclaration.self'
     package: '@azure/provisioning-core'
-    summary: Public identity for this node.
+    summary: The public component instance to use when creating children or references.
     fullName: self
     remarks: ''
     isDeprecated: false
@@ -174,10 +153,7 @@ properties:
   - name: '[RESOURCE_DECLARATION_BRAND]'
     uid: '@azure/provisioning-core.ResourceDeclaration.[RESOURCE_DECLARATION_BRAND]'
     package: '@azure/provisioning-core'
-    summary: |-
-      Brand marker for cross-realm `isResourceDeclaration()` checks. Uses
-      `Symbol.for` so it survives multiple copies of `@azure/provisioning-core`.
-      Inherited by every resource declaration implementation.
+    summary: Identifies this value as a resource declaration for resource-type checks.
     fullName: '[RESOURCE_DECLARATION_BRAND]'
     remarks: ''
     isDeprecated: false
@@ -187,21 +163,6 @@ properties:
         description: ''
         type: 'true'
 inheritedProperties:
-  - name: children
-    uid: '@azure/provisioning-core.ResourceDeclaration.children'
-    package: '@azure/provisioning-core'
-    summary: ''
-    fullName: children
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'children: ProvisioningComponent[]'
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />[]
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [ProvisioningComponent.children](xref:@azure/provisioning-core.ProvisioningComponent.children)
   - name: parent
     uid: '@azure/provisioning-core.ResourceDeclaration.parent'
     package: '@azure/provisioning-core'
@@ -295,6 +256,7 @@ inheritedMethods:
     summary: |-
       Depth-first visit of this node and all descendants.
       Return `false` from the callback to skip visiting that node's children.
+      Children created by the callback are visited as well.
     remarks: ''
     isDeprecated: false
     syntax:

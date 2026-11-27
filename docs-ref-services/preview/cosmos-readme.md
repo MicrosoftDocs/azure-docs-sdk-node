@@ -1,7 +1,7 @@
 ---
 title: Azure Cosmos DB client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/cosmos, cosmosdb
-ms.date: 11/26/2026
+ms.date: 11/27/2026
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cosmosdb

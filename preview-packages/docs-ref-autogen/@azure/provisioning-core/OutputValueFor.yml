@@ -7,6 +7,14 @@ fullName: OutputValueFor<T>
 remarks: ''
 isDeprecated: false
 syntax: |
-  type OutputValueFor<T> = T extends ScalarOutputType
-    ? ExpressionOrValue<PrimitiveTypeMap[T]>
-    : OutputValue
+  type OutputValueFor<T> = T extends "any"
+    ? OutputValue
+    : T extends "array"
+    ? readonly OutputValue[] | Expression<readonly unknown[]>
+    : T extends "object"
+    ?
+        | { [key: string]: OutputValue }
+        | InputOf<Record<string, unknown>>
+        | Resource
+        | AnyModule
+    : ExpressionOrValue<PrimitiveTypeMap[T]>

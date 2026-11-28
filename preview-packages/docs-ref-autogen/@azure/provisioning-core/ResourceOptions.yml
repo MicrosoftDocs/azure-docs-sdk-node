@@ -3,25 +3,8 @@ name: ResourceOptions
 uid: '@azure/provisioning-core.ResourceOptions'
 package: '@azure/provisioning-core'
 summary: |-
-  Optional third-argument bag passed to every resource constructor. Holds
-  authoring flags that affect how the resource declaration is emitted but are
-  not ARM-modeled properties of the resource body.
-
-  Fields:
-  - `condition` — an `if(...)` guard on the declaration. A boolean
-    expression (typically produced by `fn.eq`, `fn.and`, etc.) or a
-    plain `boolean`. Bind it to a `const` to reuse the same predicate
-    across multiple resources.
-
-  `existing` is deliberately **not** an option — it is the discriminant of
-  the generated props union (`{ existing?: false } | { existing: true }`)
-  and lives on `props`. Routing it through options too would allow
-  contradictory settings between the two channels.
-
-  `namingRules` is deliberately **not** an option either — it is
-  per-resource-type metadata declared as a `protected static namingRules`
-  field on each concrete `Resource` subclass and consumed by the base
-  constructor reflectively, so it stays off the user-facing surface.
+  Deployment options passed as the third resource constructor argument.
+  Resource properties, including `existing`, belong in the second argument.
 fullName: ResourceOptions
 remarks: ''
 isDeprecated: false
@@ -30,7 +13,7 @@ properties:
   - name: condition
     uid: '@azure/provisioning-core.ResourceOptions.condition'
     package: '@azure/provisioning-core'
-    summary: ''
+    summary: Deploy this resource only when the condition is true.
     fullName: condition
     remarks: ''
     isDeprecated: false
@@ -44,12 +27,12 @@ properties:
   - name: dependsOn
     uid: '@azure/provisioning-core.ResourceOptions.dependsOn'
     package: '@azure/provisioning-core'
-    summary: ''
+    summary: Resources or modules that must be deployed before this resource.
     fullName: dependsOn
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'dependsOn?: readonly ResourceDeclaration<string>[]'
+      content: 'dependsOn?: readonly DeploymentDependency[]'
       return:
         description: ''
-        type: readonly ResourceDeclaration&lt;string&gt;[]
+        type: readonly DeploymentDependency[]

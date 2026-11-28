@@ -2,21 +2,24 @@
 name: ParameterOptions
 uid: '@azure/provisioning-core.ParameterOptions'
 package: '@azure/provisioning-core'
-summary: ''
-fullName: ParameterOptions<T, A>
+summary: A stack parameter's type, default value, and constraints.
+fullName: ParameterOptions
 remarks: ''
 isDeprecated: false
 syntax: |
-  type ParameterOptions<T, A> = {
-    allowed?: A
-    defaultValue?: ExpressionOrValue<InferParamType<T, A>>
-    description?: string
-    discriminator?: string
-    maxLength?: number
-    maxValue?: number
-    metadata?: Record<string, unknown>
-    minLength?: number
-    minValue?: number
-    sealed?: boolean
-    secure?: boolean
-  }
+  type ParameterOptions = {
+    [T in PrimitiveTypeName]: {
+      allowed?: readonly PrimitiveTypeMap[T][]
+      defaultValue?: ExpressionOrValue<PrimitiveTypeMap[T]>
+      description?: string
+      discriminator?: string
+      maxLength?: number
+      maxValue?: number
+      metadata?: Record<string, unknown>
+      minLength?: number
+      minValue?: number
+      sealed?: boolean
+      secure?: boolean
+      type: T
+    }
+  }[PrimitiveTypeName]

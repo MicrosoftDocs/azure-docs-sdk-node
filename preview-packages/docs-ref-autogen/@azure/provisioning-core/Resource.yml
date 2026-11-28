@@ -11,17 +11,15 @@ summary: >+
 
   ```typescript snippet:ignore
 
-  import { ResourceGroup, Stack } from "@azure/provisioning-core";
+  import { Stack } from "@azure/provisioning-core";
 
   import { KeyVault } from "@azure/provisioning-keyvault";
 
 
-  const stack = new Stack("my-app", { targetScope: "subscription" });
+  const stack = new Stack("my-app", { targetScope: "resourceGroup", location:
+  "eastus" });
 
-  const rg = new ResourceGroup(stack, { name: "rg-my-app", location: "eastus"
-  });
-
-  const vault = new KeyVault(rg, {
+  const vault = new KeyVault(stack, {
     name: "kv-my-app",
     properties: {
       tenantId: "11111111-1111-1111-1111-111111111111",
@@ -30,22 +28,18 @@ summary: >+
   });
 
 
-  // vault.name is an Expression, not a string
-
-  // vault.id compiles to resourceId(...)
+  // Use vault.name and vault.id as deployment-time expressions.
 
   ```
 
 fullName: Resource<TType>
 remarks: |-
-  Resources are fully initialized at construction time. Pass a parent
-  `ProvisioningComponent` (typically a `Stack` or `ResourceGroup`) as the first
-  argument — the resource registers itself in the tree automatically.
+  Pass the containing stack, resource-owning module, or custom component as the
+  first argument to define a resource there.
 
-  Properties use expression-backed proxies: reading `resource.name`
-  returns an `Expression` that compiles to a Bicep symbolic reference,
-  not a plain string. Use `this.expr()` in subclasses to create
-  property getters and `this.setProperty()` for setters.
+  Reading a resource property such as `resource.name` returns an expression
+  resolved at deployment time, not a local value. Resource subclasses can use
+  `this.expr()` for property getters and `this.setProperty()` for setters.
 isDeprecated: false
 type: class
 constructors:
@@ -86,6 +80,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: children
+    uid: '@azure/provisioning-core.Resource.children'
+    package: '@azure/provisioning-core'
+    summary: |-
+      The components directly contained here, in creation order.
+      Changing the returned array does not add or remove children.
+    fullName: children
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: readonly ProvisioningComponent[] children
+      return:
+        description: ''
+        type: readonly ProvisioningComponent[]
   - name: condition
     uid: '@azure/provisioning-core.Resource.condition'
     package: '@azure/provisioning-core'
@@ -108,34 +116,27 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: (readonly ResourceDeclaration<string>[]) | undefined dependsOn
+      content: (readonly DeploymentDependency[]) | undefined dependsOn
       return:
         description: ''
-        type: (readonly ResourceDeclaration&lt;string&gt;[]) | undefined
+        type: (readonly DeploymentDependency[]) | undefined
   - name: deploymentContext
     uid: '@azure/provisioning-core.Resource.deploymentContext'
     package: '@azure/provisioning-core'
     summary: >-
-      The effective deployment context **inherited from ancestors**, resolved
-
-      by walking up the parent chain (this node's own local contribution is
-
-      intentionally excluded — a node's contribution flows to its descendants,
-
-      not to itself). Each field is resolved per its own rule:
+      Resource defaults inherited from the containing components.
 
 
-      - `location`: nearest ancestor with a value wins.
+      - Location and naming policy use the closest containing override.
 
-      - `namingPolicy`: nearest ancestor with a value wins.
-
-      - `tags`: flat-merged across all ancestors; innermost wins on key
-      conflict.
+      - Tags are combined, with closer overrides taking precedence.
 
 
-      Returns an object whose fields may all be `undefined` if no ancestor
+      Defaults set on this component apply to its descendants and are not
+      included
 
-      contributed anything.
+      here. Fields are `undefined` when no containing component supplies a
+      default.
     fullName: deploymentContext
     remarks: ''
     isDeprecated: false
@@ -171,18 +172,11 @@ properties:
   - name: name
     uid: '@azure/provisioning-core.Resource.name'
     package: '@azure/provisioning-core'
-    summary: |-
-      The Azure resource name as a Bicep symbolic-reference expression.
+    summary: >-
+      The Azure resource name as a deployment-time expression.
 
-      The value is established at construction time (either user-supplied
-      via `props.name` or filled in by the naming policy) and stored on
-      `state.name`. The setter routes through `setProperty` so post-
-      construction edits flow through the same proxy/expression machinery
-      as any other property — useful when working with a base `Resource`
-      reference and re-binding the name dynamically. Singleton subclasses
-      override this getter to narrow the return type to the literal
-      `Expression<"<singletonName>">`; non-singleton subclasses inherit
-      this accessor pair as-is.
+      Supply a name at construction or let the stack's naming policy generate
+      one.
     fullName: name
     remarks: ''
     isDeprecated: false
@@ -194,7 +188,7 @@ properties:
   - name: self
     uid: '@azure/provisioning-core.Resource.self'
     package: '@azure/provisioning-core'
-    summary: Public identity for this node.
+    summary: The public component instance to use when creating children or references.
     fullName: self
     remarks: ''
     isDeprecated: false
@@ -218,11 +212,7 @@ properties:
   - name: '[RESOURCE_BRAND]'
     uid: '@azure/provisioning-core.Resource.[RESOURCE_BRAND]'
     package: '@azure/provisioning-core'
-    summary: >-
-      Brand marker for cross-realm `isResource()` checks.
-
-      Uses `Symbol.for` so it survives multiple copies of
-      `@azure/provisioning-core`.
+    summary: Identifies this value as an Azure resource for resource-type checks.
     fullName: '[RESOURCE_BRAND]'
     remarks: ''
     isDeprecated: false
@@ -232,21 +222,6 @@ properties:
         description: ''
         type: 'true'
 inheritedProperties:
-  - name: children
-    uid: '@azure/provisioning-core.Resource.children'
-    package: '@azure/provisioning-core'
-    summary: ''
-    fullName: children
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'children: ProvisioningComponent[]'
-      return:
-        description: ''
-        type: <xref uid="@azure/provisioning-core.ProvisioningComponent" />[]
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [ResourceDeclaration.children](xref:@azure/provisioning-core.ResourceDeclaration.children)
   - name: parent
     uid: '@azure/provisioning-core.Resource.parent'
     package: '@azure/provisioning-core'
@@ -267,10 +242,7 @@ inheritedProperties:
   - name: '[RESOURCE_DECLARATION_BRAND]'
     uid: '@azure/provisioning-core.Resource.[RESOURCE_DECLARATION_BRAND]'
     package: '@azure/provisioning-core'
-    summary: |-
-      Brand marker for cross-realm `isResourceDeclaration()` checks. Uses
-      `Symbol.for` so it survives multiple copies of `@azure/provisioning-core`.
-      Inherited by every resource declaration implementation.
+    summary: Identifies this value as a resource declaration for resource-type checks.
     fullName: '[RESOURCE_DECLARATION_BRAND]'
     remarks: ''
     isDeprecated: false
@@ -358,6 +330,7 @@ inheritedMethods:
     summary: |-
       Depth-first visit of this node and all descendants.
       Return `false` from the callback to skip visiting that node's children.
+      Children created by the callback are visited as well.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -377,20 +350,10 @@ methods:
       FlatModelShape, FlatVariantSelector)
     uid: '@azure/provisioning-core.Resource.registerShape'
     package: '@azure/provisioning-core'
-    summary: >-
-      Register a [FlatModelShape](xref:@azure/provisioning-core.FlatModelShape)
-      for this resource class's
-
-      `(resourceType, apiVersion)` pair. Intended to be invoked from a
-
-      `static {}` initializer in generated subclasses so the registration
-
-      happens at module load.
-
-
-      The static method reads `resourceType` and `apiVersion` off `this`
-
-      (the subclass that called it), so callers don't repeat the literals.
+    summary: |-
+      Associate a property schema with this resource class and API version.
+      Service packages provide these schemas automatically. Call this when
+      defining a custom resource class to describe its supported properties.
     remarks: ''
     isDeprecated: false
     syntax:
